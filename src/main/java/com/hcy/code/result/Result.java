@@ -1,4 +1,4 @@
-package com.hcy.code.util;
+package com.hcy.code.result;
 
 import java.util.Date;
 

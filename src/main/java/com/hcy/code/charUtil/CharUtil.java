@@ -1,4 +1,4 @@
-package com.hcy.code.CharUtil;
+package com.hcy.code.charUtil;
 
 /**
  * char工具类

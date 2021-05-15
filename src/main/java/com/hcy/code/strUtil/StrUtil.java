@@ -1,6 +1,6 @@
 package com.hcy.code.strUtil;
 
-import com.hcy.code.CharUtil.CharUtil;
+import com.hcy.code.charUtil.CharUtil;
 
 /**
  * 字符串工具类

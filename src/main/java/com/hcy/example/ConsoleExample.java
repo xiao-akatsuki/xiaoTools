@@ -1,4 +1,4 @@
-package com.hcy.code.example;
+package com.hcy.example;
 
 import com.hcy.code.console.Console;
 

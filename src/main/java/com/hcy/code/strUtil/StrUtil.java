@@ -2,6 +2,8 @@ package com.hcy.code.strUtil;
 
 import com.hcy.code.charUtil.CharUtil;
 
+import java.util.List;
+
 /**
  * 字符串工具类
  * @author HCY
@@ -155,5 +157,17 @@ public class StrUtil {
     */
     public static String subPre(CharSequence string, int toIndexExclude) {
         return sub(string, 0, toIndexExclude);
+    }
+
+    public static boolean startWith(String value, char c) {
+        if (isEmpty(value)) {
+            return false;
+        } else {
+            return c == value.charAt(0);
+        }
+    }
+
+    public static List<String> split(String value, char separator) {
+        return null;
     }
 }

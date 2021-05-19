@@ -1,4 +1,4 @@
-package com.hcy.code.filUtil;
+package com.xiaoTools.core.filUtil;
 
 
 import java.io.File;

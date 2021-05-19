@@ -1,4 +1,4 @@
-package com.hcy.code.charUtil;
+package com.xiaoTools.core.charUtil;
 
 /**
  * char工具类

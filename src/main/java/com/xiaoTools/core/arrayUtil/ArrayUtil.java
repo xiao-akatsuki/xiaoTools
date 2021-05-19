@@ -1,4 +1,4 @@
-package com.hcy.code.arrayUtil;
+package com.xiaoTools.core.arrayUtil;
 
 /**
  * 数组工具类

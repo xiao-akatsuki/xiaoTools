@@ -1,4 +1,4 @@
-package com.hcy.code.result;
+package com.xiaoTools.core.result;
 
 import java.util.Date;
 

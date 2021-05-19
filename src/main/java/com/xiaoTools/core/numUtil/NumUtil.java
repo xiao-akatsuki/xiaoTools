@@ -1,6 +1,6 @@
-package com.hcy.code.numUtil;
+package com.xiaoTools.core.numUtil;
 
-import com.hcy.code.arrayUtil.ArrayUtil;
+import com.xiaoTools.core.arrayUtil.ArrayUtil;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

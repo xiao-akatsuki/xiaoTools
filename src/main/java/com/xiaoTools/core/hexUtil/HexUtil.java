@@ -1,4 +1,4 @@
-package com.hcy.code.hexUtil;
+package com.xiaoTools.core.hexUtil;
 
 /**
  * 16进制工具

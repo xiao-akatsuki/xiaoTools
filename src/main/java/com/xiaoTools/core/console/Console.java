@@ -1,4 +1,4 @@
-package com.hcy.code.console;
+package com.xiaoTools.core.console;
 
 /**
  * 经典输出

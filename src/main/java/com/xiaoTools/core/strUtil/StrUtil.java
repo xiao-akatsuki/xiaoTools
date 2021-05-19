@@ -1,6 +1,6 @@
-package com.hcy.code.strUtil;
+package com.xiaoTools.core.strUtil;
 
-import com.hcy.code.charUtil.CharUtil;
+import com.xiaoTools.core.charUtil.CharUtil;
 
 import java.util.List;
 

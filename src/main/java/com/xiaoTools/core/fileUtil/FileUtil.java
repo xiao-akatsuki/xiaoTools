@@ -15,7 +15,6 @@ public class FileUtil {
      * 默认方法
      * @author HCY
      * @since 2021/5/18 9:58 上午
-     * @return null
     */
     public FileUtil() { }
 
@@ -31,8 +30,7 @@ public class FileUtil {
             return null;
         }else {
             File file = new File(path);
-            File[] files = file.listFiles();
-            return files;
+            return file.listFiles();
         }
     }
 
@@ -52,7 +50,9 @@ public class FileUtil {
                 mkdirParentDirs(file);
                 //创建文件
                 try {
-                    file.createNewFile();
+                    if (!file.createNewFile()) {
+                        return false;
+                    }
                 } catch (Exception e) {
                     return false;
                 }
@@ -77,18 +77,19 @@ public class FileUtil {
      * @author HCY
      * @since 2021/5/18 1:36 下午
      * @param file: 目录地址
-     * @return java.io.File
+     * @return boolean
     */
-    public static File mkdir(File file) {
+    public static boolean mkdir(File file) {
+        //判断文件是否为空
         if (file == null) {
-            return null;
+            return false;
         } else {
             //判断文件是否存在
             if (!file.exists()) {
                 //创建文件夹
-                file.mkdirs();
+                return file.mkdirs();
             }
-            return file;
+            return true;
         }
     }
 
@@ -127,9 +128,8 @@ public class FileUtil {
         if (directory != null && directory.exists() && directory.isDirectory()) {
             File[] files = directory.listFiles();
             if (null != files) {
-                int length = files.length;
-                for(int i = 0; i < length; ++i) {
-                    if (!del( files[i] )) {
+                for (File file : files) {
+                    if (!del(file)) {
                         return false;
                     }
                 }
@@ -147,14 +147,10 @@ public class FileUtil {
     */
     public static String getAbsolutePath(String path) {
         File file = new File(path);
-        if (file == null){
-            return "";
-        }else {
-            try {
-                return file.getCanonicalPath();
-            } catch (IOException e) {
-                return file.getAbsolutePath();
-            }
+        try {
+            return file.getCanonicalPath();
+        } catch (IOException e) {
+            return file.getAbsolutePath();
         }
     }
 
@@ -163,7 +159,6 @@ public class FileUtil {
      * @author HCY
      * @since 2021/5/18 1:27 下午
      * @param file: 父级目录是否存在
-     * @return void
      */
     private static void mkdirParentDirs(File file) {
         if (null != file) {

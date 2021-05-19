@@ -5,8 +5,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>io.github.xiaoxunyao</groupId>
-  <artifactId>java-utils-library</artifactId>
-  <version>0.0.1-releases</version>
+  <artifactId>xiaoTools</artifactId>
+  <version>0.0.3-releases</version>
   <packaging>jar</packaging>
   <description>Lightweight java tool class</description>
 
@@ -35,7 +35,7 @@
     </developer>
   </developers>
 
-  <name>java-utils-library</name>
+  <name>xiaoTools</name>
   <!-- FIXME change it to the project's website -->
   <url>https://www.example.com</url>
 

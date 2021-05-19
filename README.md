@@ -24,16 +24,16 @@ xiaoTools = xiao + Tools，是通过[作者xiaoxunyao](https://github.com/xiaoxu
 
 ```xml
 <dependency>
-  <groupId>io.github.xiaoxunyao</groupId>
-  <artifactId>java-utils-library</artifactId>
-  <version>0.0.1-releases</version>
+    <groupId>io.github.xiaoxunyao</groupId>
+    <artifactId>xiaoTools</artifactId>
+    <version>0.0.3-releases</version>
 </dependency>
 ```
 
 ### 📥Gradle
 
 ```gradle
-implementation 'io.github.xiaoxunyao:java-utils-library:0.0.1-releases'
+implementation 'io.github.xiaoxunyao:xiaoTools:0.0.3-releases'
 ```
 
 ## 📖文档

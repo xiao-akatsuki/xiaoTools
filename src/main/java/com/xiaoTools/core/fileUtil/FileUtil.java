@@ -1,4 +1,4 @@
-package com.xiaoTools.core.filUtil;
+package com.xiaoTools.core.fileUtil;
 
 
 import java.io.File;

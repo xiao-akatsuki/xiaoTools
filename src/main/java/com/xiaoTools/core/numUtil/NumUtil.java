@@ -376,7 +376,6 @@ public class NumUtil {
      * @return double
     */
     public static double cosine(double angle){
-
         angle = (angle * PI) / CIRCULAR;
         int i = ZERO, sign = ONE;
         double item = ONE , answer = ZERO, molecule = ONE, denominator = ZERO ;
@@ -390,7 +389,19 @@ public class NumUtil {
         return answer;
     }
 
-
+    /**
+     * [计算该角度的正切值](Calculate the tangent of the angle)
+     * @description: zh - 输入一个角度，计算出该角度的正切值。
+     * @description: en - Enter an angle and calculate the tangent of the angle.
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/20 6:56 下午
+     * @param angle: [角度](angle)
+     * @return double
+    */
+    public static double tangent(double angle){
+        return sine(angle)/cosine(angle);
+    }
     
     /**
      * [将单个罗马数字转换为数字](Converting a single Roman numeral to a number)

@@ -11,16 +11,19 @@ public class Result {
 
     /**
      * 时间
+     * time
      */
     private Date timestamp;
 
     /**
      * 状态信息
+     * status information
      */
     private Integer status;
 
     /**
      * 该类型状态码表示动作被成功接收、理解和接受
+     * This type of status code indicates that the action has been successfully received, understood and accepted.
      */
     public static final Integer STATUS_200 = 200;
     public static final Integer STATUS_201 = 201;
@@ -32,6 +35,7 @@ public class Result {
 
     /**
      * 该类型状态码表示为了完成指定的动作，必须接受进一步处理。
+     * The type status code indicates that further processing is required to complete the specified action.
      */
     public static final Integer STATUS_300 = 300;
     public static final Integer STATUS_301 = 301;
@@ -43,6 +47,7 @@ public class Result {
 
     /**
      * 该类型状态码表示请求包含错误语法或不能正确执行。
+     * The type status code indicates that the request contains incorrect syntax or cannot be executed correctly.
      */
     public static final Integer STATUS_400 = 400;
     public static final Integer STATUS_401 = 401;
@@ -65,6 +70,7 @@ public class Result {
 
     /**
      * 该类型状态码表示服务器或网关错误。
+     * The type status code indicates a server or gateway error.
      */
     public static final Integer STATUS_500 = 500;
     public static final Integer STATUS_501 = 501;
@@ -75,11 +81,13 @@ public class Result {
 
     /**
      * 信息
+     * information
      */
     private String info;
 
     /**
      * 该类型状态码表示动作被成功接收、理解和接受
+     * This type of status code indicates that the action has been successfully received, understood and accepted
      */
     public static final String INFO_200 = "请求被成功地完成，所请求的资源发送到客户端。";
     public static final String INFO_201 = "提示知道新文件的URL。";
@@ -91,6 +99,7 @@ public class Result {
 
     /**
      * 该类型状态码表示为了完成指定的动作，必须接受进一步处理。
+     * The type status code indicates that further processing is required to complete the specified action.
      */
     public static final String INFO_300 = "请求的资源可在多处获得。";
     public static final String INFO_301 = "本网页被永久性转移到另一个URL。";
@@ -102,6 +111,7 @@ public class Result {
 
     /**
      * 该类型状态码表示请求包含错误语法或不能正确执行。
+     * The type status code indicates that the request contains incorrect syntax or cannot be executed correctly.
      */
     public static final String INFO_400 = "客户端请求有语法错误。";
     public static final String INFO_401 = "请求未经授权。";
@@ -124,6 +134,7 @@ public class Result {
 
     /**
      * 该类型状态码表示服务器或网关错误。
+     * The type status code indicates a server or gateway error.
      */
     public static final String INFO_500 = "服务器错误。";
     public static final String INFO_501 = "服务器不支持请求的功能。";
@@ -134,11 +145,13 @@ public class Result {
 
     /**
      * 详情
+     * details
      */
     private String details;
 
     /**
      * 该类型状态码表示动作被成功接收、理解和接受
+     * This type of status code indicates that the action has been successfully received, understood and accepted
      */
     public static final String DETAILS_200 = "The request is successfully completed and the requested resource is sent to the client.";
     public static final String DETAILS_201 = "Prompt for the URL of the new file.";
@@ -150,6 +163,7 @@ public class Result {
 
     /**
      * 该类型状态码表示为了完成指定的动作，必须接受进一步处理。
+     * The type status code indicates that further processing is required to complete the specified action.
      */
     public static final String DETAILS_300 = "The requested resource is available in multiple locations.";
     public static final String DETAILS_301 = "This page is permanently transferred to another URL.";
@@ -161,6 +175,7 @@ public class Result {
 
     /**
      * 该类型状态码表示请求包含错误语法或不能正确执行。
+     * The type status code indicates that the request contains incorrect syntax or cannot be executed correctly.
      */
     public static final String DETAILS_400 = "The client request has a syntax error.";
     public static final String DETAILS_401 = "The request is not authorized.";
@@ -183,6 +198,7 @@ public class Result {
 
     /**
      * 该类型状态码表示服务器或网关错误。
+     * The type status code indicates a server or gateway error.
      */
     public static final String DETAILS_500 = "Server error.";
     public static final String DETAILS_501 = "The server does not support the requested feature.";
@@ -193,21 +209,25 @@ public class Result {
 
     /**
      * 返回信息
+     * Return information
      */
     private Object message;
     /**
      * 调用URL
+     * Call URL
      */
     private String path;
 
     /**
      * 无参
+     * Acanthopanax
      */
     public Result() {
     }
 
     /**
      * 有参
+     * You Shen
      */
     public Result(Integer status, String info, String details, Object message, String path) {
         this.timestamp = new Date();
@@ -219,12 +239,13 @@ public class Result {
     }
 
     /**
-     * 请求被成功地完成，所请求的资源发送到客户端。
-     * The request is successfully completed and the requested resource is sent to the client.
+     * @description: 请求被成功地完成，所请求的资源发送到客户端。
+     * @description: The request is successfully completed and the requested resource is sent to the client.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/28 10:27 下午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](URL path)
      * @return Result
     */
     public Result result200(Object message, String path){
@@ -232,12 +253,13 @@ public class Result {
     }
 
     /**
-     * 提示知道新文件的URL。
-     * Prompt for the URL of the new file.
+     * @description: 提示知道新文件的URL。
+     * @description: Prompt for the URL of the new file.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/28 10:27 下午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](URL path)
      * @return Result
      */
     public Result result201(Object message, String path){
@@ -245,12 +267,13 @@ public class Result {
     }
 
     /**
-     * 接受并处理，但处理未完成。
-     * Accepted and processed, but processing is not complete.
+     * @description: 接受并处理，但处理未完成。
+     * @description: Accepted and processed, but processing is not complete.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/28 10:27 下午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result202(Object message, String path){
@@ -258,12 +281,13 @@ public class Result {
     }
 
     /**
-     * 返回信息不确定或不完整。
-     * The return information is uncertain or incomplete.
+     * @description: 返回信息不确定或不完整。
+     * @description: The return information is uncertain or incomplete.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/28 10:27 下午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result203(Object message, String path){
@@ -271,12 +295,13 @@ public class Result {
     }
 
     /**
-     * 收到请求，但返回信息为空。
-     * The request was received, but the return information is empty.
+     * @description: 收到请求，但返回信息为空。
+     * @description: The request was received, but the return information is empty.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/28 10:27 下午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result204(Object message, String path){
@@ -284,12 +309,13 @@ public class Result {
     }
 
     /**
-     * 服务器完成了请求，用户必须复位当前已经浏览过的文件。
-     * After the server completes the request, the user must reset the file that has been browsed.
+     * @description: 服务器完成了请求，用户必须复位当前已经浏览过的文件。
+     * @description: After the server completes the request, the user must reset the file that has been browsed.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/28 10:27 下午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result205(Object message, String path){
@@ -297,12 +323,13 @@ public class Result {
     }
 
     /**
-     * 服务器已经完成了部分用户的GET请求。
-     * The server has completed the get request of some users.
+     * @description: 服务器已经完成了部分用户的GET请求。
+     * @description: The server has completed the get request of some users.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/28 10:27 下午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result206(Object message, String path){
@@ -310,12 +337,13 @@ public class Result {
     }
 
     /**
-     * 请求的资源可在多处获得。
-     * The requested resource is available in multiple locations.
+     * @description: 请求的资源可在多处获得。
+     * @description: The requested resource is available in multiple locations.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:16 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
     */
     public Result result300(Object message,String path){
@@ -323,12 +351,13 @@ public class Result {
     }
 
     /**
-     * 本网页被永久性转移到另一个URL。
-     * This page is permanently transferred to another URL.
+     * @description: 本网页被永久性转移到另一个URL。
+     * @description: This page is permanently transferred to another URL.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:23 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
     */
     public Result result301(Object message,String path){
@@ -336,12 +365,13 @@ public class Result {
     }
 
     /**
-     * 请求的网页被重定向到新的地址。
-     * The requested page is redirected to a new address.
+     * @description: 请求的网页被重定向到新的地址。
+     * @description: The requested page is redirected to a new address.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:23 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result302(Object message,String path){
@@ -349,12 +379,13 @@ public class Result {
     }
 
     /**
-     * 建议用户访问其他URL或访问方式。
-     * Users are advised to visit other URLs or access methods.
+     * @description: 建议用户访问其他URL或访问方式。
+     * @description: Users are advised to visit other URLs or access methods.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:23 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result303(Object message,String path){
@@ -362,12 +393,13 @@ public class Result {
     }
 
     /**
-     * 自从上次请求后，请求的网页未修改过。
-     * The requested page has not been modified since the last request.
+     * @description: 自从上次请求后，请求的网页未修改过。
+     * @description: The requested page has not been modified since the last request.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:23 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result304(Object message,String path){
@@ -375,12 +407,13 @@ public class Result {
     }
 
     /**
-     * 请求的资源必须从服务器指定的地址获得。
-     * The requested resource must be obtained from the address specified by the server.
+     * @description: 请求的资源必须从服务器指定的地址获得。
+     * @description: The requested resource must be obtained from the address specified by the server.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:23 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result305(Object message,String path){
@@ -388,12 +421,13 @@ public class Result {
     }
 
     /**
-     * 声明请求的资源临时性删除。
-     * Declare the temporary deletion of the requested resource.
+     * @description: 声明请求的资源临时性删除。
+     * @description: Declare the temporary deletion of the requested resource.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:23 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result307(Object message,String path){
@@ -401,12 +435,13 @@ public class Result {
     }
 
     /**
-     * 客户端请求有语法错误。
-     * The client request has a syntax error.
+     * @description: 客户端请求有语法错误。
+     * @description: The client request has a syntax error.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result400(Object message,String path){
@@ -414,12 +449,13 @@ public class Result {
     }
 
     /**
-     * 请求未经授权。
-     * The request is not authorized.
+     * @description: 请求未经授权。
+     * @description: The request is not authorized.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result401(Object message,String path){
@@ -427,12 +463,13 @@ public class Result {
     }
 
     /**
-     * 保留有效ChargeTo头响应。
-     * Keep valid ChargeTo header response.
+     * @description: 保留有效ChargeTo头响应。
+     * @description: Keep valid ChargeTo header response.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result402(Object message,String path){
@@ -440,12 +477,13 @@ public class Result {
     }
 
     /**
-     * 禁止访问，服务器收到请求，但拒绝提供服务。
-     * Access is forbidden. The server receives the request but refuses to provide the service.
+     * @description: 禁止访问，服务器收到请求，但拒绝提供服务。
+     * @description: Access is forbidden. The server receives the request but refuses to provide the service.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result403(Object message,String path){
@@ -453,12 +491,13 @@ public class Result {
     }
 
     /**
-     * 可连接服务器，但服务器无法取得所请求的网页，请求资源不存在。
-     * Can connect to the server, but the server can not get the requested page, the request resource does not exist.
+     * @description: 可连接服务器，但服务器无法取得所请求的网页，请求资源不存在。
+     * @description: Can connect to the server, but the server can not get the requested page, the request resource does not exist.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result404(Object message,String path){
@@ -466,12 +505,13 @@ public class Result {
     }
 
     /**
-     * 用户在Request-Line字段定义的方法不被允许。
-     * The method defined by the user in the request line field is not allowed.
+     * @description: 用户在Request-Line字段定义的方法不被允许。
+     * @description: The method defined by the user in the request line field is not allowed.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result405(Object message,String path){
@@ -479,12 +519,13 @@ public class Result {
     }
 
     /**
-     * 根据用户发送的Accept，请求资源不可访问。
-     * According to the accept sent by the user, the request resource is not accessible.
+     * @description: 根据用户发送的Accept，请求资源不可访问。
+     * @description: According to the accept sent by the user, the request resource is not accessible.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result406(Object message,String path){
@@ -492,12 +533,13 @@ public class Result {
     }
 
     /**
-     * 用户必须首先在代理服务器上取得授权。
-     * The user must first obtain authorization on the proxy server.
+     * @description: 用户必须首先在代理服务器上取得授权。
+     * @description: The user must first obtain authorization on the proxy server.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result407(Object message,String path){
@@ -505,12 +547,13 @@ public class Result {
     }
 
     /**
-     * 客户端没有在用户指定的时间内完成请求。
-     * The client did not complete the request within the time specified by the user.
+     * @description: 客户端没有在用户指定的时间内完成请求。
+     * @description: The client did not complete the request within the time specified by the user.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result408(Object message,String path){
@@ -518,12 +561,13 @@ public class Result {
     }
 
     /**
-     * 对当前资源状态，请求不能完成。
-     * The request cannot be completed for the current resource state.
+     * @description: 对当前资源状态，请求不能完成。
+     * @description: The request cannot be completed for the current resource state.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result409(Object message,String path){
@@ -531,12 +575,13 @@ public class Result {
     }
 
     /**
-     * 服务器上不再有此资源。
-     * This resource no longer exists on the server.
+     * @description: 服务器上不再有此资源。
+     * @description: This resource no longer exists on the server.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result410(Object message,String path){
@@ -544,12 +589,13 @@ public class Result {
     }
 
     /**
-     * 服务器拒绝用户定义的Content-Length属性请求。
-     * The server rejected the user-defined request for the content length property.
+     * @description: 服务器拒绝用户定义的Content-Length属性请求。
+     * @description: The server rejected the user-defined request for the content length property.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result411(Object message,String path){
@@ -557,12 +603,13 @@ public class Result {
     }
 
     /**
-     * 一个或多个请求头字段在当前请求中错误。
-     * One or more request header fields are incorrect in the current request.
+     * @description: 一个或多个请求头字段在当前请求中错误。
+     * @description: One or more request header fields are incorrect in the current request.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result412(Object message,String path){
@@ -570,12 +617,13 @@ public class Result {
     }
 
     /**
-     * 请求的资源大于服务器允许的大小。
-     * The requested resource is larger than the size allowed by the server.
+     * @description: 请求的资源大于服务器允许的大小。
+     * @description: The requested resource is larger than the size allowed by the server.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result413(Object message,String path){
@@ -583,12 +631,13 @@ public class Result {
     }
 
     /**
-     * 请求的资源URL长于服务器允许的长度。
-     * The requested resource URL is longer than the length allowed by the server.
+     * @description: 请求的资源URL长于服务器允许的长度。
+     * @description: The requested resource URL is longer than the length allowed by the server.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result414(Object message,String path){
@@ -596,12 +645,13 @@ public class Result {
     }
 
     /**
-     * 请求资源不支持请求项目格式。
-     * The request resource does not support the request item format.
+     * @description: 请求资源不支持请求项目格式。
+     * @description: The request resource does not support the request item format.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result415(Object message,String path){
@@ -609,12 +659,13 @@ public class Result {
     }
 
     /**
-     * 请求中包含Range请求头字段，在当前请求资源范围内没有range指示值。
-     * The request contains the range request header field, and there is no range indication value in the current request resource range.
+     * @description: 请求中包含Range请求头字段，在当前请求资源范围内没有range指示值。
+     * @description: The request contains the range request header field, and there is no range indication value in the current request resource range.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result416(Object message,String path){
@@ -622,12 +673,13 @@ public class Result {
     }
 
     /**
-     * 服务器不满足请求Expect头字段指定的期望值。
-     * The server does not meet the expected value specified in the request expect header field.
+     * @description: 服务器不满足请求Expect头字段指定的期望值。
+     * @description: The server does not meet the expected value specified in the request expect header field.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result417(Object message,String path){
@@ -635,12 +687,13 @@ public class Result {
     }
 
     /**
-     * 服务器错误。
-     * Server error.
+     * @description: 服务器错误。
+     * @description: Server error.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result500(Object message,String path){
@@ -648,12 +701,13 @@ public class Result {
     }
 
     /**
-     * 服务器不支持请求的功能。
-     * The server does not support the requested feature.
+     * @description: 服务器不支持请求的功能。
+     * @description: The server does not support the requested feature.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result501(Object message,String path){
@@ -661,12 +715,13 @@ public class Result {
     }
 
     /**
-     * 网关错误。
-     * Gateway error.
+     * @description: 网关错误。
+     * @description: Gateway error.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result502(Object message,String path){
@@ -674,12 +729,13 @@ public class Result {
     }
 
     /**
-     * 无法获得服务。
-     * Unable to get service.
+     * @description: 无法获得服务。
+     * @description: Unable to get service.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result503(Object message,String path){
@@ -687,12 +743,13 @@ public class Result {
     }
 
     /**
-     * 网关超时。
-     * Gateway timed out.
+     * @description: 网关超时。
+     * @description: Gateway timed out.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result504(Object message,String path){
@@ -700,12 +757,13 @@ public class Result {
     }
 
     /**
-     * 不支持的http版本。
-     * Unsupported HTTP version.
+     * @description: 不支持的http版本。
+     * @description: Unsupported HTTP version.
+     * @version: V1.0
      * @author HCY
      * @since 2021/4/29 7:25 上午
-     * @param message: 信息
-     * @param path: URL路径
+     * @param message: [信息](information)
+     * @param path: [URL路径](url path)
      * @return Result
      */
     public Result result505(Object message,String path){

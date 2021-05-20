@@ -1,7 +1,7 @@
 package com.xiaoTools.core.charUtil;
 
 /**
- * char工具类
+ * [char工具类](Char tool class)
  * @author HCY
  * @since 2021/5/14 4:43 下午
 */

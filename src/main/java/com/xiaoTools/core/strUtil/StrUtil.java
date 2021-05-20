@@ -5,25 +5,27 @@ import com.xiaoTools.core.charUtil.CharUtil;
 import java.util.List;
 
 /**
- * 字符串工具类
+ * [字符串工具类](String tool class)
  * @author HCY
  * @since 2021/5/14 3:42 下午
 */
 public class StrUtil {
     /**
-     * 初始化方法
+     * [初始化方法](Initialization method)
      * @author HCY
      * @since 2021/5/14 3:42 下午
-     * @return null
     */
     public StrUtil() {
     }
 
     /**
-     * [判断字符串是否为空](只判断是否为空或者是否为null)
+     * [[判断字符串是否为空](只判断是否为空或者是否为null)]([judge whether the string is empty] (only judge whether it is empty or null))
+     * @description: zh - 输入字符串判断是否为空
+     * @description: en - Input string to determine whether it is empty
+     * @version: V1.0
      * @author HCY
      * @since 2021/5/14 3:55 下午
-     * @param value: 需要判断的字符串
+     * @param value: [需要判断的字符串](String to judge)
      * @return boolean
     */
     public static boolean isEmpty(CharSequence value){
@@ -31,10 +33,12 @@ public class StrUtil {
     }
 
     /**
-     * 判断字符串中是否有空的字符串
+     * [判断字符串中是否有空的字符串](Determine whether there is an empty string in the string)
+     * @description: zh - 输入字符串中是否有空的字符串
+     * @description: en - Is there an empty string in the input string
      * @author HCY
      * @since 2021/5/14 5:04 下午
-     * @param value: 需要判断的字符串
+     * @param value: [需要判断的字符串](String to judge)
      * @return boolean
     */
     public static boolean isBlank(CharSequence value){
@@ -50,23 +54,29 @@ public class StrUtil {
     }
 
     /**
-     * 判断字符串是否为空
+     * [判断字符串是否为空](Determine whether the string is empty)
+     * @description: zh - 输入的字符串，判断是否为空
+     * @description: en - Input string to determine whether it is empty
+     * @version: V1.0
      * @author HCY
      * @since 2021/5/14 7:10 下午
-     * @param cs: 需要的字符串
+     * @param value: [需要的字符串](Required string)
      * @return java.lang.String
     */
-    public static String str(CharSequence cs) {
-        return null == cs ? null : cs.toString();
+    public static String str(CharSequence value) {
+        return null == value ? null : value.toString();
     }
 
     /**
-     * 截取字符串
+     * [截取字符串](Intercept string)
+     * @description: zh - 输入的字符串截取规定某一段的字符串
+     * @description: en - The input string intercepts the specified string
+     * @version: V1.0
      * @author HCY
      * @since 2021/5/14 8:01 下午
-     * @param value: 需要截取的字符串
-     * @param formIndex: 开始位置
-     * @param toIndex: 结束位置
+     * @param value: [需要截取的字符串](String to intercept)
+     * @param formIndex: [开始位置](Start position)
+     * @param toIndex: [结束位置](End position)
      * @return java.lang.String
     */
     public static String sub(CharSequence value,int formIndex,int toIndex){
@@ -102,11 +112,14 @@ public class StrUtil {
     }
 
     /**
-     * 删除前缀
+     * [删除前缀](Remove prefix)
+     * @description: zh - 删除字符串的指定前缀
+     * @description: en - Removes the specified prefix of a string
+     * @version: V1.0
      * @author HCY
      * @since 2021/5/14 8:16 下午
-     * @param value: 需要删除前缀的字符串
-     * @param prefix: 前缀
+     * @param value: [需要删除前缀的字符串](The prefix string needs to be removed)
+     * @param prefix: [前缀](prefix)
      * @return java.lang.String
     */
     public static String delPrefix(CharSequence value,CharSequence prefix){
@@ -119,11 +132,14 @@ public class StrUtil {
     }
 
     /**
-     * 删除后缀
+     * [删除后缀](Delete suffix)
+     * @description: zh - 删除字符串中指定的后缀
+     * @description: en - Removes the suffix specified in the string
+     * @version: V1.0
      * @author HCY
      * @since 2021/5/14 8:25 下午
-     * @param value: 需要删除后缀的字符串
-     * @param suffix: 后缀
+     * @param value: [需要删除后缀的字符串](Need to delete suffix string)
+     * @param suffix: [后缀](suffix)
      * @return java.lang.String
     */
     public static String delSuffix(CharSequence value,CharSequence suffix){
@@ -136,11 +152,14 @@ public class StrUtil {
     }
 
     /**
-     * 截取字符串
+     * [截取字符串](Intercept string)
+     * @description: zh - 截取字符串中的结束位置
+     * @description: en - Intercepts the end position in a string
+     * @version: V1.0
      * @author HCY
      * @since 2021/5/14 8:18 下午
-     * @param string: 字符串
-     * @param fromIndex: 截取的位置
+     * @param string: [字符串](character string)
+     * @param fromIndex: [截取的位置](Location of interception)
      * @return java.lang.String
     */
     public static String subSuf(CharSequence string, int fromIndex) {
@@ -148,26 +167,18 @@ public class StrUtil {
     }
 
     /**
-     * 截取字符串
+     * [截取字符串](Intercept string)
+     * @description: zh - 截取字符串的开始位置
+     * @description: en - The start position of the intercepted string
+     * @version: V1.0
      * @author HCY
      * @since 2021/5/14 8:24 下午
-     * @param string: 字符串
-     * @param toIndexExclude: 截取的位置
+     * @param string: [字符串](character string)
+     * @param toIndexExclude: [截取的位置](Location of interception)
      * @return java.lang.String
     */
     public static String subPre(CharSequence string, int toIndexExclude) {
         return sub(string, 0, toIndexExclude);
     }
 
-    public static boolean startWith(String value, char c) {
-        if (isEmpty(value)) {
-            return false;
-        } else {
-            return c == value.charAt(0);
-        }
-    }
-
-    public static List<String> split(String value, char separator) {
-        return null;
-    }
 }

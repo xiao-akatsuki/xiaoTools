@@ -245,18 +245,33 @@ public class NumUtil {
      * [求最大公约数](greatest common factor)
      * @description: zh - 输入两个数字，计算出他们的最大公约数。
      * @description: en - Enter two numbers and calculate their greatest common divisor.
-     * @version: V1.0
-     * @author XiaoXunYao
-     * @since 2021/5/17 7:58 [上午](morning)
+     * @issue: zh - 把辗转相除和更相减损的优势结合，在更相减损的基础上使用位移运算。
+     * @issue: en - Combining the advantages of tossing and dividing and more subtracting, using displacement calculation on the basis of more subtracting.
+     * @version: V2.0
+     * @author XiaoXunYao and dai1474446125
+     * @since 2021/5/21 20:27
      * @param m: [求最大公约数的值1](Finding the value 1 of the greatest common divisor)
      * @param n: [求最大公约数的值2](Finding the value 2 of the greatest common divisor)
      * @return int
     */
-    public static int divisor(int m , int n){
-        if (n == 0){ return m; }
-        int r = m % n;
-        return divisor(n,r);
+    public static int divisor(int m,int n){
+      if (n==m){
+          return n;
+      }
+      if ((n&1)==0 && (m&1)==0){
+          return divisor(n>>1,m>>1)<<1;
+      }else if ((n&1)==0&&(m&1)!=0){
+          return divisor(n>>1,m);
+      } else if ((n&1)!=0&&(m&1)==0){
+          return divisor(n,m>>1);
+      } else {
+          int big = Math.max(n, m);
+          int small = Math.min(n, m);
+          return divisor(big-small,small);
+      }
     }
+
+
 
     /**
      * [求最小公倍数](Finding the least common multiple)

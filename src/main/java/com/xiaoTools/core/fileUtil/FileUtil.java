@@ -360,7 +360,7 @@ public class FileUtil {
      * @version: V1.0
      * @author XiaoXunYao
      * @since 2021/5/21 8:24 下午
-     * @param file: [需要修改名字的文件或文件夹地址](The address of the file or folder whose name needs to be changed)
+     * @param file: [需要修改名字的文件或文件夹地址的全路径](The full path of the address of the file or folder whose name needs to be changed)
      * @param newName: [修改的新名字](Modified new name)
      * @return boolean
     */

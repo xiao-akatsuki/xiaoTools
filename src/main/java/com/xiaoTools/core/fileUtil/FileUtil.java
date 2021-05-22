@@ -268,11 +268,11 @@ public class FileUtil {
     */
     public static boolean copyFolder(String resource, String target){
         try {
-            File resourceFile = new File(resource);
+            File resourceFile = file(resource);
             if (!resourceFile.exists()) {
                 return false;
             }
-            File targetFile = new File(target);
+            File targetFile = file(target);
             if (!targetFile.exists()) {
                 mkdir(targetFile);
             }
@@ -365,7 +365,7 @@ public class FileUtil {
      * @return boolean
     */
     public static boolean rename(String file,String newName){
-        File f = new File(file);
+        File f = file(file);
         // 判断原文件是否存在（防止文件名冲突）
         if (!f.exists()) {
             return false;
@@ -391,6 +391,76 @@ public class FileUtil {
             err.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * [输入需要判断的文件流，进行文件流的判断](Input the file stream to be judged and judge the file stream)
+     * @description: zh - 输入需要判断的文件流，进行文件流的判断
+     * @description: en -  Input the file stream to be judged and judge the file stream
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/22 8:06 上午
+     * @param file: [需要判断的文件流](File stream to judge)
+     * @return boolean
+    */
+    public static boolean isDirectory(File file){
+        return null != file && file.isDirectory();
+    }
+
+    /**
+     * [输入文件的全路径地址，判断是否是文件夹](Enter the full path address of the file to determine whether it is a folder)
+     * @description: zh - 输入文件的全路径地址，判断是否是文件夹
+     * @description: en - Enter the full path address of the file to determine whether it is a folder
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/22 8:10 上午
+     * @param file: [需要判断的文件流全路径地址](Full path address of file stream to be judged)
+     * @return boolean
+    */
+    public static boolean isDirectory(String file){
+        return null != file && isDirectory(file(file));
+    }
+
+    /**
+     * [将源文件移动到目标的位置](Move the source file to the destination location)
+     * @description: zh - 将源文件移动到目标的位置
+     * @description: en - Move the source file to the destination location
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/21 11:00 下午
+     * @param resource: [需要移动的文件或者文件夹](Files or folders that need to be moved)
+     * @param target: [移动文件的目标位置](Where to move files)
+     * @return boolean
+    */
+    public static boolean move(File resource,File target){
+        //判断源文件是否是文件
+        if (isDirectory(resource)) {
+            //是文件夹
+            if (copyFolder(resource, target)) {
+                return del(resource);
+            }
+        }else {
+            //是文件
+            if (copyFile(resource, target)) {
+                return del(resource);
+            }
+        }
+        return false;
+    }
+
+    /**
+     * [将源文件移动到目标的位置](Move the source file to the destination location)
+     * @description: zh - 将源文件移动到目标的位置
+     * @description: en - Move the source file to the destination location
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/22 12:35 下午
+     * @param resource: [需要移动的文件或者文件夹](Files or folders that need to be moved)
+     * @param target: [移动文件的目标位置](Where to move files)
+     * @return boolean
+    */
+    public static boolean move(String resource, String target){
+        return move(file(resource),file(target));
     }
 
     /**

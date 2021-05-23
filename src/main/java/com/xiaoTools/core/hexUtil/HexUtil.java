@@ -34,11 +34,11 @@ public class HexUtil {
         StringBuilder sb =  new  StringBuilder( "" );
         byte [] bs = value.getBytes();
         int  bit;
-        for ( int i = 0 ; i < bs.length; i++) {
-             bit = (bs[i] & 0x0f0 ) >> 4 ;
-             sb.append(DIGITS_LOWER[bit]);
-             bit = bs[i] & 0x0f ;
-             sb.append(DIGITS_LOWER[bit]);
+        for (byte b : bs) {
+            bit = (b & 0x0f0) >> 4;
+            sb.append(DIGITS_LOWER[bit]);
+            bit = b & 0x0f;
+            sb.append(DIGITS_LOWER[bit]);
         }
         return sb.toString().trim();
     }

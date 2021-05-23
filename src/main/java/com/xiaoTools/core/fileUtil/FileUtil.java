@@ -1,6 +1,9 @@
 package com.xiaoTools.core.fileUtil;
 
 
+import com.xiaoTools.core.arrayUtil.ArrayUtil;
+import com.xiaoTools.core.charUtil.CharUtil;
+
 import java.io.*;
 
 /**
@@ -461,6 +464,77 @@ public class FileUtil {
     */
     public static boolean move(String resource, String target){
         return move(file(resource),file(target));
+    }
+
+    /**
+     * [输入文件流获取到文件的名字](Enter the file stream to get the name of the file)
+     * @description: zh - 输入文件流获取到文件的名字
+     * @description: en - Enter the file stream to get the name of the file
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/23 3:10 下午
+     * @param file: [需要获取文件名字的文件流](Need to get the file stream of the file name)
+     * @return java.lang.String
+    */
+    public static String getName(File file){
+        return null != file ? file.getName() : null;
+    }
+
+    /**
+     * [输入文件的地址，获取到文件的名字](Enter the address of the file to get the name of the file)
+     * @description: zh - 输入文件的地址，获取到文件的名字
+     * @description: en - Enter the address of the file to get the name of the file
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/23 3:21 下午
+     * @param filePath: [文件的地址](The address of the file)
+     * @return java.lang.String
+    */
+    public static String getName(String filePath){
+        if (null == filePath) {
+            return null;
+        } else {
+            int len = filePath.length();
+            if (0 == len) {
+                return filePath;
+            } else {
+                if (CharUtil.isFileSeparator(filePath.charAt(len - 1))) {
+                    --len;
+                }
+                int begin = 0;
+                for(int i = len - 1; i > -1; --i) {
+                    char c = filePath.charAt(i);
+                    if (CharUtil.isFileSeparator(c)) {
+                        begin = i + 1;
+                        break;
+                    }
+                }
+                return filePath.substring(begin, len);
+            }
+        }
+    }
+
+    /**
+     * [输入文件流，判断该文件流是否为空](Input file stream to judge whether the file stream is empty)
+     * @description: zh - 输入文件流，判断该文件流是否为空
+     * @description: en - Input file stream to judge whether the file stream is empty
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/23 7:37 下午
+     * @param file: 需要判断是否为空的文件流
+     * @return boolean
+    */
+    public static boolean isEmpty(File file){
+        if (null == file) {
+            return true;
+        } else if (file.isDirectory()) {
+            String[] subFiles = file.list();
+            return ArrayUtil.isEmpty(subFiles);
+        } else if (file.isFile()) {
+            return file.length() <= 0L;
+        } else {
+            return false;
+        }
     }
 
     /**

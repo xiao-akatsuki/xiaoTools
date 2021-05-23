@@ -38,12 +38,4 @@ implementation 'io.github.xiaoxunyao:java-utils-library:0.0.1-releases'
 
 ## 📖Documentation
 
-**[Return value - Result](https://github.com/xiaoxunyao/java-utils-library/blob/master/doc/en/1.%20Return%20value%20-%20Result.md)**
-
-**[Console input - Console](https://github.com/xiaoxunyao/java-utils-library/blob/master/doc/en/2.%20Console%20input%20-%20Console.md)**
-
-**[String tool class - StrUtil](https://github.com/xiaoxunyao/java-utils-library/blob/master/doc/en/3.%20String%20tool%20class%20-%20StrUtil.md)**
-
-**[Hexadecimal Tools - HexUtil](https://github.com/xiaoxunyao/java-utils-library/blob/master/doc/en/4.%20Hexadecimal%20Tools%20-%20HexUtil.md)**
-
-**[Number Util-NumUtil](https://github.com/xiaoxunyao/java-utils-library/blob/master/doc/en/5.%20Number%20Util-NumUtil.md)**
+[Welcome everyone to visit the document URL](https://xiaoxunyao.github.io/xiaoTools-doc/en/)

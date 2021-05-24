@@ -119,7 +119,7 @@ public class FileUtil {
      * @param file: [需要删除文件的路径](The path of the file needs to be deleted)
      * @return boolean
     */
-    public static boolean del(File file){
+    public static boolean rm(File file){
         //判断file是否为空
         if (file != null && file.exists()){
             //判断该文件路径是否指向的是文件夹
@@ -151,7 +151,7 @@ public class FileUtil {
             File[] files = directory.listFiles();
             if (null != files) {
                 for (File file : files) {
-                    if (!del(file)) {
+                    if (!rm(file)) {
                         return false;
                     }
                 }
@@ -180,184 +180,33 @@ public class FileUtil {
     }
 
     /**
-     * [复制文件，将所需要复制的文件复制到目标的目录](Copy file, copy the file to the target directory)
-     * @description: zh - 输入源文件的地址和目标文件的地址进行文件的复制
-     * @description: en - Input the address of the source file and the address of the target file to copy the file
+     * [将源文件流中的数据复制到目标位置](Copy the data from the source file stream to the destination)
+     * @description: zh - 将源文件流中的数据复制到目标位置
+     * @description: en - Copy the data from the source file stream to the destination
      * @version: V1.0
      * @author XiaoXunYao
-     * @since 2021/5/20 8:09 下午
-     * @param source: 源文件的地址
-     * @param target: 目标文件的地址
+     * @since 2021/5/24 11:14 上午
+     * @param resource: [需要移动的源文件](Source files that need to be moved)
+     * @param target: [复制到的目标位置](Copy to destination)
      * @return boolean
     */
-    public static boolean copyFile(String source,String target){
-        try {
-            int byteSum = 0;
-            int byteRead;
-            File oldFile = new File(source);
-            //文件存在时
-            if (oldFile.exists()) {
-                //读入原文件
-                InputStream inStream = new FileInputStream(source);
-                FileOutputStream fs = new FileOutputStream(target);
-                byte[] buffer = new byte[1444];
-                while ((byteRead = inStream.read(buffer)) != -1) {
-                    //字节数 文件大小
-                    byteSum += byteRead;
-                    fs.write(buffer, 0, byteRead);
-                }
-                inStream.close();
-                return true;
-            }
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
+    public static boolean cp(File resource,File target){
+        return isFile(resource) ? copyFile(resource,target) : copyFolder(resource, target);
     }
 
     /**
-     * [将源文件流的文件复制到目标的文件](Copy files from the source file stream to the destination file)
-     * @description: zh - 输入源文件流和目标文件流，将源文件复制到目标文件处
-     * @description: en - Input the source file stream and the target file stream to copy the source file to the target file
+     * [将源文件流中的数据复制到目标位置](Copy the data from the source file stream to the destination)
+     * @description: zh - 将源文件流中的数据复制到目标位置
+     * @description: en - Copy the data from the source file stream to the destination
      * @version: V1.0
      * @author XiaoXunYao
-     * @since 2021/5/21 7:49 上午
-     * @param resource: [源文件的文件流](The file stream of the source file)
-     * @param target: [目标文件的文件流](The file stream of the target file)
+     * @since 2021/5/24 11:21 上午
+     * @param resource: [需要移动的源文件](Source files that need to be moved)
+     * @param target: [复制到的目标位置](Copy to destination)
      * @return boolean
     */
-    public static boolean copyFile(File resource, File target){
-        try {
-            // 输入流 --> 从一个目标读取数据
-            // 输出流 --> 向一个目标写入数据
-            // 文件输入流并进行缓冲
-            FileInputStream inputStream = new FileInputStream(resource);
-            BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
-
-            // 文件输出流并进行缓冲
-            FileOutputStream outputStream = new FileOutputStream(target);
-            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(outputStream);
-
-            // 缓冲数组
-            // 大文件 可将 1024 * 2 改大一些，但是 并不是越大就越快
-            byte[] bytes = new byte[1024 * 2];
-            int len = 0;
-            while ((len = inputStream.read(bytes)) != -1) {
-                bufferedOutputStream.write(bytes, 0, len);
-            }
-            // 刷新输出缓冲流
-            bufferedOutputStream.flush();
-            //关闭流
-            bufferedInputStream.close();
-            bufferedOutputStream.close();
-            inputStream.close();
-            outputStream.close();
-            return true;
-        }catch (Exception e){
-            return false;
-        }
-    }
-
-    /**
-     * [输入源文件夹地址和目标文件夹地址，将源文件夹地址中的所有文件复制到目标地址文件，若目标地址并未指向已经存在的文件夹，则先创建文件夹，在进行复制。](Input the address of the source folder and the address of the destination folder, copy all the files in the address of the source folder to the file of the destination address. If the destination address does not point to the existing folder, create the folder first, and then copy.)
-     * @description: zh - 输入源文件夹流和目标文件夹流，将源文件夹中的所有文件复制到目标文件夹中。
-     * @description: en - Input the source folder stream and the destination folder stream to copy all the files in the source folder to the destination folder.
-     * @version: V1.0
-     * @author XiaoXunYao
-     * @since 2021/5/21 7:59 上午
-     * @param resource: [源文件夹地址](Source folder address)
-     * @param target: [目标文件夹地址](Destination folder address)
-     * @return boolean
-    */
-    public static boolean copyFolder(String resource, String target){
-        try {
-            File resourceFile = file(resource);
-            if (!resourceFile.exists()) {
-                return false;
-            }
-            File targetFile = file(target);
-            if (!targetFile.exists()) {
-                mkdir(targetFile);
-            }
-            // 获取源文件夹下的文件夹或文件
-            File[] resourceFiles = resourceFile.listFiles();
-            for (File file : resourceFiles) {
-                File file1 = new File(targetFile.getAbsolutePath() + File.separator + resourceFile.getName());
-                // 复制文件
-                if (file.isFile()) {
-                    // 在 目标文件夹（B） 中 新建 源文件夹（A），然后将文件复制到 A 中
-                    // 这样 在 B 中 就存在 A
-                    if (!file1.exists()) {
-                        file1.mkdirs();
-                    }
-                    File targetFile1 = new File(file1.getAbsolutePath() + File.separator + file.getName());
-                    copyFile(file, targetFile1);
-                }
-                // 复制文件夹
-                // 复制源文件夹
-                if (file.isDirectory()) {
-                    String dir1 = file.getAbsolutePath();
-                    // 目的文件夹
-                    String dir2 = file1.getAbsolutePath();
-                    copyFolder(dir1, dir2);
-                }
-            }
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * [输入源文件流和目标文件流，将源文件流中的所有文件复制到目标文件处。](Input the source file stream and the target file stream, and copy all the files in the source file stream to the target file.)
-     * @description: zh - 输入源文件流，将源文件流中的所有文件复制到目标文件处。
-     * @description: en - Input the source file stream and copy all the files in the source file stream to the destination file.
-     * @version: V1.0
-     * @author XiaoXunYao
-     * @since 2021/5/21 7:40 下午
-     * @param resource: [源文件夹地址](Source folder address)
-     * @param target: [目标文件地址](Destination file address)
-     * @return boolean
-    */
-    public static boolean copyFolder(File resource, File target){
-        try {
-            if (!resource.exists()) {
-                return false;
-            }
-            if (!target.exists()) {
-                mkdir(target);
-            }
-            //判断文件是否为空
-            if (!isEmpty(resource)) {
-                return false;
-            }
-            // 获取源文件夹下的文件夹或文件
-            File[] resourceFiles = resource.listFiles();
-            for (File file : resourceFiles) {
-                File file1 = new File(target.getAbsolutePath() + File.separator + resource.getName());
-                // 复制文件
-                if (file.isFile()) {
-                    // 在 目标文件夹（B） 中 新建 源文件夹（A），然后将文件复制到 A 中
-                    // 这样 在 B 中 就存在 A
-                    if (!file1.exists()) {
-                        file1.mkdirs();
-                    }
-                    File targetFile1 = new File(file1.getAbsolutePath() + File.separator + file.getName());
-                    copyFile(file, targetFile1);
-                }
-                // 复制文件夹
-                // 复制源文件夹
-                if (file.isDirectory()) {
-                    String dir1 = file.getAbsolutePath();
-                    // 目的文件夹
-                    String dir2 = file1.getAbsolutePath();
-                    copyFolder(dir1, dir2);
-                }
-            }
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
+    public static boolean cp(String resource,String target){
+        return isFile(resource) ? copyFile(resource, target) : copyFolder(resource, target);
     }
 
     /**
@@ -439,17 +288,17 @@ public class FileUtil {
      * @param target: [移动文件的目标位置](Where to move files)
      * @return boolean
     */
-    public static boolean move(File resource,File target){
+    public static boolean mv(File resource, File target){
         //判断源文件是否是文件
         if (isDirectory(resource)) {
             //是文件夹
             if (copyFolder(resource, target)) {
-                return del(resource);
+                return rm(resource);
             }
         }else {
             //是文件
             if (copyFile(resource, target)) {
-                return del(resource);
+                return rm(resource);
             }
         }
         return false;
@@ -466,8 +315,8 @@ public class FileUtil {
      * @param target: [移动文件的目标位置](Where to move files)
      * @return boolean
     */
-    public static boolean move(String resource, String target){
-        return move(file(resource),file(target));
+    public static boolean mv(String resource, String target){
+        return mv(file(resource),file(target));
     }
 
     /**
@@ -638,6 +487,187 @@ public class FileUtil {
     */
     private static File file(String path) {
         return null == path ? null : new File(getAbsolutePath(path));
+    }
+
+    /**
+     * [复制文件，将所需要复制的文件复制到目标的目录](Copy file, copy the file to the target directory)
+     * @description: zh - 输入源文件的地址和目标文件的地址进行文件的复制
+     * @description: en - Input the address of the source file and the address of the target file to copy the file
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/20 8:09 下午
+     * @param source: 源文件的地址
+     * @param target: 目标文件的地址
+     * @return boolean
+     */
+    private static boolean copyFile(String source,String target){
+        try {
+            int byteSum = 0;
+            int byteRead;
+            File oldFile = new File(source);
+            //文件存在时
+            if (oldFile.exists()) {
+                //读入原文件
+                InputStream inStream = new FileInputStream(source);
+                FileOutputStream fs = new FileOutputStream(target);
+                byte[] buffer = new byte[1444];
+                while ((byteRead = inStream.read(buffer)) != -1) {
+                    //字节数 文件大小
+                    byteSum += byteRead;
+                    fs.write(buffer, 0, byteRead);
+                }
+                inStream.close();
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * [将源文件流的文件复制到目标的文件](Copy files from the source file stream to the destination file)
+     * @description: zh - 输入源文件流和目标文件流，将源文件复制到目标文件处
+     * @description: en - Input the source file stream and the target file stream to copy the source file to the target file
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/21 7:49 上午
+     * @param resource: [源文件的文件流](The file stream of the source file)
+     * @param target: [目标文件的文件流](The file stream of the target file)
+     * @return boolean
+     */
+    private static boolean copyFile(File resource, File target){
+        try {
+            // 输入流 --> 从一个目标读取数据
+            // 输出流 --> 向一个目标写入数据
+            // 文件输入流并进行缓冲
+            FileInputStream inputStream = new FileInputStream(resource);
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+
+            // 文件输出流并进行缓冲
+            FileOutputStream outputStream = new FileOutputStream(target);
+            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(outputStream);
+
+            // 缓冲数组
+            // 大文件 可将 1024 * 2 改大一些，但是 并不是越大就越快
+            byte[] bytes = new byte[1024 * 2];
+            int len = 0;
+            while ((len = inputStream.read(bytes)) != -1) {
+                bufferedOutputStream.write(bytes, 0, len);
+            }
+            // 刷新输出缓冲流
+            bufferedOutputStream.flush();
+            //关闭流
+            bufferedInputStream.close();
+            bufferedOutputStream.close();
+            inputStream.close();
+            outputStream.close();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    /**
+     * [输入源文件夹地址和目标文件夹地址，将源文件夹地址中的所有文件复制到目标地址文件，若目标地址并未指向已经存在的文件夹，则先创建文件夹，在进行复制。](Input the address of the source folder and the address of the destination folder, copy all the files in the address of the source folder to the file of the destination address. If the destination address does not point to the existing folder, create the folder first, and then copy.)
+     * @description: zh - 输入源文件夹流和目标文件夹流，将源文件夹中的所有文件复制到目标文件夹中。
+     * @description: en - Input the source folder stream and the destination folder stream to copy all the files in the source folder to the destination folder.
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/21 7:59 上午
+     * @param resource: [源文件夹地址](Source folder address)
+     * @param target: [目标文件夹地址](Destination folder address)
+     * @return boolean
+     */
+    private static boolean copyFolder(String resource, String target){
+        try {
+            File resourceFile = file(resource);
+            if (!resourceFile.exists()) {
+                return false;
+            }
+            File targetFile = file(target);
+            if (!targetFile.exists()) {
+                mkdir(targetFile);
+            }
+            // 获取源文件夹下的文件夹或文件
+            File[] resourceFiles = resourceFile.listFiles();
+            for (File file : resourceFiles) {
+                File file1 = new File(targetFile.getAbsolutePath() + File.separator + resourceFile.getName());
+                // 复制文件
+                if (file.isFile()) {
+                    // 在 目标文件夹（B） 中 新建 源文件夹（A），然后将文件复制到 A 中
+                    // 这样 在 B 中 就存在 A
+                    if (!file1.exists()) {
+                        file1.mkdirs();
+                    }
+                    File targetFile1 = new File(file1.getAbsolutePath() + File.separator + file.getName());
+                    copyFile(file, targetFile1);
+                }
+                // 复制文件夹
+                // 复制源文件夹
+                if (file.isDirectory()) {
+                    String dir1 = file.getAbsolutePath();
+                    // 目的文件夹
+                    String dir2 = file1.getAbsolutePath();
+                    copyFolder(dir1, dir2);
+                }
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * [输入源文件流和目标文件流，将源文件流中的所有文件复制到目标文件处。](Input the source file stream and the target file stream, and copy all the files in the source file stream to the target file.)
+     * @description: zh - 输入源文件流，将源文件流中的所有文件复制到目标文件处。
+     * @description: en - Input the source file stream and copy all the files in the source file stream to the destination file.
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/21 7:40 下午
+     * @param resource: [源文件夹地址](Source folder address)
+     * @param target: [目标文件地址](Destination file address)
+     * @return boolean
+     */
+    private static boolean copyFolder(File resource, File target){
+        try {
+            if (!resource.exists()) {
+                return false;
+            }
+            if (!target.exists()) {
+                mkdir(target);
+            }
+            //判断文件是否为空
+            if (!isEmpty(resource)) {
+                return false;
+            }
+            // 获取源文件夹下的文件夹或文件
+            File[] resourceFiles = resource.listFiles();
+            for (File file : resourceFiles) {
+                File file1 = new File(target.getAbsolutePath() + File.separator + resource.getName());
+                // 复制文件
+                if (file.isFile()) {
+                    // 在 目标文件夹（B） 中 新建 源文件夹（A），然后将文件复制到 A 中
+                    // 这样 在 B 中 就存在 A
+                    if (!file1.exists()) {
+                        file1.mkdirs();
+                    }
+                    File targetFile1 = new File(file1.getAbsolutePath() + File.separator + file.getName());
+                    copyFile(file, targetFile1);
+                }
+                // 复制文件夹
+                // 复制源文件夹
+                if (file.isDirectory()) {
+                    String dir1 = file.getAbsolutePath();
+                    // 目的文件夹
+                    String dir2 = file1.getAbsolutePath();
+                    copyFolder(dir1, dir2);
+                }
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
 }

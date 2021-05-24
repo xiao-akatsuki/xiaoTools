@@ -191,20 +191,19 @@ public class FileUtil {
     */
     public static boolean copyFile(String source,String target){
         try {
-            int bytesum = 0;
-            int byteread = 0;
-            File oldfile = new File(source);
+            int byteSum = 0;
+            int byteRead;
+            File oldFile = new File(source);
             //文件存在时
-            if (oldfile.exists()) {
+            if (oldFile.exists()) {
                 //读入原文件
                 InputStream inStream = new FileInputStream(source);
                 FileOutputStream fs = new FileOutputStream(target);
                 byte[] buffer = new byte[1444];
-                int length;
-                while ((byteread = inStream.read(buffer)) != -1) {
+                while ((byteRead = inStream.read(buffer)) != -1) {
                     //字节数 文件大小
-                    bytesum += byteread;
-                    fs.write(buffer, 0, byteread);
+                    byteSum += byteRead;
+                    fs.write(buffer, 0, byteRead);
                 }
                 inStream.close();
                 return true;
@@ -326,6 +325,10 @@ public class FileUtil {
             }
             if (!target.exists()) {
                 mkdir(target);
+            }
+            //判断文件是否为空
+            if (!isEmpty(resource)) {
+                return false;
             }
             // 获取源文件夹下的文件夹或文件
             File[] resourceFiles = resource.listFiles();

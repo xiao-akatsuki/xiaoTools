@@ -569,6 +569,16 @@ public class FileUtil {
         return null != filePath && file(getAbsolutePath(filePath)).isFile();
     }
 
+    /**
+     * [输入所需要获取的文件流，获取该文件流的后缀](Input the file stream to get and get the suffix of the file stream)
+     * @description: zh - 输入所需要获取的文件流，获取该文件流的后缀
+     * @description: en - Input the file stream to get and get the suffix of the file stream
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/24 9:11 上午
+     * @param file: [文件流](File stream)
+     * @return java.lang.String
+     */
     public static String getSuffix(File file){
         if (file == null){
             return null;

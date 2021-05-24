@@ -3,6 +3,7 @@ package com.xiaoTools.core.fileUtil;
 
 import com.xiaoTools.core.arrayUtil.ArrayUtil;
 import com.xiaoTools.core.charUtil.CharUtil;
+import com.xiaoTools.core.strUtil.StrUtil;
 
 import java.io.*;
 
@@ -537,6 +538,66 @@ public class FileUtil {
             return file.length() <= 0L;
         } else {
             return false;
+        }
+    }
+
+    /**
+     * [输入文件流判断是否是文件](Input file stream to judge whether it is a file)
+     * @description: zh - 输入文件流判断是否是文件
+     * @description: en - Input file stream to judge whether it is a file
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/24 8:43 上午
+     * @param file: [需要判断是否为文件的文件流](Need to determine whether it is the file stream of the file)
+     * @return boolean
+    */
+    public static boolean isFile(File file){
+        return null != file && file.isFile();
+    }
+
+    /**
+     * [输入文件流的绝对路径判断是否是文件](Enter the absolute path of the file stream to determine whether it is a file)
+     * @description: zh - 输入文件流的绝对路径判断是否是文件
+     * @description: en - Enter the absolute path of the file stream to determine whether it is a file
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/24 8:51 上午
+     * @param filePath: [需要判断是否是文件的文件流](Need to determine whether it is the file stream of the file)
+     * @return boolean
+    */
+    public static boolean isFile(String filePath){
+        return null != filePath && file(getAbsolutePath(filePath)).isFile();
+    }
+
+    public static String getSuffix(File file){
+        if (file == null){
+            return null;
+        }else {
+            return file.isDirectory() ? null : getSuffix(file.getName());
+        }
+    }
+
+    /**
+     * [输入所需要获取的文件流，获取该文件流的后缀](Input the file stream to get and get the suffix of the file stream)
+     * @description: zh - 输入所需要获取的文件流，获取该文件流的后缀
+     * @description: en - Input the file stream to get and get the suffix of the file stream
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/24 9:11 上午
+     * @param fileName: [文件的名字](The name of the file)
+     * @return java.lang.String
+    */
+    public static String getSuffix(String fileName){
+        if (fileName == null) {
+            return null;
+        } else {
+            int index = fileName.lastIndexOf(".");
+            if (index == -1) {
+                return "";
+            } else {
+                String ext = fileName.substring(index + 1);
+                return StrUtil.containsAny(ext, '/', '\\') ? "" : ext;
+            }
         }
     }
 

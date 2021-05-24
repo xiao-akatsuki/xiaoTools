@@ -1,5 +1,6 @@
 package com.xiaoTools.core.strUtil;
 
+import com.xiaoTools.core.arrayUtil.ArrayUtil;
 import com.xiaoTools.core.charUtil.CharUtil;
 
 import java.util.List;
@@ -181,4 +182,26 @@ public class StrUtil {
         return sub(string, 0, toIndexExclude);
     }
 
+    /**
+     * [输入所需要判断的内容，是否包含了所需要的内容](Input the content to be judged, whether it contains the required content)
+     * @description: zh - 输入所需要判断的内容，是否包含了所需要的内容
+     * @description: en - Input the content to be judged, whether it contains the required content
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/24 9:08 上午
+     * @param string: [需要判断的内容](What needs to be judged)
+     * @param testChars: [包含的内容](Content included)
+     * @return boolean
+    */
+    public static boolean containsAny(CharSequence string, char... testChars) {
+        if (!isEmpty(string)) {
+            int len = string.length();
+            for(int i = 0; i < len; ++i) {
+                if (ArrayUtil.contains(testChars, string.charAt(i))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

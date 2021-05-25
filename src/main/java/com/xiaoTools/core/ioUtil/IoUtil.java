@@ -27,13 +27,6 @@ public class IoUtil {
     */
     public IoUtil() { }
 
-    public static void main(String[] args) {
-        String value = "这是一段测试的文本";
-        String a = "/Volumes/1/2. Java_Util/JavaUtils-master/JavaUtils-master/常用类/收发邮件/test1.txt";
-//        String a = "/Volumes/1/2. Java_Util/JavaUtils-master/JavaUtils-master/常用类/收发邮件";
-        writeUTF8(value,a);
-    }
-
     /**
      * [将需要写入的文本通过字符编码写入所需要的文件](Write the text to be written to the required file by character encoding)
      * @description: zh - 将需要写入的文本通过字符编码写入所需要的文件

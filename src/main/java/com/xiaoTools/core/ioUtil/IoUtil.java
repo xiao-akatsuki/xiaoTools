@@ -15,6 +15,7 @@ import java.io.*;
 public class IoUtil {
 
     private static final String UTF8="UTF-8";
+
     private static final String GBK="GBK";
 
     /**
@@ -26,6 +27,35 @@ public class IoUtil {
      * @since 2021/5/24 1:24 下午
     */
     public IoUtil() { }
+
+
+    /**
+     * [将InputStream转为BufferedReader用于读取字符流](Converting InputStream to BufferedReader for reading character stream)
+     * @description: zh - 将InputStream转为BufferedReader用于读取字符流
+     * @description: en - Converting InputStream to BufferedReader for reading character stream
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/26 2:29 下午
+     * @param in: InputStream
+     * @return java.io.BufferedReader
+    */
+    public static BufferedReader getReader(InputStream in){
+        return in == null ? null : new BufferedReader(new InputStreamReader(in));
+    }
+
+    /**
+     * [将Reader转为BufferedReader用于读取字符流](Convert reader to BufferedReader to read character stream)
+     * @description: zh - 将Reader转为BufferedReader用于读取字符流
+     * @description: en - Convert reader to BufferedReader to read character stream
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/26 2:35 下午
+     * @param reader: [以字符为单位的输入流的公共父类](The common parent of the input stream in character units)
+     * @return java.io.BufferedReader
+    */
+    public static BufferedReader getReader(Reader reader){
+        return null == reader ? null : reader instanceof BufferedReader ? (BufferedReader)reader : new BufferedReader(reader);
+    }
 
     /**
      * [将需要写入的文本通过字符编码写入所需要的文件](Write the text to be written to the required file by character encoding)
@@ -175,5 +205,4 @@ public class IoUtil {
             }
         }
     }
-
 }

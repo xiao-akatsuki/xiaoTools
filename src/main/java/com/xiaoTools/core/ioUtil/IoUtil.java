@@ -5,7 +5,7 @@ import com.xiaoTools.core.fileUtil.FileUtil;
 import java.io.*;
 
 /**
- *  [Io流封装的工具类NIO](Tool class NiO encapsulated by IO stream)
+ * [Io流封装的工具类NIO](Tool class NiO encapsulated by IO stream)
  * @description: zh - Io流封装的工具类NIO
  * @description: en - Tool class NiO encapsulated by IO stream
  * @version: V1.0
@@ -13,7 +13,7 @@ import java.io.*;
  * @since 2021/5/24 1:23 下午
 */
 public class IoUtil {
-    
+
     private static final String UTF8="UTF-8";
 
     private static final String GBK="GBK";

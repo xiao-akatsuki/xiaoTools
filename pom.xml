@@ -6,7 +6,7 @@
 
   <groupId>io.github.xiaoxunyao</groupId>
   <artifactId>xiaoTools</artifactId>
-  <version>0.0.5-releases</version>
+  <version>0.0.6-releases</version>
   <packaging>jar</packaging>
   <description>Lightweight java tool class</description>
 

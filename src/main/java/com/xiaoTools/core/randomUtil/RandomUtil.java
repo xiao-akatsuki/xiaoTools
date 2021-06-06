@@ -401,7 +401,7 @@ public class RandomUtil {
      * @since 2021/6/4 9:09 上午
      * @return java.util.concurrent.ThreadLocalRandom
      */
-    private static ThreadLocalRandom getRandom(){ return ThreadLocalRandom.current(); }
+    public static ThreadLocalRandom getRandom(){ return ThreadLocalRandom.current(); }
 
     /**
      * [通过数组完成安全随机数的创建](Through the array to complete the creation of safe random number)
@@ -426,7 +426,7 @@ public class RandomUtil {
      * @since 2021/6/4 9:19 上午
      * @return java.security.SecureRandom
      */
-    private static SecureRandom getSecureRandom(){
+    public static SecureRandom getSecureRandom(){
         return getSecureRandom(null);
     }
 

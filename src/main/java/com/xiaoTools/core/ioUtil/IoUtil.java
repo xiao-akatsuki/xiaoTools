@@ -1,6 +1,6 @@
 package com.xiaoTools.core.ioUtil;
 
-import com.xiaoTools.core.fileUtil.FileUtil;
+import com.xiaoTools.core.fileUtil.fileUtil.FileUtil;
 
 import java.io.*;
 

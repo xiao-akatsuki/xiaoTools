@@ -205,4 +205,17 @@ public class StrUtil {
         return false;
     }
 
+    /**
+     * [通过容量进行建设](Building through capacity)
+     * @description: zh - 通过容量进行建设
+     * @description: en - Building through capacity
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/6 3:12 下午
+     * @param capacity: [容量](capacity)
+     * @return java.lang.StringBuilder
+    */
+    public static StringBuilder builder(int capacity) {
+        return new StringBuilder(capacity);
+    }
 }

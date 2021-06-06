@@ -1,4 +1,4 @@
-package com.xiaoTools.core.fileUtil;
+package com.xiaoTools.core.fileUtil.fileUtil;
 
 
 import com.xiaoTools.core.arrayUtil.ArrayUtil;

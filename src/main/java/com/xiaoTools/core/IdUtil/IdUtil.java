@@ -1,5 +1,7 @@
 package com.xiaoTools.core.IdUtil;
 
+import com.xiaoTools.core.IdUtil.objectId.ObjectId;
+import com.xiaoTools.core.IdUtil.snowflake.Snowflake;
 import com.xiaoTools.core.IdUtil.uuid.UUID;
 
 /**
@@ -63,4 +65,33 @@ public class IdUtil {
     public static String fastSimpleUUID(){
         return UUID.fastUUID().toString(true);
     }
+
+    /**
+     * [创建一个简单的ObjectID](Create a simple ObjectID)
+     * @description: zh - 创建一个简单的ObjectID
+     * @description: en - Create a simple ObjectID
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/7 9:40 上午
+     * @return java.lang.String
+    */
+    public static String objectId() {
+        return ObjectId.nextId();
+    }
+
+    /**
+     * [创建Twitter的Snowflake 算法生成器。](Create Twitter's snowflake algorithm generator.)
+     * @description: zh - 创建Twitter的Snowflake 算法生成器。
+     * @description: en - Create Twitter's snowflake algorithm generator.
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/7 9:03 上午
+     * @param workId: [终端ID](Terminal ID)
+     * @param datacenterId: [数据中心ID](Data center ID)
+     * @return com.xiaoTools.core.IdUtil.snowflake.Snowflake
+    */
+    public static Snowflake createSnowflakeId(long workId,long datacenterId){
+        return new Snowflake(workId,datacenterId);
+    }
+
 }

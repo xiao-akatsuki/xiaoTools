@@ -218,4 +218,23 @@ public class StrUtil {
     public static StringBuilder builder(int capacity) {
         return new StringBuilder(capacity);
     }
+
+    /**
+     * [移除字符串中所有给定字符串](Removes all given strings from a string)
+     * @description: zh - 移除字符串中所有给定字符串
+     * @description: en - Removes all given strings from a string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/7 9:38 上午
+     * @param str: 需要移除的字符串
+     * @param strToRemove: 被移除的字符串
+     * @return java.lang.String
+    */
+    public static String removeAll(CharSequence str, CharSequence strToRemove) {
+        // strToRemove如果为空， 也不用继续后面的逻辑
+        if (isEmpty(str) || isEmpty(strToRemove)) {
+            return str(str);
+        }
+        return str.toString().replace(strToRemove, "");
+    }
 }

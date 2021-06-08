@@ -3,8 +3,6 @@ package com.xiaoTools.core.strUtil;
 import com.xiaoTools.core.arrayUtil.ArrayUtil;
 import com.xiaoTools.core.charUtil.CharUtil;
 
-import java.util.List;
-
 /**
  * [字符串工具类](String tool class)
  * @author HCY
@@ -236,5 +234,79 @@ public class StrUtil {
             return str(str);
         }
         return str.toString().replace(strToRemove, "");
+    }
+
+    /**
+     * [指定字符是否在字符串中出现过](Specifies whether the character has ever appeared in a string)
+     * @description: zh - 指定字符是否在字符串中出现过
+     * @description: en - Specifies whether the character has ever appeared in a string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/8 9:57 上午
+     * @param str: [字符串](character string)
+     * @param searchChar: [被查找的字符串](The string being looked up)
+     * @return boolean
+    */
+    public static boolean contains(CharSequence str, char searchChar) {
+        return indexOf(str, searchChar) > -1;
+    }
+
+    /**
+     * [指定字符是否在字符串中出现过](Specifies whether the character has ever appeared in a string)
+     * @description: zh - 指定字符是否在字符串中出现过
+     * @description: en - Specifies whether the character has ever appeared in a string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/8 10:00 上午
+     * @param str: [字符串](character string)
+     * @param searchChar: [被查找的字符串](The string being looked up)
+     * @return int
+    */
+    public static int indexOf(final CharSequence str, char searchChar) {
+        return indexOf(str, searchChar, 0);
+    }
+
+    /**
+     * [指定范围内查找指定字符](Find the specified character in the specified range)
+     * @description: zh - 指定范围内查找指定字符
+     * @description: en - Find the specified character in the specified range
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/8 10:01 上午
+     * @param str: [字符串](character string)
+     * @param searchChar: [被查找的字符](The character being looked up)
+     * @param start: [起始位置，如果小于0，则从0开始进行查找](Starting position. If it is less than 0, the search starts from 0)
+     * @return int
+    */
+    public static int indexOf(CharSequence str, char searchChar, int start) {
+        if (str instanceof String) {
+            return ((String) str).indexOf(searchChar, start);
+        } else {
+            return indexOf(str, searchChar, start, -1);
+        }
+    }
+
+    /**
+     * [指定范围内查找指定字符](Find the specified character in the specified range)
+     * @description: zh - 指定范围内查找指定字符
+     * @description: en - Find the specified character in the specified range
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/8 10:02 上午
+     * @param str: [字符串](character string)
+     * @param searchChar: [被查找的字符](The character being looked up)
+     * @param start: [起始位置](Starting position)
+     * @param end: [终止位置](Termination position)
+     * @return int
+    */
+    public static int indexOf(final CharSequence str, char searchChar, int start, int end) {
+        if (isEmpty(str)) { return -1; }
+        final int len = str.length();
+        if (start < 0 || start > len) { start = 0; }
+        if (end > len || end < 0) { end = len; }
+        for (int i = start; i < end; i++) {
+            if (str.charAt(i) == searchChar) { return i; }
+        }
+        return -1;
     }
 }

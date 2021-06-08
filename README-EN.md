@@ -26,14 +26,14 @@ xiaoTools = xiao + Tools，It is the first word through [author xiaoxunyao](http
 <dependency>
     <groupId>io.github.xiaoxunyao</groupId>
     <artifactId>xiaoTools</artifactId>
-    <version>0.0.8-releases</version>
+    <version>0.0.9-releases</version>
 </dependency>
 ```
 
 ### 📥Gradle
 
 ```gradle
-implementation 'io.github.xiaoxunyao:xiaoTools:0.0.8-releases'
+implementation 'io.github.xiaoxunyao:xiaoTools:0.0.9-releases'
 ```
 
 ## 📖Documentation

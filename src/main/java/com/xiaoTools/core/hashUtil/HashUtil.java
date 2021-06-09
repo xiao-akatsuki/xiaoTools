@@ -287,9 +287,7 @@ public class HashUtil {
      * @return int
     */
     public static int elfHash(String str) {
-        int hash = 0;
-        int x;
-
+        int hash = 0;int x;
         for (int i = 0; i < str.length(); i++) {
             hash = (hash << 4) + str.charAt(i);
             if ((x = (int) (hash & 0xF0000000L)) != 0) {
@@ -297,7 +295,6 @@ public class HashUtil {
                 hash &= ~x;
             }
         }
-
         return hash & 0x7FFFFFFF;
     }
 
@@ -312,7 +309,6 @@ public class HashUtil {
      * @return int
     */
     public static int bkdrHash(String str) {
-        // 31 131 1313 13131 131313 etc..
         int seed = 131;
         int hash = 0;
         for (int i = 0; i < str.length(); i++) { hash = (hash * seed) + str.charAt(i); }
@@ -347,11 +343,9 @@ public class HashUtil {
     */
     public static int djbHash(String str) {
         int hash = 5381;
-
         for (int i = 0; i < str.length(); i++) {
             hash = ((hash << 5) + hash) + str.charAt(i);
         }
-
         return hash & 0x7FFFFFFF;
     }
 

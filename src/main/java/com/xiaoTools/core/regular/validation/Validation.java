@@ -161,4 +161,73 @@ public class Validation {
         return isMatchRegex(PatternPool.CITIZEN_ID,value);
     }
 
+    /**
+     * [判断所需要的字符串是否是中国的邮编](Determine whether the required string is a Chinese zip code)
+     * @description: zh - 判断所需要的字符串是否是中国的邮编
+     * @description: en - Determine whether the required string is a Chinese zip code
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/10 9:49 下午
+     * @param value: 需要判断是否是中国的邮编
+     * @return boolean
+    */
+    public static boolean isPostcode(CharSequence value){
+        return isMatchRegex(PatternPool.POSTCODE,value);
+    }
+
+    /**
+     * [判断输入的字符串是否符合日期格式](Determine whether the input string conforms to the date format)
+     * @description: zh - 判断输入的字符串是否符合日期格式
+     * @description: en - Determine whether the input string conforms to the date format
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/10 9:52 下午
+     * @param value: 判断是否是生日的合法
+     * @return boolean
+    */
+    public static boolean isBirthday(CharSequence value){
+        return isMatchRegex(PatternPool.BIRTHDAY,value);
+    }
+
+    /**
+     * [判断字符串是否是UUD](Determine whether the string is uud)
+     * @description: zh - 判断字符串是否是UUD
+     * @description: en - Determine whether the string is uud
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/10 9:59 下午
+     * @param value: 需要判断字符串是否是UUID的格式
+     * @return boolean
+    */
+    public static boolean isUuid(CharSequence value){
+        return isMatchRegex(PatternPool.UUID,value);
+    }
+
+    /**
+     * [判断字符串是否不带横线的UUID](Determine whether a string has a UUID without a horizontal line)
+     * @description: zh - 判断字符串是否不带横线的UUID
+     * @description: en - Determine whether a string has a UUID without a horizontal line
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/10 10:02 下午
+     * @param value: 需要判断字符串是否是不带横线的UUID
+     * @return boolean
+    */
+    public static boolean isSimpleUuid(CharSequence value){
+        return isMatchRegex(PatternPool.UUID_SIMPLE,value);
+    }
+
+    /**
+     * [判断字符串是否是MAC地址](Determine whether the string is a MAC address)
+     * @description: zh - 判断字符串是否是MAC地址
+     * @description: en - Determine whether the string is a MAC address
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/10 10:03 下午
+     * @param value: mac地址
+     * @return boolean
+    */
+    public static boolean isMac(CharSequence value){
+        return isMatchRegex(PatternPool.MAC_ADDRESS,value);
+    }
 }

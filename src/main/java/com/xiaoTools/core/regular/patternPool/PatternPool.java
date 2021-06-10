@@ -69,19 +69,12 @@ public class PatternPool {
     /**
      * 邮编，兼容港澳台
      */
-    public final static Pattern ZIP_CODE = Pattern.compile("^(0[1-7]|1[0-356]|2[0-7]|3[0-6]|4[0-7]|5[0-7]|6[0-7]|7[0-5]|8[0-9]|9[0-8])\\d{4}|99907[78]$");
+    public final static Pattern POSTCODE = Pattern.compile("^(0[1-7]|1[0-356]|2[0-7]|3[0-6]|4[0-7]|5[0-7]|6[0-7]|7[0-5]|8[0-9]|9[0-8])\\d{4}|99907[78]$");
     /**
      * 生日
      */
     public final static Pattern BIRTHDAY = Pattern.compile("^(\\d{2,4})([/\\-.年]?)(\\d{1,2})([/\\-.月]?)(\\d{1,2})日?$");
-    /**
-     * URL
-     */
-    public final static Pattern URL = Pattern.compile("[a-zA-z]+://[^\\s]*");
-    /**
-     * Http URL
-     */
-    public final static Pattern URL_HTTP = Pattern.compile("(https://|http://)?([\\w-]+\\.)+[\\w-]+(:\\d+)*(/[\\w- ./?%&=]*)?");
+
     /**
      * 中文字、英文字母、数字和下划线
      */

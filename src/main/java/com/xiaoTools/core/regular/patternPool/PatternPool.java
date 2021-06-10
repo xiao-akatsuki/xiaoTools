@@ -25,14 +25,7 @@ public class PatternPool {
      * 字母
      */
     public final static Pattern WORD = Pattern.compile("[a-zA-Z]+");
-    /**
-     * 单个中文汉字
-     */
-    public final static Pattern CHINESE = Pattern.compile("/^(?:[\\u3400-\\u4DB5\\u4E00-\\u9FEA\\uFA0E\\uFA0F\\uFA11\\uFA13\\uFA14\\uFA1F\\uFA21\\uFA23\\uFA24\\uFA27-\\uFA29]|[\\uD840-\\uD868\\uD86A-\\uD86C\\uD86F-\\uD872\\uD874-\\uD879][\\uDC00-\\uDFFF]|\\uD869[\\uDC00-\\uDED6\\uDF00-\\uDFFF]|\\uD86D[\\uDC00-\\uDF34\\uDF40-\\uDFFF]|\\uD86E[\\uDC00-\\uDC1D\\uDC20-\\uDFFF]|\\uD873[\\uDC00-\\uDEA1\\uDEB0-\\uDFFF]|\\uD87A[\\uDC00-\\uDFE0])+$/");
-    /**
-     * 分组
-     */
-    public final static Pattern GROUP_VAR = Pattern.compile("\\$(\\d+)");
+
     /**
      * IP v4
      */
@@ -63,16 +56,12 @@ public class PatternPool {
      * 中国台湾 +886 Taiwan
      */
     public final static Pattern MOBILE_HK = Pattern.compile("(?:0|852|\\+852)?\\d{8}");
+
     /**
      * 座机号码
      */
     public final static Pattern TEL = Pattern.compile("0\\d{2,3}-[1-9]\\d{6,7}");
-    /**
-     * 座机号码+400+800电话
-     *
-     * @see <a href="https://baike.baidu.com/item/800">800</a>
-     */
-    public final static Pattern TEL_400_800 = Pattern.compile("(?:(?:0\\d{2,3}[\\- ]?[1-9]\\d{6,7})|(?:[48]00[\\- ]?[1-9]\\d{6}))");
+
     /**
      * 18位身份证号码
      */
@@ -136,22 +125,7 @@ public class PatternPool {
      * </pre>
      */
     public static final Pattern CREDIT_CODE = Pattern.compile("^[0-9A-HJ-NPQRTUWXY]{2}\\d{6}[0-9A-HJ-NPQRTUWXY]{10}$");
-    /**
-     * 车架号
-     * 别名：车辆识别代号 车辆识别码
-     * eg:LDC613P23A1305189
-     * eg:LSJA24U62JG269225
-     * 十七位码、车架号
-     * 车辆的唯一标示
-     */
-    public static final Pattern CAR_VIN = Pattern.compile("^[A-Za-z0-9]{17}$");
-    /**
-     * 驾驶证  别名：驾驶证档案编号、行驶证编号
-     * eg:430101758218
-     * 12位数字字符串
-     * 仅限：中国驾驶证档案编号
-     */
-    public static final Pattern CAR_DRIVING_LICENCE = Pattern.compile("^[0-9]{12}$");
+
 
     /**
      * [Pattern池](Pattern pool)

@@ -95,10 +95,7 @@ public class PatternPool {
      * 16进制字符串
      */
     public static final Pattern HEX = Pattern.compile("^[a-f0-9]+$", Pattern.CASE_INSENSITIVE);
-    /**
-     * 时间正则
-     */
-    public static final Pattern TIME = Pattern.compile("\\d{1,2}:\\d{1,2}(:\\d{1,2})?");
+
     /**
      * 中国车牌号码（兼容新能源车牌）
      */
@@ -106,18 +103,6 @@ public class PatternPool {
             "^(([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z](([0-9]{5}[ABCDEFGHJK])|([ABCDEFGHJK]([A-HJ-NP-Z0-9])[0-9]{4})))|" +
                     "([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领]\\d{3}\\d{1,3}[领])|" +
                     "([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z][A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳使领]))$");
-
-    /**
-     * 社会统一信用代码
-     * <pre>
-     * 第一部分：登记管理部门代码1位 (数字或大写英文字母)
-     * 第二部分：机构类别代码1位 (数字或大写英文字母)
-     * 第三部分：登记管理机关行政区划码6位 (数字)
-     * 第四部分：主体标识码（组织机构代码）9位 (数字或大写英文字母)
-     * 第五部分：校验码1位 (数字或大写英文字母)
-     * </pre>
-     */
-    public static final Pattern CREDIT_CODE = Pattern.compile("^[0-9A-HJ-NPQRTUWXY]{2}\\d{6}[0-9A-HJ-NPQRTUWXY]{10}$");
 
 
     /**

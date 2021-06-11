@@ -2,6 +2,7 @@ package com.xiaoTools.core.regular.validation;
 
 import com.xiaoTools.core.regular.patternPool.PatternPool;
 
+import javax.xml.validation.Validator;
 import java.util.regex.Pattern;
 
 /**
@@ -230,4 +231,89 @@ public class Validation {
     public static boolean isMac(CharSequence value){
         return isMatchRegex(PatternPool.MAC_ADDRESS,value);
     }
+
+    /**
+     * [判断输入的字符串是否是16进制的字符串](Determine whether the input string is a hexadecimal string)
+     * @description: zh - 判断输入的字符串是否是16进制的字符串
+     * @description: en - Determine whether the input string is a hexadecimal string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/11 8:25 上午
+     * @param value: 16进制的字符串
+     * @return boolean
+    */
+    public static boolean isHex(CharSequence value){
+        return isMatchRegex(PatternPool.HEX,value);
+    }
+
+    /**
+     * [判断输入的字符串是否是中国车牌号](Judge whether the input string is Chinese license plate number)
+     * @description: zh - 判断输入的字符串是否是中国车牌号
+     * @description: en -
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/11 8:30 上午
+     * @param value: 中国车牌号
+     * @return boolean
+    */
+    public static boolean isLicensePlate(CharSequence value){
+        return isMatchRegex(PatternPool.PLATE_NUMBER,value);
+    }
+
+    /**
+     * [判断输入的布尔值是否等于「true」](Judge whether the input Boolean value is equal to 「true」)
+     * @description: zh - 判断输入的布尔值是否等于「true」
+     * @description: en - Judge whether the input Boolean value is equal to 「true」
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/11 8:35 上午
+     * @param value: 判断的布尔值
+     * @return boolean
+    */
+    public static boolean isTrue(boolean value){
+        return value;
+    }
+
+    /**
+     * [判断输入的布尔值是否等于「false」](Judge whether the input Boolean value is equal to 「false」)
+     * @description: zh - 判断输入的布尔值是否等于「false」
+     * @description: en - Judge whether the input Boolean value is equal to 「false」
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/11 8:37 上午
+     * @param value: 判断的布尔值
+     * @return boolean
+    */
+    public static boolean isFalse(boolean value){
+        return !value;
+    }
+
+    /**
+     * [判断对象是否为空](Judge whether the object is empty)
+     * @description: zh - 判断对象是否为空
+     * @description: en - Judge whether the object is empty
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/11 10:14 上午
+     * @param value: 对象
+     * @return boolean
+    */
+    public static boolean isNull(Object value){
+        return value == null;
+    }
+
+    /**
+     * [判断输入的对象是否不为空](Judge whether the input object is not empty)
+     * @description: zh - 判断输入的对象是否不为空
+     * @description: en - Judge whether the input object is not empty
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/11 10:16 上午
+     * @param value: 对象
+     * @return boolean
+    */
+    public static boolean isNotNull(Object value){
+        return value != null;
+    }
+
 }

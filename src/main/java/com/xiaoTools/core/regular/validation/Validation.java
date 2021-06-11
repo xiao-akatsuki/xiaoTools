@@ -2,7 +2,6 @@ package com.xiaoTools.core.regular.validation;
 
 import com.xiaoTools.core.regular.patternPool.PatternPool;
 
-import javax.xml.validation.Validator;
 import java.util.regex.Pattern;
 
 /**

@@ -10,6 +10,11 @@ import com.xiaoTools.core.charUtil.CharUtil;
 */
 public class StrUtil {
     /**
+     * 字符串常量：空字符串 ""
+    */
+    public static final String EMPTY = "";
+
+    /**
      * [初始化方法](Initialization method)
      * @author HCY
      * @since 2021/5/14 3:42 下午
@@ -32,6 +37,20 @@ public class StrUtil {
     }
 
     /**
+     * [字符串是否为非空白](Is the string non blank)
+     * @description: zh - 字符串是否为非空白
+     * @description: en - Is the string non blank
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/12 7:42 下午
+     * @param str: 被检测的字符串
+     * @return boolean
+    */
+    public static boolean isNotEmpty(CharSequence str) {
+        return !isEmpty(str);
+    }
+
+    /**
      * [判断字符串中是否有空的字符串](Determine whether there is an empty string in the string)
      * @description: zh - 输入字符串中是否有空的字符串
      * @description: en - Is there an empty string in the input string
@@ -50,6 +69,20 @@ public class StrUtil {
             }
         }
         return true;
+    }
+
+    /**
+     * [字符串是否为非空白](Is the string non blank)
+     * @description: zh - 字符串是否为非空白
+     * @description: en - Is the string non blank
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/12 7:51 下午
+     * @param str: 被检测的字符串
+     * @return boolean
+    */
+    public static boolean isNotBlank(CharSequence str) {
+        return !isBlank(str);
     }
 
     /**
@@ -309,4 +342,6 @@ public class StrUtil {
         }
         return -1;
     }
+
+
 }

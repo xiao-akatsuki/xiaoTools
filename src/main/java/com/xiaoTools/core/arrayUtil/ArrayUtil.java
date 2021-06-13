@@ -8,6 +8,7 @@ import java.util.Objects;
 import com.xiaoTools.core.arrayUtil.editor.Editor;
 import com.xiaoTools.core.arrayUtil.filter.Filter;
 import com.xiaoTools.core.arrayUtil.match.Match;
+import com.xiaoTools.core.console.Console;
 import com.xiaoTools.core.strUtil.StrUtil;
 
 /**
@@ -410,10 +411,7 @@ public class ArrayUtil {
      * @return T[]
     */
     public static <T> T[] reSize(T[] array, int newSize){
-        if (newSize < 0) {
-            return array;
-        }
-
+        if (newSize < 0) { return array; }
         final T[] newArray = newArray(array.getClass().getComponentType(), newSize);
         if (newSize > 0 && isNotEmpty(array)) {
             System.arraycopy(array, 0, newArray, 0, Math.min(array.length, newSize));

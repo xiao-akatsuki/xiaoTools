@@ -26,14 +26,14 @@ xiaoTools = xiao + Tools，是通过[作者xiaoxunyao](https://github.com/xiaoxu
 <dependency>
     <groupId>io.github.xiaoxunyao</groupId>
     <artifactId>xiaoTools</artifactId>
-    <version>0.1.0-releases</version>
+    <version>0.1.1-releases</version>
 </dependency>
 ```
 
 ### 📥Gradle
 
 ```gradle
-implementation 'io.github.xiaoxunyao:xiaoTools:0.1.0-releases'
+implementation 'io.github.xiaoxunyao:xiaoTools:0.1.1-releases'
 ```
 
 ## 📖文档

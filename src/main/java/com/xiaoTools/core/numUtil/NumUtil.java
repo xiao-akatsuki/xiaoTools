@@ -564,4 +564,26 @@ public class NumUtil {
             return result;
         }
     }
+
+    /**
+     * [比较大小，值相等 返回true](Compare the size, the value is equal, return true)
+     * @description: zh - 比较大小，值相等 返回true
+     * @description: en - Compare the size, the value is equal, return true
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/13 11:08 上午
+     * @param value1: 数字1
+     * @param value2: 数字2
+     * @return boolean
+    */
+    public static boolean equals(BigDecimal value1, BigDecimal value2) {
+        if (value1.equals(value2)) {
+            // 如果用户传入同一对象，省略compareTo以提高性能。
+            return true;
+        }
+        if (value1 == null || value2 == null) {
+            return false;
+        }
+        return 0 == value1.compareTo(value2);
+    }
 }

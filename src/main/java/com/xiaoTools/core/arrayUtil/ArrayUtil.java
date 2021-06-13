@@ -3,7 +3,6 @@ package com.xiaoTools.core.arrayUtil;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Map;
 import java.util.Objects;
 
 import com.xiaoTools.core.arrayUtil.editor.Editor;
@@ -129,8 +128,64 @@ public class ArrayUtil {
      * @param value: [包含的值](Values contained)
      * @return boolean
     */
-    public static boolean contains(char[] arrays, char value) {
+    public static <T> boolean contains(T[] arrays, T value) {
         return indexOf(arrays, value) > -1;
+    }
+
+    /**
+     * [数组中是否包含指定元素中的任意一个](Whether the array contains any of the specified elements)
+     * @description: zh - 数组中是否包含指定元素中的任意一个
+     * @description: en - Whether the array contains any of the specified elements
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/13 11:23 上午
+     * @param array: 数组
+     * @param values: 被检查的多个元素
+     * @return boolean
+    */
+    public static <T> boolean containsAny(T[] array, T... values){
+        for (T value : values) {
+            if (contains(array,value)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * [数组中是否包含指定元素中的全部](Whether the array contains all the elements in the specified element)
+     * @description: zh - 数组中是否包含指定元素中的全部
+     * @description: en - Whether the array contains all the elements in the specified element
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/13 11:27 上午
+     * @param array: 数组
+     * @param values: 被检查的多个元素
+     * @return boolean
+    */
+    public static <T> boolean containsAll(T[] array, T... values) {
+        for (T value : values) {
+            if (!contains(array, value)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    /**
+     * [数组中是否包含元素](Does the array contain elements)
+     * @description: zh - 数组中是否包含元素
+     * @description: en - Does the array contain elements
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/13 11:14 上午
+     * @param array: 数组
+     * @param value: 被检查的元素
+     * @return boolean
+    */
+    public static boolean contains(char[] array, char value) {
+        return indexOf(array, value) > -1;
     }
 
     /**
@@ -158,7 +213,7 @@ public class ArrayUtil {
      * @param value: [单个值](Single value)
      * @return int
     */
-    public static int indexOf(char[] array, char value) {
+    public static <T> int indexOf(T[] array, Object value) {
         if (null != array) {
             for(int i = 0; i < array.length; ++i) {
                 if (value == array[i]) {
@@ -168,6 +223,29 @@ public class ArrayUtil {
         }
         return -1;
     }
+
+    /**
+     * [通过数组获取索引的值](Gets the value of the index through an array)
+     * @description: zh - 通过数组获取索引的值
+     * @description: en - Gets the value of the index through an array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/24 9:22 上午
+     * @param array: [数组](Array)
+     * @param value: [单个值](Single value)
+     * @return int
+     */
+    public static int indexOf(char[] array, char value) {
+        if (null != array) {
+            for (int i = 0; i < array.length; i++) {
+                if (value == array[i]) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
 
     /**
      * [新建一个空数组](Create a new empty array)
@@ -658,5 +736,25 @@ public class ArrayUtil {
         return filter(array, (Editor<String>) t -> null == t ? StrUtil.EMPTY : t);
     }
 
+    /**
+     * [获取数组对象中指定index的值，支持负数，例如-1表示倒数第一个值](Gets the value of the specified index in the array object, and supports negative numbers. For example, - 1 represents the first value from the bottom)
+     * @description: zh - 获取数组对象中指定index的值，支持负数，例如-1表示倒数第一个值
+     * @description: en - Gets the value of the specified index in the array object, and supports negative numbers. For example, - 1 represents the first value from the bottom
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/13 11:55 上午
+     * @param array: 数组对象
+     * @param index: 位置下标，支持负数
+     * @return T
+    */
+    public static <T> T get(Object array, int index) {
+        if (null == array) { return null; }
+        if (index < 0) { index += Array.getLength(array); }
+        try {
+            return (T) Array.get(array, index);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return null;
+        }
+    }
 
 }

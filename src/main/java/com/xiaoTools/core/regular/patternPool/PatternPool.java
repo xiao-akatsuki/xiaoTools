@@ -1,6 +1,6 @@
 package com.xiaoTools.core.regular.patternPool;
 
-import com.xiaoTools.core.regular.simpleCache.SimpleCache;
+import com.xiaoTools.cache.simple.SimpleCache;
 
 import java.util.regex.Pattern;
 

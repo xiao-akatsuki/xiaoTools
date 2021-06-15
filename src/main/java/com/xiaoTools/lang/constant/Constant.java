@@ -3,6 +3,7 @@ package com.xiaoTools.lang.constant;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.lang.reflect.Field;
 
 /**
  * [统一常量](Uniform constant)
@@ -255,4 +256,6 @@ public class Constant {
     public static final BufferedReader BUFFERED_READER_NULL = null;
 
     public static final BufferedWriter BUFFERED_WRITER_NULL = null;
+
+    public static final Field[] FIELDS_NULL = null;
 }

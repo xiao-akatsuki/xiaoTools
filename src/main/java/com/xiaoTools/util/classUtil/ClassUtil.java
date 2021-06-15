@@ -1,6 +1,8 @@
 package com.xiaoTools.util.classUtil;
 
+import com.xiaoTools.core.basicType.BasicType;
 import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.util.arrayUtil.ArrayUtil;
 
 /**
  * [类工具类](Class tool class)
@@ -81,5 +83,75 @@ public class ClassUtil {
     */
     public static String getClassName(Class<?> clazz, boolean isSimple) {
         return Constant.NULL == clazz ? Constant.STRING_NULL : isSimple ? clazz.getSimpleName() : clazz.getName();
+    }
+
+    /**
+     * [比较判断「types1」和「types2」两组类，如果「types1」中所有的类都与「types2」对应位置的类相同，或者是其父类或接口，则返回「true」](Compare and judge "types1" and "types2". If all the classes in "types1" are the same as those in the corresponding position of "types2", or are its parent class or interface, return "true")
+     * @description: zh - 比较判断「types1」和「types2」两组类，如果「types1」中所有的类都与「types2」对应位置的类相同，或者是其父类或接口，则返回「true」
+     * @description: en - Compare and judge "types1" and "types2". If all the classes in "types1" are the same as those in the corresponding position of "types2", or are its parent class or interface, return "true"
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/15 8:08 下午
+     * @param types1: 类组1
+     * @param types2: 类组2
+     * @return boolean
+    */
+    public static boolean isAllAssignableFrom(Class<?>[] types1, Class<?>[] types2) {
+        if (ArrayUtil.isEmpty(types1) && ArrayUtil.isEmpty(types2)) {
+            return Constant.TRUE;
+        }else if (types1 == Constant.NULL && types2 == Constant.NULL){
+            return Constant.FALSE;
+        }else if (types1.length != types2.length){
+            return Constant.FALSE;
+        }
+        Class<?> type1;
+        Class<?> type2;
+        for (int i = Constant.ZERO; i < types1.length; i++) {
+            type1 = types1[i];
+            type2 = types2[i];
+            if (isBasicType(type1) && isBasicType(type2)) {
+                // 原始类型和包装类型存在不一致情况
+                if (BasicType.unWrap(type1) != BasicType.unWrap(type2)) {
+                    return Constant.FALSE;
+                }
+            } else if (!type1.isAssignableFrom(type2)) {
+                return Constant.FALSE;
+            }
+        }
+        return Constant.TRUE;
+    }
+
+    /**
+     * [是否为基本类型（包括包装类和原始类）](Whether it is a basic type (including packaging class and original class))
+     * @description: zh - 是否为基本类型（包括包装类和原始类）
+     * @description: en - Whether it is a basic type (including packaging class and original class)
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/15 8:14 下午
+     * @param clazz: 类
+     * @return boolean
+    */
+    public static boolean isBasicType(Class<?> clazz) {
+        if (Constant.NULL == clazz) {
+            return Constant.FALSE;
+        }
+        return (clazz.isPrimitive() || isPrimitiveWrapper(clazz));
+    }
+
+    /**
+     * [判断是否是包装类型](Judge whether it is the type of packing)
+     * @description: zh - 判断是否是包装类型
+     * @description: en - Judge whether it is the type of packing
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/15 8:16 下午
+     * @param clazz: 类
+     * @return boolean
+    */
+    public static boolean isPrimitiveWrapper(Class<?> clazz) {
+        if (Constant.NULL == clazz) {
+            return Constant.FALSE;
+        }
+        return BasicType.WRAPPER_PRIMITIVE_MAP.containsKey(clazz);
     }
 }

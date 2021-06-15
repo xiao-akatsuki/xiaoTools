@@ -1,6 +1,7 @@
 package com.xiaoTools.core.escape.escapeUtil;
 
 import com.xiaoTools.core.escape.filter.Filter;
+import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.strUtil.StrUtil;
 
 /**
@@ -53,7 +54,7 @@ public class EscapeUtil {
      * @return java.lang.String
     */
     public static String escapeAll(CharSequence content) {
-        return escape(content, c -> true);
+        return escape(content, c -> Constant.TRUE);
     }
 
     /**
@@ -70,19 +71,19 @@ public class EscapeUtil {
     public static String escape(CharSequence content, Filter<Character> filter){
         //判断字符串是否为空
         if (StrUtil.isEmpty(content)) { return StrUtil.str(content); }
-        final StringBuilder tmp = new StringBuilder(content.length() * 6);
+        final StringBuilder tmp = new StringBuilder(content.length() * Constant.SIX);
         char j;
-        for (int i = 0; i < content.length(); i++) {
+        for (int i = Constant.ZERO; i < content.length(); i++) {
             j = content.charAt(i);
             if (!filter.accept(j)) {
                 tmp.append(j);
-            } else if (j < 256) {
-                tmp.append("%");
-                if (j < 16) { tmp.append("0"); }
-                tmp.append(Integer.toString(j, 16));
+            } else if (j < Constant.TWO_FIFTY_SIX) {
+                tmp.append(Constant.PERCENT_SIGN);
+                if (j < Constant.SIXTEEN) { tmp.append(Constant.STRING_ZERO); }
+                tmp.append(Integer.toString(j, Constant.SIXTEEN));
             } else {
-                tmp.append("%u");
-                tmp.append(Integer.toString(j, 16));
+                tmp.append(Constant.PERCENT_SIGN_U);
+                tmp.append(Integer.toString(j, Constant.SIXTEEN));
             }
         }
         return tmp.toString();
@@ -118,23 +119,23 @@ public class EscapeUtil {
     public static String unescape(String content){
         if (StrUtil.isBlank(content)) { return content; }
         StringBuilder tmp = new StringBuilder(content.length());
-        int lastPos = 0;
+        int lastPos = Constant.ZERO;
         int pos;
         char ch;
         while (lastPos < content.length()) {
-            pos = content.indexOf("%", lastPos);
+            pos = content.indexOf(Constant.PERCENT_SIGN, lastPos);
             if (pos == lastPos) {
-                if (content.charAt(pos + 1) == 'u') {
-                    ch = (char) Integer.parseInt(content.substring(pos + 2, pos + 6), 16);
+                if (content.charAt(pos + Constant.ONE) == Constant.CHAR_DOWN_U) {
+                    ch = (char) Integer.parseInt(content.substring(pos + Constant.TWO, pos + Constant.SIX), Constant.SIXTEEN);
                     tmp.append(ch);
-                    lastPos = pos + 6;
+                    lastPos = pos + Constant.SIX;
                 } else {
-                    ch = (char) Integer.parseInt(content.substring(pos + 1, pos + 3), 16);
+                    ch = (char) Integer.parseInt(content.substring(pos + Constant.ONE, pos + Constant.THREE), Constant.SIXTEEN);
                     tmp.append(ch);
-                    lastPos = pos + 3;
+                    lastPos = pos + Constant.THREE;
                 }
             } else {
-                if (pos == -1) {
+                if (pos == Constant.NEGATIVE_ONE) {
                     tmp.append(content.substring(lastPos));
                     lastPos = content.length();
                 } else {

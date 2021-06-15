@@ -1,5 +1,6 @@
 package com.xiaoTools.util.IdUtil;
 
+import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.IdUtil.objectId.ObjectId;
 import com.xiaoTools.util.IdUtil.snowflake.Snowflake;
 import com.xiaoTools.util.IdUtil.uuid.UUID;
@@ -37,7 +38,7 @@ public class IdUtil {
      * @return java.lang.String
     */
     public static String simpleUUID(){
-        return UUID.randomUUID().toString(true);
+        return UUID.randomUUID().toString(Constant.TRUE);
     }
 
     /**
@@ -63,7 +64,7 @@ public class IdUtil {
      * @return java.lang.String
     */
     public static String fastSimpleUUID(){
-        return UUID.fastUUID().toString(true);
+        return UUID.fastUUID().toString(Constant.TRUE);
     }
 
     /**

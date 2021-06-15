@@ -1,5 +1,6 @@
 package com.xiaoTools.util.IdUtil.uuid;
 
+import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.randomUtil.RandomUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
 
@@ -27,6 +28,7 @@ public class UUID implements Serializable {
      * [最大信号位](Maximum signal bit)
      */
     private final long mostSigBits;
+
     /**
      * [最小信号位](Minimum signal bit)
      */
@@ -57,12 +59,12 @@ public class UUID implements Serializable {
      * @param data: [需要创建的UUID的数据](Data of UUID to be created)
     */
     private UUID(byte[] data){
-        long msb = 0L;
-        long lsb = 0L;
-        assert data.length == 16 : "data must be 16 bytes in length";
+        long msb = Constant.LONG_ZERO;
+        long lsb = Constant.LONG_ZERO;
+        assert data.length == Constant.SIXTEEN : "data must be 16 bytes in length";
         int i;
-        for(i = 0; i < 8; ++i) { msb = msb << 8 | (long)(data[i] & 255); }
-        for(i = 8; i < 16; ++i) { lsb = lsb << 8 | (long)(data[i] & 255); }
+        for(i = Constant.ZERO; i < Constant.EIGHT; ++i) { msb = msb << Constant.EIGHT | (long)(data[i] & Constant.TWO_FIVE); }
+        for(i = Constant.EIGHT; i < Constant.SIXTEEN; ++i) { lsb = lsb << Constant.EIGHT | (long)(data[i] & Constant.TWO_FIVE); }
         this.mostSigBits = msb;
         this.leastSigBits = lsb;
     }
@@ -79,12 +81,12 @@ public class UUID implements Serializable {
     */
     private static UUID randomUUID(boolean isSecure){
         Random ng = isSecure ? UUID.Holder.NUMBER_GENERATOR : RandomUtil.getRandom();
-        byte[] randomBytes = new byte[16];
+        byte[] randomBytes = new byte[Constant.SIXTEEN];
         ng.nextBytes(randomBytes);
-        randomBytes[6] = (byte)(randomBytes[6] & 15);
-        randomBytes[6] = (byte)(randomBytes[6] | 64);
-        randomBytes[8] = (byte)(randomBytes[8] & 63);
-        randomBytes[8] = (byte)(randomBytes[8] | 128);
+        randomBytes[Constant.SIX] = (byte)(randomBytes[Constant.SIX] & Constant.FIFTEEN);
+        randomBytes[Constant.SIX] = (byte)(randomBytes[Constant.SIX] | Constant.SIXTY_FOUR);
+        randomBytes[Constant.EIGHT] = (byte)(randomBytes[Constant.EIGHT] & Constant.SIXTY_THREE);
+        randomBytes[Constant.EIGHT] = (byte)(randomBytes[Constant.EIGHT] | Constant.ONE_TWO_EIGHT);
         return new UUID(randomBytes);
     }
 
@@ -98,7 +100,7 @@ public class UUID implements Serializable {
      * @return com.xiaoTools.util.IdUtil.uuid.UUID
     */
     public static UUID fastUUID(){
-        return randomUUID(false);
+        return randomUUID(Constant.FALSE);
     }
 
     /**
@@ -111,7 +113,7 @@ public class UUID implements Serializable {
      * @return com.xiaoTools.util.IdUtil.uuid.UUID
     */
     public static UUID randomUUID(){
-        return randomUUID(true);
+        return randomUUID(Constant.TRUE);
     }
 
     /**
@@ -132,10 +134,10 @@ public class UUID implements Serializable {
             throw new InternalError("MD5 not supported");
         }
         byte[] md5Bytes = md.digest(name);
-        md5Bytes[6] = (byte)(md5Bytes[6] & 15);
-        md5Bytes[6] = (byte)(md5Bytes[6] | 48);
-        md5Bytes[8] = (byte)(md5Bytes[8] & 63);
-        md5Bytes[8] = (byte)(md5Bytes[8] | 128);
+        md5Bytes[Constant.SIX] = (byte)(md5Bytes[Constant.SIX] & Constant.FIFTEEN);
+        md5Bytes[Constant.SIX] = (byte)(md5Bytes[Constant.SIX] | Constant.FORTY_EIGHT);
+        md5Bytes[Constant.EIGHT] = (byte)(md5Bytes[Constant.EIGHT] & Constant.SIXTY_THREE);
+        md5Bytes[Constant.EIGHT] = (byte)(md5Bytes[Constant.EIGHT] | Constant.ONE_TWO_EIGHT);
         return new UUID(md5Bytes);
     }
 
@@ -151,18 +153,18 @@ public class UUID implements Serializable {
     */
     public static UUID fromString(String value){
         String[] components = value.split("-");
-        if (components.length != 5) {
+        if (components.length != Constant.FIVE) {
             throw new IllegalArgumentException("Invalid UUID string: " + value);
         } else {
-            for(int i = 0; i < 5; ++i) { components[i] = "0x" + components[i]; }
-            long mostSigBits = Long.decode(components[0]);
-            mostSigBits <<= 16;
-            mostSigBits |= Long.decode(components[1]);
-            mostSigBits <<= 16;
-            mostSigBits |= Long.decode(components[2]);
-            long leastSigBits = Long.decode(components[3]);
-            leastSigBits <<= 48;
-            leastSigBits |= Long.decode(components[4]);
+            for(int i = Constant.ZERO; i < Constant.FIVE; ++i) { components[i] = Constant.STRING_ZERO_X + components[i]; }
+            long mostSigBits = Long.decode(components[Constant.ZERO]);
+            mostSigBits <<= Constant.SIXTEEN;
+            mostSigBits |= Long.decode(components[Constant.ONE]);
+            mostSigBits <<= Constant.SIXTEEN;
+            mostSigBits |= Long.decode(components[Constant.TWO]);
+            long leastSigBits = Long.decode(components[Constant.THREE]);
+            leastSigBits <<= Constant.FORTY_EIGHT;
+            leastSigBits |= Long.decode(components[Constant.FOUR]);
             return new UUID(mostSigBits, leastSigBits);
         }
     }
@@ -203,7 +205,7 @@ public class UUID implements Serializable {
      * @return int
     */
     public int version() {
-        return (int)(this.mostSigBits >> 12 & 15L);
+        return (int)(this.mostSigBits >> Constant.TWELVE & Constant.LONG_FIFTEEN);
     }
 
     /**
@@ -216,7 +218,7 @@ public class UUID implements Serializable {
      * @return int
     */
     public int variant() {
-        return (int)(this.leastSigBits >>> (int)(64L - (this.leastSigBits >>> 62)) & this.leastSigBits >> 63);
+        return (int)(this.leastSigBits >>> (int)(Constant.LONG_SIXTY_FOUR - (this.leastSigBits >>> Constant.SIXTY_TWO)) & this.leastSigBits >> Constant.SIXTY_THREE);
     }
 
     /**
@@ -230,7 +232,7 @@ public class UUID implements Serializable {
     */
     public long timestamp() throws UnsupportedOperationException {
         this.checkTimeBase();
-        return (this.mostSigBits & 4095L) << 48 | (this.mostSigBits >> 16 & 65535L) << 32 | this.mostSigBits >>> 32;
+        return (this.mostSigBits & Constant.LONG_UUID_VALUE_ONE) << Constant.FORTY_EIGHT | (this.mostSigBits >> Constant.SIXTEEN & Constant.LONG_UUID_VALUE_TWO) << Constant.THIRTY_TWO | this.mostSigBits >>> Constant.THIRTY_TWO;
     }
 
     /**
@@ -244,7 +246,7 @@ public class UUID implements Serializable {
     */
     public int clockSequence() throws UnsupportedOperationException {
         this.checkTimeBase();
-        return (int)((this.leastSigBits & 4611404543450677248L) >>> 48);
+        return (int)((this.leastSigBits & Constant.LONG_UUID_VALUE_THREE) >>> Constant.FORTY_EIGHT);
     }
 
     /**
@@ -258,7 +260,7 @@ public class UUID implements Serializable {
     */
     public long node() throws UnsupportedOperationException {
         this.checkTimeBase();
-        return this.leastSigBits & 281474976710655L;
+        return this.leastSigBits & Constant.LONG_UUID_VALUE_FOUR;
     }
 
     /**
@@ -270,7 +272,7 @@ public class UUID implements Serializable {
      * @since 2021/6/6 2:19 下午
     */
     private void checkTimeBase() {
-        if (this.version() != 1) {
+        if (this.version() != Constant.ONE) {
             throw new UnsupportedOperationException("Not a time-based UUID");
         }
     }
@@ -286,7 +288,7 @@ public class UUID implements Serializable {
     */
     @Override
     public String toString() {
-        return toString(false);
+        return toString(Constant.FALSE);
     }
 
     /**
@@ -300,16 +302,16 @@ public class UUID implements Serializable {
      * @return java.lang.String
     */
     public String toString(boolean isSimple) {
-        StringBuilder builder = StrUtil.builder(isSimple ? 32 : 36);
-        builder.append(digits(this.mostSigBits >> 32, 8));
-        if (!isSimple) { builder.append('-'); }
-        builder.append(digits(this.mostSigBits >> 16, 4));
-        if (!isSimple) { builder.append('-'); }
-        builder.append(digits(this.mostSigBits, 4));
-        if (!isSimple) { builder.append('-'); }
-        builder.append(digits(this.leastSigBits >> 48, 4));
-        if (!isSimple) { builder.append('-'); }
-        builder.append(digits(this.leastSigBits, 12));
+        StringBuilder builder = StrUtil.builder(isSimple ? Constant.THIRTY_TWO : Constant.THIRTY_SIX);
+        builder.append(digits(this.mostSigBits >> Constant.THIRTY_TWO, Constant.EIGHT));
+        if (!isSimple) { builder.append(Constant.CHAR_DASH); }
+        builder.append(digits(this.mostSigBits >> Constant.SIXTEEN, Constant.FOUR));
+        if (!isSimple) { builder.append(Constant.CHAR_DASH); }
+        builder.append(digits(this.mostSigBits, Constant.FOUR));
+        if (!isSimple) { builder.append(Constant.CHAR_DASH); }
+        builder.append(digits(this.leastSigBits >> Constant.FORTY_EIGHT, Constant.FOUR));
+        if (!isSimple) { builder.append(Constant.CHAR_DASH); }
+        builder.append(digits(this.leastSigBits, Constant.TWELVE));
         return builder.toString();
     }
 
@@ -325,8 +327,8 @@ public class UUID implements Serializable {
      * @return java.lang.String
     */
     private static String digits(long val, int digits) {
-        long hi = 1L << digits * 4;
-        return Long.toHexString(hi | val & hi - 1L).substring(1);
+        long hi = Constant.LONG_ONE << digits * Constant.FOUR;
+        return Long.toHexString(hi | val & hi - Constant.LONG_ONE).substring(Constant.ONE);
     }
 
     /**
@@ -341,7 +343,7 @@ public class UUID implements Serializable {
     @Override
     public int hashCode() {
         long hilo = this.mostSigBits ^ this.leastSigBits;
-        return (int)(hilo >> 32) ^ (int)hilo;
+        return (int)(hilo >> Constant.THIRTY_TWO) ^ (int)hilo;
     }
 
     /**
@@ -376,7 +378,7 @@ public class UUID implements Serializable {
     */
     public int compareTo(UUID val) {
         int compare = Long.compare(this.mostSigBits, val.mostSigBits);
-        if (0 == compare) {
+        if (Constant.ZERO == compare) {
             compare = Long.compare(this.leastSigBits, val.leastSigBits);
         }
         return compare;

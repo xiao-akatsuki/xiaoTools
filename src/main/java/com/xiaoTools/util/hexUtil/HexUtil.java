@@ -1,5 +1,7 @@
 package com.xiaoTools.util.hexUtil;
 
+import com.xiaoTools.lang.constant.Constant;
+
 /**
  * [16进制工具](Hex tool)
  * @author XiaoXunYao
@@ -31,13 +33,13 @@ public class HexUtil {
      * @return java.lang.String
     */
     public static String encodeHexStr(String value){
-        StringBuilder sb =  new  StringBuilder( "" );
+        StringBuilder sb =  new  StringBuilder( Constant.EMPTY );
         byte [] bs = value.getBytes();
         int  bit;
         for (byte b : bs) {
-            bit = (b & 0x0f0) >> 4;
+            bit = (b & Constant.BYTE_ONE) >> Constant.FOUR;
             sb.append(DIGITS_LOWER[bit]);
-            bit = b & 0x0f;
+            bit = b & Constant.BYTE_ZERO;
             sb.append(DIGITS_LOWER[bit]);
         }
         return sb.toString().trim();
@@ -55,12 +57,12 @@ public class HexUtil {
     */
     public static String decodeHexStr(String value){
         char [] hexs = value.toCharArray();
-        byte [] bytes =  new  byte [value.length() /  2 ];
+        byte [] bytes =  new  byte [value.length() /  Constant.TWO ];
         int  n;
-        for  ( int  i =  0 ; i < bytes.length; i++) {
-            n = HEXADECIMAL_STRING.indexOf(hexs[ 2  * i]) *  16 ;
-            n += HEXADECIMAL_STRING.indexOf(hexs[ 2  * i +  1 ]);
-            bytes[i] = ( byte ) (n &  0xff );
+        for  ( int  i =  Constant.ZERO ; i < bytes.length; i++) {
+            n = HEXADECIMAL_STRING.indexOf(hexs[ Constant.TWO  * i]) *  Constant.SIXTEEN ;
+            n += HEXADECIMAL_STRING.indexOf(hexs[ Constant.TWO  * i +  Constant.ONE ]);
+            bytes[i] = ( byte ) (n &  Constant.BYTE_TWO );
         }
         return  new  String(bytes);
     }

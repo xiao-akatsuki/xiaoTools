@@ -1,5 +1,6 @@
 package com.xiaoTools.util.objectUtil;
 
+import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.numUtil.NumUtil;
 
 import java.lang.reflect.Array;
@@ -75,14 +76,14 @@ public class ObjectUtil {
      * @return int
     */
     public static int length(Object value){
-        if (null == value){ return 0; }
+        if (null == value){ return Constant.ZERO; }
         if (value instanceof CharSequence) { return ((CharSequence) value).length(); }
         if (value instanceof Collection) { return ((Collection<?>) value).size(); }
         if (value instanceof Map) { return ((Map<?, ?>) value).size(); }
         int count;
         if (value instanceof Iterator) {
             Iterator<?> iter = (Iterator<?>) value;
-            count = 0;
+            count = Constant.ZERO;
             while (iter.hasNext()) {
                 count++;
                 iter.next();
@@ -90,7 +91,7 @@ public class ObjectUtil {
             return count;
         } else if (value instanceof Enumeration) {
             Enumeration<?> enumeration = (Enumeration<?>) value;
-            count = 0;
+            count = Constant.ZERO;
             while (enumeration.hasMoreElements()) {
                 count++;
                 enumeration.nextElement();
@@ -99,7 +100,7 @@ public class ObjectUtil {
         }else if (value.getClass().isArray()) {
             return Array.getLength(value);
         }
-        return -1;
+        return Constant.NEGATIVE_ONE;
     }
 
     /**
@@ -113,7 +114,7 @@ public class ObjectUtil {
      * @return boolean
     */
     public static boolean isNull(Object value){
-        return null == value || value.equals(null);
+        return Constant.NULL == value || value.equals(Constant.NULL);
     }
 
     /**
@@ -142,7 +143,7 @@ public class ObjectUtil {
      * @return T
     */
     public static <T> T defaultIfNull(final T object, final T defaultValue) {
-        return (null != object) ? object : defaultValue;
+        return (Constant.NULL != object) ? object : defaultValue;
     }
 
 

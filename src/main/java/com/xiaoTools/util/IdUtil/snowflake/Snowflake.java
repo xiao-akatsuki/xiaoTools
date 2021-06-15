@@ -1,5 +1,7 @@
 package com.xiaoTools.util.IdUtil.snowflake;
 
+import com.xiaoTools.lang.constant.Constant;
+
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -15,11 +17,6 @@ public class Snowflake implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
-
-    /**
-     * 起始的时间戳
-     */
-    private final static long START_TIMESTAMP = 1480166465631L;
 
 //    ----------------------------------------------- 每一部分占用的位数
 
@@ -144,7 +141,7 @@ public class Snowflake implements Serializable {
      * @return long
     */
     public long getGenerateDateTime(long id) {
-        return (id >> TIMESTAMP_LEFT & ~(-1L << 41L)) + START_TIMESTAMP;
+        return (id >> TIMESTAMP_LEFT & ~(-1L << 41L)) + Constant.START_TIMESTAMP;
     }
 
     /**
@@ -168,7 +165,7 @@ public class Snowflake implements Serializable {
         lastTimeStamp = currTimeStamp;
         return
                 //时间戳部分
-                (currTimeStamp - START_TIMESTAMP) << TIMESTAMP_LEFT
+                (currTimeStamp - Constant.START_TIMESTAMP) << TIMESTAMP_LEFT
                 //数据中心部分
                 | dataCenterId << DATA_CENTER_LEFT
                 //机器标识部分

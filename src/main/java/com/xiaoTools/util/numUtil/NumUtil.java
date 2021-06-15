@@ -1,5 +1,6 @@
 package com.xiaoTools.util.numUtil;
 
+import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 
 import java.math.BigDecimal;
@@ -12,30 +13,6 @@ import java.math.RoundingMode;
  * @since 2021/5/16 1:59 [下午](afternoon)
 */
 public class NumUtil {
-
-    /**
-     * @description: zh - 巧妙数
-     * @description: en - Clever number
-     */
-    private static final int ZERO = 0;
-    private static final int ONE = 1;
-    private static final int TWO = 2;
-    private static final int THREE = 3;
-    private static final int CIRCULAR = 180;
-    private static final double CLEVER = 10E-5;
-
-
-    /**
-     * @description: zh - 圆周率
-     * @description: en - PI
-     */
-    private static final double PI = Math.PI;
-
-    /**
-     * @description: zh - 常数
-     * @description: en - constant
-     */
-    private static final double E = Math.E;
 
     /**
      * @description: zh - 阿拉伯数字的数组
@@ -218,11 +195,11 @@ public class NumUtil {
      * @return boolean
     */
     public static boolean isPrime(int value){
-        if (value < TWO){ return false; }
-        if (value == TWO){ return true; }
-        if (value % TWO == ZERO){ return false; }
-        for (int i = THREE; i * i <= value ; i+= TWO){
-            if ( value % i == ZERO){ return false; }
+        if (value < Constant.TWO){ return false; }
+        if (value == Constant.TWO){ return true; }
+        if (value % Constant.TWO == Constant.ZERO){ return false; }
+        for (int i = Constant.THREE; i * i <= value ; i+= Constant.TWO){
+            if ( value % i == Constant.ZERO){ return false; }
         }
         return true;
     }
@@ -238,7 +215,7 @@ public class NumUtil {
      * @return long
     */
     public static double factorial(double number){
-        return number == ZERO ? ONE : retainDecimalPoint(Math.sqrt(TWO * number * PI) * Math.pow(number / E, number), ZERO);
+        return number == Constant.ZERO ? Constant.ONE : retainDecimalPoint(Math.sqrt(Constant.TWO * number * Constant.PI) * Math.pow(number / Constant.E, number), Constant.ZERO);
     }
 
     /**
@@ -256,12 +233,12 @@ public class NumUtil {
     */
     public static int divisor(int m,int n){
       if (n == m){ return n; }
-      if ( ((n & 1) == 0) && (( m & 1 ) == 0) ){
-          return divisor(n >> 1, m >> 1) << 1;
-      }else if ( (( n & 1 ) == 0 ) && ( (m & 1) != 0) ){
-          return divisor( n >> 1, m );
-      } else if ( ( ( n & 1 ) != 0 ) && ( ( m & 1 ) == 0 ) ){
-          return divisor(n, m >> 1);
+      if ( ((n & Constant.ONE) == Constant.ZERO) && (( m & Constant.ONE ) == Constant.ZERO) ){
+          return divisor(n >> Constant.ONE, m >> Constant.ONE) << Constant.ONE;
+      }else if ( (( n & Constant.ONE ) == Constant.ZERO ) && ( (m & Constant.ONE) != Constant.ZERO) ){
+          return divisor( n >> Constant.ONE, m );
+      } else if ( ( ( n & Constant.ONE ) != Constant.ZERO ) && ( ( m & Constant.ONE ) == Constant.ZERO ) ){
+          return divisor(n, m >> Constant.ONE);
       } else {
           int big = Math.max(n, m);
           int small = Math.min(n, m);
@@ -298,7 +275,7 @@ public class NumUtil {
     */
     public static String intToRoman(int num){
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < ARAB1.length; i++) {
+        for (int i = Constant.ZERO; i < ARAB1.length; i++) {
             int cv = ARAB1[i];
             String cs = ROMAN1[i];
             while (num >= cv){
@@ -320,9 +297,9 @@ public class NumUtil {
      * @return int
     */
     public static int romanToInt(String roman){
-        int sum = ZERO;
-        int preNum = romanOneToInt(roman.charAt(0));
-        for (int i = ONE; i < roman.length(); i++) {
+        int sum = Constant.ZERO;
+        int preNum = romanOneToInt(roman.charAt(Constant.ZERO));
+        for (int i = Constant.ONE; i < roman.length(); i++) {
             int sufNum = romanOneToInt(roman.charAt(i));
             if (preNum < sufNum){
                 sum -= preNum;
@@ -346,7 +323,7 @@ public class NumUtil {
      * @return double
     */
     public static double absolute(double value){
-        return value < ZERO ? ZERO - value : value;
+        return value < Constant.ZERO ? Constant.ZERO - value : value;
     }
 
     /**
@@ -360,16 +337,16 @@ public class NumUtil {
      * @return double
     */
     public static double sine(double angle){
-        angle = (angle * PI) / CIRCULAR;
-        int i = ONE, sign = ONE;
-        double item = angle, answer = ZERO, molecule = angle, denominator = ZERO;
-        for(; absolute(item) >= CLEVER ; i += TWO){
+        angle = (angle * Constant.PI) / Constant.CIRCULAR;
+        int i = Constant.ONE, sign = Constant.ONE;
+        double item = angle, answer = Constant.ZERO, molecule = angle, denominator = Constant.ZERO;
+        for(; absolute(item) >= Constant.CLEVER ; i += Constant.TWO){
             //累加
             answer += item;
             //分子
             molecule = molecule * angle * angle;
             //分母
-            denominator = denominator * ( i + ONE ) * ( i + TWO );
+            denominator = denominator * ( i + Constant.ONE ) * ( i + Constant.TWO );
             //符号
             sign = -sign;
             //临时变量
@@ -389,13 +366,13 @@ public class NumUtil {
      * @return double
     */
     public static double cosine(double angle){
-        angle = (angle * PI) / CIRCULAR;
-        int i = ZERO, sign = ONE;
-        double item = ONE , answer = ZERO, molecule = ONE, denominator = ZERO ;
-        for( ; absolute(item) >= CLEVER ; i += TWO){
+        angle = (angle * Constant.PI) / Constant.CIRCULAR;
+        int i = Constant.ZERO, sign = Constant.ONE;
+        double item = Constant.ONE , answer = Constant.ZERO, molecule = Constant.ONE, denominator = Constant.ZERO ;
+        for( ; absolute(item) >= Constant.CLEVER ; i += Constant.TWO){
             answer += item;
             molecule = molecule * angle * angle;
-            denominator = denominator * ( i + ONE ) * ( i + TWO );
+            denominator = denominator * ( i + Constant.ONE ) * ( i + Constant.TWO );
             sign = -sign;
             item = sign * ( molecule / denominator );
         }
@@ -415,7 +392,7 @@ public class NumUtil {
     public static double tangent(double angle){
         return sine(angle)/cosine(angle);
     }
-    
+
     /**
      * [将单个罗马数字转换为数字](Converting a single Roman numeral to a number)
      * @description: zh - 将输入的罗马数字的字符串转换成为数字
@@ -427,12 +404,12 @@ public class NumUtil {
      * @return int
     */
     private static int romanOneToInt(char value) {
-        for (int i = 0; i < ARAB2.length; i++) {
+        for (int i = Constant.ZERO; i < ARAB2.length; i++) {
             if (value == ROMAN2[i]){
                 return ARAB2[i];
             }
         }
-        return 0;
+        return Constant.ZERO;
     }
 
     /**
@@ -449,9 +426,9 @@ public class NumUtil {
         if (ArrayUtil.isEmpty(values)){
             return BigDecimal.ZERO;
         }else {
-            String value = values[ZERO];
+            String value = values[Constant.ZERO];
             BigDecimal result = null == value ? BigDecimal.ZERO : new BigDecimal(value);
-            for(int i = ONE; i < values.length; ++i) {
+            for(int i = Constant.ONE; i < values.length; ++i) {
                 result = result.setScale(Integer.parseInt(values[i]), RoundingMode.HALF_UP);
             }
             return result;
@@ -472,10 +449,10 @@ public class NumUtil {
         if (ArrayUtil.isEmpty(values)){
             return BigDecimal.ZERO;
         }else {
-            String value = values[ZERO];
+            String value = values[Constant.ZERO];
             BigDecimal result = null == value ? BigDecimal.ZERO : new BigDecimal(value);
 
-            for(int i = ONE; i < values.length; ++i) {
+            for(int i = Constant.ONE; i < values.length; ++i) {
                 value = values[i];
                 if (null != value) {
                     result = result.divide(new BigDecimal(value));
@@ -499,10 +476,10 @@ public class NumUtil {
         if (ArrayUtil.isEmpty(values)){
             return BigDecimal.ZERO;
         }else {
-            String value = values[ZERO];
+            String value = values[Constant.ZERO];
             BigDecimal result = null == value ? BigDecimal.ZERO : new BigDecimal(value);
 
-            for(int i = ONE; i < values.length; ++i) {
+            for(int i = Constant.ONE; i < values.length; ++i) {
                 value = values[i];
                 if (null != value) {
                     result = result.multiply(new BigDecimal(value));
@@ -526,10 +503,10 @@ public class NumUtil {
         if (ArrayUtil.isEmpty(values)){
             return BigDecimal.ZERO;
         }else {
-            String value = values[ZERO];
+            String value = values[Constant.ZERO];
             BigDecimal result = null == value ? BigDecimal.ZERO : new BigDecimal(value);
 
-            for(int i = ONE; i < values.length; ++i) {
+            for(int i = Constant.ONE; i < values.length; ++i) {
                 value = values[i];
                 if (null != value) {
                     result = result.subtract(new BigDecimal(value));
@@ -552,10 +529,10 @@ public class NumUtil {
         if (ArrayUtil.isEmpty(values)) {
             return BigDecimal.ZERO;
         } else {
-            String value = values[ZERO];
+            String value = values[Constant.ZERO];
             BigDecimal result = null == value ? BigDecimal.ZERO : new BigDecimal(value);
 
-            for(int i = ONE; i < values.length; ++i) {
+            for(int i = Constant.ONE; i < values.length; ++i) {
                 value = values[i];
                 if (null != value) {
                     result = result.add(new BigDecimal(value));
@@ -579,11 +556,11 @@ public class NumUtil {
     public static boolean equals(BigDecimal value1, BigDecimal value2) {
         if (value1.equals(value2)) {
             // 如果用户传入同一对象，省略compareTo以提高性能。
-            return true;
+            return Constant.TRUE;
         }
-        if (value1 == null || value2 == null) {
-            return false;
+        if (value1 == Constant.NULL || value2 == Constant.NULL) {
+            return Constant.FALSE;
         }
-        return 0 == value1.compareTo(value2);
+        return Constant.ZERO == value1.compareTo(value2);
     }
 }

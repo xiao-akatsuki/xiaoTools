@@ -731,7 +731,7 @@ public class ArrayUtil {
      * @return java.lang.String[]
     */
     public static String[] nullToEmpty(String[] array) {
-        return filter(array, (Editor<String>) t -> null == t ? StrUtil.EMPTY : t);
+        return filter(array, (Editor<String>) t -> null == t ? Constant.EMPTY : t);
     }
 
     /**

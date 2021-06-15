@@ -1,6 +1,7 @@
 package com.xiaoTools.util.strUtil;
 
 import com.xiaoTools.core.stringFormatter.StrFormatter;
+import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.charUtil.CharUtil;
 
@@ -14,10 +15,6 @@ import java.nio.charset.StandardCharsets;
  * @since 2021/5/14 3:42 下午
 */
 public class StrUtil {
-    /**
-     * 字符串常量：空字符串 ""
-    */
-    public static final String EMPTY = "";
 
     /**
      * [初始化方法](Initialization method)
@@ -38,7 +35,7 @@ public class StrUtil {
      * @return boolean
     */
     public static boolean isEmpty(CharSequence value){
-        return value == null || value.length() == 0;
+        return value == Constant.NULL || value.length() == Constant.ZERO;
     }
 
     /**
@@ -65,9 +62,9 @@ public class StrUtil {
      * @return boolean
     */
     public static boolean isBlank(CharSequence value){
-        int length = 0;
-        if (value != null && (length = value.length()) != 0){
-            for (int i = 0; i < length; i++) {
+        int length = Constant.ZERO;
+        if (value != null && (length = value.length()) != Constant.ZERO){
+            for (int i = Constant.ZERO; i < length; i++) {
                 if (!CharUtil.isBlankChar(value.charAt(i))) {
                     return false;
                 }
@@ -135,7 +132,7 @@ public class StrUtil {
      * @return java.lang.String
     */
     public static String str(byte[] data, Charset charset) {
-        if (data == null) { return null; }
+        if (data == Constant.NULL) { return Constant.STRING_NULL; }
         if (null == charset) { return new String(data); }
         return new String(data, charset);
     }
@@ -152,12 +149,12 @@ public class StrUtil {
      * @return java.lang.String
     */
     public static String str(Byte[] data, Charset charset) {
-        if (data == null) { return null; }
+        if (data == Constant.NULL) { return Constant.STRING_NULL; }
         byte[] bytes = new byte[data.length];
         Byte dataByte;
-        for (int i = 0; i < data.length; i++) {
+        for (int i = Constant.ZERO; i < data.length; i++) {
             dataByte = data[i];
-            bytes[i] = (null == dataByte) ? -1 : dataByte;
+            bytes[i] = (null == dataByte) ? Constant.NEGATIVE_ONE : dataByte;
         }
         return str(bytes, charset);
     }
@@ -197,18 +194,18 @@ public class StrUtil {
             return str(value);
         }else {
             int length = value.length();
-            if (formIndex < 0) {
+            if (formIndex < Constant.ZERO) {
                 formIndex += length;
-                if (formIndex < 0) {
-                    formIndex = 0;
+                if (formIndex < Constant.ZERO) {
+                    formIndex = Constant.ZERO;
                 }
             }else if (formIndex > length) {
                 formIndex = length;
             }
 
-            if (toIndex < 0) {
+            if (toIndex < Constant.ZERO) {
                 toIndex += length;
-                if (toIndex < 0) {
+                if (toIndex < Constant.ZERO) {
                     toIndex = length;
                 }
             } else if (toIndex > length) {
@@ -220,7 +217,7 @@ public class StrUtil {
                 formIndex = toIndex;
                 toIndex = tmp;
             }
-            return formIndex == toIndex ? "" : value.toString().substring(formIndex, toIndex);
+            return formIndex == toIndex ? Constant.EMPTY : value.toString().substring(formIndex, toIndex);
         }
     }
 
@@ -276,7 +273,7 @@ public class StrUtil {
      * @return java.lang.String
     */
     public static String subSuf(CharSequence string, int fromIndex) {
-        return isEmpty(string) ? null : sub(string, fromIndex, string.length());
+        return isEmpty(string) ? Constant.STRING_NULL : sub(string, fromIndex, string.length());
     }
 
     /**
@@ -291,7 +288,7 @@ public class StrUtil {
      * @return java.lang.String
     */
     public static String subPre(CharSequence string, int toIndexExclude) {
-        return sub(string, 0, toIndexExclude);
+        return sub(string, Constant.ZERO, toIndexExclude);
     }
 
     /**
@@ -308,13 +305,13 @@ public class StrUtil {
     public static boolean containsAny(CharSequence string, char... testChars) {
         if (!isEmpty(string)) {
             int len = string.length();
-            for(int i = 0; i < len; ++i) {
+            for(int i = Constant.ZERO; i < len; ++i) {
                 if (ArrayUtil.contains(testChars, string.charAt(i))) {
-                    return true;
+                    return Constant.TRUE;
                 }
             }
         }
-        return false;
+        return Constant.FALSE;
     }
 
     /**
@@ -347,7 +344,7 @@ public class StrUtil {
         if (isEmpty(str) || isEmpty(strToRemove)) {
             return str(str);
         }
-        return str.toString().replace(strToRemove, "");
+        return str.toString().replace(strToRemove, Constant.EMPTY);
     }
 
     /**
@@ -362,7 +359,7 @@ public class StrUtil {
      * @return boolean
     */
     public static boolean contains(CharSequence str, char searchChar) {
-        return indexOf(str, searchChar) > -1;
+        return indexOf(str, searchChar) > Constant.NEGATIVE_ONE;
     }
 
     /**
@@ -377,7 +374,7 @@ public class StrUtil {
      * @return int
     */
     public static int indexOf(final CharSequence str, char searchChar) {
-        return indexOf(str, searchChar, 0);
+        return indexOf(str, searchChar, Constant.ZERO);
     }
 
     /**
@@ -396,7 +393,7 @@ public class StrUtil {
         if (str instanceof String) {
             return ((String) str).indexOf(searchChar, start);
         } else {
-            return indexOf(str, searchChar, start, -1);
+            return indexOf(str, searchChar, start, Constant.NEGATIVE_ONE);
         }
     }
 
@@ -414,20 +411,20 @@ public class StrUtil {
      * @return int
     */
     public static int indexOf(final CharSequence str, char searchChar, int start, int end) {
-        if (isEmpty(str)) { return -1; }
+        if (isEmpty(str)) { return Constant.NEGATIVE_ONE; }
         final int len = str.length();
-        if (start < 0 || start > len) { start = 0; }
-        if (end > len || end < 0) { end = len; }
+        if (start < Constant.ZERO || start > len) { start = Constant.ZERO; }
+        if (end > len || end < Constant.ZERO) { end = len; }
         for (int i = start; i < end; i++) {
             if (str.charAt(i) == searchChar) { return i; }
         }
-        return -1;
+        return Constant.NEGATIVE_ONE;
     }
 
 
     public static String format(String template, Object... params) {
         if (null == template) {
-            return "NULL";
+            return Constant.STRING_NULL;
         }
         if (ArrayUtil.isEmpty(params) || isBlank(template)) {
             return template.toString();

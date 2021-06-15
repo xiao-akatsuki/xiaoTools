@@ -1,5 +1,6 @@
 package com.xiaoTools.util.ioUtil;
 
+import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.fileUtil.fileUtil.FileUtil;
 
 import java.io.*;
@@ -13,10 +14,6 @@ import java.io.*;
  * @since 2021/5/24 1:23 下午
 */
 public class IoUtil {
-
-    private static final String UTF8="UTF-8";
-
-    private static final String GBK="GBK";
 
     /**
      * [初始化工具类](Initialize tool class)
@@ -40,7 +37,7 @@ public class IoUtil {
      * @return java.io.BufferedReader
     */
     public static BufferedReader getReader(InputStream in){
-        return in == null ? null : new BufferedReader(new InputStreamReader(in));
+        return in == Constant.NULL ? Constant.BUFFERED_READER_NULL : new BufferedReader(new InputStreamReader(in));
     }
 
     /**
@@ -54,7 +51,7 @@ public class IoUtil {
      * @return java.io.BufferedReader
     */
     public static BufferedReader getReader(Reader reader){
-        return null == reader ? null : reader instanceof BufferedReader ? (BufferedReader)reader : new BufferedReader(reader);
+        return Constant.NULL == reader ? Constant.BUFFERED_READER_NULL : reader instanceof BufferedReader ? (BufferedReader)reader : new BufferedReader(reader);
     }
 
     /**
@@ -85,7 +82,7 @@ public class IoUtil {
      * @param path: [文件的路径](The path to the file)
     */
     public static void writeUTF8(String value,String path){
-        write(value,path,UTF8);
+        write(value,path, Constant.UTF_8);
     }
     
     /**
@@ -99,7 +96,7 @@ public class IoUtil {
      * @param path: [文件的路径](The path to the file)
     */
     public static void writeGBK(String value,String path){
-        write(value,path,GBK);
+        write(value,path,Constant.GBK);
     }
 
     /**
@@ -115,13 +112,13 @@ public class IoUtil {
     */
     public static String getContent(String path,String charsetName){
         //判断是否是文件
-        if (!FileUtil.isFile(path)) { return null; }
+        if (!FileUtil.isFile(path)) { return Constant.STRING_NULL; }
         try {
             return getContent(new FileInputStream(path), charsetName);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return Constant.STRING_NULL;
     }
 
     /**
@@ -135,7 +132,7 @@ public class IoUtil {
      * @return java.lang.String
     */
     public static String getGBKContent(String path){
-        return getContent(path,GBK);
+        return getContent(path,Constant.GBK);
     }
 
     /**
@@ -149,7 +146,7 @@ public class IoUtil {
      * @return java.lang.String
     */
     public static String getUTF8Content(String path){
-        return getContent(path,UTF8);
+        return getContent(path,Constant.UTF_8);
     }
 
     /**
@@ -167,11 +164,11 @@ public class IoUtil {
         StringBuilder test = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(value, charsetName))) {
             String str;
-            while ((str = reader.readLine()) != null) {
-                test.append(str).append("\r\n");
+            while ((str = reader.readLine()) != Constant.NULL) {
+                test.append(str).append(Constant.ENTER);
             }
         } catch (Exception e) {
-            test.delete(0, test.length());
+            test.delete(Constant.ZERO, test.length());
         }
         return test.toString();
     }
@@ -188,7 +185,7 @@ public class IoUtil {
      * @param charsetName: [字符集编码](Character set encoding)
     */
     private static void writeData(String value,String filePath,String charsetName){
-        BufferedWriter bufferedWriter = null;
+        BufferedWriter bufferedWriter = Constant.BUFFERED_WRITER_NULL;
         try {
             bufferedWriter = new BufferedWriter(
                     new OutputStreamWriter(new FileOutputStream(filePath), charsetName));
@@ -197,7 +194,7 @@ public class IoUtil {
             e.printStackTrace();
         } finally {
             try {
-                if (bufferedWriter != null) {
+                if (bufferedWriter != Constant.BUFFERED_WRITER_NULL) {
                     bufferedWriter.close();
                 }
             } catch (Exception e) {

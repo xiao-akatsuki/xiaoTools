@@ -1,5 +1,7 @@
 package com.xiaoTools.util.randomUtil;
 
+import com.xiaoTools.lang.constant.Constant;
+
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -322,11 +324,11 @@ public class RandomUtil {
         //设置产生的随机字符串加数字的长度
         StringBuilder result = new StringBuilder(length);
         //判断长度是否小于1，如果小于1，则安装长度等于1处理
-        if (length < 1) { length = 1; }
+        if (length < Constant.ONE) { length = Constant.ONE; }
         //获取父级字符串的长度
         int baseLength = BASE_CHAR_NUMBER_LOWERCASE.length();
         //进行循环
-        for(int i = 0; i < length; ++i) {
+        for(int i = Constant.ZERO; i < length; ++i) {
             //使用方法获取随机的位置
             int number = randomInt(baseLength);
             //将该位置的字符串添加
@@ -350,11 +352,11 @@ public class RandomUtil {
         //设置产生的随机字符串加数字的长度
         StringBuilder result = new StringBuilder(length);
         //判断长度是否小于1，如果小于1，则安装长度等于1处理
-        if (length < 1) { length = 1; }
+        if (length < Constant.ONE) { length = Constant.ONE; }
         //获取父级字符串的长度
         int baseLength = BASE_CHAR_NUMBER_CAPITALIZATION.length();
         //进行循环
-        for(int i = 0; i < length; ++i) {
+        for(int i = Constant.ZERO; i < length; ++i) {
             //使用方法获取随机的位置
             int number = randomInt(baseLength);
             //将该位置的字符串添加
@@ -378,11 +380,11 @@ public class RandomUtil {
         //设置产生的随机字符串加数字的长度
         StringBuilder result = new StringBuilder(length);
         //判断长度是否小于1，如果小于1，则安装长度等于1处理
-        if (length < 1) { length = 1; }
+        if (length < Constant.ONE) { length = Constant.ONE; }
         //获取父级字符串的长度
         int baseLength = BASE_NUMBER.length();
         //进行循环
-        for(int i = 0; i < length; ++i) {
+        for(int i = Constant.ZERO; i < length; ++i) {
             //使用方法获取随机的位置
             int number = randomInt(baseLength);
             //将该位置的字符串添加

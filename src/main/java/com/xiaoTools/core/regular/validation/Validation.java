@@ -1,6 +1,7 @@
 package com.xiaoTools.core.regular.validation;
 
 import com.xiaoTools.core.regular.patternPool.PatternPool;
+import com.xiaoTools.lang.constant.Constant;
 
 import java.util.regex.Pattern;
 
@@ -26,9 +27,9 @@ public class Validation {
      * @return boolean
     */
     public static boolean isMatchRegex(Pattern pattern,CharSequence value){
-        if (value == null || pattern == null) {
+        if (value == Constant.NULL || pattern == Constant.NULL) {
             // 提供null的字符串为不匹配
-            return false;
+            return Constant.FALSE;
         }
         return pattern.matcher(value).matches();
     }
@@ -298,7 +299,7 @@ public class Validation {
      * @return boolean
     */
     public static boolean isNull(Object value){
-        return value == null;
+        return value == Constant.NULL;
     }
 
     /**
@@ -312,7 +313,7 @@ public class Validation {
      * @return boolean
     */
     public static boolean isNotNull(Object value){
-        return value != null;
+        return value != Constant.NULL;
     }
 
 }

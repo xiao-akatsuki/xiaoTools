@@ -102,30 +102,30 @@ public class HashUtil {
     public static int universal(char[] key, int mask, int[] tab){
         int hash = key.length, i, len = key.length;
         for (i = Constant.ZERO; i < (len << Constant.THREE); i += Constant.EIGHT) {
-            char k = key[i >> 3];
-            if ((k & Constant.CHAR_ONE) == 0) {
+            char k = key[i >> Constant.THREE];
+            if ((k & Constant.CHAR_ONE) == Constant.ZERO) {
                 hash ^= tab[i];
             }
-            if ((k & 0x02) == 0) {
-                hash ^= tab[i + 1];
+            if ((k & Constant.CHAR_TWO) == Constant.ZERO) {
+                hash ^= tab[i + Constant.ONE];
             }
-            if ((k & 0x04) == 0) {
-                hash ^= tab[i + 2];
+            if ((k & Constant.CHAR_FOUR) == Constant.ZERO) {
+                hash ^= tab[i + Constant.TWO];
             }
-            if ((k & 0x08) == 0) {
-                hash ^= tab[i + 3];
+            if ((k & Constant.CHAR_EIGHT) == Constant.ZERO) {
+                hash ^= tab[i + Constant.THREE];
             }
-            if ((k & 0x10) == 0) {
-                hash ^= tab[i + 4];
+            if ((k & Constant.CHAR_TEN) == Constant.ZERO) {
+                hash ^= tab[i + Constant.FOUR];
             }
-            if ((k & 0x20) == 0) {
-                hash ^= tab[i + 5];
+            if ((k & Constant.CHAR_TWENTY) == Constant.ZERO) {
+                hash ^= tab[i + Constant.FIVE];
             }
-            if ((k & 0x40) == 0) {
-                hash ^= tab[i + 6];
+            if ((k & Constant.CHAR_FORTY) == Constant.ZERO) {
+                hash ^= tab[i + Constant.SIX];
             }
-            if ((k & 0x80) == 0) {
-                hash ^= tab[i + 7];
+            if ((k & Constant.CHAR_EIGHTY) == Constant.ZERO) {
+                hash ^= tab[i + Constant.SEVEN];
             }
         }
         return (hash & mask);
@@ -145,7 +145,7 @@ public class HashUtil {
     */
     public static int zobrist(char[] key, int mask, int[][] tab) {
         int hash = key.length;
-        for (int i = 0; i < key.length; ++i) { hash ^= tab[i][key[i]]; }
+        for (int i = Constant.ZERO; i < key.length; ++i) { hash ^= tab[i][key[i]]; }
         return (hash & mask);
     }
 
@@ -160,16 +160,16 @@ public class HashUtil {
      * @return int
     */
     public static int fnvHash(byte[] data) {
-        final int p = 16777619;
-        int hash = (int) 2166136261L;
+        final int p = Constant.HASH_VALUE_THREE;
+        int hash = (int) Constant.HASH_VALUE_SIX;
         for (byte b : data) {
             hash = (hash ^ b) * p;
         }
-        hash += hash << 13;
-        hash ^= hash >> 7;
-        hash += hash << 3;
-        hash ^= hash >> 17;
-        hash += hash << 5;
+        hash += hash << Constant.THIRTEEN;
+        hash ^= hash >> Constant.SEVEN;
+        hash += hash << Constant.THREE;
+        hash ^= hash >> Constant.SEVENTEEN;
+        hash += hash << Constant.FIVE;
         return Math.abs(hash);
     }
 
@@ -184,16 +184,16 @@ public class HashUtil {
      * @return int
     */
     public static int fnvHash(String data) {
-        final int p = 16777619;
-        int hash = (int) 2166136261L;
-        for (int i = 0; i < data.length(); i++) {
+        final int p = Constant.HASH_VALUE_THREE;
+        int hash = (int) Constant.HASH_VALUE_SIX;
+        for (int i = Constant.ZERO; i < data.length(); i++) {
             hash = (hash ^ data.charAt(i)) * p;
         }
-        hash += hash << 13;
-        hash ^= hash >> 7;
-        hash += hash << 3;
-        hash ^= hash >> 17;
-        hash += hash << 5;
+        hash += hash << Constant.THIRTEEN;
+        hash ^= hash >> Constant.SEVEN;
+        hash += hash << Constant.THREE;
+        hash ^= hash >> Constant.SEVENTEEN;
+        hash += hash << Constant.FIVE;
         return Math.abs(hash);
     }
 
@@ -208,12 +208,12 @@ public class HashUtil {
      * @return int
     */
     public static int intHash(int key) {
-        key += ~(key << 15);
-        key ^= (key >>> 10);
-        key += (key << 3);
-        key ^= (key >>> 6);
-        key += ~(key << 11);
-        key ^= (key >>> 16);
+        key += ~(key << Constant.FIFTEEN);
+        key ^= (key >>> Constant.TEN);
+        key += (key << Constant.THREE);
+        key ^= (key >>> Constant.SIX);
+        key += ~(key << Constant.ELEVEN);
+        key ^= (key >>> Constant.SIXTEEN);
         return key;
     }
 
@@ -228,14 +228,14 @@ public class HashUtil {
      * @return int
     */
     public static int rsHash(String str) {
-        int b = 378551;
-        int a = 63689;
-        int hash = 0;
-        for (int i = 0; i < str.length(); i++) {
+        int b = Constant.HASH_VALUE_ONE;
+        int a = Constant.HASH_VALUE_ZERO;
+        int hash = Constant.ZERO;
+        for (int i = Constant.ZERO; i < str.length(); i++) {
             hash = hash * a + str.charAt(i);
             a = a * b;
         }
-        return hash & 0x7FFFFFFF;
+        return hash & Constant.HEXADECIMAL_SEVEN;
     }
 
     /**
@@ -249,9 +249,11 @@ public class HashUtil {
      * @return int
     */
     public static int jsHash(String str) {
-        int hash = 1315423911;
-        for (int i = 0; i < str.length(); i++) { hash ^= ((hash << 5) + str.charAt(i) + (hash >> 2)); }
-        return hash & 0x7FFFFFFF;
+        int hash = Constant.HASH_VALUE_FOUR;
+        for (int i = Constant.ZERO; i < str.length(); i++) {
+            hash ^= ((hash << Constant.FIVE) + str.charAt(i) + (hash >> Constant.TWO));
+        }
+        return hash & Constant.HEXADECIMAL_SEVEN;
     }
 
     /**
@@ -265,19 +267,19 @@ public class HashUtil {
      * @return int
     */
     public static int pjwHash(String str) {
-        int bitsInUnsignedInt = 32;
-        int threeQuarters = (bitsInUnsignedInt * 3) / 4;
-        int oneEighth = bitsInUnsignedInt / 8;
-        int highBits = 0xFFFFFFFF << (bitsInUnsignedInt - oneEighth);
-        int hash = 0;
+        int bitsInUnsignedInt = Constant.THIRTY_TWO;
+        int threeQuarters = (bitsInUnsignedInt * Constant.THREE) / Constant.FOUR;
+        int oneEighth = bitsInUnsignedInt / Constant.EIGHT;
+        int highBits = Constant.HEXADECIMAL_ZERO << (bitsInUnsignedInt - oneEighth);
+        int hash = Constant.ZERO;
         int test;
-        for (int i = 0; i < str.length(); i++) {
+        for (int i = Constant.ZERO; i < str.length(); i++) {
             hash = (hash << oneEighth) + str.charAt(i);
-            if ((test = hash & highBits) != 0) {
+            if ((test = hash & highBits) != Constant.ZERO) {
                 hash = ((hash ^ (test >> threeQuarters)) & (~highBits));
             }
         }
-        return hash & 0x7FFFFFFF;
+        return hash & Constant.HEXADECIMAL_SEVEN;
     }
 
     /**
@@ -291,15 +293,16 @@ public class HashUtil {
      * @return int
     */
     public static int elfHash(String str) {
-        int hash = 0;int x;
-        for (int i = 0; i < str.length(); i++) {
-            hash = (hash << 4) + str.charAt(i);
-            if ((x = (int) (hash & 0xF0000000L)) != 0) {
-                hash ^= (x >> 24);
+        int hash = Constant.ZERO;
+        int x;
+        for (int i = Constant.ZERO; i < str.length(); i++) {
+            hash = (hash << Constant.FOUR) + str.charAt(i);
+            if ((x = (int) (hash & Constant.HEXADECIMAL_F)) != Constant.ZERO) {
+                hash ^= (x >> Constant.TWENTY_FOUR);
                 hash &= ~x;
             }
         }
-        return hash & 0x7FFFFFFF;
+        return hash & Constant.HEXADECIMAL_SEVEN;
     }
 
     /**
@@ -313,10 +316,12 @@ public class HashUtil {
      * @return int
     */
     public static int bkdrHash(String str) {
-        int seed = 131;
-        int hash = 0;
-        for (int i = 0; i < str.length(); i++) { hash = (hash * seed) + str.charAt(i); }
-        return hash & 0x7FFFFFFF;
+        int seed = Constant.HUNDRED_THIRTY_ONE;
+        int hash = Constant.ZERO;
+        for (int i = Constant.ZERO; i < str.length(); i++) {
+            hash = (hash * seed) + str.charAt(i);
+        }
+        return hash & Constant.HEXADECIMAL_SEVEN;
     }
 
     /**
@@ -330,9 +335,11 @@ public class HashUtil {
      * @return int
     */
     public static int sdbmHash(String str) {
-        int hash = 0;
-        for (int i = 0; i < str.length(); i++) { hash = str.charAt(i) + (hash << 6) + (hash << 16) - hash; }
-        return hash & 0x7FFFFFFF;
+        int hash = Constant.ZERO;
+        for (int i = Constant.ZERO; i < str.length(); i++) {
+            hash = str.charAt(i) + (hash << Constant.SIX) + (hash << Constant.SIXTEEN) - hash;
+        }
+        return hash & Constant.HEXADECIMAL_SEVEN;
     }
 
     /**
@@ -346,11 +353,11 @@ public class HashUtil {
      * @return int
     */
     public static int djbHash(String str) {
-        int hash = 5381;
-        for (int i = 0; i < str.length(); i++) {
-            hash = ((hash << 5) + hash) + str.charAt(i);
+        int hash = Constant.FIVE_THREE_EIGHT_ONE;
+        for (int i = Constant.ZERO; i < str.length(); i++) {
+            hash = ((hash << Constant.FIVE) + hash) + str.charAt(i);
         }
-        return hash & 0x7FFFFFFF;
+        return hash & Constant.HEXADECIMAL_SEVEN;
     }
 
     /**
@@ -365,8 +372,10 @@ public class HashUtil {
     */
     public static int dekHash(String str) {
         int hash = str.length();
-        for (int i = 0; i < str.length(); i++) { hash = ((hash << 5) ^ (hash >> 27)) ^ str.charAt(i); }
-        return hash & 0x7FFFFFFF;
+        for (int i = Constant.ZERO; i < str.length(); i++) {
+            hash = ((hash << Constant.FIVE) ^ (hash >> Constant.TWENTY_SEVEN)) ^ str.charAt(i);
+        }
+        return hash & Constant.HEXADECIMAL_SEVEN;
     }
 
     /**
@@ -380,9 +389,9 @@ public class HashUtil {
      * @return int
     */
     public static int apHash(String str) {
-        int hash = 0;
-        for (int i = 0; i < str.length(); i++) {
-            hash ^= ((i & 1) == 0) ? ((hash << 7) ^ str.charAt(i) ^ (hash >> 3)) : (~((hash << 11) ^ str.charAt(i) ^ (hash >> 5)));
+        int hash = Constant.ZERO;
+        for (int i = Constant.ZERO; i < str.length(); i++) {
+            hash ^= ((i & Constant.ONE) == Constant.ZERO) ? ((hash << Constant.SEVEN) ^ str.charAt(i) ^ (hash >> Constant.THREE)) : (~((hash << Constant.ELEVEN) ^ str.charAt(i) ^ (hash >> Constant.FIVE)));
         }
         return hash;
     }
@@ -400,28 +409,32 @@ public class HashUtil {
     public static long tianlHash(String str) {
         long hash;
         int iLength = str.length();
-        if (iLength == 0) { return 0; }
-        if (iLength <= 256) {
-            hash = 16777216L * (iLength - 1);
+        if (iLength == Constant.ZERO) { return Constant.ZERO; }
+        if (iLength <= Constant.TWO_FIFTY_SIX) {
+            hash = Constant.HASH_VALUE_FIVE * (iLength - Constant.ONE);
         } else {
-            hash = 4278190080L;
+            hash = Constant.HASH_VALUE_SEVEN;
         }
         int i;
         char ucChar;
-        if (iLength <= 96) {
-            for (i = 1; i <= iLength; i++) {
-                ucChar = str.charAt(i - 1);
-                if (ucChar <= 'Z' && ucChar >= 'A') { ucChar = (char) (ucChar + 32); }
-                hash += (3L * i * ucChar * ucChar + 5 * i * ucChar + 7 * i + 11 * ucChar) % 16777216;
+        if (iLength <= Constant.NINETY_SIX) {
+            for (i = Constant.ONE; i <= iLength; i++) {
+                ucChar = str.charAt(i - Constant.ONE);
+                if (ucChar <= Constant.CHAR_UP_Z && ucChar >= Constant.CHAR_UP_A) { ucChar = (char) (ucChar + Constant.THIRTY_TWO); }
+                hash += (Constant.LONG_THREE * i * ucChar * ucChar + Constant.FIVE * i * ucChar + Constant.SEVEN * i + Constant.ELEVEN * ucChar) % Constant.HASH_VALUE_TWO;
             }
         } else {
-            for (i = 1; i <= 96; i++) {
-                ucChar = str.charAt(i + iLength - 96 - 1);
-                if (ucChar <= 'Z' && ucChar >= 'A') { ucChar = (char) (ucChar + 32); }
-                hash += (3L * i * ucChar * ucChar + 5L * i * ucChar + 7L * i + 11 * ucChar) % 16777216;
+            for (i = Constant.ONE; i <= Constant.NINETY_SIX; i++) {
+                ucChar = str.charAt(i + iLength - Constant.NINETY_SIX - Constant.ONE);
+                if (ucChar <= Constant.CHAR_UP_Z && ucChar >= Constant.CHAR_UP_A) {
+                    ucChar = (char) (ucChar + Constant.THIRTY_TWO);
+                }
+                hash += (Constant.LONG_THREE * i * ucChar * ucChar + Constant.LONG_FIVE * i * ucChar + Constant.LONG_SEVEN * i + Constant.ELEVEN * ucChar) % Constant.HASH_VALUE_TWO;
             }
         }
-        if (hash < 0) { hash *= -1; }
+        if (hash < Constant.ZERO) {
+            hash *= Constant.NEGATIVE_ONE;
+        }
         return hash;
     }
 
@@ -436,11 +449,11 @@ public class HashUtil {
      * @return int
     */
     public static int javaDefaultHash(String str) {
-        int h = 0;
-        int off = 0;
+        int h = Constant.ZERO;
+        int off = Constant.ZERO;
         int len = str.length();
-        for (int i = 0; i < len; i++) {
-            h = 31 * h + str.charAt(off++);
+        for (int i = Constant.ZERO; i < len; i++) {
+            h = Constant.THIRTY_ONE * h + str.charAt(off++);
         }
         return h;
     }
@@ -457,7 +470,7 @@ public class HashUtil {
     */
     public static long mixHash(String str) {
         long hash = str.hashCode();
-        hash <<= 32;
+        hash <<= Constant.THIRTY_TWO;
         hash |= fnvHash(str);
         return hash;
     }

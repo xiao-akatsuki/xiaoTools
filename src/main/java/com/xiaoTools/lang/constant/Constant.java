@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 
 /**
  * [统一常量](Uniform constant)
@@ -179,6 +180,12 @@ public class Constant {
 
     public static final char DOUBLE_CHAR_SLASH = '\\';
 
+    public static final char CHAR_CR = '\r';
+
+    public static final char CHAR_CN = '\n';
+
+    public static final char CHAR_CT = '\t';
+
     public static final char CHAR_DOWN_A = 'a';
 
     public static final char CHAR_UP_A = 'A';
@@ -213,6 +220,8 @@ public class Constant {
 
     /*-----------------------------------------------------------String*/
 
+    public static final String STRING_SPACE = " ";
+
     public static final String STRING_ZERO = "0";
 
     public static final String STRING_ZERO_X = "0x";
@@ -228,6 +237,8 @@ public class Constant {
     public static final String SPOT = ".";
 
     public static final String BRACKETS = "{}";
+
+    public static final String DOUBLE_BRACKETS = "{}: {}";
 
     public static final String LEFT_BRACKETS = "{";
 
@@ -258,4 +269,12 @@ public class Constant {
     public static final BufferedWriter BUFFERED_WRITER_NULL = null;
 
     public static final Field[] FIELDS_NULL = null;
+
+    public static final Throwable THROWABLE_NULL = null;
+
+    public static final Object[] OBJECTS_ARRAY_NULL = null;
+
+    public static final Type TYPE_NULL = null;
+
+    public static final Type[] TYPES_NULL = null;
 }

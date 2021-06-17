@@ -63,4 +63,52 @@ public class Assertion {
         }
         return object;
     }
+
+    /**
+     * [检查给定字符串是否为空白（null、空串或只包含空白符），为空抛出 IllegalArgumentException ](Check whether the given string is blank (null, empty string or contains only blank characters), and throw IllegalArgumentException if it is empty)
+     * @description: zh - 检查给定字符串是否为空白（null、空串或只包含空白符），为空抛出 IllegalArgumentException
+     * @description: en - Check whether the given string is blank (null, empty string or contains only blank characters), and throw IllegalArgumentException if it is empty
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/16 4:52 下午
+     * @param text: 被检查字符串
+     * @return T
+    */
+    public static <T extends CharSequence> T notBlank(T text) throws IllegalArgumentException {
+        return notBlank(text, "[Assertion failed] - this String argument must have text; it must not be null, empty, or blank");
+    }
+
+    /**
+     * [检查给定字符串是否为空白（null、空串或只包含空白符），为空抛出 IllegalArgumentException](Check whether the given string is blank (null, empty string or contains only blank characters), and throw IllegalArgumentException if it is empty)
+     * @description: zh - 检查给定字符串是否为空白（null、空串或只包含空白符），为空抛出 IllegalArgumentException
+     * @description: en - Check whether the given string is blank (null, empty string or contains only blank characters), and throw IllegalArgumentException if it is empty
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/17 7:52 上午
+     * @param text: 被检查的字符串
+     * @param errorMsgTemplate: 错误的模板
+     * @param params: 参数
+     * @return T
+    */
+    public static <T extends CharSequence> T notBlank(T text, String errorMsgTemplate, Object... params) throws IllegalArgumentException {
+        return notBlank(text, () -> new IllegalArgumentException(StrUtil.format(errorMsgTemplate, params)));
+    }
+
+    /**
+     * [检查给定字符串是否为空白（null、空串或只包含空白符），为空抛出自定义异常。 并使用指定的函数获取错误信息返回](Check whether the given string is blank (null, empty string or contains only blank characters), and throw a custom exception if it is blank. And use the specified function to get the error information)
+     * @description: zh - 检查给定字符串是否为空白（null、空串或只包含空白符），为空抛出自定义异常。 并使用指定的函数获取错误信息返回
+     * @description: en - Check whether the given string is blank (null, empty string or contains only blank characters), and throw a custom exception if it is blank. And use the specified function to get the error information
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/17 7:53 上午
+     * @param text: 被检查字符串
+     * @param errorMsgSupplier: 错误抛出异常附带的消息生产接口
+     * @return T
+    */
+    public static <T extends CharSequence, X extends Throwable> T notBlank(T text, Supplier<X> errorMsgSupplier) throws X {
+        if (StrUtil.isBlank(text)) {
+            throw errorMsgSupplier.get();
+        }
+        return text;
+    }
 }

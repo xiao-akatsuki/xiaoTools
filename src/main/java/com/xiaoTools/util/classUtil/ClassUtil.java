@@ -1,8 +1,12 @@
 package com.xiaoTools.util.classUtil;
 
 import com.xiaoTools.core.basicType.BasicType;
+import com.xiaoTools.entity.nullWrapperEntity.NullWrapperEntity;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
+import com.xiaoTools.util.typeUtil.TypeUtil;
+
+import java.lang.reflect.Type;
 
 /**
  * [类工具类](Class tool class)
@@ -25,6 +29,33 @@ public class ClassUtil {
     */
     public static <T> Class<T> getClass(T value) {
         return ((Constant.NULL == value) ? (Class<T>) Constant.NULL : (Class<T>) value.getClass());
+    }
+
+    /**
+     * [获得对象数组的类数组](Gets the class array of the object array)
+     * @description: zh - 获得对象数组的类数组
+     * @description: en - Gets the class array of the object array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/17 9:04 上午
+     * @param objects: 对象数组，如果数组中存在null元素，则此元素被认为是Object类型
+     * @return java.lang.Class<?>[]
+    */
+    public static Class<?>[] getClasses(Object... objects) {
+        Class<?>[] classes = new Class<?>[objects.length];
+        Object obj;
+        for (int i = Constant.ZERO; i < objects.length; i++) {
+            obj = objects[i];
+            if (obj instanceof NullWrapperEntity) {
+                // 自定义null值的参数类型
+                classes[i] = ((NullWrapperEntity<?>) obj).getWrappedClass();
+            } else if (Constant.NULL == obj) {
+                classes[i] = Object.class;
+            } else {
+                classes[i] = obj.getClass();
+            }
+        }
+        return classes;
     }
 
     /**
@@ -153,5 +184,69 @@ public class ClassUtil {
             return Constant.FALSE;
         }
         return BasicType.WRAPPER_PRIMITIVE_MAP.containsKey(clazz);
+    }
+
+    /**
+     * [获取指定类型分的默认值](Gets the default value of the specified type)
+     * @description: zh - 获取指定类型分的默认值
+     * @description: en - Gets the default value of the specified type
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/17 8:05 上午
+     * @param clazz: 类
+     * @return java.lang.Object
+    */
+    public static Object getDefaultValue(Class<?> clazz) {
+        if (clazz.isPrimitive()) {
+            if (long.class == clazz) {
+                return Constant.LONG_ZERO;
+            } else if (int.class == clazz) {
+                return Constant.ZERO;
+            } else if (short.class == clazz) {
+                return (short) 0;
+            } else if (char.class == clazz) {
+                return (char) 0;
+            } else if (byte.class == clazz) {
+                return (byte) 0;
+            } else if (double.class == clazz) {
+                return 0D;
+            } else if (float.class == clazz) {
+                return 0f;
+            } else if (boolean.class == clazz) {
+                return Constant.FALSE;
+            }
+        }
+
+        return Constant.NULL;
+    }
+
+    /**
+     * [获得给定类的第一个泛型参数](Gets the first generic parameter of a given class)
+     * @description: zh - 获得给定类的第一个泛型参数
+     * @description: en - Gets the first generic parameter of a given class
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/17 2:36 下午
+     * @param clazz: 被检查的类，必须是已经确定泛型类型的类
+     * @return java.lang.Class<?>
+    */
+    public static Class<?> getTypeArgument(Class<?> clazz) {
+        return getTypeArgument(clazz, 0);
+    }
+
+    /**
+     * [获得给定类的泛型参数](Gets the generic parameters of the given class)
+     * @description: zh - 获得给定类的泛型参数
+     * @description: en - Gets the generic parameters of the given class
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/17 2:39 下午
+     * @param clazz:  被检查的类，必须是已经确定泛型类型的类
+     * @param index: 泛型类型的索引号，即第几个泛型类型
+     * @return java.lang.Class<?>
+    */
+    public static Class<?> getTypeArgument(Class<?> clazz, int index) {
+        final Type argumentType = TypeUtil.getTypeArgument(clazz, index);
+        return TypeUtil.getClass(argumentType);
     }
 }

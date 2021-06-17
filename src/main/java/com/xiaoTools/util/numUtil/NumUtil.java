@@ -2,9 +2,12 @@ package com.xiaoTools.util.numUtil;
 
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
+import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.NumberFormat;
+import java.text.ParseException;
 
 /**
  * @description: zh - 数字工具类
@@ -562,5 +565,90 @@ public class NumUtil {
             return Constant.FALSE;
         }
         return Constant.ZERO == value1.compareTo(value2);
+    }
+
+    /**
+     * [将指定字符串转换为Number 对象](Converts the specified string to a number object)
+     * @description: zh - 将指定字符串转换为Number 对象
+     * @description: en - Converts the specified string to a number object
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/17 8:40 下午
+     * @param numberStr: Number字符串
+     * @return java.lang.Number
+    */
+    public static Number parseNumber(String numberStr) throws NumberFormatException {
+        try {
+            return NumberFormat.getInstance().parse(numberStr);
+        } catch (ParseException e) {
+            final NumberFormatException nfe = new NumberFormatException(e.getMessage());
+            nfe.initCause(e);
+            throw nfe;
+        }
+    }
+
+    /**
+     * [解析转换数字字符串为 float 型数字](Parsing and converting numeric string to float numeric string)
+     * @description: zh - 解析转换数字字符串为 float 型数字
+     * @description: en - Parsing and converting numeric string to float numeric string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/17 8:45 下午
+     * @param number: 数字，支持0x开头、0开头和普通十进制
+     * @return float
+    */
+    public static float parseFloat(String number) {
+        if (StrUtil.isBlank(number)) { return Constant.FLOAT_ZERO; }
+        try {
+            return Float.parseFloat(number);
+        } catch (NumberFormatException e) {
+            return parseNumber(number).floatValue();
+        }
+    }
+
+    /**
+     * [解析转换数字字符串为long型数字](Parsing and converting numeric string to long numeric string)
+     * @description: zh - 解析转换数字字符串为long型数字
+     * @description: en - Parsing and converting numeric string to long numeric string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/17 8:47 下午
+     * @param number: 数字，支持0x开头、0开头和普通十进制
+     * @return double
+    */
+    public static double parseDouble(String number) {
+        if (StrUtil.isBlank(number)) {
+            return Constant.DOUBLE_ZERO;
+        }
+        try {
+            return Double.parseDouble(number);
+        } catch (NumberFormatException e) {
+            return parseNumber(number).doubleValue();
+        }
+    }
+
+    /**
+     * [解析转换数字字符串为int型数字](Analysis and conversion of numeric string to int numeric string)
+     * @description: zh - 解析转换数字字符串为int型数字
+     * @description: en - Analysis and conversion of numeric string to int numeric string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/17 8:56 下午
+     * @param number: 数字，支持0x开头、0开头和普通十进制
+     * @return int
+    */
+    public static int parseInt(String number) throws NumberFormatException {
+        if (StrUtil.isBlank(number)) {
+            return Constant.ZERO;
+        }
+        if (StrUtil.startWithIgnoreCase(number, Constant.STRING_ZERO_X)) {
+            // 0x04表示16进制数
+            return Integer.parseInt(number.substring(Constant.TWO), Constant.SIXTEEN);
+        }
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            return parseNumber(number).intValue();
+        }
     }
 }

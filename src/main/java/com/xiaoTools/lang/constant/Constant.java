@@ -248,6 +248,18 @@ public class Constant {
 
     public static final String GBK = "GBK";
 
+    public static final String STRING_TRUE = "true";
+
+    public static final String STRING_FALSE = "false";
+
+    public static final String STRING_ON = "on";
+
+    public static final String STRING_OFF = "off";
+
+    public static final String STRING_YES = "yes";
+
+    public static final String STRING_NO = "no";
+
     public static final String ENTER = "\r\n";
 
     public static final String STRING_NULL = null;
@@ -277,4 +289,14 @@ public class Constant {
     public static final Type TYPE_NULL = null;
 
     public static final Type[] TYPES_NULL = null;
+
+    public static final Boolean BOOLEAN_NULL = null;
+
+    public static final Number NUMBER_NULL = null;
+
+    /*-----------------------------------------------------------IO*/
+
+    public static final float FLOAT_ZERO = 0f;
+
+    public static final double DOUBLE_ZERO = 0D;
 }

@@ -4,6 +4,8 @@ import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
 
+import java.nio.charset.StandardCharsets;
+
 /**
  * [格式化字符串](format string )
  * @description: zh - 格式化字符串
@@ -42,7 +44,7 @@ public class StrFormatter {
                 if (delimIndex > Constant.ONE && strPattern.charAt(delimIndex - Constant.TWO) == Constant.DOUBLE_CHAR_SLASH) {
                     // 转义符之前还有一个转义符，占位符依旧有效
                     sbuf.append(strPattern, handledPosition, delimIndex - Constant.ONE);
-                    sbuf.append(StrUtil.utf8Str(argArray[argIndex]));
+                    sbuf.append(utf8Str(argArray[argIndex]));
                     handledPosition = delimIndex + Constant.TWO;
                 } else {
                     // 占位符被转义
@@ -54,7 +56,7 @@ public class StrFormatter {
             } else {
                 // 正常占位符
                 sbuf.append(strPattern, handledPosition, delimIndex);
-                sbuf.append(StrUtil.utf8Str(argArray[argIndex]));
+                sbuf.append(utf8Str(argArray[argIndex]));
                 handledPosition = delimIndex + Constant.TWO;
             }
         }
@@ -62,5 +64,9 @@ public class StrFormatter {
         sbuf.append(strPattern, handledPosition, strPattern.length());
 
         return sbuf.toString();
+    }
+
+    public static String utf8Str(Object o) {
+        return StrUtil.str(o, StandardCharsets.UTF_8);
     }
 }

@@ -8,6 +8,7 @@ import com.xiaoTools.util.charUtil.CharUtil;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.text.MessageFormat;
 
 /**
  * [字符串工具类](String tool class)
@@ -421,7 +422,17 @@ public class StrUtil {
         return Constant.NEGATIVE_ONE;
     }
 
-
+    /**
+     * [简单将占位符 {} 按照顺序替换为参数](Simply replace the placeholder {} with a parameter in order)
+     * @description: zh - 简单将占位符 {} 按照顺序替换为参数
+     * @description: en - Simply replace the placeholder {} with a parameter in order
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/17 10:11 下午
+     * @param template: 文本模板，被替换的部分用 {} 表示，如果模板为null，返回"null"
+     * @param params: 参数值
+     * @return java.lang.String
+    */
     public static String format(String template, Object... params) {
         if (null == template) {
             return Constant.STRING_NULL;
@@ -432,8 +443,113 @@ public class StrUtil {
         return StrFormatter.format(template.toString(), params);
     }
 
+    /**
+     * [有序的格式化文本，使用{number}做为占位符](Orderly formatted text, using {number} as a placeholder)
+     * @description: zh - 有序的格式化文本，使用{number}做为占位符
+     * @description: en - Orderly formatted text, using {number} as a placeholder
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/17 10:11 下午
+     * @param pattern: 文本格式
+     * @param arguments: 参数
+     * @return java.lang.String
+    */
+    public static String indexedFormat(CharSequence pattern, Object... arguments) {
+        return MessageFormat.format(pattern.toString(), arguments);
+    }
 
-    public static String utf8Str(Object o) {
-        return str(o, StandardCharsets.UTF_8);
+    // 从…开始 ------------------------------------------------------------------------ startWith
+
+    /**
+     * [是否以指定字符串开头，忽略大小写](Whether to start with the specified string, ignoring case)
+     * @description: zh - 是否以指定字符串开头，忽略大小写
+     * @description: en - Whether to start with the specified string, ignoring case
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/17 10:15 下午
+     * @param str: 被监测字符串
+     * @param prefix: 开头字符串
+     * @return boolean
+    */
+    public static boolean startWithIgnoreCase(CharSequence str, CharSequence prefix) {
+        return startWith(str, prefix, true);
+    }
+
+    /**
+     * [是否以指定字符串开头](Whether to start with the specified string)
+     * @description: zh - 是否以指定字符串开头
+     * @description: en - Whether to start with the specified string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/17 10:16 下午
+     * @param str: 被监测字符串
+     * @param prefix: 开头字符串
+     * @param ignoreCase: 是否忽略大小写
+     * @return boolean
+    */
+    public static boolean startWith(CharSequence str, CharSequence prefix, boolean ignoreCase) {
+        return startWith(str, prefix, ignoreCase, false);
+    }
+
+    /**
+     * [是否以指定字符串开头](Whether to start with the specified string)
+     * @description: zh - 是否以指定字符串开头
+     * @description: en - Whether to start with the specified string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/17 10:19 下午
+     * @param str: 被监测字符串
+     * @param prefix: 开头字符串
+     * @param ignoreCase: 是否忽略大小写
+     * @param ignoreEquals: 是否忽略字符串相等的情况
+     * @return boolean
+    */
+    public static boolean startWith(CharSequence str, CharSequence prefix, boolean ignoreCase, boolean ignoreEquals) {
+        if (Constant.NULL == str || Constant.NULL == prefix) {
+            if (!ignoreEquals) {
+                return Constant.FALSE;
+            }
+            return Constant.NULL == str && Constant.NULL == prefix;
+        }
+        boolean isStartWith;
+        if (ignoreCase) {
+            isStartWith = str.toString().toLowerCase().startsWith(prefix.toString().toLowerCase());
+        } else {
+            isStartWith = str.toString().startsWith(prefix.toString());
+        }
+        if (isStartWith) {
+            return (!ignoreEquals) || (!equals(str, prefix, ignoreCase));
+        }
+        return Constant.FALSE;
+    }
+
+    // 比较 ------------------------------------------------------------------------ equals
+
+    /**
+     * [比较两个字符串是否相等。](Compares two strings for equality.)
+     * @description: zh - 比较两个字符串是否相等。
+     * @description: en - Compares two strings for equality.
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/17 10:20 下午
+     * @param str1: 要比较的字符串1
+     * @param str2: 要比较的字符串2
+     * @param ignoreCase: 是否忽略大小写
+     * @return boolean
+    */
+    public static boolean equals(CharSequence str1, CharSequence str2, boolean ignoreCase) {
+        if (Constant.NULL == str1) {
+            // 只有两个都为null才判断相等
+            return str2 == Constant.NULL;
+        }
+        if (Constant.NULL == str2) {
+            // 字符串2空，字符串1非空，直接false
+            return Constant.FALSE;
+        }
+        if (ignoreCase) {
+            return str1.toString().equalsIgnoreCase(str2.toString());
+        } else {
+            return str1.toString().contentEquals(str2);
+        }
     }
 }

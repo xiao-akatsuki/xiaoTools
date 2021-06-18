@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+import java.util.Calendar;
 
 /**
  * [统一常量](Uniform constant)
@@ -69,6 +70,8 @@ public class Constant {
     public static final int FORTY_EIGHT = 48;
 
     public static final int FIFTY = 50;
+
+    public static final int SIXTY = 60;
 
     public static final int SIXTY_TWO = 62;
 
@@ -222,6 +225,16 @@ public class Constant {
 
     public static final String STRING_SPACE = " ";
 
+    public static final String STRING_DAY = "天";
+
+    public static final String STRING_HOUSE = "小时";
+
+    public static final String STRING_MINUTE = "分";
+
+    public static final String STRING_SECOND = "秒";
+
+    public static final String STRING_MILLISECOND = "毫秒";
+
     public static final String STRING_ZERO = "0";
 
     public static final String STRING_ZERO_X = "0x";
@@ -299,4 +312,94 @@ public class Constant {
     public static final float FLOAT_ZERO = 0f;
 
     public static final double DOUBLE_ZERO = 0D;
+
+    /*-----------------------------------------------------------Date*/
+
+    public static final int SUNDAY = Calendar.SUNDAY;
+
+    public static final int MONDAY = Calendar.MONDAY;
+
+    public static final int TUESDAY = Calendar.TUESDAY;
+
+    public static final int WEDNESDAY = Calendar.WEDNESDAY;
+
+    public static final int THURSDAY = Calendar.THURSDAY;
+
+    public static final int FRIDAY = Calendar.FRIDAY;
+
+    public static final int SATURDAY = Calendar.SATURDAY;
+
+    public static final int ERA = Calendar.ERA;
+
+    public static final int YEAR = Calendar.YEAR;
+
+    public static final int MONTH = Calendar.MONTH;
+
+    public static final int WEEK_OF_YEAR = Calendar.WEEK_OF_YEAR;
+
+    public static final int WEEK_OF_MONTH = Calendar.WEEK_OF_MONTH;
+
+    public static final int DAY_OF_MONTH = Calendar.DAY_OF_MONTH;
+
+    public static final int DAY_OF_YEAR = Calendar.DAY_OF_YEAR;
+
+    public static final int DAY_OF_WEEK = Calendar.DAY_OF_WEEK;
+
+    public static final int DAY_OF_WEEK_IN_MONTH = Calendar.DAY_OF_WEEK_IN_MONTH;
+
+    public static final int AM_PM = Calendar.AM_PM;
+
+    public static final int HOUR = Calendar.HOUR;
+
+    public static final int HOUR_OF_DAY = Calendar.HOUR_OF_DAY;
+
+    public static final int MINUTE = Calendar.MINUTE;
+
+    public static final int SECOND = Calendar.SECOND;
+
+    public static final int MILLISECOND = Calendar.MILLISECOND;
+
+    public static final int JANUARY = Calendar.JANUARY;
+
+    public static final int FEBRUARY = Calendar.FEBRUARY;
+
+    public static final int MARCH = Calendar.MARCH;
+
+    public static final int APRIL = Calendar.APRIL;
+
+    public static final int MAY = Calendar.MAY;
+
+    public static final int JUNE = Calendar.JUNE;
+
+    public static final int JULY = Calendar.JULY;
+
+    public static final int AUGUST = Calendar.AUGUST;
+
+    public static final int SEPTEMBER = Calendar.SEPTEMBER;
+
+    public static final int OCTOBER = Calendar.OCTOBER;
+
+    public static final int NOVEMBER = Calendar.NOVEMBER;
+
+    public static final int DECEMBER = Calendar.DECEMBER;
+
+    public static final int UNDECIMBER = Calendar.UNDECIMBER;
+
+    public static final String WEEK_NAME_PRE = "星期";
+
+    public static final String WEEK_SUNDAY = "日";
+
+    public static final String WEEK_ONE = "一";
+
+    public static final String WEEK_TWO = "二";
+
+    public static final String WEEK_THREE = "三";
+
+    public static final String WEEK_FOUR = "四";
+
+    public static final String WEEK_FIVE = "五";
+
+    public static final String WEEK_SIX = "六";
+
+
 }

@@ -3,6 +3,7 @@ package com.xiaoTools.core.convert.numberConverter;
 import com.xiaoTools.core.convert.abstractConverter.AbstractConverter;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.booleanUtil.BooleanUtil;
+import com.xiaoTools.util.dateUtil.DateUtil;
 import com.xiaoTools.util.numUtil.NumUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
 
@@ -145,7 +146,7 @@ public class NumberConverter extends AbstractConverter<Number> {
                 return ByteUtil.bytesToLong((byte[]) value);
             }
             final String valueStr = toStrFunc.apply((value));
-            return StrUtil.isBlank(valueStr) ? null : NumberUtil.parseLong(valueStr);
+            return StrUtil.isBlank(valueStr) ? null : NumUtil.parseLong(valueStr);
         } else if (AtomicLong.class == targetType) {
             final Number number = convert(value, Long.class, toStrFunc);
             if (null != number) {

@@ -608,8 +608,8 @@ public class NumUtil {
 
     /**
      * [解析转换数字字符串为long型数字](Parsing and converting numeric string to long numeric string)
-     * @description: zh - 解析转换数字字符串为long型数字
-     * @description: en - Parsing and converting numeric string to long numeric string
+     * @description: zh - 解析转换数字字符串为double型数字
+     * @description: en - Parsing and converting numeric string to double numeric string
      * @version: V1.0
      * @author XiaoXunYao
      * @since 2021/6/17 8:47 下午
@@ -649,6 +649,31 @@ public class NumUtil {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {
             return parseNumber(number).intValue();
+        }
+    }
+
+    /**
+     * [解析转换数字字符串为long型数字](Parsing and converting numeric string to long numeric string)
+     * @description: zh - 解析转换数字字符串为long型数字
+     * @description: en - Parsing and converting numeric string to long numeric string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/18 11:04 上午
+     * @param number: 数字，支持0x开头、0开头和普通十进制
+     * @return long
+    */
+    public static long parseLong(String number) {
+        if (StrUtil.isBlank(number)) {
+            return Constant.LONG_ZERO;
+        }
+        if (number.startsWith(Constant.STRING_ZERO_X)) {
+            // 0x04表示16进制数
+            return Long.parseLong(number.substring(Constant.TWO), Constant.SIXTEEN);
+        }
+        try {
+            return Long.parseLong(number);
+        } catch (NumberFormatException e) {
+            return parseNumber(number).longValue();
         }
     }
 }

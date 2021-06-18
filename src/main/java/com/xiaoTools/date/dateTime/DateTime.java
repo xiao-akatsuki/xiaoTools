@@ -924,4 +924,165 @@ public class DateTime extends Date {
         }
         return compareTo(date) <= Constant.ZERO;
     }
+
+    /**
+     * [是否在给定日期之后](After a given date)
+     * @description: zh - 是否在给定日期之后
+     * @description: en - After a given date
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/18 8:53 下午
+     * @param date: 日期
+     * @return boolean
+    */
+    public boolean isAfter(Date date) {
+        if (null == date) {
+            throw new NullPointerException("Date to compare is null !");
+        }
+        return compareTo(date) > Constant.ZERO;
+    }
+
+    /**
+     * [是否在给定日期之后或与给定日期相等](Is it after or equal to the given date)
+     * @description: zh - 是否在给定日期之后或与给定日期相等
+     * @description: en - Is it after or equal to the given date
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/18 8:54 下午
+     * @param date: 日期
+     * @return boolean
+    */
+    public boolean isAfterOrEquals(Date date) {
+        if (null == date) {
+            throw new NullPointerException("Date to compare is null !");
+        }
+        return compareTo(date) >= Constant.ZERO;
+    }
+
+    /**
+     * [对象是否可变](Is the object mutable)
+     * @description: zh - 对象是否可变
+     * @description: en - Is the object mutable
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/18 8:55 下午
+     * @return boolean
+    */
+    public boolean isMutable() {
+        return mutable;
+    }
+
+    /**
+     * [设置对象是否可变 如果为不可变对象](Sets whether the object is mutable, if it is immutable)
+     * @description: zh - 设置对象是否可变 如果为不可变对象
+     * @description: en - Sets whether the object is mutable, if it is immutable
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/18 8:55 下午
+     * @param mutable: 是否可变
+     * @return com.xiaoTools.date.dateTime.DateTime
+    */
+    public DateTime setMutable(boolean mutable) {
+        this.mutable = mutable;
+        return this;
+    }
+
+    /**
+     * [获得一周的第一天，默认为周一](Get the first day of the week, default to Monday)
+     * @description: zh - 获得一周的第一天，默认为周一
+     * @description: en - Get the first day of the week, default to Monday
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/18 8:56 下午
+     * @return com.xiaoTools.date.week.Week
+    */
+    public Week getFirstDayOfWeek() {
+        return firstDayOfWeek;
+    }
+
+    /**
+     * [设置一周的第一天](Set the first day of the week)
+     * @description: zh - 设置一周的第一天
+     * @description: en - Set the first day of the week
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/18 8:56 下午
+     * @param firstDayOfWeek: 一周的第一天
+     * @return com.xiaoTools.date.dateTime.DateTime
+    */
+    public DateTime setFirstDayOfWeek(Week firstDayOfWeek) {
+        this.firstDayOfWeek = firstDayOfWeek;
+        return this;
+    }
+
+    /**
+     * [获取时区](Get time zone)
+     * @description: zh - 获取时区
+     * @description: en - Get time zone
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/18 8:57 下午
+     * @return java.util.TimeZone
+    */
+    public TimeZone getTimeZone() {
+        return this.timeZone;
+    }
+
+    /**
+     * [获取时区ID](Get time zone ID)
+     * @description: zh - 获取时区ID
+     * @description: en - Get time zone ID
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/18 8:58 下午
+     * @return java.time.ZoneId
+    */
+    public ZoneId getZoneId() {
+        return this.timeZone.toZoneId();
+    }
+
+    /**
+     * [设置时区](Set time zone)
+     * @description: zh - 设置时区
+     * @description: en - Set time zone
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/18 8:58 下午
+     * @param timeZone: 时区
+     * @return com.xiaoTools.date.dateTime.DateTime
+    */
+    public DateTime setTimeZone(TimeZone timeZone) {
+        this.timeZone = ObjectUtil.defaultIfNull(timeZone, TimeZone.getDefault());
+        return this;
+    }
+
+    /*输出 --------------------------------------------------------------------toString*/
+
+    /**
+     * [转为"yyyy-MM-dd HH:mm:ss" 格式字符串](Convert to "yyyy MM DD HH: mm: SS" format string)
+     * @description: zh - 转为"yyyy-MM-dd HH:mm:ss" 格式字符串
+     * @description: en - Convert to "yyyy MM DD HH: mm: SS" format string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/18 9:02 下午
+     * @return java.lang.String
+    */
+    @Override
+    public String toString() {
+        return toString(this.timeZone);
+    }
+
+    /**
+     * [转为"yyyy-MM-dd HH:mm:ss" 格式字符串](Convert to "yyyy MM DD HH: mm: SS" format string)
+     * @description: zh - 转为"yyyy-MM-dd HH:mm:ss" 格式字符串
+     * @description: en - Convert to "yyyy MM DD HH: mm: SS" format string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/18 9:02 下午
+     * @return java.lang.String
+    */
+    public String toStringDefaultTimeZone() {
+        return toString(TimeZone.getDefault());
+    }
+
 }

@@ -1,6 +1,8 @@
 package com.xiaoTools.date.format.fastDateFormat;
 
+import com.xiaoTools.cache.format.FormatCache;
 import com.xiaoTools.date.format.dateParser.DateParser;
+import com.xiaoTools.date.format.datePrinter.DatePrinter;
 
 import java.io.Serial;
 import java.text.*;
@@ -266,7 +268,7 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
         return CACHE.getDateTimeInstance(dateStyle, timeStyle, timeZone, locale);
     }
 
-    // ----------------------------------------------------------------------- Constructor start
+    // 构造函数----------------------------------------------------------------------- Constructor
     /**
      * 构造
      *
@@ -292,9 +294,9 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
         printer = new FastDatePrinter(pattern, timeZone, locale);
         parser = new FastDateParser(pattern, timeZone, locale, centuryStart);
     }
-    // ----------------------------------------------------------------------- Constructor end
 
-    // ----------------------------------------------------------------------- Format methods
+    //格式化方法----------------------------------------------------------------------- Format methods
+
     @Override
     public StringBuffer format(final Object obj, final StringBuffer toAppendTo, final FieldPosition pos) {
         return toAppendTo.append(printer.format(obj));
@@ -330,7 +332,8 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
         return printer.format(calendar, buf);
     }
 
-    // ----------------------------------------------------------------------- Parsing
+    //解析----------------------------------------------------------------------- Parsing
+
     @Override
     public Date parse(final String source) throws ParseException {
         return parser.parse(source);
@@ -352,6 +355,7 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
     }
 
     // ----------------------------------------------------------------------- Accessors
+
     @Override
     public String getPattern() {
         return printer.getPattern();

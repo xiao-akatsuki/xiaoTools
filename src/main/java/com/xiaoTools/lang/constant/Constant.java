@@ -6,6 +6,8 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
 import java.util.regex.Pattern;
 
 /**
@@ -309,6 +311,10 @@ public class Constant {
     public static final Boolean BOOLEAN_NULL = null;
 
     public static final Number NUMBER_NULL = null;
+
+    public static final TimeZone TIME_ZONE_NULL = null;
+
+    public static final Locale LOCALE_NULL = null;
 
     /*-----------------------------------------------------------IO*/
 

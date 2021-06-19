@@ -6,6 +6,7 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
@@ -82,7 +83,11 @@ public class Constant {
 
     public static final int SIXTY_FOUR = 64;
 
+    public static final int EIGHTY = 80;
+
     public static final int NINETY_SIX = 96;
+
+    public static final int HUNDRED = 100;
 
     public static final int ONE_TWO_EIGHT = 128;
 
@@ -105,6 +110,8 @@ public class Constant {
     public static final int FILE_BYTE = 1444;
 
     public static final int ONE_MEGA_BYTES = 1024;
+
+    public static final int TEN_THOUSAND = 10000;
 
     public static final int HEXADECIMAL_ZERO = 0xFFFFFFFF;
 
@@ -186,6 +193,8 @@ public class Constant {
 
     public static final char DOUBLE_CHAR_SLASH = '\\';
 
+    public static final char CHAR_SLASH_SPOT = '\'';
+
     public static final char CHAR_CR = '\r';
 
     public static final char CHAR_CN = '\n';
@@ -196,17 +205,65 @@ public class Constant {
 
     public static final char CHAR_UP_A = 'A';
 
+    public static final char CHAR_UP_W = 'W';
+
+    public static final char CHAR_DOWN_W = 'w';
+
+    public static final char CHAR_UP_D = 'D';
+
+    public static final char CHAR_DOWN_D = 'd';
+
+    public static final char CHAR_DOWN_H = 'h';
+
+    public static final char CHAR_UP_H = 'H';
+
+    public static final char CHAR_UP_S = 'S';
+
+    public static final char CHAR_DOWN_S = 's';
+
+    public static final char CHAR_DOWN_E = 'e';
+
+    public static final char CHAR_UP_E = 'E';
+
     public static final char CHAR_DOWN_U = 'u';
 
     public static final char CHAR_DOWN_F = 'f';
 
     public static final char CHAR_UP_F = 'F';
 
+    public static final char CHAR_UP_M = 'M';
+
+    public static final char CHAR_DOWN_M = 'm';
+
+    public static final char CHAR_UP_G = 'G';
+
+    public static final char CHAR_DOWN_G = 'g';
+
+    public static final char CHAR_DOWN_X = 'x';
+
+    public static final char CHAR_UP_X = 'X';
+
+    public static final char CHAR_UP_K = 'K';
+
+    public static final char CHAR_DOWN_K = 'k';
+
+    public static final char CHAR_UP_Y = 'Y';
+
+    public static final char CHAR_DOWN_Y = 'y';
+
     public static final char CHAR_UP_Z = 'Z';
+
+    public static final char CHAR_DOWN_Z = 'z';
 
     public static final char CHAR_ZERO = '0';
 
     public static final char CHAR_NINE = '9';
+
+    public static final char CHAR_PLUS = '+';
+
+    public static final char CHAR_COLON = ':';
+
+    public static final char CHAR_POWER = '^';
 
     public static final char CHAR_ONE = 0x01;
 
@@ -276,11 +333,17 @@ public class Constant {
 
     public static final String STRING_NO = "no";
 
+    public static final String STRING_JA = "ja";
+
+    public static final String STRING_JP = "JP";
+
     public static final String ENTER = "\r\n";
 
     public static final String STRING_NULL = null;
 
-    public final static String NORM_MONTH_PATTERN = "yyyy-MM";
+    public static final String NORM_MONTH_PATTERN = "yyyy-MM";
+
+    public static final String STRING_UP_Z = "Z";
 
     /*-----------------------------------------------------------byte*/
 
@@ -315,6 +378,8 @@ public class Constant {
     public static final TimeZone TIME_ZONE_NULL = null;
 
     public static final Locale LOCALE_NULL = null;
+
+    public static final Date DATE_NULL = null;
 
     /*-----------------------------------------------------------IO*/
 

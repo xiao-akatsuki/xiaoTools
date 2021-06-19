@@ -4,7 +4,10 @@ import com.xiaoTools.core.exception.dateException.DateException;
 import com.xiaoTools.date.betweenFormatter.BetweenFormatter;
 import com.xiaoTools.date.dateBetween.DateBetween;
 import com.xiaoTools.date.dateField.DateField;
+import com.xiaoTools.date.datePattern.DatePattern;
 import com.xiaoTools.date.dateUnit.DateUnit;
+import com.xiaoTools.date.format.dateParser.DateParser;
+import com.xiaoTools.date.format.fastDateFormat.FastDateFormat;
 import com.xiaoTools.date.leven.Level;
 import com.xiaoTools.date.month.Month;
 import com.xiaoTools.date.quarter.Quarter;
@@ -16,6 +19,7 @@ import com.xiaoTools.util.objectUtil.ObjectUtil;
 import java.io.Serial;
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -1084,5 +1088,113 @@ public class DateTime extends Date {
     public String toStringDefaultTimeZone() {
         return toString(TimeZone.getDefault());
     }
+
+    /**
+     * [转为"yyyy-MM-dd HH:mm:ss" 格式字符串](Convert to "yyyy MM DD HH: mm: SS" format string)
+     * @description: zh - 转为"yyyy-MM-dd HH:mm:ss" 格式字符串
+     * @description: en - Convert to "yyyy MM DD HH: mm: SS" format string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/19 7:31 上午
+     * @param timeZone: 时区
+     * @return java.lang.String
+    */
+    public String toString(TimeZone timeZone) {
+        if (Constant.NULL != timeZone) {
+            return toString(DateUtil.newSimpleFormat(DatePattern.NORM_DATETIME_PATTERN, Constant.NULL, timeZone));
+        }
+        return toString(DatePattern.NORM_DATETIME_FORMAT);
+    }
+
+    /**
+     * [转为"yyyy-MM-dd" 格式字符串](Convert to "yyyy MM DD" format string)
+     * @description: zh - 转为"yyyy-MM-dd" 格式字符串
+     * @description: en - Convert to "yyyy MM DD" format string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/19 7:32 上午
+     * @return java.lang.String
+    */
+    public String toDateStr() {
+        if (Constant.NULL != this.timeZone) {
+            return toString(DateUtil.newSimpleFormat(DatePattern.NORM_DATE_PATTERN, Constant.NULL, timeZone));
+        }
+        return toString(DatePattern.NORM_DATE_FORMAT);
+    }
+
+    /**
+     * [转为"HH:mm:ss" 格式字符串](Convert to "HH: mm: SS" format string)
+     * @description: zh - 转为"HH:mm:ss" 格式字符串
+     * @description: en - Convert to "HH: mm: SS" format string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/19 7:32 上午
+     * @return java.lang.String
+    */
+    public String toTimeStr() {
+        if (Constant.NULL != this.timeZone) {
+            return toString(DateUtil.newSimpleFormat(DatePattern.NORM_TIME_PATTERN, Constant.NULL, timeZone));
+        }
+        return toString(DatePattern.NORM_TIME_FORMAT);
+    }
+
+    /**
+     * [转为字符串](Convert to string)
+     * @description: zh - 转为字符串
+     * @description: en - Convert to string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/19 7:35 上午
+     * @param format: 日期格式
+     * @return java.lang.String
+    */
+    public String toString(String format) {
+        if (Constant.NULL != this.timeZone) {
+            return toString(DateUtil.newSimpleFormat(format, Constant.NULL, timeZone));
+        }
+        return toString(FastDateFormat.getInstance(format));
+    }
+
+    /**
+     * [转为字符串](Convert to string)
+     * @description: zh - 转为字符串
+     * @description: en - Convert to string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/19 7:36 上午
+     * @param format: DatePrinter 或 FastDateFormat
+     * @return java.lang.String
+    */
+    public String toString(DatePrinter format) {
+        return format.format(this);
+    }
+
+    /**
+     * [转为字符串](Convert to string)
+     * @description: zh - 转为字符串
+     * @description: en - Convert to string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/19 7:36 上午
+     * @param format: SimpleDateFormat
+     * @return java.lang.String
+    */
+    public String toString(DateFormat format) {
+        return format.format(this);
+    }
+
+    /**
+     * [输出精确到毫秒的标准日期形式Constant.NULLtput the standard date form in milliseconds)
+     * @description: zh - 输出精确到毫秒的标准日期形式
+     * @description: en - Output the standard date form in milliseconds
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/19 7:37 上午
+     * @return java.lang.String
+    */
+    public String toMsStr() {
+        return toString(DatePattern.NORM_DATETIME_MS_FORMAT);
+    }
+
 
 }

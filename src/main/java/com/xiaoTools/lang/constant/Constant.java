@@ -6,6 +6,7 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.Calendar;
+import java.util.regex.Pattern;
 
 /**
  * [统一常量](Uniform constant)
@@ -276,6 +277,8 @@ public class Constant {
     public static final String ENTER = "\r\n";
 
     public static final String STRING_NULL = null;
+
+    public final static String NORM_MONTH_PATTERN = "yyyy-MM";
 
     /*-----------------------------------------------------------byte*/
 

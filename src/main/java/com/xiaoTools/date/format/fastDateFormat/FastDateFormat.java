@@ -350,7 +350,7 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
      * @throws NullPointerException if pattern, timeZone, or locale is null.
     */
     protected FastDateFormat(final String pattern, final TimeZone timeZone, final Locale locale) {
-        this(pattern, timeZone, locale, null);
+        this(pattern, timeZone, locale, Constant.DATE_NULL);
     }
 
     /**
@@ -456,8 +456,7 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
         return printer.getMaxLengthEstimate();
     }
 
-    // Basics
-    // -----------------------------------------------------------------------
+    // 基础----------------------------------------------------------------------- Basics
 
     @Override
     public boolean equals(final Object obj) {
@@ -465,7 +464,7 @@ public class FastDateFormat extends Format implements DateParser, DatePrinter {
             return false;
         }
         final FastDateFormat other = (FastDateFormat) obj;
-        // no need to check parser, as it has same invariants as printer
+        //不需要检查解析器，因为它和打印机有相同的不变量
         return printer.equals(other.printer);
     }
 

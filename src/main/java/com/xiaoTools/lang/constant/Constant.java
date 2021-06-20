@@ -187,10 +187,6 @@ public class Constant {
 
     /*-----------------------------------------------------------char*/
 
-    public static final char CHAR_DASH = '-';
-
-    public static final char SINGLE_CHAR_SLASH = '/';
-
     public static final char DOUBLE_CHAR_SLASH = '\\';
 
     public static final char CHAR_SLASH_SPOT = '\'';
@@ -259,11 +255,37 @@ public class Constant {
 
     public static final char CHAR_NINE = '9';
 
+    public static final char CHAR_DASH = '-';
+
+    public static final char SINGLE_CHAR_SLASH = '/';
+
+    public static final char CHAR_VERTICAL_LINE = '|';
+
+    public static final char CHAR_QUESTION_MARK = '?';
+
+    public static final char CHAR_SPOT = '.';
+
     public static final char CHAR_PLUS = '+';
+
+    public static final char CHAR_STAR = '*';
+
+    public static final char CHAR_DOLLAR = '$';
 
     public static final char CHAR_COLON = ':';
 
     public static final char CHAR_POWER = '^';
+
+    public static final char CHAR_LEFT_SMALL_BRACKETS = '(';
+
+    public static final char CHAR_RIGHT_SMALL_BRACKETS = ')';
+
+    public static final char CHAR_LEFT_MIDDLE_BRACKETS = '[';
+
+    public static final char CHAR_RIGHT_MIDDLE_BRACKETS = ']';
+
+    public static final char CHAR_LEFT_BIG_BRACKETS = '{';
+
+    public static final char CHAR_RIGHT_BIG_BRACKETS = '}';
 
     public static final char CHAR_ONE = 0x01;
 
@@ -315,11 +337,25 @@ public class Constant {
 
     public static final String LEFT_BRACKETS = "{";
 
+    public static final String RIGHT_BRACKETS = "}";
+
+    public static final String STRING_SMALL_LEFT_BRACKETS = "(";
+
+    public static final String STRING_SMALL_RIGHT_BRACKETS = ")";
+
+    public static final String STRING_QUESTION_MARK_I_U = "((?iu)";
+
     public static final String SINGLE_STRING_SLASH = "/";
+
+    public static final String STRING_VERTICAL_LINE = "|";
 
     public static final String UTF_8 = "UFT-8";
 
     public static final String GBK = "GBK";
+
+    public static final String GMT = "GMT";
+
+    public static final String UTC = "UTC";
 
     public static final String STRING_TRUE = "true";
 
@@ -342,6 +378,18 @@ public class Constant {
     public static final String STRING_NULL = null;
 
     public static final String NORM_MONTH_PATTERN = "yyyy-MM";
+
+    public static final String RFC_822_TIME_ZONE =  "[+-]\\d{4}";
+
+    public static final String UTC_TIME_ZONE_WITH_OFFSET = "[+-]\\d{2}:\\d{2}";
+
+    public static final String GMT_OPTION = "GMT[+-]\\d{1,2}:\\d{2}";
+
+    public static final String ISO_8601_1_STRATEGY = "(Z|(?:[+-]\\d{2}))";
+
+    public static final String ISO_8601_2_STRATEGY = "(Z|(?:[+-]\\d{2}\\d{2}))";
+
+    public static final String ISO_8601_3_STRATEGY = "(Z|(?:[+-]\\d{2}(?::)\\d{2}))";
 
     public static final String STRING_UP_Z = "Z";
 

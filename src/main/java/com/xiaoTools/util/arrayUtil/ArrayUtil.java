@@ -133,6 +133,11 @@ public class ArrayUtil {
         return indexOf(arrays, value) > Constant.NEGATIVE_ONE;
     }
 
+    public static boolean contains(int[] array, int value) {
+        return indexOf(array, value) > Constant.NEGATIVE_ONE;
+    }
+
+
     /**
      * [数组中是否包含指定元素中的任意一个](Whether the array contains any of the specified elements)
      * @description: zh - 数组中是否包含指定元素中的任意一个
@@ -217,6 +222,28 @@ public class ArrayUtil {
     public static <T> int indexOf(T[] array, Object value) {
         if (Constant.NULL != array) {
             for(int i = Constant.ZERO; i < array.length; ++i) {
+                if (value == array[i]) {
+                    return i;
+                }
+            }
+        }
+        return Constant.NEGATIVE_ONE;
+    }
+
+    /**
+     * [返回数组中指定元素所在位置，未找到返回 -1](Returns the location of the specified element in the array, and - 1 is not found)
+     * @description: zh - 返回数组中指定元素所在位置，未找到返回 -1
+     * @description: en - Returns the location of the specified element in the array, and - 1 is not found
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/20 5:29 下午
+     * @param array: 数组
+     * @param value: 被检查的元素
+     * @return int
+    */
+    public static int indexOf(int[] array, int value) {
+        if (null != array) {
+            for (int i = 0; i < array.length; i++) {
                 if (value == array[i]) {
                     return i;
                 }

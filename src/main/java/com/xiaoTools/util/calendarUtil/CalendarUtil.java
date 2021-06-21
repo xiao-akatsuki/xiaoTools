@@ -6,9 +6,13 @@ import com.xiaoTools.date.dateTime.DateTime;
 import com.xiaoTools.date.month.Month;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.dateUtil.DateUtil;
+import com.xiaoTools.util.strUtil.StrUtil;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedHashSet;
 
 /**
  * [针对Calendar 对象封装工具类](Encapsulating tool classes for calendar objects)
@@ -425,5 +429,146 @@ public class CalendarUtil {
         return cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&
                 cal1.get(Calendar.MONTH) == cal2.get(Calendar.MONTH);
     }
+
+    /**
+     * [检查两个Calendar时间戳是否相同。](Check that the two calendar timestamps are the same.)
+     * @description: zh - 检查两个Calendar时间戳是否相同。
+     * @description: en - Check that the two calendar timestamps are the same.
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 7:35 上午
+     * @param date1: 时间1
+     * @param date2: 时间2
+     * @return boolean
+    */
+    public static boolean isSameInstant(Calendar date1, Calendar date2) {
+        return Constant.NULL == date1 ? Constant.NULL == date2 : Constant.NULL == date2 ? Constant.FALSE : date1.getTimeInMillis() == date2.getTimeInMillis();
+    }
+
+    /**
+     * [获得指定日期区间内的年份和季度](Gets the year and quarter in the specified date range)
+     * @description: zh - 获得指定日期区间内的年份和季度
+     * @description: en - Gets the year and quarter in the specified date range
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 7:38 上午
+     * @param startDate: 起始日期（包含）
+     * @param endDate: 结束日期（包含）
+     * @return java.util.LinkedHashSet<java.lang.String>
+    */
+    public static LinkedHashSet<String> yearAndQuarter(long startDate, long endDate) {
+        LinkedHashSet<String> quarters = new LinkedHashSet<>();
+        final Calendar cal = calendar(startDate);
+        while (startDate <= endDate) {
+            // 如果开始时间超出结束时间，让结束时间为开始时间，处理完后结束循环
+            quarters.add(yearAndQuarter(cal));
+            cal.add(Calendar.MONTH, Constant.THREE);
+            startDate = cal.getTimeInMillis();
+        }
+        return quarters;
+    }
+
+    /**
+     * [获得指定日期年份和季度](Get the specified date, year and quarter)
+     * @description: zh - 获得指定日期年份和季度
+     * @description: en - Get the specified date, year and quarter
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 7:43 上午
+     * @param cal: 日期
+     * @return java.lang.String
+    */
+    public static String yearAndQuarter(Calendar cal) {
+        return StrUtil.builder().append(cal.get(Calendar.YEAR)).append(cal.get(Calendar.MONTH) / Constant.THREE + Constant.ONE).toString();
+    }
+
+    /**
+     * [获取指定日期字段的最小值，例如分钟的最小值是0](Gets the minimum value of the specified date field. For example, the minimum value of minute is 0)
+     * @description: zh - 获取指定日期字段的最小值，例如分钟的最小值是0
+     * @description: en - Gets the minimum value of the specified date field. For example, the minimum value of minute is 0
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 7:46 上午
+     * @param calendar: Calendar
+     * @param dateField:  DateField
+     * @return int
+    */
+    public static int getBeginValue(Calendar calendar, DateField dateField) {
+        return getBeginValue(calendar, dateField.getValue());
+    }
+
+    /**
+     * [获取指定日期字段的最小值，例如分钟的最小值是0](Gets the minimum value of the specified date field. For example, the minimum value of minute is 0)
+     * @description: zh - 获取指定日期字段的最小值，例如分钟的最小值是0
+     * @description: en - Gets the minimum value of the specified date field. For example, the minimum value of minute is 0
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 7:47 上午
+     * @param calendar: Calendar
+     * @param dateField: DateField
+     * @return int
+    */
+    public static int getBeginValue(Calendar calendar, int dateField) {
+        return Calendar.DAY_OF_WEEK == dateField ? calendar.getFirstDayOfWeek() : calendar.getActualMinimum(dateField);
+    }
+
+    /**
+     * [获取指定日期字段的最大值](Gets the maximum value of the specified date field)
+     * @description: zh - 获取指定日期字段的最大值
+     * @description: en - Gets the maximum value of the specified date field
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 7:51 上午
+     * @param calendar: Calendar
+     * @param dateField: DateField
+     * @return int
+    */
+    public static int getEndValue(Calendar calendar, DateField dateField) {
+        return getEndValue(calendar, dateField.getValue());
+    }
+
+    /**
+     * [获取指定日期字段的最大值](Gets the maximum value of the specified date field)
+     * @description: zh - 获取指定日期字段的最大值
+     * @description: en - Gets the maximum value of the specified date field
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 7:52 上午
+     * @param calendar: Calendar
+     * @param dateField: DateField
+     * @return int
+    */
+    public static int getEndValue(Calendar calendar, int dateField) {
+        return Calendar.DAY_OF_WEEK == dateField ? (calendar.getFirstDayOfWeek() + Constant.SIX) % Constant.SEVEN : calendar.getActualMaximum(dateField);
+    }
+
+    /**
+     * [CalendarInstant 对象](CalendarInstant object)
+     * @description: zh - CalendarInstant 对象
+     * @description: en - CalendarInstant object
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 7:57 上午
+     * @param calendar: Date对象
+     * @return java.time.Instant
+    */
+    public static Instant toInstant(Calendar calendar) {
+        return Constant.NULL == calendar ? Constant.INSTANT_NULL : calendar.toInstant();
+    }
+
+    /**
+     * [Calendar 转换为 LocalDateTime，使用系统默认时区](Calendar is converted to LocalDateTime and the system default time zone is used)
+     * @description: zh - Calendar 转换为 LocalDateTime，使用系统默认时区
+     * @description: en - Calendar is converted to LocalDateTime and the system default time zone is used
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 7:59 上午
+     * @param calendar: Calendar
+     * @return java.time.LocalDateTime
+    */
+    public static LocalDateTime toLocalDateTime(Calendar calendar) {
+        return LocalDateTime.ofInstant(calendar.toInstant(), calendar.getTimeZone().toZoneId());
+    }
+
 
 }

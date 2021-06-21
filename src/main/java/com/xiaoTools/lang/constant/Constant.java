@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -464,6 +465,8 @@ public class Constant {
     public static final Locale LOCALE_NULL = null;
 
     public static final Date DATE_NULL = null;
+
+    public static final Instant INSTANT_NULL = null;
 
     /*-----------------------------------------------------------IO*/
 

@@ -243,6 +243,19 @@ public class StrUtil {
     }
 
     /**
+     * [创建StringBuilder对象](Create StringBuilder object)
+     * @description: zh - 创建StringBuilder对象
+     * @description: en - Create StringBuilder object
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 7:40 上午
+     * @return java.lang.StringBuilder
+    */
+    public static StringBuilder builder() {
+        return new StringBuilder();
+    }
+
+    /**
      * [删除后缀](Delete suffix)
      * @description: zh - 删除字符串中指定的后缀
      * @description: en - Removes the suffix specified in the string

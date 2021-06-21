@@ -1,5 +1,6 @@
 package com.xiaoTools.util.calendarUtil;
 
+import com.xiaoTools.core.convert.formatter.numberChineseFormatter.NumberChineseFormatter;
 import com.xiaoTools.core.exception.dateException.DateException;
 import com.xiaoTools.date.dateField.DateField;
 import com.xiaoTools.date.dateModifier.DateModifier;
@@ -7,6 +8,7 @@ import com.xiaoTools.date.dateTime.DateTime;
 import com.xiaoTools.date.format.fastDateParser.FastDateParser;
 import com.xiaoTools.date.month.Month;
 import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.util.compareUtil.CompareUtil;
 import com.xiaoTools.util.dateUtil.DateUtil;
 import com.xiaoTools.util.objectUtil.ObjectUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
@@ -414,6 +416,21 @@ public class CalendarUtil {
     }
 
     /**
+     * [修改日期为某个时间字段结束时间](The modification date is the end time of a time field)
+     * @description: zh - 修改日期为某个时间字段结束时间
+     * @description: en - The modification date is the end time of a time field
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 9:11 上午
+     * @param calendar: Calendar
+     * @param dateField: 时间字段
+     * @return java.util.Calendar
+    */
+    public static Calendar ceiling(Calendar calendar, DateField dateField) {
+        return DateModifier.modify(calendar, dateField.getValue(), DateModifier.ModifyType.CEILING);
+    }
+
+    /**
      * [比较两个日期是否为同一月](Compare two dates for the same month)
      * @description: zh - 比较两个日期是否为同一月
      * @description: en - Compare two dates for the same month
@@ -638,6 +655,41 @@ public class CalendarUtil {
             age--;
         }
         return age;
+    }
+
+    public static String formatChineseDate(Calendar calendar, boolean withTime) {
+        final StringBuilder result = StrUtil.builder();
+        // 年
+        String year = String.valueOf(calendar.get(Calendar.YEAR));
+        final int length = year.length();
+        for (int i = Constant.ZERO; i < length; i++) {
+            result.append(NumberChineseFormatter.numberCharToChinese(year.charAt(i), Constant.FALSE));
+        }
+        result.append(Constant.CHAR_YEAR);
+        // 月
+        int month = calendar.get(Calendar.MONTH) + Constant.ONE;
+        result.append(NumberChineseFormatter.format(month, Constant.FALSE));
+        result.append(Constant.CHAR_MONTH);
+        // 日
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        result.append(NumberChineseFormatter.format(day, Constant.FALSE));
+        result.append(Constant.CHAR_DAY);
+        if (withTime) {
+            // 时
+            int hour = calendar.get(Calendar.HOUR_OF_DAY);
+            result.append(NumberChineseFormatter.format(hour, Constant.FALSE));
+            result.append(Constant.CHAR_TIME);
+            // 分
+            int minute = calendar.get(Calendar.MINUTE);
+            result.append(NumberChineseFormatter.format(minute, Constant.FALSE));
+            result.append(Constant.CHAR_BRANCH);
+            // 秒
+            int second = calendar.get(Calendar.SECOND);
+            result.append(NumberChineseFormatter.format(second, Constant.FALSE));
+            result.append(Constant.CHAR_SECOND);
+        }
+
+        return result.toString().replace(Constant.CHAR_CHINA_ZERO, Constant.CHAR_NUM_ZERO);
     }
 
     /**

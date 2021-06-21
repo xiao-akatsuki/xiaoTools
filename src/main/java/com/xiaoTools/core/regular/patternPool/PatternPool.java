@@ -27,6 +27,11 @@ public class PatternPool {
     public final static Pattern WORD = Pattern.compile("[a-zA-Z]+");
 
     /**
+     * 分组
+     */
+    public final static Pattern GROUP_VAR = Pattern.compile("\\$(\\d+)");
+
+    /**
      * IP v4
      */
     public final static Pattern IPV4 = Pattern.compile("\\b((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\b");
@@ -109,13 +114,84 @@ public class PatternPool {
     */
     public final static Pattern REGEX_NORM = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}(\\s\\d{1,2}:\\d{1,2}(:\\d{1,2})?)?(.\\d{1,3})?");
 
-
+    /*方法-----------------------------------------------------------Method*/
 
     /**
      * [Pattern池](Pattern pool)
      */
     private static final SimpleCache<RegexWithFlag, Pattern> POOL = new SimpleCache<>();
 
+    /**
+     * [先从Pattern池中查找正则对应的Pattern，找不到则编译正则表达式并入池](First, find the pattern corresponding to the regular expression from the pattern pool. If not, compile the regular expression into the pool)
+     * @description: zh - 先从Pattern池中查找正则对应的Pattern，找不到则编译正则表达式并入池
+     * @description: en - First, find the pattern corresponding to the regular expression from the pattern pool. If not, compile the regular expression into the pool
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 7:01 下午
+     * @param regex: 正则表达式
+     * @return java.util.regex.Pattern
+    */
+    public static Pattern get(String regex) {
+        return get(regex, 0);
+    }
+
+    /**
+     * [先从Pattern池中查找正则对应的Pattern，找不到则编译正则表达式并入池。](First, find the pattern corresponding to the regular expression from the pattern pool. If not, compile the regular expression into the pool.)
+     * @description: zh - 先从Pattern池中查找正则对应的Pattern，找不到则编译正则表达式并入池。
+     * @description: en - First, find the pattern corresponding to the regular expression from the pattern pool. If not, compile the regular expression into the pool.
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 7:04 下午
+     * @param regex: 正则表达式
+     * @param flags: 正则标识位集合 Pattern
+     * @return java.util.regex.Pattern
+    */
+    public static Pattern get(String regex, int flags) {
+        final RegexWithFlag regexWithFlag = new RegexWithFlag(regex, flags);
+
+        Pattern pattern = POOL.get(regexWithFlag);
+        if (null == pattern) {
+            pattern = Pattern.compile(regex, flags);
+            POOL.put(regexWithFlag, pattern);
+        }
+        return pattern;
+    }
+
+    /**
+     * [移除缓存](remove cache)
+     * @description: zh - 移除缓存
+     * @description: en - remove cache
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 7:10 下午
+     * @param regex: 正则
+     * @param flags: 标识
+     * @return java.util.regex.Pattern
+    */
+    public static Pattern remove(String regex, int flags) {
+        return POOL.remove(new RegexWithFlag(regex, flags));
+    }
+
+    /**
+     * [清空缓存池](Clear cache pool)
+     * @description: zh - 清空缓存池
+     * @description: en - Clear cache pool
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 7:11 下午
+    */
+    public static void clear() {
+        POOL.clear();
+    }
+
+    /**
+     * [正则表达式和正则标识位的包装](Packaging of regular expressions and regular identifier bits)
+     * @description: zh - 正则表达式和正则标识位的包装
+     * @description: en - Packaging of regular expressions and regular identifier bits
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 7:06 下午
+    */
     private static class RegexWithFlag {
         private final String regex;
         private final int flag;

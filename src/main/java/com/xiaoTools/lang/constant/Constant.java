@@ -6,10 +6,10 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.time.Instant;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -57,6 +57,8 @@ public class Constant {
     public static final int SIXTEEN = 16;
 
     public static final int SEVENTEEN = 17;
+
+    public static final int TWENTY = 20;
 
     public static final int TWENTY_THREE = 23;
 
@@ -115,6 +117,8 @@ public class Constant {
     public static final int ONE_MEGA_BYTES = 1024;
 
     public static final int TEN_THOUSAND = 10000;
+
+    public static final int ONE_HUNDRED_MILLION = 100000000;
 
     public static final int HEXADECIMAL_ZERO = 0xFFFFFFFF;
 
@@ -176,6 +180,10 @@ public class Constant {
 
     public static final double E = Math.E;
 
+    public static final double NUMBER_SUPPORT_START = 99999999999999.99;
+
+    public static final double NUMBER_SUPPORT_END = -99999999999999.99;
+
     /*-----------------------------------------------------------entity*/
 
     public static final Object NULL = null;
@@ -199,6 +207,22 @@ public class Constant {
     public static final char CHAR_CN = '\n';
 
     public static final char CHAR_CT = '\t';
+
+    public static final char CHAR_YEAR = '年';
+
+    public static final char CHAR_MONTH = '月';
+
+    public static final char CHAR_DAY = '日';
+
+    public static final char CHAR_TIME = '时';
+
+    public static final char CHAR_BRANCH = '分';
+
+    public static final char CHAR_SECOND = '秒';
+
+    public static final char CHAR_CHINA_ZERO = '零';
+
+    public static final char CHAR_NUM_ZERO = '〇';
 
     public static final char CHAR_DOWN_A = 'a';
 
@@ -336,7 +360,11 @@ public class Constant {
 
     public static final String BRACKETS = "{}";
 
+    public static final String STRING_PLUS = "+";
+
     public static final String DOUBLE_BRACKETS = "{}: {}";
+
+    public static final String STRING_S_ONE_TWO = "[S]{1,2}";
 
     public static final String LEFT_BRACKETS = "{";
 
@@ -380,6 +408,10 @@ public class Constant {
 
     public static final String STRING_NULL = null;
 
+    public static final String STRING_HOUR_OF_DAY = "HourOfDay";
+
+    public static final String STRING_YEAR_OF_ERA = "YearOfEra";
+
     public static final String NORM_MONTH_PATTERN = "yyyy-MM";
 
     public static final String SIMPLE_MONTH_PATTERN = "yyyyMM";
@@ -416,6 +448,8 @@ public class Constant {
 
     public static final String UTC_MS_WITH_ZONE_OFFSET_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
 
+    public static final String PURE_DATETIME_PATTERN = "yyyyMMddHHmmss";
+
     public static final String RFC_822_TIME_ZONE =  "[+-]\\d{4}";
 
     public static final String UTC_TIME_ZONE_WITH_OFFSET = "[+-]\\d{2}:\\d{2}";
@@ -428,7 +462,13 @@ public class Constant {
 
     public static final String ISO_8601_3_STRATEGY = "(Z|(?:[+-]\\d{2}(?::)\\d{2}))";
 
+    public static final String STRING_REGULAR_CHINA = "[\u4E00-\u9FFF]";
+
     public static final String STRING_UP_Z = "Z";
+
+    public static final String STRING_DOLLAR = "$";
+
+    public static final String STRING_NULL_OUT = "null";
 
     /*-----------------------------------------------------------byte*/
 
@@ -467,6 +507,14 @@ public class Constant {
     public static final Date DATE_NULL = null;
 
     public static final Instant INSTANT_NULL = null;
+
+    public static final LocalDateTime LOCAL_DATE_TIME_NULL = null;
+
+    public static final DateTimeFormatter DATE_TIME_FORMATTER_NULL = null;
+
+    public static final LocalDate LOCAL_DATE_NULL = null;
+
+    public static final List<String> LIST_STRING_NULL = null;
 
     /*-----------------------------------------------------------IO*/
 

@@ -6,7 +6,9 @@ import com.xiaoTools.date.quarter.Quarter;
 import com.xiaoTools.date.week.Week;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.calendarUtil.CalendarUtil;
+import com.xiaoTools.util.localDateTimeUtil.LocalDateTimeUtil;
 
+import java.time.LocalDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.Calendar;
 import java.util.Date;
@@ -578,5 +580,11 @@ public class DateUtil extends CalendarUtil {
             return new LinkedHashSet<>(Constant.ZERO);
         }
         return yearAndQuarter(startDate.getTime(), endDate.getTime());
+    }
+
+    /*格式化-----------------------------------------------------------Format*/
+
+    public static String formatLocalDateTime(LocalDateTime localDateTime) {
+        return LocalDateTimeUtil.formatNormal(localDateTime);
     }
 }

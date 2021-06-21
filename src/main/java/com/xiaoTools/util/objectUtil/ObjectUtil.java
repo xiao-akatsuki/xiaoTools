@@ -1,6 +1,7 @@
 package com.xiaoTools.util.objectUtil;
 
 import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.util.compareUtil.CompareUtil;
 import com.xiaoTools.util.numUtil.NumUtil;
 
 import java.lang.reflect.Array;
@@ -144,6 +145,37 @@ public class ObjectUtil {
     */
     public static <T> T defaultIfNull(final T object, final T defaultValue) {
         return (Constant.NULL != object) ? object : defaultValue;
+    }
+
+    /**
+     * [null安全的对象比较，null对象排在末尾](Null safe object comparison, null objects at the end)
+     * @description: zh - null安全的对象比较，null对象排在末尾
+     * @description: en - Null safe object comparison, null objects at the end
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 8:06 下午
+     * @param c1: 对象1，可以为null
+     * @param c2: 对象2，可以为null
+     * @return int
+    */
+    public static <T extends Comparable<? super T>> int compare(T c1, T c2) {
+        return CompareUtil.compare(c1, c2);
+    }
+
+    /**
+     * [null安全的对象比较](Comparison of null safe objects)
+     * @description: zh - null安全的对象比较
+     * @description: en - Comparison of null safe objects
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 8:08 下午
+     * @param c1: 对象1，可以为null
+     * @param c2: 对象2，可以为null
+     * @param nullGreater: 当被比较对象为null时是否排在前面
+     * @return int
+    */
+    public static <T extends Comparable<? super T>> int compare(T c1, T c2, boolean nullGreater) {
+        return CompareUtil.compare(c1, c2, nullGreater);
     }
 
 

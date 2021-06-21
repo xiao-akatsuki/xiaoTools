@@ -1,18 +1,20 @@
 package com.xiaoTools.util.calendarUtil;
 
+import com.xiaoTools.core.exception.dateException.DateException;
 import com.xiaoTools.date.dateField.DateField;
 import com.xiaoTools.date.dateModifier.DateModifier;
 import com.xiaoTools.date.dateTime.DateTime;
+import com.xiaoTools.date.format.fastDateParser.FastDateParser;
 import com.xiaoTools.date.month.Month;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.dateUtil.DateUtil;
+import com.xiaoTools.util.objectUtil.ObjectUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
 
+import java.text.ParsePosition;
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.LinkedHashSet;
+import java.util.*;
 
 /**
  * [针对Calendar 对象封装工具类](Encapsulating tool classes for calendar objects)
@@ -570,5 +572,139 @@ public class CalendarUtil {
         return LocalDateTime.ofInstant(calendar.toInstant(), calendar.getTimeZone().toZoneId());
     }
 
+    /**
+     * [null 安全的 Calendar 比较，null小于任何日期](Null safe Calendar comparison, null is less than any date)
+     * @description: zh - null 安全的 Calendar 比较，null小于任何日期
+     * @description: en - Null safe Calendar comparison, null is less than any date
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 8:19 上午
+     * @param calendar1: 日期1
+     * @param calendar2: 日期2
+     * @return int
+    */
+    public static int compare(Calendar calendar1, Calendar calendar2) {
+        return CompareUtil.compare(calendar1, calendar2);
+    }
 
+    /**
+     * [计算相对于 dateToCompare 的年龄，长用于计算指定生日在某年的年龄](Calculate the age relative to dateToCompare. Length is used to calculate the age of a specified birthday in a year)
+     * @description: zh - 计算相对于 dateToCompare 的年龄，长用于计算指定生日在某年的年龄
+     * @description: en - Calculate the age relative to dateToCompare. Length is used to calculate the age of a specified birthday in a year
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 8:20 上午
+     * @param birthday: 生日
+     * @param dateToCompare: 需要对比的日期
+     * @return int
+    */
+    public static int age(Calendar birthday, Calendar dateToCompare) {
+        return age(birthday.getTimeInMillis(), dateToCompare.getTimeInMillis());
+    }
+
+    /**
+     * [计算相对于 dateToCompare 的年龄，长用于计算指定生日在某年的年龄](Calculate the age relative to dateToCompare. Length is used to calculate the age of a specified birthday in a year)
+     * @description: zh - 计算相对于 dateToCompare 的年龄，长用于计算指定生日在某年的年龄
+     * @description: en - Calculate the age relative to dateToCompare. Length is used to calculate the age of a specified birthday in a year
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 8:25 上午
+     * @param birthday: 生日
+     * @param dateToCompare: 需要对比的日期
+     * @return int
+    */
+    protected static int age(long birthday, long dateToCompare) {
+        if (birthday > dateToCompare) {
+            throw new IllegalArgumentException("Birthday is after dateToCompare!");
+        }
+        final Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(dateToCompare);
+        final int year = cal.get(Calendar.YEAR);
+        final int month = cal.get(Calendar.MONTH);
+        final int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+        final boolean isLastDayOfMonth = dayOfMonth == cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        cal.setTimeInMillis(birthday);
+        int age = year - cal.get(Calendar.YEAR);
+        final int monthBirth = cal.get(Calendar.MONTH);
+        if (month == monthBirth) {
+            final int dayOfMonthBirth = cal.get(Calendar.DAY_OF_MONTH);
+            final boolean isLastDayOfMonthBirth = dayOfMonthBirth == cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+            if ((!isLastDayOfMonth || !isLastDayOfMonthBirth) && dayOfMonth < dayOfMonthBirth) {
+                // 如果生日在当月，但是未达到生日当天的日期，年龄减一
+                age--;
+            }
+        } else if (month < monthBirth) {
+            // 如果当前月份未达到生日的月份，年龄计算减一
+            age--;
+        }
+        return age;
+    }
+
+    /**
+     * [通过给定的日期格式解析日期时间字符串](Parse the date time string through the given date format)
+     * @description: zh - 通过给定的日期格式解析日期时间字符串
+     * @description: en - Parse the date time string through the given date format
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 8:31 上午
+     * @param str: 日期时间字符串，非空
+     * @param locale: 地区，当为null时使用Locale.getDefault()
+     * @param parsePatterns: 需要尝试的日期时间格式数组，非空, 见SimpleDateFormat
+     * @return java.util.Calendar
+    */
+    public static Calendar parseByPatterns(String str, Locale locale, String... parsePatterns) throws DateException {
+        return parseByPatterns(str, locale, Constant.TRUE, parsePatterns);
+    }
+
+    /**
+     * [通过给定的日期格式解析日期时间字符串。](Parses the date time string through the given date format.)
+     * @description: zh - 通过给定的日期格式解析日期时间字符串。
+     * @description: en - Parses the date time string through the given date format.
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 8:32 上午
+     * @param str: 日期时间字符串
+     * @param parsePatterns: 需要尝试的日期时间格式数组
+     * @return java.util.Calendar
+    */
+    public static Calendar parseByPatterns(String str, String... parsePatterns) throws DateException {
+        return parseByPatterns(str, Constant.LOCALE_NULL, parsePatterns);
+    }
+
+    /**
+     * [通过给定的日期格式解析日期时间字符串](Parse the date time string through the given date format)
+     * @description: zh - 通过给定的日期格式解析日期时间字符串
+     * @description: en - Parse the date time string through the given date format
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/21 8:29 上午
+     * @param str: 日期时间字符串，非空
+     * @param locale: 地区，当为null时使用Locale.getDefault()
+     * @param lenient: 日期时间解析是否使用严格模式
+     * @param parsePatterns: 需要尝试的日期时间格式数组，非空, 见SimpleDateFormat
+     * @return java.util.Calendar
+    */
+    public static Calendar parseByPatterns(String str, Locale locale, boolean lenient, String... parsePatterns) throws DateException {
+        if (str == Constant.NULL || parsePatterns == Constant.NULL) {
+            throw new IllegalArgumentException("Date and Patterns must not be null");
+        }
+        final TimeZone tz = TimeZone.getDefault();
+        final Locale lcl = ObjectUtil.defaultIfNull(locale, Locale.getDefault());
+        final ParsePosition pos = new ParsePosition(Constant.ZERO);
+        final Calendar calendar = Calendar.getInstance(tz, lcl);
+        calendar.setLenient(lenient);
+        for (final String parsePattern : parsePatterns) {
+            final FastDateParser fdp = new FastDateParser(parsePattern, tz, lcl);
+            calendar.clear();
+            try {
+                if (fdp.parse(str, pos, calendar) && pos.getIndex() == str.length()) {
+                    return calendar;
+                }
+            } catch (final IllegalArgumentException ignore) {
+                // leniency is preventing calendar from being set
+            }
+            pos.setIndex(Constant.ZERO);
+        }
+        throw new DateException("Unable to parse the date: {}", str);
+    }
 }

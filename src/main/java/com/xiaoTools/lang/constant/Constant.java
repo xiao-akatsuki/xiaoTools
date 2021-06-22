@@ -1,5 +1,7 @@
 package com.xiaoTools.lang.constant;
 
+import com.xiaoTools.date.dateTime.DateTime;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -517,6 +519,8 @@ public class Constant {
     public static final LocalDate LOCAL_DATE_NULL = null;
 
     public static final List<String> LIST_STRING_NULL = null;
+
+    public static final DateTime DATE_TIME_NULL = null;
 
     /*-----------------------------------------------------------IO*/
 

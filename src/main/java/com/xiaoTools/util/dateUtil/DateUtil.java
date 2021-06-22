@@ -1,6 +1,7 @@
 package com.xiaoTools.util.dateUtil;
 
 import com.xiaoTools.core.exception.dateException.DateException;
+import com.xiaoTools.core.regular.patternPool.PatternPool;
 import com.xiaoTools.date.datePattern.DatePattern;
 import com.xiaoTools.date.dateTime.DateTime;
 import com.xiaoTools.date.format.dateParser.DateParser;
@@ -10,7 +11,9 @@ import com.xiaoTools.date.quarter.Quarter;
 import com.xiaoTools.date.week.Week;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.calendarUtil.CalendarUtil;
+import com.xiaoTools.util.charUtil.CharUtil;
 import com.xiaoTools.util.localDateTimeUtil.LocalDateTimeUtil;
+import com.xiaoTools.util.numUtil.NumUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.text.DateFormat;
@@ -18,6 +21,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
 import java.util.*;
+import java.util.regex.Matcher;
 
 /**
  * [时间工具类](Time tools)
@@ -939,5 +943,120 @@ public class DateUtil extends CalendarUtil {
         return Constant.ONE == StrUtil.count(timeString, Constant.CHAR_COLON) ? parse(timeString, DatePattern.NORM_DATETIME_MINUTE_PATTERN) : parse(timeString, DatePattern.NORM_DATETIME_FORMAT);
     }
 
+    /**
+     * [解析UTC时间](Resolve UTC time)
+     * @description: zh - 解析UTC时间
+     * @description: en - Resolve UTC time
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/23 7:48 上午
+     * @param utcString: UTC时间
+     * @return com.xiaoTools.date.dateTime.DateTime
+    */
+    public static DateTime parseUTC(String utcString) {
+        if (utcString == Constant.NULL) { return Constant.DATE_TIME_NULL; }
+        int length = utcString.length();
+        if (StrUtil.contains(utcString, Constant.CHAR_UP_Z)) {
+            if (length == DatePattern.UTC_PATTERN.length() - Constant.FOUR) {
+                // 格式类似：2018-09-13T05:34:31Z，-4表示减去4个单引号的长度
+                return parse(utcString, DatePattern.UTC_FORMAT);
+            }
+            final int patternLength = DatePattern.UTC_MS_PATTERN.length();
+            // 格式类似：2018-09-13T05:34:31.999Z，-4表示减去4个单引号的长度
+            // -4 ~ -6范围表示匹配毫秒1~3位的情况
+            if (length <= patternLength - Constant.FOUR && length >= patternLength - Constant.SIX) {
+                return parse(utcString, DatePattern.UTC_MS_FORMAT);
+            }
+        } else {
+            if (length == DatePattern.UTC_WITH_ZONE_OFFSET_PATTERN.length() + Constant.TWO || length == DatePattern.UTC_WITH_ZONE_OFFSET_PATTERN.length() + Constant.THREE) {
+                // 格式类似：2018-09-13T05:34:31+0800 或 2018-09-13T05:34:31+08:00
+                return parse(utcString, DatePattern.UTC_WITH_ZONE_OFFSET_FORMAT);
+            } else if (length == DatePattern.UTC_MS_WITH_ZONE_OFFSET_PATTERN.length() + Constant.TWO || length == DatePattern.UTC_MS_WITH_ZONE_OFFSET_PATTERN.length() + Constant.THREE) {
+                // 格式类似：2018-09-13T05:34:31.999+0800 或 2018-09-13T05:34:31.999+08:00
+                return parse(utcString, DatePattern.UTC_MS_WITH_ZONE_OFFSET_FORMAT);
+            } else if (length == DatePattern.UTC_SIMPLE_PATTERN.length() - Constant.TWO) {
+                // 格式类似：2018-09-13T05:34:31
+                return parse(utcString, DatePattern.UTC_SIMPLE_FORMAT);
+            } else if (StrUtil.contains(utcString, Constant.CHAR_SPOT)){
+                // 可能为：  2021-03-17T06:31:33.99
+                return parse(utcString, DatePattern.UTC_SIMPLE_MS_FORMAT);
+            }
+        }
+        // 没有更多匹配的时间格式
+        throw new DateException("No format fit for date String [{}] !", utcString);
+    }
 
+    /**
+     * [解析CST时间](Analysis of CST time)
+     * @description: zh - 解析CST时间
+     * @description: en - Analysis of CST time
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/23 7:51 上午
+     * @param cstString: UTC时间
+     * @return com.xiaoTools.date.dateTime.DateTime
+    */
+    public static DateTime parseCST(CharSequence cstString) {
+        return cstString == Constant.NULL ? Constant.DATE_TIME_NULL : parse(cstString, DatePattern.JDK_DATETIME_FORMAT);
+    }
+
+    public static DateTime parse(CharSequence dateCharSequence) {
+        if (StrUtil.isBlank(dateCharSequence)) {
+            return null;
+        }
+        String dateStr = dateCharSequence.toString();
+        // 去掉两边空格并去掉中文日期中的“日”和“秒”，以规范长度
+        dateStr = StrUtil.removeAll(dateStr.trim(), '日', '秒');
+        int length = dateStr.length();
+
+        if (NumUtil.isNumber(dateStr)) {
+            // 纯数字形式
+            if (length == DatePattern.PURE_DATETIME_PATTERN.length()) {
+                return parse(dateStr, DatePattern.PURE_DATETIME_FORMAT);
+            } else if (length == DatePattern.PURE_DATETIME_MS_PATTERN.length()) {
+                return parse(dateStr, DatePattern.PURE_DATETIME_MS_FORMAT);
+            } else if (length == DatePattern.PURE_DATE_PATTERN.length()) {
+                return parse(dateStr, DatePattern.PURE_DATE_FORMAT);
+            } else if (length == DatePattern.PURE_TIME_PATTERN.length()) {
+                return parse(dateStr, DatePattern.PURE_TIME_FORMAT);
+            }
+        } else if (ReUtil.isMatch(PatternPool.TIME, dateStr)) {
+            // HH:mm:ss 或者 HH:mm 时间格式匹配单独解析
+            return parseTimeToday(dateStr);
+        } else if (StrUtil.containsAnyIgnoreCase(dateStr, wtb)) {
+            // JDK的Date对象toString默认格式，类似于：
+            // Tue Jun 4 16:25:15 +0800 2019
+            // Thu May 16 17:57:18 GMT+08:00 2019
+            // Wed Aug 01 00:00:00 CST 2012
+            return parseCST(dateStr);
+        } else if (StrUtil.contains(dateStr, 'T')) {
+            // UTC时间
+            return parseUTC(dateStr);
+        }
+
+        //标准日期格式（包括单个数字的日期时间）
+        dateStr = normalize(dateStr);
+        final Matcher matcher = DatePattern.REGEX_NORM.matcher(dateStr);
+        if (ReUtil.isMatch(DatePattern.REGEX_NORM, dateStr)) {
+            final int colonCount = StrUtil.count(dateStr, CharUtil.COLON);
+            switch (colonCount) {
+                case 0:
+                    // yyyy-MM-dd
+                    return parse(dateStr, DatePattern.NORM_DATE_FORMAT);
+                case 1:
+                    // yyyy-MM-dd HH:mm
+                    return parse(dateStr, DatePattern.NORM_DATETIME_MINUTE_FORMAT);
+                case 2:
+                    if (StrUtil.contains(dateStr, CharUtil.DOT)) {
+                        // yyyy-MM-dd HH:mm:ss.SSS
+                        return parse(dateStr, DatePattern.NORM_DATETIME_MS_FORMAT);
+                    }
+                    // yyyy-MM-dd HH:mm:ss
+                    return parse(dateStr, DatePattern.NORM_DATETIME_FORMAT);
+            }
+        }
+
+        // 没有更多匹配的时间格式
+        throw new DateException("No format fit for date String [{}] !", dateStr);
+    }
 }

@@ -7,8 +7,9 @@ import com.xiaoTools.util.charUtil.CharUtil;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * [字符串工具类](String tool class)
@@ -507,6 +508,21 @@ public class StrUtil {
     }
 
     /**
+     * [是否以指定字符串开头，忽略相等字符串的情况](Whether to start with the specified string, ignoring the case of equal strings)
+     * @description: zh - 是否以指定字符串开头，忽略相等字符串的情况
+     * @description: en - Whether to start with the specified string, ignoring the case of equal strings
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 11:12 上午
+     * @param str: 被监测字符串
+     * @param prefix: 开头字符串
+     * @return boolean
+    */
+    public static boolean startWithIgnoreEquals(CharSequence str, CharSequence prefix) {
+        return startWith(str, prefix, Constant.FALSE, Constant.TRUE);
+    }
+
+    /**
      * [是否以指定字符串开头](Whether to start with the specified string)
      * @description: zh - 是否以指定字符串开头
      * @description: en - Whether to start with the specified string
@@ -569,18 +585,82 @@ public class StrUtil {
      * @return boolean
     */
     public static boolean equals(CharSequence str1, CharSequence str2, boolean ignoreCase) {
-        if (Constant.NULL == str1) {
-            // 只有两个都为null才判断相等
-            return str2 == Constant.NULL;
-        }
-        if (Constant.NULL == str2) {
-            // 字符串2空，字符串1非空，直接false
-            return Constant.FALSE;
-        }
-        if (ignoreCase) {
-            return str1.toString().equalsIgnoreCase(str2.toString());
-        } else {
-            return str1.toString().contentEquals(str2);
-        }
+        // 只有两个都为null才判断相等
+        if (Constant.NULL == str1) { return str2 == Constant.NULL; }
+        // 字符串2空，字符串1非空，直接false
+        if (Constant.NULL == str2) { return Constant.FALSE; }
+        return ignoreCase ? str1.toString().equalsIgnoreCase(str2.toString()) : str1.toString().contentEquals(str2);
     }
+
+    /**
+     * [去掉指定前缀](Remove the specified prefix)
+     * @description: zh - 去掉指定前缀
+     * @description: en - Remove the specified prefix
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 11:13 上午
+     * @param str: 字符串
+     * @param prefix: 前缀
+     * @return java.lang.String
+    */
+    public static String removePrefix(CharSequence str, CharSequence prefix) {
+        if (isEmpty(str) || isEmpty(prefix)) { return str(str); }
+        final String str2 = str.toString();
+        return str2.startsWith(prefix.toString()) ? subSuf(str2, prefix.length()) : str2;
+    }
+
+    // 重复 ------------------------------------------------------------------------ repeat
+
+    /**
+     * [重复某个字符](Repeat a character)
+     * @description: zh - 重复某个字符
+     * @description: en - Repeat a character
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 11:14 上午
+     * @param c: 被重复的字符
+     * @param count: 重复的数目
+     * @return java.lang.String
+    */
+    public static String repeat(char c, int count) {
+        if (count <= Constant.ZERO) { return Constant.EMPTY; }
+        char[] result = new char[count];
+        for (int i = Constant.ZERO; i < count; i++) { result[i] = c; }
+        return new String(result);
+    }
+
+    /**
+     * [重复某个字符串](Repeat a string)
+     * @description: zh - 重复某个字符串
+     * @description: en - Repeat a string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 11:22 上午
+     * @param str: 被重复的字符
+     * @param count: 重复的数目
+     * @return java.lang.String
+    */
+    public static String repeat(CharSequence str, int count) {
+        if (Constant.NULL == str) { return Constant.STRING_NULL; }
+        if (count <= Constant.ZERO || str.length() == Constant.ZERO) { return Constant.EMPTY; }
+        if (count == Constant.ONE) { return str.toString(); }
+        // 检查
+        final int len = str.length();
+        final long longSize = (long) len * (long) count;
+        final int size = (int) longSize;
+        if (size != longSize) {
+            throw new ArrayIndexOutOfBoundsException("Required String length is too large: " + longSize);
+        }
+        final char[] array = new char[size];
+        str.toString().getChars(Constant.ZERO, len, array, Constant.ZERO);
+        int n;
+        for (n = len; n < size - n; n <<= Constant.ONE) {
+            // n <<= 1相当于n *2
+            System.arraycopy(array, Constant.ZERO, array, n, n);
+        }
+        System.arraycopy(array, Constant.ZERO, array, n, size - n);
+        return new String(array);
+    }
+
+
 }

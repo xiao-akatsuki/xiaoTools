@@ -364,6 +364,8 @@ public class Constant {
 
     public static final String DOUBLE_BRACKETS = "{}: {}";
 
+    public static final String STRING_DOUBLE_BRACKETS = "{} {}";
+
     public static final String STRING_S_ONE_TWO = "[S]{1,2}";
 
     public static final String LEFT_BRACKETS = "{";

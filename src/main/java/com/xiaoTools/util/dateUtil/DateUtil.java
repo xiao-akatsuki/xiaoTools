@@ -1,18 +1,23 @@
 package com.xiaoTools.util.dateUtil;
 
+import com.xiaoTools.core.exception.dateException.DateException;
+import com.xiaoTools.date.datePattern.DatePattern;
 import com.xiaoTools.date.dateTime.DateTime;
+import com.xiaoTools.date.format.dateParser.DateParser;
+import com.xiaoTools.date.format.datePrinter.DatePrinter;
 import com.xiaoTools.date.month.Month;
 import com.xiaoTools.date.quarter.Quarter;
 import com.xiaoTools.date.week.Week;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.calendarUtil.CalendarUtil;
 import com.xiaoTools.util.localDateTimeUtil.LocalDateTimeUtil;
+import com.xiaoTools.util.strUtil.StrUtil;
 
+import java.text.DateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.LinkedHashSet;
+import java.util.*;
 
 /**
  * [时间工具类](Time tools)
@@ -584,7 +589,355 @@ public class DateUtil extends CalendarUtil {
 
     /*格式化-----------------------------------------------------------Format*/
 
+    /**
+     * [格式化日期时间](Format date time)
+     * @description: zh - 格式化日期时间
+     * @description: en - Format date time
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 12:58 下午
+     * @param localDateTime: 被格式化的日期
+     * @return java.lang.String
+    */
     public static String formatLocalDateTime(LocalDateTime localDateTime) {
         return LocalDateTimeUtil.formatNormal(localDateTime);
     }
+
+    /**
+     * [根据特定格式格式化日期](Format the date according to a specific format)
+     * @description: zh - 根据特定格式格式化日期
+     * @description: en - Format the date according to a specific format
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 1:00 下午
+     * @param localDateTime: 被格式化的日期
+     * @param format: 日期格式
+     * @return java.lang.String
+    */
+    public static String format(LocalDateTime localDateTime, String format) {
+        return LocalDateTimeUtil.format(localDateTime, format);
+    }
+
+    /**
+     * [根据特定格式格式化日期](Format the date according to a specific format)
+     * @description: zh - 根据特定格式格式化日期
+     * @description: en - Format the date according to a specific format
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 1:04 下午
+     * @param date: 被格式化的日期
+     * @param format: 日期格式
+     * @return java.lang.String
+    */
+    public static String format(Date date, String format) {
+        if (Constant.NULL == date || StrUtil.isBlank(format)) {
+            return Constant.STRING_NULL;
+        }
+        TimeZone timeZone = (TimeZone) Constant.NULL;
+        if (date instanceof DateTime) {
+            timeZone = ((DateTime) date).getTimeZone();
+        }
+        return format(date, newSimpleFormat(format, null, timeZone));
+    }
+
+    /**
+     * [根据特定格式格式化日期](Format the date according to a specific format)
+     * @description: zh - 根据特定格式格式化日期
+     * @description: en - Format the date according to a specific format
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 1:12 下午
+     * @param date: 被格式化的日期
+     * @param format: DatePrinter 或 FastDateFormat
+     * @return java.lang.String
+    */
+    public static String format(Date date, DatePrinter format) {
+        return Constant.NULL == format || Constant.NULL == date ? Constant.STRING_NULL : format.format(date);
+    }
+
+    /**
+     * [根据特定格式格式化日期](Format the date according to a specific format)
+     * @description: zh - 根据特定格式格式化日期
+     * @description: en - Format the date according to a specific format
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 1:15 下午
+     * @param date: 被格式化的日期
+     * @param format: SimpleDateFormat
+     * @return java.lang.String
+    */
+    public static String format(Date date, DateFormat format) {
+        return Constant.NULL == format || Constant.NULL == date ? Constant.STRING_NULL : format.format(date);
+    }
+
+    /**
+     * [根据特定格式格式化日期](Format the date according to a specific format)
+     * @description: zh - 根据特定格式格式化日期
+     * @description: en - Format the date according to a specific format
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 1:18 下午
+     * @param date: 被格式化的日期
+     * @param format: SimpleDateFormat
+     * @return java.lang.String
+    */
+    public static String format(Date date, DateTimeFormatter format) {
+        return Constant.NULL == format || Constant.NULL == date ? Constant.STRING_NULL : format.format(date.toInstant());
+    }
+
+    /**
+     * [格式化日期时间](Format date time)
+     * @description: zh - 格式化日期时间
+     * @description: en - Format date time
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 3:01 下午
+     * @param date: 被格式化的日期
+     * @return java.lang.String
+    */
+    public static String formatDateTime(Date date) {
+        return Constant.NULL == date ? Constant.STRING_NULL : DatePattern.NORM_DATETIME_FORMAT.format(date);
+    }
+
+    /**
+     * [格式化日期部分](Format date section)
+     * @description: zh - 格式化日期部分
+     * @description: en - Format date section
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 3:10 下午
+     * @param date: 被格式化的日期
+     * @return java.lang.String
+    */
+    public static String formatDate(Date date) {
+        return Constant.NULL == date ? Constant.STRING_NULL : DatePattern.NORM_DATE_FORMAT.format(date);
+    }
+
+    /**
+     * [格式化时间](Format time)
+     * @description: zh - 格式化时间
+     * @description: en - Format time
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 3:13 下午
+     * @param date: 被格式化的日期
+     * @return java.lang.String
+    */
+    public static String formatTime(Date date) {
+        return Constant.NULL == date ? Constant.STRING_NULL : DatePattern.NORM_TIME_FORMAT.format(date);
+    }
+
+    /**
+     * [格式化为Http的标准日期格式](Standard date format formatted as http)
+     * @description: zh - 格式化为Http的标准日期格式
+     * @description: en - Standard date format formatted as http
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 3:17 下午
+     * @param date: 被格式化的日期
+     * @return java.lang.String
+    */
+    public static String formatHttpDate(Date date) {
+        return Constant.NULL == date ? Constant.STRING_NULL : DatePattern.HTTP_DATETIME_FORMAT.format(date);
+    }
+
+    /**
+     * [格式化为中文日期格式，如果isUppercase为false](Format to Chinese date format, if isUpperCase is false)
+     * @description: zh - 格式化为中文日期格式，如果isUppercase为false
+     * @description: en - Format to Chinese date format, if isUpperCase is false
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 3:26 下午
+     * @param date: 被格式化的日期
+     * @param isUppercase: 是否采用大写形式
+     * @param withTime: 是否包含时间部分
+     * @return java.lang.String
+    */
+    public static String formatChineseDate(Date date, boolean isUppercase, boolean withTime) {
+        return Constant.NULL == date ? Constant.STRING_NULL : !isUppercase ? (withTime ? DatePattern.CHINESE_DATE_TIME_FORMAT : DatePattern.CHINESE_DATE_FORMAT).format(date) : CalendarUtil.formatChineseDate(CalendarUtil.calendar(date), withTime);
+    }
+
+    /*构造-----------------------------------------------------------Parse*/
+
+    /**
+     * [构建 LocalDateTime 对象](Building the LocalDateTime object)
+     * @description: zh - 构建 LocalDateTime 对象
+     * @description: en - Building the LocalDateTime object
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 3:28 下午
+     * @param dateStr: 时间字符串
+     * @return java.time.LocalDateTime
+    */
+    public static LocalDateTime parseLocalDateTime(CharSequence dateStr) {
+        return parseLocalDateTime(dateStr, DatePattern.NORM_DATETIME_PATTERN);
+    }
+
+    /**
+     * [构建 LocalDateTime 对象](Building the LocalDateTime object)
+     * @description: zh - 构建 LocalDateTime 对象
+     * @description: en - Building the LocalDateTime object
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 7:33 下午
+     * @param dateStr: 时间字符串（带格式）
+     * @param format: 使用DatePattern定义的格式
+     * @return java.time.LocalDateTime
+    */
+    public static LocalDateTime parseLocalDateTime(CharSequence dateStr, String format) {
+        return LocalDateTimeUtil.parse(dateStr, format);
+    }
+
+    /**
+     * [构建DateTime对象](Building a datetime object)
+     * @description: zh - 构建DateTime对象
+     * @description: en - Building a datetime object
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 8:17 下午
+     * @param dateStr: Date字符串
+     * @param dateFormat: 格式化器
+     * @return com.xiaoTools.date.dateTime.DateTime
+    */
+    public static DateTime parse(CharSequence dateStr, DateFormat dateFormat) {
+        return new DateTime(dateStr, dateFormat);
+    }
+
+    /**
+     * [Building a datetime object](Building a datetime object)
+     * @description: zh - 构建DateTime对象
+     * @description: en - Building a datetime object
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 8:18 下午
+     * @param dateStr: Date字符串
+     * @param parser: 格式化器
+     * @return com.xiaoTools.date.dateTime.DateTime
+    */
+    public static DateTime parse(CharSequence dateStr, DateParser parser) {
+        return new DateTime(dateStr, parser);
+    }
+
+    /**
+     * [构建DateTime对象](Building a datetime object)
+     * @description: zh - 构建DateTime对象
+     * @description: en - Building a datetime object
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 8:20 下午
+     * @param dateStr: Date字符串
+     * @param formatter: 格式化器
+     * @return com.xiaoTools.date.dateTime.DateTime
+    */
+    public static DateTime parse(CharSequence dateStr, DateTimeFormatter formatter) {
+        return new DateTime(dateStr, formatter);
+    }
+
+    /**
+     * [将特定格式的日期转换为Date对象](Converts a date in a specific format to a date object)
+     * @description: zh - 将特定格式的日期转换为Date对象
+     * @description: en - Converts a date in a specific format to a date object
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 8:22 下午
+     * @param dateStr: 特定格式的日期
+     * @param format: 格式
+     * @return com.xiaoTools.date.dateTime.DateTime
+    */
+    public static DateTime parse(CharSequence dateStr, String format) {
+        return new DateTime(dateStr, format);
+    }
+
+    /**
+     * [将特定格式的日期转换为Date对象](Converts a date in a specific format to a date object)
+     * @description: zh - 将特定格式的日期转换为Date对象
+     * @description: en - Converts a date in a specific format to a date object
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 8:22 下午
+     * @param dateStr: 特定格式的日期
+     * @param format: 格式
+     * @param locale: 区域信息
+     * @return com.xiaoTools.date.dateTime.DateTime
+    */
+    public static DateTime parse(CharSequence dateStr, String format, Locale locale) {
+        return new DateTime(dateStr, DateUtil.newSimpleFormat(format, locale, null));
+    }
+
+    /**
+     * [通过给定的日期格式解析日期时间字符串。](Parses the date time string through the given date format.)
+     * @description: zh - 通过给定的日期格式解析日期时间字符串。
+     * @description: en - Parses the date time string through the given date format.
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 8:25 下午
+     * @param str: 日期时间字符串，非空
+     * @param parsePatterns: 需要尝试的日期时间格式数组
+     * @return com.xiaoTools.date.dateTime.DateTime
+    */
+    public static DateTime parse(String str, String... parsePatterns) throws DateException {
+        return new DateTime(CalendarUtil.parseByPatterns(str, parsePatterns));
+    }
+
+    /**
+     * [解析日期时间字符串](Parsing date time string)
+     * @description: zh - 解析日期时间字符串
+     * @description: en - Parsing date time string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 8:26 下午
+     * @param dateString: 标准形式的时间字符串
+     * @return com.xiaoTools.date.dateTime.DateTime
+    */
+    public static DateTime parseDateTime(CharSequence dateString) {
+        dateString = normalize(dateString);
+        return parse(dateString, DatePattern.NORM_DATETIME_FORMAT);
+    }
+
+    /**
+     * [解析日期字符串，忽略时分秒](Parsing date string, ignoring time, minute and second)
+     * @description: zh - 解析日期字符串，忽略时分秒
+     * @description: en - Parsing date string, ignoring time, minute and second
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 8:30 下午
+     * @param dateString: 标准形式的日期字符串
+     * @return com.xiaoTools.date.dateTime.DateTime
+    */
+    public static DateTime parseDate(CharSequence dateString) {
+        dateString = normalize(dateString);
+        return parse(dateString, DatePattern.NORM_DATE_FORMAT);
+    }
+
+    /**
+     * [解析时间](Analysis time)
+     * @description: zh - 解析时间
+     * @description: en - Analysis time
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 8:31 下午
+     * @param timeString: 标准形式的日期字符串
+     * @return com.xiaoTools.date.dateTime.DateTime
+    */
+    public static DateTime parseTime(CharSequence timeString) {
+        timeString = normalize(timeString);
+        return parse(timeString, DatePattern.NORM_TIME_FORMAT);
+    }
+
+    /**
+     * [解析时间](Analysis time)
+     * @description: zh - 解析时间
+     * @description: en - Analysis time
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 8:31 下午
+     * @param timeString: 标准形式的日期字符串
+     * @return com.xiaoTools.date.dateTime.DateTime
+    */
+    public static DateTime parseTimeToday(CharSequence timeString) {
+        timeString = StrUtil.format(Constant.STRING_DOUBLE_BRACKETS, today(), timeString);
+        return Constant.ONE == StrUtil.count(timeString, Constant.CHAR_COLON) ? parse(timeString, DatePattern.NORM_DATETIME_MINUTE_PATTERN) : parse(timeString, DatePattern.NORM_DATETIME_FORMAT);
+    }
+
+
 }

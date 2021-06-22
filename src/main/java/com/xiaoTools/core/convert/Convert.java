@@ -15,17 +15,20 @@ import java.lang.reflect.Type;
 public class Convert {
 
     /**
-     *
-     * @description: zh -
+     * [转换为字符串](Convert to string)
+     * @description: zh - 转换为字符串
+     * @description: en - Convert to string
      * @version: V1.0
      * @author XiaoXunYao
-     * @since 2021/6/17 12:10 下午
-     * @param type: 目标类型
-     * @param value: 值
-     * @param defaultValue: 默认值
-     * @param quietly: 是否静默转换，true不抛异常
-     * @return T
+     * @since 2021/6/22 11:08 上午
+     * @param value: 被转换的值
+     * @param defaultValue: 转换错误时的默认值
+     * @return java.lang.String
     */
+    public static String toStr(Object value, String defaultValue) {
+        return convertQuietly(String.class, value, defaultValue);
+    }
+
     public static <T> T convertWithCheck(Type type, Object value, T defaultValue, boolean quietly) {
         final ConverterRegistry registry = ConverterRegistry.getInstance();
         try {
@@ -37,4 +40,5 @@ public class Convert {
             throw e;
         }
     }
+
 }

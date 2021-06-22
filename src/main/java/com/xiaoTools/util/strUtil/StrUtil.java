@@ -75,6 +75,24 @@ public class StrUtil {
     }
 
     /**
+     * [指定字符串数组中，是否包含空字符串。](Specifies whether the string array contains an empty string.)
+     * @description: zh - 指定字符串数组中，是否包含空字符串。
+     * @description: en - Specifies whether the string array contains an empty string.
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/22 8:36 上午
+     * @param values: 字符串列表
+     * @return boolean
+    */
+    public static boolean isBlank(CharSequence... values){
+        if (ArrayUtil.isEmpty(values)) { return Constant.TRUE; }
+        for (CharSequence value : values) {
+            if (isBlank(value)) { return Constant.TRUE; }
+        }
+        return Constant.FALSE;
+    }
+
+    /**
      * [字符串是否为非空白](Is the string non blank)
      * @description: zh - 字符串是否为非空白
      * @description: en - Is the string non blank

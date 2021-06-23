@@ -8,8 +8,6 @@ import com.xiaoTools.util.charUtil.CharUtil;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.text.MessageFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * [字符串工具类](String tool class)
@@ -38,6 +36,19 @@ public class StrUtil {
     */
     public static boolean isEmpty(CharSequence value){
         return value == Constant.NULL || value.length() == Constant.ZERO;
+    }
+
+    public static boolean isEmpty(CharSequence... strs) {
+        if (ArrayUtil.isEmpty(strs)) {
+            return Constant.TRUE;
+        }
+
+        for (CharSequence str : strs) {
+            if (isEmpty(str)) {
+                return Constant.TRUE;
+            }
+        }
+        return Constant.FALSE;
     }
 
     /**
@@ -381,6 +392,36 @@ public class StrUtil {
     }
 
     /**
+     * [去除字符串中指定的多个字符，如有多个则全部去除](Remove multiple characters specified in the string. If there are multiple characters, remove them all)
+     * @description: zh - 去除字符串中指定的多个字符，如有多个则全部去除
+     * @description: en - Remove multiple characters specified in the string. If there are multiple characters, remove them all
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/23 9:09 上午
+     * @param str: 字符串
+     * @param chars: 字符列表
+     * @return java.lang.String
+    */
+    public static String removeAll(CharSequence str, char... chars) {
+        if (null == str || ArrayUtil.isEmpty(chars)) {
+            return str(str);
+        }
+        final int len = str.length();
+        if (Constant.ZERO == len) {
+            return str(str);
+        }
+        final StringBuilder builder = new StringBuilder(len);
+        char c;
+        for (int i = Constant.ZERO; i < len; i++) {
+            c = str.charAt(i);
+            if (!ArrayUtil.contains(chars, c)) {
+                builder.append(c);
+            }
+        }
+        return builder.toString();
+    }
+
+    /**
      * [指定字符是否在字符串中出现过](Specifies whether the character has ever appeared in a string)
      * @description: zh - 指定字符是否在字符串中出现过
      * @description: en - Specifies whether the character has ever appeared in a string
@@ -662,5 +703,114 @@ public class StrUtil {
         return new String(array);
     }
 
+    /**
+     * [是否包含特定字符，忽略大小写，如果给定两个参数都为null，返回true](Whether to include specific characters, regardless of case. If both parameters are null, return true)
+     * @description: zh - 是否包含特定字符，忽略大小写，如果给定两个参数都为null，返回true
+     * @description: en - Whether to include specific characters, regardless of case. If both parameters are null, return true
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/23 11:22 上午
+     * @param str: 被检测字符串
+     * @param testStr: 被测试是否包含的字符串
+     * @return boolean
+    */
+    public static boolean containsIgnoreCase(CharSequence str, CharSequence testStr) {
+        if (Constant.NULL == str) {
+            // 如果被监测字符串和
+            return Constant.NULL == testStr;
+        }
+        return str.toString().toLowerCase().contains(testStr.toString().toLowerCase());
+    }
 
+    /**
+     * [查找指定字符串是否包含指定字符串列表中的任意一个字符串,忽略大小写](Finds whether the specified string contains any string in the specified string list, regardless of case)
+     * @description: zh - 查找指定字符串是否包含指定字符串列表中的任意一个字符串,忽略大小写
+     * @description: en - Finds whether the specified string contains any string in the specified string list, regardless of case
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/23 11:19 上午
+     * @param str: 指定字符串
+     * @param testStrs: 需要检查的字符串数组
+     * @return boolean
+    */
+    public static boolean containsAnyIgnoreCase(CharSequence str, CharSequence... testStrs) {
+        return Constant.NULL != getContainsStrIgnoreCase(str, testStrs);
+    }
+
+    /**
+     * [查找指定字符串是否包含指定字符串列表中的任意一个字符串，如果包含返回找到的第一个字符串,忽略大小写](Find whether the specified string contains any string in the specified string list. If it contains the first string found, ignore case)
+     * @description: zh - 查找指定字符串是否包含指定字符串列表中的任意一个字符串，如果包含返回找到的第一个字符串,忽略大小写
+     * @description: en - Find whether the specified string contains any string in the specified string list. If it contains the first string found, ignore case
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/23 11:21 上午
+     * @param str: 指定字符串
+     * @param testStrs: 需要检查的字符串数组
+     * @return java.lang.String
+    */
+    public static String getContainsStrIgnoreCase(CharSequence str, CharSequence... testStrs) {
+        if (isEmpty(str) || ArrayUtil.isEmpty(testStrs)) {
+            return Constant.STRING_NULL;
+        }
+        for (CharSequence testStr : testStrs) {
+            if (containsIgnoreCase(str, testStr)) {
+                return testStr.toString();
+            }
+        }
+        return Constant.STRING_NULL;
+    }
+
+    // 总数 ------------------------------------------------------------------------ count
+
+    /**
+     * [统计指定内容中包含指定字符的数量](Count the number of specified characters in the specified content)
+     * @description: zh - 统计指定内容中包含指定字符的数量
+     * @description: en - Count the number of specified characters in the specified content
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/23 11:26 上午
+     * @param content: 内容
+     * @param charForSearch: 被统计的字符
+     * @return int
+    */
+    public static int count(CharSequence content, char charForSearch) {
+        int count = Constant.ZERO;
+        if (isEmpty(content)) {
+            return Constant.ZERO;
+        }
+        int contentLength = content.length();
+        for (int i = Constant.ZERO; i < contentLength; i++) {
+            if (charForSearch == content.charAt(i)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * [统计指定内容中包含指定字符串的数量](Counts the number of specified strings in the specified content)
+     * @description: zh - 统计指定内容中包含指定字符串的数量
+     * @description: en - Counts the number of specified strings in the specified content
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/23 11:31 上午
+     * @param content: 被查找的字符串
+     * @param strForSearch: 需要查找的字符串
+     * @return int
+    */
+    public static int count(CharSequence content, CharSequence strForSearch) {
+        if (isEmpty(content, strForSearch) || strForSearch.length() > content.length()) {
+            return Constant.ZERO;
+        }
+
+        int count = Constant.ZERO;
+        int idx = Constant.ZERO;
+        final String content2 = content.toString();
+        final String strForSearch2 = strForSearch.toString();
+        while ((idx = content2.indexOf(strForSearch2, idx)) > Constant.NEGATIVE_ONE) {
+            count++;
+            idx += strForSearch.length();
+        }
+        return count;
+    }
 }

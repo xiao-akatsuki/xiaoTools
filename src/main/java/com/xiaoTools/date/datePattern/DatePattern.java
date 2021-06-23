@@ -103,6 +103,46 @@ public class DatePattern {
     public static final DateTimeFormatter NORM_DATETIME_FORMATTER = DateTimeFormatter.ofPattern(NORM_DATETIME_PATTERN);
 
     /**
+     * 标准日期格式：yyyyMMddHHmmss
+     */
+    public static final String PURE_DATETIME_PATTERN = Constant.PURE_DATETIME_PATTERN;
+
+    /**
+     * 标准日期格式 FastDateFormat：yyyyMMddHHmmss
+     */
+    public static final FastDateFormat PURE_DATETIME_FORMAT = FastDateFormat.getInstance(PURE_DATETIME_PATTERN);
+
+    /**
+     * 标准日期格式：yyyyMMddHHmmssSSS
+     */
+    public static final String PURE_DATETIME_MS_PATTERN = Constant.PURE_DATETIME_MS_PATTERN;
+
+    /**
+     * 标准日期格式 FastDateFormat：yyyyMMddHHmmssSSS
+     */
+    public static final FastDateFormat PURE_DATETIME_MS_FORMAT = FastDateFormat.getInstance(PURE_DATETIME_MS_PATTERN);
+
+    /**
+     * 标准日期格式：yyyyMMdd
+     */
+    public static final String PURE_DATE_PATTERN = Constant.PURE_DATE_PATTERN;
+
+    /**
+     * 标准日期格式 FastDateFormat：yyyyMMdd
+     */
+    public static final FastDateFormat PURE_DATE_FORMAT = FastDateFormat.getInstance(PURE_DATE_PATTERN);
+
+    /**
+     * 标准日期格式：HHmmss
+     */
+    public static final String PURE_TIME_PATTERN = Constant.PURE_TIME_PATTERN;
+
+    /**
+     * 标准日期格式 FastDateFormat：HHmmss
+     */
+    public static final FastDateFormat PURE_TIME_FORMAT = FastDateFormat.getInstance(PURE_TIME_PATTERN);
+
+    /**
      * 标准日期时间格式，精确到毫秒：yyyy-MM-dd HH:mm:ss.SSS
      */
     public static final String NORM_DATETIME_MS_PATTERN = Constant.NORM_DATETIME_MS_PATTERN;

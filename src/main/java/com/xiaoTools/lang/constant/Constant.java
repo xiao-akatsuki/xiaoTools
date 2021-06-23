@@ -46,6 +46,8 @@ public class Constant {
 
     public static final int EIGHT = 8;
 
+    public static final int NINE = 9;
+
     public static final int TEN = 10;
 
     public static final int ELEVEN = 11;
@@ -178,6 +180,8 @@ public class Constant {
 
     public static final double CLEVER = 10E-5;
 
+    public static final double DOUBLE_HUNDRED = 100.0;
+
     public static final double PI = Math.PI;
 
     public static final double E = Math.E;
@@ -272,9 +276,17 @@ public class Constant {
 
     public static final char CHAR_DOWN_K = 'k';
 
+    public static final char CHAR_DOWN_L = 'l';
+
+    public static final char CHAR_UP_L = 'L';
+
     public static final char CHAR_UP_Y = 'Y';
 
     public static final char CHAR_DOWN_Y = 'y';
+
+    public static final char CHAR_DOWN_T = 't';
+
+    public static final char CHAR_UP_T = 'T';
 
     public static final char CHAR_UP_Z = 'Z';
 
@@ -454,6 +466,14 @@ public class Constant {
 
     public static final String PURE_DATETIME_PATTERN = "yyyyMMddHHmmss";
 
+    public static final String PURE_DATETIME_MS_PATTERN = "yyyyMMddHHmmssSSS";
+
+    public static final String PURE_DATE_PATTERN = "yyyyMMdd";
+
+    public static final String PURE_DATE_TIME_PATTERN = "yyMMddHHmm";
+
+    public static final String PURE_TIME_PATTERN = "HHmmss";
+
     public static final String RFC_822_TIME_ZONE =  "[+-]\\d{4}";
 
     public static final String UTC_TIME_ZONE_WITH_OFFSET = "[+-]\\d{2}:\\d{2}";
@@ -473,6 +493,8 @@ public class Constant {
     public static final String STRING_DOLLAR = "$";
 
     public static final String STRING_NULL_OUT = "null";
+
+    public static final String STRING_BIG_SPACE = "  ";
 
     /*-----------------------------------------------------------byte*/
 

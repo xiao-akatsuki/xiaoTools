@@ -676,4 +676,109 @@ public class NumUtil {
             return parseNumber(number).longValue();
         }
     }
+
+    /**
+     * [是否为数字](Is it a number)
+     * @description: zh - 是否为数字
+     * @description: en - Is it a number
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/23 9:10 上午
+     * @param str: 字符串值
+     * @return boolean
+    */
+    public static boolean isNumber(CharSequence str) {
+        if (StrUtil.isBlank(str)) { return Constant.FALSE; }
+        char[] chars = str.toString().toCharArray();
+        int sz = chars.length;
+        boolean hasExp = Constant.FALSE;
+        boolean hasDecPoint = Constant.FALSE;
+        boolean allowSigns = Constant.FALSE;
+        boolean foundDigit = Constant.FALSE;
+        // 提前处理大部分的可能性
+        int start = (chars[Constant.ZERO] == Constant.CHAR_DASH || chars[Constant.ZERO] == Constant.CHAR_PLUS) ? Constant.ONE : Constant.ZERO;
+        if (sz > start + Constant.ONE) {
+            if (chars[start] == Constant.CHAR_ZERO && (chars[start + Constant.ONE] == Constant.CHAR_DOWN_X || chars[start + Constant.ONE] == Constant.CHAR_UP_X)) {
+                int i = start + Constant.TWO;
+                if (i == sz) {
+                    return Constant.FALSE;
+                }
+                // 检查十六进制（不能是其他任何东西）
+                for (; i < chars.length; i++) {
+                    if ((chars[i] < Constant.CHAR_ZERO || chars[i] > Constant.CHAR_NINE) && (chars[i] < Constant.CHAR_DOWN_A || chars[i] > Constant.CHAR_DOWN_F) && (chars[i] < Constant.CHAR_UP_A || chars[i] > Constant.CHAR_UP_F)) {
+                        return Constant.FALSE;
+                    }
+                }
+                return Constant.TRUE;
+            }
+        }
+        // 不想循环到最后一个字符，请在后面检查
+        sz--;
+        // 对于类型限定符
+        int i = start;
+        // 循环到下一个到最后一个字符，或者如果需要另一个数字，则循环到最后一个字符,生成有效数字
+        while (i < sz || (i < sz + Constant.ONE && allowSigns && !foundDigit)) {
+            if (chars[i] >= Constant.CHAR_ZERO && chars[i] <= Constant.CHAR_NINE) {
+                foundDigit = Constant.TRUE;
+                allowSigns = Constant.FALSE;
+
+            } else if (chars[i] == Constant.CHAR_SPOT) {
+                if (hasDecPoint || hasExp) {
+                    // 两个小数点或指数小数点
+                    return Constant.FALSE;
+                }
+                hasDecPoint = Constant.TRUE;
+            } else if (chars[i] == Constant.CHAR_DOWN_E || chars[i] == Constant.CHAR_UP_E) {
+                // 处理完成
+                if (hasExp) {
+                    // 产生了两个E
+                    return Constant.FALSE;
+                }
+                if (!foundDigit) {
+                    return Constant.FALSE;
+                }
+                hasExp = Constant.TRUE;
+                allowSigns = Constant.TRUE;
+            } else if (chars[i] == Constant.CHAR_PLUS || chars[i] == Constant.CHAR_DASH) {
+                if (!allowSigns) {
+                    return Constant.FALSE;
+                }
+                allowSigns = Constant.FALSE;
+                // 我们需要在E后面加一个数字
+                foundDigit = Constant.FALSE;
+            } else {
+                return Constant.FALSE;
+            }
+            i++;
+        }
+        if (i < chars.length) {
+            if (chars[i] >= Constant.CHAR_ZERO && chars[i] <= Constant.CHAR_NINE) {
+                // 没有类型限定符
+                return Constant.TRUE;
+            }
+            if (chars[i] == Constant.CHAR_DOWN_E || chars[i] == Constant.CHAR_UP_E) {
+                // 最后一个字节不能有E
+                return Constant.FALSE;
+            }
+            if (chars[i] == Constant.CHAR_SPOT) {
+                if (hasDecPoint || hasExp) {
+                    // 两个小数点或指数小数点
+                    return Constant.FALSE;
+                }
+                // 非指数后的单个尾随小数点是可以的
+                return foundDigit;
+            }
+            if (!allowSigns && (chars[i] == Constant.CHAR_DOWN_D || chars[i] == Constant.CHAR_UP_D || chars[i] == Constant.CHAR_DOWN_F || chars[i] == Constant.CHAR_UP_F)) {
+                return foundDigit;
+            }
+            if (chars[i] == Constant.CHAR_DOWN_L || chars[i] == Constant.CHAR_UP_L) {
+                // 不允许带指数的L
+                return foundDigit && !hasExp;
+            }
+            // 最后一个字符是非法的
+            return Constant.FALSE;
+        }
+        // 如果val以“E”结尾，则allowSigns为真,同时确保是数字，不会产生奇怪的东西。
+        return !allowSigns && foundDigit;
+    }
 }

@@ -23,6 +23,20 @@ public class FileUtil {
     */
     public FileUtil() { }
 
+
+    /**
+     * [获取当前系统的换行分隔符](Gets the newline separator of the current system)
+     * @description: zh - 获取当前系统的换行分隔符
+     * @description: en - Gets the newline separator of the current system
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/23 7:52 下午
+     * @return java.lang.String
+     */
+    public static String getLineSeparator() {
+        return System.lineSeparator();
+    }
+
     /**
      * [通过路径查看该路径下的[文件](包括文件夹)](View [file] (including folder) under the path through the path)
      * @description: zh - 会获取该路径下的所有文件包括文件夹。

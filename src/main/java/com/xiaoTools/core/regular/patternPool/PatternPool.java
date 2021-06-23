@@ -114,6 +114,11 @@ public class PatternPool {
     */
     public final static Pattern REGEX_NORM = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}(\\s\\d{1,2}:\\d{1,2}(:\\d{1,2})?)?(.\\d{1,3})?");
 
+    /**
+     * 时间正则
+     */
+    public static final Pattern TIME = Pattern.compile("\\d{1,2}:\\d{1,2}(:\\d{1,2})?");
+
     /*方法-----------------------------------------------------------Method*/
 
     /**

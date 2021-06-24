@@ -1,5 +1,6 @@
 package com.xiaoTools.util.dateUtil;
 
+import com.xiaoTools.assertion.Assertion;
 import com.xiaoTools.core.exception.dateException.DateException;
 import com.xiaoTools.core.regular.patternPool.PatternPool;
 import com.xiaoTools.date.betweenFormatter.BetweenFormatter;
@@ -1934,5 +1935,108 @@ public class DateUtil extends CalendarUtil {
     */
     public static int ageOfNow(String birthDay) {
         return ageOfNow(parse(birthDay));
+    }
+
+    /**
+     * [生日转为年龄，计算法定年龄](The birthday is converted to the age, and the legal age is calculated)
+     * @description: zh - 生日转为年龄，计算法定年龄
+     * @description: en - The birthday is converted to the age, and the legal age is calculated
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 11:16 上午
+     * @param birthDay: 生日
+     * @return int
+    */
+    public static int ageOfNow(Date birthDay) {
+        return age(birthDay, date());
+    }
+
+    /**
+     * [是否闰年](Is it a leap year)
+     * @description: zh - 是否闰年
+     * @description: en - Is it a leap year
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 11:17 上午
+     * @param year: 年
+     * @return boolean
+    */
+    public static boolean isLeapYear(int year) {
+        return new GregorianCalendar().isLeapYear(year);
+    }
+
+    /**
+     * [计算相对于 dateToCompare 的年龄，长用于计算指定生日在某年的年龄](Calculate the age relative to dateToCompare. Length is used to calculate the age of a specified birthday in a year)
+     * @description: zh - 计算相对于 dateToCompare 的年龄，长用于计算指定生日在某年的年龄
+     * @description: en - Calculate the age relative to dateToCompare. Length is used to calculate the age of a specified birthday in a year
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 11:17 上午
+     * @param birthday: 生日
+     * @param dateToCompare: 需要对比的日期
+     * @return int
+    */
+    public static int age(Date birthday, Date dateToCompare) {
+        Assertion.notNull(birthday, "Birthday can not be null !");
+        dateToCompare = Constant.NULL == dateToCompare ? date() : dateToCompare;
+        return age(birthday.getTime(), dateToCompare.getTime());
+    }
+
+    /**
+     * [HH:mm:ss 时间格式字符串转为秒数](HH:mm:SS time format string to seconds)
+     * @description: zh - HH:mm:ss 时间格式字符串转为秒数
+     * @description: en - HH:mm:SS time format string to seconds
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 12:10 下午
+     * @param timeStr: 字符串时分秒(HH:mm:ss)格式
+     * @return int
+    */
+    public static int timeToSecond(String timeStr) {
+        if (StrUtil.isEmpty(timeStr)) { return Constant.ZERO; }
+        final List<String> hms = StrUtil.splitTrim(timeStr, Constant.CHAR_COLON, Constant.THREE);
+        int lastIndex = hms.size() - Constant.ONE;
+        int result = Constant.ZERO;
+        for (int i = lastIndex; i >= Constant.ZERO; i--) {
+            result += Integer.parseInt(hms.get(i)) * Math.pow(Constant.SIXTY, (lastIndex - i));
+        }
+        return result;
+    }
+
+    /**
+     * [秒数转为时间格式(HH:mm:ss)](Seconds to time format (HH:mm:SS))
+     * @description: zh - 秒数转为时间格式(HH:mm:ss)
+     * @description: en - Seconds to time format (HH:mm:SS)
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 12:19 下午
+     * @param seconds: 需要转换的秒数
+     * @return java.lang.String
+    */
+    public static String secondToTime(int seconds) {
+        if (seconds < 0) {
+            throw new IllegalArgumentException("Seconds must be a positive number!");
+        }
+
+        int hour = seconds / 3600;
+        int other = seconds % 3600;
+        int minute = other / 60;
+        int second = other % 60;
+        final StringBuilder sb = new StringBuilder();
+        if (hour < 10) {
+            sb.append("0");
+        }
+        sb.append(hour);
+        sb.append(":");
+        if (minute < 10) {
+            sb.append("0");
+        }
+        sb.append(minute);
+        sb.append(":");
+        if (second < 10) {
+            sb.append("0");
+        }
+        sb.append(second);
+        return sb.toString();
     }
 }

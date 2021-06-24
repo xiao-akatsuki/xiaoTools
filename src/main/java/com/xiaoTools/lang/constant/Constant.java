@@ -110,6 +110,8 @@ public class Constant {
 
     public static final int ONE_THOUSAND = 1000;
 
+    public static final int THREE_SIX_DOUBLE_ZERO = 3600;
+
     public static final int NOTHING_BOM = 65279;
 
     public static final int FIVE_THREE_EIGHT_ONE = 5381;
@@ -119,6 +121,8 @@ public class Constant {
     public static final int FILE_BYTE = 1444;
 
     public static final int ONE_MEGA_BYTES = 1024;
+
+    public static final int ONE_NINE_DOUBLE_ZERO = 1900;
 
     public static final int TEN_THOUSAND = 10000;
 
@@ -367,6 +371,8 @@ public class Constant {
     public static final String PERCENT_SIGN_U = "%u";
 
     public static final String EMPTY = "";
+
+    public static final String STRING_COLON = ":";
 
     public static final String DASH = "-";
 

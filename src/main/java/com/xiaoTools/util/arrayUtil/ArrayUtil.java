@@ -6,9 +6,9 @@ import java.util.Arrays;
 import java.util.Objects;
 
 import com.xiaoTools.lang.constant.Constant;
-import com.xiaoTools.util.arrayUtil.editor.Editor;
-import com.xiaoTools.util.arrayUtil.filter.Filter;
-import com.xiaoTools.util.arrayUtil.match.Match;
+import com.xiaoTools.core.editor.Editor;
+import com.xiaoTools.core.filter.Filter;
+import com.xiaoTools.core.match.Match;
 import com.xiaoTools.util.strUtil.StrUtil;
 
 /**

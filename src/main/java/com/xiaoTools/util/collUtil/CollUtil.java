@@ -1,10 +1,21 @@
 package com.xiaoTools.util.collUtil;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
+import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.util.listUtil.ListUtil;
 
+import java.util.*;
+
+/**
+ * [集合相关工具类](Collection related tool classes)
+ * @description: zh - 集合相关工具类
+ * @description: en - Collection related tool classes
+ * @version: V1.0
+ * @author XiaoXunYao
+ * @since 2021/6/24 5:25 下午
+*/
 public class CollUtil {
+
+
 
     /**
      * [新建一个HashSet](Create a new HashSet)
@@ -19,10 +30,10 @@ public class CollUtil {
     */
     @SafeVarargs
     public static <T> HashSet<T> set(boolean isSorted, T... ts) {
-        if (null == ts) {
+        if (Constant.NULL == ts) {
             return isSorted ? new LinkedHashSet<>() : new HashSet<>();
         }
-        int initialCapacity = Math.max((int) (ts.length / .75f) + 1, 16);
+        int initialCapacity = Math.max((int) (ts.length / .75f) + Constant.ONE, Constant.SIXTEEN);
         final HashSet<T> set = isSorted ? new LinkedHashSet<>(initialCapacity) : new HashSet<>(initialCapacity);
         Collections.addAll(set, ts);
         return set;
@@ -42,4 +53,79 @@ public class CollUtil {
     public static <T> HashSet<T> newHashSet(T... ts) {
         return set(false, ts);
     }
+
+    /*新建一个ArrayList-----------------------------------------------------------new Array List*/
+
+    /**
+     * [新建一个ArrayList](Create a new ArrayList)
+     * @description: zh - 新建一个ArrayList
+     * @description: en - Create a new ArrayList
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 8:17 下午
+     * @param values: 数组
+     * @return java.util.ArrayList<T>
+    */
+    @SafeVarargs
+    public static <T> ArrayList<T> newArrayList(T... values) {
+        return ListUtil.toList(values);
+    }
+
+    /**
+     * [新建一个ArrayList](Create a new ArrayList)
+     * @description: zh - 新建一个ArrayList
+     * @description: en - Create a new ArrayList
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 8:22 下午
+     * @param collection: 集合
+     * @return java.util.ArrayList<T>
+    */
+    public static <T> ArrayList<T> newArrayList(Collection<T> collection) {
+        return ListUtil.toList(collection);
+    }
+    
+    /**
+     * [新建一个ArrayList](Create a new ArrayList)
+     * @description: zh - 新建一个ArrayList
+     * @description: en - Create a new ArrayList
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 8:14 下午
+     * @param iterable: Iterable
+     * @return java.util.ArrayList<T>
+    */
+    public static <T> ArrayList<T> newArrayList(Iterable<T> iterable) {
+        return ListUtil.toList(iterable);
+    }
+
+    /**
+     * [新建一个ArrayList](Create a new ArrayList)
+     * @description: zh - 新建一个ArrayList
+     * @description: en - Create a new ArrayList
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 8:25 下午
+     * @param iterator: Iterator
+     * @return java.util.ArrayList<T>
+    */
+    public static <T> ArrayList<T> newArrayList(Iterator<T> iterator) {
+        return ListUtil.toList(iterator);
+    }
+
+    /**
+     * [新建一个ArrayList](Create a new ArrayList)
+     * @description: zh - 新建一个ArrayList
+     * @description: en - Create a new ArrayList
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 8:29 下午
+     * @param enumeration: Enumeration
+     * @return java.util.ArrayList<T>
+    */
+    public static <T> ArrayList<T> newArrayList(Enumeration<T> enumeration) {
+        return ListUtil.toList(enumeration);
+    }
+
+
 }

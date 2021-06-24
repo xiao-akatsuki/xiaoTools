@@ -1,4 +1,4 @@
-package com.xiaoTools.util.arrayUtil.filter;
+package com.xiaoTools.core.filter;
 
 /**
  * [过滤器接口](Filter interface)

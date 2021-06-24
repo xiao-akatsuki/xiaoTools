@@ -1,4 +1,4 @@
-package com.xiaoTools.util.arrayUtil.editor;
+package com.xiaoTools.core.editor;
 
 /**
  * [编辑器接口，常用于对于集合中的元素做统一编辑](Editor interface, commonly used for unified editing of elements in a collection)

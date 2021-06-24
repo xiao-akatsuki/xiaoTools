@@ -7,6 +7,7 @@ import com.xiaoTools.date.betweenFormatter.BetweenFormatter;
 import com.xiaoTools.date.dateBetween.DateBetween;
 import com.xiaoTools.date.dateField.DateField;
 import com.xiaoTools.date.datePattern.DatePattern;
+import com.xiaoTools.date.dateRange.DateRange;
 import com.xiaoTools.date.dateTime.DateTime;
 import com.xiaoTools.date.dateUnit.DateUnit;
 import com.xiaoTools.date.format.dateParser.DateParser;
@@ -17,19 +18,27 @@ import com.xiaoTools.date.quarter.Quarter;
 import com.xiaoTools.date.timer.stopWatch.StopWatch;
 import com.xiaoTools.date.timer.timeInterval.TimeInterval;
 import com.xiaoTools.date.week.Week;
+import com.xiaoTools.date.zodiac.Zodiac;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.calendarUtil.CalendarUtil;
 import com.xiaoTools.util.charUtil.CharUtil;
+import com.xiaoTools.util.collUtil.CollUtil;
+import com.xiaoTools.util.compareUtil.CompareUtil;
 import com.xiaoTools.util.localDateTimeUtil.LocalDateTimeUtil;
 import com.xiaoTools.util.numUtil.NumUtil;
 import com.xiaoTools.util.regularUtil.RegularUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
+import com.xiaoTools.util.temporalAccessorUtil.TemporalAccessorUtil;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 
 /**
@@ -2004,7 +2013,7 @@ public class DateUtil extends CalendarUtil {
     }
 
     /**
-     * [秒数转为时间格式(HH:mm:ss)](Seconds to time format (HH:mm:SS))
+     * [秒数转为时间格式(HH:mm:ss)Constant.TENSeconds to time format (HH:mm:SS))
      * @description: zh - 秒数转为时间格式(HH:mm:ss)
      * @description: en - Seconds to time format (HH:mm:SS)
      * @version: V1.0
@@ -2014,29 +2023,285 @@ public class DateUtil extends CalendarUtil {
      * @return java.lang.String
     */
     public static String secondToTime(int seconds) {
-        if (seconds < 0) {
+        if (seconds < Constant.ZERO) {
             throw new IllegalArgumentException("Seconds must be a positive number!");
         }
-
-        int hour = seconds / 3600;
-        int other = seconds % 3600;
-        int minute = other / 60;
-        int second = other % 60;
+        int hour = seconds / Constant.THREE_SIX_DOUBLE_ZERO;
+        int other = seconds % Constant.THREE_SIX_DOUBLE_ZERO;
+        int minute = other / Constant.SIXTY;
+        int second = other % Constant.SIXTY;
         final StringBuilder sb = new StringBuilder();
-        if (hour < 10) {
-            sb.append("0");
+        if (hour < Constant.TEN) {
+            sb.append(Constant.STRING_ZERO);
         }
         sb.append(hour);
-        sb.append(":");
-        if (minute < 10) {
-            sb.append("0");
+        sb.append(Constant.STRING_COLON);
+        if (minute < Constant.TEN) {
+            sb.append(Constant.STRING_ZERO);
         }
         sb.append(minute);
-        sb.append(":");
-        if (second < 10) {
-            sb.append("0");
+        sb.append(Constant.STRING_COLON);
+        if (second < Constant.TEN) {
+            sb.append(Constant.STRING_ZERO);
         }
         sb.append(second);
         return sb.toString();
+    }
+
+    /**
+     * [创建日期范围生成器](Create date range generator)
+     * @description: zh - 创建日期范围生成器 
+     * @description: en - Create date range generator 
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 3:10 下午
+     * @param start: 起始日期时间
+     * @param end: 结束日期时间 
+     * @param unit: 步进单位 
+     * @return com.xiaoTools.date.dateRange.DateRange
+    */
+    public static DateRange range(Date start, Date end, final DateField unit) {
+        return new DateRange(start, end, unit);
+    }
+
+    /**
+     * [创建日期范围生成器](Create date range generator)
+     * @description: zh - 创建日期范围生成器 
+     * @description: en - Create date range generator 
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 3:15 下午
+     * @param start: 起始日期时间
+     * @param end: 结束日期时间 
+     * @param unit: 步进单位 
+     * @return java.util.List<com.xiaoTools.date.dateTime.DateTime>
+    */
+    public static List<DateTime> rangeToList(Date start, Date end, final DateField unit) {
+        return CollUtil.newArrayList((Iterable<DateTime>) range(start, end, unit));
+    }
+
+    /**
+     * [通过生日计算星座](Calculate constellation by birthday)
+     * @description: zh - 通过生日计算星座 
+     * @description: en - Calculate constellation by birthday 
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 3:19 下午
+     * @param month: 月，从0开始计数
+     * @param day: 天 
+     * @return java.lang.String
+    */
+    public static String getZodiac(int month, int day) {
+        return Zodiac.getZodiac(month, day);
+    }
+
+    /**
+     * [计算生肖，只计算1900年后出生的人](Calculate the zodiac, only people born after 1900)
+     * @description: zh - 计算生肖，只计算1900年后出生的人
+     * @description: en - Calculate the zodiac, only people born after 1900
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 3:23 下午
+     * @param year: 农历年
+     * @return java.lang.String
+    */
+    public static String getChineseZodiac(int year) {
+        return Zodiac.getChineseZodiac(year);
+    }
+
+    /**
+     * [null安全的日期比较，null对象排在末尾](Null is a safe date comparison, with null objects at the end)
+     * @description: zh - null安全的日期比较，null对象排在末尾 
+     * @description: en - Null is a safe date comparison, with null objects at the end 
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 3:26 下午
+     * @param date1: 日期1
+     * @param date2: 日期2 
+     * @return int
+    */
+    public static int compare(Date date1, Date date2) {
+        return CompareUtil.compare(date1, date2);
+    }
+
+    /**
+     * [纳秒转毫秒](Nanosecond to millisecond)
+     * @description: zh - 纳秒转毫秒
+     * @description: en - Nanosecond to millisecond
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 3:27 下午
+     * @param duration: 时长 
+     * @return long
+    */
+    public static long nanosToMillis(long duration) {
+        return TimeUnit.NANOSECONDS.toMillis(duration);
+    }
+
+    /**
+     * [纳秒转秒，保留小数](Nanosecond to second, decimal)
+     * @description: zh - 纳秒转秒，保留小数
+     * @description: en - Nanosecond to second, decimal
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 3:31 下午
+     * @param duration: 时长 
+     * @return double
+    */
+    public static double nanosToSeconds(long duration) {
+        return duration / 1_000_000_000.0;
+    }
+
+    /**
+     * [Date对象转换为Instant对象](Convert Date object to instant object)
+     * @description: zh - Date对象转换为Instant对象
+     * @description: en - Convert Date object to instant object
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 3:31 下午
+     * @param date: Date对象
+     * @return java.time.Instant
+    */
+    public static Instant toInstant(Date date) {
+        return Constant.NULL == date ? Constant.INSTANT_NULL : date.toInstant();
+    }
+
+    /**
+     * [Date对象转换为Instant对象](Convert Date object to instant object)
+     * @description: zh - Date对象转换为Instant对象
+     * @description: en - Convert Date object to instant object
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 3:33 下午
+     * @param temporalAccessor: Date对象 
+     * @return java.time.Instant
+    */
+    public static Instant toInstant(TemporalAccessor temporalAccessor) {
+        return TemporalAccessorUtil.toInstant(temporalAccessor);
+    }
+
+    /**
+     * [Instant 转换为 LocalDateTime，使用系统默认时区](Convert instant to LocalDateTime and use the system default time zone)
+     * @description: zh - Instant 转换为 LocalDateTime，使用系统默认时区
+     * @description: en - Convert instant to LocalDateTime and use the system default time zone
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 3:34 下午
+     * @param instant: Instant
+     * @return java.time.LocalDateTime
+    */
+    public static LocalDateTime toLocalDateTime(Instant instant) {
+        return LocalDateTimeUtil.of(instant);
+    }
+
+    /**
+     * [Date 转换为 LocalDateTime，使用系统默认时区](Date is converted to LocalDateTime and the system default time zone is used)
+     * @description: zh - Date 转换为 LocalDateTime，使用系统默认时区 
+     * @description: en - Date is converted to LocalDateTime and the system default time zone is used 
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 3:34 下午
+     * @param date: Date
+     * @return java.time.LocalDateTime
+    */
+    public static LocalDateTime toLocalDateTime(Date date) {
+        return LocalDateTimeUtil.of(date);
+    }
+
+    /**
+     * [获得指定年份的总天数](Gets the total number of days in the specified year)
+     * @description: zh - 获得指定年份的总天数
+     * @description: en - Gets the total number of days in the specified year
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 3:36 下午
+     * @param year: 年份
+     * @return int
+    */
+    public static int lengthOfYear(int year) {
+        return Year.of(year).length();
+    }
+
+    /**
+     * [获得指定月份的总天数](Gets the total number of days in the specified month)
+     * @description: zh - 获得指定月份的总天数 
+     * @description: en - Gets the total number of days in the specified month 
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 3:36 下午
+     * @param month: 年份
+     * @param isLeapYear: 是否闰年 
+     * @return int
+    */
+    public static int lengthOfMonth(int month, boolean isLeapYear) {
+        return java.time.Month.of(month).length(isLeapYear);
+    }
+
+    /**
+     * [创建 SimpleDateFormat，注意此对象非线程安全！](Create SimpleDateFormat, note that this object is not thread safe!)
+     * @description: zh - 创建 SimpleDateFormat，注意此对象非线程安全！
+     * @description: en - Create SimpleDateFormat, note that this object is not thread safe!
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 3:38 下午
+     * @param pattern: 表达式
+     * @return java.text.SimpleDateFormat
+    */
+    public static SimpleDateFormat newSimpleFormat(String pattern) {
+        return newSimpleFormat(pattern, null, null);
+    }
+
+    /**
+     * [创建 SimpleDateFormat，注意此对象非线程安全！](Create SimpleDateFormat, note that this object is not thread safe!)
+     * @description: zh - 创建 SimpleDateFormat，注意此对象非线程安全！
+     * @description: en - Create SimpleDateFormat, note that this object is not thread safe!
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/24 3:45 下午
+     * @param pattern: 表达式
+     * @param locale: Locale，null表示默认
+     * @param timeZone: TimeZone，null表示默认
+     * @return java.text.SimpleDateFormat
+    */
+    public static SimpleDateFormat newSimpleFormat(String pattern, Locale locale, TimeZone timeZone) {
+        if (Constant.NULL == locale) {
+            locale = Locale.getDefault(Locale.Category.FORMAT);
+        }
+        final SimpleDateFormat format = new SimpleDateFormat(pattern, locale);
+        if (Constant.NULL != timeZone) {
+            format.setTimeZone(timeZone);
+        }
+        format.setLenient(Constant.FALSE);
+        return format;
+    }
+
+    /*私有-----------------------------------------------------------private*/
+
+    private static String normalize(CharSequence dateStr) {
+        if (StrUtil.isBlank(dateStr)) { return StrUtil.str(dateStr); }
+
+        // 日期时间分开处理
+        final List<String> dateAndTime = StrUtil.splitTrim(dateStr, ' ');
+        final int size = dateAndTime.size();
+        if (size < Constant.ONE || size > Constant.TWO) {
+            // 非可被标准处理的格式
+            return StrUtil.str(dateStr);
+        }
+        final StringBuilder builder = StrUtil.builder();
+        // 日期部分（"\"、"/"、"."、"年"、"月"都替换为"-"）
+        String datePart = dateAndTime.get(Constant.ZERO).replaceAll("[/.年月]", "-");
+        datePart = StrUtil.removeSuffix(datePart, "日");
+        builder.append(datePart);
+        // 时间部分
+        if (size == Constant.TWO) {
+            builder.append(' ');
+            String timePart = dateAndTime.get(Constant.ONE).replaceAll("[时分秒]", ":");
+            timePart = StrUtil.removeSuffix(timePart, ":");
+            //将ISO8601中的逗号替换为.
+            timePart = timePart.replace(',', '.');
+            builder.append(timePart);
+        }
+
+        return builder.toString();
     }
 }

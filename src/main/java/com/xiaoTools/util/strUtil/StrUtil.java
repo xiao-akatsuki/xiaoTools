@@ -814,5 +814,39 @@ public class StrUtil {
         return count;
     }
 
+    // 切分 ------------------------------------------------------------------------ split
 
+    /**
+     * [切分字符串](Segmentation string)
+     * @description: zh - 切分字符串
+     * @description: en - Segmentation string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/25 8:25 上午
+     * @param str: 被切分的字符串
+     * @param separator: 分隔符字符
+     * @return java.lang.String[]
+    */
+    public static String[] splitToArray(CharSequence str, char separator) {
+        return splitToArray(str, separator, Constant.ZERO);
+    }
+
+    /**
+     * [切分字符串](Segmentation string)
+     * @description: zh - 切分字符串
+     * @description: en - Segmentation string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/25 8:26 上午
+     * @param str: 被切分的字符串
+     * @param separator: 分隔符字符
+     * @param limit: 限制分片数
+     * @return java.lang.String[]
+    */
+    public static String[] splitToArray(CharSequence str, char separator, int limit) {
+        if (Constant.NULL == str) {
+            return new String[]{};
+        }
+        return StrSpliter.splitToArray(str.toString(), separator, limit, false, false);
+    }
 }

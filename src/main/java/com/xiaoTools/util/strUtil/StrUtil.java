@@ -1,6 +1,7 @@
 package com.xiaoTools.util.strUtil;
 
 import com.xiaoTools.core.stringFormatter.StrFormatter;
+import com.xiaoTools.core.text.strSpliter.StrSpliter;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.charUtil.CharUtil;

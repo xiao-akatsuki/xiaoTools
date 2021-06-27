@@ -2,6 +2,7 @@ package com.xiaoTools.util.numUtil;
 
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
+import com.xiaoTools.util.charUtil.CharUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.math.BigDecimal;
@@ -248,8 +249,6 @@ public class NumUtil {
           return divisor(big - small, small);
       }
     }
-
-
 
     /**
      * [求最小公倍数](Finding the least common multiple)
@@ -565,6 +564,22 @@ public class NumUtil {
             return Constant.FALSE;
         }
         return Constant.ZERO == value1.compareTo(value2);
+    }
+
+    /**
+     * [比较两个字符是否相同](Compare two characters to see if they are the same)
+     * @description: zh - 比较两个字符是否相同
+     * @description: en - Compare two characters to see if they are the same
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/27 9:10 上午
+     * @param c1: 字符1
+     * @param c2: 字符2
+     * @param ignoreCase: 是否忽略大小写
+     * @return boolean
+    */
+    public static boolean equals(char c1, char c2, boolean ignoreCase) {
+        return CharUtil.equals(c1, c2, ignoreCase);
     }
 
     /**

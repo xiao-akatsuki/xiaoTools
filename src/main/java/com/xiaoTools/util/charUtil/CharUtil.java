@@ -61,4 +61,23 @@ public class CharUtil {
     public static String toString(char c) {
         return AsciiStrCache.toString(c);
     }
+
+    /**
+     * [比较两个字符是否相同](Compare two characters to see if they are the same)
+     * @description: zh - 比较两个字符是否相同
+     * @description: en - Compare two characters to see if they are the same
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/27 9:12 上午
+     * @param c1: 字符1
+     * @param c2: 字符2
+     * @param ignoreCase: 是否忽略大小写
+     * @return boolean
+    */
+    public static boolean equals(char c1, char c2, boolean ignoreCase) {
+        if (ignoreCase) {
+            return Character.toLowerCase(c1) == Character.toLowerCase(c2);
+        }
+        return c1 == c2;
+    }
 }

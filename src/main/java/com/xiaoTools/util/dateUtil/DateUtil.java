@@ -21,7 +21,6 @@ import com.xiaoTools.date.week.Week;
 import com.xiaoTools.date.zodiac.Zodiac;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.calendarUtil.CalendarUtil;
-import com.xiaoTools.util.charUtil.CharUtil;
 import com.xiaoTools.util.collUtil.CollUtil;
 import com.xiaoTools.util.compareUtil.CompareUtil;
 import com.xiaoTools.util.localDateTimeUtil.LocalDateTimeUtil;
@@ -659,7 +658,7 @@ public class DateUtil extends CalendarUtil {
         if (date instanceof DateTime) {
             timeZone = ((DateTime) date).getTimeZone();
         }
-        return format(date, newSimpleFormat(format, null, timeZone));
+        return format(date, newSimpleFormat(format, Constant.LOCALE_NULL, timeZone));
     }
 
     /**
@@ -883,7 +882,7 @@ public class DateUtil extends CalendarUtil {
      * @return com.xiaoTools.date.dateTime.DateTime
     */
     public static DateTime parse(CharSequence dateStr, String format, Locale locale) {
-        return new DateTime(dateStr, DateUtil.newSimpleFormat(format, locale, null));
+        return new DateTime(dateStr, DateUtil.newSimpleFormat(format, locale, Constant.TIME_ZONE_NULL));
     }
 
     /**

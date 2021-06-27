@@ -9,6 +9,8 @@ import com.xiaoTools.util.charUtil.CharUtil;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * [字符串工具类](String tool class)
@@ -497,6 +499,66 @@ public class StrUtil {
     }
 
     /**
+     * [指定范围内查找字符串](Finds a string in the specified range)
+     * @description: zh - 指定范围内查找字符串
+     * @description: en - Finds a string in the specified range
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/27 9:32 上午
+     * @param str: 字符串
+     * @param searchStr: 需要查找位置的字符串
+     * @param fromIndex: 起始位置
+     * @param ignoreCase: 是否忽略大小写
+     * @return int
+    */
+    public static int indexOf(final CharSequence str, CharSequence searchStr, int fromIndex, boolean ignoreCase) {
+        if (str == Constant.NULL || searchStr == Constant.NULL) {
+            return Constant.NEGATIVE_ONE;
+        }
+        if (fromIndex < Constant.ZERO) {
+            fromIndex = Constant.ZERO;
+        }
+
+        final int endLimit = str.length() - searchStr.length() + Constant.ONE;
+        if (fromIndex > endLimit) {
+            return Constant.NEGATIVE_ONE;
+        }
+        if (searchStr.length() == Constant.ZERO) {
+            return fromIndex;
+        }
+
+        if (!ignoreCase) {
+            // 不忽略大小写调用JDK方法
+            return str.toString().indexOf(searchStr.toString(), fromIndex);
+        }
+        for (int i = fromIndex; i < endLimit; i++) {
+            if (isSubEquals(str, i, searchStr, Constant.ZERO, searchStr.length(), Constant.TRUE)) {
+                return i;
+            }
+        }
+        return Constant.NEGATIVE_ONE;
+    }
+
+    /**
+     * [截取两个字符串的不同部分（长度一致），判断截取的子串是否相同](Intercepts different parts of two strings (the same length) to determine whether the intercepted substrings are the same)
+     * @description: zh - 截取两个字符串的不同部分（长度一致），判断截取的子串是否相同
+     * @description: en - Intercepts different parts of two strings (the same length) to determine whether the intercepted substrings are the same
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/27 9:31 上午
+     * @param str1: 第一个字符串
+     * @param start1: 第一个字符串开始的位置
+     * @param str2: 第二个字符串
+     * @param start2: 第二个字符串开始的位置
+     * @param length: 截取长度
+     * @param ignoreCase: 是否忽略大小写
+     * @return boolean
+    */
+    public static boolean isSubEquals(CharSequence str1, int start1, CharSequence str2, int start2, int length, boolean ignoreCase) {
+        return Constant.NULL != str1 && Constant.NULL != str2 && str1.toString().regionMatches(ignoreCase, start1, str2.toString(), start2, length);
+    }
+
+    /**
      * [简单将占位符 {} 按照顺序替换为参数](Simply replace the placeholder {} with a parameter in order)
      * @description: zh - 简单将占位符 {} 按照顺序替换为参数
      * @description: en - Simply replace the placeholder {} with a parameter in order
@@ -761,6 +823,27 @@ public class StrUtil {
         return Constant.STRING_NULL;
     }
 
+    // 删除 ------------------------------------------------------------------------ remove
+
+    /**
+     * [去掉指定后缀](Remove the specified suffix)
+     * @description: zh - 去掉指定后缀
+     * @description: en - Remove the specified suffix
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/27 10:04 上午
+     * @param str: 字符串
+     * @param suffix: 后缀
+     * @return java.lang.String
+    */
+    public static String removeSuffix(CharSequence str, CharSequence suffix) {
+        if (isEmpty(str) || isEmpty(suffix)) {
+            return str(str);
+        }
+        final String str2 = str.toString();
+        return str2.endsWith(suffix.toString()) ? subPre(str2, str2.length() - suffix.length()) : str2;
+    }
+
     // 总数 ------------------------------------------------------------------------ count
 
     /**
@@ -849,5 +932,107 @@ public class StrUtil {
             return new String[]{};
         }
         return StrSpliter.splitToArray(str.toString(), separator, limit, false, false);
+    }
+
+    /**
+     * [切分字符串，去除切分后每个元素两边的空白符，去除空白项](Cut string, remove the blank character on both sides of each element after cutting, remove the blank item)
+     * @description: zh - 切分字符串，去除切分后每个元素两边的空白符，去除空白项
+     * @description: en - Cut string, remove the blank character on both sides of each element after cutting, remove the blank item
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/27 9:57 上午
+     * @param str: 被切分的字符串
+     * @param separator: 分隔符字符
+     * @return java.util.List<java.lang.String>
+    */
+    public static List<String> splitTrim(CharSequence str, char separator) {
+        return splitTrim(str, separator, -1);
+    }
+
+    /**
+     * [切分字符串，去除切分后每个元素两边的空白符，去除空白项](Cut string, remove the blank character on both sides of each element after cutting, remove the blank item)
+     * @description: zh - 切分字符串，去除切分后每个元素两边的空白符，去除空白项
+     * @description: en - Cut string, remove the blank character on both sides of each element after cutting, remove the blank item
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/27 9:50 上午
+     * @param str: 被切分的字符串
+     * @param separator: 分隔符字符
+     * @param limit: 限制分片数，-1不限制
+     * @return java.util.List<java.lang.String>
+    */
+    public static List<String> splitTrim(CharSequence str, char separator, int limit) {
+        return split(str, separator, limit, Constant.TRUE, Constant.TRUE);
+    }
+
+    /**
+     * 
+     * @description: 
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/27 9:51 上午
+     * @param str: 被切分的字符串
+     * @param separator: 分隔符字符
+     * @param limit: 限制分片数，-1不限制
+     * @param isTrim: 是否去除切分字符串后每个元素两边的空格
+     * @param ignoreEmpty: 是否忽略空串
+     * @return java.util.List<java.lang.String>
+    */
+    public static List<String> split(CharSequence str, char separator, int limit, boolean isTrim, boolean ignoreEmpty) {
+        return Constant.NULL == str ? new ArrayList<>(Constant.ZERO) : StrSpliter.split(str.toString(), separator, limit, isTrim, ignoreEmpty);
+    }
+
+    // 修剪 ------------------------------------------------------------------------ trim
+
+    /**
+     * [除去字符串头尾部的空白，如果字符串是null，依然返回null。](Remove the blanks at the beginning and end of the string. If the string is null, null is still returned.)
+     * @description: zh - 除去字符串头尾部的空白，如果字符串是null，依然返回null。
+     * @description: en - Remove the blanks at the beginning and end of the string. If the string is null, null is still returned.
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/27 9:38 上午
+     * @param str: 要处理的字符串
+     * @return java.lang.String
+    */
+    public static String trim(CharSequence str) {
+        return (Constant.NULL == str) ? Constant.STRING_NULL : trim(str, Constant.ZERO);
+    }
+
+    /**
+     * [除去字符串头尾部的空白符，如果字符串是 null ，依然返回 null 。](Remove the blanks at the beginning and end of the string, and return null if the string is null.)
+     * @description: zh - 除去字符串头尾部的空白符，如果字符串是 null ，依然返回 null 。
+     * @description: en - Remove the blanks at the beginning and end of the string, and return null if the string is null.
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/27 9:38 上午
+     * @param str: 要处理的字符串
+     * @param mode: -1表示trimStart，0表示trim全部， 1表示trimEnd
+     * @return java.lang.String
+    */
+    public static String trim(CharSequence str, int mode) {
+        String result;
+        if (str == Constant.NULL) {
+            result = Constant.STRING_NULL;
+        } else {
+            int length = str.length();
+            int start = Constant.ZERO;
+            int end = length;// 扫描字符串头部
+            if (mode <= Constant.ZERO) {
+                while ((start < end) && (CharUtil.isBlankChar(str.charAt(start)))) {
+                    start++;
+                }
+            }// 扫描字符串尾部
+            if (mode >= Constant.ZERO) {
+                while ((start < end) && (CharUtil.isBlankChar(str.charAt(end - Constant.ONE)))) {
+                    end--;
+                }
+            }
+            if ((start > Constant.ZERO) || (end < length)) {
+                result = str.toString().substring(start, end);
+            } else {
+                result = str.toString();
+            }
+        }
+        return result;
     }
 }

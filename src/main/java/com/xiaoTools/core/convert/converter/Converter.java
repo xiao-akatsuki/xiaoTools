@@ -18,6 +18,7 @@ public interface Converter<T> {
      * @since 2021/6/17 8:42 上午
      * @param value: 原始值
      * @param defaultValue: 默认值
+     * @throws IllegalArgumentException: 非法参数异常
      * @return T
     */
     T convert(Object value, T defaultValue) throws IllegalArgumentException;

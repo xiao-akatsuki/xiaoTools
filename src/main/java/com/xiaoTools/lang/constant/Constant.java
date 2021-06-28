@@ -552,6 +552,8 @@ public class Constant {
 
     public static final Character CHARACTER_NULL = null;
 
+    public static final Integer INTEGER_NULL = null;
+
     /*-----------------------------------------------------------IO*/
 
     public static final float FLOAT_ZERO = 0f;

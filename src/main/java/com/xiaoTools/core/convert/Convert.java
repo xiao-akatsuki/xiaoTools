@@ -258,6 +258,141 @@ public class Convert {
 
     /*转换为int-----------------------------------------------------------to int*/
 
+    /**
+     * [转换成为int类型](convert to int)
+     * @description: zh - 转换成为int类型
+     * @description: en - convert to int
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/28 7:52 上午
+     * @param value: 被转换的值
+     * @param defaultValue: 转换错误时的默认值
+     * @return java.lang.Integer
+    */
+    public static Integer toInt(Object value, Integer defaultValue) {
+        return convertQuietly(Integer.class, value, defaultValue);
+    }
+
+    /**
+     * [转换成为int类型](convert to int)
+     * @description: zh - 转换成为int类型
+     * @description: en - convert to int
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/28 7:53 上午
+     * @param value: 被转换的值
+     * @return java.lang.Integer
+    */
+    public static Integer toInt(Object value) {
+        return toInt(value, Constant.INTEGER_NULL);
+    }
+
+    /**
+     * [转换为Integer数组](Convert to integer array)
+     * @description: zh - 转换为Integer数组
+     * @description: en - Convert to integer array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/28 7:54 上午
+     * @param value: 被转换的值
+     * @return java.lang.Integer[]
+    */
+    public static Integer[] toIntArray(Object value) {
+        return convert(Integer[].class, value);
+    }
+
+    /*转换为long-----------------------------------------------------------to long*/
+
+    /**
+     * [转换为long](covert to long)
+     * @description: zh - 转换为long
+     * @description: en - covert to long
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/28 7:55 上午
+     * @param value: 被转换的值
+     * @param defaultValue: 转换错误时的默认值
+     * @return java.lang.Long
+    */
+    public static Long toLong(Object value, Long defaultValue) {
+        return convertQuietly(Long.class, value, defaultValue);
+    }
+
+    /**
+     * [转换为long](Convert to long)
+     * @description: zh - 转换为long
+     * @description: en - Convert to long
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/28 7:57 上午
+     * @param value: 被转换的值
+     * @return java.lang.Long
+    */
+    public static Long toLong(Object value) {
+        return toLong(value, null);
+    }
+
+    /**
+     * [转换为Long数组](Convert to long array)
+     * @description: zh - 转换为Long数组
+     * @description: en - Convert to long array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/28 7:57 上午
+     * @param value: 被转换的值
+     * @return java.lang.Long[]
+    */
+    public static Long[] toLongArray(Object value) {
+        return convert(Long[].class, value);
+    }
+
+    /*转换为double-----------------------------------------------------------to double*/
+
+    /**
+     * [转换为double](Convert to double)
+     * @description: zh - 转换为double
+     * @description: en - Convert to double
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/28 7:59 上午
+     * @param value: 被转换的值
+     * @param defaultValue: 转换错误时的默认值
+     * @return java.lang.Double
+    */
+    public static Double toDouble(Object value, Double defaultValue) {
+        return convertQuietly(Double.class, value, defaultValue);
+    }
+
+    /**
+     * [转换为double](Convert to double)
+     * @description: zh - 转换为double
+     * @description: en - Convert to double
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/28 8:00 上午
+     * @param value: 被转换的值
+     * @return java.lang.Double
+    */
+    public static Double toDouble(Object value) {
+        return toDouble(value, null);
+    }
+
+    /**
+     * [转换为Double数组](Convert to double array)
+     * @description: zh - 转换为Double数组
+     * @description: en - Convert to double array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/28 8:00 上午
+     * @param value: 被转换的值
+     * @return java.lang.Double[]
+    */
+    public static Double[] toDoubleArray(Object value) {
+        return convert(Double[].class, value);
+    }
+
+    /*转换为float-----------------------------------------------------------to float*/
+
     public static <T> T convertWithCheck(Type type, Object value, T defaultValue, boolean quietly) {
         final ConverterRegistry registry = ConverterRegistry.getInstance();
         try {

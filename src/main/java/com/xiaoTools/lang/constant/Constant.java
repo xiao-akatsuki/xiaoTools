@@ -498,6 +498,8 @@ public class Constant {
 
     public static final String STRING_DOLLAR = "$";
 
+    public static final String STRING_WELL_NUMBER = "#";
+
     public static final String STRING_NULL_OUT = "null";
 
     public static final String STRING_BIG_SPACE = "  ";
@@ -505,6 +507,10 @@ public class Constant {
     /*-----------------------------------------------------------byte*/
 
     public static final int BYTE_ZERO = 0x0f;
+
+    public static final int ZERO_X_F_ZERO = 0xF0;
+
+    public static final int ZERO_X_ZERO_F = 0x0F;
 
     public static final int BYTE_ONE =  0x0f0;
 

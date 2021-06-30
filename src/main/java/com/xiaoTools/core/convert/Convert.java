@@ -977,4 +977,17 @@ public class Convert {
     public static String toHex(String str, Charset charset) {
         return HexUtil.encodeHexStr(str, charset);
     }
+
+    /**
+     * 
+     * @description: 
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/30 9:31 下午
+     * @param bytes: 
+     * @return java.lang.String
+    */
+    public static String toHex(byte[] bytes) {
+        return HexUtil.encodeHexStr(bytes);
+    }
 }

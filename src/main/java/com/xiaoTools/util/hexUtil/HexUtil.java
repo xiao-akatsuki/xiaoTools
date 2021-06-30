@@ -139,47 +139,39 @@ public class HexUtil {
     }
 
     /**
-     * [将字符串转换成为16进制](Converts a string to hexadecimal)
-     * @description: zh - 输入字符串将字符串转换成为16进制的字符串。
-     * @description: en - Input string converts the string to a hexadecimal string.
+     * [将字符串转换为十六进制字符串，结果为小写](Converts a string to a hexadecimal string and the result is lowercase)
+     * @description: zh - 将字符串转换为十六进制字符串，结果为小写
+     * @description: en - Converts a string to a hexadecimal string and the result is lowercase
      * @version: V1.0
      * @author XiaoXunYao
-     * @since 2021/5/15 2:38 下午
-     * @param value: [需要编码的字符串](String to encode)
+     * @since 2021/6/30 9:33 下午
+     * @param data: 被编码的字符串
      * @return java.lang.String
     */
-    public static String encodeHexStr(String value){
-        StringBuilder sb =  new  StringBuilder( Constant.EMPTY );
-        byte [] bs = value.getBytes();
-        int  bit;
-        for (byte b : bs) {
-            bit = (b & Constant.BYTE_ONE) >> Constant.FOUR;
-            sb.append(DIGITS_LOWER[bit]);
-            bit = b & Constant.BYTE_ZERO;
-            sb.append(DIGITS_LOWER[bit]);
-        }
-        return sb.toString().trim();
+    public static String encodeHexStr(String data) {
+        return encodeHexStr(data, CharsetUtil.CHARSET_UTF_8);
     }
 
     /**
-     * [将十六进制的字符串转换成为字符串](Converts a hexadecimal string to a string)
-     * @description: zh - 输入十六进制的字符串将该字符串转换成为字符串
-     * @description: en - Enter a string in hexadecimal to convert the string to a string
+     * [将字节数组转换为十六进制字符串](Converts a byte array to a hexadecimal string)
+     * @description: zh - 将字节数组转换为十六进制字符串
+     * @description: en - Converts a byte array to a hexadecimal string
      * @version: V1.0
      * @author XiaoXunYao
-     * @since 2021/5/15 2:54 下午
-     * @param value: [十六进制的字符串](Hexadecimal string)
+     * @since 2021/6/30 9:34 下午
+     * @param data: byte[]
+     * @param toLowerCase: true 传换成小写格式 ， false 传换成大写格式
      * @return java.lang.String
     */
-    public static String decodeHexStr(String value){
-        char [] hexs = value.toCharArray();
-        byte [] bytes =  new  byte [value.length() /  Constant.TWO ];
-        int  n;
-        for  ( int  i =  Constant.ZERO ; i < bytes.length; i++) {
-            n = HEXADECIMAL_STRING.indexOf(hexs[ Constant.TWO  * i]) *  Constant.SIXTEEN ;
-            n += HEXADECIMAL_STRING.indexOf(hexs[ Constant.TWO  * i +  Constant.ONE ]);
-            bytes[i] = ( byte ) (n &  Constant.BYTE_TWO );
-        }
-        return  new  String(bytes);
+    public static String encodeHexStr(byte[] data, boolean toLowerCase) {
+        return encodeHexStr(data, toLowerCase ? DIGITS_LOWER : DIGITS_UPPER);
     }
+
+    /*解码-----------------------------------------------------------decode*/
+
+    public static String decodeHexStr(String hexStr) {
+        return decodeHexStr(hexStr, CharsetUtil.CHARSET_UTF_8);
+    }
+
+
 }

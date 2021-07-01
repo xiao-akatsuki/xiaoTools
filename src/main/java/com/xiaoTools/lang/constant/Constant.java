@@ -364,6 +364,8 @@ public class Constant {
 
     public static final String STRING_ZERO = "0";
 
+    public static final String STRING_FOURS_ZERO = "0000";
+
     public static final String STRING_ZERO_X = "0x";
 
     public static final String PERCENT_SIGN = "%";

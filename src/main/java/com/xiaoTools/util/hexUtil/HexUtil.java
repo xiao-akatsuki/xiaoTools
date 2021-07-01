@@ -321,18 +321,29 @@ public class HexUtil {
         return Color.decode(hexColor);
     }
 
+    /**
+     * [将指定int值转换为Unicode字符串形式](Converts the specified int value to a Unicode string)
+     * @description: zh - 将指定int值转换为Unicode字符串形式
+     * @description: en - Converts the specified int value to a Unicode string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/1 8:31 上午
+     * @param value: int值，也可以是char
+     * @return java.lang.String
+    */
     public static String toUnicodeHex(int value) {
         final StringBuilder builder = new StringBuilder(Constant.SIX);
-
         builder.append(Constant.STRING_PATTERN_U);
         String hex = toHex(value);
         int len = hex.length();
         if (len < Constant.FOUR) {
             // 不足4位补0
-            builder.append("0000", Constant.ZERO, Constant.FOUR - len);
+            builder.append(Constant.STRING_FOURS_ZERO, Constant.ZERO, Constant.FOUR - len);
         }
         builder.append(hex);
 
         return builder.toString();
     }
+
+
 }

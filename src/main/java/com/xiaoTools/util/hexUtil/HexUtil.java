@@ -3,6 +3,7 @@ package com.xiaoTools.util.hexUtil;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.strUtil.StrUtil;
 
+import java.awt.*;
 import java.nio.charset.Charset;
 
 /**
@@ -169,9 +170,169 @@ public class HexUtil {
 
     /*解码-----------------------------------------------------------decode*/
 
+    /**
+     * [将十六进制字符数组转换为字符串，默认编码UTF-8](Convert hexadecimal character array to string, default encoding UTF-8)
+     * @description: zh - 将十六进制字符数组转换为字符串，默认编码UTF-8
+     * @description: en - Convert hexadecimal character array to string, default encoding UTF-8
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/1 7:50 上午
+     * @param hexStr: 十六进制String
+     * @return java.lang.String
+    */
     public static String decodeHexStr(String hexStr) {
         return decodeHexStr(hexStr, CharsetUtil.CHARSET_UTF_8);
     }
 
+    /**
+     * [将十六进制字符数组转换为字符串](Converts a hexadecimal character array to a string)
+     * @description: zh - 将十六进制字符数组转换为字符串
+     * @description: en - Converts a hexadecimal character array to a string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/1 7:51 上午
+     * @param hexStr: 十六进制String
+     * @param charset: 编码
+     * @return java.lang.String
+    */
+    public static String decodeHexStr(String hexStr, Charset charset) {
+        return StrUtil.isEmpty(hexStr) ? hexStr : decodeHexStr(hexStr.toCharArray(), charset);
+    }
 
+    /**
+     * [将十六进制字符数组转换为字符串](Converts a hexadecimal character array to a string)
+     * @description: zh - 将十六进制字符数组转换为字符串
+     * @description: en - Converts a hexadecimal character array to a string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/1 7:52 上午
+     * @param hexData: 十六进制char[]
+     * @param charset: 编码
+     * @return java.lang.String
+    */
+    public static String decodeHexStr(char[] hexData, Charset charset) {
+        return StrUtil.str(decodeHex(hexData), charset);
+    }
+
+    /**
+     * [将十六进制字符数组转换为字节数组](Converts a hexadecimal character array to a byte array)
+     * @description: zh - 将十六进制字符数组转换为字节数组
+     * @description: en - Converts a hexadecimal character array to a byte array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/1 7:54 上午
+     * @param hexData: 十六进制char[]
+     * @return byte[]
+    */
+    public static byte[] decodeHex(char[] hexData) {
+        int len = hexData.length;
+        if ((len & Constant.ZERO_X_ZERO_ONE) != Constant.ZERO) {
+            throw new RuntimeException("Odd number of characters.");
+        }
+        byte[] out = new byte[len >> 1];
+        // two characters form the hex value.
+        for (int i = Constant.ZERO, j = Constant.ZERO; j < len; i++) {
+            int f = toDigit(hexData[j], j) << Constant.FOUR;
+            j++;
+            f = f | toDigit(hexData[j], j);
+            j++;
+            out[i] = (byte) (f & Constant.ZERO_X_F_F);
+        }
+        return out;
+    }
+
+    /**
+     * [将十六进制字符串解码为byte[]](Decode hexadecimal string to byte [])
+     * @description: zh - 将十六进制字符串解码为byte[]
+     * @description: en - Decode hexadecimal string to byte []
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/1 7:58 上午
+     * @param hexStr: 十六进制String
+     * @return byte[]
+    */
+    public static byte[] decodeHex(String hexStr) {
+        if (StrUtil.isEmpty(hexStr)) {
+            return null;
+        }
+        hexStr = StrUtil.cleanBlank(hexStr);
+        return decodeHex(hexStr.toCharArray());
+    }
+
+    /*编码-----------------------------------------------------------Color*/
+
+    /**
+     * [将Color编码为Hex形式](Encode color to hex form)
+     * @description: zh - 将Color编码为Hex形式
+     * @description: en - Encode color to hex form
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/1 7:59 上午
+     * @param color: Color
+     * @return java.lang.String
+    */
+    public static String encodeColor(Color color) {
+        return encodeColor(color, Constant.STRING_WELL_NUMBER);
+    }
+
+    /**
+     * [将Color编码为Hex形式](Encode color to hex form)
+     * @description: zh - 将Color编码为Hex形式
+     * @description: en - Encode color to hex form
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/1 8:03 上午
+     * @param color: Color
+     * @param prefix: 前缀字符串，可以是#、0x等
+     * @return java.lang.String
+    */
+    public static String encodeColor(Color color, String prefix) {
+        final StringBuilder builder = new StringBuilder(prefix);
+        String colorHex;
+        colorHex = Integer.toHexString(color.getRed());
+        if (Constant.ONE == colorHex.length()) {
+            builder.append(Constant.CHAR_ZERO);
+        }
+        builder.append(colorHex);
+        colorHex = Integer.toHexString(color.getGreen());
+        if (Constant.ONE == colorHex.length()) {
+            builder.append(Constant.CHAR_ZERO);
+        }
+        builder.append(colorHex);
+        colorHex = Integer.toHexString(color.getBlue());
+        if (Constant.ONE == colorHex.length()) {
+            builder.append(Constant.CHAR_ZERO);
+        }
+        builder.append(colorHex);
+        return builder.toString();
+    }
+
+    /**
+     * [将Hex颜色值转为Color](Convert hex color value to color)
+     * @description: zh - 将Hex颜色值转为Color
+     * @description: en - Convert hex color value to color
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/1 8:04 上午
+     * @param hexColor: 16进制颜色值，可以以#开头，也可以用0x开头
+     * @return java.awt.Color
+    */
+    public static Color decodeColor(String hexColor) {
+        return Color.decode(hexColor);
+    }
+
+    public static String toUnicodeHex(int value) {
+        final StringBuilder builder = new StringBuilder(Constant.SIX);
+
+        builder.append(Constant.STRING_PATTERN_U);
+        String hex = toHex(value);
+        int len = hex.length();
+        if (len < Constant.FOUR) {
+            // 不足4位补0
+            builder.append("0000", Constant.ZERO, Constant.FOUR - len);
+        }
+        builder.append(hex);
+
+        return builder.toString();
+    }
 }

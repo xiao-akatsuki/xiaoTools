@@ -428,6 +428,8 @@ public class Constant {
 
     public static final String ENTER = "\r\n";
 
+    public static final String STRING_PATTERN_U = "\\u";
+
     public static final String STRING_NULL = null;
 
     public static final String STRING_HOUR_OF_DAY = "HourOfDay";
@@ -508,9 +510,13 @@ public class Constant {
 
     public static final int BYTE_ZERO = 0x0f;
 
+    public static final int ZERO_X_ZERO_ONE = 0x01;
+
     public static final int ZERO_X_F_ZERO = 0xF0;
 
     public static final int ZERO_X_ZERO_F = 0x0F;
+
+    public static final int ZERO_X_F_F = 0xFF;
 
     public static final int BYTE_ONE =  0x0f0;
 

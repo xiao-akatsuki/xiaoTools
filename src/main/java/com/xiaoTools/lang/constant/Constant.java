@@ -12,7 +12,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.regex.Pattern;
 
 /**
  * [统一常量](Uniform constant)
@@ -209,6 +208,8 @@ public class Constant {
     /*-----------------------------------------------------------char*/
 
     public static final char DOUBLE_CHAR_SLASH = '\\';
+
+    public static final char CHAR_SPACE = ' ';
 
     public static final char CHAR_SLASH_SPOT = '\'';
 
@@ -515,6 +516,8 @@ public class Constant {
     public static final int ZERO_X_ZERO_ONE = 0x01;
 
     public static final int ZERO_X_F_ZERO = 0xF0;
+
+    public static final int ZERO_X_F_ZERO_DOWN = 0xf0;
 
     public static final int ZERO_X_ZERO_F = 0x0F;
 

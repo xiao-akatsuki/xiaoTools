@@ -1,9 +1,11 @@
 package com.xiaoTools.util.hexUtil;
 
 import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.util.charUtil.CharUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.awt.*;
+import java.math.BigInteger;
 import java.nio.charset.Charset;
 
 /**
@@ -100,31 +102,6 @@ public class HexUtil {
     }
 
     /**
-     * [将字节数组转换为十六进制字符数组](Convert byte array to hexadecimal character array)
-     * @description: zh - 将字节数组转换为十六进制字符数组
-     * @description: en - Convert byte array to hexadecimal character array
-     * @version: V1.0
-     * @author XiaoXunYao
-     * @since 2021/6/30 8:05 上午
-     * @param data: byte[]
-     * @param toDigits: 用于控制输出的char[]
-     * @return char[]
-    */
-    private static char[] encodeHex(byte[] data, char[] toDigits) {
-        final int len = data.length;
-        //len*2
-        final char[] out = new char[len << Constant.ONE];
-        //十六进制值中的两个字符。
-        for (int i = Constant.ZERO, j = Constant.ZERO; i < len; i++) {
-            // 高位
-            out[j++] = toDigits[(Constant.ZERO_X_F_ZERO & data[i]) >>> Constant.FOUR];
-            // 低位
-            out[j++] = toDigits[Constant.ZERO_X_ZERO_F & data[i]];
-        }
-        return out;
-    }
-
-    /**
      * [将字符串转换为十六进制字符串，结果为小写](Converts a string to a hexadecimal string and the result is lowercase)
      * @description: zh - 将字符串转换为十六进制字符串，结果为小写
      * @description: en - Converts a string to a hexadecimal string and the result is lowercase
@@ -151,6 +128,20 @@ public class HexUtil {
     */
     public static String encodeHexStr(String data) {
         return encodeHexStr(data, CharsetUtil.CHARSET_UTF_8);
+    }
+
+    /**
+     * [将字节数组转换为十六进制字符串](Converts a byte array to a hexadecimal string)
+     * @description: zh - 将字节数组转换为十六进制字符串
+     * @description: en - Converts a byte array to a hexadecimal string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/3 8:03 上午
+     * @param data: byte[]
+     * @return java.lang.String
+    */
+    public static String encodeHexStr(byte[] data) {
+        return encodeHexStr(data, true);
     }
 
     /**
@@ -345,5 +336,163 @@ public class HexUtil {
         return builder.toString();
     }
 
+    /**
+     * [将指定char值转换为Unicode字符串形式](Converts the specified char value to unicode string form)
+     * @description: zh - 将指定char值转换为Unicode字符串形式
+     * @description: en - Converts the specified char value to unicode string form
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/3 7:48 上午
+     * @param ch: char值
+     * @return java.lang.String
+    */
+    public static String toUnicodeHex(char ch) {
+        return Constant.STRING_PATTERN_U +
+                DIGITS_LOWER[(ch >> Constant.TWELVE) & Constant.FIFTEEN] +
+                DIGITS_LOWER[(ch >> Constant.EIGHT) & Constant.FIFTEEN] +
+                DIGITS_LOWER[(ch >> Constant.FOUR) & Constant.FIFTEEN] +
+                DIGITS_LOWER[(ch) & Constant.FIFTEEN];
+    }
 
+    /**
+     * [转为16进制字符串](Convert to hexadecimal string)
+     * @description: zh - 转为16进制字符串
+     * @description: en - Convert to hexadecimal string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/3 7:50 上午
+     * @param value: int value
+     * @return java.lang.String
+    */
+    public static String toHex(int value) {
+        return Integer.toHexString(value);
+    }
+
+    /**
+     * [转为16进制字符串](Convert to hexadecimal string)
+     * @description: zh - 转为16进制字符串
+     * @description: en - Convert to hexadecimal string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/3 7:50 上午
+     * @param value: long value
+     * @return java.lang.String
+    */
+    public static String toHex(long value) {
+        return Long.toHexString(value);
+    }
+
+    /**
+     * [将byte值转为16进制并添加到StringBuilder中](Convert the byte value to hexadecimal and add it to StringBuilder)
+     * @description: zh - 将byte值转为16进制并添加到StringBuilder中
+     * @description: en - Convert the byte value to hexadecimal and add it to StringBuilder
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/3 7:54 上午
+     * @param builder: StringBuilder
+     * @param b: byte
+     * @param toLowerCase: 是否使用小写
+    */
+    public static void appendHex(StringBuilder builder, byte b, boolean toLowerCase) {
+        final char[] toDigits = toLowerCase ? DIGITS_LOWER : DIGITS_UPPER;
+        //计算高位
+        int high = (b & Constant.ZERO_X_F_ZERO_DOWN) >>> Constant.FOUR;
+        //计算低位
+        int low = b & Constant.BYTE_ZERO;
+        builder.append(toDigits[high]);
+        builder.append(toDigits[low]);
+    }
+
+    /**
+     * [Hex（16进制）字符串转为BigInteger](Hex (hexadecimal) string to BigInteger)
+     * @description: zh - Hex（16进制）字符串转为BigInteger
+     * @description: en - Hex (hexadecimal) string to BigInteger
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/3 7:56 上午
+     * @param hexStr: Hex(16进制字符串)
+     * @return java.math.BigInteger
+    */
+    public static BigInteger toBigInteger(String hexStr) {
+        return Constant.NULL == hexStr ? null : new BigInteger(hexStr, Constant.SIXTEEN);
+    }
+
+    /**
+     * [格式化Hex字符串](Format hex string)
+     * @description: zh - 格式化Hex字符串
+     * @description: en - Format hex string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/3 7:59 上午
+     * @param hexStr: Hex字符串
+     * @return java.lang.String
+    */
+    public static String format(String hexStr) {
+        final int length = hexStr.length();
+        final StringBuilder builder = StrUtil.builder(length + length / Constant.TWO);
+        builder.append(hexStr.charAt(Constant.ZERO)).append(hexStr.charAt(Constant.ONE));
+        for (int i = Constant.TWO; i < length - Constant.ONE; i += Constant.TWO) {
+            builder.append(Constant.CHAR_SPACE).append(hexStr.charAt(i)).append(hexStr.charAt(i + Constant.ONE));
+        }
+        return builder.toString();
+    }
+
+    /**
+     *
+     * @description: zh - 将字节数组转换为十六进制字符串
+     * @description: en - Converts a byte array to a hexadecimal string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/3 8:01 上午
+     * @param data: byte[]
+     * @param toDigits: 用于控制输出的char[]
+     * @return java.lang.String
+    */
+    private static String encodeHexStr(byte[] data, char[] toDigits) {
+        return new String(encodeHex(data, toDigits));
+    }
+
+    /**
+     * [将字节数组转换为十六进制字符数组](Convert byte array to hexadecimal character array)
+     * @description: zh - 将字节数组转换为十六进制字符数组
+     * @description: en - Convert byte array to hexadecimal character array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/6/30 8:05 上午
+     * @param data: byte[]
+     * @param toDigits: 用于控制输出的char[]
+     * @return char[]
+     */
+    private static char[] encodeHex(byte[] data, char[] toDigits) {
+        final int len = data.length;
+        //len*2
+        final char[] out = new char[len << Constant.ONE];
+        //十六进制值中的两个字符。
+        for (int i = Constant.ZERO, j = Constant.ZERO; i < len; i++) {
+            // 高位
+            out[j++] = toDigits[(Constant.ZERO_X_F_ZERO & data[i]) >>> Constant.FOUR];
+            // 低位
+            out[j++] = toDigits[Constant.ZERO_X_ZERO_F & data[i]];
+        }
+        return out;
+    }
+
+    /**
+     * [将十六进制字符转换成一个整数](Converts a hexadecimal character to an integer)
+     * @description: zh - 将十六进制字符转换成一个整数
+     * @description: en - Converts a hexadecimal character to an integer
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/3 8:01 上午
+     * @param ch: 十六进制char
+     * @param index: 十六进制字符在字符数组中的位置
+     * @return int
+    */
+    private static int toDigit(char ch, int index) {
+        int digit = Character.digit(ch, 16);
+        if (digit == -1) {
+            throw new RuntimeException("Illegal hexadecimal character " + ch + " at index " + index);
+        }
+        return digit;
+    }
 }

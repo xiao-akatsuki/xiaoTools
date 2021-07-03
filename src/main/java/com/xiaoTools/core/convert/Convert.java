@@ -979,15 +979,59 @@ public class Convert {
     }
 
     /**
-     * 
-     * @description: 
+     * [byte数组转16进制串](Conversion of byte array to hexadecimal string)
+     * @description: zh - byte数组转16进制串
+     * @description: en - Conversion of byte array to hexadecimal string
      * @version: V1.0
      * @author XiaoXunYao
      * @since 2021/6/30 7:51 上午
-     * @param bytes: 
+     * @param bytes: 被转换的byte数组
      * @return java.lang.String
     */
     public static String toHex(byte[] bytes) {
         return HexUtil.encodeHexStr(bytes);
+    }
+
+    /**
+     * [Hex字符串转换为Byte值](Hex string to byte value)
+     * @description: zh - Hex字符串转换为Byte值
+     * @description: en - Hex string to byte value
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/3 8:05 上午
+     * @param src: Byte字符串，每个Byte之间没有分隔符
+     * @return byte[]
+    */
+    public static byte[] hexToBytes(String src) {
+        return HexUtil.decodeHex(src.toCharArray());
+    }
+
+    /**
+     * [十六进制转换字符串](Hexadecimal conversion string)
+     * @description: zh - 十六进制转换字符串
+     * @description: en - Hexadecimal conversion string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/3 8:05 上午
+     * @param hexStr: Byte字符串(Byte之间无分隔符 如:[616C6B])
+     * @param charset: 编码 Charset
+     * @return java.lang.String
+    */
+    public static String hexToStr(String hexStr, Charset charset) {
+        return HexUtil.decodeHexStr(hexStr, charset);
+    }
+
+    /**
+     * [String的字符串转换成unicode的String](String string to unicode string)
+     * @description: zh - String的字符串转换成unicode的String
+     * @description: en - String string to unicode string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/3 8:07 上午
+     * @param strText: 全角字符串
+     * @return java.lang.String
+    */
+    public static String strToUnicode(String strText) {
+        return UnicodeUtil.toUnicode(strText);
     }
 }

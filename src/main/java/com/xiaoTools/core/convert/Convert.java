@@ -1,9 +1,13 @@
 package com.xiaoTools.core.convert;
 
+import com.xiaoTools.assertion.Assertion;
+import com.xiaoTools.core.basicType.BasicType;
 import com.xiaoTools.core.convert.converterRegistry.ConverterRegistry;
+import com.xiaoTools.core.convert.formatter.numberChineseFormatter.NumberChineseFormatter;
 import com.xiaoTools.core.convert.typeReference.TypeReference;
 import com.xiaoTools.core.exception.convertException.ConvertException;
 import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.util.byteUtil.ByteUtil;
 import com.xiaoTools.util.classUtil.ClassUtil;
 import com.xiaoTools.util.hexUtil.HexUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
@@ -15,6 +19,7 @@ import java.nio.charset.Charset;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * [类型转换器](Type converter)
@@ -1033,5 +1038,273 @@ public class Convert {
     */
     public static String strToUnicode(String strText) {
         return UnicodeUtil.toUnicode(strText);
+    }
+
+    /**
+     * [unicode的String转换成String的字符串](The string of Unicode is converted to the string of string)
+     * @description: zh - unicode的String转换成String的字符串
+     * @description: en - The string of Unicode is converted to the string of string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/4 3:51 下午
+     * @param unicode: Unicode符
+     * @return java.lang.String
+    */
+    public static String unicodeToStr(String unicode) {
+        return UnicodeUtil.toString(unicode);
+    }
+
+    /**
+     * [给定字符串转换字符编码](Character encoding for given string conversion)
+     * @description: zh - 给定字符串转换字符编码
+     * @description: en - Character encoding for given string conversion
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/4 3:57 下午
+     * @param str: 被转码的字符串
+     * @param sourceCharset: 原字符集
+     * @param destCharset: 目标字符集
+     * @return java.lang.String
+    */
+    public static String convertCharset(String str, String sourceCharset, String destCharset) {
+        return StrUtil.hasBlank(str, sourceCharset, destCharset) ?
+                str : CharsetUtil.convert(str, sourceCharset, destCharset);
+    }
+
+    /**
+     * [转换时间单位](Convert time units)
+     * @description: zh - 转换时间单位
+     * @description: en - Convert time units
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/4 3:58 下午
+     * @param sourceDuration: 时长
+     * @param sourceUnit: 源单位
+     * @param destUnit: 目标单位
+     * @return long
+    */
+    public static long convertTime(long sourceDuration, TimeUnit sourceUnit, TimeUnit destUnit) {
+        Assertion.notNull(sourceUnit, "sourceUnit is null !");
+        Assertion.notNull(destUnit, "destUnit is null !");
+        return destUnit.convert(sourceDuration, sourceUnit);
+    }
+
+    /*原始包装类型转换-----------------------------------------------------------Original packaging type conversion*/
+
+    /**
+     * [原始类转为包装类，非原始类返回原类](The original class is converted to a wrapper class, and the non original class returns the original class)
+     * @description: zh - 原始类转为包装类，非原始类返回原类
+     * @description: en - The original class is converted to a wrapper class, and the non original class returns the original class
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/4 4:11 下午
+     * @param clazz: 原始类
+     * @return java.lang.Class<?>
+    */
+    public static Class<?> wrap(Class<?> clazz) {
+        return BasicType.wrap(clazz);
+    }
+
+    /**
+     * [包装类转为原始类，非包装类返回原类](The packing class becomes the original class, and the non packing class returns the original class)
+     * @description: zh - 包装类转为原始类，非包装类返回原类
+     * @description: en - The packing class becomes the original class, and the non packing class returns the original class
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/4 4:12 下午
+     * @param clazz: 原始类
+     * @return java.lang.Class<?>
+    */
+    public static Class<?> unWrap(Class<?> clazz) {
+        return BasicType.unWrap(clazz);
+    }
+
+    /*数字和英文转换-----------------------------------------------------------Digital and English conversion*/
+
+    /**
+     * [将阿拉伯数字转为英文表达方式](Translate Arabic numerals into English)
+     * @description: zh - 将阿拉伯数字转为英文表达方式
+     * @description: en - Translate Arabic numerals into English
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/4 4:14 下午
+     * @param number: Number对象
+     * @return java.lang.String
+    */
+    public static String numberToWord(Number number) {
+        return NumberWordFormatter.format(number);
+    }
+
+    /**
+     * [将阿拉伯数字转为精简表示形式,例如 1200 --> 1.2K](Convert Arabic numerals to reduced representation, such as 1200 --> 1.2K)
+     * @description: zh - 将阿拉伯数字转为精简表示形式,例如 1200 --> 1.2K
+     * @description: en - Convert Arabic numerals to reduced representation, such as 1200 --> 1.2K
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/4 4:16 下午
+     * @param number: Number对象
+     * @return java.lang.String
+    */
+    public static String numberToSimple(Number number) {
+        return NumberWordFormatter.formatSimple(number.longValue());
+    }
+
+    /**
+     * [将阿拉伯数字转为中文表达方式](Convert Arabic numerals into Chinese expressions)
+     * @description: zh - 将阿拉伯数字转为中文表达方式
+     * @description: en - Convert Arabic numerals into Chinese expressions
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/4 4:25 下午
+     * @param number: 数字
+     * @param isUseTraditional: 是否使用繁体字（金额形式）
+     * @return java.lang.String
+    */
+    public static String numberToChinese(double number, boolean isUseTraditional) {
+        return NumberChineseFormatter.format(number, isUseTraditional);
+    }
+
+    /**
+     * [数字中文表示形式转数字](Conversion of Chinese representation of numbers to numbers)
+     * @description: zh - 数字中文表示形式转数字
+     * @description: en - Conversion of Chinese representation of numbers to numbers
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/4 4:27 下午
+     * @param number: 数字中文表示
+     * @return int
+    */
+    public static int chineseToNumber(String number){
+        return NumberChineseFormatter.chineseToNumber(number);
+    }
+
+    /**
+     * [金额转为中文形式](Amount in Chinese)
+     * @description: zh - 金额转为中文形式
+     * @description: en - Amount in Chinese
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/4 4:29 下午
+     * @param n: 数字
+     * @return java.lang.String
+    */
+    public static String digitToChinese(Number n) {
+        return Constant.NULL == n ?
+                Constant.STRING_CHINA_ZERO : NumberChineseFormatter.format(n.doubleValue(), Constant.TRUE, Constant.TRUE);
+    }
+
+    /*数字转换-----------------------------------------------------------Digital conversion*/
+
+    /**
+     * [int转byte](Int to byte)
+     * @description: zh - int转byte
+     * @description: en - Int to byte
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/4 4:33 下午
+     * @param intValue: int值
+     * @return byte
+    */
+    public static byte intToByte(int intValue) {
+        return (byte) intValue;
+    }
+
+    /**
+     * [byte转无符号int](Byte to unsigned int)
+     * @description: zh - byte转无符号int
+     * @description: en - Byte to unsigned int
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/4 4:34 下午
+     * @param byteValue: byte值
+     * @return int
+    */
+    public static int byteToUnsignedInt(byte byteValue) {
+        // Java 总是把 byte 当做有符处理；我们可以通过将其和 0xFF 进行二进制与得到它的无符值
+        return byteValue & 0xFF;
+    }
+
+    /**
+     * [byte数组转short](Byte array to short)
+     * @description: zh - byte数组转short
+     * @description: en - Byte array to short
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/4 4:36 下午
+     * @param bytes: byte数组
+     * @return short
+    */
+    public static short bytesToShort(byte[] bytes) {
+        return ByteUtil.bytesToShort(bytes);
+    }
+
+    /**
+     * [short转byte数组](Short to byte array)
+     * @description: zh - short转byte数组
+     * @description: en - Short to byte array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/4 4:49 下午
+     * @param shortValue: short值
+     * @return byte[]
+    */
+    public static byte[] shortToBytes(short shortValue) {
+        return ByteUtil.shortToBytes(shortValue);
+    }
+
+    /**
+     * [byte[]转int值](Byte [] to int)
+     * @description: zh - byte[]转int值
+     * @description: en - Byte [] to int
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/4 4:52 下午
+     * @param bytes: byte数组
+     * @return int
+    */
+    public static int bytesToInt(byte[] bytes) {
+        return ByteUtil.bytesToInt(bytes);
+    }
+
+    /**
+     * [int转byte数组](Int to byte array)
+     * @description: zh - int转byte数组
+     * @description: en - Int to byte array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/4 4:53 下午
+     * @param intValue: int值
+     * @return byte[]
+    */
+    public static byte[] intToBytes(int intValue) {
+        return ByteUtil.intToBytes(intValue);
+    }
+
+    /**
+     * [long转byte数组](Long to byte array)
+     * @description: zh - long转byte数组
+     * @description: en - Long to byte array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/4 4:55 下午
+     * @param longValue: long值
+     * @return byte[]
+    */
+    public static byte[] longToBytes(long longValue) {
+        return ByteUtil.longToBytes(longValue);
+    }
+
+    /**
+     * [byte数组转long](Convert byte array to long)
+     * @description: zh - byte数组转long
+     * @description: en - Convert byte array to long
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/4 4:56 下午
+     * @param bytes: byte数组
+     * @return long
+    */
+    public static long bytesToLong(byte[] bytes) {
+        return ByteUtil.bytesToLong(bytes);
     }
 }

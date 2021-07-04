@@ -353,6 +353,8 @@ public class Constant {
 
     public static final String STRING_SPACE = " ";
 
+    public static final String STRING_CHINA_ZERO = "零";
+
     public static final String STRING_DAY = "天";
 
     public static final String STRING_HOUSE = "小时";

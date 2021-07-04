@@ -4,6 +4,7 @@ import com.xiaoTools.core.stringFormatter.StrFormatter;
 import com.xiaoTools.core.text.strSpliter.StrSpliter;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
+import com.xiaoTools.util.charSequenceUtil.CharSequenceUtil;
 import com.xiaoTools.util.charUtil.CharUtil;
 
 import java.nio.ByteBuffer;
@@ -17,15 +18,14 @@ import java.util.List;
  * @author HCY
  * @since 2021/5/14 3:42 下午
 */
-public class StrUtil {
+public class StrUtil extends CharSequenceUtil {
 
     /**
      * [初始化方法](Initialization method)
      * @author HCY
      * @since 2021/5/14 3:42 下午
     */
-    public StrUtil() {
-    }
+    public StrUtil() { }
 
     /**
      * [[判断字符串是否为空](只判断是否为空或者是否为null)]([judge whether the string is empty] (only judge whether it is empty or null))
@@ -41,6 +41,16 @@ public class StrUtil {
         return value == Constant.NULL || value.length() == Constant.ZERO;
     }
 
+    /**
+     * [[判断字符串是否为空](只判断是否为空或者是否为null)]([judge whether the string is empty] (only judge whether it is empty or null))
+     * @description: zh - 输入字符串判断是否为空
+     * @description: en - Input string to determine whether it is empty
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/4 7:23 下午
+     * @param strs: 需要判断的字符串数组
+     * @return boolean
+    */
     public static boolean isEmpty(CharSequence... strs) {
         if (ArrayUtil.isEmpty(strs)) {
             return Constant.TRUE;
@@ -1035,4 +1045,21 @@ public class StrUtil {
         }
         return result;
     }
+
+    // 反转 ------------------------------------------------------------------------ reverse
+
+    /**
+     * [反转字符串](Invert string)
+     * @description: zh - 反转字符串
+     * @description: en - Invert string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/4 7:24 下午
+     * @param str: 被反转的字符串
+     * @return java.lang.String
+    */
+    public static String reverse(String str) {
+        return new String(ArrayUtil.reverse(str.toCharArray()));
+    }
+
 }

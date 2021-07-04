@@ -367,6 +367,8 @@ public class Constant {
 
     public static final String STRING_ZERO = "0";
 
+    public static final String STRING_ONE = "1";
+
     public static final String STRING_FOURS_ZERO = "0000";
 
     public static final String STRING_ZERO_X = "0x";
@@ -374,6 +376,10 @@ public class Constant {
     public static final String PERCENT_SIGN = "%";
 
     public static final String PERCENT_SIGN_U = "%u";
+
+    public static final String STRING_S_S = "%s%s";
+
+    public static final String STRING_WELL_WELL = "#.##";
 
     public static final String EMPTY = "";
 

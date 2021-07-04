@@ -4,6 +4,7 @@ import com.xiaoTools.assertion.Assertion;
 import com.xiaoTools.core.basicType.BasicType;
 import com.xiaoTools.core.convert.converterRegistry.ConverterRegistry;
 import com.xiaoTools.core.convert.formatter.numberChineseFormatter.NumberChineseFormatter;
+import com.xiaoTools.core.convert.formatter.numberChineseFormatter.NumberWordFormatter;
 import com.xiaoTools.core.convert.typeReference.TypeReference;
 import com.xiaoTools.core.exception.convertException.ConvertException;
 import com.xiaoTools.lang.constant.Constant;

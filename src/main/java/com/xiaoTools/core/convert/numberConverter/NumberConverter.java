@@ -3,6 +3,7 @@ package com.xiaoTools.core.convert.numberConverter;
 import com.xiaoTools.core.convert.abstractConverter.AbstractConverter;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.booleanUtil.BooleanUtil;
+import com.xiaoTools.util.byteUtil.ByteUtil;
 import com.xiaoTools.util.dateUtil.DateUtil;
 import com.xiaoTools.util.numUtil.NumUtil;
 import com.xiaoTools.util.strUtil.StrUtil;

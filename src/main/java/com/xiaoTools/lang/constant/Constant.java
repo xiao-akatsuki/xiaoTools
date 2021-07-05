@@ -515,6 +515,8 @@ public class Constant {
 
     public static final String STRING_NULL_OUT = "null";
 
+    public static final String STRING_UNDEFINED = "undefined";
+
     public static final String STRING_BIG_SPACE = "  ";
 
     /*-----------------------------------------------------------byte*/

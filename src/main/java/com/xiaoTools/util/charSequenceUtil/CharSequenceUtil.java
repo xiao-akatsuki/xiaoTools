@@ -333,5 +333,117 @@ public class CharSequenceUtil {
         return Constant.STRING_NULL_OUT.equals(strString) || Constant.STRING_UNDEFINED.equals(strString);
     }
 
+    /*截取-----------------------------------------------------------trim*/
+
+    /**
+     * [除去字符串头尾部的空白，如果字符串是null，依然返回null。](Remove the blanks at the beginning and end of the string. If the string is null, null is still returned.)
+     * @description: zh - 除去字符串头尾部的空白，如果字符串是null，依然返回null。
+     * @description: en - Remove the blanks at the beginning and end of the string. If the string is null, null is still returned.
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/6 7:45 上午
+     * @param str: 要处理的字符串
+     * @return java.lang.String
+    */
+    public static String trim(CharSequence str) {
+        return (Constant.NULL == str) ? Constant.STRING_NULL : trim(str, 0);
+    }
+
+    /**
+     * [除去字符串头尾部的空白，如果字符串是null，则返回""。](Remove the blanks at the beginning and end of the string, and return "" if the string is null.)
+     * @description: zh - 除去字符串头尾部的空白，如果字符串是null，则返回""。
+     * @description: en - Remove the blanks at the beginning and end of the string, and return "" if the string is null.
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/6 7:46 上午
+     * @param str: 要处理的字符串
+     * @return java.lang.String
+    */
+    public static String trimToEmpty(CharSequence str) {
+        return str == Constant.NULL ? Constant.EMPTY : trim(str);
+    }
+
+    /**
+     * [除去字符串头尾部的空白，如果字符串是null或者""，返回null](Remove the blanks at the beginning and end of the string. If the string is null or '', null is returned)
+     * @description: zh - 除去字符串头尾部的空白，如果字符串是null或者""，返回null
+     * @description: en - Remove the blanks at the beginning and end of the string. If the string is null or '', null is returned
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/6 7:48 上午
+     * @param str: 要处理的字符串
+     * @return java.lang.String
+    */
+    public static String trimToNull(CharSequence str) {
+        final String trimStr = trim(str);
+        return Constant.EMPTY.equals(trimStr) ? Constant.STRING_NULL : trimStr;
+    }
+
+    /**
+     * [除去字符串头部的空白，如果字符串是null，则返回null。](Remove the blanks in the head of the string, and return null if the string is null.)
+     * @description: zh - 除去字符串头部的空白，如果字符串是null，则返回null。
+     * @description: en - Remove the blanks in the head of the string, and return null if the string is null.
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/6 7:49 上午
+     * @param str: 要处理的字符串
+     * @return java.lang.String
+    */
+    public static String trimStart(CharSequence str) {
+        return trim(str, -1);
+    }
+
+    /**
+     * [除去字符串尾部的空白，如果字符串是null，则返回null。](Remove the blanks at the end of the string and return null if the string is null.)
+     * @description: zh - 除去字符串尾部的空白，如果字符串是null，则返回null。
+     * @description: en - Remove the blanks at the end of the string and return null if the string is null.
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/6 7:50 上午
+     * @param str: 要处理的字符串
+     * @return java.lang.String
+    */
+    public static String trimEnd(CharSequence str) {
+        return trim(str, 1);
+    }
+
+    /**
+     * [除去字符串头尾部的空白符，如果字符串是null，依然返回null。](Remove the blanks at the beginning and end of the string, and return null if the string is null.)
+     * @description: zh - 除去字符串头尾部的空白符，如果字符串是null，依然返回null。
+     * @description: en - Remove the blanks at the beginning and end of the string, and return null if the string is null.
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/6 7:51 上午
+     * @param str: 要处理的字符串
+     * @param mode: -1表示trimStart，0表示trim全部， 1表示trimEnd
+     * @return java.lang.String
+    */
+    public static String trim(CharSequence str, int mode) {
+        String result;
+        if (str == Constant.NULL) {
+            result = Constant.STRING_NULL;
+        } else {
+            int length = str.length();
+            int start = Constant.ZERO;
+            // 扫描字符串头部
+            int end = length;
+            if (mode <= Constant.ZERO) {
+                while ((start < end) && (CharUtil.isBlankChar(str.charAt(start)))) {
+                    start++;
+                }
+            }// 扫描字符串尾部
+            if (mode >= Constant.ZERO) {
+                while ((start < end) && (CharUtil.isBlankChar(str.charAt(end - Constant.ONE)))) {
+                    end--;
+                }
+            }
+            if ((start > Constant.ZERO) || (end < length)) {
+                result = str.toString().substring(start, end);
+            } else {
+                result = str.toString();
+            }
+        }
+        return result;
+    }
+
 
 }

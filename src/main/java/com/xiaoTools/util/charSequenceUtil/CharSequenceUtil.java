@@ -445,5 +445,134 @@ public class CharSequenceUtil {
         return result;
     }
 
+    /*是否开始-----------------------------------------------------------startWith*/
 
+    /**
+     * [字符串是否以给定字符开始](Whether the string starts with the given character)
+     * @description: zh - 字符串是否以给定字符开始
+     * @description: en - Whether the string starts with the given character
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/7 9:45 下午
+     * @param str: 字符串
+     * @param c: 字符
+     * @return boolean
+    */
+    public static boolean startWith(CharSequence str, char c) {
+        return isEmpty(str) ? Constant.FALSE : c == str.charAt(Constant.ZERO);
+    }
+
+    /**
+     * [是否以指定字符串开头](Whether to start with the specified string)
+     * @description: zh - 是否以指定字符串开头
+     * @description: en - Whether to start with the specified string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/7 9:55 下午
+     * @param str: 被监测字符串
+     * @param prefix: 开头字符串
+     * @param ignoreCase: 是否忽略大小写
+     * @return boolean
+    */
+    public static boolean startWith(CharSequence str, CharSequence prefix, boolean ignoreCase) {
+        return startWith(str, prefix, ignoreCase, false);
+    }
+
+    /**
+     * [是否以指定字符串开头](Whether to start with the specified string)
+     * @description: zh - 是否以指定字符串开头
+     * @description: en - Whether to start with the specified string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/7 9:57 下午
+     * @param str: 被监测字符串
+     * @param prefix: 开头字符串
+     * @param ignoreCase: 是否忽略大小写
+     * @param ignoreEquals: 是否忽略字符串相等的情况
+     * @return boolean
+    */
+    public static boolean startWith(CharSequence str, CharSequence prefix, boolean ignoreCase, boolean ignoreEquals) {
+        if (Constant.NULL == str || Constant.NULL == prefix) {
+            if (!ignoreEquals) {
+                return Constant.FALSE;
+            }
+            return Constant.NULL == str && Constant.NULL == prefix;
+        }
+
+        boolean isStartWith;
+        isStartWith = ignoreCase ?
+                str.toString().toLowerCase().startsWith(prefix.toString().toLowerCase()) :
+                str.toString().startsWith(prefix.toString());
+
+        return isStartWith ? (!ignoreEquals) || (!equals(str, prefix, ignoreCase)) : Constant.FALSE
+    }
+
+    /**
+     * [是否以指定字符串开头](Whether to start with the specified string)
+     * @description: zh - 是否以指定字符串开头
+     * @description: en - Whether to start with the specified string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/7 10:05 下午
+     * @param str: 被监测字符串
+     * @param prefix: 开头字符串
+     * @return boolean
+    */
+    public static boolean startWith(CharSequence str, CharSequence prefix) {
+        return startWith(str, prefix, Constant.FALSE);
+    }
+
+    /**
+     * [是否以指定字符串开头，忽略相等字符串的情况](Whether to start with the specified string, ignoring the case of equal strings)
+     * @description: zh - 是否以指定字符串开头，忽略相等字符串的情况
+     * @description: en - Whether to start with the specified string, ignoring the case of equal strings
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/7 10:06 下午
+     * @param str: 被监测字符串
+     * @param prefix: 开头字符串
+     * @return boolean
+    */
+    public static boolean startWithIgnoreEquals(CharSequence str, CharSequence prefix) {
+        return startWith(str, prefix, Constant.FALSE, Constant.TRUE);
+    }
+
+    /**
+     * [是否以指定字符串开头，忽略大小写](Whether to start with the specified string, ignoring case)
+     * @description: zh - 是否以指定字符串开头，忽略大小写
+     * @description: en - Whether to start with the specified string, ignoring case
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/7 10:07 下午
+     * @param str: 被监测字符串
+     * @param prefix: 开头字符串
+     * @return boolean
+    */
+    public static boolean startWithIgnoreCase(CharSequence str, CharSequence prefix) {
+        return startWith(str, prefix, Constant.TRUE);
+    }
+
+    /**
+     * [给定字符串是否以任何一个字符串开始](Whether the given string starts with any string)
+     * @description: zh - 给定字符串是否以任何一个字符串开始
+     * @description: en - Whether the given string starts with any string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/7 10:10 下午
+     * @param str: 给定字符串
+     * @param prefixes: 需要检测的开始字符串
+     * @return boolean
+    */
+    public static boolean startWithAny(CharSequence str, CharSequence... prefixes) {
+        if (isEmpty(str) || ArrayUtil.isEmpty(prefixes)) {
+            return Constant.FALSE;
+        }
+
+        for (CharSequence suffix : prefixes) {
+            if (startWith(str, suffix, Constant.FALSE)) {
+                return Constant.TRUE;
+            }
+        }
+        return Constant.FALSE;
+    }
 }

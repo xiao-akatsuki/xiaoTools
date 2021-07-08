@@ -782,5 +782,110 @@ public class CharSequenceUtil {
         return Constant.TRUE;
     }
 
+    /**
+     * [给定字符串是否包含空白符（空白符包括空格、制表符、全角空格和不间断空格）](Whether the given string contains white space (white space includes spaces, tabs, full width spaces, and uninterrupted spaces))
+     * @description: zh - 给定字符串是否包含空白符（空白符包括空格、制表符、全角空格和不间断空格）
+     * @description: en - Whether the given string contains white space (white space includes spaces, tabs, full width spaces, and uninterrupted spaces)
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 5:19 下午
+     * @param str: 字符串
+     * @return boolean
+    */
+    public static boolean containsBlank(CharSequence str) {
+        if (Constant.NULL == str) {
+            return Constant.FALSE;
+        }
+        final int length = str.length();
+        if (Constant.ZERO == length) {
+            return Constant.FALSE;
+        }
+
+        for (int i = Constant.ZERO; i < length; i += Constant.ONE) {
+            if (CharUtil.isBlankChar(str.charAt(i))) {
+                return Constant.TRUE;
+            }
+        }
+        return Constant.FALSE;
+    }
+
+    /**
+     * [查找指定字符串是否包含指定字符串列表中的任意一个字符串，如果包含返回找到的第一个字符串](Finds whether the specified string contains any string in the specified string list, and returns the first string found if it contains)
+     * @description: zh - 查找指定字符串是否包含指定字符串列表中的任意一个字符串，如果包含返回找到的第一个字符串
+     * @description: en - Finds whether the specified string contains any string in the specified string list, and returns the first string found if it contains
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 5:21 下午
+     * @param str: 指定字符串
+     * @param strArray: 需要检查的字符串数组
+     * @return java.lang.String
+    */
+    public static String getContainsStr(CharSequence str, CharSequence... strArray) {
+        if (isEmpty(str) || ArrayUtil.isEmpty(strArray)) {
+            return Constant.STRING_NULL;
+        }
+        for (CharSequence checkStr : strArray) {
+            if (str.toString().contains(checkStr)) {
+                return checkStr.toString();
+            }
+        }
+        return Constant.STRING_NULL;
+    }
+
+    /**
+     * [是否包含特定字符，忽略大小写，如果给定两个参数都为null，返回true](Whether to include specific characters, regardless of case. If both parameters are null, return true)
+     * @description: zh - 是否包含特定字符，忽略大小写，如果给定两个参数都为null，返回true
+     * @description: en - Whether to include specific characters, regardless of case. If both parameters are null, return true
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 5:41 下午
+     * @param str: 被检测字符串
+     * @param value: 被测试是否包含的字符串
+     * @return boolean
+    */
+    public static boolean containsIgnoreCase(CharSequence str, CharSequence value) {
+        return Constant.NULL == str ?
+                Constant.NULL == value :
+                str.toString().toLowerCase().contains(value.toString().toLowerCase());
+    }
+
+    /**
+     * [查找指定字符串是否包含指定字符串列表中的任意一个字符串](Finds whether the specified string contains any string in the specified string list)
+     * @description: zh - 查找指定字符串是否包含指定字符串列表中的任意一个字符串
+     * @description: en - Finds whether the specified string contains any string in the specified string list
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 5:43 下午
+     * @param str: 指定字符串
+     * @param strArray: 需要检查的字符串数组
+     * @return boolean
+    */
+    public static boolean containsAnyIgnoreCase(CharSequence str, CharSequence... strArray) {
+        return Constant.NULL != getContainsStrIgnoreCase(str, strArray);
+    }
+
+    /**
+     * [查找指定字符串是否包含指定字符串列表中的任意一个字符串，如果包含返回找到的第一个字符串](Finds whether the specified string contains any string in the specified string list, and returns the first string found if it contains)
+     * @description: zh - 查找指定字符串是否包含指定字符串列表中的任意一个字符串，如果包含返回找到的第一个字符串
+     * @description: en - Finds whether the specified string contains any string in the specified string list, and returns the first string found if it contains
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 5:44 下午
+     * @param str: 指定字符串
+     * @param strArray: 需要检查的字符串数组
+     * @return java.lang.String
+    */
+    public static String getContainsStrIgnoreCase(CharSequence str, CharSequence... strArray) {
+        if (isEmpty(str) || ArrayUtil.isEmpty(strArray)) {
+            return Constant.STRING_NULL;
+        }
+        for (CharSequence testStr : strArray) {
+            if (containsIgnoreCase(str, testStr)) {
+                return testStr.toString();
+            }
+        }
+        return Constant.STRING_NULL;
+    }
+
 
 }

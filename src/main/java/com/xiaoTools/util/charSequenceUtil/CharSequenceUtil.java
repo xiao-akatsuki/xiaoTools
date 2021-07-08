@@ -504,7 +504,7 @@ public class CharSequenceUtil {
                 str.toString().toLowerCase().startsWith(prefix.toString().toLowerCase()) :
                 str.toString().startsWith(prefix.toString());
 
-        return isStartWith ? (!ignoreEquals) || (!equals(str, prefix, ignoreCase)) : Constant.FALSE
+        return isStartWith ? (!ignoreEquals) || (!equals(str, prefix, ignoreCase)) : Constant.FALSE;
     }
 
     /**
@@ -575,4 +575,119 @@ public class CharSequenceUtil {
         }
         return Constant.FALSE;
     }
+
+    /*是否结束-----------------------------------------------------------endWith*/
+
+    /**
+     * [字符串是否以给定字符结尾](Whether the string ends with the given character)
+     * @description: zh - 字符串是否以给定字符结尾
+     * @description: en - Whether the string ends with the given character
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 1:39 下午
+     * @param str: 字符串
+     * @param c: 字符
+     * @return boolean
+    */
+    public static boolean endWith(CharSequence str, char c) {
+        return isEmpty(str) ? Constant.FALSE : c == str.charAt(str.length() - Constant.ONE);
+    }
+
+    /**
+     * [是否以指定字符串结尾](Whether to end with the specified string)
+     * @description: zh - 是否以指定字符串结尾 
+     * @description: en - Whether to end with the specified string 
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 1:45 下午
+     * @param str: 被监测字符串
+     * @param suffix: 结尾字符串 
+     * @param isIgnoreCase: 是否忽略大小写 
+     * @return boolean
+    */
+    public static boolean endWith(CharSequence str, CharSequence suffix, boolean isIgnoreCase) {
+        if (Constant.NULL == str || Constant.NULL == suffix) {
+            return Constant.NULL == str && Constant.NULL == suffix;
+        }
+        return isIgnoreCase ? str.toString().toLowerCase().endsWith(suffix.toString().toLowerCase()) : str.toString().endsWith(suffix.toString());
+    }
+
+    /**
+     * [是否以指定字符串结尾](Whether to end with the specified string)
+     * @description: zh - 是否以指定字符串结尾
+     * @description: en - Whether to end with the specified string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 1:59 下午
+     * @param str: 被监测字符串
+     * @param suffix: 结尾字符串
+     * @return boolean
+    */
+    public static boolean endWith(CharSequence str, CharSequence suffix) {
+        return endWith(str, suffix, Constant.FALSE);
+    }
+
+    /**
+     * [是否以指定字符串结尾，忽略大小写](Whether to end with the specified string, ignoring case)
+     * @description: zh - 是否以指定字符串结尾，忽略大小写
+     * @description: en - Whether to end with the specified string, ignoring case
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 3:59 下午
+     * @param str: 被监测字符串
+     * @param suffix: 结尾字符串
+     * @return boolean
+    */
+    public static boolean endWithIgnoreCase(CharSequence str, CharSequence suffix) {
+        return endWith(str, suffix, Constant.TRUE);
+    }
+
+    /**
+     * [给定字符串是否以任何一个字符串结尾](Whether the given string ends with any string)
+     * @description: zh - 给定字符串是否以任何一个字符串结尾
+     * @description: en - Whether the given string ends with any string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 4:01 下午
+     * @param str: 给定字符串
+     * @param suffixes: 需要检测的结尾字符串
+     * @return boolean
+    */
+    public static boolean endWithAny(CharSequence str, CharSequence... suffixes) {
+        if (isEmpty(str) || ArrayUtil.isEmpty(suffixes)) {
+            return Constant.FALSE;
+        }
+        for (CharSequence suffix : suffixes) {
+            if (endWith(str, suffix, Constant.FALSE)) {
+                return Constant.TRUE;
+            }
+        }
+        return  Constant.FALSE;
+    }
+
+    /**
+     * [给定字符串是否以任何一个字符串结尾（忽略大小写）](Whether the given string ends with any string (case ignored))
+     * @description: zh - 给定字符串是否以任何一个字符串结尾（忽略大小写）
+     * @description: en - Whether the given string ends with any string (case ignored)
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 4:05 下午
+     * @param str: 给定字符串
+     * @param suffixes: 需要检测的结尾字符串
+     * @return boolean
+    */
+    public static boolean endWithAnyIgnoreCase(CharSequence str, CharSequence... suffixes) {
+        if (isEmpty(str) || ArrayUtil.isEmpty(suffixes)) {
+            return Constant.FALSE;
+        }
+
+        for (CharSequence suffix : suffixes) {
+            if (endWith(str, suffix, Constant.TRUE)) {
+                return Constant.TRUE;
+            }
+        }
+        return Constant.FALSE;
+    }
+
+
 }

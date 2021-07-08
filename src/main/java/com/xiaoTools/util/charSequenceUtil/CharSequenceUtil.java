@@ -689,5 +689,98 @@ public class CharSequenceUtil {
         return Constant.FALSE;
     }
 
+    /*包含-----------------------------------------------------------contains*/
+
+    /**
+     * [指定字符是否在字符串中出现过](Specifies whether the character has ever appeared in a string)
+     * @description: zh - 指定字符是否在字符串中出现过
+     * @description: en - Specifies whether the character has ever appeared in a string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 4:13 下午
+     * @param str: 字符串
+     * @param searchChar: 被查找的字符
+     * @return boolean
+    */
+    public static boolean contains(CharSequence str, char searchChar) {
+        return indexOf(str, searchChar) > Constant.NEGATIVE_ONE;
+    }
+
+    /**
+     * [指定字符串是否在字符串中出现过](Specifies whether the string ever appears in the string)
+     * @description: zh - 指定字符串是否在字符串中出现过
+     * @description: en - Specifies whether the string ever appears in the string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 4:27 下午
+     * @param str: 字符串
+     * @param searchStr: 被查找的字符串
+     * @return boolean
+    */
+    public static boolean contains(CharSequence str, CharSequence searchStr) {
+        return Constant.NULL == str || Constant.NULL == searchStr ? Constant.FALSE : str.toString().contains(searchStr);
+    }
+
+    /**
+     * [查找指定字符串是否包含指定字符串列表中的任意一个字符串](Finds whether the specified string contains any string in the specified string list)
+     * @description: zh - 查找指定字符串是否包含指定字符串列表中的任意一个字符串
+     * @description: en - Finds whether the specified string contains any string in the specified string list
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 4:28 下午
+     * @param str: 指定字符串
+     * @param strArray: 需要检查的字符串数组
+     * @return boolean
+    */
+    public static boolean containsAny(CharSequence str, CharSequence... strArray) {
+        return Constant.NULL != getContainsStr(str, strArray);
+    }
+
+    /**
+     * [查找指定字符串是否包含指定字符列表中的任意一个字符](Finds whether the specified string contains any character in the specified character list)
+     * @description: zh - 查找指定字符串是否包含指定字符列表中的任意一个字符
+     * @description: en - Finds whether the specified string contains any character in the specified character list
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 4:29 下午
+     * @param str: 指定字符串
+     * @param strArray: 需要检查的字符数组
+     * @return boolean
+    */
+    public static boolean containsAny(CharSequence str, char... strArray) {
+        if (!isEmpty(str)) {
+            int len = str.length();
+            for (int i = Constant.ZERO; i < len; i++) {
+                if (ArrayUtil.contains(strArray, str.charAt(i))) {
+                    return Constant.TRUE;
+                }
+            }
+        }
+        return Constant.FALSE;
+    }
+
+    /**
+     * [检查指定字符串中是否只包含给定的字符](Checks whether the specified string contains only the given character)
+     * @description: zh - 检查指定字符串中是否只包含给定的字符
+     * @description: en - Checks whether the specified string contains only the given character
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 4:35 下午
+     * @param str: 字符串
+     * @param strArray: 检查的字符
+     * @return boolean
+    */
+    public static boolean containsOnly(CharSequence str, char... strArray) {
+        if (!isEmpty(str)) {
+            int len = str.length();
+            for (int i = Constant.ZERO; i < len; i++) {
+                if (!ArrayUtil.contains(strArray, str.charAt(i))) {
+                    return Constant.FALSE;
+                }
+            }
+        }
+        return Constant.TRUE;
+    }
+
 
 }

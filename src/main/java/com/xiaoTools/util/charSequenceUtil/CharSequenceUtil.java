@@ -595,14 +595,14 @@ public class CharSequenceUtil {
 
     /**
      * [是否以指定字符串结尾](Whether to end with the specified string)
-     * @description: zh - 是否以指定字符串结尾 
-     * @description: en - Whether to end with the specified string 
+     * @description: zh - 是否以指定字符串结尾
+     * @description: en - Whether to end with the specified string
      * @version: V1.0
      * @author XiaoXunYao
      * @since 2021/7/8 1:45 下午
      * @param str: 被监测字符串
-     * @param suffix: 结尾字符串 
-     * @param isIgnoreCase: 是否忽略大小写 
+     * @param suffix: 结尾字符串
+     * @param isIgnoreCase: 是否忽略大小写
      * @return boolean
     */
     public static boolean endWith(CharSequence str, CharSequence suffix, boolean isIgnoreCase) {
@@ -1098,5 +1098,232 @@ public class CharSequenceUtil {
         return index;
     }
 
+    /*移除字符串中给定字符串-----------------------------------------------------------remove*/
 
+    /**
+     * [移除字符串中所有给定字符串](Removes all given strings from a string)
+     * @description: zh - 移除字符串中所有给定字符串
+     * @description: en - Removes all given strings from a string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 7:16 下午
+     * @param str: 字符串
+     * @param removeValue: 被移除的字符串
+     * @return java.lang.String
+    */
+    public static String removeAll(CharSequence str, CharSequence removeValue) {
+        // strToRemove如果为空， 也不用继续后面的逻辑
+        return isEmpty(str) || isEmpty(removeValue) ? str(str) : str.toString().replace(removeValue, Constant.EMPTY);
+
+    }
+
+    /**
+     * [移除字符串中所有给定字符串，当某个字符串出现多次，则全部移除](Remove all given strings from a string. When a string appears more than once, remove all strings)
+     * @description: zh - 移除字符串中所有给定字符串，当某个字符串出现多次，则全部移除
+     * @description: en - Remove all given strings from a string. When a string appears more than once, remove all strings
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 7:18 下午
+     * @param str: 字符串
+     * @param removeArray: 被移除的字符串
+     * @return java.lang.String
+    */
+    public static String removeAny(CharSequence str, CharSequence... removeArray) {
+        String result = str(str);
+        if (isNotEmpty(str)) {
+            for (CharSequence strToRemove : removeArray) {
+                result = removeAll(result, strToRemove);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * [去除字符串中指定的多个字符，如有多个则全部去除](Remove multiple characters specified in the string. If there are multiple characters, remove them all)
+     * @description: zh - 去除字符串中指定的多个字符，如有多个则全部去除
+     * @description: en - Remove multiple characters specified in the string. If there are multiple characters, remove them all
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 7:22 下午
+     * @param str: 字符串
+     * @param chars: 字符列表
+     * @return java.lang.String
+    */
+    public static String removeAll(CharSequence str, char... chars) {
+        if (Constant.NULL == str || ArrayUtil.isEmpty(chars)) {
+            return str(str);
+        }
+        final int len = str.length();
+        if (Constant.ZERO == len) {
+            return str(str);
+        }
+        final StringBuilder builder = new StringBuilder(len);
+        char c;
+        for (int i = Constant.ZERO; i < len; i++) {
+            c = str.charAt(i);
+            if (!ArrayUtil.contains(chars, c)) {
+                builder.append(c);
+            }
+        }
+        return builder.toString();
+    }
+
+    /**
+     * [去除所有换行符](Remove all line breaks)
+     * @description: zh - 去除所有换行符
+     * @description: en - Remove all line breaks
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 7:24 下午
+     * @param str: 字符串
+     * @return java.lang.String
+    */
+    public static String removeAllLineBreaks(CharSequence str) {
+        return removeAll(str, Constant.CHAR_CR, Constant.CHAR_CN);
+    }
+
+    /**
+     * [去掉首部指定长度的字符串并将剩余字符串首字母小写](Remove the specified length of the first string and lowercase the first letter of the remaining string)
+     * @description: zh - 去掉首部指定长度的字符串并将剩余字符串首字母小写
+     * @description: en - Remove the specified length of the first string and lowercase the first letter of the remaining string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 7:27 下午
+     * @param str: 被处理的字符串
+     * @param preLength: 去掉的长度
+     * @return java.lang.String
+    */
+    public static String removePreAndLowerFirst(CharSequence str, int preLength) {
+        if (str == Constant.NULL) { return Constant.STRING_NULL; }
+        if (str.length() > preLength) {
+            char first = Character.toLowerCase(str.charAt(preLength));
+            return str.length() > preLength + Constant.ONE ?
+                    first + str.toString().substring(preLength + Constant.ONE) :
+                    String.valueOf(first);
+        } else {
+            return str.toString();
+        }
+    }
+
+    /**
+     * [去掉首部指定长度的字符串并将剩余字符串首字母小写](Remove the specified length of the first string and lowercase the first letter of the remaining string)
+     * @description: zh - 去掉首部指定长度的字符串并将剩余字符串首字母小写
+     * @description: en - Remove the specified length of the first string and lowercase the first letter of the remaining string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 7:30 下午
+     * @param str: 被处理的字符串
+     * @param prefix: 前缀
+     * @return java.lang.String
+    */
+    public static String removePreAndLowerFirst(CharSequence str, CharSequence prefix) {
+        return lowerFirst(removePrefix(str, prefix));
+    }
+
+    /**
+     * [去掉指定前缀](Remove the specified prefix)
+     * @description: zh - 去掉指定前缀
+     * @description: en - Remove the specified prefix
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 7:32 下午
+     * @param str: 字符串
+     * @param prefix: 前缀
+     * @return java.lang.String
+    */
+    public static String removePrefix(CharSequence str, CharSequence prefix) {
+        if (isEmpty(str) || isEmpty(prefix)) {
+            return str(str);
+        }
+
+        final String str2 = str.toString();
+        return str2.startsWith(prefix.toString()) ?
+                subSuf(str2, prefix.length()) :
+                str2;
+    }
+
+    /**
+     * [忽略大小写去掉指定前缀](Ignore case and remove the specified prefix)
+     * @description: zh - 忽略大小写去掉指定前缀
+     * @description: en - Ignore case and remove the specified prefix
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 7:36 下午
+     * @param str: 字符串
+     * @param prefix: 前缀
+     * @return java.lang.String
+    */
+    public static String removePrefixIgnoreCase(CharSequence str, CharSequence prefix) {
+        if (isEmpty(str) || isEmpty(prefix)) { return str(str); }
+
+        final String str2 = str.toString();
+        return str2.toLowerCase().startsWith(prefix.toString().toLowerCase()) ?
+                subSuf(str2, prefix.length()) :
+                str2;
+    }
+
+    /**
+     *
+     * @description: zh - 去掉指定后缀
+     * @description: en - Remove the specified suffix
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 7:38 下午
+     * @param str: 字符串
+     * @param suffix: 后缀
+     * @return java.lang.String
+    */
+    public static String removeSuffix(CharSequence str, CharSequence suffix) {
+        if (isEmpty(str) || isEmpty(suffix)) { return str(str); }
+
+        final String str2 = str.toString();
+        return str2.endsWith(suffix.toString()) ?
+                subPre(str2, str2.length() - suffix.length()) :
+                str2;
+    }
+
+    /**
+     * 去掉指定后缀，并小写首字母
+     *
+     * @param str    字符串
+     * @param suffix 后缀
+     * @return 切掉后的字符串，若后缀不是 suffix， 返回原字符串
+     */
+    public static String removeSufAndLowerFirst(CharSequence str, CharSequence suffix) {
+        return lowerFirst(removeSuffix(str, suffix));
+    }
+
+    /**
+     *
+     * @description: zh - 忽略大小写去掉指定后缀
+     * @description: en - Ignore case and remove the specified suffix
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 7:38 下午
+     * @param str: 字符串
+     * @param suffix: 后缀
+     * @return java.lang.String
+    */
+    public static String removeSuffixIgnoreCase(CharSequence str, CharSequence suffix) {
+        if (isEmpty(str) || isEmpty(suffix)) { return str(str); }
+
+        final String str2 = str.toString();
+        return str2.toLowerCase().endsWith(suffix.toString().toLowerCase()) ?
+                subPre(str2, str2.length() - suffix.length()) :
+                str2;
+    }
+
+    /**
+     * [清理空白字符](Clean up white space)
+     * @description: zh - 清理空白字符
+     * @description: en - Clean up white space
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 7:39 下午
+     * @param str: 被清理的字符串
+     * @return java.lang.String
+    */
+    public static String cleanBlank(CharSequence str) {
+        return filter(str, c -> !CharUtil.isBlankChar(c));
+    }
 }

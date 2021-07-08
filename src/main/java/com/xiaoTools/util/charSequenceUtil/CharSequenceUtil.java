@@ -887,5 +887,216 @@ public class CharSequenceUtil {
         return Constant.STRING_NULL;
     }
 
+    /*查找-----------------------------------------------------------indexOf*/
+
+    /**
+     * [指定范围内查找指定字符](Find the specified character in the specified range)
+     * @description: zh - 指定范围内查找指定字符
+     * @description: en - Find the specified character in the specified range
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 5:57 下午
+     * @param str: 字符串
+     * @param searchValue: 被查找的字符
+     * @return int
+    */
+    public static int indexOf(final CharSequence str, char searchValue) {
+        return indexOf(str, searchValue, Constant.ZERO);
+    }
+
+    /**
+     * [指定范围内查找指定字符](Find the specified character in the specified range)
+     * @description: zh - 指定范围内查找指定字符
+     * @description: en - Find the specified character in the specified range
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 6:05 下午
+     * @param str:  字符串
+     * @param searchValue: 被查找的字符
+     * @param start: 起始位置，如果小于0，从0开始查找
+     * @return int
+    */
+    public static int indexOf(CharSequence str, char searchValue, int start) {
+        return str instanceof String ? ((String) str).indexOf(searchValue, start) : indexOf(str, searchValue, start, -1);
+    }
+
+    /**
+     * [指定范围内查找指定字符](Find the specified character in the specified range)
+     * @description: zh - 指定范围内查找指定字符
+     * @description: en - Find the specified character in the specified range
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 6:07 下午
+     * @param str: 字符串
+     * @param searchValue: 被查找的字符
+     * @param start: 起始位置，如果小于0，从0开始查找
+     * @param end: 终止位置，如果超过str.length()则默认查找到字符串末尾
+     * @return int
+    */
+    public static int indexOf(final CharSequence str, char searchValue, int start, int end) {
+        if (isEmpty(str)) { return Constant.NEGATIVE_ONE; }
+        final int len = str.length();
+        if (start < Constant.ZERO || start > len) { start = Constant.ZERO; }
+        if (end > len || end < Constant.ZERO) { end = len; }
+        for (int i = start; i < end; i++) {
+            if (str.charAt(i) == searchValue) { return i; }
+        }
+        return Constant.NEGATIVE_ONE;
+    }
+
+    /**
+     * [指定范围内查找字符串，忽略大小写](Find string in specified range, ignore case)
+     * @description: zh - 指定范围内查找字符串，忽略大小写
+     * @description: en - Find string in specified range, ignore case
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 6:28 下午
+     * @param str: 字符串
+     * @param searchValue: 需要查找位置的字符串
+     * @return int
+    */
+    public static int indexOfIgnoreCase(final CharSequence str, final CharSequence searchValue) {
+        return indexOfIgnoreCase(str, searchValue, Constant.ZERO);
+    }
+
+    /**
+     * [指定范围内查找字符串](Finds a string in the specified range)
+     * @description: zh - 指定范围内查找字符串
+     * @description: en - Finds a string in the specified range
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 6:29 下午
+     * @param str: 字符串
+     * @param searchValue: 需要查找位置的字符串
+     * @param fromIndex: 起始位置
+     * @return int
+    */
+    public static int indexOfIgnoreCase(final CharSequence str, final CharSequence searchValue, int fromIndex) {
+        return indexOf(str, searchValue, fromIndex, Constant.TRUE);
+    }
+
+    /**
+     * [指定范围内查找字符串](Finds a string in the specified range)
+     * @description: zh - 指定范围内查找字符串
+     * @description: en - Finds a string in the specified range
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 6:46 下午
+     * @param str: 字符串
+     * @param searchValue: 需要查找位置的字符串
+     * @param fromIndex: 起始位置
+     * @param ignoreCase: 是否忽略大小写
+     * @return int
+    */
+    public static int indexOf(final CharSequence str, CharSequence searchValue, int fromIndex, boolean ignoreCase) {
+        if (str == Constant.NULL || searchValue == Constant.NULL) { return Constant.NEGATIVE_ONE; }
+        if (fromIndex < Constant.ZERO) { fromIndex = Constant.ZERO; }
+        final int endLimit = str.length() - searchValue.length() + Constant.ONE;
+        if (fromIndex > endLimit) { return Constant.NEGATIVE_ONE; }
+        if (searchValue.length() == Constant.ZERO) { return fromIndex; }
+
+        if (!ignoreCase) {
+            // 不忽略大小写调用JDK方法
+            return str.toString().indexOf(searchValue.toString(), fromIndex);
+        }
+
+        for (int i = fromIndex; i < endLimit; i++) {
+            if (isSubEquals(str, i, searchValue, Constant.ZERO, searchValue.length(), Constant.TRUE)) {
+                return i;
+            }
+        }
+        return Constant.NEGATIVE_ONE;
+    }
+
+    /**
+     * [指定范围内查找字符串，忽略大小写](Find string in specified range, ignore case)
+     * @description: zh - 指定范围内查找字符串，忽略大小写
+     * @description: en - Find string in specified range, ignore case
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 6:48 下午
+     * @param str: 字符串
+     * @param searchValue: 需要查找位置的字符串
+     * @return int
+    */
+    public static int lastIndexOfIgnoreCase(final CharSequence str, final CharSequence searchValue) {
+        return lastIndexOfIgnoreCase(str, searchValue, str.length());
+    }
+
+    /**
+     * [指定范围内查找字符串，忽略大小写](Find string in specified range, ignore case)
+     * @description: zh - 指定范围内查找字符串，忽略大小写
+     * @description: en - Find string in specified range, ignore case
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 6:53 下午
+     * @param str: 字符串
+     * @param searchValue: 需要查找位置的字符串
+     * @param fromIndex: 起始位置，从后往前计数
+     * @return int
+    */
+    public static int lastIndexOfIgnoreCase(final CharSequence str, final CharSequence searchValue, int fromIndex) {
+        return lastIndexOf(str, searchValue, fromIndex, Constant.TRUE);
+    }
+
+    /**
+     * [指定范围内查找字符串](Finds a string in the specified range)
+     * @description: zh - 指定范围内查找字符串
+     * @description: en - Finds a string in the specified range
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 7:05 下午
+     * @param str: 字符串
+     * @param searchValue: 需要查找位置的字符串
+     * @param fromIndex: 起始位置，从后往前计数
+     * @param ignoreCase: 是否忽略大小写
+     * @return int
+    */
+    public static int lastIndexOf(final CharSequence str, final CharSequence searchValue, int fromIndex, boolean ignoreCase) {
+        if (str == Constant.NULL || searchValue == Constant.NULL) { return Constant.NEGATIVE_ONE; }
+        if (fromIndex < Constant.ZERO) { fromIndex = Constant.ZERO; }
+        fromIndex = Math.min(fromIndex, str.length());
+        if (searchValue.length() == Constant.ZERO) { return fromIndex; }
+
+        if (!ignoreCase) {
+            // 不忽略大小写调用JDK方法
+            return str.toString().lastIndexOf(searchValue.toString(), fromIndex);
+        }
+
+        for (int i = fromIndex; i >= Constant.ZERO; i--) {
+            if (isSubEquals(str, i, searchValue, Constant.ZERO, searchValue.length(), Constant.TRUE)) {
+                return i;
+            }
+        }
+        return Constant.NEGATIVE_ONE;
+    }
+
+    /**
+     * [返回字符串 searchValue 在字符串 str 中第 ordinal 次出现的位置](Returns the position of the ordinal occurrence of the string searchValue in the string str)
+     * @description: zh - 返回字符串 searchValue 在字符串 str 中第 ordinal 次出现的位置
+     * @description: en - Returns the position of the ordinal occurrence of the string searchValue in the string str
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/8 7:11 下午
+     * @param str: 被检查的字符串，可以为null
+     * @param searchValue: 被查找的字符串，可以为null
+     * @param ordinal: 第几次出现的位置
+     * @return int
+    */
+    public static int ordinalIndexOf(CharSequence str, CharSequence searchValue, int ordinal) {
+        if (str == Constant.NULL || searchValue == Constant.NULL || ordinal <= Constant.ZERO) {
+            return Constant.NEGATIVE_ONE;
+        }
+        if (searchValue.length() == Constant.ZERO) { return Constant.ZERO; }
+        int found = Constant.ZERO;
+        int index = Constant.NEGATIVE_ONE;
+        do {
+            index = indexOf(str, searchValue, index + Constant.ONE, Constant.FALSE);
+            if (index < Constant.ZERO) { return index; }
+            found++;
+        } while (found < ordinal);
+        return index;
+    }
+
 
 }

@@ -1,8 +1,14 @@
 package com.xiaoTools.util.charSequenceUtil;
 
+import com.xiaoTools.core.convert.Convert;
+import com.xiaoTools.core.text.strSpliter.StrSpliter;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.charUtil.CharUtil;
+import com.xiaoTools.util.numUtil.NumUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * [CharSequence 相关工具类封装](Encapsulation of CharSequence related tool classes)
@@ -1455,6 +1461,295 @@ public class CharSequenceUtil {
         final String str2 = str.toString();
         final String suffix2 = suffix.toString();
         return !str2.endsWith(suffix2) ? str2.concat(suffix2) : str2;
+    }
+
+    /*切分字符串-----------------------------------------------------------split*/
+
+    /**
+     * [切分字符串](Segmentation string)
+     * @description: zh - 切分字符串
+     * @description: en - Segmentation string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 10:50 上午
+     * @param str: 被切分的字符串
+     * @param separator: 分隔符字符
+     * @return java.lang.String[]
+    */
+    public static String[] splitToArray(CharSequence str, char separator) {
+        return splitToArray(str, separator, Constant.ZERO);
+    }
+
+    /**
+     * [切分字符串](Segmentation string)
+     * @description: zh - 切分字符串
+     * @description: en - Segmentation string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 11:23 上午
+     * @param str: 被切分的字符串
+     * @param separator: 分隔符字符
+     * @param limit: 限制分片数
+     * @return java.lang.String[]
+    */
+    public static String[] splitToArray(CharSequence str, char separator, int limit) {
+        return Constant.NULL == str ? new String[]{} : StrSpliter.splitToArray(str.toString(), separator, limit, Constant.FALSE, Constant.FALSE);
+    }
+
+    /**
+     * [切分字符串为long数组](Splitting strings into long arrays)
+     * @description: zh - 切分字符串为long数组
+     * @description: en - Splitting strings into long arrays
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 10:57 上午
+     * @param str: 被切分的字符串
+     * @param separator: 分隔符
+     * @return long[]
+    */
+    public static long[] splitToLong(CharSequence str, char separator) {
+        return Convert.convert(long[].class, splitTrim(str, separator));
+    }
+
+    /**
+     * [切分字符串为long数组](Splitting strings into long arrays)
+     * @description: zh - 切分字符串为long数组
+     * @description: en - Splitting strings into long arrays
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 11:02 上午
+     * @param str: 被切分的字符串
+     * @param separator: 分隔符字符串
+     * @return long[]
+    */
+    public static long[] splitToLong(CharSequence str, CharSequence separator) {
+        return Convert.convert(long[].class, splitTrim(str, separator));
+    }
+
+    /**
+     * [切分字符串为int数组](Splits a string into an int array)
+     * @description: zh - 切分字符串为int数组
+     * @description: en - Splits a string into an int array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 11:04 上午
+     * @param str: 被切分的字符串
+     * @param separator: 分隔符
+     * @return int[]
+    */
+    public static int[] splitToInt(CharSequence str, char separator) {
+        return Convert.convert(int[].class, splitTrim(str, separator));
+    }
+
+    /**
+     * [切分字符串为int数组](Splits a string into an int array)
+     * @description: zh - 切分字符串为int数组
+     * @description: en - Splits a string into an int array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 11:06 上午
+     * @param str: 被切分的字符串
+     * @param separator: 分隔符
+     * @return int[]
+    */
+    public static int[] splitToInt(CharSequence str, CharSequence separator) {
+        return Convert.convert(int[].class, splitTrim(str, separator));
+    }
+
+    /**
+     * [切分字符串，去除切分后每个元素两边的空白符，去除空白项](Cut string, remove the blank character on both sides of each element after cutting, remove the blank item)
+     * @description: zh - 切分字符串，去除切分后每个元素两边的空白符，去除空白项
+     * @description: en - Cut string, remove the blank character on both sides of each element after cutting, remove the blank item
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 11:42 上午
+     * @param str: 被切分的字符串
+     * @param separator: 分隔符字符
+     * @return java.util.List<java.lang.String>
+    */
+    public static List<String> splitTrim(CharSequence str, char separator) {
+        return splitTrim(str, separator, Constant.NEGATIVE_ONE);
+    }
+
+    /**
+     * [切分字符串，去除切分后每个元素两边的空白符，去除空白项](Cut string, remove the blank character on both sides of each element after cutting, remove the blank item)
+     * @description: zh - 切分字符串，去除切分后每个元素两边的空白符，去除空白项
+     * @description: en - Cut string, remove the blank character on both sides of each element after cutting, remove the blank item
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 11:43 上午
+     * @param str: 被切分的字符串
+     * @param separator: 分隔符字符
+     * @return java.util.List<java.lang.String>
+    */
+    public static List<String> splitTrim(CharSequence str, CharSequence separator) {
+        return splitTrim(str, separator, Constant.NEGATIVE_ONE);
+    }
+
+    /**
+     * [切分字符串，去除切分后每个元素两边的空白符，去除空白项](Cut string, remove the blank character on both sides of each element after cutting, remove the blank item)
+     * @description: zh - 切分字符串，去除切分后每个元素两边的空白符，去除空白项
+     * @description: en - Cut string, remove the blank character on both sides of each element after cutting, remove the blank item
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 11:49 上午
+     * @param str: 被切分的字符串
+     * @param separator: 分隔符字符
+     * @param limit: 限制分片数，-1不限制
+     * @return java.util.List<java.lang.String>
+    */
+    public static List<String> splitTrim(CharSequence str, char separator, int limit) {
+        return split(str, separator, limit, true, true);
+    }
+
+    /**
+     * [切分字符串](Segmentation string)
+     * @description: zh - 切分字符串
+     * @description: en - Segmentation string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 11:10 上午
+     * @param str: 被切分的字符串
+     * @param separator: 分隔符字符
+     * @return java.util.List<java.lang.String>
+    */
+    public static List<String> split(CharSequence str, char separator) {
+        return split(str, separator, Constant.ZERO);
+    }
+
+    /**
+     * [切分字符串，不去除切分后每个元素两边的空白符，不去除空白项](Cut string, do not remove the white space on both sides of each element after cutting, do not remove the white space)
+     * @description: zh - 切分字符串，不去除切分后每个元素两边的空白符，不去除空白项
+     * @description: en - Cut string, do not remove the white space on both sides of each element after cutting, do not remove the white space
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 11:25 上午
+     * @param str: 被切分的字符串
+     * @param separator: 分隔符字符
+     * @param limit: 限制分片数，-1不限制
+     * @return java.util.List<java.lang.String>
+    */
+    public static List<String> split(CharSequence str, char separator, int limit) {
+        return split(str, separator, limit, Constant.FALSE, Constant.FALSE);
+    }
+
+    /**
+     * [切分字符串，不限制分片数量](Cut string, unlimited number of pieces)
+     * @description: zh - 切分字符串，不限制分片数量
+     * @description: en - Cut string, unlimited number of pieces
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 11:26 上午
+     * @param str: 被切分的字符串
+     * @param separator: 分隔符字符
+     * @param isTrim: 是否去除切分字符串后每个元素两边的空格
+     * @param ignoreEmpty: 是否忽略空串
+     * @return java.util.List<java.lang.String>
+    */
+    public static List<String> split(CharSequence str, char separator, boolean isTrim, boolean ignoreEmpty) {
+        return split(str, separator, Constant.ZERO, isTrim, ignoreEmpty);
+    }
+
+    /**
+     * [切分字符串](Segmentation string)
+     * @description: zh - 切分字符串
+     * @description: en - Segmentation string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 11:28 上午
+     * @param str: 被切分的字符串
+     * @param separator: 分隔符字符
+     * @param limit: 限制分片数，-1不限制
+     * @param isTrim: 是否去除切分字符串后每个元素两边的空格
+     * @param ignoreEmpty: 是否忽略空串
+     * @return java.util.List<java.lang.String>
+    */
+    public static List<String> split(CharSequence str, char separator, int limit, boolean isTrim, boolean ignoreEmpty) {
+        return Constant.NULL == str ? new ArrayList<>(Constant.ZERO) : StrSpliter.split(str.toString(), separator, limit, isTrim, ignoreEmpty);
+    }
+
+    /**
+     * [切分字符串](Segmentation string)
+     * @description: zh - 切分字符串
+     * @description: en - Segmentation string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 11:33 上午
+     * @param str: 被切分的字符串
+     * @param separator: 分隔符字符
+     * @param limit: 限制分片数，-1不限制
+     * @param isTrim: 是否去除切分字符串后每个元素两边的空格
+     * @param ignoreEmpty: 是否忽略空串
+     * @return java.util.List<java.lang.String>
+    */
+    public static List<String> split(CharSequence str, CharSequence separator, int limit, boolean isTrim, boolean ignoreEmpty) {
+        if (Constant.NULL == str) { return new ArrayList<>(Constant.ZERO); }
+        final String separatorStr = (Constant.NULL == separator) ? Constant.STRING_NULL : separator.toString();
+        return StrSpliter.split(str.toString(), separatorStr, limit, isTrim, ignoreEmpty);
+    }
+
+    /**
+     * [根据给定长度，将给定字符串截取为多个部分](According to the given length, the given string is intercepted into multiple parts)
+     * @description: zh - 根据给定长度，将给定字符串截取为多个部分
+     * @description: en - According to the given length, the given string is intercepted into multiple parts
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 11:35 上午
+     * @param str: 字符串
+     * @param separator: 每一个小节的长度
+     * @return java.lang.String[]
+    */
+    public static String[] split(CharSequence str, CharSequence separator) {
+        if (str == Constant.NULL) {
+            return new String[]{};
+        }
+
+        final String separatorStr = (Constant.NULL == separator) ? Constant.STRING_NULL : separator.toString();
+        return StrSpliter.splitToArray(str.toString(), separatorStr, Constant.ZERO, Constant.FALSE, Constant.FALSE);
+    }
+
+    /**
+     * [根据给定长度，将给定字符串截取为多个部分](According to the given length, the given string is intercepted into multiple parts)
+     * @description: zh - 根据给定长度，将给定字符串截取为多个部分
+     * @description: en - According to the given length, the given string is intercepted into multiple parts
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 11:36 上午
+     * @param str: 字符串
+     * @param len: 每一个小节的长度
+     * @return java.lang.String[]
+    */
+    public static String[] split(CharSequence str, int len) {
+        return Constant.NULL == str ? new String[]{} : StrSpliter.splitByLength(str.toString(), len);
+    }
+
+    /**
+     * [将字符串切分为N等份](Divide a string into N equal parts)
+     * @description: zh - 将字符串切分为N等份
+     * @description: en - Divide a string into N equal parts
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 11:38 上午
+     * @param str: 字符串
+     * @param partLength: 每等份的长度
+     * @return java.lang.String[]
+    */
+    public static String[] cut(CharSequence str, int partLength) {
+        if (Constant.NULL == str) {
+            return Constant.STRINGS_NULL;
+        }
+        int len = str.length();
+        if (len < partLength) {
+            return new String[]{str.toString()};
+        }
+        int part = NumUtil.count(len, partLength);
+        final String[] array = new String[part];
+
+        final String str2 = str.toString();
+        for (int i = Constant.ZERO; i < part; i++) {
+            array[i] = str2.substring(i * partLength, (i == part - Constant.ONE) ? len : (partLength + i * partLength));
+        }
+        return array;
     }
 
 

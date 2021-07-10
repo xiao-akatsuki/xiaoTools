@@ -2254,5 +2254,150 @@ public class CharSequenceUtil {
         return builder.toString();
     }
 
+    /*对比的字符串 -----------------------------------------------------------equals*/
+
+    /**
+     * [比较两个字符串（大小写敏感）。](Compare two strings (case sensitive).)
+     * @description: zh - 比较两个字符串（大小写敏感）。
+     * @description: en - Compare two strings (case sensitive).
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 6:48 下午
+     * @param str1: 要比较的字符串1
+     * @param str2: 要比较的字符串2
+     * @return boolean
+    */
+    public static boolean equals(CharSequence str1, CharSequence str2) {
+        return equals(str1, str2, Constant.FALSE);
+    }
+
+    /**
+     * [比较两个字符串是否相等。](Compares two strings for equality.)
+     * @description: zh - 比较两个字符串是否相等。
+     * @description: en - Compares two strings for equality.
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 6:52 下午
+     * @param str1: str1 – 要比较的字符串1
+     * @param str2: 要比较的字符串2
+     * @param ignoreCase: 是否忽略大小写
+     * @return boolean
+    */
+    public static boolean equals(CharSequence str1, CharSequence str2, boolean ignoreCase) {
+        if (Constant.NULL == str1) {
+            // 只有两个都为null才判断相等
+            return str2 == Constant.NULL;
+        }
+        if (Constant.NULL == str2) {
+            // 字符串2空，字符串1非空，直接false
+            return Constant.FALSE;
+        }
+        return  ignoreCase ? str1.toString().equalsIgnoreCase(str2.toString()) : str1.toString().contentEquals(str2);
+    }
+
+    /**
+     * [比较两个字符串（大小写不敏感）。](Compares two strings (case insensitive).)
+     * @description: zh - 比较两个字符串（大小写不敏感）。
+     * @description: en - Compares two strings (case insensitive).
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 6:59 下午
+     * @param str1: 要比较的字符串1
+     * @param str2: 要比较的字符串2
+     * @return boolean
+    */
+    public static boolean equalsIgnoreCase(CharSequence str1, CharSequence str2) {
+        return equals(str1, str2, Constant.TRUE);
+    }
+
+    /**
+     * [给定字符串是否与提供的中任一字符串相同（忽略大小写），相同则返回true，没有相同的返回false](If the given string is the same as any of the provided strings (regardless of case), true will be returned if it is the same, and false will be returned if it is not the same)
+     * @description: zh - 给定字符串是否与提供的中任一字符串相同（忽略大小写），相同则返回true，没有相同的返回false
+     * @description: en - If the given string is the same as any of the provided strings (regardless of case), true will be returned if it is the same, and false will be returned if it is not the same
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 7:00 下午
+     * @param str1: 给定需要检查的字符串
+     * @param arrays: 需要参与比对的字符串列表
+     * @return boolean
+    */
+    public static boolean equalsAnyIgnoreCase(CharSequence str1, CharSequence... arrays) {
+        return equalsAny(str1, Constant.TRUE, arrays);
+    }
+
+    /**
+     * [给定字符串是否与提供的中任一字符串相同，相同则返回true，没有相同的返回false](If the given string is the same as any of the provided strings, true will be returned if it is the same, and false will be returned if it is not the same)
+     * @description: zh - 给定字符串是否与提供的中任一字符串相同，相同则返回true，没有相同的返回false
+     * @description: en - If the given string is the same as any of the provided strings, true will be returned if it is the same, and false will be returned if it is not the same
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 7:01 下午
+     * @param str1: 给定需要检查的字符串
+     * @param arrays: 需要参与比对的字符串列表
+     * @return boolean
+    */
+    public static boolean equalsAny(CharSequence str1, CharSequence... arrays) {
+        return equalsAny(str1, Constant.FALSE, arrays);
+    }
+
+    /**
+     * [给定字符串是否与提供的中任一字符串相同，相同则返回true，没有相同的返回false](If the given string is the same as any of the provided strings, true will be returned if it is the same, and false will be returned if it is not the same)
+     * @description: zh - 给定字符串是否与提供的中任一字符串相同，相同则返回true，没有相同的返回false
+     * @description: en - If the given string is the same as any of the provided strings, true will be returned if it is the same, and false will be returned if it is not the same
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 7:02 下午
+     * @param str1: 给定需要检查的字符串
+     * @param ignoreCase: 是否忽略大小写
+     * @param array: 需要参与比对的字符串列表
+     * @return boolean
+    */
+    public static boolean equalsAny(CharSequence str1, boolean ignoreCase, CharSequence... array) {
+        if (ArrayUtil.isEmpty(array)) {
+            return Constant.FALSE;
+        }
+
+        for (CharSequence str : array) {
+            if (equals(str1, str, ignoreCase)) {
+                return Constant.TRUE;
+            }
+        }
+        return Constant.FALSE;
+    }
+
+    /**
+     * [字符串指定位置的字符是否与给定字符相同](Whether the character at the specified position of the string is the same as the given character)
+     * @description: zh - 字符串指定位置的字符是否与给定字符相同
+     * @description: en - Whether the character at the specified position of the string is the same as the given character
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 7:06 下午
+     * @param string: 字符串
+     * @param position: 位置
+     * @param value: 需要对比的字符
+     * @return boolean
+    */
+    public static boolean equalsCharAt(CharSequence string, int position, char value) {
+        return Constant.NULL == string || position < Constant.ZERO ? Constant.FALSE : string.length() > position && value == string.charAt(position);
+    }
+
+    /**
+     * [截取两个字符串的不同部分（长度一致），判断截取的子串是否相同](Intercepts different parts of two strings (the same length) to determine whether the intercepted substrings are the same)
+     * @description: zh - 截取两个字符串的不同部分（长度一致），判断截取的子串是否相同
+     * @description: en - Intercepts different parts of two strings (the same length) to determine whether the intercepted substrings are the same
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 7:10 下午
+     * @param str1: 第一个字符串
+     * @param start1: 第一个字符串开始的位置
+     * @param str2: 第二个字符串
+     * @param start2: 第二个字符串开始的位置
+     * @param length: 截取长度
+     * @param ignoreCase: 是否忽略大小写
+     * @return boolean
+    */
+    public static boolean isSubEquals(CharSequence str1, int start1, CharSequence str2, int start2, int length, boolean ignoreCase) {
+        return Constant.NULL == str1 || Constant.NULL == str2 ? Constant.FALSE : str1.toString().regionMatches(ignoreCase, start1, str2.toString(), start2, length);
+    }
 
 }

@@ -1599,8 +1599,26 @@ public class CharSequenceUtil {
      * @return java.util.List<java.lang.String>
     */
     public static List<String> splitTrim(CharSequence str, char separator, int limit) {
-        return split(str, separator, limit, true, true);
+        return split(str, separator, limit, Constant.TRUE, Constant.TRUE);
     }
+
+    /**
+     * [切分字符串，去除切分后每个元素两边的空白符，去除空白项](Cut string, remove the blank character on both sides of each element after cutting, remove the blank item)
+     * @description: zh - 切分字符串，去除切分后每个元素两边的空白符，去除空白项
+     * @description: en - Cut string, remove the blank character on both sides of each element after cutting, remove the blank item
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 3:33 下午
+     * @param str: 被切分的字符串
+     * @param separator: 分隔符字符
+     * @param limit: 限制分片数，-1不限制
+     * @return java.util.List<java.lang.String>
+    */
+    public static List<String> splitTrim(CharSequence str, CharSequence separator, int limit) {
+        return split(str, separator, limit, Constant.TRUE, Constant.TRUE);
+    }
+
+
 
     /**
      * [切分字符串](Segmentation string)

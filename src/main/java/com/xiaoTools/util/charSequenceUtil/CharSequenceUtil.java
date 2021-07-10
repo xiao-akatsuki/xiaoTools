@@ -8,6 +8,7 @@ import com.xiaoTools.util.charUtil.CharUtil;
 import com.xiaoTools.util.numUtil.NumUtil;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -1770,5 +1771,362 @@ public class CharSequenceUtil {
         return array;
     }
 
+    /*截取字符串-----------------------------------------------------------intercept*/
 
+    /**
+     * [截取字符串](Intercept string)
+     * @description: zh - 截取字符串
+     * @description: en - Intercept string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 4:36 下午
+     * @param value: String
+     * @param beginIndex: 开始的index（包括）
+     * @param endIndex: 结束的index（不包括）
+     * @return java.lang.String
+    */
+    public static String subString(CharSequence value, int beginIndex, int endIndex) {
+        if (isEmpty(value)) {
+            return str(value);
+        }
+        int len = value.length();
+
+        if (beginIndex < Constant.ZERO) {
+            beginIndex = len + beginIndex;
+            if (beginIndex < Constant.ZERO) {
+                beginIndex = Constant.ZERO;
+            }
+        } else if (beginIndex > len) {
+            beginIndex = len;
+        }
+
+        if (endIndex < Constant.ZERO) {
+            endIndex = len + endIndex;
+            if (endIndex < Constant.ZERO) {
+                endIndex = len;
+            }
+        } else if (endIndex > len) {
+            endIndex = len;
+        }
+
+        if (endIndex < beginIndex) {
+            int tmp = beginIndex;
+            beginIndex = endIndex;
+            endIndex = tmp;
+        }
+        return beginIndex == endIndex ? Constant.EMPTY : value.toString().substring(beginIndex, endIndex);
+    }
+
+    /**
+     * [通过CodePoint截取字符串，可以截断Emoji](You can truncate Emoji by intercepting strings through codepoint)
+     * @description: zh - 通过CodePoint截取字符串，可以截断Emoji
+     * @description: en - You can truncate Emoji by intercepting strings through codepoint
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 4:39 下午
+     * @param value: String
+     * @param beginIndex: 开始的index（包括）
+     * @param endIndex: 结束的index（不包括）
+     * @return java.lang.String
+    */
+    public static String subStringByCodePoint(CharSequence value, int beginIndex, int endIndex) {
+        if (isEmpty(value)) { return str(value); }
+        if (beginIndex < Constant.ZERO || beginIndex > endIndex) {
+            throw new IllegalArgumentException();
+        }
+        if (beginIndex == endIndex) { return Constant.EMPTY; }
+
+        final StringBuilder sb = new StringBuilder();
+        final int subLen = endIndex - beginIndex;
+        value.toString().codePoints().skip(beginIndex).limit(subLen).forEach(v -> sb.append(Character.toChars(v)));
+        return sb.toString();
+    }
+
+    /**
+     * [截取部分字符串，这里一个汉字的长度认为是2](Intercept part of the string, where the length of a Chinese character is considered to be 2)
+     * @description: zh - 截取部分字符串，这里一个汉字的长度认为是2
+     * @description: en - Intercept part of the string, where the length of a Chinese character is considered to be 2
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 4:43 下午
+     * @param str: 字符串
+     * @param length: 切割的位置
+     * @param suffix: 切割后加上后缀
+     * @return java.lang.String
+    */
+    public static String subStringPreGbk(CharSequence str, int length, CharSequence suffix) {
+        if (isEmpty(str)) { return str(str); }
+
+        byte[] b;
+        int counterOfDoubleByte = Constant.ZERO;
+        b = str.toString().getBytes(CharsetUtil.CHARSET_GBK);
+        if (b.length <= length) { return str.toString(); }
+        for (int i = Constant.ZERO; i < length; i++) {
+            if (b[i] < Constant.ZERO) { counterOfDoubleByte++; }
+        }
+
+        if (counterOfDoubleByte % Constant.TWO != Constant.ZERO) {
+            length += Constant.ONE;
+        }
+        return new String(b, Constant.ZERO, length, CharsetUtil.CHARSET_GBK) + suffix;
+    }
+
+    /**
+     * [切割指定位置之前部分的字符串](Cuts the string before the specified position)
+     * @description: zh - 切割指定位置之前部分的字符串
+     * @description: en - Cuts the string before the specified position
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 4:48 下午
+     * @param string: 字符串
+     * @param toIndexExclude: 切割到的位置（不包括）
+     * @return java.lang.String
+    */
+    public static String subStringPre(CharSequence string, int toIndexExclude) {
+        return subString(string, Constant.ZERO, toIndexExclude);
+    }
+
+    /**
+     * [切割指定位置之后部分的字符串](Cuts the string after the specified position)
+     * @description: zh - 切割指定位置之后部分的字符串
+     * @description: en - Cuts the string after the specified position
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 4:54 下午
+     * @param string: 字符串
+     * @param fromIndex: 切割开始的位置（包括）
+     * @return java.lang.String
+    */
+    public static String subStringSuf(CharSequence string, int fromIndex) {
+        return isEmpty(string) ? Constant.STRING_NULL : subString(string, fromIndex, string.length());
+    }
+
+    /**
+     * [切割指定长度的后部分的字符串](A string that cuts the last part of the specified length)
+     * @description: zh - 切割指定长度的后部分的字符串
+     * @description: en - A string that cuts the last part of the specified length
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 4:56 下午
+     * @param string:  字符串
+     * @param length: 切割长度
+     * @return java.lang.String
+    */
+    public static String subStringSufByLength(CharSequence string, int length) {
+        return isEmpty(string) ?
+                Constant.STRING_NULL :
+                length <= Constant.ZERO ? Constant.EMPTY : subString(string, -length, string.length());
+    }
+
+    /**
+     * [截取字符串,从指定位置开始,截取指定长度的字符串](Intercepts the string, starts from the specified position, intercepts the specified length string)
+     * @description: zh - 截取字符串,从指定位置开始,截取指定长度的字符串
+     * @description: en - Intercepts the string, starts from the specified position, intercepts the specified length string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 5:04 下午
+     * @param input: 原始字符串
+     * @param fromIndex: 开始的index,包括
+     * @param length: 要截取的长度
+     * @return java.lang.String
+    */
+    public static String subStringWithLength(String input, int fromIndex, int length) {
+        return subString(input, fromIndex, fromIndex + length);
+    }
+
+    /**
+     * [截取分隔字符串之前的字符串，不包括分隔字符串](Intercepts the string before the delimited string, excluding the delimited string)
+     * @description: zh - 截取分隔字符串之前的字符串，不包括分隔字符串
+     * @description: en - Intercepts the string before the delimited string, excluding the delimited string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 5:07 下午
+     * @param string: 被查找的字符串
+     * @param separator: 分隔字符串（不包括）
+     * @param isLastSeparator: 是否查找最后一个分隔字符串（多次出现分隔字符串时选取最后一个），true为选取最后一个
+     * @return java.lang.String
+    */
+    public static String subStringBefore(CharSequence string, CharSequence separator, boolean isLastSeparator) {
+        if (isEmpty(string) || separator == Constant.NULL) {
+            return Constant.NULL == string ? Constant.STRING_NULL : string.toString();
+        }
+
+        final String str = string.toString();
+        final String sep = separator.toString();
+        if (sep.isEmpty()) { return Constant.EMPTY; }
+        final int pos = isLastSeparator ? str.lastIndexOf(sep) : str.indexOf(sep);
+        return Constant.NEGATIVE_ONE == pos ? str : Constant.ZERO == pos ? Constant.EMPTY : str.substring(Constant.ZERO, pos);
+    }
+
+    /**
+     * [截取分隔字符串之前的字符串，不包括分隔字符串](Intercepts the string before the delimited string, excluding the delimited string)
+     * @description: zh - 截取分隔字符串之前的字符串，不包括分隔字符串
+     * @description: en - Intercepts the string before the delimited string, excluding the delimited string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 5:10 下午
+     * @param string: 被查找的字符串
+     * @param separator: 分隔字符串（不包括）
+     * @param isLastSeparator: 是否查找最后一个分隔字符串（多次出现分隔字符串时选取最后一个），true为选取最后一个
+     * @return java.lang.String
+    */
+    public static String subStringBefore(CharSequence string, char separator, boolean isLastSeparator) {
+        if (isEmpty(string)) {
+            return Constant.NULL == string ? Constant.STRING_NULL : Constant.EMPTY;
+        }
+
+        final String str = string.toString();
+        final int pos = isLastSeparator ? str.lastIndexOf(separator) : str.indexOf(separator);
+        return Constant.NEGATIVE_ONE == pos ? str :
+                Constant.ZERO == pos ? Constant.EMPTY : str.substring(Constant.ZERO, pos);
+    }
+
+    /**
+     * [截取分隔字符串之后的字符串，不包括分隔字符串](Intercepts the string after the delimited string, excluding the delimited string)
+     * @description: zh - 截取分隔字符串之后的字符串，不包括分隔字符串
+     * @description: en - Intercepts the string after the delimited string, excluding the delimited string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 5:35 下午
+     * @param string: 被查找的字符串
+     * @param separator: 分隔字符串（不包括）
+     * @param isLastSeparator: 是否查找最后一个分隔字符串（多次出现分隔字符串时选取最后一个），true为选取最后一个
+     * @return java.lang.String
+    */
+    public static String subStringAfter(CharSequence string, CharSequence separator, boolean isLastSeparator) {
+        if (isEmpty(string)) {
+            return Constant.NULL == string ? Constant.STRING_NULL : Constant.EMPTY;
+        }
+        if (separator == Constant.NULL) {
+            return Constant.EMPTY;
+        }
+        final String str = string.toString();
+        final String sep = separator.toString();
+        final int pos = isLastSeparator ? str.lastIndexOf(sep) : str.indexOf(sep);
+        if (Constant.NEGATIVE_ONE == pos || (string.length() - 1) == pos) {
+            return Constant.EMPTY;
+        }
+        return str.substring(pos + separator.length());
+    }
+
+    /**
+     * [截取分隔字符串之后的字符串，不包括分隔字符串](Intercepts the string after the delimited string, excluding the delimited string)
+     * @description: zh - 截取分隔字符串之后的字符串，不包括分隔字符串
+     * @description: en - Intercepts the string after the delimited string, excluding the delimited string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 5:53 下午
+     * @param string: 被查找的字符串
+     * @param separator: 分隔字符串（不包括）
+     * @param isLastSeparator: 是否查找最后一个分隔字符串（多次出现分隔字符串时选取最后一个），true为选取最后一个
+     * @return java.lang.String
+    */
+    public static String subStringAfter(CharSequence string, char separator, boolean isLastSeparator) {
+        if (isEmpty(string)) {
+            return Constant.NULL == string ? Constant.STRING_NULL : Constant.EMPTY;
+        }
+        final String str = string.toString();
+        final int pos = isLastSeparator ? str.lastIndexOf(separator) : str.indexOf(separator);
+        return Constant.NEGATIVE_ONE == pos ? Constant.EMPTY :  str.substring(pos + Constant.ONE);
+    }
+
+    /**
+     * [截取指定字符串中间部分，不包括标识字符串](Intercepts the middle part of the specified string, excluding the identification string)
+     * @description: zh - 截取指定字符串中间部分，不包括标识字符串
+     * @description: en - Intercepts the middle part of the specified string, excluding the identification string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 5:54 下午
+     * @param str: 被切割的字符串
+     * @param before: 截取开始的字符串标识
+     * @param after: 截取到的字符串标识
+     * @return java.lang.String
+    */
+    public static String subStringBetween(CharSequence str, CharSequence before, CharSequence after) {
+        if (str == Constant.NULL || before == Constant.NULL || after == Constant.NULL) {
+            return Constant.STRING_NULL;
+        }
+
+        final String str2 = str.toString();
+        final String before2 = before.toString();
+        final String after2 = after.toString();
+
+        final int start = str2.indexOf(before2);
+        if (start != Constant.NEGATIVE_ONE) {
+            final int end = str2.indexOf(after2, start + before2.length());
+            if (end != Constant.NEGATIVE_ONE) {
+                return str2.substring(start + before2.length(), end);
+            }
+        }
+        return Constant.STRING_NULL;
+    }
+
+    /**
+     * [截取指定字符串中间部分，不包括标识字符串](Intercepts the middle part of the specified string, excluding the identification string)
+     * @description: zh - 截取指定字符串中间部分，不包括标识字符串
+     * @description: en - Intercepts the middle part of the specified string, excluding the identification string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 5:55 下午
+     * @param str: 被切割的字符串
+     * @param beforeAndAfter: 截取开始和结束的字符串标识
+     * @return java.lang.String
+    */
+    public static String subStringBetween(CharSequence str, CharSequence beforeAndAfter) {
+        return subStringBetween(str, beforeAndAfter, beforeAndAfter);
+    }
+
+    /**
+     * [截取指定字符串多段中间部分，不包括标识字符串](Intercepts the middle part of the specified string, excluding the identification string)
+     * @description: zh - 截取指定字符串多段中间部分，不包括标识字符串
+     * @description: en - Intercepts the middle part of the specified string, excluding the identification string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 5:58 下午
+     * @param str: 被切割的字符串
+     * @param prefix: 截取开始的字符串标识
+     * @param suffix: 截取到的字符串标识
+     * @return java.lang.String[]
+    */
+    public static String[] subStringBetweenAll(CharSequence str, CharSequence prefix, CharSequence suffix) {
+        if (hasEmpty(str, prefix, suffix) ||
+                // 不包含起始字符串，则肯定没有子串
+                !contains(str, prefix)) {
+            return new String[Constant.ZERO];
+        }
+
+        final List<String> result = new LinkedList<>();
+        final String[] split = split(str, prefix);
+        if (prefix.equals(suffix)) {
+            // 前后缀字符相同，单独处理
+            for (int i = Constant.ONE, length = split.length - Constant.ONE; i < length; i += Constant.TWO) {
+                result.add(split[i]);
+            }
+        } else {
+            int suffixIndex;
+            for (String fragment : split) {
+                suffixIndex = fragment.indexOf(suffix.toString());
+                if (suffixIndex > Constant.ZERO) {
+                    result.add(fragment.substring(Constant.ZERO, suffixIndex));
+                }
+            }
+        }
+
+        return result.toArray(new String[Constant.ZERO]);
+    }
+
+    /**
+     * [截取指定字符串多段中间部分，不包括标识字符串](Intercepts the middle part of the specified string, excluding the identification string)
+     * @description: zh - 截取指定字符串多段中间部分，不包括标识字符串
+     * @description: en - Intercepts the middle part of the specified string, excluding the identification string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 5:59 下午
+     * @param str: 被切割的字符串
+     * @param prefixAndSuffix: 截取开始和结束的字符串标识
+     * @return java.lang.String[]
+    */
+    public static String[] subStringBetweenAll(CharSequence str, CharSequence prefixAndSuffix) {
+        return subStringBetweenAll(str, prefixAndSuffix, prefixAndSuffix);
+    }
 }

@@ -1417,5 +1417,45 @@ public class CharSequenceUtil {
         return str2.substring(from, to);
     }
 
+    /*添加字符串-----------------------------------------------------------add*/
+
+    /**
+     * [如果给定字符串不是以prefix开头的，在开头补充 prefix](If the given string does not start with prefix, prefix is added at the beginning)
+     * @description: zh - 如果给定字符串不是以prefix开头的，在开头补充 prefix
+     * @description: en - If the given string does not start with prefix, prefix is added at the beginning
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 10:30 上午
+     * @param str: 字符串
+     * @param prefix: 前缀
+     * @return java.lang.String
+    */
+    public static String addPrefixIfNot(CharSequence str, CharSequence prefix) {
+        if (isEmpty(str) || isEmpty(prefix)) { return str(str); }
+
+        final String str2 = str.toString();
+        final String prefix2 = prefix.toString();
+        return !str2.startsWith(prefix2) ? prefix2.concat(str2) : str2;
+    }
+
+    /**
+     * [如果给定字符串不是以suffix结尾的，在尾部补充 suffix](If the given string does not end with suffix, suffix is added at the end)
+     * @description: zh - 如果给定字符串不是以suffix结尾的，在尾部补充 suffix
+     * @description: en - If the given string does not end with suffix, suffix is added at the end
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 10:36 上午
+     * @param str: 字符串
+     * @param suffix: 后缀
+     * @return java.lang.String
+    */
+    public static String addSuffixIfNot(CharSequence str, CharSequence suffix) {
+        if (isEmpty(str) || isEmpty(suffix)) { return str(str); }
+
+        final String str2 = str.toString();
+        final String suffix2 = suffix.toString();
+        return !str2.endsWith(suffix2) ? str2.concat(suffix2) : str2;
+    }
+
 
 }

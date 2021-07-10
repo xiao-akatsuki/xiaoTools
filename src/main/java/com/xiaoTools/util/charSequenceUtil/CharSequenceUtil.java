@@ -1326,4 +1326,96 @@ public class CharSequenceUtil {
     public static String cleanBlank(CharSequence str) {
         return filter(str, c -> !CharUtil.isBlankChar(c));
     }
+
+    /*去除两边的指定字符串-----------------------------------------------------------strip*/
+
+    /**
+     * [去除两边的指定字符串](Remove both sides of the specified string)
+     * @description: zh - 去除两边的指定字符串
+     * @description: en - Remove both sides of the specified string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/9 9:09 上午
+     * @param str: 被处理的字符串
+     * @param prefixOrSuffix: 前缀或后缀
+     * @return java.lang.String
+    */
+    public static String strip(CharSequence str, CharSequence prefixOrSuffix) {
+        return equals(str, prefixOrSuffix) ? Constant.EMPTY : strip(str, prefixOrSuffix, prefixOrSuffix);
+    }
+
+    /**
+     * [去除两边的指定字符串](Remove both sides of the specified string)
+     * @description: zh - 去除两边的指定字符串
+     * @description: en - Remove both sides of the specified string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 10:09 上午
+     * @param str: 被处理的字符串
+     * @param prefix: 前缀
+     * @param suffix: 后缀
+     * @return java.lang.String
+    */
+    public static String strip(CharSequence str, CharSequence prefix, CharSequence suffix) {
+        if (isEmpty(str)) { return str(str); }
+
+        int from = Constant.ZERO;
+        int to = str.length();
+
+        String str2 = str.toString();
+        if (startWith(str2, prefix)) {
+            from = prefix.length();
+        }
+        if (endWith(str2, suffix)) {
+            to -= suffix.length();
+        }
+
+        return str2.substring(Math.min(from, to), Math.max(from, to));
+    }
+
+    /**
+     * [去除两边的指定字符串，忽略大小写](Remove both sides of the specified string, ignoring case)
+     * @description: zh - 去除两边的指定字符串，忽略大小写
+     * @description: en - Remove both sides of the specified string, ignoring case
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 10:10 上午
+     * @param str: 被处理的字符串
+     * @param prefixOrSuffix: 前缀或后缀
+     * @return java.lang.String
+    */
+    public static String stripIgnoreCase(CharSequence str, CharSequence prefixOrSuffix) {
+        return stripIgnoreCase(str, prefixOrSuffix, prefixOrSuffix);
+    }
+
+    /**
+     * [去除两边的指定字符串，忽略大小写](Remove both sides of the specified string, ignoring case)
+     * @description: zh - 去除两边的指定字符串，忽略大小写
+     * @description: en - Remove both sides of the specified string, ignoring case
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 10:20 上午
+     * @param str: 被处理的字符串
+     * @param prefix: 前缀
+     * @param suffix: 后缀
+     * @return java.lang.String
+    */
+    public static String stripIgnoreCase(CharSequence str, CharSequence prefix, CharSequence suffix) {
+        if (isEmpty(str)) {
+            return str(str);
+        }
+        int from = 0;
+        int to = str.length();
+
+        String str2 = str.toString();
+        if (startWithIgnoreCase(str2, prefix)) {
+            from = prefix.length();
+        }
+        if (endWithIgnoreCase(str2, suffix)) {
+            to -= suffix.length();
+        }
+        return str2.substring(from, to);
+    }
+
+
 }

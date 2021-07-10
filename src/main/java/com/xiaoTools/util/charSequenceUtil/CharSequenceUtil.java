@@ -2129,4 +2129,130 @@ public class CharSequenceUtil {
     public static String[] subStringBetweenAll(CharSequence str, CharSequence prefixAndSuffix) {
         return subStringBetweenAll(str, prefixAndSuffix, prefixAndSuffix);
     }
+
+    /*重复的字符串 -----------------------------------------------------------repeat*/
+
+    /**
+     * [重复某一个字符](Repeat a character)
+     * @description: zh - 重复某一个字符
+     * @description: en - Repeat a character
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 6:08 下午
+     * @param repeatValue: 被重复的字符
+     * @param count: 重复的数目，如果小于等于0则返回""
+     * @return java.lang.String
+    */
+    public static String repeat(char repeatValue, int count) {
+        if (count <= Constant.ZERO) {
+            return Constant.EMPTY;
+        }
+
+        char[] result = new char[count];
+        for (int i = Constant.ZERO; i < count; i++) {
+            result[i] = repeatValue;
+        }
+        return new String(result);
+    }
+
+    /**
+     * [重复某个字符串](Repeat a string)
+     * @description: zh - 重复某个字符串
+     * @description: en - Repeat a string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 6:14 下午
+     * @param str: 被重复的字符
+     * @param count: 重复的数目
+     * @return java.lang.String
+    */
+    public static String repeat(CharSequence str, int count) {
+        if (null == str) {
+            return null;
+        }
+        if (count <= Constant.ZERO || str.length() == Constant.ZERO) {
+            return Constant.EMPTY;
+        }
+        if (count == Constant.ONE) {
+            return str.toString();
+        }
+
+        // 检查
+        final int len = str.length();
+        final long longSize = (long) len * (long) count;
+        final int size = (int) longSize;
+        if (size != longSize) {
+            throw new ArrayIndexOutOfBoundsException("Required String length is too large: " + longSize);
+        }
+
+        final char[] array = new char[size];
+        str.toString().getChars(Constant.ZERO, len, array, Constant.ZERO);
+        int n;
+        for (n = len; n < size - n; n <<= Constant.ONE) {
+            // n <<= 1相当于n *2
+            System.arraycopy(array, Constant.ZERO, array, n, n);
+        }
+        System.arraycopy(array, Constant.ZERO, array, n, size - n);
+        return new String(array);
+    }
+
+    /**
+     * [重复某个字符串到指定长度](Repeats a string to a specified length)
+     * @description: zh - 重复某个字符串到指定长度
+     * @description: en - Repeats a string to a specified length
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 6:34 下午
+     * @param str: 被重复的字符
+     * @param padLen: 指定长度
+     * @return java.lang.String
+    */
+    public static String repeatByLength(CharSequence str, int padLen) {
+        if (Constant.NULL == str) { return Constant.STRING_NULL; }
+        if (padLen <= Constant.ZERO) { return Constant.EMPTY; }
+        final int strLen = str.length();
+        if (strLen == padLen) {
+            return str.toString();
+        } else if (strLen > padLen) {
+            return subStringPre(str, padLen);
+        }
+
+        // 重复，直到达到指定长度
+        final char[] padding = new char[padLen];
+        for (int i = Constant.ZERO; i < padLen; i++) {
+            padding[i] = str.charAt(i % strLen);
+        }
+        return new String(padding);
+    }
+
+    /**
+     * [重复某个字符串并通过分界符连接](Repeats a string and concatenates it with a separator)
+     * @description: zh - 重复某个字符串并通过分界符连接
+     * @description: en - Repeats a string and concatenates it with a separator
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/10 6:36 下午
+     * @param str: 被重复的字符串
+     * @param count: 数量
+     * @param conjunction: 分界符
+     * @return java.lang.String
+    */
+    public static String repeatAndJoin(CharSequence str, int count, CharSequence conjunction) {
+        if (count <= Constant.ZERO) {
+            return Constant.EMPTY;
+        }
+        final StrBuilder builder = StrBuilder.create();
+        boolean isFirst = true;
+        while (count-- > 0) {
+            if (isFirst) {
+                isFirst = false;
+            } else if (isNotEmpty(conjunction)) {
+                builder.append(conjunction);
+            }
+            builder.append(str);
+        }
+        return builder.toString();
+    }
+
+
 }

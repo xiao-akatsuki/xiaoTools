@@ -1,12 +1,14 @@
 package com.xiaoTools.util.charSequenceUtil;
 
 import com.xiaoTools.core.convert.Convert;
+import com.xiaoTools.core.stringFormatter.StrFormatter;
 import com.xiaoTools.core.text.strSpliter.StrSpliter;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.charUtil.CharUtil;
 import com.xiaoTools.util.numUtil.NumUtil;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -2398,6 +2400,39 @@ public class CharSequenceUtil {
     */
     public static boolean isSubEquals(CharSequence str1, int start1, CharSequence str2, int start2, int length, boolean ignoreCase) {
         return Constant.NULL == str1 || Constant.NULL == str2 ? Constant.FALSE : str1.toString().regionMatches(ignoreCase, start1, str2.toString(), start2, length);
+    }
+
+    /*格式化字符串 -----------------------------------------------------------format*/
+
+    /**
+     * [格式化文本, {} 表示占位符](Formatted text, {} represents a placeholder)
+     * @description: zh - 格式化文本, {} 表示占位符
+     * @description: en - Formatted text, {} represents a placeholder
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/11 8:00 下午
+     * @param template:文本模板，被替换的部分用 {} 表示，如果模板为null，返回"null"
+     * @param params: 参数值
+     * @return java.lang.String
+    */
+    public static String format(CharSequence template, Object... params) {
+        return Constant.NULL == template ? Constant.STRING_NULL :
+                ArrayUtil.isEmpty(params) || isBlank(template) ? template.toString() : StrFormatter.format(template.toString(), params);
+    }
+
+    /**
+     * [有序的格式化文本，使用{number}做为占位符](Orderly formatted text, using {number} as a placeholder)
+     * @description: zh - 有序的格式化文本，使用{number}做为占位符
+     * @description: en - Orderly formatted text, using {number} as a placeholder
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/11 8:00 下午
+     * @param pattern: 文本格式
+     * @param arguments: 参数
+     * @return java.lang.String
+    */
+    public static String indexedFormat(CharSequence pattern, Object... arguments) {
+        return MessageFormat.format(pattern.toString(), arguments);
     }
 
 }

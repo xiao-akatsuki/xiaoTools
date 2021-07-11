@@ -8,6 +8,8 @@ import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.charUtil.CharUtil;
 import com.xiaoTools.util.numUtil.NumUtil;
 
+import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -2435,4 +2437,79 @@ public class CharSequenceUtil {
         return MessageFormat.format(pattern.toString(), arguments);
     }
 
+    /*编码字符串 -----------------------------------------------------------bytes*/
+
+    /**
+     * [编码字符串，编码为UTF-8](Encoding string, encoded as UTF-8)
+     * @description: zh - 编码字符串，编码为UTF-8
+     * @description: en - Encoding string, encoded as UTF-8
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/11 8:43 下午
+     * @param value: 字符串
+     * @return byte[]
+    */
+    public static byte[] utf8Bytes(CharSequence value) {
+        return bytes(value, CharsetUtil.CHARSET_UTF_8);
+    }
+
+    /**
+     * [编码字符串 使用系统默认编码](The encoding string uses the system default encoding)
+     * @description: zh - 编码字符串 使用系统默认编码
+     * @description: en - The encoding string uses the system default encoding
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/11 8:44 下午
+     * @param str: 字符串
+     * @return byte[]
+    */
+    public static byte[] bytes(CharSequence str) {
+        return bytes(str, Charset.defaultCharset());
+    }
+
+    /**
+     * [编码字符串](Encoding string)
+     * @description: zh - 编码字符串
+     * @description: en - Encoding string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/11 8:46 下午
+     * @param str: 字符串
+     * @param charset: 字符集，如果此字段为空，则解码的结果取决于平台
+     * @return byte[]
+    */
+    public static byte[] bytes(CharSequence str, String charset) {
+        return bytes(str, isBlank(charset) ? Charset.defaultCharset() : Charset.forName(charset));
+    }
+
+    /**
+     * [编码字符串](Encoding string)
+     * @description: zh - 编码字符串
+     * @description: en - Encoding string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/11 8:49 下午
+     * @param str: 字符串
+     * @param charset: 字符集，如果此字段为空，则解码的结果取决于平台
+     * @return byte[]
+    */
+    public static byte[] bytes(CharSequence str, Charset charset) {
+        return str == Constant.NULL ? Constant.BYTES_NULL :
+                Constant.NULL == charset ? str.toString().getBytes() : str.toString().getBytes(charset);
+    }
+
+    /**
+     * [字符串转换为byteBuffer](String to ByteBuffer)
+     * @description: zh - 字符串转换为byteBuffer
+     * @description: en - String to ByteBuffer
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/11 8:51 下午
+     * @param str: 字符串
+     * @param charset: 编码
+     * @return java.nio.ByteBuffer
+    */
+    public static ByteBuffer byteBuffer(CharSequence str, String charset) {
+        return ByteBuffer.wrap(bytes(str, charset));
+    }
 }

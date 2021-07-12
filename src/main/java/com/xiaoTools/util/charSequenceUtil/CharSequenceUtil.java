@@ -2665,7 +2665,7 @@ public class CharSequenceUtil {
      * @return java.lang.String
     */
     public static String unWrap(CharSequence value, String prefix, String suffix) {
-        return isWrap(value, prefix, suffix) ? sub(value, prefix.length(), value.length() - suffix.length()) : value.toString();
+        return isWrap(value, prefix, suffix) ? subString(value, prefix.length(), value.length() - suffix.length()) : value.toString();
     }
 
     /**
@@ -2682,7 +2682,7 @@ public class CharSequenceUtil {
     */
     public static String unWrap(CharSequence value, char prefix, char suffix) {
         return isEmpty(value) ? str(value) :
-                value.charAt(Constant.ZERO) == prefix && value.charAt(value.length() - Constant.ONE) == suffix ? sub(value, Constant.ONE, value.length() - Constant.ONE) : value.toString();
+                value.charAt(Constant.ZERO) == prefix && value.charAt(value.length() - Constant.ONE) == suffix ? subString(value, Constant.ONE, value.length() - Constant.ONE) : value.toString();
     }
 
     /**
@@ -2765,4 +2765,92 @@ public class CharSequenceUtil {
     public static boolean isWrap(CharSequence str, char prefixChar, char suffixChar) {
         return Constant.NULL == str ? Constant.FALSE : str.charAt(Constant.ZERO) == prefixChar && str.charAt(str.length() - Constant.ONE) == suffixChar;
     }
+
+    /*补充字符串 -----------------------------------------------------------pad*/
+
+    /**
+     * [补充字符串以满足指定长度，如果提供的字符串大于指定长度，截断之](The string is supplemented to meet the specified length. If the supplied string is larger than the specified length, it is truncated)
+     * @description: zh - 补充字符串以满足指定长度，如果提供的字符串大于指定长度，截断之
+     * @description: en - The string is supplemented to meet the specified length. If the supplied string is larger than the specified length, it is truncated
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 9:28 上午
+     * @param value: 字符串
+     * @param length: 长度
+     * @param padStr: 补充的字符
+     * @return java.lang.String
+    */
+    public static String padPre(CharSequence value, int length, CharSequence padStr) {
+        if (Constant.NULL == value) {
+            return Constant.STRING_NULL;
+        }
+        final int strLen = value.length();
+        return strLen == length ? value.toString() : strLen > length ?
+                subStringPre(value, length) : repeatByLength(padStr, length - strLen).concat(value.toString());
+    }
+
+    /**
+     * [补充字符串以满足指定长度，如果提供的字符串大于指定长度，截断之](The string is supplemented to meet the specified length. If the supplied string is larger than the specified length, it is truncated)
+     * @description: zh - 补充字符串以满足指定长度，如果提供的字符串大于指定长度，截断之
+     * @description: en - The string is supplemented to meet the specified length. If the supplied string is larger than the specified length, it is truncated
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 10:33 上午
+     * @param value: 字符串
+     * @param length: 长度
+     * @param padChar: 补充的字符
+     * @return java.lang.String
+    */
+    public static String padPre(CharSequence value, int length, char padChar) {
+        if (Constant.NULL == value) {
+            return Constant.STRING_NULL;
+        }
+        final int strLen = value.length();
+        return strLen == length ? value.toString() :
+                strLen > length ? subStringPre(value, length) : repeat(padChar, length - strLen).concat(value.toString());
+    }
+
+    /**
+     * [补充字符串以满足指定长度，如果提供的字符串大于指定长度，截断之](The string is supplemented to meet the specified length. If the supplied string is larger than the specified length, it is truncated)
+     * @description: zh - 补充字符串以满足指定长度，如果提供的字符串大于指定长度，截断之
+     * @description: en - The string is supplemented to meet the specified length. If the supplied string is larger than the specified length, it is truncated
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 10:36 上午
+     * @param value: 字符串，如果为null，直接返回null
+     * @param length: 长度
+     * @param padChar: 补充的字符
+     * @return java.lang.String
+    */
+    public static String padAfter(CharSequence value, int length, char padChar) {
+        if (Constant.NULL == value) {
+            return Constant.STRING_NULL;
+        }
+        final int strLen = value.length();
+        return strLen == length ? value.toString() :
+                strLen > length ? subString(value, strLen - length, strLen) :
+                        value.toString().concat(repeat(padChar, length - strLen));
+    }
+
+    /**
+     * [补充字符串以满足最小长度](Supplement string to meet minimum length)
+     * @description: zh - 补充字符串以满足最小长度
+     * @description: en - Supplement string to meet minimum length
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 10:50 上午
+     * @param value: 字符串，如果为null，直接返回null
+     * @param length: 长度
+     * @param padStr: 补充的字
+     * @return java.lang.String
+    */
+    public static String padAfter(CharSequence value, int length, CharSequence padStr) {
+        if (Constant.NULL == value) { return Constant.STRING_NULL; }
+        final int strLen = value.length();
+        return strLen == length ? value.toString() :
+                strLen > length ? subStringSufByLength(value, length) :
+                        value.toString().concat(repeatByLength(padStr, length - strLen));
+    }
+
+
 }

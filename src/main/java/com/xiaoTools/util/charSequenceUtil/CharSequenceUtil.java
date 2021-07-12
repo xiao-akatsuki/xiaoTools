@@ -2852,5 +2852,67 @@ public class CharSequenceUtil {
                         value.toString().concat(repeatByLength(padStr, length - strLen));
     }
 
+    /*居中字符串 -----------------------------------------------------------center*/
 
+    /**
+     * [居中字符串，两边补充指定字符串，如果指定长度小于字符串，则返回原字符串](Center the string and supplement the specified string on both sides. If the specified length is less than the string, the original string will be returned)
+     * @description: zh - 居中字符串，两边补充指定字符串，如果指定长度小于字符串，则返回原字符串
+     * @description: en - Center the string and supplement the specified string on both sides. If the specified length is less than the string, the original string will be returned
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 2:15 下午
+     * @param value: 字符串
+     * @param size: 指定长度
+     * @param padStr: 两边补充的字符串
+     * @return java.lang.String
+    */
+    public static String center(CharSequence value, final int size, CharSequence padStr) {
+        if (value == Constant.NULL || size <= Constant.ZERO) {
+            return str(value);
+        }
+        if (isEmpty(padStr)) { padStr = Constant.STRING_SPACE; }
+        final int strLen = value.length();
+        final int pads = size - strLen;
+        if (pads <= Constant.ZERO) { return value.toString(); }
+        value = padPre(value, strLen + pads / Constant.TWO, padStr);
+        value = padAfter(value, size, padStr);
+        return value.toString();
+    }
+
+    /**
+     * [居中字符串，两边补充指定字符串，如果指定长度小于字符串，则返回原字符串](Center the string and supplement the specified string on both sides. If the specified length is less than the string, the original string will be returned)
+     * @description: zh - 居中字符串，两边补充指定字符串，如果指定长度小于字符串，则返回原字符串
+     * @description: en - Center the string and supplement the specified string on both sides. If the specified length is less than the string, the original string will be returned
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 2:17 下午
+     * @param value: 字符串
+     * @param size: 指定长度
+     * @param padChar: 两边补充的字符
+     * @return java.lang.String
+    */
+    public static String center(CharSequence value, final int size, char padChar) {
+        if (value == Constant.NULL || size <= Constant.ZERO) { return str(value); }
+        final int strLen = value.length();
+        final int pads = size - strLen;
+        if (pads <= Constant.ZERO) { return value.toString(); }
+        value = padPre(value, strLen + pads / Constant.TWO, padChar);
+        value = padAfter(value, size, padChar);
+        return value.toString();
+    }
+
+    /**
+     * [居中字符串，两边补充指定字符串，如果指定长度小于字符串，则返回原字符串](Center the string and supplement the specified string on both sides. If the specified length is less than the string, the original string will be returned)
+     * @description: zh - 居中字符串，两边补充指定字符串，如果指定长度小于字符串，则返回原字符串
+     * @description: en - Center the string and supplement the specified string on both sides. If the specified length is less than the string, the original string will be returned
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 2:18 下午
+     * @param value: 字符串
+     * @param size: 指定长度
+     * @return java.lang.String
+    */
+    public static String center(CharSequence value, final int size) {
+        return center(value, size, Constant.STRING_SPACE);
+    }
 }

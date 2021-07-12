@@ -2915,4 +2915,22 @@ public class CharSequenceUtil {
     public static String center(CharSequence value, final int size) {
         return center(value, size, Constant.STRING_SPACE);
     }
+
+    /*转为字符串 -----------------------------------------------------------str*/
+
+    /**
+     * [CharSequence 转为字符串，null安全](CharSequence to string, null safe)
+     * @description: zh - CharSequence 转为字符串，null安全
+     * @description: en - CharSequence to string, null safe
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 2:26 下午
+     * @param value: CharSequence
+     * @return java.lang.String
+    */
+    public static String str(CharSequence value) {
+        return Constant.NULL == value ? Constant.STRING_NULL : value.toString();
+    }
+
+
 }

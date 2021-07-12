@@ -2460,11 +2460,11 @@ public class CharSequenceUtil {
      * @version: V1.0
      * @author XiaoXunYao
      * @since 2021/7/11 8:44 下午
-     * @param str: 字符串
+     * @param value: 字符串
      * @return byte[]
     */
-    public static byte[] bytes(CharSequence str) {
-        return bytes(str, Charset.defaultCharset());
+    public static byte[] bytes(CharSequence value) {
+        return bytes(value, Charset.defaultCharset());
     }
 
     /**
@@ -2474,12 +2474,12 @@ public class CharSequenceUtil {
      * @version: V1.0
      * @author XiaoXunYao
      * @since 2021/7/11 8:46 下午
-     * @param str: 字符串
+     * @param value: 字符串
      * @param charset: 字符集，如果此字段为空，则解码的结果取决于平台
      * @return byte[]
     */
-    public static byte[] bytes(CharSequence str, String charset) {
-        return bytes(str, isBlank(charset) ? Charset.defaultCharset() : Charset.forName(charset));
+    public static byte[] bytes(CharSequence value, String charset) {
+        return bytes(value, isBlank(charset) ? Charset.defaultCharset() : Charset.forName(charset));
     }
 
     /**
@@ -2489,13 +2489,13 @@ public class CharSequenceUtil {
      * @version: V1.0
      * @author XiaoXunYao
      * @since 2021/7/11 8:49 下午
-     * @param str: 字符串
+     * @param value: 字符串
      * @param charset: 字符集，如果此字段为空，则解码的结果取决于平台
      * @return byte[]
     */
-    public static byte[] bytes(CharSequence str, Charset charset) {
-        return str == Constant.NULL ? Constant.BYTES_NULL :
-                Constant.NULL == charset ? str.toString().getBytes() : str.toString().getBytes(charset);
+    public static byte[] bytes(CharSequence value, Charset charset) {
+        return value == Constant.NULL ? Constant.BYTES_NULL :
+                Constant.NULL == charset ? value.toString().getBytes() : value.toString().getBytes(charset);
     }
 
     /**
@@ -2505,11 +2505,264 @@ public class CharSequenceUtil {
      * @version: V1.0
      * @author XiaoXunYao
      * @since 2021/7/11 8:51 下午
-     * @param str: 字符串
+     * @param value: 字符串
      * @param charset: 编码
      * @return java.nio.ByteBuffer
     */
-    public static ByteBuffer byteBuffer(CharSequence str, String charset) {
-        return ByteBuffer.wrap(bytes(str, charset));
+    public static ByteBuffer byteBuffer(CharSequence value, String charset) {
+        return ByteBuffer.wrap(bytes(value, charset));
+    }
+
+    /*包装指定字符串 -----------------------------------------------------------wrap*/
+
+    /**
+     * [包装指定字符串](Wrapper specified string)
+     * @description: zh - 包装指定字符串
+     * @description: en - Wrapper specified string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 8:54 上午
+     * @param value: 被包装的字符串
+     * @param prefixAndSuffix: 前缀和后缀
+     * @return java.lang.String
+    */
+    public static String wrap(CharSequence value, CharSequence prefixAndSuffix) {
+        return wrap(value, prefixAndSuffix, prefixAndSuffix);
+    }
+
+    /**
+     * [包装指定字符串](Wrapper specified string)
+     * @description: zh - 包装指定字符串
+     * @description: en - Wrapper specified string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 8:56 上午
+     * @param value: 被包装的字符串
+     * @param prefix: 前缀
+     * @param suffix: 后缀
+     * @return java.lang.String
+    */
+    public static String wrap(CharSequence value, CharSequence prefix, CharSequence suffix) {
+        return nullToEmpty(prefix).concat(nullToEmpty(value)).concat(nullToEmpty(suffix));
+    }
+
+    /**
+     * [使用单个字符包装多个字符串](Wrapping multiple strings with a single character)
+     * @description: zh - 使用单个字符包装多个字符串
+     * @description: en - Wrapping multiple strings with a single character
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 8:57 上午
+     * @param prefixAndSuffix: 前缀和后缀
+     * @param values: 多个字符串
+     * @return java.lang.String[]
+    */
+    public static String[] wrapAllWithPair(CharSequence prefixAndSuffix, CharSequence... values) {
+        return wrapAll(prefixAndSuffix, prefixAndSuffix, values);
+    }
+
+    /**
+     * [包装多个字符串](Wrapping multiple strings)
+     * @description: zh - 包装多个字符串
+     * @description: en - Wrapping multiple strings
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 8:59 上午
+     * @param prefix: 前缀
+     * @param suffix: 后缀
+     * @param values: 多个字符串
+     * @return java.lang.String[]
+    */
+    public static String[] wrapAll(CharSequence prefix, CharSequence suffix, CharSequence... values) {
+        final String[] results = new String[values.length];
+        for (int i = 0; i < values.length; i++) {
+            results[i] = wrap(values[i], prefix, suffix);
+        }
+        return results;
+    }
+
+    /**
+     * [包装指定字符串，如果前缀或后缀已经包含对应的字符串，则不再包装](Wrap the specified string. If the prefix or suffix already contains the corresponding string, it is no longer wrapped)
+     * @description: zh - 包装指定字符串，如果前缀或后缀已经包含对应的字符串，则不再包装
+     * @description: en - Wrap the specified string. If the prefix or suffix already contains the corresponding string, it is no longer wrapped
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 9:00 上午
+     * @param value: 被包装的字符串
+     * @param prefix: 前缀
+     * @param suffix: 后缀
+     * @return java.lang.String
+    */
+    public static String wrapIfMissing(CharSequence value, CharSequence prefix, CharSequence suffix) {
+        int len = Constant.ZERO;
+        if (isNotEmpty(value)) {
+            len += value.length();
+        }
+        if (isNotEmpty(prefix)) {
+            len += value.length();
+        }
+        if (isNotEmpty(suffix)) {
+            len += value.length();
+        }
+        StringBuilder sb = new StringBuilder(len);
+        if (isNotEmpty(prefix) && !startWith(value, prefix)) {
+            sb.append(prefix);
+        }
+        if (isNotEmpty(value)) {
+            sb.append(value);
+        }
+        if (isNotEmpty(suffix) && !endWith(value, suffix)) {
+            sb.append(suffix);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * [使用成对的字符包装多个字符串，如果已经包装，则不再包装](Use pairs of characters to wrap multiple strings. If they are already wrapped, they are no longer wrapped)
+     * @description: zh - 使用成对的字符包装多个字符串，如果已经包装，则不再包装
+     * @description: en - Use pairs of characters to wrap multiple strings. If they are already wrapped, they are no longer wrapped
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 9:01 上午
+     * @param prefixAndSuffix: 前缀和后缀
+     * @param values: 多个字符串
+     * @return java.lang.String[]
+    */
+    public static String[] wrapAllWithPairIfMissing(CharSequence prefixAndSuffix, CharSequence... values) {
+        return wrapAllIfMissing(prefixAndSuffix, prefixAndSuffix, values);
+    }
+
+    /**
+     * [使用成对的字符包装多个字符串，如果已经包装，则不再包装](Use pairs of characters to wrap multiple strings. If they are already wrapped, they are no longer wrapped)
+     * @description: zh - 使用成对的字符包装多个字符串，如果已经包装，则不再包装
+     * @description: en - Use pairs of characters to wrap multiple strings. If they are already wrapped, they are no longer wrapped
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 9:05 上午
+     * @param prefix: 前缀
+     * @param suffix: 后缀
+     * @param values: 多个字符串
+     * @return java.lang.String[]
+    */
+    public static String[] wrapAllIfMissing(CharSequence prefix, CharSequence suffix, CharSequence... values) {
+        final String[] results = new String[values.length];
+        for (int i = Constant.ZERO; i < values.length; i++) {
+            results[i] = wrapIfMissing(values[i], prefix, suffix);
+        }
+        return results;
+    }
+
+    /**
+     * [去掉字符包装，如果未被包装则返回原字符串](Remove the character wrapping, and return the original string if it is not wrapped)
+     * @description: zh - 去掉字符包装，如果未被包装则返回原字符串
+     * @description: en - Remove the character wrapping, and return the original string if it is not wrapped
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 9:06 上午
+     * @param value: 字符串
+     * @param prefix: 前置字符串
+     * @param suffix: 后置字符串
+     * @return java.lang.String
+    */
+    public static String unWrap(CharSequence value, String prefix, String suffix) {
+        return isWrap(value, prefix, suffix) ? sub(value, prefix.length(), value.length() - suffix.length()) : value.toString();
+    }
+
+    /**
+     * [去掉字符包装，如果未被包装则返回原字符串](Remove the character wrapping, and return the original string if it is not wrapped)
+     * @description: zh - 去掉字符包装，如果未被包装则返回原字符串
+     * @description: en - Remove the character wrapping, and return the original string if it is not wrapped
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 9:10 上午
+     * @param value: 字符串
+     * @param prefix: 前置字符
+     * @param suffix: 后置字符
+     * @return java.lang.String
+    */
+    public static String unWrap(CharSequence value, char prefix, char suffix) {
+        return isEmpty(value) ? str(value) :
+                value.charAt(Constant.ZERO) == prefix && value.charAt(value.length() - Constant.ONE) == suffix ? sub(value, Constant.ONE, value.length() - Constant.ONE) : value.toString();
+    }
+
+    /**
+     * [去掉字符包装，如果未被包装则返回原字符串](Remove the character wrapping, and return the original string if it is not wrapped)
+     * @description: zh - 去掉字符包装，如果未被包装则返回原字符串
+     * @description: en - Remove the character wrapping, and return the original string if it is not wrapped
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 9:11 上午
+     * @param value: 字符串
+     * @param prefixAndSuffix: 前置和后置字符
+     * @return java.lang.String
+    */
+    public static String unWrap(CharSequence value, char prefixAndSuffix) {
+        return unWrap(value, prefixAndSuffix, prefixAndSuffix);
+    }
+
+    /**
+     * [指定字符串是否被包装](Specifies whether the string is wrapped)
+     * @description: zh - 指定字符串是否被包装
+     * @description: en - Specifies whether the string is wrapped
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 9:12 上午
+     * @param value: 字符串
+     * @param prefix: 前缀
+     * @param suffix: 后缀
+     * @return boolean
+    */
+    public static boolean isWrap(CharSequence value, String prefix, String suffix) {
+        if (ArrayUtil.hasNull(value, prefix, suffix)) {
+            return false;
+        }
+        final String str2 = value.toString();
+        return str2.startsWith(prefix) && str2.endsWith(suffix);
+    }
+
+    /**
+     * [指定字符串是否被同一字符包装（前后都有这些字符串）](Specifies whether the string is wrapped by the same character (both before and after the string))
+     * @description: zh - 指定字符串是否被同一字符包装（前后都有这些字符串）
+     * @description: en - Specifies whether the string is wrapped by the same character (both before and after the string)
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 9:14 上午
+     * @param str: 字符串
+     * @param wrapper: 包装字符串
+     * @return boolean
+    */
+    public static boolean isWrap(CharSequence str, String wrapper) {
+        return isWrap(str, wrapper, wrapper);
+    }
+
+    /**
+     * [指定字符串是否被同一字符包装（前后都有这些字符串）](Specifies whether the string is wrapped by the same character (both before and after the string))
+     * @description: zh - 指定字符串是否被同一字符包装（前后都有这些字符串）
+     * @description: en - Specifies whether the string is wrapped by the same character (both before and after the string)
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 9:15 上午
+     * @param str: 字符串
+     * @param wrapper: 包装字符
+     * @return boolean
+    */
+    public static boolean isWrap(CharSequence str, char wrapper) {
+        return isWrap(str, wrapper, wrapper);
+    }
+
+    /**
+     * [指定字符串是否被包装](Specifies whether the string is wrapped)
+     * @description: zh - 指定字符串是否被包装
+     * @description: en - Specifies whether the string is wrapped
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 9:16 上午
+     * @param str: 字符串
+     * @param prefixChar: 前缀
+     * @param suffixChar: 后缀
+     * @return boolean
+    */
+    public static boolean isWrap(CharSequence str, char prefixChar, char suffixChar) {
+        return Constant.NULL == str ? Constant.FALSE : str.charAt(Constant.ZERO) == prefixChar && str.charAt(str.length() - Constant.ONE) == suffixChar;
     }
 }

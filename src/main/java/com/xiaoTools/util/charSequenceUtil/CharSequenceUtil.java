@@ -2932,5 +2932,59 @@ public class CharSequenceUtil {
         return Constant.NULL == value ? Constant.STRING_NULL : value.toString();
     }
 
+    /*统计字符串 -----------------------------------------------------------count*/
+
+    /**
+     * [统计指定内容中包含指定字符串的数量](Counts the number of specified strings in the specified content)
+     * @description: zh - 统计指定内容中包含指定字符串的数量
+     * @description: en - Counts the number of specified strings in the specified content
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 2:31 下午
+     * @param content: 被查找的字符串
+     * @param strForSearch: 需要查找的字符串
+     * @return int
+    */
+    public static int count(CharSequence content, CharSequence strForSearch) {
+        if (hasEmpty(content, strForSearch) || strForSearch.length() > content.length()) {
+            return Constant.ZERO;
+        }
+
+        int count = Constant.ZERO;
+        int idx = Constant.ZERO;
+        final String content2 = content.toString();
+        final String strForSearch2 = strForSearch.toString();
+        while ((idx = content2.indexOf(strForSearch2, idx)) > Constant.NEGATIVE_ONE) {
+            count++;
+            idx += strForSearch.length();
+        }
+        return count;
+    }
+
+    /**
+     * [统计指定内容中包含指定字符串的数量](Counts the number of specified strings in the specified content)
+     * @description: zh - 统计指定内容中包含指定字符串的数量
+     * @description: en - Counts the number of specified strings in the specified content
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/12 2:32 下午
+     * @param content: 内容
+     * @param charForSearch: 被统计的字符
+     * @return int
+    */
+    public static int count(CharSequence content, char charForSearch) {
+        int count = Constant.ZERO;
+        if (isEmpty(content)) {
+            return Constant.ZERO;
+        }
+        int contentLength = content.length();
+        for (int i = Constant.ZERO; i < contentLength; i++) {
+            if (charForSearch == content.charAt(i)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
 
 }

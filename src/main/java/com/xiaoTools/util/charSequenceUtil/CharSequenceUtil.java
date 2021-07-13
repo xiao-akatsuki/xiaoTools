@@ -2986,5 +2986,58 @@ public class CharSequenceUtil {
         return count;
     }
 
+    /*比较字符串 -----------------------------------------------------------compare*/
 
+    /**
+     * [比较两个字符串，用于排序](Compare two strings for sorting)
+     * @description: zh - 比较两个字符串，用于排序
+     * @description: en - Compare two strings for sorting
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/13 2:41 下午
+     * @param str1: 字符串1
+     * @param str2: 字符串2
+     * @param nullIsLess: null 值是否排在前（null是否小于非空值
+     * @return int
+    */
+    public static int compare(final CharSequence str1, final CharSequence str2, final boolean nullIsLess) {
+        return str1 == str2 ? Constant.ZERO :
+                str1 == Constant.NULL ? nullIsLess ? Constant.NEGATIVE_ONE : Constant.ONE :
+                        str2 == Constant.NULL ? nullIsLess ? Constant.ONE : Constant.NEGATIVE_ONE :
+                                str1.toString().compareTo(str2.toString());
+    }
+
+    /**
+     * [比较两个字符串，用于排序，大小写不敏感](Compare two strings for sorting, case insensitive)
+     * @description: zh - 比较两个字符串，用于排序，大小写不敏感
+     * @description: en - Compare two strings for sorting, case insensitive
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/13 3:18 下午
+     * @param str1: 字符串1
+     * @param str2: 字符串2
+     * @param nullIsLess: null 值是否排在前（null是否小于非空值）
+     * @return int
+    */
+    public static int compareIgnoreCase(CharSequence str1, CharSequence str2, boolean nullIsLess) {
+        return str1 == str2 ? Constant.ZERO :
+                str1 == Constant.NULL ? nullIsLess ? Constant.NEGATIVE_ONE : Constant.ONE :
+                        str2 == Constant.NULL ? nullIsLess ? Constant.ONE : Constant.NEGATIVE_ONE :
+                                str1.toString().compareToIgnoreCase(str2.toString());
+    }
+
+    /**
+     * [比较两个版本](Compare the two versions)
+     * @description: zh - 比较两个版本
+     * @description: en - Compare the two versions
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/13 3:20 下午
+     * @param value1: 版本1
+     * @param value2: 版本2
+     * @return int
+    */
+    public static int compareVersion(CharSequence value1, CharSequence value2) {
+        return VersionComparator.INSTANCE.compare(str(value1), str(value2));
+    }
 }

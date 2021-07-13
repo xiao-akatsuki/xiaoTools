@@ -3040,4 +3040,124 @@ public class CharSequenceUtil {
     public static int compareVersion(CharSequence value1, CharSequence value2) {
         return VersionComparator.INSTANCE.compare(str(value1), str(value2));
     }
+
+    /*添加字符串 -----------------------------------------------------------append*/
+
+    /**
+     * [如果给定字符串不是以给定的一个或多个字符串为结尾，则在尾部添加结尾字符串](If the given string does not end with one or more of the given strings, the ending string is added at the end)
+     * @description: zh - 如果给定字符串不是以给定的一个或多个字符串为结尾，则在尾部添加结尾字符串
+     * @description: en - If the given string does not end with one or more of the given strings, the ending string is added at the end
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/13 8:08 下午
+     * @param value: 被检查的字符串
+     * @param suffix: 需要添加到结尾的字符串
+     * @param suffixes: 需要额外检查的结尾字符串，如果以这些中的一个为结尾，则不再添加
+     * @return java.lang.String
+    */
+    public static String appendIfMissing(final CharSequence value, final CharSequence suffix, final CharSequence... suffixes) {
+        return appendIfMissing(value, suffix, Constant.FALSE, suffixes);
+    }
+
+    /**
+     * [如果给定字符串不是以给定的一个或多个字符串为结尾，则在尾部添加结尾字符串](If the given string does not end with one or more of the given strings, the ending string is added at the end)
+     * @description: zh - 如果给定字符串不是以给定的一个或多个字符串为结尾，则在尾部添加结尾字符串
+     * @description: en - If the given string does not end with one or more of the given strings, the ending string is added at the end
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/13 8:10 下午
+     * @param value: 被检查的字符串
+     * @param suffix: 需要添加到结尾的字符串
+     * @param suffixes: 需要额外检查的结尾字符串，如果以这些中的一个为结尾，则不再添加
+     * @return java.lang.String
+    */
+    public static String appendIfMissingIgnoreCase(final CharSequence value, final CharSequence suffix, final CharSequence... suffixes) {
+        return appendIfMissing(value, suffix, Constant.TRUE, suffixes);
+    }
+
+    /**
+     * [如果给定字符串不是以给定的一个或多个字符串为结尾，则在尾部添加结尾字符串](If the given string does not end with one or more of the given strings, the ending string is added at the end)
+     * @description: zh - 如果给定字符串不是以给定的一个或多个字符串为结尾，则在尾部添加结尾字符串
+     * @description: en - If the given string does not end with one or more of the given strings, the ending string is added at the end
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/13 8:12 下午
+     * @param value: 被检查的字符串
+     * @param suffix: 需要添加到结尾的字符串
+     * @param ignoreCase: 检查结尾时是否忽略大小写
+     * @param suffixes: 需要额外检查的结尾字符串，如果以这些中的一个为结尾，则不再添加
+     * @return java.lang.String
+    */
+    public static String appendIfMissing(final CharSequence value, final CharSequence suffix, final boolean ignoreCase, final CharSequence... suffixes) {
+        if (value == Constant.NULL || isEmpty(suffix) || endWith(value, suffix, ignoreCase)) {
+            return str(value);
+        }
+        if (suffixes != Constant.NULL && suffixes.length > Constant.ZERO) {
+            for (final CharSequence s : suffixes) {
+                if (endWith(value, s, ignoreCase)) {
+                    return value.toString();
+                }
+            }
+        }
+        return value.toString().concat(suffix.toString());
+    }
+
+    /**
+     * [如果给定字符串不是以给定的一个或多个字符串为开头，则在首部添加起始字符串](If the given string does not start with one or more given strings, the starting string is added at the beginning)
+     * @description: zh - 如果给定字符串不是以给定的一个或多个字符串为开头，则在首部添加起始字符串
+     * @description: en - If the given string does not start with one or more given strings, the starting string is added at the beginning
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/13 8:13 下午
+     * @param value: 被检查的字符串
+     * @param prefix: 需要添加到首部的字符串
+     * @param prefixes: 需要额外检查的首部字符串，如果以这些中的一个为起始，则不再添加
+     * @return java.lang.String
+    */
+    public static String prependIfMissing(final CharSequence value, final CharSequence prefix, final CharSequence... prefixes) {
+        return prependIfMissing(value, prefix, Constant.FALSE, prefixes);
+    }
+
+    /**
+     * [如果给定字符串不是以给定的一个或多个字符串为开头，则在首部添加起始字符串](If the given string does not start with one or more given strings, the starting string is added at the beginning)
+     * @description: zh - 如果给定字符串不是以给定的一个或多个字符串为开头，则在首部添加起始字符串
+     * @description: en - If the given string does not start with one or more given strings, the starting string is added at the beginning
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/13 8:14 下午
+     * @param str: 被检查的字符串
+     * @param prefix: 需要添加到首部的字符串
+     * @param prefixes: 需要额外检查的首部字符串，如果以这些中的一个为起始，则不再添加
+     * @return java.lang.String
+    */
+    public static String prependIfMissingIgnoreCase(final CharSequence str, final CharSequence prefix, final CharSequence... prefixes) {
+        return prependIfMissing(str, prefix, Constant.TRUE, prefixes);
+    }
+
+    /**
+     * [如果给定字符串不是以给定的一个或多个字符串为开头，则在首部添加起始字符串](If the given string does not start with one or more given strings, the starting string is added at the beginning)
+     * @description: zh - 如果给定字符串不是以给定的一个或多个字符串为开头，则在首部添加起始字符串
+     * @description: en - If the given string does not start with one or more given strings, the starting string is added at the beginning
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/13 8:15 下午
+     * @param str: 被检查的字符串
+     * @param prefix: 需要添加到首部的字符串
+     * @param ignoreCase: 检查结尾时是否忽略大小写
+     * @param prefixes: 需要额外检查的首部字符串，如果以这些中的一个为起始，则不再添加
+     * @return java.lang.String
+    */
+    public static String prependIfMissing(final CharSequence str, final CharSequence prefix, final boolean ignoreCase, final CharSequence... prefixes) {
+        if (str == Constant.NULL || isEmpty(prefix) || startWith(str, prefix, ignoreCase)) {
+            return str(str);
+        }
+        if (prefixes != Constant.NULL && prefixes.length > Constant.ZERO) {
+            for (final CharSequence s : prefixes) {
+                if (startWith(str, s, ignoreCase)) {
+                    return str.toString();
+                }
+            }
+        }
+        return prefix.toString().concat(str.toString());
+    }
 }

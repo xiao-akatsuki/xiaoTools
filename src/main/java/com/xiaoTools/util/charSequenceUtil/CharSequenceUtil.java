@@ -3,6 +3,7 @@ package com.xiaoTools.util.charSequenceUtil;
 import com.xiaoTools.core.convert.Convert;
 import com.xiaoTools.core.stringFormatter.StrFormatter;
 import com.xiaoTools.core.text.strSpliter.StrSpliter;
+import com.xiaoTools.core.versionComparator.VersionComparator;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.charUtil.CharUtil;

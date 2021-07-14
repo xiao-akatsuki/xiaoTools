@@ -13,9 +13,7 @@ import com.xiaoTools.util.regularUtil.method.Func1;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 
 /**
@@ -3335,6 +3333,86 @@ public class CharSequenceUtil {
     */
     public static String replace(CharSequence value, String regex, Func1<java.util.regex.Matcher, String> replaceFun) {
         return ReUtil.replaceAll(value, regex, replaceFun);
+    }
+
+    /*脱敏字符串 -----------------------------------------------------------desensitized*/
+
+    /**
+     * [替换指定字符串的指定区间内字符为"*" 俗称：脱敏功能，后面其他功能](Replace the characters in the specified interval of the specified string as "*", commonly known as desensitization function, followed by other functions)
+     * @description: zh - 替换指定字符串的指定区间内字符为"*" 俗称：脱敏功能，后面其他功能
+     * @description: en - Replace the characters in the specified interval of the specified string as "*", commonly known as desensitization function, followed by other functions
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/14 7:14 下午
+     * @param value: 字符串
+     * @param startInclude: 开始位置（包含）
+     * @param endExclude: 结束位置（不包含）
+     * @return java.lang.String
+    */
+    public static String hide(CharSequence value, int startInclude, int endExclude) {
+        return replace(value, startInclude, endExclude, Constant.CHAR_STAR);
+    }
+
+    /**
+     * [脱敏，使用默认的脱敏策略](Desensitization, using the default desensitization strategy)
+     * @description: zh - 脱敏，使用默认的脱敏策略
+     * @description: en - Desensitization, using the default desensitization strategy
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/14 7:18 下午
+     * @param value: 字符串
+     * @param desensitizedType: 脱敏类型;可以脱敏：用户id、中文名、身份证号、座机号、手机号、地址、电子邮件、密码
+     * @return java.lang.String
+    */
+    public static String desensitized(CharSequence value, DesensitizedUtil.DesensitizedType desensitizedType) {
+        return DesensitizedUtil.desensitized(value, desensitizedType);
+    }
+
+    /**
+     * [替换字符字符数组中所有的字符为 replaced](Replace all characters in the character array as replaced)
+     * @description: zh - 替换字符字符数组中所有的字符为 replaced
+     * @description: en - Replace all characters in the character array as replaced
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/14 7:20 下午
+     * @param value: 被检查的字符串
+     * @param chars: 需要替换的字符列表，用一个字符串表示这个字符列表
+     * @param replaced: 替换成的字符串
+     * @return java.lang.String
+    */
+    public static String replaceChars(CharSequence value, String chars, CharSequence replaced) {
+        return isEmpty(value) || isEmpty(chars) ? str(value) : replaceChars(value, chars.toCharArray(), replaced);
+    }
+
+    /**
+     * [替换字符字符数组中所有的字符为 replaced](Replace all characters in the character array as replaced)
+     * @description: zh - 替换字符字符数组中所有的字符为 replaced
+     * @description: en - Replace all characters in the character array as replaced
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/14 7:24 下午
+     * @param value: 被检查的字符串
+     * @param chars: 需要替换的字符列表
+     * @param replaced: 替换成的字符串
+     * @return java.lang.String
+    */
+    public static String replaceChars(CharSequence value, char[] chars, CharSequence replaced) {
+        if (isEmpty(value) || ArrayUtil.isEmpty(chars)) {
+            return str(value);
+        }
+
+        final Set<Character> set = new HashSet<>(chars.length);
+        for (char c : chars) {
+            set.add(c);
+        }
+        int strLen = value.length();
+        final StringBuilder builder = new StringBuilder();
+        char c;
+        for (int i = Constant.ZERO; i < strLen; i++) {
+            c = value.charAt(i);
+            builder.append(set.contains(c) ? replaced : c);
+        }
+        return builder.toString();
     }
 
 

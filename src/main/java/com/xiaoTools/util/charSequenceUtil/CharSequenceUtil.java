@@ -10,6 +10,7 @@ import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.charUtil.CharUtil;
 import com.xiaoTools.util.numUtil.NumUtil;
 import com.xiaoTools.util.regularUtil.method.Func1;
+import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
@@ -3485,4 +3486,50 @@ public class CharSequenceUtil {
         }
         return subString(string, Constant.ZERO, length) + "...";
     }
+
+    /*判断第一个字符串 -----------------------------------------------------------first*/
+
+    /**
+     * [返回第一个非 null 元素](Returns the first non null element)
+     * @description: zh - 返回第一个非 null 元素
+     * @description: en - Returns the first non null element
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/14 8:02 下午
+     * @param values: 多个元素
+     * @return T
+    */
+    public <T extends CharSequence> T firstNonNull(T... values) {
+        return ArrayUtil.firstNonNull(values);
+    }
+
+    /**
+     * [返回第一个非 empty 元素](Returns the first non empty element)
+     * @description: zh - 返回第一个非 empty 元素
+     * @description: en - Returns the first non empty element
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/14 8:04 下午
+     * @param values: 多个元素
+     * @return T
+    */
+    public <T extends CharSequence> T firstNonEmpty(T... values) {
+        return ArrayUtil.firstMatch(StrUtil::isNotEmpty, values);
+    }
+
+    /**
+     * [返回第一个非 blank 元素](Returns the first non blank element)
+     * @description: zh - 返回第一个非 blank 元素
+     * @description: en - Returns the first non blank element
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/14 8:07 下午
+     * @param values: 多个元素
+     * @return T
+    */
+    public <T extends CharSequence> T firstNonBlank(T... values) {
+        return ArrayUtil.firstMatch(StrUtil::isNotBlank, values);
+    }
+
+
 }

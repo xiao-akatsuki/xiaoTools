@@ -1,5 +1,6 @@
 package com.xiaoTools.util.charSequenceUtil;
 
+import com.xiaoTools.assertion.Assertion;
 import com.xiaoTools.core.convert.Convert;
 import com.xiaoTools.core.stringFormatter.StrFormatter;
 import com.xiaoTools.core.text.strSpliter.StrSpliter;
@@ -3415,5 +3416,73 @@ public class CharSequenceUtil {
         return builder.toString();
     }
 
+    /*获取字符串长度 -----------------------------------------------------------length*/
 
+    /**
+     * [获取字符串的长度，如果为null返回0](Gets the length of the string, and returns 0 if NULL)
+     * @description: zh - 获取字符串的长度，如果为null返回0
+     * @description: en - Gets the length of the string, and returns 0 if NULL
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/14 7:31 下午
+     * @param value: 字符串
+     * @return int
+    */
+    public static int length(CharSequence value) {
+        return value == Constant.NULL ? Constant.ZERO : value.length();
+    }
+
+    /**
+     * [给定字符串转为bytes后的byte数（byte长度）](The number of bytes (byte length) after the given string is converted to bytes)
+     * @description: zh - 给定字符串转为bytes后的byte数（byte长度）
+     * @description: en - The number of bytes (byte length) after the given string is converted to bytes
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/14 7:32 下午
+     * @param cs: 字符串
+     * @param charset: 编码
+     * @return int
+    */
+    public static int byteLength(CharSequence cs, Charset charset) {
+        return cs == Constant.NULL ? Constant.ZERO : cs.toString().getBytes(charset).length;
+    }
+
+    /**
+     * [给定字符串数组的总长度](The total length of the given string array)
+     * @description: zh - 给定字符串数组的总长度
+     * @description: en - The total length of the given string array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/14 7:35 下午
+     * @param values: 字符串数组
+     * @return int
+    */
+    public static int totalLength(CharSequence... values) {
+        int totalLength = Constant.ZERO;
+        for (CharSequence value : values) {
+            totalLength += (Constant.NULL == value ? Constant.ZERO : value.length());
+        }
+        return totalLength;
+    }
+
+    /**
+     *
+     * @description: zh - 限制字符串长度，如果超过指定长度，截取指定长度并在末尾加"..."
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/14 7:38 下午
+     * @param string:
+     * @param length:
+     * @return java.lang.String
+    */
+    public static String maxLength(CharSequence string, int length) {
+        Assertion.isTrue(length > 0);
+        if (Constant.NULL == string) {
+            return Constant.STRING_NULL;
+        }
+        if (string.length() <= length) {
+            return string.toString();
+        }
+        return subString(string, Constant.ZERO, length) + "...";
+    }
 }

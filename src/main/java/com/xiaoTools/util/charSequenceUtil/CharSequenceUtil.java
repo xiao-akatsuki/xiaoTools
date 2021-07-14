@@ -2,6 +2,7 @@ package com.xiaoTools.util.charSequenceUtil;
 
 import com.xiaoTools.assertion.Assertion;
 import com.xiaoTools.core.convert.Convert;
+import com.xiaoTools.core.filter.Filter;
 import com.xiaoTools.core.stringFormatter.StrFormatter;
 import com.xiaoTools.core.text.strSpliter.StrSpliter;
 import com.xiaoTools.core.versionComparator.VersionComparator;
@@ -3593,4 +3594,36 @@ public class CharSequenceUtil {
         }
         return value.toString();
     }
+
+    /*过滤字符串字符串 -----------------------------------------------------------filter*/
+
+    /**
+     * [过滤字符串](Filter strings)
+     * @description: zh - 过滤字符串
+     * @description: en - Filter strings
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/14 9:47 下午
+     * @param value: 字符串
+     * @param filter: 过滤器
+     * @return java.lang.String
+    */
+    public static String filter(CharSequence value, final Filter<Character> filter) {
+        if (value == Constant.NULL || filter == Constant.NULL) {
+            return str(value);
+        }
+
+        int len = value.length();
+        final StringBuilder sb = new StringBuilder(len);
+        char c;
+        for (int i = Constant.ZERO; i < len; i++) {
+            c = value.charAt(i);
+            if (filter.accept(c)) {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+
+
 }

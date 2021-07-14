@@ -3531,5 +3531,66 @@ public class CharSequenceUtil {
         return ArrayUtil.firstMatch(StrUtil::isNotBlank, values);
     }
 
+    /*添加指定字符串 -----------------------------------------------------------append*/
 
+    /**
+     * [原字符串首字母大写并在其首部添加指定字符串](Capitalize the original string and add the specified string at the beginning)
+     * @description: zh - 原字符串首字母大写并在其首部添加指定字符串
+     * @description: en - Capitalize the original string and add the specified string at the beginning
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/14 8:22 下午
+     * @param value: 被处理的字符串
+     * @param pre: 添加的首部
+     * @return java.lang.String
+    */
+    public static String upperFirstAndAddPre(CharSequence value, String pre) {
+        return value == Constant.NULL || pre == Constant.NULL ? Constant.STRING_NULL : pre + upperFirst(value);
+    }
+
+    /**
+     * [大写首字母](Capital initial)
+     * @description: zh - 大写首字母
+     * @description: en - Capital initial
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/14 8:23 下午
+     * @param value: 字符串
+     * @return java.lang.String
+    */
+    public static String upperFirst(CharSequence value) {
+        if (Constant.NULL == value) {
+            return Constant.STRING_NULL;
+        }
+        if (value.length() > Constant.ZERO) {
+            char firstChar = value.charAt(Constant.ZERO);
+            if (Character.isLowerCase(firstChar)) {
+                return Character.toUpperCase(firstChar) + subStringSuf(value, Constant.ONE);
+            }
+        }
+        return value.toString();
+    }
+
+    /**
+     * [小写首字母](Small initial)
+     * @description: zh - 小写首字母
+     * @description: en - Small initial
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/14 8:24 下午
+     * @param value: 字符串
+     * @return java.lang.String
+    */
+    public static String lowerFirst(CharSequence value) {
+        if (Constant.NULL == value) {
+            return Constant.STRING_NULL;
+        }
+        if (value.length() > Constant.ZERO) {
+            char firstChar = value.charAt(Constant.ZERO);
+            if (Character.isUpperCase(firstChar)) {
+                return Character.toLowerCase(firstChar) + subStringSuf(value, Constant.ONE);
+            }
+        }
+        return value.toString();
+    }
 }

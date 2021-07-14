@@ -8,6 +8,7 @@ import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.charUtil.CharUtil;
 import com.xiaoTools.util.numUtil.NumUtil;
+import com.xiaoTools.util.regularUtil.method.Func1;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
@@ -15,6 +16,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Matcher;
 
 /**
  * [CharSequence 相关工具类封装](Encapsulation of CharSequence related tool classes)
@@ -3161,4 +3163,179 @@ public class CharSequenceUtil {
         }
         return prefix.toString().concat(str.toString());
     }
+
+    /*替换字符串 -----------------------------------------------------------replace*/
+
+    /**
+     * [替换字符串中的指定字符串，忽略大小写](Replaces the specified string in the string, ignoring case)
+     * @description: zh - 替换字符串中的指定字符串，忽略大小写
+     * @description: en - Replaces the specified string in the string, ignoring case
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/14 6:28 下午
+     * @param value: 字符串
+     * @param search: 被查找的字符串
+     * @param replacement: 被替换的字符串
+     * @return java.lang.String
+    */
+    public static String replaceIgnoreCase(CharSequence value, CharSequence search, CharSequence replacement) {
+        return replace(value, Constant.ZERO, search, replacement, Constant.TRUE);
+    }
+
+    /**
+     * [替换字符串中的指定字符串](Replaces the specified string in the string)
+     * @description: zh - 替换字符串中的指定字符串
+     * @description: en - Replaces the specified string in the string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/14 6:38 下午
+     * @param value: 字符串
+     * @param search: 被查找的字符串
+     * @param replacement: 被替换的字符串
+     * @return java.lang.String
+    */
+    public static String replace(CharSequence value, CharSequence search, CharSequence replacement) {
+        return replace(value, Constant.ZERO, search, replacement, Constant.FALSE);
+    }
+
+    /**
+     * [替换字符串中的指定字符串](Replaces the specified string in the string)
+     * @description: zh - 替换字符串中的指定字符串
+     * @description: en - Replaces the specified string in the string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/14 6:39 下午
+     * @param value: 字符串
+     * @param search: 被查找的字符串
+     * @param replacement: 被替换的字符串
+     * @param ignoreCase: 是否忽略大小写
+     * @return java.lang.String
+    */
+    public static String replace(CharSequence value, CharSequence search, CharSequence replacement, boolean ignoreCase) {
+        return replace(value, Constant.ZERO, search, replacement, ignoreCase);
+    }
+
+    /**
+     * [替换字符串中的指定字符串](Replaces the specified string in the string)
+     * @description: zh - 替换字符串中的指定字符串
+     * @description: en - Replaces the specified string in the string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/14 6:42 下午
+     * @param value: 字符串
+     * @param fromIndex: 开始位置（包括）
+     * @param search: 被查找的字符串
+     * @param replacement: 被替换的字符串
+     * @param ignoreCase: 是否忽略大小写
+     * @return java.lang.String
+    */
+    public static String replace(CharSequence value, int fromIndex, CharSequence search, CharSequence replacement, boolean ignoreCase) {
+        if (isEmpty(value) || isEmpty(search)) {
+            return str(value);
+        }
+        if (Constant.NULL == replacement) {
+            replacement = Constant.EMPTY;
+        }
+
+        final int strLength = value.length();
+        final int searchStrLength = search.length();
+        if (fromIndex > strLength) {
+            return str(value);
+        } else if (fromIndex < Constant.ZERO) {
+            fromIndex = Constant.ZERO;
+        }
+
+        final StrBuilder result = StrBuilder.create(strLength + Constant.SIXTEEN);
+        if (Constant.ZERO != fromIndex) {
+            result.append(value.subSequence(Constant.ZERO, fromIndex));
+        }
+
+        int preIndex = fromIndex;
+        int index;
+        while ((index = indexOf(value, search, preIndex, ignoreCase)) > Constant.NEGATIVE_ONE) {
+            result.append(value.subSequence(preIndex, index));
+            result.append(replacement);
+            preIndex = index + searchStrLength;
+        }
+
+        if (preIndex < strLength) {
+            // 结尾部分
+            result.append(value.subSequence(preIndex, strLength));
+        }
+        return result.toString();
+    }
+
+    /**
+     * [替换指定字符串的指定区间内字符为固定字符](Replace the characters in the specified interval of the specified string as fixed characters)
+     * @description: zh - 替换指定字符串的指定区间内字符为固定字符
+     * @description: en - Replace the characters in the specified interval of the specified string as fixed characters
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/14 6:46 下午
+     * @param value: 字符串
+     * @param startInclude: 开始位置（包含）
+     * @param endExclude: 结束位置（不包含）
+     * @param replacedChar: 被替换的字符
+     * @return java.lang.String
+    */
+    public static String replace(CharSequence value, int startInclude, int endExclude, char replacedChar) {
+        if (isEmpty(value)) {
+            return str(value);
+        }
+        final int strLength = value.length();
+        if (startInclude > strLength) {
+            return str(value);
+        }
+        if (endExclude > strLength) {
+            endExclude = strLength;
+        }
+        if (startInclude > endExclude) {
+            // 如果起始位置大于结束位置，不替换
+            return str(value);
+        }
+
+        final char[] chars = new char[strLength];
+        for (int i = Constant.ZERO; i < strLength; i++) {
+            if (i >= startInclude && i < endExclude) {
+                chars[i] = replacedChar;
+            } else {
+                chars[i] = value.charAt(i);
+            }
+        }
+        return new String(chars);
+    }
+
+    /**
+     * [替换所有正则匹配的文本，并使用自定义函数决定如何替换](Replace all regular matched text and use custom functions to decide how to replace it)
+     * @description: zh - 替换所有正则匹配的文本，并使用自定义函数决定如何替换
+     * @description: en - Replace all regular matched text and use custom functions to decide how to replace it
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/14 6:58 下午
+     * @param value: 要替换的字符串
+     * @param pattern: 用于匹配的正则式
+     * @param replaceFun: 决定如何替换的函数
+     * @return java.lang.String
+    */
+    public static String replace(CharSequence value, java.util.regex.Pattern pattern, Func1<Matcher, String> replaceFun) {
+        return ReUtil.replaceAll(value, pattern, replaceFun);
+    }
+
+    /**
+     * [替换所有正则匹配的文本，并使用自定义函数决定如何替换](Replace all regular matched text and use custom functions to decide how to replace it)
+     * @description: zh - 替换所有正则匹配的文本，并使用自定义函数决定如何替换
+     * @description: en - Replace all regular matched text and use custom functions to decide how to replace it
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/14 6:59 下午
+     * @param value: 要替换的字符串
+     * @param regex: 用于匹配的正则式
+     * @param replaceFun: 决定如何替换的函数
+     * @return java.lang.String
+    */
+    public static String replace(CharSequence value, String regex, Func1<java.util.regex.Matcher, String> replaceFun) {
+        return ReUtil.replaceAll(value, regex, replaceFun);
+    }
+
+
 }

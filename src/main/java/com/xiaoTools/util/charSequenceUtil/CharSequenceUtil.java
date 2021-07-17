@@ -3634,17 +3634,19 @@ public class CharSequenceUtil {
      * @version: V1.0
      * @author XiaoXunYao
      * @since 2021/7/17 2:01 下午
-     * @param str: 被检查的字符串
+     * @param value: 被检查的字符串
      * @return boolean
     */
-    public static boolean isUpperCase(CharSequence str) {
-        if (Constant.NULL == str) { return Constant.FALSE; }
-        final int len = str.length();
+    public static boolean isUpperCase(CharSequence value) {
+        if (Constant.NULL == value) { return Constant.FALSE; }
+        final int len = value.length();
         for (int i = Constant.ZERO; i < len; i++) {
-            if (Character.isLowerCase(str.charAt(i))) { return Constant.FALSE; }
+            if (Character.isLowerCase(value.charAt(i))) { return Constant.FALSE; }
         }
         return Constant.TRUE;
     }
+
+    /*判断字符串是否是大小写的 -----------------------------------------------------------case*/
 
     /**
      * [给定字符串中的字母是否全部为小写](Whether all the letters in the given string are lowercase)
@@ -3653,21 +3655,153 @@ public class CharSequenceUtil {
      * @version: V1.0
      * @author XiaoXunYao
      * @since 2021/7/17 2:12 下午
-     * @param str: 被检查的字符串
+     * @param value: 被检查的字符串
      * @return boolean
     */
-    public static boolean isLowerCase(CharSequence str) {
-        if (Constant.NULL == str) {
+    public static boolean isLowerCase(CharSequence value) {
+        if (Constant.NULL == value) {
             return Constant.FALSE;
         }
-        final int len = str.length();
+        final int len = value.length();
         for (int i = Constant.ZERO; i < len; i++) {
-            if (Character.isUpperCase(str.charAt(i))) {
+            if (Character.isUpperCase(value.charAt(i))) {
                 return Constant.FALSE;
             }
         }
         return Constant.TRUE;
     }
 
+    /**
+     * [切换给定字符串中的大小写](Toggles the case of a given string)
+     * @description: zh - 切换给定字符串中的大小写
+     * @description: en - Toggles the case of a given string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/17 4:00 下午
+     * @param value: 字符串
+     * @return java.lang.String
+    */
+    public static String swapCase(final String value) {
+        if (isEmpty(value)) { return value; }
+        final char[] buffer = value.toCharArray();
+        for (int i = Constant.ZERO; i < buffer.length; i++) {
+            final char ch = buffer[i];
+            if (Character.isUpperCase(ch)) {
+                buffer[i] = Character.toLowerCase(ch);
+            } else if (Character.isTitleCase(ch)) {
+                buffer[i] = Character.toLowerCase(ch);
+            } else if (Character.isLowerCase(ch)) {
+                buffer[i] = Character.toUpperCase(ch);
+            }
+        }
+        return new String(buffer);
+    }
 
+    /**
+     * [将驼峰式命名的字符串转换为下划线方式](Convert hump named strings to underscores)
+     * @description: zh - 将驼峰式命名的字符串转换为下划线方式
+     * @description: en - Convert hump named strings to underscores
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/17 4:04 下午
+     * @param value: 转换前的驼峰式命名的字符串，也可以为下划线形式
+     * @return java.lang.String
+    */
+    public static String toUnderlineCase(CharSequence value) {
+        return toSymbolCase(value, Constant.CHAR_UNDERLINE);
+    }
+
+    /**
+     * [将驼峰式命名的字符串转换为使用符号连接方式](Convert hump named string to symbolic connection)
+     * @description: zh - 将驼峰式命名的字符串转换为使用符号连接方式
+     * @description: en - Convert hump named string to symbolic connection
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/17 4:10 下午
+     * @param value: 转换前的驼峰式命名的字符串，也可以为符号连接形式
+     * @param symbol: 连接符
+     * @return java.lang.String
+    */
+    public static String toSymbolCase(CharSequence value, char symbol) {
+        if (value == Constant.NULL) { return Constant.STRING_NULL; }
+
+        final int length = value.length();
+        final StrBuilder sb = new StrBuilder();
+        char c;
+        for (int i = Constant.ZERO; i < length; i++) {
+            c = value.charAt(i);
+            final Character preChar = (i > Constant.ZERO) ? value.charAt(i - Constant.ONE) : Constant.CHARACTER_NULL;
+            if (Character.isUpperCase(c)) {
+                // 遇到大写字母处理
+                final Character nextChar = (i < value.length() - Constant.ONE) ? value.charAt(i + Constant.ONE) : Constant.CHARACTER_NULL;
+                if (Constant.NULL != preChar && Character.isUpperCase(preChar)) {
+                    // 前一个字符为大写，则按照一个词对待，例如AB
+                    sb.append(c);
+                } else if (Constant.NULL != nextChar && (!Character.isLowerCase(nextChar))) {
+                    // 后一个为非小写字母，按照一个词对待
+                    if (Constant.NULL != preChar && symbol != preChar) {
+                        // 前一个是非大写时按照新词对待，加连接符，例如xAB
+                        sb.append(symbol);
+                    }
+                    sb.append(c);
+                } else {
+                    // 前后都为非大写按照新词对待
+                    if (Constant.NULL != preChar && symbol != preChar) {
+                        // 前一个非连接符，补充连接符
+                        sb.append(symbol);
+                    }
+                    sb.append(Character.toLowerCase(c));
+                }
+            } else {
+                if (symbol != c
+                        && sb.length() > Constant.ZERO
+                        && Character.isUpperCase(sb.charAt(Constant.NEGATIVE_ONE))
+                        && Character.isLowerCase(c)) {
+                    // 当结果中前一个字母为大写，当前为小写(非数字或字符)，说明此字符为新词开始（连接符也表示新词）
+                    sb.append(symbol);
+                }
+                // 小写或符号
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * [将下划线方式命名的字符串转换为驼峰式。如果转换前的下划线大写方式命名的字符串为空，则返回空字符串。](Converts a string named by underline to hump. If the string named by the pre conversion underline capitalization method is empty, the empty string is returned.)
+     * @description: zh - 将下划线方式命名的字符串转换为驼峰式。如果转换前的下划线大写方式命名的字符串为空，则返回空字符串。
+     * @description: en - Converts a string named by underline to hump. If the string named by the pre conversion underline capitalization method is empty, the empty string is returned.
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/17 9:01 下午
+     * @param name: 转换前的下划线大写方式命名的字符串
+     * @return java.lang.String
+    */
+    public static String toCamelCase(CharSequence name) {
+        if (Constant.NULL == name) {
+            return Constant.STRING_NULL;
+        }
+
+        final String name2 = name.toString();
+        if (contains(name2, Constant.CHAR_UNDERLINE)) {
+            final int length = name2.length();
+            final StringBuilder sb = new StringBuilder(length);
+            boolean upperCase = Constant.FALSE;
+            for (int i = Constant.ZERO; i < length; i++) {
+                char c = name2.charAt(i);
+
+                if (c == Constant.CHAR_UNDERLINE) {
+                    upperCase = Constant.TRUE;
+                } else if (upperCase) {
+                    sb.append(Character.toUpperCase(c));
+                    upperCase = Constant.FALSE;
+                } else {
+                    sb.append(Character.toLowerCase(c));
+                }
+            }
+            return sb.toString();
+        } else {
+            return name2;
+        }
+    }
 }

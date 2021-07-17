@@ -315,6 +315,8 @@ public class Constant {
 
     public static final char CHAR_STAR = '*';
 
+    public static final char CHAR_UNDERLINE = '_';
+
     public static final char CHAR_DOLLAR = '$';
 
     public static final char CHAR_COLON = ':';

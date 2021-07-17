@@ -3625,5 +3625,49 @@ public class CharSequenceUtil {
         return sb.toString();
     }
 
+    /*过滤字符串字符串 -----------------------------------------------------------filter*/
+
+    /**
+     * [给定字符串中的字母是否全部为大写](Whether all the letters in the given string are uppercase)
+     * @description: zh - 给定字符串中的字母是否全部为大写
+     * @description: en - Whether all the letters in the given string are uppercase
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/17 2:01 下午
+     * @param str: 被检查的字符串
+     * @return boolean
+    */
+    public static boolean isUpperCase(CharSequence str) {
+        if (Constant.NULL == str) { return Constant.FALSE; }
+        final int len = str.length();
+        for (int i = Constant.ZERO; i < len; i++) {
+            if (Character.isLowerCase(str.charAt(i))) { return Constant.FALSE; }
+        }
+        return Constant.TRUE;
+    }
+
+    /**
+     * [给定字符串中的字母是否全部为小写](Whether all the letters in the given string are lowercase)
+     * @description: zh - 给定字符串中的字母是否全部为小写
+     * @description: en - Whether all the letters in the given string are lowercase
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/17 2:12 下午
+     * @param str: 被检查的字符串
+     * @return boolean
+    */
+    public static boolean isLowerCase(CharSequence str) {
+        if (Constant.NULL == str) {
+            return Constant.FALSE;
+        }
+        final int len = str.length();
+        for (int i = Constant.ZERO; i < len; i++) {
+            if (Character.isUpperCase(str.charAt(i))) {
+                return Constant.FALSE;
+            }
+        }
+        return Constant.TRUE;
+    }
+
 
 }

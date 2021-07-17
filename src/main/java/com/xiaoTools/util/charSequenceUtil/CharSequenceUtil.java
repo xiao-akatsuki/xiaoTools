@@ -5,6 +5,7 @@ import com.xiaoTools.core.convert.Convert;
 import com.xiaoTools.core.filter.Filter;
 import com.xiaoTools.core.stringFormatter.StrFormatter;
 import com.xiaoTools.core.text.strSpliter.StrSpliter;
+import com.xiaoTools.core.text.stringBuilder.StrBuilder;
 import com.xiaoTools.core.versionComparator.VersionComparator;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;

@@ -1,5 +1,6 @@
 package com.xiaoTools.core.text.stringBuilder;
 
+import com.xiaoTools.core.convert.Convert;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 
@@ -194,6 +195,22 @@ public class StrBuilder implements CharSequence, Appendable, Serializable {
         return insert(this.position, csq, start, end);
     }
 
-
+    /**
+     * [追加对象，对象会被转换为字符串](Appends an object, which is converted to a string)
+     * @description: zh - 追加对象，对象会被转换为字符串
+     * @description: en - Appends an object, which is converted to a string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/18 7:39 下午
+     * @param index: 插入位置
+     * @param obj: 对象
+     * @return com.xiaoTools.core.text.stringBuilder.StrBuilder
+    */
+    public StrBuilder insert(int index, Object obj) {
+        if (obj instanceof CharSequence) {
+            return insert(index, (CharSequence) obj);
+        }
+        return insert(index, Convert.toStr(obj));
+    }
 
 }

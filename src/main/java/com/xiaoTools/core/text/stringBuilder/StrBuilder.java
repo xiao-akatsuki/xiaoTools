@@ -195,6 +195,8 @@ public class StrBuilder implements CharSequence, Appendable, Serializable {
         return insert(this.position, csq, start, end);
     }
 
+    /*添加 -----------------------------------------------------------insert*/
+
     /**
      * [追加对象，对象会被转换为字符串](Appends an object, which is converted to a string)
      * @description: zh - 追加对象，对象会被转换为字符串
@@ -211,6 +213,150 @@ public class StrBuilder implements CharSequence, Appendable, Serializable {
             return insert(index, (CharSequence) obj);
         }
         return insert(index, Convert.toStr(obj));
+    }
+
+    /**
+     * [插入指定字符](Inserts the specified character)
+     * @description: zh - 插入指定字符
+     * @description: en - Inserts the specified character
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/19 5:59 下午
+     * @param index: 位置
+     * @param c: 字符
+     * @return com.xiaoTools.core.text.stringBuilder.StrBuilder
+    */
+    public StrBuilder insert(int index, char c) {
+        moveDataAfterIndex(index, Constant.ONE);
+        value[index] = c;
+        this.position = Math.max(this.position, index) + Constant.ONE;
+        return this;
+    }
+
+    /**
+     * [指定位置插入数据](Insert data at specified location)
+     * @description: zh - 指定位置插入数据
+     * @description: en - Insert data at specified location
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/19 6:02 下午
+     * @param index: 插入位置
+     * @param src: 源数组
+     * @return com.xiaoTools.core.text.stringBuilder.StrBuilder
+    */
+    public StrBuilder insert(int index, char[] src) {
+        return ArrayUtil.isEmpty(src) ? this : insert(index, src, Constant.ZERO, src.length);
+    }
+
+    /**
+     * [指定位置插入数据](Insert data at specified location)
+     * @description: zh - 指定位置插入数据
+     * @description: en - Insert data at specified location
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/19 6:03 下午
+     * @param index: 插入位置
+     * @param src: 源数组
+     * @param srcPos: 位置
+     * @param length: 长度
+     * @return com.xiaoTools.core.text.stringBuilder.StrBuilder
+    */
+    public StrBuilder insert(int index, char[] src, int srcPos, int length) {
+        if (ArrayUtil.isEmpty(src) || srcPos > src.length || length <= Constant.ZERO) {
+            return this;
+        }
+        if (index < Constant.ZERO) {
+            index = Constant.ZERO;
+        }
+        if (srcPos < Constant.ZERO) {
+            srcPos = Constant.ZERO;
+        } else if (srcPos + length > src.length) {
+            // 长度越界，只截取最大长度
+            length = src.length - srcPos;
+        }
+
+        moveDataAfterIndex(index, length);
+        // 插入数据
+        System.arraycopy(src, srcPos, value, index, length);
+        this.position = Math.max(this.position, index) + length;
+        return this;
+    }
+
+    /**
+     * [指定位置插入字符串的某个部分](Inserts a part of a string at a specified location)
+     * @description: zh - 指定位置插入字符串的某个部分
+     * @description: en - Inserts a part of a string at a specified location
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/19 6:10 下午
+     * @param index: 位置
+     * @param csq: 字符串
+     * @return com.xiaoTools.core.text.stringBuilder.StrBuilder
+    */
+    public StrBuilder insert(int index, CharSequence csq) {
+        if (null == csq) {
+            csq = Constant.EMPTY;
+        }
+        int len = csq.length();
+        moveDataAfterIndex(index, csq.length());
+        if (csq instanceof String) {
+            ((String) csq).getChars(Constant.ZERO, len, this.value, index);
+        } else if (csq instanceof StringBuilder) {
+            ((StringBuilder) csq).getChars(Constant.ZERO, len, this.value, index);
+        } else if (csq instanceof StringBuffer) {
+            ((StringBuffer) csq).getChars(Constant.ZERO, len, this.value, index);
+        } else if (csq instanceof StrBuilder) {
+            ((StrBuilder) csq).getChars(Constant.ZERO, len, this.value, index);
+        } else {
+            for (int i = Constant.ZERO, j = this.position; i < len; i++, j++) {
+                this.value[j] = csq.charAt(i);
+            }
+        }
+        this.position = Math.max(this.position, index) + len;
+        return this;
+    }
+
+    /**
+     * [指定位置插入字符串的某个部分](Inserts a part of a string at a specified location)
+     * @description: zh - 指定位置插入字符串的某个部分
+     * @description: en - Inserts a part of a string at a specified location
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/19 6:11 下午
+     * @param index: 位置
+     * @param csq: 字符串
+     * @param start: 字符串开始位置（包括）
+     * @param end: 字符串结束位置（不包括）
+     * @return com.xiaoTools.core.text.stringBuilder.StrBuilder
+    */
+    public StrBuilder insert(int index, CharSequence csq, int start, int end) {
+        if (csq == Constant.NULL) {
+            csq = Constant.STRING_NULL_OUT;
+        }
+        final int csqLen = csq.length();
+        if (start > csqLen) {
+            return this;
+        }
+        if (start < Constant.ZERO) {
+            start = Constant.ZERO;
+        }
+        if (end > csqLen) {
+            end = csqLen;
+        }
+        if (start >= end) {
+            return this;
+        }
+        if (index < Constant.ZERO) {
+            index = Constant.ZERO;
+        }
+
+        final int length = end - start;
+        moveDataAfterIndex(index, length);
+        for (int i = start, j = this.position; i < end; i++, j++) {
+            value[j] = csq.charAt(i);
+        }
+        this.position = Math.max(this.position, index) + length;
+        return this;
     }
 
 }

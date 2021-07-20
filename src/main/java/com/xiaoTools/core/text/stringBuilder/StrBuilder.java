@@ -359,4 +359,37 @@ public class StrBuilder implements CharSequence, Appendable, Serializable {
         return this;
     }
 
+    /*将指定段的字符列表写出到目标字符数组中 -----------------------------------------------------------get Chars*/
+
+    /**
+     * [将指定段的字符列表写出到目标字符数组中](Writes the character list of the specified segment to the target character array)
+     * @description: zh - 将指定段的字符列表写出到目标字符数组中
+     * @description: en - Writes the character list of the specified segment to the target character array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/20 5:51 下午
+     * @param srcBegin: 起始位置（包括）
+     * @param srcEnd: 结束位置（不包括）
+     * @param dst: 目标数组
+     * @param dstBegin: 目标起始位置（包括）
+     * @return com.xiaoTools.core.text.stringBuilder.StrBuilder
+    */
+    public StrBuilder getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
+        if (srcBegin < Constant.ZERO) {
+            srcBegin = Constant.ZERO;
+        }
+        if (srcEnd < Constant.ZERO) {
+            srcEnd = Constant.ZERO;
+        } else if (srcEnd > this.position) {
+            srcEnd = this.position;
+        }
+        if (srcBegin > srcEnd) {
+            throw new StringIndexOutOfBoundsException("srcBegin > srcEnd");
+        }
+        System.arraycopy(value, srcBegin, dst, dstBegin, srcEnd - srcBegin);
+        return this;
+    }
+
+
+
 }

@@ -390,6 +390,59 @@ public class StrBuilder implements CharSequence, Appendable, Serializable {
         return this;
     }
 
+    /*其他API -----------------------------------------------------------other*/
 
+    /**
+     * [是否有内容](Is there any content)
+     * @description: zh - 是否有内容
+     * @description: en - Is there any content
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/21 5:58 下午
+     * @return boolean
+    */
+    public boolean hasContent() {
+        return position > Constant.ZERO;
+    }
 
+    /**
+     * [是否为空](Is it empty)
+     * @description: zh - 是否为空
+     * @description: en - Is it empty
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/21 6:01 下午
+     * @return boolean
+    */
+    @Override
+    public boolean isEmpty() {
+        return position == Constant.ZERO;
+    }
+
+    /**
+     * [删除全部字符，位置归零](Delete all characters and return to zero)
+     * @description: zh - 删除全部字符，位置归零
+     * @description: en - Delete all characters and return to zero
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/21 6:05 下午
+     * @return com.xiaoTools.core.text.stringBuilder.StrBuilder
+    */
+    public StrBuilder clear() {
+        return reset();
+    }
+
+    /**
+     * [删除全部字符，位置归零](Delete all characters and return to zero)
+     * @description: zh - 删除全部字符，位置归零
+     * @description: en - Delete all characters and return to zero
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/21 6:05 下午
+     * @return com.xiaoTools.core.text.stringBuilder.StrBuilder
+    */
+    public StrBuilder reset() {
+        this.position = Constant.ZERO;
+        return this;
+    }
 }

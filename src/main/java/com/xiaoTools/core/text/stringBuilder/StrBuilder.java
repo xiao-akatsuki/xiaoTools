@@ -390,6 +390,56 @@ public class StrBuilder implements CharSequence, Appendable, Serializable {
         return this;
     }
 
+    /*其他API -----------------------------------------------------------to Sting*/
+
+    /**
+     * [生成字符串](Generate string)
+     * @description: zh - 生成字符串
+     * @description: en - Generate string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/22 7:12 下午
+     * @param isReset: 是否重置
+     * @return java.lang.String
+    */
+    public String toString(boolean isReset) {
+        if (position > Constant.ZERO) {
+            final String s = new String(value, Constant.ZERO, position);
+            if (isReset) {
+                reset();
+            }
+            return s;
+        }
+        return Constant.EMPTY;
+    }
+
+    /**
+     * [重置并返回生成的字符串](Reset and return the generated string)
+     * @description: zh - 重置并返回生成的字符串
+     * @description: en - Reset and return the generated string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/22 7:12 下午
+     * @return java.lang.String
+    */
+    public String toStringAndReset() {
+        return toString(Constant.TRUE);
+    }
+
+    /**
+     * [生成字符串](Generate string)
+     * @description: zh - 生成字符串
+     * @description: en - Generate string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/22 7:11 下午
+     * @return java.lang.String
+    */
+    @Override
+    public String toString() {
+        return toString(Constant.FALSE);
+    }
+
     /*其他API -----------------------------------------------------------other*/
 
     /**
@@ -499,5 +549,10 @@ public class StrBuilder implements CharSequence, Appendable, Serializable {
         return this;
     }
 
+    /*重写的内容 -----------------------------------------------------------Override*/
 
+    @Override
+    public int length() {
+        return this.position;
+    }
 }

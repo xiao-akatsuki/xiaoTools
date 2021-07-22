@@ -445,4 +445,59 @@ public class StrBuilder implements CharSequence, Appendable, Serializable {
         this.position = Constant.ZERO;
         return this;
     }
+
+    /**
+     * [删除到指定位置](Delete to specified location)
+     * @description: zh - 删除到指定位置
+     * @description: en - Delete to specified location
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/22 6:18 下午
+     * @param position: 新的位置，不包括这个位置
+     * @return com.xiaoTools.core.text.stringBuilder.StrBuilder
+    */
+    public StrBuilder delTo(int position) {
+        if (position < Constant.ZERO) {
+            position = Constant.ZERO;
+        }
+        return del(position, this.position);
+    }
+
+    /**
+     * [删除指定长度的字符](Delete characters of specified length)
+     * @description: zh - 删除指定长度的字符
+     * @description: en - Delete characters of specified length
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/22 6:22 下午
+     * @param start: 开始位置，负数按照0处理（包括）
+     * @param end: 结束位置，超出最大长度按照最大长度处理（不包括）
+     * @return com.xiaoTools.core.text.stringBuilder.StrBuilder
+    */
+    public StrBuilder del(int start, int end) throws StringIndexOutOfBoundsException {
+        if (start < Constant.ZERO) {
+            start = Constant.ZERO;
+        }
+
+        if (end >= this.position) {
+            // end在边界及以外，相当于删除后半部分
+            this.position = start;
+            return this;
+        } else if (end < Constant.ZERO) {
+            // start和end都为0的情况下表示删除全部
+            end = Constant.ZERO;
+        }
+
+        int len = end - start;
+        // 截取中间部分，需要将后半部分复制到删除的开始位置
+        if (len > Constant.ZERO) {
+            System.arraycopy(value, start + len, value, start, this.position - end);
+            this.position -= len;
+        } else if (len < Constant.ZERO) {
+            throw new StringIndexOutOfBoundsException("Start is greater than End.");
+        }
+        return this;
+    }
+
+
 }

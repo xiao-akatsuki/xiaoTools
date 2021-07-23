@@ -3850,5 +3850,87 @@ public class CharSequenceUtil {
                         str.charAt(Constant.ZERO) == prefix && str.charAt(str.length() - Constant.ONE) == suffix;
     }
 
+    /*创建StringBuilder对象 -----------------------------------------------------------StringBuild*/
 
+    /**
+     * [创建StringBuilder对象](Create StringBuilder object)
+     * @description: zh - 创建StringBuilder对象
+     * @description: en - Create StringBuilder object
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/23 9:36 上午
+     * @param values: 初始字符串列表
+     * @return java.lang.StringBuilder
+    */
+    public static StringBuilder builder(CharSequence... values) {
+        final StringBuilder result = new StringBuilder();
+        for (CharSequence value : values) {
+            result.append(value);
+        }
+        return result;
+    }
+
+    /**
+     * [创建 StrBuilder 对象](Creating StrBuilder objects)
+     * @description: zh - 创建 StrBuilder 对象
+     * @description: en - Creating StrBuilder objects
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/23 9:37 上午
+     * @param values: 初始字符串列表
+     * @return com.xiaoTools.core.text.stringBuilder.StrBuilder
+    */
+    public static StrBuilder strBuilder(CharSequence... values) {
+        return StrBuilder.create(values);
+    }
+
+    /*标准属性名 -----------------------------------------------------------getter*/
+
+    /**
+     * [获得 set 或 get 或 is 方法对应的标准属性名](Get the standard property name corresponding to the set or get or is method)
+     * @description: zh - 获得 set 或 get 或 is 方法对应的标准属性名
+     * @description: en - Get the standard property name corresponding to the set or get or is method
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/23 9:40 上午
+     * @param getOrSetMethodName: Get或Set方法名
+     * @return java.lang.String
+    */
+    public static String getGeneralField(CharSequence getOrSetMethodName) {
+        final String getOrSetMethodNameStr = getOrSetMethodName.toString();
+        if (getOrSetMethodNameStr.startsWith("get") || getOrSetMethodNameStr.startsWith("set")) {
+            return removePreAndLowerFirst(getOrSetMethodName, Constant.THREE);
+        } else if (getOrSetMethodNameStr.startsWith("is")) {
+            return removePreAndLowerFirst(getOrSetMethodName, Constant.TWO);
+        }
+        return Constant.STRING_NULL;
+    }
+
+    /**
+     * [生成 set 方法名](Generate set method name)
+     * @description: zh - 生成 set 方法名
+     * @description: en - Generate set method name
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/23 9:41 上午
+     * @param fieldName: 属性名
+     * @return java.lang.String
+    */
+    public static String genSetter(CharSequence fieldName) {
+        return upperFirstAndAddPre(fieldName, "set");
+    }
+
+    /**
+     * [生成 get 方法名](Generate get method name)
+     * @description: zh - 生成 get 方法名
+     * @description: en - Generate get method name
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/23 9:41 上午
+     * @param fieldName: 属性名
+     * @return java.lang.String
+    */
+    public static String genGetter(CharSequence fieldName) {
+        return upperFirstAndAddPre(fieldName, "get");
+    }
 }

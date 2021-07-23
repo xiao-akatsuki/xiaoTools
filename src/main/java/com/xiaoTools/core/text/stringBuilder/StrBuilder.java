@@ -555,4 +555,51 @@ public class StrBuilder implements CharSequence, Appendable, Serializable {
     public int length() {
         return this.position;
     }
+
+    @Override
+    public char charAt(int index) {
+        if(index < 0){
+            index = this.position + index;
+        }
+        if ((index < 0) || (index > this.position)) {
+            throw new StringIndexOutOfBoundsException(index);
+        }
+        return this.value[index];
+    }
+
+    @Override
+    public CharSequence subSequence(int start, int end) {
+        return subString(start, end);
+    }
+
+    /**
+     * [返回自定段的字符串](Returns a string of custom segments)
+     * @description: zh - 返回自定段的字符串
+     * @description: en - Returns a string of custom segments
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/23 9:06 上午
+     * @param start: 开始位置（包括）
+     * @return java.lang.String
+    */
+    public String subString(int start) {
+        return subString(start, this.position);
+    }
+
+    /**
+     * [返回自定段的字符串](Returns a string of custom segments)
+     * @description: zh - 返回自定段的字符串
+     * @description: en - Returns a string of custom segments
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/23 9:05 上午
+     * @param start: 开始位置（包括）
+     * @param end: 结束位置（不包括）
+     * @return java.lang.String
+    */
+    public String subString(int start, int end) {
+        return new String(this.value, start, end - start);
+    }
+
+
 }

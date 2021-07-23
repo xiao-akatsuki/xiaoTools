@@ -38,5 +38,6 @@ implementation 'io.github.xiaoxunyao:xiaoTools:0.1.1-releases'
 
 ## 📖Documentation
 
-[Welcome everyone to visit the document URL](https://xiaoxunyao.github.io/xiaoTools-doc/en/)
+### Address --> [Welcome to visit the document URL](https://xiaoxunyao.github.io/xiaoTools-doc/)
+### Document author --> [「missyou-zxt」](https://github.com/missyou-zxt)
 

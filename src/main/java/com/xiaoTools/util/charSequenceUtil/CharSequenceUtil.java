@@ -1254,7 +1254,7 @@ public class CharSequenceUtil {
 
         final String str2 = str.toString();
         return str2.startsWith(prefix.toString()) ?
-                subSuf(str2, prefix.length()) :
+                subStringSuf(str2, prefix.length()) :
                 str2;
     }
 
@@ -1274,7 +1274,7 @@ public class CharSequenceUtil {
 
         final String str2 = str.toString();
         return str2.toLowerCase().startsWith(prefix.toString().toLowerCase()) ?
-                subSuf(str2, prefix.length()) :
+                subStringSuf(str2, prefix.length()) :
                 str2;
     }
 
@@ -1294,7 +1294,7 @@ public class CharSequenceUtil {
 
         final String str2 = str.toString();
         return str2.endsWith(suffix.toString()) ?
-                subPre(str2, str2.length() - suffix.length()) :
+                subStringPre(str2, str2.length() - suffix.length()) :
                 str2;
     }
 
@@ -1325,7 +1325,7 @@ public class CharSequenceUtil {
 
         final String str2 = str.toString();
         return str2.toLowerCase().endsWith(suffix.toString().toLowerCase()) ?
-                subPre(str2, str2.length() - suffix.length()) :
+                subStringPre(str2, str2.length() - suffix.length()) :
                 str2;
     }
 
@@ -3933,4 +3933,131 @@ public class CharSequenceUtil {
     public static String genGetter(CharSequence fieldName) {
         return upperFirstAndAddPre(fieldName, "get");
     }
+
+    /*其他 -----------------------------------------------------------other*/
+
+    /**
+     * [连接多个字符串为一个](Connect multiple strings into one)
+     * @description: zh - 连接多个字符串为一个
+     * @description: en - Connect multiple strings into one
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/23 10:03 上午
+     * @param isNullToEmpty: 是否null转为""
+     * @param values: 字符串数组
+     * @return java.lang.String
+    */
+    public static String concat(boolean isNullToEmpty, CharSequence... values) {
+        final StrBuilder result = new StrBuilder();
+        for (CharSequence value : values) {
+            result.append(isNullToEmpty ? nullToEmpty(value) : value);
+        }
+        return result.toString();
+    }
+
+    /**
+     * [将给定字符串，变成 "xxx...xxx" 形式的字符串](Change the given string into a string in the form of "XXX... XXX")
+     * @description: zh - 将给定字符串，变成 "xxx...xxx" 形式的字符串
+     * @description: en - Change the given string into a string in the form of "XXX... XXX"
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/23 10:05 上午
+     * @param value: 字符串
+     * @param maxLength: 最大长度
+     * @return java.lang.String
+    */
+    public static String brief(CharSequence value, int maxLength) {
+        if (Constant.NULL == value) {
+            return Constant.STRING_NULL;
+        }
+        if (maxLength <= Constant.ZERO || value.length() <= maxLength) {
+            return value.toString();
+        }
+        int w = maxLength / Constant.TWO;
+        int l = value.length() + Constant.THREE;
+
+        final String str2 = value.toString();
+        return format("{}...{}", str2.substring(Constant.ZERO, maxLength - w), str2.substring(l - w));
+    }
+
+    /**
+     * [以 conjunction 为分隔符将多个对象转换为字符串](Convert multiple objects to strings with conjunction as a delimiter)
+     * @description: zh - 以 conjunction 为分隔符将多个对象转换为字符串
+     * @description: en - Convert multiple objects to strings with conjunction as a delimiter
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/23 10:06 上午
+     * @param conjunction: 分隔符
+     * @param values: 数组
+     * @return java.lang.String
+    */
+    public static String join(CharSequence conjunction, Object... values) {
+        return ArrayUtil.join(values, conjunction);
+    }
+
+    /**
+     * [字符串的每一个字符是否都与定义的匹配器匹配](Does each character of the string match the defined matcher)
+     * @description: zh - 字符串的每一个字符是否都与定义的匹配器匹配
+     * @description: en - Does each character of the string match the defined matcher
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/23 10:07 上午
+     * @param value: 字符串
+     * @param matcher: 匹配器
+     * @return boolean
+    */
+    public static boolean isAllCharMatch(CharSequence value, com.xiaoTools.core.matcher.Matcher<Character> matcher) {
+        if (StrUtil.isBlank(value)) {
+            return Constant.FALSE;
+        }
+        int len = value.length();
+        for (int i = Constant.ZERO; i < len; i++) {
+            if (!matcher.match(value.charAt(i))) {
+                return Constant.FALSE;
+            }
+        }
+        return Constant.TRUE;
+    }
+
+    /**
+     * [循环位移指定位置的字符串为指定距离](Circular displacement the string at the specified position is the specified distance)
+     * @description: zh - 循环位移指定位置的字符串为指定距离
+     * @description: en - Circular displacement the string at the specified position is the specified distance
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/23 10:09 上午
+     * @param str: 字符串
+     * @param startInclude: 起始位置（包括）
+     * @param endExclude: 结束位置（不包括）
+     * @param moveLength: 移动距离，负数表示左移，正数为右移
+     * @return java.lang.String
+    */
+    public static String move(CharSequence str, int startInclude, int endExclude, int moveLength) {
+        if (isEmpty(str)) {
+            return str(str);
+        }
+        int len = str.length();
+        if (Math.abs(moveLength) > len) {
+            // 循环位移，当越界时循环
+            moveLength = moveLength % len;
+        }
+        final StrBuilder strBuilder = StrBuilder.create(len);
+        if (moveLength > Constant.ZERO) {
+            int endAfterMove = Math.min(endExclude + moveLength, str.length());
+            strBuilder.append(str.subSequence(Constant.ZERO, startInclude))
+                    .append(str.subSequence(endExclude, endAfterMove))
+                    .append(str.subSequence(startInclude, endExclude))
+                    .append(str.subSequence(endAfterMove, str.length()));
+        } else if (moveLength < Constant.ZERO) {
+            int startAfterMove = Math.max(startInclude + moveLength, Constant.ZERO);
+            strBuilder.append(str.subSequence(Constant.ZERO, startAfterMove))
+                    .append(str.subSequence(startInclude, endExclude))
+                    .append(str.subSequence(startAfterMove, startInclude))
+                    .append(str.subSequence(endExclude, str.length()));
+        } else {
+            return str(str);
+        }
+        return strBuilder.toString();
+    }
+
 }

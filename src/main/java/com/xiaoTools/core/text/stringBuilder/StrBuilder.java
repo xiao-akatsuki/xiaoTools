@@ -6,6 +6,7 @@ import com.xiaoTools.util.arrayUtil.ArrayUtil;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * [可复用的字符串生成器，非线程安全](Reusable string generator, non thread safe)
@@ -601,5 +602,80 @@ public class StrBuilder implements CharSequence, Appendable, Serializable {
         return new String(this.value, start, end - start);
     }
 
+    /*私有的内容 -----------------------------------------------------------private*/
 
+    /**
+     * [指定位置之后的数据后移指定长度](The data after the specified position is moved back by the specified length)
+     * @description: zh - 指定位置之后的数据后移指定长度
+     * @description: en - The data after the specified position is moved back by the specified length
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/23 9:17 上午
+     * @param index: 位置
+     * @param length: 位移长度
+    */
+    private void moveDataAfterIndex(int index, int length) {
+        ensureCapacity(Math.max(this.position, index) + length);
+        if (index < this.position) {
+            // 插入位置在已有数据范围内，后移插入位置之后的数据
+            System.arraycopy(this.value, index, this.value, index + length, this.position - index);
+        } else if (index > this.position) {
+            // 插入位置超出范围，则当前位置到index清除为空格
+            Arrays.fill(this.value, this.position, index, Constant.CHAR_SPACE);
+        }
+        // 不位移
+    }
+
+    /**
+     * [确认容量是否够用，不够用则扩展容量](Confirm whether the capacity is enough, and expand the capacity if not)
+     * @description: zh - 确认容量是否够用，不够用则扩展容量
+     * @description: en - Confirm whether the capacity is enough, and expand the capacity if not
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/23 9:18 上午
+     * @param minimumCapacity: 最小容量
+    */
+    private void ensureCapacity(int minimumCapacity) {
+        if (minimumCapacity - value.length > Constant.ZERO) {
+            expandCapacity(minimumCapacity);
+        }
+    }
+
+    /**
+     * [扩展容量](Expansion capacity)
+     * @description: zh - 扩展容量
+     * @description: en - Expansion capacity
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/23 9:20 上午
+     * @param minimumCapacity: 需要扩展的最小容量
+    */
+    private void expandCapacity(int minimumCapacity) {
+        int newCapacity = (value.length << Constant.ONE) + Constant.TWO;
+        if (newCapacity - minimumCapacity < Constant.ZERO) {
+            newCapacity = minimumCapacity;
+        }
+        if (newCapacity < Constant.ZERO) {
+            throw new OutOfMemoryError("Capacity is too long and max than Integer.MAX");
+        }
+        value = Arrays.copyOf(value, newCapacity);
+    }
+
+    /**
+     * [给定字符串数组的总长度](The total length of the given string array)
+     * @description: zh - 给定字符串数组的总长度
+     * @description: en - The total length of the given string array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/23 9:20 上午
+     * @param values: 字符串数组
+     * @return int
+    */
+    private static int totalLength(CharSequence... values) {
+        int totalLength = Constant.ZERO;
+        for (CharSequence str : values) {
+            totalLength += (Constant.NULL == str ? Constant.FOUR : str.length());
+        }
+        return totalLength;
+    }
 }

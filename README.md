@@ -38,6 +38,7 @@ implementation 'io.github.xiaoxunyao:xiaoTools:0.1.1-releases'
 
 ## 📖文档
 
-[欢迎大家访问文档网址](https://xiaoxunyao.github.io/xiaoTools-doc/)
+### 地址 --> [欢迎大家访问文档网址](https://xiaoxunyao.github.io/xiaoTools-doc/)
+### 文档作者 --> [「missyou-zxt」](https://github.com/missyou-zxt)
 
 

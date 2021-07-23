@@ -3805,4 +3805,50 @@ public class CharSequenceUtil {
             return name2;
         }
     }
+
+    /*给定字符串是否被字符包围 -----------------------------------------------------------isSurround*/
+
+    /**
+     * [给定字符串是否被字符包围](Whether the given string is surrounded by characters)
+     * @description: zh - 给定字符串是否被字符包围
+     * @description: en - Whether the given string is surrounded by characters
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/23 9:26 上午
+     * @param str: 字符串
+     * @param prefix: 前缀
+     * @param suffix: 后缀
+     * @return boolean
+    */
+    public static boolean isSurround(CharSequence str, CharSequence prefix, CharSequence suffix) {
+        if (StrUtil.isBlank(str)) {
+            return Constant.FALSE;
+        }
+        if (str.length() < (prefix.length() + suffix.length())) {
+            return Constant.FALSE;
+        }
+
+        final String str2 = str.toString();
+        return str2.startsWith(prefix.toString()) && str2.endsWith(suffix.toString());
+    }
+
+    /**
+     * [给定字符串是否被字符包围](Whether the given string is surrounded by characters)
+     * @description: zh - 给定字符串是否被字符包围
+     * @description: en - Whether the given string is surrounded by characters
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/23 9:30 上午
+     * @param str: 字符串
+     * @param prefix: 前缀
+     * @param suffix: 后缀
+     * @return boolean
+    */
+    public static boolean isSurround(CharSequence str, char prefix, char suffix) {
+        return StrUtil.isBlank(str) ? Constant.FALSE :
+                str.length() < Constant.TWO ? Constant.FALSE :
+                        str.charAt(Constant.ZERO) == prefix && str.charAt(str.length() - Constant.ONE) == suffix;
+    }
+
+
 }

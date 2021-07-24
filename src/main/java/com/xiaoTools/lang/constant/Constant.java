@@ -5,6 +5,7 @@ import com.xiaoTools.date.dateTime.DateTime;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.StringReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.time.Instant;
@@ -586,6 +587,8 @@ public class Constant {
     public static final String[] STRINGS_NULL = null;
 
     public static final byte[] BYTES_NULL = null;
+
+    public static final StringReader STRING_READER_NULL = null;
 
     /*-----------------------------------------------------------IO*/
 

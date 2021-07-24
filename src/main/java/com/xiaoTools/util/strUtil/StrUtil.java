@@ -5,6 +5,8 @@ import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.charSequenceUtil.CharSequenceUtil;
 
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 
@@ -311,5 +313,32 @@ public class StrUtil extends CharSequenceUtil {
         return StrBuilder.create(size);
     }
 
+    /*获得StringReader 和 StringWriter------------------------------------------------------------ Reader and Writer*/
 
+    /**
+     * [获得 StringReader](Get StringReader)
+     * @description: zh - 获得 StringReader
+     * @description: en - Get StringReader
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/24 10:25 上午
+     * @param value: 字符串
+     * @return java.io.StringReader
+    */
+    public static StringReader getReader(CharSequence value) {
+        return Constant.NULL == value ? Constant.STRING_READER_NULL : new StringReader(value.toString());
+    }
+
+    /**
+     * [获得StringWriter](Get StringWriter)
+     * @description: zh - 获得StringWriter
+     * @description: en - Get StringWriter
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/24 10:26 上午
+     * @return java.io.StringWriter
+    */
+    public static StringWriter getWriter() {
+        return new StringWriter();
+    }
 }

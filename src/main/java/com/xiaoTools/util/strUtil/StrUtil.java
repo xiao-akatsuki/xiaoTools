@@ -133,5 +133,109 @@ public class StrUtil extends CharSequenceUtil {
         return value.toString();
     }
 
+    /**
+     * [将byte数组转为字符串](Convert byte array to string)
+     * @description: zh - 将byte数组转为字符串
+     * @description: en - Convert byte array to string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/24 8:16 上午
+     * @param bytes: 字符串
+     * @param charset: 字符集
+     * @return java.lang.String
+    */
+    public static String str(byte[] bytes, String charset) {
+        return str(bytes, isBlank(charset) ? Charset.defaultCharset() : Charset.forName(charset));
+    }
+
+    /**
+     * [解码字节码](Decode bytecode)
+     * @description: zh - 解码字节码
+     * @description: en - Decode bytecode
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/24 8:19 上午
+     * @param data: 字符串
+     * @param charset: 字符集，如果此字段为空，则解码的结果取决于平台
+     * @return java.lang.String
+    */
+    public static String str(byte[] data, Charset charset) {
+        return data == Constant.NULL ? Constant.STRING_NULL :
+                Constant.NULL == charset ? new String(data) : new String(data,charset);
+    }
+
+    /**
+     * [将Byte数组转为字符串](Convert byte array to string)
+     * @description: zh - 将Byte数组转为字符串
+     * @description: en - Convert byte array to string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/24 8:20 上午
+     * @param bytes: byte数组
+     * @param charset: 字符集
+     * @return java.lang.String
+    */
+    public static String str(Byte[] bytes, String charset) {
+        return str(bytes, isBlank(charset) ? Charset.defaultCharset() : Charset.forName(charset));
+    }
+
+    /**
+     * [解码字节码](Decode bytecode)
+     * @description: zh - 解码字节码
+     * @description: en - Decode bytecode
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/24 8:22 上午
+     * @param data: 字符串
+     * @param charset: 字符集，如果此字段为空，则解码的结果取决于平台
+     * @return java.lang.String
+    */
+    public static String str(Byte[] data, Charset charset) {
+        if (data == Constant.NULL) {
+            return Constant.STRING_NULL;
+        }
+
+        byte[] bytes = new byte[data.length];
+        Byte dataByte;
+        for (int i = Constant.ZERO; i < data.length; i++) {
+            dataByte = data[i];
+            bytes[i] = (Constant.NULL == dataByte) ? Constant.NEGATIVE_ONE : dataByte;
+        }
+
+        return str(bytes, charset);
+    }
+
+    /**
+     * [将编码的byteBuffer数据转换为字符串](Converts encoded ByteBuffer data to a string)
+     * @description: zh - 将编码的byteBuffer数据转换为字符串
+     * @description: en - Converts encoded ByteBuffer data to a string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/24 8:22 上午
+     * @param data: 数据
+     * @param charset: 字符集，如果为空使用当前系统字符集
+     * @return java.lang.String
+    */
+    public static String str(ByteBuffer data, String charset) {
+        return data == Constant.NULL ? Constant.STRING_NULL : str(data, Charset.forName(charset));
+    }
+
+    /**
+     * [将编码的byteBuffer数据转换为字符串](Converts encoded ByteBuffer data to a string)
+     * @description: zh - 将编码的byteBuffer数据转换为字符串
+     * @description: en - Converts encoded ByteBuffer data to a string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/24 8:23 上午
+     * @param data: 数据
+     * @param charset: 字符集，如果为空使用当前系统字符集
+     * @return java.lang.String
+    */
+    public static String str(ByteBuffer data, Charset charset) {
+        if (Constant.NULL == charset) {
+            charset = Charset.defaultCharset();
+        }
+        return charset.decode(data).toString();
+    }
 
 }

@@ -271,6 +271,20 @@ public class StrUtil extends CharSequenceUtil {
     }
 
     /**
+     *
+     * @description: zh - 创建 StringBuilder 对象
+     * @description: en - Create a StringBuilder object
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/24 10:03 上午
+     * @param size: 初始大小
+     * @return java.lang.StringBuilder
+     */
+    public static StringBuilder builder(int size) {
+        return new StringBuilder(size);
+    }
+
+    /**
      * [创建StrBuilder对象](Create StrBuilder object)
      * @description: zh - 创建StrBuilder对象
      * @description: en - Create StrBuilder object
@@ -284,16 +298,18 @@ public class StrUtil extends CharSequenceUtil {
     }
 
     /**
-     *
-     * @description: zh - 创建 StringBuilder 对象
-     * @description: en - Create a StringBuilder object
+     * [创建StrBuilder对象](Create StrBuilder object)
+     * @description: zh - 创建StrBuilder对象
+     * @description: en - Create StrBuilder object
      * @version: V1.0
      * @author XiaoXunYao
-     * @since 2021/7/24 10:03 上午
+     * @since 2021/7/24 10:13 上午
      * @param size: 初始大小
-     * @return java.lang.StringBuilder
+     * @return com.xiaoTools.core.text.stringBuilder.StrBuilder
     */
-    public static StringBuilder builder(int size) {
-        return new StringBuilder(size);
+    public static StrBuilder strBuilder(int size) {
+        return StrBuilder.create(size);
     }
+
+
 }

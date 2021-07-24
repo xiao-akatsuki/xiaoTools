@@ -357,4 +357,60 @@ public class StrUtil extends CharSequenceUtil {
     public static String reverse(String value) {
         return new String(ArrayUtil.reverse(value.toCharArray()));
     }
+
+    /*填充字符串------------------------------------------------------------ fill*/
+
+    /**
+     * [将已有字符串填充为规定长度，如果已有字符串超过这个长度则返回这个字符串](Fill the existing string with the specified length. If the existing string exceeds this length, the string will be returned)
+     * @description: zh - 将已有字符串填充为规定长度，如果已有字符串超过这个长度则返回这个字符串
+     * @description: en - Fill the existing string with the specified length. If the existing string exceeds this length, the string will be returned
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/24 5:30 下午
+     * @param value: 被填充的字符串
+     * @param filled: 填充的字符
+     * @param len: 填充长度
+     * @return java.lang.String
+    */
+    public static String fillBefore(String value, char filled, int len) {
+        return fill(value, filled, len, Constant.TRUE);
+    }
+
+    /**
+     * [将已有字符串填充为规定长度，如果已有字符串超过这个长度则返回这个字符串](Fill the existing string with the specified length. If the existing string exceeds this length, the string will be returned)
+     * @description: zh - 将已有字符串填充为规定长度，如果已有字符串超过这个长度则返回这个字符串
+     * @description: en - Fill the existing string with the specified length. If the existing string exceeds this length, the string will be returned
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/24 5:32 下午
+     * @param value: 被填充的字符串
+     * @param filled: 填充的字符
+     * @param len: 填充长度
+     * @return java.lang.String
+    */
+    public static String fillAfter(String value, char filled, int len) {
+        return fill(value, filled, len, Constant.FALSE);
+    }
+
+    /**
+     * [将已有字符串填充为规定长度，如果已有字符串超过这个长度则返回这个字符串](Fill the existing string with the specified length. If the existing string exceeds this length, the string will be returned)
+     * @description: zh - 将已有字符串填充为规定长度，如果已有字符串超过这个长度则返回这个字符串
+     * @description: en - Fill the existing string with the specified length. If the existing string exceeds this length, the string will be returned
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/24 5:33 下午
+     * @param value: 被填充的字符串
+     * @param filled: 填充的字符
+     * @param len: 填充长度
+     * @param pre: 是否填充在前
+     * @return java.lang.String
+    */
+    public static String fill(String value, char filled, int len, boolean pre) {
+        final int strLen = value.length();
+        if (strLen > len) {
+            return value;
+        }
+        String filledStr = repeat(filled, len - strLen);
+        return pre ? filledStr.concat(value) : value.concat(filledStr);
+    }
 }

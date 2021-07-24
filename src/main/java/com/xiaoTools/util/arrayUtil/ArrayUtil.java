@@ -9,6 +9,7 @@ import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.core.editor.Editor;
 import com.xiaoTools.core.filter.Filter;
 import com.xiaoTools.core.match.Match;
+import com.xiaoTools.util.strUtil.StrUtil;
 
 /**
  * [数组工具类](Array tool class)

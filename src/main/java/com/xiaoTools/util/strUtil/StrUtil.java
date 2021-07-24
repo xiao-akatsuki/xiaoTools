@@ -413,4 +413,39 @@ public class StrUtil extends CharSequenceUtil {
         String filledStr = repeat(filled, len - strLen);
         return pre ? filledStr.concat(value) : value.concat(filledStr);
     }
+
+    /*判断字符串的相似度------------------------------------------------------------ similar*/
+
+    /**
+     * [计算两个字符串的相似度](Calculate the similarity of two strings)
+     * @description: zh - 计算两个字符串的相似度
+     * @description: en - Calculate the similarity of two strings
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/24 6:01 下午
+     * @param value1: 字符串1
+     * @param value2: 字符串2
+     * @return double
+    */
+    public static double similar(String value1, String value2) {
+        return TextSimilarity.similar(value1, value2);
+    }
+
+    /**
+     * [计算两个字符串的相似度百分比](Calculate the percentage of similarity between two strings)
+     * @description: zh - 计算两个字符串的相似度百分比
+     * @description: en - Calculate the percentage of similarity between two strings
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/24 6:02 下午
+     * @param value1: 字符串1
+     * @param value2: 字符串2
+     * @param scale: 保留小数
+     * @return java.lang.String
+    */
+    public static String similar(String value1, String value2, int scale) {
+        return TextSimilarity.similar(value1, value2, scale);
+    }
+
+
 }

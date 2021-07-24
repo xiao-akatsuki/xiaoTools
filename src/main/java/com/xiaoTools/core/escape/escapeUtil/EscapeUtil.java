@@ -2,7 +2,6 @@ package com.xiaoTools.core.escape.escapeUtil;
 
 import com.xiaoTools.core.escape.filter.Filter;
 import com.xiaoTools.lang.constant.Constant;
-import com.xiaoTools.util.strUtil.StrUtil;
 
 /**
  * [转义工具类](Escape tool class)

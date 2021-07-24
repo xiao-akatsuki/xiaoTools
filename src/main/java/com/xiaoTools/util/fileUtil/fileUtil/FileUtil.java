@@ -4,7 +4,6 @@ package com.xiaoTools.util.fileUtil.fileUtil;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.charUtil.CharUtil;
-import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.io.*;
 

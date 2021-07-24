@@ -2,7 +2,6 @@ package com.xiaoTools.core.convert.formatter.numberChineseFormatter;
 
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.numUtil.NumUtil;
-import com.xiaoTools.util.strUtil.StrUtil;
 
 /**
  * [将浮点数类型的number转换成英语的表达方式](Convert floating-point number into English expression)

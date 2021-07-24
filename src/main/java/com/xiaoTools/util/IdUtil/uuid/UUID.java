@@ -2,7 +2,6 @@ package com.xiaoTools.util.IdUtil.uuid;
 
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.randomUtil.RandomUtil;
-import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.io.Serial;
 import java.io.Serializable;

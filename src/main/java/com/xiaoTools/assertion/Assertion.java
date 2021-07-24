@@ -1,7 +1,5 @@
 package com.xiaoTools.assertion;
 
-import com.xiaoTools.util.strUtil.StrUtil;
-
 import java.util.function.Supplier;
 
 /**

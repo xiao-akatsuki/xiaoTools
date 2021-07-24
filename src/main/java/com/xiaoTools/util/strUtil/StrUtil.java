@@ -9,6 +9,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
+import java.util.Map;
 
 
 /**
@@ -447,5 +448,52 @@ public class StrUtil extends CharSequenceUtil {
         return TextSimilarity.similar(value1, value2, scale);
     }
 
+    /*判断字符串的相似度------------------------------------------------------------ similar*/
 
+    /**
+     * [格式化文本，使用 {value} 占位](Format text using {value} placeholders)
+     * @description: zh - 格式化文本，使用 {value} 占位
+     * @description: en - Format text using {value} placeholders
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/24 6:18 下午
+     * @param template: 文本模板
+     * @param map: 参数值对
+     * @return java.lang.String
+    */
+    public static String format(CharSequence template, Map<?, ?> map) {
+        return format(template, map, Constant.TRUE);
+    }
+
+    /**
+     * [格式化文本，使用 {value} 占位](Format text using {value} placeholders)
+     * @description: zh - 格式化文本，使用 {value} 占位
+     * @description: en - Format text using {value} placeholders
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/24 6:19 下午
+     * @param template: 文本模板，被替换的部分用 {key} 表示
+     * @param map: 参数值对
+     * @param ignoreNull: 是否忽略 null 值，忽略则 null 值对应的变量不被替换，否则替换为""
+     * @return java.lang.String
+    */
+    public static String format(CharSequence template, Map<?, ?> map, boolean ignoreNull) {
+        if (null == template) {
+            return null;
+        }
+        if (null == map || map.isEmpty()) {
+            return template.toString();
+        }
+
+        String template2 = template.toString();
+        String value;
+        for (Map.Entry<?, ?> entry : map.entrySet()) {
+            value = string(entry.getValue());
+            if (null == value && ignoreNull) {
+                continue;
+            }
+            template2 = replace(template2, "{" + entry.getKey() + "}", value);
+        }
+        return template2;
+    }
 }

@@ -341,4 +341,20 @@ public class StrUtil extends CharSequenceUtil {
     public static StringWriter getWriter() {
         return new StringWriter();
     }
+
+    /*反转字符串------------------------------------------------------------ reverse*/
+
+    /**
+     * [反转字符串](Reverse string)
+     * @description: zh - 反转字符串
+     * @description: en - Reverse string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/24 12:02 下午
+     * @param value: 被反转的字符串
+     * @return java.lang.String
+    */
+    public static String reverse(String value) {
+        return new String(ArrayUtil.reverse(value.toCharArray()));
+    }
 }

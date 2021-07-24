@@ -1,5 +1,6 @@
 package com.xiaoTools.util.strUtil;
 
+import com.xiaoTools.core.text.stringBuilder.StrBuilder;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.charSequenceUtil.CharSequenceUtil;
@@ -238,5 +239,61 @@ public class StrUtil extends CharSequenceUtil {
         return charset.decode(data).toString();
     }
 
+    /*输出字符串------------------------------------------------------------ to String*/
 
+    /**
+     * [调用对象的toString方法，null会返回“null”](Call the toString method of the object, null will return "null")
+     * @description: zh - 调用对象的toString方法，null会返回“null”
+     * @description: en - Call the toString method of the object, null will return "null"
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/24 9:54 上午
+     * @param value: 对象
+     * @return java.lang.String
+    */
+    public static String toString(Object value) {
+        return Constant.NULL == value ? Constant.STRING_NULL_OUT : value.toString();
+    }
+
+    /*创建StringBuilder对象------------------------------------------------------------ builder*/
+
+    /**
+     * [创建StringBuilder对象](Create a StringBuilder object)
+     * @description: zh - 创建StringBuilder对象
+     * @description: en - Create a StringBuilder object
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/24 10:00 上午
+     * @return java.lang.StringBuilder
+    */
+    public static StringBuilder builder() {
+        return new StringBuilder();
+    }
+
+    /**
+     * [创建StrBuilder对象](Create StrBuilder object)
+     * @description: zh - 创建StrBuilder对象
+     * @description: en - Create StrBuilder object
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/24 10:01 上午
+     * @return com.xiaoTools.core.text.stringBuilder.StrBuilder
+    */
+    public static StrBuilder strBuilder() {
+        return StrBuilder.create();
+    }
+
+    /**
+     *
+     * @description: zh - 创建 StringBuilder 对象
+     * @description: en - Create a StringBuilder object
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/24 10:03 上午
+     * @param size: 初始大小
+     * @return java.lang.StringBuilder
+    */
+    public static StringBuilder builder(int size) {
+        return new StringBuilder(size);
+    }
 }

@@ -220,7 +220,7 @@ public class Result {
 
     /**
      * 无参
-     * Acanthopanax
+     * No parameter
      */
     public Result() {
     }

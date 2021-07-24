@@ -1,6 +1,7 @@
 package com.xiaoTools.util.strUtil;
 
 import com.xiaoTools.core.text.stringBuilder.StrBuilder;
+import com.xiaoTools.core.text.textSimilarity.TextSimilarity;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.charSequenceUtil.CharSequenceUtil;
@@ -478,10 +479,10 @@ public class StrUtil extends CharSequenceUtil {
      * @return java.lang.String
     */
     public static String format(CharSequence template, Map<?, ?> map, boolean ignoreNull) {
-        if (null == template) {
-            return null;
+        if (Constant.NULL == template) {
+            return Constant.STRING_NULL;
         }
-        if (null == map || map.isEmpty()) {
+        if (Constant.NULL == map || map.isEmpty()) {
             return template.toString();
         }
 
@@ -489,10 +490,10 @@ public class StrUtil extends CharSequenceUtil {
         String value;
         for (Map.Entry<?, ?> entry : map.entrySet()) {
             value = string(entry.getValue());
-            if (null == value && ignoreNull) {
+            if (Constant.NULL == value && ignoreNull) {
                 continue;
             }
-            template2 = replace(template2, "{" + entry.getKey() + "}", value);
+            template2 = replace(template2, Constant.LEFT_BRACKETS + entry.getKey() + Constant.RIGHT_BRACKETS, value);
         }
         return template2;
     }

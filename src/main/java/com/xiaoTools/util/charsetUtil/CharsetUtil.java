@@ -76,5 +76,48 @@ public class CharsetUtil {
         return StrUtil.isBlank(charsetName) ? Charset.defaultCharset() : Charset.forName(charsetName);
     }
 
+    /*解析字符串编码为Charset对象------------------------------------------------------------ parse*/
+
+    /**
+     * [解析字符串编码为Charset对象，解析失败返回默认编码](The parsing string is encoded as charset object. If parsing fails, the default encoding is returned)
+     * @description: zh - 解析字符串编码为Charset对象，解析失败返回默认编码
+     * @description: en - The parsing string is encoded as charset object. If parsing fails, the default encoding is returned
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/25 6:51 下午
+     * @param charsetName: 字符集，为空则返回默认字符集
+     * @return java.nio.charset.Charset
+    */
+    public static Charset parse(String charsetName) {
+        return parse(charsetName, Charset.defaultCharset());
+    }
+
+    /**
+     * [解析字符串编码为Charset对象，解析失败返回默认编码](The parsing string is encoded as charset object. If parsing fails, the default encoding is returned)
+     * @description: zh - 解析字符串编码为Charset对象，解析失败返回默认编码
+     * @description: en - The parsing string is encoded as charset object. If parsing fails, the default encoding is returned
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/25 4:58 下午
+     * @param name:字符集，为空则返回默认字符集
+     * defaultCharset –
+     * @param defaultValue: 解析失败使用的默认编码
+     * @return java.nio.charset.Charset
+    */
+    public static Charset parse(String name, Charset defaultValue) {
+        if (StrUtil.isBlank(name)) {
+            return defaultValue;
+        }
+
+        Charset result;
+        try {
+            result = Charset.forName(name);
+        } catch (UnsupportedCharsetException e) {
+            result = defaultValue;
+        }
+
+        return result;
+    }
+
 
 }

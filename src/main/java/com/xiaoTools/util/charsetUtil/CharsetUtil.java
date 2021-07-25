@@ -60,6 +60,8 @@ public class CharsetUtil {
         CHARSET_GBK = gbk;
     }
 
+    /*转换为Charset对象------------------------------------------------------------ charset*/
+
     /**
      * [转换为Charset对象](Convert to charset object)
      * @description: zh - 转换为Charset对象

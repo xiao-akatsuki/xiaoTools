@@ -3,6 +3,7 @@ package com.xiaoTools.util.numUtil;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.charUtil.CharUtil;
+import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

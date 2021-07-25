@@ -1,6 +1,7 @@
 package com.xiaoTools.util.hexUtil;
 
 import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.util.charsetUtil.CharsetUtil;
 
 import java.awt.*;
 import java.math.BigInteger;

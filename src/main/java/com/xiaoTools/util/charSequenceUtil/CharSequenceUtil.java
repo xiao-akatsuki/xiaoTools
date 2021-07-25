@@ -10,6 +10,7 @@ import com.xiaoTools.core.versionComparator.VersionComparator;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.charUtil.CharUtil;
+import com.xiaoTools.util.charsetUtil.CharsetUtil;
 import com.xiaoTools.util.numUtil.NumUtil;
 import com.xiaoTools.util.regularUtil.method.Func1;
 

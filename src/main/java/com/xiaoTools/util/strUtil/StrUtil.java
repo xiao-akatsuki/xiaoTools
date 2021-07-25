@@ -5,6 +5,7 @@ import com.xiaoTools.core.text.textSimilarity.TextSimilarity;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.charSequenceUtil.CharSequenceUtil;
+import com.xiaoTools.util.charsetUtil.CharsetUtil;
 
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -89,7 +90,7 @@ public class StrUtil extends CharSequenceUtil {
      * @return java.lang.String
     */
     public static String string(Object value) {
-        return str(value, CharsetUtil.CHARSET_UTF_8);
+        return string(value, CharsetUtil.CHARSET_UTF_8);
     }
 
     /**

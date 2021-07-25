@@ -1,8 +1,10 @@
 package com.xiaoTools.util.charsetUtil;
 
 import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.util.fileUtil.fileUtil.FileUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
 
+import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.charset.UnsupportedCharsetException;
@@ -119,5 +121,40 @@ public class CharsetUtil {
         return result;
     }
 
+    /*转换字符串的字符集编码------------------------------------------------------------ convert*/
+
+    /**
+     * [转换字符串的字符集编码](Character set encoding of conversion string)
+     * @description: zh - 转换字符串的字符集编码
+     * @description: en - Character set encoding of conversion string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/25 7:06 下午
+     * @param source: 字符串
+     * @param srcCharset: 源字符集，默认ISO-8859-1
+     * @param destCharset: 目标字符集，默认UTF-8
+     * @return java.lang.String
+    */
+    public static String convert(String source, String srcCharset, String destCharset) {
+        return convert(source, Charset.forName(srcCharset), Charset.forName(destCharset));
+    }
+
+    /**
+     * [转换字符串的字符集编码](Character set encoding of conversion string)
+     * @description: zh - 转换字符串的字符集编码
+     * @description: en - Character set encoding of conversion string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/25 7:03 下午
+     * @param source: 字符串
+     * @param srcCharset: 源字符集，默认ISO-8859-1
+     * @param destCharset: 目标字符集，默认UTF-8
+     * @return java.lang.String
+    */
+    public static String convert(String source, Charset srcCharset, Charset destCharset) {
+        srcCharset = Constant.NULL == srcCharset ? StandardCharsets.ISO_8859_1 : srcCharset;
+        destCharset = Constant.NULL == destCharset ? StandardCharsets.UTF_8 : destCharset;
+        return StrUtil.isBlank(source) || srcCharset.equals(destCharset) ? source : new String(source.getBytes(srcCharset), destCharset);
+    }
 
 }

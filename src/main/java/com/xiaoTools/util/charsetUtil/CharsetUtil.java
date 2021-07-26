@@ -184,4 +184,32 @@ public class CharsetUtil {
     public static Charset systemCharset() {
         return FileUtil.isWindows() ? CHARSET_GBK : defaultCharset();
     }
+
+    /*系统默认字符集编码 ------------------------------------------------------------ default*/
+
+    /**
+     * [系统默认字符集编码](System default character set encoding)
+     * @description: zh - 系统默认字符集编码
+     * @description: en - System default character set encoding
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/26 9:02 上午
+     * @return java.lang.String
+    */
+    public static String defaultCharsetName() {
+        return defaultCharset().name();
+    }
+
+    /**
+     * [系统默认字符集编码](System default character set encoding)
+     * @description: zh - 系统默认字符集编码
+     * @description: en - System default character set encoding
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/26 9:03 上午
+     * @return java.nio.charset.Charset
+    */
+    public static Charset defaultCharset() {
+        return Charset.defaultCharset();
+    }
 }

@@ -157,4 +157,31 @@ public class CharsetUtil {
         return StrUtil.isBlank(source) || srcCharset.equals(destCharset) ? source : new String(source.getBytes(srcCharset), destCharset);
     }
 
+    /*系统字符集编码 ------------------------------------------------------------ system*/
+
+    /**
+     * [系统字符集编码](System character set encoding)
+     * @description: zh - 系统字符集编码
+     * @description: en - System character set encoding
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/26 8:57 上午
+     * @return java.lang.String
+    */
+    public static String systemCharsetName() {
+        return systemCharset().name();
+    }
+
+    /**
+     * [系统字符集编码](System character set encoding)
+     * @description: zh - 系统字符集编码
+     * @description: en - System character set encoding
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/26 8:59 上午
+     * @return java.nio.charset.Charset
+    */
+    public static Charset systemCharset() {
+        return FileUtil.isWindows() ? CHARSET_GBK : defaultCharset();
+    }
 }

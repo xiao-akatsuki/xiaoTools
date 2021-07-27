@@ -768,6 +768,67 @@ public class NumUtil {
 
     /*范围 ----------------------------------------------------------- range*/
 
+    /**
+     * [从0开始给定范围内的整数列表，步进为1](A list of integers in the given range starting from 0 in steps of 1)
+     * @description: zh - 从0开始给定范围内的整数列表，步进为1
+     * @description: en - A list of integers in the given range starting from 0 in steps of 1
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/27 7:21 下午
+     * @param stop: 结束（包含）
+     * @return int[]
+    */
+    public static int[] range(int stop) {
+        return range(Constant.ZERO, stop);
+    }
+
+    /**
+     * [给定范围内的整数列表，步进为1](A list of integers within a given range in steps of 1)
+     * @description: zh - 给定范围内的整数列表，步进为1
+     * @description: en - A list of integers within a given range in steps of 1
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/27 7:22 下午
+     * @param start: 开始（包含）
+     * @param stop: 结束（包含）
+     * @return int[]
+    */
+    public static int[] range(int start, int stop) {
+        return range(start, stop, Constant.ONE);
+    }
+
+    /**
+     * [给定范围内的整数列表](List of integers in the given range)
+     * @description: zh - 给定范围内的整数列表
+     * @description: en - List of integers in the given range
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/27 7:27 下午
+     * @param start: 开始（包含）
+     * @param stop: 结束（包含）
+     * @param step: 步进
+     * @return int[]
+    */
+    public static int[] range(int start, int stop, int step) {
+        if (start < stop) {
+            step = Math.abs(step);
+        } else if (start > stop) {
+            step = -Math.abs(step);
+        } else {
+            // start == end 的情况
+            return new int[]{start};
+        }
+
+        int size = Math.abs((stop - start) / step) + Constant.ONE;
+        int[] values = new int[size];
+        int index = Constant.ZERO;
+        for (int i = start; (step > Constant.ZERO) ? i <= stop : i >= stop; i += step) {
+            values[index] = i;
+            index++;
+        }
+        return values;
+    }
+
     /*private ----------------------------------------------------------- 私有的方法*/
 
     /**

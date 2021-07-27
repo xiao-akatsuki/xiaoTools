@@ -45,7 +45,7 @@ public class TextSimilarity {
         }
 
         int temp2 = longestCommonSubstring(newStrA, newStrB).length();
-        return NumUtil.div(temp2, temp);
+        return NumUtil.division(temp2, temp);
     }
 
     /**

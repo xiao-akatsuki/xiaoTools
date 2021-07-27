@@ -43,6 +43,8 @@ public class NumUtil {
      */
     public NumUtil() { }
 
+    /*Basic four operations-----------------------------------------------------------基本四则运算*/
+
     /**
      * [加法](addition)
      * @description: zh - 计算两个数字之间的相加，可以带符号。
@@ -103,6 +105,8 @@ public class NumUtil {
         return division(Double.toString(divisor),Double.toString(dividend)).doubleValue();
     }
 
+    /*keep decimal point ----------------------------------------------------------- 保留小数点*/
+
     /**
      * @description: zh - [保留小数点](含有四舍五入)
      * @description: en - [keep decimal point] (including rounding)
@@ -130,6 +134,8 @@ public class NumUtil {
     public static double retainDecimalPoint(String decimal,int digit){
         return retainDecimalPoint(decimal,Integer.toString(digit)).doubleValue();
     }
+
+    /*Determine whether it is an integer ----------------------------------------------------------- 判断是否是整数*/
 
     /**
      * [判断是否是整数](Judge whether it is an integer)
@@ -188,6 +194,8 @@ public class NumUtil {
         }
     }
 
+    /*Judge whether it is a prime number ----------------------------------------------------------- 判断是否是质数*/
+
     /**
      * [判断是否是质数](Judge whether it is prime or not)
      * @description: zh - 输入一个数字判断是否是质数，如果是则返回true，反之则返回false。
@@ -208,6 +216,8 @@ public class NumUtil {
         return true;
     }
 
+    /*Calculate the factorial of a number ----------------------------------------------------------- 计算数字的阶乘*/
+
     /**
      * [计算数字的阶乘](Calculate the factorial of a number)
      * @description: zh - 输入一个数组，将会计算出他的阶乘，然后将其返回。
@@ -221,6 +231,8 @@ public class NumUtil {
     public static double factorial(double number){
         return number == Constant.ZERO ? Constant.ONE : retainDecimalPoint(Math.sqrt(Constant.TWO * number * Constant.PI) * Math.pow(number / Constant.E, number), Constant.ZERO);
     }
+
+    /*greatest common factor ----------------------------------------------------------- 求最大公约数*/
 
     /**
      * [求最大公约数](greatest common factor)
@@ -250,6 +262,8 @@ public class NumUtil {
       }
     }
 
+    /*Finding the least common multiple ----------------------------------------------------------- 求最小公倍数*/
+
     /**
      * [求最小公倍数](Finding the least common multiple)
      * @description: zh - 输入两个数字，计算出他们的最小公倍数。
@@ -264,6 +278,8 @@ public class NumUtil {
     public static int multiple(int m ,int n){
         return (m * n) / divisor(m,n);
     }
+
+    /*Arabic numerals AND Roman numerals ----------------------------------------------------------- 阿拉伯数字 AND 罗马数字*/
 
     /**
      * @description: [阿拉伯数字转换成为罗马数字](Conversion of Arabic numerals to Roman numerals)
@@ -314,6 +330,8 @@ public class NumUtil {
         return sum;
     }
 
+    /*Calculate the absolute value ----------------------------------------------------------- 计算绝对值*/
+
     /**
      * [计算绝对值](Calculate the absolute value)
      * @description: zh - 输入一个数值，计算出他的绝对值
@@ -327,6 +345,8 @@ public class NumUtil {
     public static double absolute(double value){
         return value < Constant.ZERO ? Constant.ZERO - value : value;
     }
+
+    /*trigonometric function ----------------------------------------------------------- 三角函数*/
 
     /**
      * [计算该度数的正弦值](Calculate the sine of the degree)
@@ -395,154 +415,7 @@ public class NumUtil {
         return sine(angle)/cosine(angle);
     }
 
-    /**
-     * [将单个罗马数字转换为数字](Converting a single Roman numeral to a number)
-     * @description: zh - 将输入的罗马数字的字符串转换成为数字
-     * @description: en - Converts the input Roman numeral string to a number
-     * @version: V1.0
-     * @author XiaoXunYao
-     * @since 2021/5/17 9:44 [上午](morning)
-     * @param value: [单个罗马数字](Single Roman numeral)
-     * @return int
-    */
-    private static int romanOneToInt(char value) {
-        for (int i = Constant.ZERO; i < ARAB2.length; i++) {
-            if (value == ROMAN2[i]){
-                return ARAB2[i];
-            }
-        }
-        return Constant.ZERO;
-    }
-
-    /**
-     * [保留小数点](Keep decimal point)
-     * @description: zh - [保留的小数点](含有四舍五入)
-     * @description: en - [reserved decimal point] (including rounding)
-     * @version: V1.0
-     * @author XiaoXunYao
-     * @since 2021/5/16 7:10 [下午](afternoon)
-     * @param values: [需要保留小数点的数组](Array with decimal point)
-     * @return java.math.BigDecimal
-    */
-    private static BigDecimal retainDecimalPoint(String... values) {
-        if (ArrayUtil.isEmpty(values)){
-            return BigDecimal.ZERO;
-        }else {
-            String value = values[Constant.ZERO];
-            BigDecimal result = null == value ? BigDecimal.ZERO : new BigDecimal(value);
-            for(int i = Constant.ONE; i < values.length; ++i) {
-                result = result.setScale(Integer.parseInt(values[i]), RoundingMode.HALF_UP);
-            }
-            return result;
-        }
-    }
-
-    /**
-     * [除法](division)
-     * @description: zh - 计算除法的方法
-     * @description: en - The method of calculating Division
-     * @version: V1.0
-     * @author XiaoXunYao
-     * @since 2021/5/16 5:03 [下午](afternoon)
-     * @param values: [完成除法所组成的数组](Complete the array of division)
-     * @return java.math.BigDecimal
-    */
-    private static BigDecimal division(String... values) {
-        if (ArrayUtil.isEmpty(values)){
-            return BigDecimal.ZERO;
-        }else {
-            String value = values[Constant.ZERO];
-            BigDecimal result = null == value ? BigDecimal.ZERO : new BigDecimal(value);
-
-            for(int i = Constant.ONE; i < values.length; ++i) {
-                value = values[i];
-                if (null != value) {
-                    result = result.divide(new BigDecimal(value));
-                }
-            }
-            return result;
-        }
-    }
-
-    /**
-     * [乘法](multiplication)
-     * @description: zh - 具体完成乘法的方法
-     * @description: en - The specific method of multiplication
-     * @version: V1.0
-     * @author XiaoXunYao
-     * @since 2021/5/16 4:51 [下午](afternoon)
-     * @param values: [乘法的数组](Multiplicative array)
-     * @return java.math.BigDecimal
-    */
-    private static BigDecimal multiplication(String... values) {
-        if (ArrayUtil.isEmpty(values)){
-            return BigDecimal.ZERO;
-        }else {
-            String value = values[Constant.ZERO];
-            BigDecimal result = null == value ? BigDecimal.ZERO : new BigDecimal(value);
-
-            for(int i = Constant.ONE; i < values.length; ++i) {
-                value = values[i];
-                if (null != value) {
-                    result = result.multiply(new BigDecimal(value));
-                }
-            }
-            return result;
-        }
-    }
-
-    /**
-     * [减法](subtraction)
-     * @description: zh - 具体完成减法的方法
-     * @description: en - How to complete the subtraction
-     * @version: V1.0
-     * @author XiaoXunYao
-     * @since 2021/5/16 4:41 [下午](afternoon)
-     * @param values: [减法的数组](Subtracted array)
-     * @return java.math.BigDecimal
-    */
-    private static BigDecimal subtraction(String... values) {
-        if (ArrayUtil.isEmpty(values)){
-            return BigDecimal.ZERO;
-        }else {
-            String value = values[Constant.ZERO];
-            BigDecimal result = null == value ? BigDecimal.ZERO : new BigDecimal(value);
-
-            for(int i = Constant.ONE; i < values.length; ++i) {
-                value = values[i];
-                if (null != value) {
-                    result = result.subtract(new BigDecimal(value));
-                }
-            }
-            return result;
-        }
-    }
-    /**
-     * [加法](addition)
-     * @description: zh - 具体完成加法的方法
-     * @description: en - How to complete the addition
-     * @version: V1.0
-     * @author XiaoXunYao
-     * @since 2021/5/16 2:23 [下午](afternoon)
-     * @param values: [参与加法的数组](Arrays participating in addition)
-     * @return java.math.BigDecimal
-    */
-    private static BigDecimal addition(String... values) {
-        if (ArrayUtil.isEmpty(values)) {
-            return BigDecimal.ZERO;
-        } else {
-            String value = values[Constant.ZERO];
-            BigDecimal result = null == value ? BigDecimal.ZERO : new BigDecimal(value);
-
-            for(int i = Constant.ONE; i < values.length; ++i) {
-                value = values[i];
-                if (null != value) {
-                    result = result.add(new BigDecimal(value));
-                }
-            }
-            return result;
-        }
-    }
+    /*equal ----------------------------------------------------------- 比较大小*/
 
     /**
      * [比较大小，值相等 返回true](Compare the size, the value is equal, return true)
@@ -581,6 +454,8 @@ public class NumUtil {
     public static boolean equals(char c1, char c2, boolean ignoreCase) {
         return CharUtil.equals(c1, c2, ignoreCase);
     }
+
+    /*转换 ----------------------------------------------------------- parse*/
 
     /**
      * [将指定字符串转换为Number 对象](Converts the specified string to a number object)
@@ -795,5 +670,158 @@ public class NumUtil {
         }
         // 如果val以“E”结尾，则allowSigns为真,同时确保是数字，不会产生奇怪的东西。
         return !allowSigns && foundDigit;
+    }
+
+
+
+    /*private ----------------------------------------------------------- 私有的方法*/
+
+    /**
+     * [将单个罗马数字转换为数字](Converting a single Roman numeral to a number)
+     * @description: zh - 将输入的罗马数字的字符串转换成为数字
+     * @description: en - Converts the input Roman numeral string to a number
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/17 9:44 [上午](morning)
+     * @param value: [单个罗马数字](Single Roman numeral)
+     * @return int
+     */
+    private static int romanOneToInt(char value) {
+        for (int i = Constant.ZERO; i < ARAB2.length; i++) {
+            if (value == ROMAN2[i]){
+                return ARAB2[i];
+            }
+        }
+        return Constant.ZERO;
+    }
+
+    /**
+     * [保留小数点](Keep decimal point)
+     * @description: zh - [保留的小数点](含有四舍五入)
+     * @description: en - [reserved decimal point] (including rounding)
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/16 7:10 [下午](afternoon)
+     * @param values: [需要保留小数点的数组](Array with decimal point)
+     * @return java.math.BigDecimal
+     */
+    private static BigDecimal retainDecimalPoint(String... values) {
+        if (ArrayUtil.isEmpty(values)){
+            return BigDecimal.ZERO;
+        }else {
+            String value = values[Constant.ZERO];
+            BigDecimal result = null == value ? BigDecimal.ZERO : new BigDecimal(value);
+            for(int i = Constant.ONE; i < values.length; ++i) {
+                result = result.setScale(Integer.parseInt(values[i]), RoundingMode.HALF_UP);
+            }
+            return result;
+        }
+    }
+
+    /**
+     * [除法](division)
+     * @description: zh - 计算除法的方法
+     * @description: en - The method of calculating Division
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/16 5:03 [下午](afternoon)
+     * @param values: [完成除法所组成的数组](Complete the array of division)
+     * @return java.math.BigDecimal
+     */
+    private static BigDecimal division(String... values) {
+        if (ArrayUtil.isEmpty(values)){
+            return BigDecimal.ZERO;
+        }else {
+            String value = values[Constant.ZERO];
+            BigDecimal result = null == value ? BigDecimal.ZERO : new BigDecimal(value);
+
+            for(int i = Constant.ONE; i < values.length; ++i) {
+                value = values[i];
+                if (null != value) {
+                    result = result.divide(new BigDecimal(value));
+                }
+            }
+            return result;
+        }
+    }
+
+    /**
+     * [乘法](multiplication)
+     * @description: zh - 具体完成乘法的方法
+     * @description: en - The specific method of multiplication
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/16 4:51 [下午](afternoon)
+     * @param values: [乘法的数组](Multiplicative array)
+     * @return java.math.BigDecimal
+     */
+    private static BigDecimal multiplication(String... values) {
+        if (ArrayUtil.isEmpty(values)){
+            return BigDecimal.ZERO;
+        }else {
+            String value = values[Constant.ZERO];
+            BigDecimal result = null == value ? BigDecimal.ZERO : new BigDecimal(value);
+
+            for(int i = Constant.ONE; i < values.length; ++i) {
+                value = values[i];
+                if (null != value) {
+                    result = result.multiply(new BigDecimal(value));
+                }
+            }
+            return result;
+        }
+    }
+
+    /**
+     * [减法](subtraction)
+     * @description: zh - 具体完成减法的方法
+     * @description: en - How to complete the subtraction
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/16 4:41 [下午](afternoon)
+     * @param values: [减法的数组](Subtracted array)
+     * @return java.math.BigDecimal
+     */
+    private static BigDecimal subtraction(String... values) {
+        if (ArrayUtil.isEmpty(values)){
+            return BigDecimal.ZERO;
+        }else {
+            String value = values[Constant.ZERO];
+            BigDecimal result = null == value ? BigDecimal.ZERO : new BigDecimal(value);
+
+            for(int i = Constant.ONE; i < values.length; ++i) {
+                value = values[i];
+                if (null != value) {
+                    result = result.subtract(new BigDecimal(value));
+                }
+            }
+            return result;
+        }
+    }
+    /**
+     * [加法](addition)
+     * @description: zh - 具体完成加法的方法
+     * @description: en - How to complete the addition
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/5/16 2:23 [下午](afternoon)
+     * @param values: [参与加法的数组](Arrays participating in addition)
+     * @return java.math.BigDecimal
+     */
+    private static BigDecimal addition(String... values) {
+        if (ArrayUtil.isEmpty(values)) {
+            return BigDecimal.ZERO;
+        } else {
+            String value = values[Constant.ZERO];
+            BigDecimal result = null == value ? BigDecimal.ZERO : new BigDecimal(value);
+
+            for(int i = Constant.ONE; i < values.length; ++i) {
+                value = values[i];
+                if (null != value) {
+                    result = result.add(new BigDecimal(value));
+                }
+            }
+            return result;
+        }
     }
 }

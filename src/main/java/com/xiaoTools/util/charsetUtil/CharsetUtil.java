@@ -4,7 +4,6 @@ import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.fileUtil.fileUtil.FileUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
 
-import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.charset.UnsupportedCharsetException;

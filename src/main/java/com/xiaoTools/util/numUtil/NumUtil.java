@@ -1,14 +1,20 @@
 package com.xiaoTools.util.numUtil;
 
+import com.xiaoTools.assertion.Assertion;
+import com.xiaoTools.core.exception.utilException.UtilException;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.charUtil.CharUtil;
+import com.xiaoTools.util.randomUtil.RandomUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
 /**
  * @description: zh - 数字工具类
@@ -672,7 +678,95 @@ public class NumUtil {
         return !allowSigns && foundDigit;
     }
 
+    /*生成XXX ----------------------------------------------------------- generateXXX*/
 
+    /**
+     * [生成不重复随机数 根据给定的最小数字和最大数字，以及随机数的个数，产生指定的不重复的数组](Generate a non repeating random number to generate a specified non repeating array according to the given minimum number, maximum number and the number of random numbers)
+     * @description: zh - 生成不重复随机数 根据给定的最小数字和最大数字，以及随机数的个数，产生指定的不重复的数组
+     * @description: en - Generate a non repeating random number to generate a specified non repeating array according to the given minimum number, maximum number and the number of random numbers
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/27 5:38 下午
+     * @param begin: 最小数字（包含该数）
+     * @param end: 最大数字（不包含该数）
+     * @param size: 指定产生随机数的个数
+     * @return int[]
+    */
+    public static int[] generateRandomNumber(int begin, int end, int size) {
+        // 种子你可以随意生成，但不能重复
+        final int[] seed = ArrayUtil.range(begin, end);
+        return generateRandomNumber(begin, end, size, seed);
+    }
+
+    /**
+     * [生成不重复随机数 根据给定的最小数字和最大数字，以及随机数的个数，产生指定的不重复的数组](Generate a non repeating random number to generate a specified non repeating array according to the given minimum number, maximum number and the number of random numbers)
+     * @description: zh - 生成不重复随机数 根据给定的最小数字和最大数字，以及随机数的个数，产生指定的不重复的数组
+     * @description: en - Generate a non repeating random number to generate a specified non repeating array according to the given minimum number, maximum number and the number of random numbers
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/27 5:37 下午
+     * @param begin: 最小数字（包含该数）
+     * @param end: 最大数字（不包含该数）
+     * @param size: 指定产生随机数的个数
+     * @param seed: 种子，用于取随机数的int池
+     * @return int[]
+    */
+    public static int[] generateRandomNumber(int begin, int end, int size, int[] seed) {
+        if (begin > end) {
+            int temp = begin;
+            begin = end;
+            end = temp;
+        }
+        // 加入逻辑判断，确保begin<end并且size不能大于该表示范围
+        Assertion.isTrue((end - begin) >= size, "Size is larger than range between begin and end!");
+        Assertion.isTrue(seed.length >= size, "Size is larger than seed size!");
+
+        final int[] ranArr = new int[size];
+        // 数量你可以自己定义。
+        for (int i = Constant.ZERO; i < size; i++) {
+            // 得到一个位置
+            int j = RandomUtil.randomInt(seed.length - i);
+            // 得到那个位置的数值
+            ranArr[i] = seed[j];
+            // 将最后一个未用的数字放到这里
+            seed[j] = seed[seed.length - Constant.ONE - i];
+        }
+        return ranArr;
+    }
+
+    /**
+     * [生成不重复随机数 根据给定的最小数字和最大数字，以及随机数的个数，产生指定的不重复的数组](Generate a non repeating random number to generate a specified non repeating array according to the given minimum number, maximum number and the number of random numbers)
+     * @description: zh - 生成不重复随机数 根据给定的最小数字和最大数字，以及随机数的个数，产生指定的不重复的数组
+     * @description: en - Generate a non repeating random number to generate a specified non repeating array according to the given minimum number, maximum number and the number of random numbers
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/27 5:41 下午
+     * @param begin: 最小数字（包含该数）
+     * @param end: 最大数字（不包含该数）
+     * @param size: 指定产生随机数的个数
+     * @return java.lang.Integer[]
+    */
+    public static Integer[] generateBySet(int begin, int end, int size) {
+        if (begin > end) {
+            int temp = begin;
+            begin = end;
+            end = temp;
+        }
+        // 加入逻辑判断，确保begin<end并且size不能大于该表示范围
+        if ((end - begin) < size) {
+            throw new UtilException("The size is greater than the range between the beginning and the end");
+        }
+
+        Random ran = new Random();
+        Set<Integer> set = new HashSet<>();
+        while (set.size() < size) {
+            set.add(begin + ran.nextInt(end - begin));
+        }
+
+        return set.toArray(new Integer[size]);
+    }
+
+    /*范围 ----------------------------------------------------------- range*/
 
     /*private ----------------------------------------------------------- 私有的方法*/
 

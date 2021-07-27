@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -825,6 +826,52 @@ public class NumUtil {
         for (int i = start; (step > Constant.ZERO) ? i <= stop : i >= stop; i += step) {
             values[index] = i;
             index++;
+        }
+        return values;
+    }
+
+    /**
+     * [将给定范围内的整数添加到已有集合中，步进为1](Adds an integer in the given range to an existing set in steps of 1)
+     * @description: zh - 将给定范围内的整数添加到已有集合中，步进为1
+     * @description: en - Adds an integer in the given range to an existing set in steps of 1
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/27 7:35 下午
+     * @param start: 开始（包含）
+     * @param stop: 结束（包含）
+     * @param values: 集合
+     * @return java.util.Collection<java.lang.Integer>
+    */
+    public static Collection<Integer> appendRange(int start, int stop, Collection<Integer> values) {
+        return appendRange(start, stop, Constant.ONE, values);
+    }
+
+    /**
+     * [将给定范围内的整数添加到已有集合中](Adds an integer in the given range to an existing set)
+     * @description: zh - 将给定范围内的整数添加到已有集合中
+     * @description: en - Adds an integer in the given range to an existing set
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/27 7:36 下午
+     * @param start: 开始（包含）
+     * @param stop: 结束（包含）
+     * @param step: 步进
+     * @param values: 集合
+     * @return java.util.Collection<java.lang.Integer>
+    */
+    public static Collection<Integer> appendRange(int start, int stop, int step, Collection<Integer> values) {
+        if (start < stop) {
+            step = Math.abs(step);
+        } else if (start > stop) {
+            step = -Math.abs(step);
+        } else {
+            // start == end 的情况
+            values.add(start);
+            return values;
+        }
+
+        for (int i = start; (step > Constant.ZERO) ? i <= stop : i >= stop; i += step) {
+            values.add(i);
         }
         return values;
     }

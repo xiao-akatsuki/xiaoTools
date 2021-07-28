@@ -9,6 +9,7 @@ import com.xiaoTools.util.randomUtil.RandomUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -874,6 +875,78 @@ public class NumUtil {
             values.add(i);
         }
         return values;
+    }
+
+    /*factorial ----------------------------------------------------------- 阶乘方法*/
+
+    /**
+     * [计算阶乘](Calculate factorial)
+     * @description: zh - 计算阶乘
+     * @description: en - Calculate factorial
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/28 3:29 下午
+     * @param n: 阶乘起始
+     * @return java.math.BigInteger
+    */
+    public static BigInteger factorial(BigInteger n) {
+        return n.equals(BigInteger.ZERO) ? BigInteger.ONE : factorial(n, BigInteger.ZERO);
+    }
+
+    /**
+     * [计算范围阶乘](Calculation range factorial)
+     * @description: zh - 计算范围阶乘
+     * @description: en - Calculation range factorial
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/28 3:30 下午
+     * @param start: 阶乘起始（包含）
+     * @param end: 阶乘结束，必须小于起始（不包括）
+     * @return java.math.BigInteger
+    */
+    public static BigInteger factorial(BigInteger start, BigInteger end) {
+        Assertion.notNull(start, "Factorial start must be not null!");
+        Assertion.notNull(end, "Factorial end must be not null!");
+        if(start.compareTo(BigInteger.ZERO) < Constant.ZERO || end.compareTo(BigInteger.ZERO) < Constant.ZERO){
+            throw new IllegalArgumentException(StrUtil.format("Factorial start and end both must be > 0, but got start={}, end={}", start, end));
+        }
+
+        if (start.equals(BigInteger.ZERO)){
+            start = BigInteger.ONE;
+        }
+
+        if(end.compareTo(BigInteger.ONE) < Constant.ZERO){
+            end = BigInteger.ONE;
+        }
+
+        BigInteger result = start;
+        end = end.add(BigInteger.ONE);
+        while(start.compareTo(end) > Constant.ZERO) {
+            start = start.subtract(BigInteger.ONE);
+            result = result.multiply(start);
+        }
+        return result;
+    }
+
+    /**
+     * [计算范围阶乘](Calculation range factorial)
+     * @description: zh - 计算范围阶乘
+     * @description: en - Calculation range factorial
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/28 3:53 下午
+     * @param start: 阶乘起始（包含）
+     * @param end: 阶乘结束，必须小于起始（不包括）
+     * @return long
+    */
+    public static long factorial(long start, long end) {
+        // 负数没有阶乘
+        if (start < Constant.ZERO || end < Constant.ZERO) {
+            throw new IllegalArgumentException(StrUtil.format("Factorial start and end both must be >= 0, but got start={}, end={}", start, end));
+        }
+        return Constant.LONG_ZERO == start || start == end ? Constant.LONG_ONE :
+                start < end ? Constant.LONG_ZERO :
+                    factorialMultiplyAndCheck(start, factorial(start - Constant.ONE, end));
     }
 
     /*private ----------------------------------------------------------- 私有的方法*/

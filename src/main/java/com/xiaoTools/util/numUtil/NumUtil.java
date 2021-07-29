@@ -971,6 +971,34 @@ public class NumUtil {
         return FACTORIALS[(int) value];
     }
 
+    /*square root ----------------------------------------------------------- 平方根*/
+
+    /**
+     * [平方根算法](Square root algorithm)
+     * @description: zh - 平方根算法
+     * @description: en - Square root algorithm
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/29 10:53 上午
+     * @param value: 值
+     * @return long
+    */
+    public static long sqrt(long value) {
+        long result = Constant.ZERO;
+        long bit = (~Long.MAX_VALUE) >>> Constant.ONE;
+        while (bit > Constant.ZERO) {
+            if (value >= result + bit) {
+                value -= result + bit;
+                result >>= Constant.ONE;
+                result += bit;
+            } else {
+                result >>= Constant.ONE;
+            }
+            bit >>= Constant.TWO;
+        }
+        return result;
+    }
+
     /*private ----------------------------------------------------------- 私有的方法*/
 
     /**

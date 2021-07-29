@@ -40,6 +40,11 @@ public class NumUtil {
     private static final String[] ROMAN1 = {"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};
     private static final char[] ROMAN2 = {'I','V','X','L','C','D','M'};
 
+    private static final long[] FACTORIALS = new long[]{
+            1L, 1L, 2L, 6L, 24L, 120L, 720L, 5040L, 40320L, 362880L, 3628800L, 39916800L, 479001600L, 6227020800L,
+            87178291200L, 1307674368000L, 20922789888000L, 355687428096000L, 6402373705728000L, 121645100408832000L,
+            2432902008176640000L};
+
 
     /**
      * [初始化操作](Initialization operation)
@@ -949,6 +954,23 @@ public class NumUtil {
                     factorialMultiplyAndCheck(start, factorial(start - Constant.ONE, end));
     }
 
+    /**
+     * [计算阶乘](Calculate factorial)
+     * @description: zh - 计算阶乘
+     * @description: en - Calculate factorial
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/29 10:24 上午
+     * @param value: 阶乘起始
+     * @return long
+    */
+    public static long factorial(long value) {
+        if (value < Constant.ZERO || value > Constant.TWENTY) {
+            throw new IllegalArgumentException(StrUtil.format("Factorial must have n >= 0 and n <= 20 for n!, but got n = {}", value));
+        }
+        return FACTORIALS[(int) value];
+    }
+
     /*private ----------------------------------------------------------- 私有的方法*/
 
     /**
@@ -1098,5 +1120,23 @@ public class NumUtil {
             }
             return result;
         }
+    }
+
+    /**
+     * [计算范围阶乘中校验中间的计算是否存在溢出，factorial提前做了负数和0的校验，因此这里没有校验数字的正负](In the factorial of the calculation range, check whether there is overflow in the middle calculation. Factorial checks the negative number and 0 in advance, so there is no positive or negative number of the check number)
+     * @description: zh - 计算范围阶乘中校验中间的计算是否存在溢出，factorial提前做了负数和0的校验，因此这里没有校验数字的正负
+     * @description: en - In the factorial of the calculation range, check whether there is overflow in the middle calculation. Factorial checks the negative number and 0 in advance, so there is no positive or negative number of the check number
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/29 10:18 上午
+     * @param multiplier: 乘数
+     * @param multiplicand: 被乘数
+     * @return long
+    */
+    private static long factorialMultiplyAndCheck(long multiplier, long multiplicand) {
+        if (multiplier <= Long.MAX_VALUE / multiplicand) {
+            return multiplier * multiplicand;
+        }
+        throw new IllegalArgumentException(StrUtil.format("Overflow in multiplication: {} * {}", multiplier, multiplicand));
     }
 }

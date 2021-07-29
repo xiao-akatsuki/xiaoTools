@@ -999,6 +999,76 @@ public class NumUtil {
         return result;
     }
 
+    /*max ----------------------------------------------------------- 比较数字的大小*/
+
+    /**
+     * [比较两个数字谁大](Compare the two numbers. Who is bigger)
+     * @description: zh - 比较两个数字谁大
+     * @description: en - Compare the two numbers. Who is bigger
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/29 1:48 下午
+     * @param a: 比较的数字1
+     * @param b: 比较的数字2
+     * @return int
+    */
+    public static int max(int a,int b){
+        return (a >= b) ? a : b;
+    }
+
+    /**
+     * [比较两个数字谁大](Compare the two numbers. Who is bigger)
+     * @description: zh - 比较两个数字谁大
+     * @description: en - Compare the two numbers. Who is bigger
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/29 1:48 下午
+     * @param a: 比较的数字1
+     * @param b: 比较的数字2
+     * @return long
+    */
+    public static long max(long a,long b){
+        return (a >= b) ? a : b;
+    }
+
+    /**
+     * [比较两个数字谁大](Compare the two numbers. Who is bigger)
+     * @description: zh - 比较两个数字谁大
+     * @description: en - Compare the two numbers. Who is bigger
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/29 2:06 下午
+     * @param a: 比较的数字1
+     * @param b: 比较的数字2
+     * @return float
+    */
+    public static float max(float a, float b) {
+        return a != a ? a :
+                (a == Constant.FLOAT_DOUBLE_ZERO) &&
+                        (b == Constant.FLOAT_DOUBLE_ZERO) &&
+                        (Float.floatToRawIntBits(a) == Float.floatToRawIntBits(Constant.FLOAT_DOUBLE_NEGATIVE_ZERO)) ? b :
+                            (a >= b) ? a : b;
+    }
+
+    /**
+     * [比较两个数字谁大](Compare the two numbers. Who is bigger)
+     * @description: zh - 比较两个数字谁大
+     * @description: en - Compare the two numbers. Who is bigger
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/29 2:08 下午
+     * @param a: 比较的数字1
+     * @param b: 比较的数字2
+     * @return double
+    */
+    public static double max(double a, double b) {
+        return a != a ? a :
+                (a == Constant.DOUBLE_DOUBLE_ZERO) &&
+                        (b == Constant.DOUBLE_DOUBLE_ZERO) &&
+                        (Double.doubleToRawLongBits(a) == Double.doubleToRawLongBits(Constant.DOUBLE_DOUBLE_NEGATIVE_ZERO)) ? b :
+                        (a >= b) ? a : b;
+    }
+
     /*private ----------------------------------------------------------- 私有的方法*/
 
     /**

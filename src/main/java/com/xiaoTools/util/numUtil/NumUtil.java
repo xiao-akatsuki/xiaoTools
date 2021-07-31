@@ -999,7 +999,7 @@ public class NumUtil {
         return result;
     }
 
-    /*max ----------------------------------------------------------- 比较数字的大小*/
+    /*max AND min ----------------------------------------------------------- 比较数字的大小*/
 
     /**
      * [比较两个数字谁大](Compare the two numbers. Who is bigger)
@@ -1067,6 +1067,74 @@ public class NumUtil {
                         (b == Constant.DOUBLE_DOUBLE_ZERO) &&
                         (Double.doubleToRawLongBits(a) == Double.doubleToRawLongBits(Constant.DOUBLE_DOUBLE_NEGATIVE_ZERO)) ? b :
                         (a >= b) ? a : b;
+    }
+
+    /**
+     * [比较两个数字谁小](Compare the two numbers. Who is the smaller)
+     * @description: zh - 比较两个数字谁小
+     * @description: en - Compare the two numbers. Who is the smaller
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/31 5:46 下午
+     * @param a: 比较的数字1
+     * @param b: 比较的数字2
+     * @return int
+    */
+    public static int min(int a,int b){
+        return (a <= b) ? a : b;
+    }
+
+    /**
+     * [比较两个数字谁小](Compare the two numbers. Who is the smaller)
+     * @description: zh - 比较两个数字谁小
+     * @description: en - Compare the two numbers. Who is the smaller
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/31 5:48 下午
+     * @param a: 比较的数字1
+     * @param b: 比较的数字2
+     * @return long
+    */
+    public static long min (long a, long b){
+        return (a <= b) ? a : b;
+    }
+
+    /**
+     * [比较两个数字谁小](Compare the two numbers. Who is the smaller)
+     * @description: zh - 比较两个数字谁小
+     * @description: en - Compare the two numbers. Who is the smaller
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/31 5:55 下午
+     * @param a: 比较的数字1
+     * @param b: 比较的数字2
+     * @return float
+    */
+    public static float min(float a, float b){
+        return a != a ? a :
+                (a == Constant.FLOAT_DOUBLE_ZERO) &&
+                        (b == Constant.FLOAT_DOUBLE_ZERO) &&
+                        (Float.floatToRawIntBits(b) == Float.floatToRawIntBits(Constant.FLOAT_DOUBLE_NEGATIVE_ZERO)) ? b :
+                            (a <= b) ? a : b;
+    }
+
+    /**
+     * [比较两个数字谁小](Compare the two numbers. Who is the smaller)
+     * @description: zh - 比较两个数字谁小
+     * @description: en - Compare the two numbers. Who is the smaller
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/7/31 5:58 下午
+     * @param a: 比较的数字1
+     * @param b: 比较的数字2
+     * @return double
+    */
+    public static double min(double a, double b){
+        return a != a ? a :
+                (a == Constant.DOUBLE_DOUBLE_NEGATIVE_ZERO) &&
+                        (b == Constant.DOUBLE_DOUBLE_NEGATIVE_ZERO) &&
+                        (Double.doubleToRawLongBits(b) == Double.doubleToRawLongBits(Constant.DOUBLE_DOUBLE_NEGATIVE_ZERO)) ? b :
+                            (a <= b) ? a : b;
     }
 
     /*private ----------------------------------------------------------- 私有的方法*/

@@ -1214,6 +1214,74 @@ public class NumUtil {
         return Long.parseLong(value, Constant.TWO);
     }
 
+    /*转换成为字符串 ----------------------------------------------------------- to string*/
+
+    /**
+     * [数字转字符串](Number to String)
+     * @description: zh - 数字转字符串
+     * @description: en - Number to String
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/1 7:35 下午
+     * @param value: 数字
+     * @param defaultValue: 如果 value 参数为null，返回此默认值
+     * @return java.lang.String
+    */
+    public static String toStr(Number value, String defaultValue) {
+        return (Constant.NULL == value) ? defaultValue : toStr(value);
+    }
+
+    /**
+     * [数字转字符串](Number to String)
+     * @description: zh - 数字转字符串
+     * @description: en - Number to String
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/1 7:39 下午
+     * @param value: 数字
+     * @return java.lang.String
+    */
+    public static String toStr(Number value) {
+        return toStr(value, Constant.TRUE);
+    }
+
+    /**
+     * [数字转字符串](Number to String)
+     * @description: zh - 数字转字符串
+     * @description: en - Number to String
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/1 7:49 下午
+     * @param value: 数字
+     * @param isStripTrailingZeros: 是否去除末尾多余0，例如5.0返回5
+     * @return java.lang.String
+    */
+    public static String toStr(Number value, boolean isStripTrailingZeros) {
+        Assertion.notNull(value, "Number is null !");
+
+        // BigDecimal单独处理，使用非科学计数法
+        if (value instanceof BigDecimal) {
+            return toStr((BigDecimal) value, isStripTrailingZeros);
+        }
+
+        Assertion.isTrue(isValidNumber(value), "Number is non-finite!");
+        // 去掉小数点儿后多余的0
+        String string = value.toString();
+        if (isStripTrailingZeros) {
+            if (string.indexOf(Constant.CHAR_SPOT) > Constant.ZERO && string.indexOf(Constant.CHAR_DOWN_E) < Constant.ZERO && string.indexOf(Constant.CHAR_UP_E) < Constant.ZERO) {
+                while (string.endsWith(Constant.STRING_ZERO)) {
+                    string = string.substring(Constant.ZERO, string.length() - Constant.ONE);
+                }
+                if (string.endsWith(Constant.SPOT)) {
+                    string = string.substring(Constant.ZERO, string.length() - Constant.ONE);
+                }
+            }
+        }
+        return string;
+    }
+
+
+
     /*private ----------------------------------------------------------- 私有的方法*/
 
     /**

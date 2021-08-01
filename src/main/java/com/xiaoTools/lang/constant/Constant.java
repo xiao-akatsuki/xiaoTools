@@ -692,5 +692,6 @@ public class Constant {
     public static final Float FLOAT_DOUBLE_NEGATIVE_ZERO  = -0.0f;
 
     public static final Double DOUBLE_DOUBLE_ZERO = 0.0d;
+
     public static final Double DOUBLE_DOUBLE_NEGATIVE_ZERO = 0.0d;
 }

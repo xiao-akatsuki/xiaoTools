@@ -430,6 +430,37 @@ public class NumUtil {
 
     /*equal ----------------------------------------------------------- 比较大小*/
 
+
+    /**
+     * [比较两个数值是否相等](Compare two values for equality)
+     * @description: zh - 比较两个数值是否相等
+     * @description: en - Compare two values for equality
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/1 6:59 下午
+     * @param value1: 比较的数值1
+     * @param value2: 比较的数值2
+     * @return boolean
+     */
+    public static boolean equals(double value1, double value2) {
+        return Double.doubleToLongBits(value1) == Double.doubleToLongBits(value2);
+    }
+
+    /**
+     * [比较两个数值是否相等](Compare two values for equality)
+     * @description: zh - 比较两个数值是否相等
+     * @description: en - Compare two values for equality
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/1 7:06 下午
+     * @param value1: 比较的数值1
+     * @param value2: 比较的数值2
+     * @return boolean
+     */
+    public static boolean equals(float value1, float value2) {
+        return Float.floatToIntBits(value1) == Float.floatToIntBits(value2);
+    }
+
     /**
      * [比较大小，值相等 返回true](Compare the size, the value is equal, return true)
      * @description: zh - 比较大小，值相等 返回true

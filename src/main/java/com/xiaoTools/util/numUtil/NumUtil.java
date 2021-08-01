@@ -1137,6 +1137,52 @@ public class NumUtil {
                             (a <= b) ? a : b;
     }
 
+    /*二进制转XXX ----------------------------------------------------------- binaryToXXX*/
+
+    /**
+     * [获得数字对应的二进制字符串](Get the binary string corresponding to the number)
+     * @description: zh - 获得数字对应的二进制字符串
+     * @description: en - Get the binary string corresponding to the number
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/1 3:56 下午
+     * @param number: 数字
+     * @return java.lang.String
+    */
+    public static String getBinaryStr(Number number) {
+        return number instanceof Long ? Long.toBinaryString((Long) number) :
+                number instanceof Integer ? Integer.toBinaryString((Integer) number):
+                        Long.toBinaryString(number.longValue());
+    }
+
+    /**
+     * [二进制转int](Binary to int)
+     * @description: zh - 二进制转int
+     * @description: en - Binary to int
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/1 3:52 下午
+     * @param value: 二进制字符串
+     * @return int
+    */
+    public static int binaryToInt(String value) {
+        return Integer.parseInt(value, Constant.TWO);
+    }
+
+    /**
+     * [二进制转long](Binary to long)
+     * @description: zh - 二进制转long
+     * @description: en - Binary to long
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/1 3:55 下午
+     * @param value: 二进制字符串
+     * @return long
+    */
+    public static long binaryToLong(String value) {
+        return Long.parseLong(value, Constant.TWO);
+    }
+
     /*private ----------------------------------------------------------- 私有的方法*/
 
     /**

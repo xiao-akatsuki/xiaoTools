@@ -1312,6 +1312,77 @@ public class NumUtil {
         return isStripTrailingZeros ? bigDecimal.stripTrailingZeros().toPlainString() : bigDecimal.toPlainString();
     }
 
+    /*数字转BigDecimal ----------------------------------------------------------- number to BigDecimal*/
+
+    /**
+     * [数字转BigDecimal](number to BigDecimal)
+     * @description: zh - 数字转BigDecimal
+     * @description: en - number to BigDecimal
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/4 1:26 下午
+     * @param number: 数字
+     * @return java.math.BigDecimal
+    */
+    public static BigDecimal toBigDecimal(Number number) {
+        return Constant.NULL == number ? BigDecimal.ZERO :
+                number instanceof BigDecimal ? (BigDecimal) number :
+                        number instanceof Long ? new BigDecimal((Long) number) :
+                                number instanceof Integer ? new BigDecimal((Integer) number) :
+                                        number instanceof BigInteger ? new BigDecimal((BigInteger) number) :
+                                                toBigDecimal(number.toString());
+    }
+
+    /**
+     * [数字转BigDecimal](number to BigDecimal)
+     * @description: zh - 数字转BigDecimal
+     * @description: en - number to BigDecimal
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/4 1:26 下午
+     * @param number: 数字
+     * @return java.math.BigDecimal
+    */
+    public static BigDecimal toBigDecimal(String number) {
+        try {
+            number = parseNumber(number).toString();
+        } catch (Exception ignore) {
+            // 忽略解析错误
+        }
+        return StrUtil.isBlank(number) ? BigDecimal.ZERO : new BigDecimal(number);
+    }
+
+    /**
+     * [数字转BigDecimal](number to BigDecimal)
+     * @description: zh - 数字转BigDecimal
+     * @description: en - number to BigDecimal
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/4 1:31 下午
+     * @param number: 数字
+     * @return java.math.BigInteger
+    */
+    public static BigInteger toBigInteger(Number number) {
+        return Constant.NULL == number ? BigInteger.ZERO :
+                number instanceof BigInteger ? (BigInteger) number :
+                        number instanceof Long ? BigInteger.valueOf((Long) number) :
+                                toBigInteger(number.longValue());
+    }
+
+    /**
+     * [数字转BigDecimal](number to BigDecimal)
+     * @description: zh - 数字转BigDecimal
+     * @description: en - number to BigDecimal
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/4 1:33 下午
+     * @param number: 数字
+     * @return java.math.BigInteger
+    */
+    public static BigInteger toBigInteger(String number) {
+        return StrUtil.isBlank(number) ? BigInteger.ZERO : new BigInteger(number);
+    }
+
     /*私有的方法 ----------------------------------------------------------- private*/
 
     /**

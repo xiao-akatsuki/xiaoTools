@@ -1280,9 +1280,39 @@ public class NumUtil {
         return string;
     }
 
+    /*私有的方法 ----------------------------------------------------------- BigDecimal to string*/
 
+    /**
+     * [BigDecimal数字转字符串](BigDecimal number to String)
+     * @description: zh - BigDecimal数字转字符串
+     * @description: en - BigDecimal number to String
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/4 1:10 下午
+     * @param bigDecimal: a BigDecimal
+     * @return java.lang.String
+    */
+    public static String toStr(BigDecimal bigDecimal) {
+        return toStr(bigDecimal, Constant.TRUE);
+    }
 
-    /*private ----------------------------------------------------------- 私有的方法*/
+    /**
+     * [BigDecimal数字转字符串](BigDecimal number to String)
+     * @description: zh - BigDecimal数字转字符串
+     * @description: en - BigDecimal number to String
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/4 1:11 下午
+     * @param bigDecimal: a BigDecimal
+     * @param isStripTrailingZeros: 是否去除末尾多余0
+     * @return java.lang.String
+    */
+    public static String toStr(BigDecimal bigDecimal, boolean isStripTrailingZeros) {
+        Assertion.notNull(bigDecimal, "BigDecimal is null !");
+        return isStripTrailingZeros ? bigDecimal.stripTrailingZeros().toPlainString() : bigDecimal.toPlainString();
+    }
+
+    /*私有的方法 ----------------------------------------------------------- private*/
 
     /**
      * [将单个罗马数字转换为数字](Converting a single Roman numeral to a number)

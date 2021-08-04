@@ -1400,6 +1400,36 @@ public class NumUtil {
         return (total % part) == Constant.ZERO ? (total / part) : (total / part + Constant.ONE);
     }
 
+    /* 空转0 OR 0转1  ----------------------------------------------------------- zero to xxx OR xxx to zero*/
+
+    /**
+     * [空转0](null to zero)
+     * @description: zh - 空转0
+     * @description: en - null to zero
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/4 1:47 下午
+     * @param value: BigDecimal
+     * @return java.math.BigDecimal
+    */
+    public static BigDecimal null2Zero(BigDecimal value) {
+        return value == Constant.NULL ? BigDecimal.ZERO : value;
+    }
+
+    /**
+     * [如果给定值为0，返回1，否则返回原值](If the given value is 0, return 1, otherwise return the original value)
+     * @description: zh - 如果给定值为0，返回1，否则返回原值
+     * @description: en - If the given value is 0, return 1, otherwise return the original value
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/4 1:48 下午
+     * @param value: 数字
+     * @return int
+    */
+    public static int zero2One(int value) {
+        return Constant.ZERO == value ? Constant.ONE : value;
+    }
+
     /*私有的方法 ----------------------------------------------------------- private*/
 
     /**

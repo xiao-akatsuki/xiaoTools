@@ -1280,7 +1280,7 @@ public class NumUtil {
         return string;
     }
 
-    /*私有的方法 ----------------------------------------------------------- BigDecimal to string*/
+    /*BigDecimal数字转字符串 ----------------------------------------------------------- BigDecimal to string*/
 
     /**
      * [BigDecimal数字转字符串](BigDecimal number to String)

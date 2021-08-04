@@ -1383,6 +1383,23 @@ public class NumUtil {
         return StrUtil.isBlank(number) ? BigInteger.ZERO : new BigInteger(number);
     }
 
+    /*计算等份个数 ----------------------------------------------------------- Calculate the number of equal parts*/
+
+    /**
+     * [计算等份个数](Calculate the number of equal parts)
+     * @description: zh - 计算等份个数
+     * @description: en - Calculate the number of equal parts
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/4 1:40 下午
+     * @param total: 总数
+     * @param part: 每份的个数
+     * @return int
+    */
+    public static int count(int total, int part) {
+        return (total % part) == Constant.ZERO ? (total / part) : (total / part + Constant.ONE);
+    }
+
     /*私有的方法 ----------------------------------------------------------- private*/
 
     /**

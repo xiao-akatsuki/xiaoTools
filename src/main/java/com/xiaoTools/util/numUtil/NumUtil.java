@@ -1526,7 +1526,35 @@ public class NumUtil {
 
     /*判断是否是相邻的数字 ----------------------------------------------------------- Is Beside*/
 
+    /**
+     * [判断两个数字是否相邻](Judge whether two numbers are adjacent)
+     * @description: zh - 判断两个数字是否相邻
+     * @description: en - Judge whether two numbers are adjacent
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/5 12:20 下午
+     * @param number1: 数值1
+     * @param number2: 数值2
+     * @return boolean
+    */
+    public static boolean isBeside(long number1, long number2) {
+        return abs(number1 - number2) == Constant.ONE;
+    }
 
+    /**
+     * [判断两个数字是否相邻](Judge whether two numbers are adjacent)
+     * @description: zh - 判断两个数字是否相邻
+     * @description: en - Judge whether two numbers are adjacent
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/5 12:21 下午
+     * @param number1: 数值1
+     * @param number2: 数值2
+     * @return boolean
+    */
+    public static boolean isBeside(int number1 , int number2){
+        return abs(number1 - number2) == Constant.ONE;
+    }
 
     /*私有的方法 ----------------------------------------------------------- private*/
 

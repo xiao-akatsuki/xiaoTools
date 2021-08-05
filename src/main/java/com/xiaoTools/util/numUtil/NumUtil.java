@@ -1430,6 +1430,50 @@ public class NumUtil {
         return Constant.ZERO == value ? Constant.ONE : value;
     }
 
+    /*数字的方法 ----------------------------------------------------------- BigInteger*/
+
+    /**
+     * [创建BigInteger，支持16进制、10进制和8进制，如果传入空白串返回null](BigInteger is created, which supports hexadecimal, hexadecimal and octal. If a blank string is passed in, null is returned)
+     * @description: zh - 创建BigInteger，支持16进制、10进制和8进制，如果传入空白串返回null
+     * @description: en - BigInteger is created, which supports hexadecimal, hexadecimal and octal. If a blank string is passed in, null is returned
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/5 12:03 下午
+     * @param value: 转换成为数字的模块
+     * @return java.math.BigInteger
+    */
+    public static BigInteger newBigInteger(String value) {
+        value = StrUtil.trimToNull(value);
+        if (Constant.NULL == value) { return Constant.BIG_INTEGER_NULL; }
+        // 数字字符串位置
+        int pos = Constant.ZERO;
+        int radix = Constant.TEN;
+        // 负数与否
+        boolean negate = Constant.FALSE;
+        if (value.startsWith(Constant.DASH)) {
+            negate = Constant.TRUE;
+            pos = Constant.ONE;
+        }
+        if (value.startsWith(Constant.STRING_ZERO_X, pos) || value.startsWith(Constant.STRING_ZERO_X, pos)) {
+            // hex
+            radix = Constant.SIXTEEN;
+            pos += Constant.TWO;
+        } else if (value.startsWith(Constant.STRING_WELL_NUMBER, pos)) {
+            // alternative hex (allowed by Long/Integer)
+            radix = Constant.SIXTEEN;
+            pos++;
+        } else if (value.startsWith(Constant.STRING_ZERO, pos) && value.length() > pos + Constant.ONE) {
+            // octal;
+            // so long as there are additional digits
+            radix = Constant.EIGHT;
+            pos++;
+        }
+        // default is to treat as decimal
+        if (pos > Constant.ZERO) { value = value.substring(pos); }
+        final BigInteger result = new BigInteger(value, radix);
+        return negate ? result.negate() : result;
+    }
+
     /*私有的方法 ----------------------------------------------------------- private*/
 
     /**

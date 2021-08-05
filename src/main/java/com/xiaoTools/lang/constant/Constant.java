@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.StringReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -592,6 +593,8 @@ public class Constant {
     public static final StringReader STRING_READER_NULL = null;
 
     public static final Charset CHARSET_NULL = null;
+
+    public static final BigInteger BIG_INTEGER_NULL = null;
 
     /*-----------------------------------------------------------IO*/
 

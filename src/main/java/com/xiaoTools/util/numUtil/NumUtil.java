@@ -1474,6 +1474,60 @@ public class NumUtil {
         return negate ? result.negate() : result;
     }
 
+    /*绝对值 ----------------------------------------------------------- abs*/
+
+    /**
+     * [获取数值的绝对值](Gets the absolute value of the value)
+     * @description: zh - 获取数值的绝对值
+     * @description: en - Gets the absolute value of the value
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/5 12:14 下午
+     * @param value: 数值
+     * @return int
+    */
+    public static int abs(int value){ return value < Constant.ZERO ? -value : value; }
+
+    /**
+     * [获取数值的绝对值](Gets the absolute value of the value)
+     * @description: zh - 获取数值的绝对值
+     * @description: en - Gets the absolute value of the value
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/5 12:16 下午
+     * @param value: 数值
+     * @return double
+    */
+    public static double abs(double value){ return value < Constant.DOUBLE_ZERO ? -value : value; }
+
+    /**
+     * [获取数值的绝对值](Gets the absolute value of the value)
+     * @description: zh - 获取数值的绝对值
+     * @description: en - Gets the absolute value of the value
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/5 12:17 下午
+     * @param value: 数值
+     * @return long
+    */
+    public static long abs(long value){ return value < Constant.LONG_ZERO ? -value : value; }
+
+    /**
+     * [获取数值的绝对值](Gets the absolute value of the value)
+     * @description: zh - 获取数值的绝对值
+     * @description: en - Gets the absolute value of the value
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/5 12:18 下午
+     * @param value: 数值
+     * @return float
+    */
+    public static float abs(float value){ return value < Constant.FLOAT_ZERO ? -value : value; }
+
+    /*判断是否是相邻的数字 ----------------------------------------------------------- Is Beside*/
+
+
+
     /*私有的方法 ----------------------------------------------------------- private*/
 
     /**

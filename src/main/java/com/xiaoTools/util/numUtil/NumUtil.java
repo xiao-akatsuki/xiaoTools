@@ -1625,6 +1625,20 @@ public class NumUtil {
         return value.pow(n);
     }
 
+    /**
+     * [判断一个整数是否是2的幂](Determines whether an integer is a power of 2)
+     * @description: zh - 判断一个整数是否是2的幂
+     * @description: en - Determines whether an integer is a power of 2
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/6 1:36 下午
+     * @param value: 待验证的整数
+     * @return boolean
+    */
+    public static boolean isPowerOfTwo(long value) {
+        return (value > Constant.ZERO) && ((value & (value - Constant.ONE)) == Constant.ZERO);
+    }
+
     /*私有的方法 ----------------------------------------------------------- private*/
 
     /**

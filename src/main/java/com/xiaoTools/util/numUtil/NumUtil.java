@@ -1556,6 +1556,44 @@ public class NumUtil {
         return abs(number1 - number2) == Constant.ONE;
     }
 
+    /*把给定的总数平均分成N份 ----------------------------------------------------------- part value*/
+
+    /**
+     * [把给定的总数平均分成N份，返回每份的个数](Divide the given total number into N parts, and return the number of each part)
+     * @description: zh - 把给定的总数平均分成N份，返回每份的个数
+     * @description: en - Divide the given total number into N parts, and return the number of each part
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/6 1:14 下午
+     * @param total: 总数
+     * @param count: 份数
+     * @return int
+    */
+    public static int partValue(int total, int count) {
+        return partValue(total, count, Constant.TRUE);
+    }
+
+    /**
+     * [把给定的总数平均分成N份，返回每份的个数](Divide the given total number into N parts, and return the number of each part)
+     * @description: zh - 把给定的总数平均分成N份，返回每份的个数
+     * @description: en - Divide the given total number into N parts, and return the number of each part
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/6 1:17 下午
+     * @param total: 总数
+     * @param count: 份数
+     * @param isPlusOneWhenHasRem: 在有余数时是否每份+1
+     * @return int
+    */
+    public static int partValue(int total, int count, boolean isPlusOneWhenHasRem) {
+        int partValue = total / count;
+        if (isPlusOneWhenHasRem && total % count > Constant.ZERO) {
+            partValue++;
+        }
+        return partValue;
+    }
+
+
     /*私有的方法 ----------------------------------------------------------- private*/
 
     /**

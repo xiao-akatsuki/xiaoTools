@@ -1593,6 +1593,37 @@ public class NumUtil {
         return partValue;
     }
 
+    /*幂运算 ----------------------------------------------------------- pow*/
+
+    /**
+     * [提供精确的幂运算](Provide accurate power operation)
+     * @description: zh - 提供精确的幂运算
+     * @description: en - Provide accurate power operation
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/6 1:29 下午
+     * @param value: 底数
+     * @param n: 指数
+     * @return java.math.BigDecimal
+    */
+    public static BigDecimal pow(Number value, int n) {
+        return pow(toBigDecimal(value), n);
+    }
+
+    /**
+     * [提供精确的幂运算](Provide accurate power operation)
+     * @description: zh - 提供精确的幂运算
+     * @description: en - Provide accurate power operation
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/6 1:29 下午
+     * @param value: 底数
+     * @param n: 指数
+     * @return java.math.BigDecimal
+    */
+    public static BigDecimal pow(BigDecimal value, int n) {
+        return value.pow(n);
+    }
 
     /*私有的方法 ----------------------------------------------------------- private*/
 

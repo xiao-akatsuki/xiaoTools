@@ -1639,6 +1639,25 @@ public class NumUtil {
         return (value > Constant.ZERO) && ((value & (value - Constant.ONE)) == Constant.ZERO);
     }
 
+    /*byte数组转int ----------------------------------------------------------- byte array to int*/
+
+    /**
+     * [byte数组转int](byte array to int)
+     * @description: zh - byte数组转int
+     * @description: en - byte array to int
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/7 7:05 下午
+     * @param bytes: byte数组
+     * @return int
+    */
+    public static int toInt(byte[] bytes) {
+        return (bytes[Constant.ZERO] & 0xff) << Constant.TWENTY_FOUR
+                | (bytes[Constant.ONE] & 0xff) << Constant.SIXTEEN
+                | (bytes[Constant.TWO] & 0xff) << Constant.EIGHT
+                | (bytes[Constant.THREE] & 0xff);
+    }
+
     /*私有的方法 ----------------------------------------------------------- private*/
 
     /**

@@ -1652,10 +1652,10 @@ public class NumUtil {
      * @return int
     */
     public static int toInt(byte[] bytes) {
-        return (bytes[Constant.ZERO] & 0xff) << Constant.TWENTY_FOUR
-                | (bytes[Constant.ONE] & 0xff) << Constant.SIXTEEN
-                | (bytes[Constant.TWO] & 0xff) << Constant.EIGHT
-                | (bytes[Constant.THREE] & 0xff);
+        return (bytes[Constant.ZERO] & Constant.BYTE_TWO) << Constant.TWENTY_FOUR
+                | (bytes[Constant.ONE] & Constant.BYTE_TWO) << Constant.SIXTEEN
+                | (bytes[Constant.TWO] & Constant.BYTE_TWO) << Constant.EIGHT
+                | (bytes[Constant.THREE] & Constant.BYTE_TWO);
     }
 
     /*私有的方法 ----------------------------------------------------------- private*/

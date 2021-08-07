@@ -1658,6 +1658,93 @@ public class NumUtil {
                 | (bytes[Constant.THREE] & Constant.BYTE_TWO);
     }
 
+    /*转换为无符号数组 ----------------------------------------------------------- Convert to unsigned array*/
+
+    /**
+     * [以无符号字节数组的形式返回传入值。](Returns the incoming value as an unsigned byte array.)
+     * @description: zh - 以无符号字节数组的形式返回传入值。
+     * @description: en - Returns the incoming value as an unsigned byte array.
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/7 7:30 下午
+     * @param value: 需要转换的值
+     * @return byte[]
+    */
+    public static byte[] toUnsignedByteArray(BigInteger value) {
+        byte[] bytes = value.toByteArray();
+        if (bytes[Constant.ZERO] == Constant.ZERO) {
+            byte[] tmp = new byte[bytes.length - Constant.ONE];
+            System.arraycopy(bytes, Constant.ONE, tmp, Constant.ZERO, tmp.length);
+            return tmp;
+        }
+        return bytes;
+    }
+
+    /**
+     * [以无符号字节数组的形式返回传入值。](Returns the incoming value as an unsigned byte array.)
+     * @description: zh - 以无符号字节数组的形式返回传入值。
+     * @description: en - Returns the incoming value as an unsigned byte array.
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/7 7:33 下午
+     * @param length: bytes长度
+     * value –
+     * @param value: 需要转换的值
+     * @return byte[]
+    */
+    public static byte[] toUnsignedByteArray(int length, BigInteger value) {
+        byte[] bytes = value.toByteArray();
+        if (bytes.length == length) {
+            return bytes;
+        }
+
+        int start = bytes[Constant.ZERO] == Constant.ZERO ? Constant.ONE : Constant.ZERO;
+        int count = bytes.length - start;
+
+        if (count > length) {
+            throw new IllegalArgumentException("standard length exceeded for value");
+        }
+
+        byte[] tmp = new byte[length];
+        System.arraycopy(bytes, start, tmp, tmp.length - count, count);
+        return tmp;
+    }
+
+    /**
+     * [无符号bytes转BigInteger](Unsigned bytes to BigInteger)
+     * @description: zh - 无符号bytes转BigInteger
+     * @description: en - Unsigned bytes to BigInteger
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/7 7:34 下午
+     * @param buf: 无符号bytes
+     * @return java.math.BigInteger
+    */
+    public static BigInteger fromUnsignedByteArray(byte[] buf) {
+        return new BigInteger(Constant.ONE, buf);
+    }
+
+    /**
+     * [无符号bytes转BigInteger](Unsigned bytes to BigInteger)
+     * @description: zh - 无符号bytes转BigInteger
+     * @description: en - Unsigned bytes to BigInteger
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/7 7:34 下午
+     * @param buf: 无符号bytes
+     * @param off: 起始位置
+     * @param length: 长度
+     * @return java.math.BigInteger
+    */
+    public static BigInteger fromUnsignedByteArray(byte[] buf, int off, int length) {
+        byte[] mag = buf;
+        if (off != Constant.ZERO || length != buf.length) {
+            mag = new byte[length];
+            System.arraycopy(buf, off, mag, Constant.ZERO, length);
+        }
+        return new BigInteger(Constant.ONE, mag);
+    }
+
     /*私有的方法 ----------------------------------------------------------- private*/
 
     /**

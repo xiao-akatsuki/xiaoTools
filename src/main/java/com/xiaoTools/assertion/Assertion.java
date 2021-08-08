@@ -1,5 +1,6 @@
 package com.xiaoTools.assertion;
 
+import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.util.function.Supplier;
@@ -202,5 +203,51 @@ public class Assertion {
     */
     public static void isFalse(boolean expression) throws IllegalArgumentException {
         isFalse(expression, "[Assertion failed] - this expression must be false");
+    }
+
+    /* 是否为NULL ------------------------------------------------------------------------------- Is it null */
+
+    /**
+     * [判断对象是否为null ，如果不为null 抛出指定类型异常 并使用指定的函数获取错误信息返回](Judge whether the object is null. If it is not null, throw an exception of the specified type and use the specified function to get the error information)
+     * @description: zh - 判断对象是否为null ，如果不为null 抛出指定类型异常 并使用指定的函数获取错误信息返回
+     * @description: en - Judge whether the object is null. If it is not null, throw an exception of the specified type and use the specified function to get the error information
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/8 11:06 上午
+     * @param object: 被检查的对象
+     * @param errorSupplier: 错误抛出异常附带的消息生产接口
+    */
+    public static <X extends Throwable> void isNull(Object object, Supplier<X> errorSupplier) throws X {
+        if (Constant.NULL != object) {
+            throw errorSupplier.get();
+        }
+    }
+
+    /**
+     * [判断对象是否为null ，如果不为null 抛出指定类型异常 并使用指定的函数获取错误信息返回](Judge whether the object is null. If it is not null, throw an exception of the specified type and use the specified function to get the error information)
+     * @description: zh - 判断对象是否为null ，如果不为null 抛出指定类型异常 并使用指定的函数获取错误信息返回
+     * @description: en - Judge whether the object is null. If it is not null, throw an exception of the specified type and use the specified function to get the error information
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/8 11:13 上午
+     * @param object: 被检查的对象
+     * @param errorMsgTemplate: 消息模板
+     * @param params: 参数列表
+    */
+    public static void isNull(Object object, String errorMsgTemplate, Object... params) throws IllegalArgumentException {
+        isNull(object, () -> new IllegalArgumentException(StrUtil.format(errorMsgTemplate, params)));
+    }
+
+    /**
+     * [判断对象是否为null ，如果不为null 抛出指定类型异常 并使用指定的函数获取错误信息返回](Judge whether the object is null. If it is not null, throw an exception of the specified type and use the specified function to get the error information)
+     * @description: zh - 判断对象是否为null ，如果不为null 抛出指定类型异常 并使用指定的函数获取错误信息返回
+     * @description: en - Judge whether the object is null. If it is not null, throw an exception of the specified type and use the specified function to get the error information
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/8 11:13 上午
+     * @param object: 被检查的对象
+    */
+    public static void isNull(Object object) throws IllegalArgumentException {
+        isNull(object, "[Assertion failed] - the object argument must be null");
     }
 }

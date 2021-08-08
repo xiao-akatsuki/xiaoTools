@@ -157,4 +157,50 @@ public class Assertion {
     public static void isTrue(boolean expression) throws IllegalArgumentException {
         isTrue(expression, "[Assertion failed] - this expression must be true");
     }
+
+    /* 是否为假 ------------------------------------------------------------------------------- Is it false */
+
+    /**
+     * [是否为假，如果为 true 抛出指定类型异常](Whether it is false. If it is true, an exception of the specified type will be thrown)
+     * @description: zh - 是否为假，如果为 true 抛出指定类型异常
+     * @description: en - Whether it is false. If it is true, an exception of the specified type will be thrown
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/8 10:57 上午
+     * @param expression: 布尔值
+     * @param errorSupplier: 不通过时抛出的异常
+    */
+    public static <X extends Throwable> void isFalse(boolean expression, Supplier<X> errorSupplier) throws X {
+        if (expression) {
+            throw errorSupplier.get();
+        }
+    }
+
+    /**
+     * [是否为假，如果为 true 抛出指定类型异常](Whether it is false. If it is true, an exception of the specified type will be thrown)
+     * @description: zh - 是否为假，如果为 true 抛出指定类型异常
+     * @description: en - Whether it is false. If it is true, an exception of the specified type will be thrown
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/8 10:58 上午
+     * @param expression: 布尔值
+     * @param errorMsgTemplate: 错误抛出异常附带的消息模板，变量用{}代替
+     * @param params: 参数列表
+    */
+    public static void isFalse(boolean expression, String errorMsgTemplate, Object... params) throws IllegalArgumentException {
+        isFalse(expression, () -> new IllegalArgumentException(StrUtil.format(errorMsgTemplate, params)));
+    }
+
+    /**
+     * [是否为假，如果为 true 抛出指定类型异常](Whether it is false. If it is true, an exception of the specified type will be thrown)
+     * @description: zh - 是否为假，如果为 true 抛出指定类型异常
+     * @description: en - Whether it is false. If it is true, an exception of the specified type will be thrown
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/8 10:58 上午
+     * @param expression: 布尔值
+    */
+    public static void isFalse(boolean expression) throws IllegalArgumentException {
+        isFalse(expression, "[Assertion failed] - this expression must be false");
+    }
 }

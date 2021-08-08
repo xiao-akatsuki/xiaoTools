@@ -1,5 +1,7 @@
 package com.xiaoTools.assertion;
 
+import com.xiaoTools.util.strUtil.StrUtil;
+
 import java.util.function.Supplier;
 
 /**
@@ -108,5 +110,51 @@ public class Assertion {
             throw errorMsgSupplier.get();
         }
         return text;
+    }
+
+    /* 是否为真 ------------------------------------------------------------------------------- Is it true */
+
+    /**
+     * [是否为真，如果为 false 抛出给定的异常](Whether it is true. If it is false, the given exception is thrown)
+     * @description: zh - 是否为真，如果为 false 抛出给定的异常
+     * @description: en - Whether it is true. If it is false, the given exception is thrown
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/8 10:41 上午
+     * @param expression: 布尔值
+     * @param supplier: 判断错误产生的异常
+    */
+    public static <X extends Throwable> void isTrue(boolean expression, Supplier<? extends X> supplier) throws X {
+        if (!expression) {
+            throw supplier.get();
+        }
+    }
+
+    /**
+     * [是否为真，如果为 false 抛出给定的异常](Whether it is true. If it is false, the given exception is thrown)
+     * @description: zh - 是否为真，如果为 false 抛出给定的异常
+     * @description: en - Whether it is true. If it is false, the given exception is thrown
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/8 10:42 上午
+     * @param expression: 布尔值
+     * @param errorMsgTemplate: 错误抛出异常附带的消息模板
+     * @param params: 参数列表
+    */
+    public static void isTrue(boolean expression, String errorMsgTemplate, Object... params) throws IllegalArgumentException {
+        isTrue(expression, () -> new IllegalArgumentException(StrUtil.format(errorMsgTemplate, params)));
+    }
+
+    /**
+     * [是否为真，如果为 false 抛出给定的异常](Whether it is true. If it is false, the given exception is thrown)
+     * @description: zh - 是否为真，如果为 false 抛出给定的异常
+     * @description: en - Whether it is true. If it is false, the given exception is thrown
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/8 10:43 上午
+     * @param expression: 布尔值
+    */
+    public static void isTrue(boolean expression) throws IllegalArgumentException {
+        isTrue(expression, "[Assertion failed] - this expression must be true");
     }
 }

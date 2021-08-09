@@ -1,8 +1,10 @@
 package com.xiaoTools.assertion;
 
 import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.util.collUtil.CollUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
 
+import java.util.Map;
 import java.util.function.Supplier;
 
 /**
@@ -302,5 +304,103 @@ public class Assertion {
     */
     public static String notContain(String textToSearch, String substring) throws IllegalArgumentException {
         return notContain(textToSearch, substring, "[Assertion failed] - this String argument must not contain the substring [{}]", substring);
+    }
+
+    /* 判断给定集合非空 ------------------------------------------------------------------------------- Judge that the given set is not empty */
+
+    /**
+     * [判断给定集合非空](Judge that the given set is not empty)
+     * @description: zh - 判断给定集合非空
+     * @description: en - Judge that the given set is not empty
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/9 3:59 下午
+     * @param collection: 被检查的集合
+     * @param errorSupplier: 错误抛出异常附带的消息生产接口
+     * @return T
+    */
+    public static <E, T extends Iterable<E>, X extends Throwable> T notEmpty(T collection, Supplier<X> errorSupplier) throws X {
+        if (CollUtil.isEmpty(collection)) {
+            throw errorSupplier.get();
+        }
+        return collection;
+    }
+
+    /**
+     * [判断给定集合非空](Judge that the given set is not empty)
+     * @description: zh - 判断给定集合非空
+     * @description: en - Judge that the given set is not empty
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/9 4:03 下午
+     * @param collection: 被检查的集合
+     * @param errorMsgTemplate: 异常时的消息模板
+     * @param params: 参数列表
+     * @return T
+    */
+    public static <E, T extends Iterable<E>> T notEmpty(T collection, String errorMsgTemplate, Object... params) throws IllegalArgumentException {
+        return notEmpty(collection, () -> new IllegalArgumentException(StrUtil.format(errorMsgTemplate, params)));
+    }
+
+    /**
+     * [判断给定集合非空](Judge that the given set is not empty)
+     * @description: zh - 判断给定集合非空
+     * @description: en - Judge that the given set is not empty
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/9 4:05 下午
+     * @param collection: 被检查的集合
+     * @return T
+    */
+    public static <E, T extends Iterable<E>> T notEmpty(T collection) throws IllegalArgumentException {
+        return notEmpty(collection, "[Assertion failed] - this collection must not be empty: it must contain at least 1 element");
+    }
+
+    /**
+     * [给定Map非空](The given map is not empty)
+     * @description: zh - 给定Map非空
+     * @description: en - The given map is not empty
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/9 4:07 下午
+     * @param map: 被检查的Map
+     * @param errorSupplier: 错误抛出异常附带的消息生产接口
+     * @return T
+    */
+    public static <K, V, T extends Map<K, V>, X extends Throwable> T notEmpty(T map, Supplier<X> errorSupplier) throws X {
+        if (MapUtil.isEmpty(map)) {
+            throw errorSupplier.get();
+        }
+        return map;
+    }
+
+    /**
+     * [给定Map非空](The given map is not empty)
+     * @description: zh - 给定Map非空
+     * @description: en - The given map is not empty
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/9 4:11 下午
+     * @param map: 被检查的Map
+     * @param errorMsgTemplate: 异常时的消息模板
+     * @param params: 参数列表
+     * @return T
+    */
+    public static <K, V, T extends Map<K, V>> T notEmpty(T map, String errorMsgTemplate, Object... params) throws IllegalArgumentException {
+        return notEmpty(map, () -> new IllegalArgumentException(StrUtil.format(errorMsgTemplate, params)));
+    }
+
+    /**
+     * [给定Map非空](The given map is not empty)
+     * @description: zh - 给定Map非空
+     * @description: en - The given map is not empty
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/9 4:12 下午
+     * @param map: 被检查的Map
+     * @return T
+    */
+    public static <K, V, T extends Map<K, V>> T notEmpty(T map) throws IllegalArgumentException {
+        return notEmpty(map, "[Assertion failed] - this map must not be empty; it must contain at least one entry");
     }
 }

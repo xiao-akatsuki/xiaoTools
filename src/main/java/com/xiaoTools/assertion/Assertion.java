@@ -250,4 +250,57 @@ public class Assertion {
     public static void isNull(Object object) throws IllegalArgumentException {
         isNull(object, "[Assertion failed] - the object argument must be null");
     }
+
+    /* 是否为子串 ------------------------------------------------------------------------------- Is it a substring */
+
+    /**
+     * [是否为子串](Is it a substring)
+     * @description: zh - 是否为子串
+     * @description: en - Is it a substring
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/9 3:40 下午
+     * @param textToSearch: 被搜索的字符串
+     * @param substring: 被检查的子串
+     * @param errorSupplier: 错误抛出异常附带的消息生产接口
+     * @return T
+    */
+    public static <T extends CharSequence, X extends Throwable> T notContain(CharSequence textToSearch, T substring, Supplier<X> errorSupplier) throws X {
+        if (StrUtil.contains(textToSearch, substring)) {
+            throw errorSupplier.get();
+        }
+        return substring;
+    }
+
+    /**
+     * [是否为子串](Is it a substring)
+     * @description: zh - 是否为子串
+     * @description: en - Is it a substring
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/9 3:42 下午
+     * @param textToSearch: 被搜索的字符串
+     * @param substring: 被检查的子串
+     * @param errorMsgTemplate: 异常时的消息模板
+     * @param params: 参数列表
+     * @return java.lang.String
+    */
+    public static String notContain(String textToSearch, String substring, String errorMsgTemplate, Object... params) throws IllegalArgumentException {
+        return notContain(textToSearch, substring, () -> new IllegalArgumentException(StrUtil.format(errorMsgTemplate, params)));
+    }
+
+    /**
+     * [是否为子串](Is it a substring)
+     * @description: zh - 是否为子串
+     * @description: en - Is it a substring
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/9 3:44 下午
+     * @param textToSearch: 被搜索的字符串
+     * @param substring: 被检查的子串
+     * @return java.lang.String
+    */
+    public static String notContain(String textToSearch, String substring) throws IllegalArgumentException {
+        return notContain(textToSearch, substring, "[Assertion failed] - this String argument must not contain the substring [{}]", substring);
+    }
 }

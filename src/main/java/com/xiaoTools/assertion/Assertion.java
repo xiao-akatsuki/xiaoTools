@@ -475,4 +475,51 @@ public class Assertion {
         }
     }
 
+    /* 检查boolean表达式 ------------------------------------------------------------------------------- Check Boolean expression */
+
+    /**
+     * [检查boolean表达式](Check Boolean expression)
+     * @description: zh - 检查boolean表达式
+     * @description: en - Check Boolean expression
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/10 4:30 下午
+     * @param expression: boolean 表达式
+     * @param errorMsgSupplier: 错误抛出异常附带的消息生产接口
+    */
+    public static void state(boolean expression, Supplier<String> errorMsgSupplier) throws IllegalStateException {
+        if (!expression) {
+            throw new IllegalStateException(errorMsgSupplier.get());
+        }
+    }
+
+    /**
+     * [检查boolean表达式](Check Boolean expression)
+     * @description: zh - 检查boolean表达式
+     * @description: en - Check Boolean expression
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/10 4:31 下午
+     * @param expression: 表达式
+     * @param errorMsgTemplate: 异常时的消息模板
+     * @param params: 参数列表
+    */
+    public static void state(boolean expression, String errorMsgTemplate, Object... params) throws IllegalStateException {
+        if (!expression) {
+            throw new IllegalStateException(StrUtil.format(errorMsgTemplate, params));
+        }
+    }
+
+    /**
+     * [检查boolean表达式](Check Boolean expression)
+     * @description: zh - 检查boolean表达式
+     * @description: en - Check Boolean expression
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/10 4:31 下午
+     * @param expression: boolean 表达式
+    */
+    public static void state(boolean expression) throws IllegalStateException {
+        state(expression, "[Assertion failed] - this state invariant must be true");
+    }
 }

@@ -403,4 +403,76 @@ public class Assertion {
     public static <K, V, T extends Map<K, V>> T notEmpty(T map) throws IllegalArgumentException {
         return notEmpty(map, "[Assertion failed] - this map must not be empty; it must contain at least one entry");
     }
+
+    /* 判断给定对象是否是给定类的实例 ------------------------------------------------------------------------------- Determines whether a given object is an instance of a given class */
+
+    /**
+     * [判断给定对象是否是给定类的实例](Determines whether a given object is an instance of a given class)
+     * @description: zh - 判断给定对象是否是给定类的实例
+     * @description: en - Determines whether a given object is an instance of a given class
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/10 4:24 下午
+     * @param type: 被检查对象匹配的类型
+     * @param obj: 被检查对象
+     * @return T
+    */
+    public static <T> T isInstanceOf(Class<?> type, T obj) {
+        return isInstanceOf(type, obj, "Object [{}] is not instanceof [{}]", obj, type);
+    }
+
+    /**
+     * [判断给定对象是否是给定类的实例](Determines whether a given object is an instance of a given class)
+     * @description: zh - 判断给定对象是否是给定类的实例
+     * @description: en - Determines whether a given object is an instance of a given class
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/10 4:25 下午
+     * @param type: 被检查对象匹配的类型
+     * @param obj: 被检查对象
+     * @param errorMsgTemplate: 异常时的消息模板
+     * @param params: 参数列表
+     * @return T
+    */
+    public static <T> T isInstanceOf(Class<?> type, T obj, String errorMsgTemplate, Object... params) throws IllegalArgumentException {
+        notNull(type, "Type to check against must not be null");
+        if (!type.isInstance(obj)) {
+            throw new IllegalArgumentException(StrUtil.format(errorMsgTemplate, params));
+        }
+        return obj;
+    }
+
+    /**
+     * [判断给定对象是否是给定类的实例](Determines whether a given object is an instance of a given class)
+     * @description: zh - 判断给定对象是否是给定类的实例
+     * @description: en - Determines whether a given object is an instance of a given class
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/10 4:25 下午
+     * @param superType: 需要检查的父类或接口
+     * @param subType: 需要检查的子类
+    */
+    public static void isAssignable(Class<?> superType, Class<?> subType) throws IllegalArgumentException {
+        isAssignable(superType, subType, "{} is not assignable to {})", subType, superType);
+    }
+
+    /**
+     * [判断给定对象是否是给定类的实例](Determines whether a given object is an instance of a given class)
+     * @description: zh - 判断给定对象是否是给定类的实例
+     * @description: en - Determines whether a given object is an instance of a given class
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/10 4:26 下午
+     * @param superType: 需要检查的父类或接口
+     * @param subType: 需要检查的子类
+     * @param errorMsgTemplate: 异常时的消息模板
+     * @param params: 参数列表
+    */
+    public static void isAssignable(Class<?> superType, Class<?> subType, String errorMsgTemplate, Object... params) throws IllegalArgumentException {
+        notNull(superType, "Type to check against must not be null");
+        if (subType == Constant.NULL || !superType.isAssignableFrom(subType)) {
+            throw new IllegalArgumentException(StrUtil.format(errorMsgTemplate, params));
+        }
+    }
+
 }

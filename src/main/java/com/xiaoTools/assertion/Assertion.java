@@ -522,4 +522,147 @@ public class Assertion {
     public static void state(boolean expression) throws IllegalStateException {
         state(expression, "[Assertion failed] - this state invariant must be true");
     }
+
+    /* 检查下标 ------------------------------------------------------------------------------- Check subscript */
+
+    /**
+     * [检查下标](Check subscript)
+     * @description: zh - 检查下标
+     * @description: en - Check subscript
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/10 4:38 下午
+     * @param index: 下标
+     * @param size: 长度
+     * @return int
+    */
+    public static int checkIndex(int index, int size) throws IllegalArgumentException, IndexOutOfBoundsException {
+        return checkIndex(index, size, "[Assertion failed]");
+    }
+
+    /**
+     * [检查下标](Check subscript)
+     * @description: zh - 检查下标
+     * @description: en - Check subscript
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/10 4:40 下午
+     * @param index:  下标
+     * @param size: 长度
+     * @param errorMsgTemplate: 异常时的消息模板
+     * @param params: 参数列表
+     * @return int
+    */
+    public static int checkIndex(int index, int size, String errorMsgTemplate, Object... params) throws IllegalArgumentException, IndexOutOfBoundsException {
+        if (index < Constant.ZERO || index >= size) {
+            throw new IndexOutOfBoundsException(badIndexMsg(index, size, errorMsgTemplate, params));
+        }
+        return index;
+    }
+
+    /**
+     * [检查值是否在指定范围内](Check whether the value is within the specified range)
+     * @description: zh - 检查值是否在指定范围内
+     * @description: en - Check whether the value is within the specified range
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/10 4:41 下午
+     * @param value: 值
+     * @param min: 最小值（包含
+     * @param max: 最大值（包含）
+     * @return int
+    */
+    public static int checkBetween(int value, int min, int max) {
+        if (value < min || value > max) {
+            throw new IllegalArgumentException(StrUtil.format("Length must be between {} and {}.", min, max));
+        }
+        return value;
+    }
+
+    /**
+     * [检查值是否在指定范围内](Check whether the value is within the specified range)
+     * @description: zh - 检查值是否在指定范围内
+     * @description: en - Check whether the value is within the specified range
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/10 4:41 下午
+     * @param value: 值
+     * @param min: 最小值（包含）
+     * @param max: 最大值（包含）
+     * @return long
+    */
+    public static long checkBetween(long value, long min, long max) {
+        if (value < min || value > max) {
+            throw new IllegalArgumentException(StrUtil.format("Length must be between {} and {}.", min, max));
+        }
+        return value;
+    }
+
+    /**
+     * [检查值是否在指定范围内](Check whether the value is within the specified range)
+     * @description: zh - 检查值是否在指定范围内
+     * @description: en - Check whether the value is within the specified range
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/10 4:42 下午
+     * @param value: 值
+     * @param min: 最小值（包含）
+     * @param max: 最大值（包含）
+     * @return double
+    */
+    public static double checkBetween(double value, double min, double max) {
+        if (value < min || value > max) {
+            throw new IllegalArgumentException(StrUtil.format("Length must be between {} and {}.", min, max));
+        }
+        return value;
+    }
+
+    /**
+     * [检查值是否在指定范围内](Check whether the value is within the specified range)
+     * @description: zh - 检查值是否在指定范围内
+     * @description: en - Check whether the value is within the specified range
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/10 4:42 下午
+     * @param value: 值
+     * @param min: 最小值（包含）
+     * @param max: 最大值（包含）
+     * @return java.lang.Number
+    */
+    public static Number checkBetween(Number value, Number min, Number max) {
+        notNull(value);
+        notNull(min);
+        notNull(max);
+        double valueDouble = value.doubleValue();
+        double minDouble = min.doubleValue();
+        double maxDouble = max.doubleValue();
+        if (valueDouble < minDouble || valueDouble > maxDouble) {
+            throw new IllegalArgumentException(StrUtil.format("Length must be between {} and {}.", min, max));
+        }
+        return value;
+    }
+
+    /**
+     * [错误的下标时显示的消息](Message displayed when subscript is wrong)
+     * @description: zh - 错误的下标时显示的消息
+     * @description: en - Message displayed when subscript is wrong
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/10 4:43 下午
+     * @param index: 下标
+     * @param size: 长度
+     * @param desc: 异常时的消息模板
+     * @param params: 参数列表
+     * @return java.lang.String
+    */
+    private static String badIndexMsg(int index, int size, String desc, Object... params) {
+        if (index < Constant.ZERO) {
+            return StrUtil.format("{} ({}) must not be negative", StrUtil.format(desc, params), index);
+        } else if (size < Constant.ZERO) {
+            throw new IllegalArgumentException("negative size: " + size);
+        } else {
+            // index >= size
+            return StrUtil.format("{} ({}) must be less than size ({})", StrUtil.format(desc, params), index, size);
+        }
+    }
 }

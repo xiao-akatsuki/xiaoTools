@@ -263,4 +263,276 @@ public class PrimitiveArrayUtil {
         }
         return newArray;
     }
+
+    /* 多个数组合并在一起 ------------------------------------------------------------------------------- Add All*/
+
+    /**
+     * [将多个数组合并在一起](Merge multiple arrays together)
+     * @description: zh - 将多个数组合并在一起
+     * @description: en - Merge multiple arrays together
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/12 8:49 下午
+     * @param arrays: 数组
+     * @return byte[]
+    */
+    public static byte[] addAll(byte[]... arrays) {
+        if (arrays.length == Constant.ONE) {
+            return arrays[Constant.ZERO];
+        }
+        // 计算总长度
+        int length = Constant.ZERO;
+        for (byte[] array : arrays) {
+            if (Constant.NULL != array) {
+                length += array.length;
+            }
+        }
+        final byte[] result = new byte[length];
+        length = Constant.ZERO;
+        for (byte[] array : arrays) {
+            if (Constant.NULL != array) {
+                System.arraycopy(array, Constant.ZERO, result, length, array.length);
+                length += array.length;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * [将多个数组合并在一起](Merge multiple arrays together)
+     * @description: zh - 将多个数组合并在一起
+     * @description: en - Merge multiple arrays together
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/12 8:52 下午
+     * @param arrays: 数组
+     * @return int[]
+    */
+    public static int[] addAll(int[]... arrays) {
+        if (arrays.length == Constant.ONE) {
+            return arrays[Constant.ZERO];
+        }
+
+        // 计算总长度
+        int length = Constant.ZERO;
+        for (int[] array : arrays) {
+            if (Constant.NULL != array) {
+                length += array.length;
+            }
+        }
+
+        final int[] result = new int[length];
+        length = Constant.ZERO;
+        for (int[] array : arrays) {
+            if (Constant.NULL != array) {
+                System.arraycopy(array, Constant.ZERO, result, length, array.length);
+                length += array.length;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * [将多个数组合并在一起](Merge multiple arrays together)
+     * @description: zh - 将多个数组合并在一起
+     * @description: en - Merge multiple arrays together
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/12 8:54 下午
+     * @param arrays: 数组
+     * @return long[]
+    */
+    public static long[] addAll(long[]... arrays) {
+        if (arrays.length == Constant.ONE) {
+            return arrays[Constant.ZERO];
+        }
+
+        // 计算总长度
+        int length = Constant.ZERO;
+        for (long[] array : arrays) {
+            if (Constant.NULL != array) {
+                length += array.length;
+            }
+        }
+
+        final long[] result = new long[length];
+        length = Constant.ZERO;
+        for (long[] array : arrays) {
+            if (Constant.NULL != array) {
+                System.arraycopy(array, Constant.ZERO, result, length, array.length);
+                length += array.length;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * [将多个数组合并在一起](Merge multiple arrays together)
+     * @description: zh - 将多个数组合并在一起
+     * @description: en - Merge multiple arrays together
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/12 8:57 下午
+     * @param arrays: 数组
+     * @return double[]
+    */
+    public static double[] addAll(double[]... arrays) {
+        if (arrays.length == Constant.ONE) {
+            return arrays[Constant.ZERO];
+        }
+
+        // 计算总长度
+        int length = Constant.ZERO;
+        for (double[] array : arrays) {
+            if (Constant.NULL != array) {
+                length += array.length;
+            }
+        }
+
+        final double[] result = new double[length];
+        length = Constant.ZERO;
+        for (double[] array : arrays) {
+            if (Constant.NULL != array) {
+                System.arraycopy(array, Constant.ZERO, result, length, array.length);
+                length += array.length;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * [将多个数组合并在一起](Merge multiple arrays together)
+     * @description: zh - 将多个数组合并在一起
+     * @description: en - Merge multiple arrays together
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/12 9:03 下午
+     * @param arrays: 数组
+     * @return float[]
+    */
+    public static float[] addAll(float[]... arrays) {
+        if (arrays.length == Constant.ONE) {
+            return arrays[Constant.ZERO];
+        }
+
+        // 计算总长度
+        int length = Constant.ZERO;
+        for (float[] array : arrays) {
+            if (Constant.NULL != array) {
+                length += array.length;
+            }
+        }
+
+        final float[] result = new float[length];
+        length = Constant.ZERO;
+        for (float[] array : arrays) {
+            if (Constant.NULL != array) {
+                System.arraycopy(array, Constant.ZERO, result, length, array.length);
+                length += array.length;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * [将多个数组合并在一起](Merge multiple arrays together)
+     * @description: zh - 将多个数组合并在一起
+     * @description: en - Merge multiple arrays together
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/12 9:04 下午
+     * @param arrays: 数组
+     * @return char[]
+    */
+    public static char[] addAll(char[]... arrays) {
+        if (arrays.length == Constant.ONE) {
+            return arrays[Constant.ZERO];
+        }
+
+        // 计算总长度
+        int length = Constant.ZERO;
+        for (char[] array : arrays) {
+            if (Constant.NULL != array) {
+                length += array.length;
+            }
+        }
+
+        final char[] result = new char[length];
+        length = Constant.ZERO;
+        for (char[] array : arrays) {
+            if (Constant.NULL != array) {
+                System.arraycopy(array, Constant.ZERO, result, length, array.length);
+                length += array.length;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * [将多个数组合并在一起](Merge multiple arrays together)
+     * @description: zh - 将多个数组合并在一起
+     * @description: en - Merge multiple arrays together
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/12 9:05 下午
+     * @param arrays: 数组
+     * @return boolean[]
+    */
+    public static boolean[] addAll(boolean[]... arrays) {
+        if (arrays.length == Constant.ONE) {
+            return arrays[Constant.ZERO];
+        }
+
+        // 计算总长度
+        int length = Constant.ZERO;
+        for (boolean[] array : arrays) {
+            if (null != array) {
+                length += array.length;
+            }
+        }
+
+        final boolean[] result = new boolean[length];
+        length = Constant.ZERO;
+        for (boolean[] array : arrays) {
+            if (null != array) {
+                System.arraycopy(array, Constant.ZERO, result, length, array.length);
+                length += array.length;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * [将多个数组合并在一起](Merge multiple arrays together)
+     * @description: zh - 将多个数组合并在一起
+     * @description: en - Merge multiple arrays together
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/12 9:07 下午
+     * @param arrays: 数组
+     * @return short[]
+    */
+    public static short[] addAll(short[]... arrays) {
+        if (arrays.length == Constant.ONE) {
+            return arrays[Constant.ZERO];
+        }
+
+        // 计算总长度
+        int length = Constant.ZERO;
+        for (short[] array : arrays) {
+            if (Constant.NULL != array) {
+                length += array.length;
+            }
+        }
+
+        final short[] result = new short[length];
+        length = Constant.ZERO;
+        for (short[] array : arrays) {
+            if (Constant.NULL != array) {
+                System.arraycopy(array, Constant.ZERO, result, length, array.length);
+                length += array.length;
+            }
+        }
+        return result;
+    }
 }

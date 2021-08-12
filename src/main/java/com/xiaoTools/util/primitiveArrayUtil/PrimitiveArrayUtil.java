@@ -125,4 +125,118 @@ public class PrimitiveArrayUtil {
     public static boolean isEmpty(boolean[] array) {
         return array == Constant.NULL || array.length == Constant.ZERO;
     }
+
+    /* 数组是否为非空 ------------------------------------------------------------------------------- Is Not Empty */
+
+    /**
+     * [数组是否为非空](array is not empty)
+     * @description: zh - 数组是否为非空
+     * @description: en - array is not empty
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/12 8:03 下午
+     * @param array: 数组
+     * @return boolean
+     */
+    public static boolean isNotEmpty(int[] array) {
+        return !isEmpty(array);
+    }
+
+    /**
+     * [数组是否为非空](array is not empty)
+     * @description: zh - 数组是否为非空
+     * @description: en - array is not empty
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/12 8:02 下午
+     * @param array: 数组
+     * @return boolean
+    */
+    public static boolean isNotEmpty(long[] array) {
+        return !isEmpty(array);
+    }
+
+    /**
+     * [数组是否为非空](array is not empty)
+     * @description: zh - 数组是否为非空
+     * @description: en - array is not empty
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/12 8:04 下午
+     * @param array: 数组
+     * @return boolean
+    */
+    public static boolean isNotEmpty(short[] array) {
+        return !isEmpty(array);
+    }
+
+    /**
+     * [数组是否为非空](array is not empty)
+     * @description: zh - 数组是否为非空
+     * @description: en - array is not empty
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/12 8:05 下午
+     * @param array: 数组
+     * @return boolean
+    */
+    public static boolean isNotEmpty(char[] array) {
+        return !isEmpty(array);
+    }
+
+    /**
+     * [数组是否为非空](array is not empty)
+     * @description: zh - 数组是否为非空
+     * @description: en - array is not empty
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/12 8:05 下午
+     * @param array: 数组
+     * @return boolean
+    */
+    public static boolean isNotEmpty(byte[] array) {
+        return !isEmpty(array);
+    }
+
+    /**
+     * [数组是否为非空](array is not empty)
+     * @description: zh - 数组是否为非空
+     * @description: en - array is not empty
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/12 8:05 下午
+     * @param array: 数组
+     * @return boolean
+    */
+    public static boolean isNotEmpty(double[] array) {
+        return !isEmpty(array);
+    }
+
+    /**
+     * [数组是否为非空](array is not empty)
+     * @description: zh - 数组是否为非空
+     * @description: en - array is not empty
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/12 8:05 下午
+     * @param array: 数组
+     * @return boolean
+    */
+    public static boolean isNotEmpty(float[] array) {
+        return !isEmpty(array);
+    }
+
+    /**
+     * [数组是否为非空](array is not empty)
+     * @description: zh - 数组是否为非空
+     * @description: en - array is not empty
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/12 8:06 下午
+     * @param array: 数组
+     * @return boolean
+    */
+    public static boolean isNotEmpty(boolean[] array) {
+        return !isEmpty(array);
+    }
 }

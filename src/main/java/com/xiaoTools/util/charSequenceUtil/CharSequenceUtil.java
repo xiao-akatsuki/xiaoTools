@@ -13,6 +13,7 @@ import com.xiaoTools.util.charUtil.CharUtil;
 import com.xiaoTools.util.charsetUtil.CharsetUtil;
 import com.xiaoTools.util.numUtil.NumUtil;
 import com.xiaoTools.util.regularUtil.method.Func1;
+import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;

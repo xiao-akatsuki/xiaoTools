@@ -239,4 +239,28 @@ public class PrimitiveArrayUtil {
     public static boolean isNotEmpty(boolean[] array) {
         return !isEmpty(array);
     }
+
+    /* 重新设置大小的数组 ------------------------------------------------------------------------------- resize*/
+
+    /**
+     * [生成一个新的重新设置大小的数组](Generates a new resized array)
+     * @description: zh - 生成一个新的重新设置大小的数组
+     * @description: en - Generates a new resized array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/12 8:16 下午
+     * @param bytes: 原数组
+     * @param newSize: 新的数组大小
+     * @return byte[]
+    */
+    public static byte[] resize(byte[] bytes, int newSize) {
+        if (newSize < Constant.ZERO) {
+            return bytes;
+        }
+        final byte[] newArray = new byte[newSize];
+        if (newSize > Constant.ZERO && isNotEmpty(bytes)) {
+            System.arraycopy(bytes, Constant.ZERO, newArray, Constant.ZERO, Math.min(bytes.length, newSize));
+        }
+        return newArray;
+    }
 }

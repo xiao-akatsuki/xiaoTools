@@ -2,6 +2,7 @@ package com.xiaoTools.core.versionComparator;
 
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.objectUtil.ObjectUtil;
+import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.io.Serial;
 import java.io.Serializable;

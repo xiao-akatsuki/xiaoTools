@@ -602,4 +602,39 @@ public class PrimitiveArrayUtil {
         }
         return range;
     }
+
+    /* 拆分 ------------------------------------------------------------------------------- split */
+
+    /**
+     * [拆分byte数组为几个等份](Split byte array into several equal parts)
+     * @description: zh - 拆分byte数组为几个等份
+     * @description: en - Split byte array into several equal parts
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/13 1:35 下午
+     * @param array: 数组
+     * @param len: 每个小节的长度
+     * @return byte[][]
+    */
+    public static byte[][] split(byte[] array, int len) {
+        int amount = array.length / len;
+        final int remainder = array.length % len;
+        if (remainder != Constant.ZERO) {
+            ++amount;
+        }
+        final byte[][] arrays = new byte[amount][];
+        byte[] arr;
+        for (int i = Constant.ZERO; i < amount; i++) {
+            if (i == amount - Constant.ONE && remainder != Constant.ZERO) {
+                // 有剩余，按照实际长度创建
+                arr = new byte[remainder];
+                System.arraycopy(array, i * len, arr, Constant.ZERO, remainder);
+            } else {
+                arr = new byte[len];
+                System.arraycopy(array, i * len, arr, Constant.ZERO, len);
+            }
+            arrays[i] = arr;
+        }
+        return arrays;
+    }
 }

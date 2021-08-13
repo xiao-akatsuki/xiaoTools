@@ -535,4 +535,71 @@ public class PrimitiveArrayUtil {
         }
         return result;
     }
+
+    /* 生成一个数字列表 ------------------------------------------------------------------------------- range*/
+
+    /**
+     *
+     * @description: zh - 生成一个从0开始的数字列表
+     * @description: en - Generate a list of numbers starting from 0
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/13 1:24 下午
+     * @param value: 结束的数字（不包含）
+     * @return int[]
+    */
+    public static int[] range(int value) {
+        return range(Constant.ZERO, value, Constant.ONE);
+    }
+
+    /**
+     * [生成一个数字列表](Generate a list of numbers)
+     * @description: zh - 生成一个数字列表
+     * @description: en - Generate a list of numbers
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/13 1:27 下午
+     * @param start: 开始的数字（包含）
+     * @param end: 结束的数字（不包含）
+     * @return int[]
+    */
+    public static int[] range(int start, int end) {
+        return range(start, end, Constant.ONE);
+    }
+
+    /**
+     * [生成一个数字列表](Generate a list of numbers)
+     * @description: zh - 生成一个数字列表
+     * @description: en - Generate a list of numbers
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/13 1:28 下午
+     * @param start: 开始的数字（包含）
+     * @param end: 结束的数字（不包含）
+     * @param step: 步进
+     * @return int[]
+    */
+    public static int[] range(int start, int end, int step) {
+        if (start > end) {
+            int tmp = start;
+            start = end;
+            end = tmp;
+        }
+
+        if (step <= Constant.ZERO) {
+            step = Constant.ONE;
+        }
+
+        int deviation = end - start;
+        int length = deviation / step;
+        if (deviation % step != Constant.ZERO) {
+            length += Constant.ONE;
+        }
+        int[] range = new int[length];
+        for (int i = Constant.ZERO; i < length; i++) {
+            range[i] = start;
+            start += step;
+        }
+        return range;
+    }
 }

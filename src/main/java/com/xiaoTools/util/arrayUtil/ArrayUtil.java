@@ -9,6 +9,7 @@ import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.core.editor.Editor;
 import com.xiaoTools.core.filter.Filter;
 import com.xiaoTools.core.match.Match;
+import com.xiaoTools.util.primitiveArrayUtil.PrimitiveArrayUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
 
 /**
@@ -16,7 +17,7 @@ import com.xiaoTools.util.strUtil.StrUtil;
  * @author HCY
  * @since 2021/5/16 2:21 [下午](afternoon)
 */
-public class ArrayUtil {
+public class ArrayUtil extends PrimitiveArrayUtil {
     /**
      * [初始化方法](Initialization method)
      * @author HCY

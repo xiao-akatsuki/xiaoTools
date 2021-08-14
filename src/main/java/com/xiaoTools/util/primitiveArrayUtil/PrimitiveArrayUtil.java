@@ -2,6 +2,7 @@ package com.xiaoTools.util.primitiveArrayUtil;
 
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.numUtil.NumUtil;
+import com.xiaoTools.util.objectUtil.ObjectUtil;
 
 /**
  * [原始类型数组工具类](Primitive type array utility class)
@@ -1115,5 +1116,61 @@ public class PrimitiveArrayUtil {
     */
     public static boolean contains(boolean[] array, boolean value) {
         return indexOf(array, value) > Constant.NEGATIVE_ONE;
+    }
+
+    /* 将原始类型数组包装为包装类型 ------------------------------------------------------------------------------- wrap */
+
+    /**
+     * [将原始类型数组包装为包装类型](Wrap the original type array as a wrapper type)
+     * @description: zh - 将原始类型数组包装为包装类型
+     * @description: en - Wrap the original type array as a wrapper type
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/14 4:43 下午
+     * @param values: 原始类型数组
+     * @return java.lang.Integer[]
+    */
+    public static Integer[] wrap(int... values) {
+        if (Constant.NULL == values) {
+            return Constant.INTEGERS_NULL;
+        }
+        final int length = values.length;
+        if (Constant.ZERO == length) {
+            return new Integer[Constant.ZERO];
+        }
+
+        final Integer[] array = new Integer[length];
+        for (int i = Constant.ZERO; i < length; i++) {
+            array[i] = values[i];
+        }
+        return array;
+    }
+
+    /* 包装类数组转为原始类型数组 ------------------------------------------------------------------------------- unWrap */
+
+    /**
+     * [包装类数组转为原始类型数组](Convert wrapper class array to original type array)
+     * @description: zh - 包装类数组转为原始类型数组
+     * @description: en - Convert wrapper class array to original type array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/14 4:54 下午
+     * @param values: 包装类型数组
+     * @return int[]
+    */
+    public static int[] unWrap(Integer... values) {
+        if (Constant.NULL == values) {
+            return Constant.INTS_NULL;
+        }
+        final int length = values.length;
+        if (Constant.ZERO == length) {
+            return new int[Constant.ZERO];
+        }
+
+        final int[] array = new int[length];
+        for (int i = Constant.ZERO; i < length; i++) {
+            array[i] = ObjectUtil.defaultIfNull(values[i], Constant.ZERO);
+        }
+        return array;
     }
 }

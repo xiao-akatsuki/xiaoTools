@@ -588,6 +588,10 @@ public class Constant {
 
     public static final String[] STRINGS_NULL = null;
 
+    public static final Integer[] INTEGERS_NULL = null;
+
+    public static final int[] INTS_NULL = null;
+
     public static final byte[] BYTES_NULL = null;
 
     public static final StringReader STRING_READER_NULL = null;

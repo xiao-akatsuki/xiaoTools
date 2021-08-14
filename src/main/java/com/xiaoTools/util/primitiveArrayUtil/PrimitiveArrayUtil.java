@@ -994,6 +994,4 @@ public class PrimitiveArrayUtil {
         }
         return Constant.NEGATIVE_ONE;
     }
-
-
 }

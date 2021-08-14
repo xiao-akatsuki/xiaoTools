@@ -590,9 +590,23 @@ public class Constant {
 
     public static final Integer[] INTEGERS_NULL = null;
 
+    public static final Long[] LONGS_NULL = null;
+
+    public static final long[] LONGS_DOWN_NULL = null;
+
+    public static final Character[] CHARACTERS_NULL = null;
+
+    public static final char[] CHARS_NULL = null;
+
+    public static final Byte[] BYTES_UP_NULL = null;
+
     public static final int[] INTS_NULL = null;
 
     public static final byte[] BYTES_NULL = null;
+
+    public static final Short[] SHORTS_NULL = null;
+
+    public static final short[] SHORTS_DOWN_NULL = null;
 
     public static final StringReader STRING_READER_NULL = null;
 

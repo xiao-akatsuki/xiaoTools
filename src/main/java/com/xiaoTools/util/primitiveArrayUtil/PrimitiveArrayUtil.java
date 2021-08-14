@@ -637,4 +637,28 @@ public class PrimitiveArrayUtil {
         }
         return arrays;
     }
+
+    /* 返回数组中指定元素所在位置 ------------------------------------------------------------------------------- indexOf */
+
+    /**
+     * [返回数组中指定元素所在位置](Returns the position of the specified element in the array)
+     * @description: zh - 返回数组中指定元素所在位置
+     * @description: en - Returns the position of the specified element in the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/14 12:41 下午
+     * @param array: 数组
+     * @param value: 被检查的元素
+     * @return int
+    */
+    public static int indexOf(long[] array, long value) {
+        if (Constant.NULL != array) {
+            for (int i = Constant.ZERO; i < array.length; i++) {
+                if (value == array[i]) {
+                    return i;
+                }
+            }
+        }
+        return Constant.NEGATIVE_ONE;
+    }
 }

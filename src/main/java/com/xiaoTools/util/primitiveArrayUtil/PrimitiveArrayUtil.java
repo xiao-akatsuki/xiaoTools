@@ -994,4 +994,126 @@ public class PrimitiveArrayUtil {
         }
         return Constant.NEGATIVE_ONE;
     }
+
+    /* 数组中是否包含元素 ------------------------------------------------------------------------------- contains */
+
+    /**
+     * [数组中是否包含元素](Does the array contain elements)
+     * @description: zh - 数组中是否包含元素
+     * @description: en - Does the array contain elements
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/14 4:33 下午
+     * @param array: 数组
+     * @param value: 被检查的元素
+     * @return boolean
+    */
+    public static boolean contains(long[] array, long value) {
+        return indexOf(array, value) > Constant.NEGATIVE_ONE;
+    }
+
+    /**
+     * [数组中是否包含元素](Does the array contain elements)
+     * @description: zh - 数组中是否包含元素
+     * @description: en - Does the array contain elements
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/14 4:34 下午
+     * @param array: 数组
+     * @param value: 被检查的元素
+     * @return boolean
+    */
+    public static boolean contains(int[] array, int value) {
+        return indexOf(array, value) > Constant.NEGATIVE_ONE;
+    }
+
+    /**
+     * [数组中是否包含元素](Does the array contain elements)
+     * @description: zh - 数组中是否包含元素
+     * @description: en - Does the array contain elements
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/14 4:34 下午
+     * @param array: 数组
+     * @param value: 被检查的元素
+     * @return boolean
+    */
+    public static boolean contains(short[] array, short value) {
+        return indexOf(array, value) > Constant.NEGATIVE_ONE;
+    }
+
+    /**
+     * [数组中是否包含元素](Does the array contain elements)
+     * @description: zh - 数组中是否包含元素
+     * @description: en - Does the array contain elements
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/14 4:35 下午
+     * @param array: 数组
+     * @param value: 被检查的元素
+     * @return boolean
+    */
+    public static boolean contains(char[] array, char value) {
+        return indexOf(array, value) > Constant.NEGATIVE_ONE;
+    }
+
+    /**
+     * [数组中是否包含元素](Does the array contain elements)
+     * @description: zh - 数组中是否包含元素
+     * @description: en - Does the array contain elements
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/14 4:35 下午
+     * @param array: 数组
+     * @param value: 被检查的元素
+     * @return boolean
+    */
+    public static boolean contains(byte[] array, byte value) {
+        return indexOf(array, value) > Constant.NEGATIVE_ONE;
+    }
+
+    /**
+     * [数组中是否包含元素](Does the array contain elements)
+     * @description: zh - 数组中是否包含元素
+     * @description: en - Does the array contain elements
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/14 4:36 下午
+     * @param array: 数组
+     * @param value: 被检查的元素
+     * @return boolean
+    */
+    public static boolean contains(double[] array, double value) {
+        return indexOf(array, value) > Constant.NEGATIVE_ONE;
+    }
+
+    /**
+     * [数组中是否包含元素](Does the array contain elements)
+     * @description: zh - 数组中是否包含元素
+     * @description: en - Does the array contain elements
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/14 4:36 下午
+     * @param array: 数组
+     * @param value: 被检查的元素
+     * @return boolean
+    */
+    public static boolean contains(float[] array, float value) {
+        return indexOf(array, value) > Constant.NEGATIVE_ONE;
+    }
+
+    /**
+     * [数组中是否包含元素](Does the array contain elements)
+     * @description: zh - 数组中是否包含元素
+     * @description: en - Does the array contain elements
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/14 4:37 下午
+     * @param array: 数组
+     * @param value: 被检查的元素
+     * @return boolean
+    */
+    public static boolean contains(boolean[] array, boolean value) {
+        return indexOf(array, value) > Constant.NEGATIVE_ONE;
+    }
 }

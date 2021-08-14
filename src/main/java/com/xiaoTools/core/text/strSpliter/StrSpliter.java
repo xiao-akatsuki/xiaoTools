@@ -4,6 +4,7 @@ import com.xiaoTools.core.regular.patternPool.PatternPool;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.charUtil.CharUtil;
 import com.xiaoTools.util.numUtil.NumUtil;
+import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.util.ArrayList;
 import java.util.List;

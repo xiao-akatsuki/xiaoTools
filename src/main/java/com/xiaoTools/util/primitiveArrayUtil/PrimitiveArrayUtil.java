@@ -1,6 +1,7 @@
 package com.xiaoTools.util.primitiveArrayUtil;
 
 import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.util.numUtil.NumUtil;
 
 /**
  * [原始类型数组工具类](Primitive type array utility class)
@@ -764,7 +765,7 @@ public class PrimitiveArrayUtil {
     public static int indexOf(double[] array, double value) {
         if (Constant.NULL != array) {
             for (int i = Constant.ZERO; i < array.length; i++) {
-                if (value == array[i]) {
+                if (NumUtil.equals(value,array[i])) {
                     return i;
                 }
             }
@@ -786,7 +787,7 @@ public class PrimitiveArrayUtil {
     public static int indexOf(float[] array, float value) {
         if (Constant.NULL != array) {
             for (int i = Constant.ZERO; i < array.length; i++) {
-                if (value == array[i]) {
+                if (NumUtil.equals(value,array[i])) {
                     return i;
                 }
             }
@@ -830,6 +831,160 @@ public class PrimitiveArrayUtil {
      * @return int
     */
     public static int lastIndexOf(long[] array, long value) {
+        if (Constant.NULL != array) {
+            for (int i = array.length - Constant.ONE; i >= Constant.ZERO; i--) {
+                if (value == array[i]) {
+                    return i;
+                }
+            }
+        }
+        return Constant.NEGATIVE_ONE;
+    }
+
+    /**
+     * [返回数组中指定元素所在最后的位置](Returns the last position of the specified element in the array)
+     * @description: zh - 返回数组中指定元素所在最后的位置
+     * @description: en - Returns the last position of the specified element in the array 
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/14 1:13 下午
+     * @param array: 数组
+     * @param value: 被检查的元素 
+     * @return int
+    */
+    public static int lastIndexOf(int[] array, int value) {
+        if (Constant.NULL != array) {
+            for (int i = array.length - Constant.ONE; i >= Constant.ZERO; i--) {
+                if (value == array[i]) {
+                    return i;
+                }
+            }
+        }
+        return Constant.NEGATIVE_ONE;
+    }
+
+    /**
+     * [返回数组中指定元素所在最后的位置](Returns the last position of the specified element in the array)
+     * @description: zh - 返回数组中指定元素所在最后的位置
+     * @description: en - Returns the last position of the specified element in the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/14 1:14 下午
+     * @param array: 数组
+     * @param value: 被检查的元素
+     * @return int
+    */
+    public static int lastIndexOf(short[] array, short value) {
+        if (Constant.NULL != array) {
+            for (int i = array.length - Constant.ONE; i >= Constant.ZERO; i--) {
+                if (value == array[i]) {
+                    return i;
+                }
+            }
+        }
+        return Constant.NEGATIVE_ONE;
+    }
+
+    /**
+     * [返回数组中指定元素所在最后的位置](Returns the last position of the specified element in the array)
+     * @description: zh - 返回数组中指定元素所在最后的位置
+     * @description: en - Returns the last position of the specified element in the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/14 1:15 下午
+     * @param array: 数组
+     * @param value: 被检查的元素
+     * @return int
+    */
+    public static int lastIndexOf(char[] array, char value) {
+        if (Constant.NULL != array) {
+            for (int i = array.length - Constant.ONE; i >= Constant.ZERO; i--) {
+                if (value == array[i]) {
+                    return i;
+                }
+            }
+        }
+        return Constant.NEGATIVE_ONE;
+    }
+
+    /**
+     * [返回数组中指定元素所在最后的位置](Returns the last position of the specified element in the array)
+     * @description: zh - 返回数组中指定元素所在最后的位置
+     * @description: en - Returns the last position of the specified element in the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/14 1:15 下午
+     * @param array: 数组
+     * @param value: 被检查的元素
+     * @return int
+    */
+    public static int lastIndexOf(byte[] array, byte value) {
+        if (Constant.NULL != array) {
+            for (int i = array.length - Constant.ONE; i >= Constant.ZERO; i--) {
+                if (value == array[i]) {
+                    return i;
+                }
+            }
+        }
+        return Constant.NEGATIVE_ONE;
+    }
+
+    /**
+     * [返回数组中指定元素所在最后的位置](Returns the last position of the specified element in the array)
+     * @description: zh - 返回数组中指定元素所在最后的位置
+     * @description: en - Returns the last position of the specified element in the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/14 1:16 下午
+     * @param array: 数组
+     * @param value: 被检查的元素
+     * @return int
+    */
+    public static int lastIndexOf(double[] array, double value) {
+        if (Constant.NULL != array) {
+            for (int i = array.length - Constant.ONE; i >= Constant.ZERO; i--) {
+                if (NumUtil.equals(value, array[i])) {
+                    return i;
+                }
+            }
+        }
+        return Constant.NEGATIVE_ONE;
+    }
+
+    /**
+     * [返回数组中指定元素所在最后的位置](Returns the last position of the specified element in the array)
+     * @description: zh - 返回数组中指定元素所在最后的位置
+     * @description: en - Returns the last position of the specified element in the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/14 1:18 下午
+     * @param array: 数组
+     * @param value: 被检查的元素
+     * @return int
+    */
+    public static int lastIndexOf(float[] array, float value) {
+        if (Constant.NULL != array) {
+            for (int i = array.length - Constant.ONE; i >= Constant.ZERO; i--) {
+                if (NumUtil.equals(value, array[i])) {
+                    return i;
+                }
+            }
+        }
+        return Constant.NEGATIVE_ONE;
+    }
+
+    /**
+     * [返回数组中指定元素所在最后的位置](Returns the last position of the specified element in the array)
+     * @description: zh - 返回数组中指定元素所在最后的位置
+     * @description: en - Returns the last position of the specified element in the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/14 1:20 下午
+     * @param array: 数组
+     * @param value: 被检查的元素
+     * @return int
+    */
+    public static int lastIndexOf(boolean[] array, boolean value) {
         if (Constant.NULL != array) {
             for (int i = array.length - Constant.ONE; i >= Constant.ZERO; i--) {
                 if (value == array[i]) {

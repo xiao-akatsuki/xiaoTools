@@ -608,6 +608,18 @@ public class Constant {
 
     public static final short[] SHORTS_DOWN_NULL = null;
 
+    public static final Float[] FLOATS_UP_NULL = null;
+
+    public static final float[] FLOATS_DOWN_NULL = null;
+
+    public static final Double[] DOUBLES_UP_NULL = null;
+
+    public static final double[] DOUBLES_DOWN_NULL = null;
+
+    public static final Boolean[] BOOLEANS_UP_NULL = null;
+
+    public static final boolean[] BOOLEANS_DOWN_NULL = null;
+
     public static final StringReader STRING_READER_NULL = null;
 
     public static final Charset CHARSET_NULL = null;

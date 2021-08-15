@@ -1225,6 +1225,69 @@ public class PrimitiveArrayUtil {
         return array;
     }
 
+    /**
+     * [将原始类型数组包装为包装类型](Wrap the original type array as a wrapper type)
+     * @description: zh - 将原始类型数组包装为包装类型
+     * @description: en - Wrap the original type array as a wrapper type
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 8:26 上午
+     * @param values: 原始类型数组
+     * @return java.lang.Float[]
+    */
+    public static Float[] wrap(float... values) {
+        if (Constant.NULL == values) { return Constant.FLOATS_UP_NULL; }
+        final int length = values.length;
+        if (Constant.ZERO == length) { return new Float[Constant.ZERO]; }
+        final Float[] array = new Float[length];
+        for (int i = Constant.ZERO; i < length; i++) {
+            array[i] = values[i];
+        }
+        return array;
+    }
+
+    /**
+     * [将原始类型数组包装为包装类型](Wrap the original type array as a wrapper type)
+     * @description: zh - 将原始类型数组包装为包装类型
+     * @description: en - Wrap the original type array as a wrapper type
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 8:28 上午
+     * @param values: 原始类型数组
+     * @return java.lang.Double[]
+    */
+    public static Double[] wrap(double... values) {
+        if (Constant.NULL == values) { return Constant.DOUBLES_UP_NULL; }
+        final int length = values.length;
+        if (Constant.ZERO == length) { return new Double[Constant.ZERO]; }
+        final Double[] array = new Double[length];
+        for (int i = Constant.ZERO; i < length; i++) {
+            array[i] = values[i];
+        }
+        return array;
+    }
+
+    /**
+     * [将原始类型数组包装为包装类型](Wrap the original type array as a wrapper type)
+     * @description: zh - 将原始类型数组包装为包装类型
+     * @description: en - Wrap the original type array as a wrapper type
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 8:31 上午
+     * @param values: 原始类型数组
+     * @return java.lang.Boolean[]
+    */
+    public static Boolean[] wrap(boolean... values) {
+        if (Constant.NULL == values) { return Constant.BOOLEANS_UP_NULL; }
+        final int length = values.length;
+        if (Constant.ZERO == length) { return new Boolean[Constant.ZERO]; }
+        final Boolean[] array = new Boolean[length];
+        for (int i = Constant.ZERO; i < length; i++) {
+            array[i] = values[i];
+        }
+        return array;
+    }
+
     /* 包装类数组转为原始类型数组 ------------------------------------------------------------------------------- unWrap */
 
     /**
@@ -1328,6 +1391,69 @@ public class PrimitiveArrayUtil {
         final short[] array = new short[length];
         for (int i = Constant.ZERO; i < length; i++) {
             array[i] = ObjectUtil.defaultIfNull(values[i], (short) Constant.ZERO);
+        }
+        return array;
+    }
+
+    /**
+     * [包装类数组转为原始类型数组](Convert wrapper class array to original type array)
+     * @description: zh - 包装类数组转为原始类型数组
+     * @description: en - Convert wrapper class array to original type array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 8:27 上午
+     * @param values: 包装类型数组
+     * @return float[]
+    */
+    public static float[] unWrap(Float... values) {
+        if (Constant.NULL == values) { return Constant.FLOATS_DOWN_NULL; }
+        final int length = values.length;
+        if (Constant.ZERO == length) { return new float[Constant.ZERO]; }
+        final float[] array = new float[length];
+        for (int i = Constant.ZERO; i < length; i++) {
+            array[i] = ObjectUtil.defaultIfNull(values[i], Constant.FLOAT_ZERO);
+        }
+        return array;
+    }
+
+    /**
+     * [包装类数组转为原始类型数组](Convert wrapper class array to original type array)
+     * @description: zh - 包装类数组转为原始类型数组
+     * @description: en - Convert wrapper class array to original type array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 8:30 上午
+     * @param values: 包装类型数组
+     * @return double[]
+    */
+    public static double[] unWrap(Double... values) {
+        if (Constant.NULL == values) { return Constant.DOUBLES_DOWN_NULL; }
+        final int length = values.length;
+        if (Constant.ZERO == length) { return new double[Constant.ZERO]; }
+        final double[] array = new double[length];
+        for (int i = Constant.ZERO; i < length; i++) {
+            array[i] = ObjectUtil.defaultIfNull(values[i], Constant.DOUBLE_ZERO);
+        }
+        return array;
+    }
+
+    /**
+     * [包装类数组转为原始类型数组](Convert wrapper class array to original type array)
+     * @description: zh - 包装类数组转为原始类型数组
+     * @description: en - Convert wrapper class array to original type array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 8:32 上午
+     * @param values: 包装类型数组
+     * @return boolean[]
+    */
+    public static boolean[] unWrap(Boolean... values) {
+        if (Constant.NULL == values) { return Constant.BOOLEANS_DOWN_NULL; }
+        final int length = values.length;
+        if (Constant.ZERO == length) { return new boolean[Constant.ZERO]; }
+        final boolean[] array = new boolean[length];
+        for (int i = Constant.ZERO; i < length; i++) {
+            array[i] = ObjectUtil.defaultIfNull(values[i], Constant.FALSE);
         }
         return array;
     }

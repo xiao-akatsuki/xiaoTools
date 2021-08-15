@@ -8,6 +8,7 @@ import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.collUtil.CollUtil;
 import com.xiaoTools.util.objectUtil.ObjectUtil;
 import com.xiaoTools.util.regularUtil.method.Func1;
+import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -311,7 +312,7 @@ public class RegularUtil {
                 int group = Integer.parseInt(var);
                 template = template.replace(Constant.STRING_DOLLAR + var, matcher.group(group));
             }
-            contentHolder.set(StrUtil.sub(content, matcher.end(), content.length()));
+            contentHolder.set(StrUtil.subString(content, matcher.end(), content.length()));
             return template;
         }
         return Constant.STRING_NULL;
@@ -478,7 +479,7 @@ public class RegularUtil {
         if (Constant.NULL == content || Constant.NULL == regex) { return StrUtil.str(content); }
         final Pattern pattern = PatternPool.get(regex, Pattern.DOTALL);
         Matcher matcher = pattern.matcher(content);
-        return matcher.find() ? StrUtil.sub(content, matcher.end(), content.length()) : StrUtil.str(content);
+        return matcher.find() ? StrUtil.subString(content, matcher.end(), content.length()) : StrUtil.str(content);
     }
 
     /*匹配pattern的个数-----------------------------------------------------------count*/

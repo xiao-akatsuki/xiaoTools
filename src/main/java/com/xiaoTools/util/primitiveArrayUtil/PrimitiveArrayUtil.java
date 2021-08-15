@@ -4,6 +4,9 @@ import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.numUtil.NumUtil;
 import com.xiaoTools.util.objectUtil.ObjectUtil;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 /**
  * [原始类型数组工具类](Primitive type array utility class)
  * @description: zh - 原始类型数组工具类
@@ -1457,4 +1460,303 @@ public class PrimitiveArrayUtil {
         }
         return array;
     }
+
+    /* 获取子数组 ------------------------------------------------------------------------------- sub */
+
+    /**
+     * [获取子数组](Get subarray)
+     * @description: zh - 获取子数组
+     * @description: en - Get subarray
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 1:47 下午
+     * @param array: 数组
+     * @param start: 开始位置
+     * @param end: 结束位置
+     * @return byte[]
+    */
+    public static byte[] sub(byte[] array, int start, int end) {
+        int length = Array.getLength(array);
+        if (start < Constant.ZERO) {
+            start += length;
+        }
+        if (end < Constant.ZERO) {
+            end += length;
+        }
+        if (start == length) {
+            return new byte[Constant.ZERO];
+        }
+        if (start > end) {
+            int tmp = start;
+            start = end;
+            end = tmp;
+        }
+        if (end > length) {
+            if (start >= length) {
+                return new byte[Constant.ZERO];
+            }
+            end = length;
+        }
+        return Arrays.copyOfRange(array, start, end);
+    }
+
+    /**
+     * [获取子数组](Get subarray)
+     * @description: zh - 获取子数组
+     * @description: en - Get subarray
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 1:48 下午
+     * @param array: 数组
+     * @param start: 开始位置
+     * @param end: 结束位置
+     * @return int[]
+    */
+    public static int[] sub(int[] array, int start, int end){
+        int length = Array.getLength(array);
+        if (start < Constant.ZERO) {
+            start += length;
+        }
+        if (end < Constant.ZERO) {
+            end += length;
+        }
+        if (start == length) {
+            return new int[Constant.ZERO];
+        }
+        if (start > end) {
+            int tmp = start;
+            start = end;
+            end = tmp;
+        }
+        if (end > length) {
+            if (start >= length) {
+                return new int[Constant.ZERO];
+            }
+            end = length;
+        }
+        return Arrays.copyOfRange(array, start, end);
+    }
+
+    /**
+     * [获取子数组](Get subarray)
+     * @description: zh - 获取子数组
+     * @description: en - Get subarray
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 1:48 下午
+     * @param array: 数组
+     * @param start: 开始位置
+     * @param end: 结束位置
+     * @return long[]
+    */
+    public static long[] sub(long[] array, int start, int end) {
+        int length = Array.getLength(array);
+        if (start < Constant.ZERO) {
+            start += length;
+        }
+        if (end < Constant.ZERO) {
+            end += length;
+        }
+        if (start == length) {
+            return new long[Constant.ZERO];
+        }
+        if (start > end) {
+            int tmp = start;
+            start = end;
+            end = tmp;
+        }
+        if (end > length) {
+            if (start >= length) {
+                return new long[Constant.ZERO];
+            }
+            end = length;
+        }
+        return Arrays.copyOfRange(array, start, end);
+    }
+
+    /**
+     * [获取子数组](Get subarray)
+     * @description: zh - 获取子数组
+     * @description: en - Get subarray
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 1:49 下午
+     * @param array: 数组
+     * @param start: 开始位置
+     * @param end: 结束位置
+     * @return char[]
+    */
+    public static char[] sub(char[] array, int start, int end) {
+        int length = Array.getLength(array);
+        if (start < Constant.ZERO) {
+            start += length;
+        }
+        if (end < Constant.ZERO) {
+            end += length;
+        }
+        if (start == length) {
+            return new char[Constant.ZERO];
+        }
+        if (start > end) {
+            int tmp = start;
+            start = end;
+            end = tmp;
+        }
+        if (end > length) {
+            if (start >= length) {
+                return new char[Constant.ZERO];
+            }
+            end = length;
+        }
+        return Arrays.copyOfRange(array, start, end);
+    }
+
+    /**
+     * [获取子数组](Get subarray)
+     * @description: zh - 获取子数组
+     * @description: en - Get subarray
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 1:48 下午
+     * @param array: 数组
+     * @param start: 开始位置
+     * @param end: 结束位置
+     * @return short[]
+    */
+    public static short[] sub(short[] array, int start, int end) {
+        int length = Array.getLength(array);
+        if (start < Constant.ZERO) {
+            start += length;
+        }
+        if (end < Constant.ZERO) {
+            end += length;
+        }
+        if (start == length) {
+            return new short[Constant.ZERO];
+        }
+        if (start > end) {
+            int tmp = start;
+            start = end;
+            end = tmp;
+        }
+        if (end > length) {
+            if (start >= length) {
+                return new short[Constant.ZERO];
+            }
+            end = length;
+        }
+        return Arrays.copyOfRange(array, start, end);
+    }
+
+    /**
+     * [获取子数组](Get subarray)
+     * @description: zh - 获取子数组
+     * @description: en - Get subarray
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 1:49 下午
+     * @param array: 数组
+     * @param start: 开始位置
+     * @param end: 结束位置
+     * @return double[]
+    */
+    public static double[] sub(double[] array, int start, int end) {
+        int length = Array.getLength(array);
+        if (start < Constant.ZERO) {
+            start += length;
+        }
+        if (end < Constant.ZERO) {
+            end += length;
+        }
+        if (start == length) {
+            return new double[Constant.ZERO];
+        }
+        if (start > end) {
+            int tmp = start;
+            start = end;
+            end = tmp;
+        }
+        if (end > length) {
+            if (start >= length) {
+                return new double[Constant.ZERO];
+            }
+            end = length;
+        }
+        return Arrays.copyOfRange(array, start, end);
+    }
+
+    /**
+     * [获取子数组](Get subarray)
+     * @description: zh - 获取子数组
+     * @description: en - Get subarray
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 1:47 下午
+     * @param array: 数组
+     * @param start: 开始位置
+     * @param end: 结束位置
+     * @return float[]
+    */
+    public static float[] sub(float[] array, int start, int end) {
+        int length = Array.getLength(array);
+        if (start < Constant.ZERO) {
+            start += length;
+        }
+        if (end < Constant.ZERO) {
+            end += length;
+        }
+        if (start == length) {
+            return new float[Constant.ZERO];
+        }
+        if (start > end) {
+            int tmp = start;
+            start = end;
+            end = tmp;
+        }
+        if (end > length) {
+            if (start >= length) {
+                return new float[Constant.ZERO];
+            }
+            end = length;
+        }
+        return Arrays.copyOfRange(array, start, end);
+    }
+
+    /**
+     * [获取子数组](Get subarray)
+     * @description: zh - 获取子数组
+     * @description: en - Get subarray
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 1:45 下午
+     * @param array: 数组
+     * @param start: 开始位置
+     * @param end: 结束位置
+     * @return boolean[]
+    */
+    public static boolean[] sub(boolean[] array, int start, int end) {
+        int length = Array.getLength(array);
+        if (start < Constant.ZERO) {
+            start += length;
+        }
+        if (end < Constant.ZERO) {
+            end += length;
+        }
+        if (start == length) {
+            return new boolean[Constant.ZERO];
+        }
+        if (start > end) {
+            int tmp = start;
+            start = end;
+            end = tmp;
+        }
+        if (end > length) {
+            if (start >= length) {
+                return new boolean[Constant.ZERO];
+            }
+            end = length;
+        }
+        return Arrays.copyOfRange(array, start, end);
+    }
+
 }

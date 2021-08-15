@@ -2104,10 +2104,8 @@ public class PrimitiveArrayUtil {
         final Object result = Array.newInstance(array.getClass().getComponentType(), length - Constant.ONE);
         System.arraycopy(array, Constant.ZERO, result, Constant.ZERO, index);
         if (index < length - Constant.ONE) {
-            // 后半部分
             System.arraycopy(array, index + Constant.ONE, result, index, length - index - Constant.ONE);
         }
-
         return result;
     }
 }

@@ -1964,5 +1964,150 @@ public class PrimitiveArrayUtil {
         return sb.toString();
     }
 
+    /* 移除数组中对应位置的元素 ------------------------------------------------------------------------------- remove */
 
+    /**
+     * [移除数组中对应位置的元素](Remove the element at the corresponding position in the array)
+     * @description: zh - 移除数组中对应位置的元素
+     * @description: en - Remove the element at the corresponding position in the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 4:02 下午
+     * @param array: 数组对象，可以是对象数组，也可以原始类型数组
+     * @param index: 位置，如果位置小于0或者大于长度，返回原数组
+     * @return long[]
+    */
+    public static long[] remove(long[] array, int index) throws IllegalArgumentException {
+        return (long[]) remove((Object) array, index);
+    }
+
+    /**
+     * [移除数组中对应位置的元素](Remove the element at the corresponding position in the array)
+     * @description: zh - 移除数组中对应位置的元素
+     * @description: en - Remove the element at the corresponding position in the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 4:14 下午
+     * @param array: 数组对象，可以是对象数组，也可以原始类型数组
+     * @param index: 位置，如果位置小于0或者大于长度，返回原数组
+     * @return int[]
+    */
+    public static int[] remove(int[] array, int index) throws IllegalArgumentException {
+        return (int[]) remove((Object) array, index);
+    }
+
+    /**
+     * [移除数组中对应位置的元素](Remove the element at the corresponding position in the array)
+     * @description: zh - 移除数组中对应位置的元素
+     * @description: en - Remove the element at the corresponding position in the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 4:14 下午
+     * @param array: 数组对象，可以是对象数组，也可以原始类型数组
+     * @param index: 位置，如果位置小于0或者大于长度，返回原数组
+     * @return short[]
+    */
+    public static short[] remove(short[] array, int index) throws IllegalArgumentException {
+        return (short[]) remove((Object) array, index);
+    }
+
+    /**
+     * [移除数组中对应位置的元素](Remove the element at the corresponding position in the array)
+     * @description: zh - 移除数组中对应位置的元素
+     * @description: en - Remove the element at the corresponding position in the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 4:13 下午
+     * @param array: 数组对象，可以是对象数组，也可以原始类型数组
+     * @param index: 位置，如果位置小于0或者大于长度，返回原数组
+     * @return char[]
+    */
+    public static char[] remove(char[] array, int index) throws IllegalArgumentException {
+        return (char[]) remove((Object) array, index);
+    }
+
+    /**
+     * [移除数组中对应位置的元素](Remove the element at the corresponding position in the array)
+     * @description: zh - 移除数组中对应位置的元素
+     * @description: en - Remove the element at the corresponding position in the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 4:13 下午
+     * @param array: 数组对象，可以是对象数组，也可以原始类型数组
+     * @param index: 位置，如果位置小于0或者大于长度，返回原数组
+     * @return byte[]
+    */
+    public static byte[] remove(byte[] array, int index) throws IllegalArgumentException {
+        return (byte[]) remove((Object) array, index);
+    }
+
+    /**
+     * [移除数组中对应位置的元素](Remove the element at the corresponding position in the array)
+     * @description: zh - 移除数组中对应位置的元素
+     * @description: en - Remove the element at the corresponding position in the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 4:12 下午
+     * @param array: 数组对象，可以是对象数组，也可以原始类型数组
+     * @param index: 位置，如果位置小于0或者大于长度，返回原数组
+     * @return float[]
+    */
+    public static float[] remove(float[] array, int index) throws IllegalArgumentException {
+        return (float[]) remove((Object) array, index);
+    }
+
+    /**
+     * [移除数组中对应位置的元素](Remove the element at the corresponding position in the array)
+     * @description: zh - 移除数组中对应位置的元素
+     * @description: en - Remove the element at the corresponding position in the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 4:12 下午
+     * @param array: 数组对象，可以是对象数组，也可以原始类型数组
+     * @param index: 位置，如果位置小于0或者大于长度，返回原数组
+     * @return double[]
+    */
+    public static double[] remove(double[] array, int index) throws IllegalArgumentException {
+        return (double[]) remove((Object) array, index);
+    }
+
+    /**
+     * [移除数组中对应位置的元素](Remove the element at the corresponding position in the array)
+     * @description: zh - 移除数组中对应位置的元素
+     * @description: en - Remove the element at the corresponding position in the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 4:05 下午
+     * @param array: 数组对象，可以是对象数组，也可以原始类型数组
+     * @param index: 位置，如果位置小于0或者大于长度，返回原数组
+     * @return boolean[]
+    */
+    public static boolean[] remove(boolean[] array, int index) throws IllegalArgumentException {
+        return (boolean[]) remove((Object) array, index);
+    }
+
+    /**
+     * [移除数组中对应位置的元素](Remove the element at the corresponding position in the array)
+     * @description: zh - 移除数组中对应位置的元素
+     * @description: en - Remove the element at the corresponding position in the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 4:04 下午
+     * @param array: 数组对象，可以是对象数组，也可以原始类型数组
+     * @param index: 位置，如果位置小于0或者大于长度，返回原数组
+     * @return java.lang.Object
+    */
+    public static Object remove(Object array, int index) throws IllegalArgumentException {
+        if (Constant.NULL == array) { return Constant.NULL; }
+        int length = Array.getLength(array);
+        if (index < Constant.ZERO || index >= length) { return array; }
+        final Object result = Array.newInstance(array.getClass().getComponentType(), length - Constant.ONE);
+        System.arraycopy(array, Constant.ZERO, result, Constant.ZERO, index);
+        if (index < length - Constant.ONE) {
+            // 后半部分
+            System.arraycopy(array, index + Constant.ONE, result, index, length - index - Constant.ONE);
+        }
+
+        return result;
+    }
 }

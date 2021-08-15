@@ -1759,4 +1759,210 @@ public class PrimitiveArrayUtil {
         return Arrays.copyOfRange(array, start, end);
     }
 
+    /* 分隔符将数组转换为字符串 ------------------------------------------------------------------------------- join */
+
+    /**
+     * [分隔符将数组转换为字符串](The delimiter converts the array to a string)
+     * @description: zh - 分隔符将数组转换为字符串
+     * @description: en - The delimiter converts the array to a string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 3:49 下午
+     * @param array: 数组
+     * @param conjunction: 分隔符
+     * @return java.lang.String
+    */
+    public static String join(int[] array, CharSequence conjunction) {
+        if (Constant.NULL == array) {
+            return Constant.STRING_NULL;
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        boolean isFirst = Constant.TRUE;
+        for (int item : array) {
+            if (isFirst) {
+                isFirst = Constant.FALSE;
+            } else {
+                sb.append(conjunction);
+            }
+            sb.append(item);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * [分隔符将数组转换为字符串](The delimiter converts the array to a string)
+     * @description: zh - 分隔符将数组转换为字符串
+     * @description: en - The delimiter converts the array to a string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 3:50 下午
+     * @param array: 数组
+     * @param conjunction: 分隔符
+     * @return java.lang.String
+    */
+    public static String join(short[] array, CharSequence conjunction) {
+        if (Constant.NULL == array) {
+            return Constant.STRING_NULL;
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        boolean isFirst = Constant.TRUE;
+        for (short item : array) {
+            if (isFirst) {
+                isFirst = Constant.FALSE;
+            } else {
+                sb.append(conjunction);
+            }
+            sb.append(item);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * [分隔符将数组转换为字符串](The delimiter converts the array to a string)
+     * @description: zh - 分隔符将数组转换为字符串
+     * @description: en - The delimiter converts the array to a string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 3:50 下午
+     * @param array: 数组
+     * @param conjunction: 分隔符
+     * @return java.lang.String
+     */
+    public static String join(char[] array, CharSequence conjunction) {
+        if (Constant.NULL == array) {
+            return Constant.STRING_NULL;
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        boolean isFirst = Constant.TRUE;
+        for (char item : array) {
+            if (isFirst) {
+                isFirst = Constant.FALSE;
+            } else {
+                sb.append(conjunction);
+            }
+            sb.append(item);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * [分隔符将数组转换为字符串](The delimiter converts the array to a string)
+     * @description: zh - 分隔符将数组转换为字符串
+     * @description: en - The delimiter converts the array to a string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 3:50 下午
+     * @param array: 数组
+     * @param conjunction: 分隔符
+     * @return java.lang.String
+     */
+    public static String join(byte[] array, CharSequence conjunction) {
+        if (Constant.NULL == array) {
+            return Constant.STRING_NULL;
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        boolean isFirst = Constant.TRUE;
+        for (byte item : array) {
+            if (isFirst) {
+                isFirst = Constant.FALSE;
+            } else {
+                sb.append(conjunction);
+            }
+            sb.append(item);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * [分隔符将数组转换为字符串](The delimiter converts the array to a string)
+     * @description: zh - 分隔符将数组转换为字符串
+     * @description: en - The delimiter converts the array to a string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 3:50 下午
+     * @param array: 数组
+     * @param conjunction: 分隔符
+     * @return java.lang.String
+     */
+    public static String join(boolean[] array, CharSequence conjunction) {
+        if (Constant.NULL == array) {
+            return Constant.STRING_NULL;
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        boolean isFirst = Constant.TRUE;
+        for (boolean item : array) {
+            if (isFirst) {
+                isFirst = Constant.FALSE;
+            } else {
+                sb.append(conjunction);
+            }
+            sb.append(item);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * [分隔符将数组转换为字符串](The delimiter converts the array to a string)
+     * @description: zh - 分隔符将数组转换为字符串
+     * @description: en - The delimiter converts the array to a string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 3:50 下午
+     * @param array: 数组
+     * @param conjunction: 分隔符
+     * @return java.lang.String
+     */
+    public static String join(float[] array, CharSequence conjunction) {
+        if (Constant.NULL == array) {
+            return Constant.STRING_NULL;
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        boolean isFirst = Constant.TRUE;
+        for (float item : array) {
+            if (isFirst) {
+                isFirst = Constant.FALSE;
+            } else {
+                sb.append(conjunction);
+            }
+            sb.append(item);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * [分隔符将数组转换为字符串](The delimiter converts the array to a string)
+     * @description: zh - 分隔符将数组转换为字符串
+     * @description: en - The delimiter converts the array to a string
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/15 3:50 下午
+     * @param array: 数组
+     * @param conjunction: 分隔符
+     * @return java.lang.String
+     */
+    public static String join(double[] array, CharSequence conjunction) {
+        if (Constant.NULL == array) {
+            return Constant.STRING_NULL;
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        boolean isFirst = Constant.TRUE;
+        for (double item : array) {
+            if (isFirst) {
+                isFirst = Constant.FALSE;
+            } else {
+                sb.append(conjunction);
+            }
+            sb.append(item);
+        }
+        return sb.toString();
+    }
+
+
 }

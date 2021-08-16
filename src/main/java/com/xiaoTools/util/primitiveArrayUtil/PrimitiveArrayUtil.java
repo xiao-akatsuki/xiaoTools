@@ -2108,4 +2108,127 @@ public class PrimitiveArrayUtil {
         }
         return result;
     }
+
+    /* 移除数组中指定的元素 ------------------------------------------------------------------------------- remove element */
+
+    /**
+     * [移除数组中指定的元素](Removes the specified element from the array)
+     * @description: zh - 移除数组中指定的元素
+     * @description: en - Removes the specified element from the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/16 12:50 下午
+     * @param array: 数组对象，可以是对象数组，也可以原始类型数组
+     * @param element: 要移除的元素
+     * @return long[]
+    */
+    public static long[] removeEle(long[] array, long element) throws IllegalArgumentException {
+        return remove(array, indexOf(array, element));
+    }
+
+    /**
+     * [移除数组中指定的元素](Removes the specified element from the array)
+     * @description: zh - 移除数组中指定的元素
+     * @description: en - Removes the specified element from the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/16 12:52 下午
+     * @param array: 数组对象，可以是对象数组，也可以原始类型数组
+     * @param element: 要移除的元素
+     * @return int[]
+    */
+    public static int[] removeEle(int[] array, int element) throws IllegalArgumentException {
+        return remove(array, indexOf(array, element));
+    }
+
+    /**
+     * [移除数组中指定的元素](Removes the specified element from the array)
+     * @description: zh - 移除数组中指定的元素
+     * @description: en - Removes the specified element from the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/16 12:53 下午
+     * @param array: 数组对象，可以是对象数组，也可以原始类型数组
+     * @param element: 要移除的元素
+     * @return short[]
+    */
+    public static short[] removeEle(short[] array, short element) throws IllegalArgumentException {
+        return remove(array, indexOf(array, element));
+    }
+
+    /**
+     * [移除数组中指定的元素](Removes the specified element from the array)
+     * @description: zh - 移除数组中指定的元素
+     * @description: en - Removes the specified element from the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/16 12:55 下午
+     * @param array: 数组对象，可以是对象数组，也可以原始类型数组
+     * @param element: 要移除的元素
+     * @return char[]
+    */
+    public static char[] removeEle(char[] array, char element) throws IllegalArgumentException {
+        return remove(array, indexOf(array, element));
+    }
+
+    /**
+     * [移除数组中指定的元素](Removes the specified element from the array)
+     * @description: zh - 移除数组中指定的元素
+     * @description: en - Removes the specified element from the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/16 12:57 下午
+     * @param array: 数组对象，可以是对象数组，也可以原始类型数组
+     * @param element: 要移除的元素
+     * @return byte[]
+    */
+    public static byte[] removeEle(byte[] array, byte element) throws IllegalArgumentException {
+        return remove(array, indexOf(array, element));
+    }
+
+    /**
+     * [移除数组中指定的元素](Removes the specified element from the array)
+     * @description: zh - 移除数组中指定的元素
+     * @description: en - Removes the specified element from the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/16 12:57 下午
+     * @param array: 数组对象，可以是对象数组，也可以原始类型数组
+     * @param element: 要移除的元素
+     * @return double[]
+    */
+    public static double[] removeEle(double[] array, double element) throws IllegalArgumentException {
+        return remove(array, indexOf(array, element));
+    }
+
+    /**
+     * [移除数组中指定的元素](Removes the specified element from the array)
+     * @description: zh - 移除数组中指定的元素
+     * @description: en - Removes the specified element from the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/16 12:57 下午
+     * @param array: 数组对象，可以是对象数组，也可以原始类型数组
+     * @param element: 要移除的元素
+     * @return float[]
+    */
+    public static float[] removeEle(float[] array, float element) throws IllegalArgumentException {
+        return remove(array, indexOf(array, element));
+    }
+
+    /**
+     * [移除数组中指定的元素](Removes the specified element from the array)
+     * @description: zh - 移除数组中指定的元素
+     * @description: en - Removes the specified element from the array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/16 12:58 下午
+     * @param array: 数组对象，可以是对象数组，也可以原始类型数组
+     * @param element: 要移除的元素
+     * @return boolean[]
+    */
+    public static boolean[] removeEle(boolean[] array, boolean element) throws IllegalArgumentException {
+        return remove(array, indexOf(array, element));
+    }
+
 }

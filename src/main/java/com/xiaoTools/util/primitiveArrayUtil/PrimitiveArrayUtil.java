@@ -2300,4 +2300,264 @@ public class PrimitiveArrayUtil {
 		}
 		return array;
 	}
+
+    /**
+     * [反转数组](Invert array)
+     * @description zh - 反转数组
+     * @description en - Invert array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-16 18:30:14
+     * @param array : 数组
+     * @return int[]
+     */
+    public static int[] reverse(int[] array) {
+		return reverse(array, Constant.ZERO, array.length);
+	}
+
+    /**
+     * [反转数组](Invert array)
+     * @description zh - 反转数组
+     * @description en - Invert array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-16 19:05:20
+     * @param array 数组
+     * @param start 起始位置 
+     * @param end 结束位置
+     * @return short[]
+     */
+    public static short[] reverse(short[] array, final int start, final int end) {
+		if (isEmpty(array)) {
+			return array;
+		}
+		int i = NumUtil.max(start, Constant.ZERO);
+		int j = NumUtil.min(array.length, end) - Constant.ONE;
+		short tmp;
+		while (j > i) {
+			swap(array, i, j);
+			j--;
+			i++;
+		}
+		return array;
+	}
+
+    /**
+     * [反转数组](Invert array)
+     * @description zh - 反转数组
+     * @description en - Invert array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-16 19:06:38
+     * @param array : 数组
+     * @return short[]
+     */
+    public static short[] reverse(short[] array) {
+		return reverse(array, Constant.ZERO, array.length);
+	}
+
+    /**
+     * [反转数组](Invert array)
+     * @description zh - 反转数组
+     * @description en - Invert array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-16 19:09:14
+     * @param array 数组
+     * @param start 起始位置 
+     * @param end 结束位置
+     * @return char[]
+     */
+    public static char[] reverse(char[] array, final int start, final int end) {
+		if (isEmpty(array)) {
+			return array;
+		}
+		int i = NumUtil.max(start, Constant.ZERO);
+		int j = NumUtil.min(array.length, end) - Constant.ONE;
+		char tmp;
+		while (j > i) {
+			swap(array, i, j);
+			j--;
+			i++;
+		}
+		return array;
+	}
+
+    /**
+     * [反转数组](Invert array)
+     * @description zh - 反转数组
+     * @description en - Invert array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-16 19:12:03
+     * @param array : 数组
+     * @return char[]
+     */
+    public static char[] reverse(char[] array) {
+		return reverse(array, Constant.ZERO, array.length);
+	}
+
+    /**
+     * [反转数组](Invert array)
+     * @description zh - 反转数组
+     * @description en - Invert array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-16 19:13:41
+     * @param array 数组
+     * @param start 起始位置 
+     * @param end 结束位置
+     * @return byte[]
+     */
+    public static byte[] reverse(byte[] array, final int start, final int end) {
+		if (isEmpty(array)) {
+			return array;
+		}
+		int i = NumUtil.max(start, Constant.ZERO);
+		int j = NumUtil.min(array.length, end) - Constant.ONE;
+		byte tmp;
+		while (j > i) {
+			swap(array, i, j);
+			j--;
+			i++;
+		}
+		return array;
+	}
+
+    /**
+     * [反转数组](Invert array)
+     * @description zh - 反转数组
+     * @description en - Invert array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-16 19:15:39
+     * @param array : 数组
+     * @return byte[]
+     */
+    public static byte[] reverse(byte[] array) {
+		return reverse(array, Constant.ZERO, array.length);
+	}
+
+    /**
+     * [反转数组](Invert array)
+     * @description zh - 反转数组
+     * @description en - Invert array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-16 19:17:04
+     * @param array 数组
+     * @param start 起始位置 
+     * @param end 结束位置
+     * @return double[]
+     */
+    public static double[] reverse(double[] array, final int start, final int end) {
+		if (isEmpty(array)) {
+			return array;
+		}
+		int i = NumUtil.max(start, Constant.ZERO);
+		int j = NumUtil.min(array.length, end) - Constant.ONE;
+		double tmp;
+		while (j > i) {
+			swap(array, i, j);
+			j--;
+			i++;
+		}
+		return array;
+	}
+
+    /**
+     * [反转数组](Invert array)
+     * @description zh - 反转数组
+     * @description en - Invert array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-16 19:18:15
+     * @param array : 数组
+     * @return double[]
+     */
+    public static double[] reverse(double[] array) {
+		return reverse(array, Constant.ZERO, array.length);
+	}
+
+    /**
+     * [反转数组](Invert array)
+     * @description zh - 反转数组
+     * @description en - Invert array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-16 19:19:00
+     * @param array 数组
+     * @param start 起始位置 
+     * @param end 结束位置
+     * @return float[]
+     */
+    public static float[] reverse(float[] array, final int start, final int end) {
+		if (isEmpty(array)) {
+			return array;
+		}
+		int i = NumUtil.max(start, Constant.ZERO);
+		int j = NumUtil.min(array.length, end) - Constant.ONE;
+		float tmp;
+		while (j > i) {
+			swap(array, i, j);
+			j--;
+			i++;
+		}
+		return array;
+	}
+
+    /**
+     * [反转数组](Invert array)
+     * @description zh - 反转数组
+     * @description en - Invert array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-16 19:21:56
+     * @param array : 数组
+     * @return float[]
+     */
+    public static float[] reverse(float[] array) {
+		return reverse(array, Constant.ZERO, array.length);
+	}
+
+    /**
+     * [反转数组](Invert array)
+     * @description zh - 反转数组
+     * @description en - Invert array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-16 19:22:39
+     * @param array 数组
+     * @param start 起始位置 
+     * @param end 结束位置
+     * @return boolean[]
+     */
+    public static boolean[] reverse(boolean[] array, final int start, final int end) {
+		if (isEmpty(array)) {
+			return array;
+		}
+		int i = NumUtil.max(start, Constant.ZERO);
+		int j = NumUtil.min(array.length, end) - Constant.ONE;
+		boolean tmp;
+		while (j > i) {
+			swap(array, i, j);
+			j--;
+			i++;
+		}
+		return array;
+	}
+
+    /**
+     * [反转数组](Invert array)
+     * @description zh - 反转数组
+     * @description en - Invert array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-16 19:23:39
+     * @param array : 数组
+     * @return boolean[]
+     */
+    public static boolean[] reverse(boolean[] array) {
+		return reverse(array, Constant.ZERO, array.length);
+	}
 }

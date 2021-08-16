@@ -2231,4 +2231,47 @@ public class PrimitiveArrayUtil {
         return remove(array, indexOf(array, element));
     }
 
+    /* 反转数组 ------------------------------------------------------------------------------- reverse */
+
+    /**
+     * [反转数组](Invert array)
+     * @description: zh - 反转数组
+     * @description: en - Invert array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/16 1:06 下午
+     * @param array: 数组，会变更
+     * @param startIndexInclusive: 其实位置（包含）
+     * @param endIndexExclusive: 结束位置（不包含）
+     * @return long[]
+    */
+    public static long[] reverse(long[] array, final int startIndexInclusive, final int endIndexExclusive) {
+        if (isEmpty(array)) {
+            return array;
+        }
+        int i = Math.max(startIndexInclusive, Constant.ZERO);
+        int j = Math.min(array.length, endIndexExclusive) - Constant.ONE;
+        long tmp;
+        while (j > i) {
+            swap(array, i, j);
+            j--;
+            i++;
+        }
+        return array;
+    }
+
+    /**
+     * [反转数组](Invert array)
+     * @description: zh - 反转数组
+     * @description: en - Invert array
+     * @version: V1.0
+     * @author XiaoXunYao
+     * @since 2021/8/16 1:08 下午
+     * @param array: 数组
+     * @return long[]
+    */
+    public static long[] reverse(long[] array) {
+        return reverse(array, Constant.ZERO, array.length);
+    }
+
 }

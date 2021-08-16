@@ -2240,17 +2240,17 @@ public class PrimitiveArrayUtil {
      * @version: V1.0
      * @author XiaoXunYao
      * @since 2021/8/16 1:06 下午
-     * @param array: 数组，会变更
-     * @param startIndexInclusive: 其实位置（包含）
-     * @param endIndexExclusive: 结束位置（不包含）
+     * @param array : 数组，会变更
+     * @param start : 其实位置（包含）
+     * @param end : 结束位置（不包含）
      * @return long[]
     */
-    public static long[] reverse(long[] array, final int startIndexInclusive, final int endIndexExclusive) {
+    public static long[] reverse(long[] array, final int start, final int end) {
         if (isEmpty(array)) {
             return array;
         }
-        int i = Math.max(startIndexInclusive, Constant.ZERO);
-        int j = Math.min(array.length, endIndexExclusive) - Constant.ONE;
+        int i = NumUtil.max(start, Constant.ZERO);
+        int j = NumUtil.min(array.length, end) - Constant.ONE;
         long tmp;
         while (j > i) {
             swap(array, i, j);
@@ -2267,11 +2267,37 @@ public class PrimitiveArrayUtil {
      * @version: V1.0
      * @author XiaoXunYao
      * @since 2021/8/16 1:08 下午
-     * @param array: 数组
+     * @param array : 数组
      * @return long[]
     */
     public static long[] reverse(long[] array) {
         return reverse(array, Constant.ZERO, array.length);
     }
-
+    
+    /**
+     * [反转数组](Invert array)
+     * @description zh - 反转数组
+     * @description en - Invert array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-16 18:22:54
+     * @param array 数组
+     * @param start 起始位置 
+     * @param end 结束位置
+     * @return int[]
+     */
+    public static int[] reverse(int[] array, final int start, final int end) {
+		if (isEmpty(array)) {
+			return array;
+		}
+		int i = NumUtil.max(start, Constant.ZERO);
+		int j = NumUtil.min(array.length, end) - Constant.ONE;
+		int tmp;
+		while (j > i) {
+			swap(array, i, j);
+			j--;
+			i++;
+		}
+		return array;
+	}
 }

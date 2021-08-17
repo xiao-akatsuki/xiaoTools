@@ -2964,4 +2964,41 @@ public class PrimitiveArrayUtil {
 
 		return array;
 	}
+
+    /**
+     * [打乱数组顺序](Disorder array order)
+     * @description zh - 打乱数组顺序
+     * @description en - Disorder array order
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 18:53:55
+     * @param array 数组
+     * @return double[]
+     */
+    public static double[] disorder(double[] array) {
+		return disorder(array, RandomUtil.getRandom());
+	}
+
+    /**
+     * [打乱数组顺序](Disorder array order)
+     * @description zh - 打乱数组顺序
+     * @description en - Disorder array order
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 18:55:32
+     * @param array 数组
+     * @param random 随机数生成器
+     * @return double[]
+     */
+    public static double[] disorder(double[] array, Random random) {
+		if (array == Constant.NULL || random == Constant.NULL || array.length <= Constant.ONE) {
+			return array;
+		}
+
+		for (int i = array.length; i > Constant.ONE; i--) {
+			swap(array, i - Constant.ONE, random.nextInt(i));
+		}
+
+		return array;
+	}
 }

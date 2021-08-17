@@ -2560,4 +2560,167 @@ public class PrimitiveArrayUtil {
     public static boolean[] reverse(boolean[] array) {
 		return reverse(array, Constant.ZERO, array.length);
 	}
+
+    /* 最小值 ------------------------------------------------------------------------------- min */
+
+    /**
+     * [取最小值](Take the minimum value)
+     * @description zh - 取最小值
+     * @description en - Take the minimum value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 13:12:56
+     * @param arrays 数组
+     * @return long
+     */
+    public static long min(long... arrays) {
+		if (isEmpty(arrays)) {
+			throw new IllegalArgumentException("array must not empty !");
+		}
+		long min = arrays[Constant.ZERO];
+		for (int i = Constant.ONE; i < arrays.length; i++) {
+			if (min > arrays[i]) {
+				min = arrays[i];
+			}
+		}
+		return min;
+	}
+
+    /**
+     * [取最小值](Take the minimum value)
+     * @description zh - 取最小值
+     * @description en - Take the minimum value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 13:16:13
+     * @param arrays 数组
+     * @return int
+     */
+    public static int min(int... arrays) {
+		if (isEmpty(arrays)) {
+			throw new IllegalArgumentException("array must not empty !");
+		}
+		int min = arrays[Constant.ZERO];
+		for (int i = Constant.ONE; i < arrays.length; i++) {
+			if (min > arrays[i]) {
+				min = arrays[i];
+			}
+		}
+		return min;
+	}
+
+    /**
+     * [取最小值](Take the minimum value)
+     * @description zh - 取最小值
+     * @description en - Take the minimum value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 13:19:21
+     * @param arrays 数组
+     * @return short
+     */
+    public static short min(short... arrays) {
+		if (isEmpty(arrays)) {
+			throw new IllegalArgumentException("array must not empty !");
+		}
+		short min = arrays[Constant.ZERO];
+		for (int i = Constant.ONE; i < arrays.length; i++) {
+			if (min > arrays[i]) {
+				min = arrays[i];
+			}
+		}
+		return min;
+	}
+
+    /**
+     * [取最小值](Take the minimum value)
+     * @description zh - 取最小值
+     * @description en - Take the minimum value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 13:21:03
+     * @param arrays 数组
+     * @return char
+     */
+    public static char min(char... arrays) {
+		if (isEmpty(arrays)) {
+			throw new IllegalArgumentException("array must not empty !");
+		}
+		char min = arrays[Constant.ZERO];
+		for (int i = Constant.ONE; i < arrays.length; i++) {
+			if (min > arrays[i]) {
+				min = arrays[i];
+			}
+		}
+		return min;
+	}
+
+    /**
+     * [取最小值](Take the minimum value)
+     * @description zh - 取最小值
+     * @description en - Take the minimum value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 13:22:07
+     * @param arrays 数组
+     * @return byte
+     */
+	public static byte min(byte... arrays) {
+		if (isEmpty(arrays)) {
+			throw new IllegalArgumentException("array must not empty !");
+		}
+		byte min = arrays[Constant.ZERO];
+		for (int i = Constant.ONE; i < arrays.length; i++) {
+			if (min > arrays[i]) {
+				min = arrays[i];
+			}
+		}
+		return min;
+	}
+
+    /**
+     * [取最小值](Take the minimum value)
+     * @description zh - 取最小值
+     * @description en - Take the minimum value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 13:24:29
+     * @param arrays 数组
+     * @return double
+     */
+	public static double min(double... arrays) {
+		if (isEmpty(arrays)) {
+			throw new IllegalArgumentException("array must not empty !");
+		}
+		double min = arrays[Constant.ZERO];
+		for (int i = Constant.ONE; i < arrays.length; i++) {
+			if (min > arrays[i]) {
+				min = arrays[i];
+			}
+		}
+		return min;
+	}
+
+    /**
+     * [取最小值](Take the minimum value)
+     * @description zh - 取最小值
+     * @description en - Take the minimum value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 13:24:54
+     * @param arrays 数组
+     * @return float
+     */
+	public static float min(float... arrays) {
+		if (isEmpty(arrays)) {
+			throw new IllegalArgumentException("array must not empty !");
+		}
+		float min = arrays[Constant.ZERO];
+		for (int i = Constant.ONE; i < arrays.length; i++) {
+			if (min > arrays[i]) {
+				min = arrays[i];
+			}
+		}
+		return min;
+	}
 }

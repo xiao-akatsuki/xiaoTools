@@ -3112,4 +3112,78 @@ public class PrimitiveArrayUtil {
 
 		return array;
 	}
+
+    /**
+     * [打乱数组顺序](Disorder array order)
+     * @description zh - 打乱数组顺序
+     * @description en - Disorder array order
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 19:06:49
+     * @param array 数组
+     * @return char[]
+     */
+	public static char[] shuffle(char[] array) {
+		return shuffle(array, RandomUtil.getRandom());
+	}
+
+    /**
+     * [打乱数组顺序](Disorder array order)
+     * @description zh - 打乱数组顺序
+     * @description en - Disorder array order
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 19:07:21
+     * @param array 数组
+     * @param random 随机数生成器
+     * @return char[]
+     */
+	public static char[] shuffle(char[] array, Random random) {
+		if (array == Constant.NULL || random == Constant.NULL || array.length <= Constant.ONE) {
+			return array;
+		}
+
+		for (int i = array.length; i > Constant.ONE; i--) {
+			swap(array, i - Constant.ONE, random.nextInt(i));
+		}
+
+		return array;
+	}
+
+    /**
+     * [打乱数组顺序](Disorder array order)
+     * @description zh - 打乱数组顺序
+     * @description en - Disorder array order
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 19:10:54
+     * @param array 数组
+     * @return short[]
+     */
+	public static short[] shuffle(short[] array) {
+		return shuffle(array, RandomUtil.getRandom());
+	}
+
+    /**
+     * [打乱数组顺序](Disorder array order)
+     * @description zh - 打乱数组顺序
+     * @description en - Disorder array order
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 19:11:29
+     * @param array 数组
+     * @param random 随机数生成器
+     * @return short[]
+     */
+	public static short[] shuffle(short[] array, Random random) {
+		if (array == Constant.NULL || random == Constant.NULL || array.length <= Constant.ONE) {
+			return array;
+		}
+
+		for (int i = array.length; i > Constant.ONE; i--) {
+			swap(array, i - Constant.ONE, random.nextInt(i));
+		}
+
+		return array;
+	}
 }

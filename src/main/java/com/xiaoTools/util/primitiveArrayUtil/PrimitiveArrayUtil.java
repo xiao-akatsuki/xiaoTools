@@ -2723,4 +2723,167 @@ public class PrimitiveArrayUtil {
 		}
 		return min;
 	}
+
+    /* 最大值 ------------------------------------------------------------------------------- max */
+
+    /**
+     * [取最大值](Take the maximum value)
+     * @description zh - 取最大值
+     * @description en - Take the maximum value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 17:36:46
+     * @param arrays 数组
+     * @return long
+     */
+    public static long max(long... arryas) {
+		if (isEmpty(arryas)) {
+			throw new IllegalArgumentException("array must not empty !");
+		}
+		long max = arryas[Constant.ZERO];
+		for (int i = Constant.ONE; i < arryas.length; i++) {
+			if (max < arryas[i]) {
+				max = arryas[i];
+			}
+		}
+		return max;
+	}
+
+    /**
+     * [取最大值](Take the maximum value)
+     * @description zh - 取最大值
+     * @description en - Take the maximum value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 17:39:03
+     * @param arrays 数组
+     * @return int
+     */
+    public static int max(int... arrays) {
+		if (isEmpty(arrays)) {
+			throw new IllegalArgumentException("array must not empty !");
+		}
+		int max = arrays[Constant.ZERO];
+		for (int i = Constant.ONE; i < arrays.length; i++) {
+			if (max < arrays[i]) {
+				max = arrays[i];
+			}
+		}
+		return max;
+	}
+
+    /**
+     * [取最大值](Take the maximum value)
+     * @description zh - 取最大值
+     * @description en - Take the maximum value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 17:42:33
+     * @param arrays 数组
+     * @return short
+     */
+    public static short max(short... arrays) {
+		if (isEmpty(arrays)) {
+			throw new IllegalArgumentException("array must not empty !");
+		}
+		short max = arrays[Constant.ZERO];
+		for (int i = Constant.ONE; i < arrays.length; i++) {
+			if (max < arrays[i]) {
+				max = arrays[i];
+			}
+		}
+		return max;
+	}
+
+    /**
+     * [取最大值](Take the maximum value)
+     * @description zh - 取最大值
+     * @description en - Take the maximum value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 17:44:26
+     * @param arrays 数组
+     * @return char
+     */
+    public static char max(char... arrays) {
+		if (isEmpty(arrays)) {
+			throw new IllegalArgumentException("array must not empty !");
+		}
+		char max = arrays[Constant.ZERO];
+		for (int i = Constant.ONE; i < arrays.length; i++) {
+			if (max < arrays[i]) {
+				max = arrays[i];
+			}
+		}
+		return max;
+	}
+
+    /**
+     * [取最大值](Take the maximum value)
+     * @description zh - 取最大值
+     * @description en - Take the maximum value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 17:48:42
+     * @param arrays 数组
+     * @return byte
+     */
+    public static byte max(byte... arrays) {
+		if (isEmpty(arrays)) {
+			throw new IllegalArgumentException("array must not empty !");
+		}
+		byte max = arrays[Constant.ZERO];
+		for (int i = Constant.ONE; i < arrays.length; i++) {
+			if (max < arrays[i]) {
+				max = arrays[i];
+			}
+		}
+		return max;
+	}
+
+    /**
+     * [取最大值](Take the maximum value)
+     * @description zh - 取最大值
+     * @description en - Take the maximum value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 17:49:25
+     * @param arrays 数组
+     * @return double
+     */
+    public static double max(double... arrays) {
+		if (isEmpty(arrays)) {
+			throw new IllegalArgumentException("array must not empty !");
+		}
+		double max = arrays[Constant.ZERO];
+		for (int i = Constant.ONE; i < arrays.length; i++) {
+			if (max < arrays[i]) {
+				max = arrays[i];
+			}
+		}
+		return max;
+	}
+
+    /**
+     * [取最大值](Take the maximum value)
+     * @description zh - 取最大值
+     * @description en - Take the maximum value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 17:51:21
+     * @param arrays 数组
+     * @return float
+    */
+    public static float max(float... arrays) {
+		if (isEmpty(arrays)) {
+			throw new IllegalArgumentException("array must not empty !");
+		}
+		float max = arrays[Constant.ZERO];
+		for (int i = Constant.ONE; i < arrays.length; i++) {
+			if (max < arrays[i]) {
+				max = arrays[i];
+			}
+		}
+		return max;
+	}
 }

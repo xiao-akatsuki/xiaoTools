@@ -3,9 +3,11 @@ package com.xiaoTools.util.primitiveArrayUtil;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.numUtil.NumUtil;
 import com.xiaoTools.util.objectUtil.ObjectUtil;
+import com.xiaoTools.util.randomUtil.RandomUtil;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * [原始类型数组工具类](Primitive type array utility class)
@@ -2885,5 +2887,81 @@ public class PrimitiveArrayUtil {
 			}
 		}
 		return max;
+	}
+
+    /* 打乱数组顺序 ------------------------------------------------------------------------------- disorder */
+
+    /**
+     * [打乱数组顺序](Disorder array order)
+     * @description zh - 打乱数组顺序
+     * @description en - Disorder array order
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 18:02:38
+     * @param array 数组
+     * @return int[]
+     */
+    public static int[] disorder(int[] array) {
+		return disorder(array, RandomUtil.getRandom());
+	}
+
+    /**
+     * [打乱数组顺序](Disorder array order)
+     * @description zh - 打乱数组顺序
+     * @description en - Disorder array order
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 18:04:35
+     * @param array 数组
+     * @param random 随机数生成器
+     * @return int[]
+     */
+    public static int[] disorder(int[] array, Random random) {
+		if (array == Constant.NULL || random == Constant.NULL || array.length <= Constant.ONE) {
+			return array;
+		}
+
+		for (int i = array.length; i > Constant.ONE; i--) {
+			swap(array, i - Constant.ONE, random.nextInt(i));
+		}
+
+		return array;
+	}
+
+    /**
+     * [打乱数组顺序](Disorder array order)
+     * @description zh - 打乱数组顺序
+     * @description en - Disorder array order
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 18:06:42
+     * @param array 数组
+     * @return long[]
+     */
+    public static long[] disorder(long[] array) {
+		return disorder(array, RandomUtil.getRandom());
+	}
+
+    /**
+     * [打乱数组顺序](Disorder array order)
+     * @description zh - 打乱数组顺序
+     * @description en - Disorder array order
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 18:07:54
+     * @param array 数组
+     * @param random 随机数生成器
+     * @return long[]
+     */
+    public static long[] disorder(long[] array, Random random) {
+		if (array == Constant.NULL || random == Constant.NULL || array.length <= Constant.ONE) {
+			return array;
+		}
+
+		for (int i = array.length; i > Constant.ONE; i--) {
+			swap(array, i - Constant.ONE, random.nextInt(i));
+		}
+
+		return array;
 	}
 }

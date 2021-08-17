@@ -3364,4 +3364,28 @@ public class PrimitiveArrayUtil {
 		array[index2] = tmp;
 		return array;
 	}
+
+    /* 数组是否升序 ------------------------------------------------------------------------------- ASC */
+
+    /**
+     * [检查数组是否升序](Check whether the array is in ascending order)
+     * @description zh - 检查数组是否升序
+     * @description en - Check whether the array is in ascending order
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 19:52:53
+     * @param array 数组
+     * @return boolean
+     */
+    public static boolean isSortedASC(byte[] array) {
+		if (array == Constant.NULL) {
+			return Constant.FALSE;
+		}
+		for (int i = Constant.ZERO; i < array.length - Constant.ONE; i++) {
+			if (array[i] > array[i + Constant.ONE]) {
+				return Constant.FALSE;
+			}
+		}
+		return Constant.TRUE;
+	}
 }

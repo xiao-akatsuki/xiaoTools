@@ -3298,4 +3298,26 @@ public class PrimitiveArrayUtil {
 		array[index2] = tmp;
 		return array;
 	}
+
+    /**
+     * [交换数组中两个位置的值](Swap the values of two positions in the array)
+     * @description zh - 交换数组中两个位置的值
+     * @description en - Swap the values of two positions in the array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-17 19:37:50
+     * @param array 数组
+     * @param index1 位置1
+     * @param index2 位置2
+     * @return byte[]
+     */
+    public static byte[] swap(byte[] array, int index1, int index2) {
+		if (isEmpty(array)) {
+			throw new IllegalArgumentException("array must not empty !");
+		}
+		byte tmp = array[index1];
+		array[index1] = array[index2];
+		array[index2] = tmp;
+		return array;
+	}
 }

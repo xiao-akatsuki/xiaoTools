@@ -134,9 +134,20 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return Constant.NULL == firstNonNull(array);
 	}
 
-    
+    /**
+     * [返回数组中第一个匹配规则的值](Returns the value of the first matching rule in the array)
+     * @description zh - 返回数组中第一个非空元素
+     * @description en - Returns the value of the first matching rule in the array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-18 20:18:19
+     * @param array 数组
+     * @return T
+     */
     @SuppressWarnings("unchecked")
 	public static <T> T firstNonNull(T... array) {
 		return firstMatch(Objects::nonNull, array);
 	}
+
+
 }

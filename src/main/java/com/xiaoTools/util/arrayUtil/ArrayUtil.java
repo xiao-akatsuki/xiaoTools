@@ -91,4 +91,6 @@ public class ArrayUtil extends PrimitiveArrayUtil {
     public static boolean isNotEmpty(Object array) {
 		return Constant.FALSE == isEmpty(array);
 	}
+
+    
 }

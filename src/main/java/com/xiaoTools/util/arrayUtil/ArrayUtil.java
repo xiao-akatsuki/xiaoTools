@@ -61,4 +61,20 @@ public class ArrayUtil extends PrimitiveArrayUtil {
     public static <T> T[] defaultIfEmpty(T[] array, T[] defaultArray) {
 		return isEmpty(array) ? defaultArray : array;
 	}
+
+    /* 数组是否为非空 ------------------------------------------------------------------------------- isNotEmpty */
+
+    /**
+     * [数组是否为非空](Is the array non empty)
+     * @description zh - 数组是否为非空
+     * @description en - Is the array non empty
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-18 15:02:55
+     */
+    public static <T> boolean isNotEmpty(T[] array) {
+		return (Constant.NULL != array && array.length != Constant.ZERO);
+	}
+
+    
 }

@@ -173,5 +173,35 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return null;
 	}
 
+    /* 新建一个空数组 ------------------------------------------------------------------------------- newArray */
 
+    /**
+     * [新建一个空数组](Create a new empty array)
+     * @description zh - 新建一个空数组
+     * @description en - Create a new empty array 
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-18 20:54:36
+     * @param componentType 类型
+     * @param newSize 数组大小
+     * @return T[]
+     */
+    @SuppressWarnings("unchecked")
+	public static <T> T[] newArray(Class<?> componentType, int newSize) {
+		return (T[]) Array.newInstance(componentType, newSize);
+	}
+
+    /**
+     * [新建一个空数组](Create a new empty array)
+     * @description zh - 新建一个空数组
+     * @description en - Create a new empty array 
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-18 21:47:45
+     * @param newSize 数组大小
+     * @return Object[]
+     */
+    public static Object[] newArray(int newSize) {
+		return new Object[newSize];
+	}
 }

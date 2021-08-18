@@ -71,10 +71,24 @@ public class ArrayUtil extends PrimitiveArrayUtil {
      * @version V1.0
      * @author XiaoXunYao
      * @since 2021-08-18 15:02:55
+     * @param array 数组
+     * @return T
      */
     public static <T> boolean isNotEmpty(T[] array) {
 		return (Constant.NULL != array && array.length != Constant.ZERO);
 	}
 
-    
+    /**
+     * [数组是否为非空](Is the array non empty)
+     * @description zh - 数组是否为非空
+     * @description en - Is the array non empty
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-18 15:04:32
+     * @param array 数组
+     * @return boolean
+     */
+    public static boolean isNotEmpty(Object array) {
+		return Constant.FALSE == isEmpty(array);
+	}
 }

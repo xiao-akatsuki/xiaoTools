@@ -1,6 +1,7 @@
 package com.xiaoTools.util.arrayUtil;
 
 import java.lang.reflect.Array;
+import java.util.Objects;
 
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.primitiveArrayUtil.PrimitiveArrayUtil;
@@ -114,5 +115,28 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 			}
 		}
 		return Constant.FALSE;
+	}
+
+    /* 多个字段是否全为 null ------------------------------------------------------------------------------- isAllNull */
+
+    /**
+     * [多个字段是否全为 null](Are multiple fields all null)
+     * @description zh - 多个字段是否全为 null
+     * @description en - Are multiple fields all null
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-18 20:14:56
+     * @param array 数组
+     * @return boolean
+     */
+    @SuppressWarnings("unchecked")
+	public static <T> boolean isAllNull(T... array) {
+		return Constant.NULL == firstNonNull(array);
+	}
+
+    
+    @SuppressWarnings("unchecked")
+	public static <T> T firstNonNull(T... array) {
+		return firstMatch(Objects::nonNull, array);
 	}
 }

@@ -92,5 +92,27 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return Constant.FALSE == isEmpty(array);
 	}
 
-    
+    /* 是否包含 null 元素 ------------------------------------------------------------------------------- hasNull */
+
+    /**
+     * [是否包含 null 元素](Contains null elements)
+     * @description zh - 是否包含 null 元素
+     * @description en - Contains null elements
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-18 19:41:43
+     * @param array 数组
+     * @return boolean
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> boolean hasNull(T... array) {
+		if (isNotEmpty(array)) {
+			for (T element : array) {
+				if (Constant.NULL == element) {
+					return Constant.TRUE;
+				}
+			}
+		}
+		return Constant.FALSE;
+	}
 }

@@ -3,6 +3,7 @@ package com.xiaoTools.util.arrayUtil;
 import java.lang.reflect.Array;
 import java.util.Objects;
 
+import com.xiaoTools.core.matcher.Matcher;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.primitiveArrayUtil.PrimitiveArrayUtil;
 
@@ -147,6 +148,29 @@ public class ArrayUtil extends PrimitiveArrayUtil {
     @SuppressWarnings("unchecked")
 	public static <T> T firstNonNull(T... array) {
 		return firstMatch(Objects::nonNull, array);
+	}
+
+    /**
+     * [返回数组中第一个匹配规则的值](Returns the value of the first matching rule in the array)
+     * @description zh - 返回数组中第一个匹配规则的值
+     * @description en - Returns the value of the first matching rule in the array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-18 20:22:49
+     * @param match
+     * @param array 数组
+     * @return T
+     */
+    @SuppressWarnings("unchecked")
+	public static <T> T firstMatch(Matcher<T> matcher, T... array) {
+		if (isNotEmpty(array)) {
+			for (final T val : array) {
+				if (matcher.match(val)) {
+					return val;
+				}
+			}
+		}
+		return null;
 	}
 
 

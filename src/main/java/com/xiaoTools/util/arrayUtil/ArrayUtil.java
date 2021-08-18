@@ -47,4 +47,18 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		}
 		return Constant.TRUE;
 	}
+
+    /* 如果给定数组为空 ------------------------------------------------------------------------------- default array */
+
+    /**
+     * [如果给定数组为空，返回默认数组](If the given array is empty, the default array is returned)
+     * @description zh - 如果给定数组为空，返回默认数组
+     * @description en - If the given array is empty, the default array is returned
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-18 15:00:54
+     */
+    public static <T> T[] defaultIfEmpty(T[] array, T[] defaultArray) {
+		return isEmpty(array) ? defaultArray : array;
+	}
 }

@@ -220,4 +220,18 @@ public class ArrayUtil extends PrimitiveArrayUtil {
     public static Class<?> getComponentType(Object array) {
 		return Constant.NULL == array ? null : array.getClass().getComponentType();
 	}
+
+    /**
+     * [获取数组对象的元素类型](Gets the element type of the array object)
+     * @description zh - 获取数组对象的元素类型
+     * @description en - Gets the element type of the array object
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-19 14:16:17
+     * @param arratClass 数组类
+     * @return Class
+     */
+    public static Class<?> getComponentType(Class<?> arrayClass) {
+		return Constant.NULL == arrayClass ? null : arrayClass.getComponentType();
+	}
 }

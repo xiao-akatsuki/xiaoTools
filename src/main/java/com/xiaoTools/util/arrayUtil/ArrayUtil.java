@@ -295,4 +295,20 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 	public static <T> T[] append(T[] buffer, T... elements) {
         return isEmpty( buffer ) ? elements : insert(buffer, buffer.length, elements);
 	}
+
+    /**
+     * [将新元素添加到已有数组中](Adds a new element to an existing array)
+     * @description zh - 将新元素添加到已有数组中
+     * @description en - Adds a new element to an existing array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-19 19:10:02
+     * @param array 已有数组
+     * @param elements 新元素
+     * @return Object
+     */
+    @SafeVarargs
+	public static <T> Object append(Object array, T... elements) {
+        return isEmpty(array) ? elements : insert(array, length(array), elements);
+	}
 }

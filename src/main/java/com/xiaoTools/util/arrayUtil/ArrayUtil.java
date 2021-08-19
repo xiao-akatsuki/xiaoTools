@@ -353,4 +353,17 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 			return append(array, value);
 		}
 	}
+
+    /**
+     * [将新元素插入到到已有数组中的某个位置](Inserts a new element into an existing array)
+     * @description zh - 将新元素插入到到已有数组中的某个位置
+     * @description en - Inserts a new element into an existing array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-19 19:43:55
+     */
+    @SuppressWarnings("unchecked")
+	public static <T> T[] insert(T[] buffer, int index, T... newElements) {
+		return (T[]) insert((Object) buffer, index, newElements);
+	}
 }

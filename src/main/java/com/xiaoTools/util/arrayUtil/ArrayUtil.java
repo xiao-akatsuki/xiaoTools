@@ -305,10 +305,33 @@ public class ArrayUtil extends PrimitiveArrayUtil {
      * @since 2021-08-19 19:10:02
      * @param array 已有数组
      * @param elements 新元素
-     * @return Object
+     * @return java.lang.Object
      */
     @SafeVarargs
 	public static <T> Object append(Object array, T... elements) {
         return isEmpty(array) ? elements : insert(array, length(array), elements);
 	}
+
+    /**
+     * [将元素值设置为数组的某个位置](Set the element value to a position in the array)
+     * @description zh - 将元素值设置为数组的某个位置
+     * @description en - Set the element value to a position in the array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-19 19:12:16
+     * @param buffer 已有数组
+     * @param index 位置，大于长度追加，否则替换
+     * @param value 新值
+     * @return T[]
+     */
+    public static <T> T[] setOrAppend(T[] buffer, int index, T value) {
+		if (index < buffer.length) {
+			Array.set(buffer, index, value);
+			return buffer;
+		} else {
+			return append(buffer, value);
+		}
+	}
+
+
 }

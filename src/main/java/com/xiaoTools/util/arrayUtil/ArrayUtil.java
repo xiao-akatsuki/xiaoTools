@@ -407,4 +407,55 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return result;
 	}
 
+    /* 生成一个新的重新设置大小的数组 -------------------------------------------------------------- resize */
+
+    /**
+     * [生成一个新的重新设置大小的数组](Generates a new resized array)
+     * @description zh - 生成一个新的重新设置大小的数组
+     * @description en - Generates a new resized array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-19 19:55:30
+     * @param data 原数组
+     * @param size 新的数组大小
+     * @param type 数组元素类型
+     * @return T[]
+     */
+    public static <T> T[] resize(T[] data, int size, Class<?> type) {
+		if (size < Constant.ZERO) {
+			return data;
+		}
+		final T[] newArray = newArray(type, size);
+		if (size > Constant.ZERO && isNotEmpty(data)) {
+			System.arraycopy(data, Constant.ZERO, newArray, Constant.ZERO, Math.min(data.length, size));
+		}
+		return newArray;
+	}
+
+    /**
+     * [生成一个新的重新设置大小的数组](Generates a new resized array)
+     * @description zh - 生成一个新的重新设置大小的数组
+     * @description en - Generates a new resized array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-19 20:00:12
+     * @param array 原有数组
+     * @param size 数组大小
+     * @return java.lang.Object
+     */
+    public static Object resize(Object array, int size) {
+		if (size < Constant.ZERO) {
+			return array;
+		}
+		if (Constant.NULL == array) {
+			return Constant.NULL;
+		}
+		final int length = length(array);
+		final Object newArray = Array.newInstance(array.getClass().getComponentType(), size);
+		if (size > Constant.ZERO && isNotEmpty(array)) {
+			//noinspection SuspiciousSystemArraycopy
+			System.arraycopy(array, Constant.ZERO, newArray, Constant.ZERO, Math.min(length, size));
+		}
+		return newArray;
+	}
 }

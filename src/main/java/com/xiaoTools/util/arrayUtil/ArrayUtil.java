@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import com.xiaoTools.core.matcher.Matcher;
 import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.util.numUtil.NumUtil;
 import com.xiaoTools.util.primitiveArrayUtil.PrimitiveArrayUtil;
 
 /**
@@ -361,9 +362,49 @@ public class ArrayUtil extends PrimitiveArrayUtil {
      * @version V1.0
      * @author XiaoXunYao
      * @since 2021-08-19 19:43:55
+     * @param buffer 已有数组
+     * @param index 插入位置，此位置为对应此位置元素之前的空档
+     * @param elements 新元素
+     * @return T[]
      */
     @SuppressWarnings("unchecked")
-	public static <T> T[] insert(T[] buffer, int index, T... newElements) {
-		return (T[]) insert((Object) buffer, index, newElements);
+	public static <T> T[] insert(T[] buffer, int index, T... elements) {
+		return (T[]) insert((Object) buffer, index, elements);
 	}
+
+    /**
+     * [将新元素插入到到已有数组中的某个位置](Inserts a new element into an existing array)
+     * @description zh - 将新元素插入到到已有数组中的某个位置
+     * @description en - Inserts a new element into an existing array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-19 19:49:23
+     * @param array 已有数组
+     * @param index 插入位置，此位置为对应此位置元素之前的空档
+     * @param elements 新元素
+     * @return java.lang.Object
+     */
+    @SuppressWarnings({"unchecked", "SuspiciousSystemArraycopy"})
+	public static <T> Object insert(Object array, int index, T... elements) {
+		if (isEmpty(elements)) {
+			return array;
+		}
+		if (isEmpty(array)) {
+			return elements;
+		}
+
+		final int len = length(array);
+		if (index < Constant.ZERO) {
+			index = (index % len) + len;
+		}
+
+		final T[] result = newArray(array.getClass().getComponentType(), NumUtil.max(len, index) + elements.length);
+		System.arraycopy(array, Constant.ZERO, result, Constant.ZERO, Math.min(len, index));
+		System.arraycopy(elements, Constant.ZERO, result, index, elements.length);
+		if (index < len) {
+			System.arraycopy(array, index, result, index + elements.length, len - index);
+		}
+		return result;
+	}
+
 }

@@ -473,4 +473,39 @@ public class ArrayUtil extends PrimitiveArrayUtil {
     public static <T> T[] resize(T[] buffer, int size) {
 		return resize(buffer, size, buffer.getClass().getComponentType());
 	}
+
+    /* 将多个数组合并在一起 -------------------------------------------------------------- addAll */
+
+    /**
+     * [将多个数组合并在一起](Merge multiple arrays together)
+     * @description zh - 将多个数组合并在一起
+     * @description en - Merge multiple arrays together
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-19 20:10:27
+     * @param arrays 数组
+     * @return T[]
+     */
+    @SafeVarargs
+	public static <T> T[] addAll(T[]... arrays) {
+		if (arrays.length == Constant.ONE) {
+			return arrays[Constant.ZERO];
+		}
+
+		int length = Constant.ZERO;
+		for (T[] array : arrays) {
+			if (Constant.NULL != array) {
+				length += array.length;
+			}
+		}
+		T[] result = newArray(arrays.getClass().getComponentType().getComponentType(), length);
+		length = Constant.ZERO;
+		for (T[] array : arrays) {
+			if (Constant.NULL != array) {
+				System.arraycopy(array, Constant.ZERO, result, length, array.length);
+				length += array.length;
+			}
+		}
+		return result;
+	}
 }

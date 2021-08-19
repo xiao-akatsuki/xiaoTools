@@ -458,4 +458,19 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		}
 		return newArray;
 	}
+
+    /**
+     * [生成一个新的重新设置大小的数组](Generates a new resized array)
+     * @description zh - 生成一个新的重新设置大小的数组
+     * @description en - Generates a new resized array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-19 20:02:55
+     * @param buffer 原数组
+     * @param size 新的数组大小
+     * @return T[]
+     */
+    public static <T> T[] resize(T[] buffer, int size) {
+		return resize(buffer, size, buffer.getClass().getComponentType());
+	}
 }

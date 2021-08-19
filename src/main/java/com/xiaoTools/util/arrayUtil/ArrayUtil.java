@@ -333,5 +333,24 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		}
 	}
 
-
+    /**
+     * [将元素值设置为数组的某个位置](Set the element value to a position in the array)
+     * @description zh - 将元素值设置为数组的某个位置
+     * @description en - Set the element value to a position in the array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-19 19:42:00
+     * @param buffer 已有数组
+     * @param index 位置，大于长度追加，否则替换
+     * @param value 新值
+     * @return java.lang.Object
+     */
+    public static Object setOrAppend(Object array, int index, Object value) {
+		if (index < length(array)) {
+			Array.set(array, index, value);
+			return array;
+		} else {
+			return append(array, value);
+		}
+	}
 }

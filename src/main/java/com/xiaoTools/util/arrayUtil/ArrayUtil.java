@@ -183,12 +183,12 @@ public class ArrayUtil extends PrimitiveArrayUtil {
      * @author XiaoXunYao
      * @since 2021-08-18 20:54:36
      * @param componentType 类型
-     * @param newSize 数组大小
+     * @param size 数组大小
      * @return T[]
      */
     @SuppressWarnings("unchecked")
-	public static <T> T[] newArray(Class<?> componentType, int newSize) {
-		return (T[]) Array.newInstance(componentType, newSize);
+	public static <T> T[] newArray(Class<?> componentType, int size) {
+		return (T[]) Array.newInstance(componentType, size);
 	}
 
     /**
@@ -198,11 +198,11 @@ public class ArrayUtil extends PrimitiveArrayUtil {
      * @version V1.0
      * @author XiaoXunYao
      * @since 2021-08-18 21:47:45
-     * @param newSize 数组大小
+     * @param size 数组大小
      * @return Object[]
      */
-    public static Object[] newArray(int newSize) {
-		return new Object[newSize];
+    public static Object[] newArray(int size) {
+		return new Object[size];
 	}
 
     /* 获取数组对象的元素类型 ------------------------------------------------------------------------------- type */
@@ -242,11 +242,11 @@ public class ArrayUtil extends PrimitiveArrayUtil {
      * @version V1.0
      * @author XiaoXunYao
      * @since 2021-08-19 14:18:32
-     * @param componentType 数组元素类型
+     * @param type 数组元素类型
      * @return Class
      */
-    public static Class<?> getArrayType(Class<?> componentType) {
-		return Array.newInstance(componentType, Constant.ZERO).getClass();
+    public static Class<?> getArrayType(Class<?> type) {
+		return Array.newInstance(type, Constant.ZERO).getClass();
 	}
 
     /* 强转数组类型 ------------------------------------------------------------------------------- cast */
@@ -276,5 +276,23 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		final Object[] result = ArrayUtil.newArray(componentType, array.length);
 		System.arraycopy(array, Constant.ZERO, result, Constant.ZERO, array.length);
 		return result;
+	}
+
+    /* 将新元素添加到已有数组中 -------------------------------------------------------------- append */
+
+    /**
+     * [将新元素添加到已有数组中](Adds a new element to an existing array)
+     * @description zh - 将新元素添加到已有数组中
+     * @description en - Adds a new element to an existing array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-19 19:05:05
+     * @param buffer 已有数组
+     * @param elements 新元素
+     * @return T[]
+     */
+    @SafeVarargs
+	public static <T> T[] append(T[] buffer, T... elements) {
+        return isEmpty( buffer ) ? elements : insert(buffer, buffer.length, elements);
 	}
 }

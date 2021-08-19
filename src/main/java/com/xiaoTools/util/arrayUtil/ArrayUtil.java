@@ -248,4 +248,33 @@ public class ArrayUtil extends PrimitiveArrayUtil {
     public static Class<?> getArrayType(Class<?> componentType) {
 		return Array.newInstance(componentType, Constant.ZERO).getClass();
 	}
+
+    /* 强转数组类型 ------------------------------------------------------------------------------- cast */
+
+    /**
+     * [强转数组类型](Strong conversion array type)
+     * @description zh - 强转数组类型
+     * @description en - Strong conversion array type
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-19 18:38:48
+     * @param type 数组类型或数组元素类型
+     * @param arrayObj 原数组
+     * @return java.lang.Object[]
+     */
+    public static Object[] cast(Class<?> type, Object arrayObj) throws NullPointerException, IllegalArgumentException {
+		if (Constant.NULL == arrayObj) {
+			throw new NullPointerException("Argument [arrayObj] is null");
+		}
+		if (Constant.FALSE == arrayObj.getClass().isArray()) {
+			throw new IllegalArgumentException("Argument [arrayObj] is not array");
+		}
+		if (Constant.NULL == type) { return (Object[]) arrayObj; }
+
+		final Class<?> componentType = type.isArray() ? type.getComponentType() : type;
+		final Object[] array = (Object[]) arrayObj;
+		final Object[] result = ArrayUtil.newArray(componentType, array.length);
+		System.arraycopy(array, Constant.ZERO, result, Constant.ZERO, array.length);
+		return result;
+	}
 }

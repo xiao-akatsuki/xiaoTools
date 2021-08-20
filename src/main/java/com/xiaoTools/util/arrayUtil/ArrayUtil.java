@@ -531,11 +531,16 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 	}
 
     /**
-     *
-     * @description 
+     * [数组复制](Array copy)
+     * @description zh - 数组复制
+     * @description en - Array copy
      * @version V1.0
      * @author XiaoXunYao
      * @since 2021-08-20 19:21:16
+     * @param src 源数组
+     * @param dest 目标数组
+     * @param length 拷贝数组长度
+     * @return Object
      */
     public static Object copy(Object src, Object dest, int length) {
 		System.arraycopy(src, Constant.ZERO, dest, Constant.ZERO, length);

@@ -1,8 +1,11 @@
 package com.xiaoTools.util.arrayUtil;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
+import com.xiaoTools.core.editor.Editor;
 import com.xiaoTools.core.matcher.Matcher;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.numUtil.NumUtil;
@@ -594,6 +597,31 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 			return (T) result;
 		}
 		return null;
+	}
+
+    /* 过滤 -------------------------------------------------------------- filter */
+
+    /**
+     * [过滤](filter)
+     * @description zh - 过滤
+     * @description en - filter
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-20 19:57:00
+     * @param array 数组
+     * @param editor 编辑器接口
+     * @return T[]
+     */
+    public static <T> T[] filter(T[] array, Editor<T> editor) {
+		ArrayList<T> list = new ArrayList<>(array.length);
+		T modified;
+		for (T t : array) {
+			modified = editor.edit(t);
+			if (Constant.NULL != modified) {
+				list.add(modified);
+			}
+		}
+		return list.toArray(Arrays.copyOf(array, list.size()));
 	}
 
     

@@ -754,14 +754,18 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 	}
 
     /**
-     *
-     * @description 
+     * [映射键值](Mapping key value)
+     * @description zh - 映射键值
+     * @description en - Mapping key value
      * @version V1.0
      * @author XiaoXunYao
      * @since 2021-08-20 20:36:03
+     * @param keys 键列表
+     * @param values 值列表
+     * @return java.util.Map<K, V>
      */
     public static <K, V> Map<K, V> zip(K[] keys, V[] values) {
-		return zip(keys, values, false);
+		return zip(keys, values, Constant.FALSE);
 	}
 
 }

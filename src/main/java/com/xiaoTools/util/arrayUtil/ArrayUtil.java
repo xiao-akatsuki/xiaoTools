@@ -3,12 +3,14 @@ package com.xiaoTools.util.arrayUtil;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Objects;
 
 import com.xiaoTools.core.editor.Editor;
 import com.xiaoTools.core.filter.Filter;
 import com.xiaoTools.core.matcher.Matcher;
 import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.util.collUtil.CollUtil;
 import com.xiaoTools.util.numUtil.NumUtil;
 import com.xiaoTools.util.primitiveArrayUtil.PrimitiveArrayUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
@@ -726,4 +728,40 @@ public class ArrayUtil extends PrimitiveArrayUtil {
     public static String[] nullToEmpty(String[] array) {
 		return filter(array, (Editor<String>) element -> Constant.NULL == element ? Constant.EMPTY : element);
 	}
+
+    /* 映射键值 -------------------------------------------------------------- Mapping key value */
+
+    /**
+     * [映射键值](Mapping key value)
+     * @description zh - 映射键值
+     * @description en - Mapping key value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-20 20:34:54
+     * @param keys 键列表
+     * @param values 值列表
+     * @param isOrder 是否有序
+     * @return java.util.Map<K, V>
+     */
+    public static <K, V> Map<K, V> zip(K[] keys, V[] values, boolean isOrder) {
+		if (isEmpty(keys) || isEmpty(values)) { return null; }
+		final int size = Math.min(keys.length, values.length);
+		final Map<K, V> map = CollUtil.newHashMap(size, isOrder);
+		for (int i = Constant.ZERO; i < size; i++) {
+			map.put(keys[i], values[i]);
+		}
+		return map;
+	}
+
+    /**
+     *
+     * @description 
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-20 20:36:03
+     */
+    public static <K, V> Map<K, V> zip(K[] keys, V[] values) {
+		return zip(keys, values, false);
+	}
+
 }

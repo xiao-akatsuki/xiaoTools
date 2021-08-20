@@ -562,4 +562,39 @@ public class ArrayUtil extends PrimitiveArrayUtil {
     public static <T> T[] clone(T[] array) {
         return array == Constant.NULL ? null : array.clone();
 	}
+
+    /**
+     * [克隆数组](Clone array)
+     * @description zh - 克隆数组
+     * @description en - Clone array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-20 19:53:34
+     * @param obj 数组对象
+     * @return T
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T clone(final T obj) {
+		if (Constant.NULL == obj) {
+			return null;
+		}
+		if (isArray(obj)) {
+			final Object result;
+			final Class<?> componentType = obj.getClass().getComponentType();
+			if (componentType.isPrimitive()) {
+                // 原始类型
+				int length = Array.getLength(obj);
+				result = Array.newInstance(componentType, length);
+				while (length-- > Constant.ZERO) {
+					Array.set(result, length, Array.get(obj, length));
+				}
+			} else {
+				result = ((Object[]) obj).clone();
+			}
+			return (T) result;
+		}
+		return null;
+	}
+
+    
 }

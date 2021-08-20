@@ -546,4 +546,20 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		System.arraycopy(src, Constant.ZERO, dest, Constant.ZERO, length);
 		return dest;
 	}
+
+    /* 克隆数组 -------------------------------------------------------------- clone */
+
+    /**
+     * [克隆数组](Clone array)
+     * @description zh - 克隆数组
+     * @description en - Clone array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-20 19:49:29
+     * @param array 数组
+     * @return T[]
+     */
+    public static <T> T[] clone(T[] array) {
+        return array == Constant.NULL ? null : array.clone();
+	}
 }

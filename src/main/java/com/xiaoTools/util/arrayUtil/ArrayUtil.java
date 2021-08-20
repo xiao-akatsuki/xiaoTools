@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 import com.xiaoTools.core.editor.Editor;
+import com.xiaoTools.core.filter.Filter;
 import com.xiaoTools.core.matcher.Matcher;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.numUtil.NumUtil;
@@ -624,5 +625,42 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return list.toArray(Arrays.copyOf(array, list.size()));
 	}
 
-    
+    /**
+     * [过滤](filter)
+     * @description zh - 过滤
+     * @description en - filter
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-20 19:58:23
+     * @param array 数组
+     * @param editor 编辑器接口
+     */
+    public static <T> void edit(T[] array, Editor<T> editor) {
+		for (int i = Constant.ZERO; i < array.length; i++) {
+			array[i] = editor.edit(array[i]);
+		}
+	}
+
+    /**
+     * [过滤](filter)
+     * @description zh - 过滤
+     * @description en - filter
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-20 20:00:01
+     * @param array 数组
+     * @param filter 过滤器接口，用于定义过滤规则，null表示不过滤，返回原数组
+     * @return T[]
+     */
+    public static <T> T[] filter(T[] array, Filter<T> filter) {
+		if (Constant.NULL == filter) { return array; }
+		final ArrayList<T> list = new ArrayList<>(array.length);
+		for (T t : array) {
+			if (filter.accept(t)) {
+				list.add(t);
+			}
+		}
+		final T[] result = newArray(array.getClass().getComponentType(), list.size());
+		return list.toArray(result);
+	}
 }

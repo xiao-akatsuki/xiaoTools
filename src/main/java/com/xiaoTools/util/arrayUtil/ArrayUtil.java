@@ -697,5 +697,17 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return filter(array, StrUtil::isNotEmpty);
 	}
 
-
+    /**
+     * [去除 null 或者 "" 或者 空白字符串 元素](Remove null or '' or blank string elements)
+     * @description zh - 去除 null 或者 "" 或者 空白字符串 元素
+     * @description en - Remove null or '' or blank string elements
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-20 20:10:37
+     * @param array 数组
+     * @return T[]
+     */
+    public static <T extends CharSequence> T[] removeBlank(T[] array) {
+		return filter(array, StrUtil::isNotBlank);
+	}
 }

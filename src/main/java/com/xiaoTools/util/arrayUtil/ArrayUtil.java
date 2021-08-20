@@ -684,9 +684,9 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 	}
 
     /**
-     * [去除 null 或者 "" 元素](Remove null or '' elements)
+     * [去除 null 或者 "" 元素](Remove null or "" elements)
      * @description zh - 去除 null 或者 "" 元素
-     * @description en - Remove null or '' elements
+     * @description en - Remove null or "" elements
      * @version V1.0
      * @author XiaoXunYao
      * @since 2021-08-20 20:09:01
@@ -697,5 +697,5 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return filter(array, StrUtil::isNotEmpty);
 	}
 
-    
+
 }

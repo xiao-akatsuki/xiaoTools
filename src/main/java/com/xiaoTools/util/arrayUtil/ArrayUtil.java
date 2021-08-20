@@ -710,4 +710,20 @@ public class ArrayUtil extends PrimitiveArrayUtil {
     public static <T extends CharSequence> T[] removeBlank(T[] array) {
 		return filter(array, StrUtil::isNotBlank);
 	}
+
+    /* XXX转换XXX -------------------------------------------------------------- XXXTOXXX */
+
+    /**
+     * [数组元素中的null转换为""](Null in array element converted to '')
+     * @description zh - 数组元素中的null转换为""
+     * @description en - Null in array element converted to ''
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-20 20:16:39
+     * @param array 数组
+     * @return java.lang.String[]
+     */
+    public static String[] nullToEmpty(String[] array) {
+		return filter(array, (Editor<String>) element -> Constant.NULL == element ? Constant.EMPTY : element);
+	}
 }

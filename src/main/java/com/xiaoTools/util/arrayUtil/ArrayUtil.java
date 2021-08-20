@@ -11,6 +11,7 @@ import com.xiaoTools.core.matcher.Matcher;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.numUtil.NumUtil;
 import com.xiaoTools.util.primitiveArrayUtil.PrimitiveArrayUtil;
+import com.xiaoTools.util.strUtil.StrUtil;
 
 /**
  * [数组工具类](Array tool class)
@@ -663,4 +664,38 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		final T[] result = newArray(array.getClass().getComponentType(), list.size());
 		return list.toArray(result);
 	}
+
+    /* 去除元素 -------------------------------------------------------------- remove */
+
+    /**
+     * [去除 null 元素](Remove null elements)
+     * @description zh - 去除 null 元素
+     * @description en - Remove null elements
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-20 20:07:44
+     * @param array 数组
+     * @return T[]
+     */
+    public static <T> T[] removeNull(T[] array) {
+		return filter(array, (Editor<T>) element -> {
+			return element;
+		});
+	}
+
+    /**
+     * [去除 null 或者 "" 元素](Remove null or '' elements)
+     * @description zh - 去除 null 或者 "" 元素
+     * @description en - Remove null or '' elements
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-20 20:09:01
+     * @param array 数组
+     * @return T[]
+     */
+    public static <T extends CharSequence> T[] removeEmpty(T[] array) {
+		return filter(array, StrUtil::isNotEmpty);
+	}
+
+    
 }

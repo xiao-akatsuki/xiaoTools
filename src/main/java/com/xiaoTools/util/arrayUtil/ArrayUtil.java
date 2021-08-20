@@ -508,4 +508,37 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		}
 		return result;
 	}
+
+    /* 数组复制 -------------------------------------------------------------- copy */
+
+    /**
+     * [数组复制](Array copy)
+     * @description zh - 数组复制
+     * @description en - Array copy
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-20 19:08:57
+     * @param src 源数组
+     * @param srcPos 源数组开始位置
+     * @param dest 目标数组
+     * @param destPos 目标数组开始位置
+     * @param length 拷贝数组长度
+     * @return java.lang.Object
+     */
+    public static Object copy(Object src, int srcPos, Object dest, int destPos, int length) {
+		System.arraycopy(src, srcPos, dest, destPos, length);
+		return dest;
+	}
+
+    /**
+     *
+     * @description 
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-20 19:21:16
+     */
+    public static Object copy(Object src, Object dest, int length) {
+		System.arraycopy(src, Constant.ZERO, dest, Constant.ZERO, length);
+		return dest;
+	}
 }

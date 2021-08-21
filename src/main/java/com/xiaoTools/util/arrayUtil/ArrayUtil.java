@@ -1160,12 +1160,9 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		} else if (value instanceof double[]) {
 			return Arrays.toString((double[]) value);
 		} else if (ArrayUtil.isArray(value)) {
-			// 对象数组
 			try {
 				return Arrays.deepToString((Object[]) value);
-			} catch (Exception ignore) {
-				//ignore
-			}
+			} catch (Exception ignore) {  }
 		}
 
 		return value.toString();

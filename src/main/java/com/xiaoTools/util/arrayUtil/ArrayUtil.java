@@ -866,10 +866,10 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 	public static <T> boolean containsAny(T[] array, T... values) {
 		for (T value : values) {
 			if (contains(array, value)) {
-				return true;
+				return Constant.TRUE;
 			}
 		}
-		return false;
+		return Constant.FALSE;
 	}
 
     /**
@@ -886,10 +886,25 @@ public class ArrayUtil extends PrimitiveArrayUtil {
     @SuppressWarnings("unchecked")
 	public static <T> boolean containsAll(T[] array, T... values) {
 		for (T value : values) {
-			if (false == contains(array, value)) {
-				return false;
+			if (Constant.FALSE == contains(array, value)) {
+				return Constant.FALSE;
 			}
 		}
-		return true;
+		return Constant.TRUE;
+	}
+
+    /**
+     * [数组中是否包含元素，忽略大小写](Whether the array contains elements, ignoring case)
+     * @description zh - 数组中是否包含元素，忽略大小写
+     * @description en - Whether the array contains elements, ignoring case
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-21 19:36:59
+     * @param array 数组
+     * @param value 被检查的元素
+     * @return boolean
+     */
+    public static boolean containsIgnoreCase(CharSequence[] array, CharSequence value) {
+		return indexOfIgnoreCase(array, value) > Constant.NEGATIVE_ONE;
 	}
 }

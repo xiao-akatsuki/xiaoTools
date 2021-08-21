@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import com.xiaoTools.core.editor.Editor;
+import com.xiaoTools.core.exception.utilException.UtilException;
 import com.xiaoTools.core.filter.Filter;
 import com.xiaoTools.core.matcher.Matcher;
 import com.xiaoTools.lang.constant.Constant;
@@ -907,4 +908,51 @@ public class ArrayUtil extends PrimitiveArrayUtil {
     public static boolean containsIgnoreCase(CharSequence[] array, CharSequence value) {
 		return indexOfIgnoreCase(array, value) > Constant.NEGATIVE_ONE;
 	}
+
+    /* 包装数组对象 -------------------------------------------------------------- wrap */
+
+    /**
+     * [包装数组对象](Wrap array object)
+     * @description zh - 包装数组对象
+     * @description en - Wrap array object
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-21 19:46:52
+     * @param value 对象，可以是对象数组或者基本类型数组
+     * @return java.lang.Object[]
+     */
+    public static Object[] wrap(Object value) {
+		if (Constant.NULL == value) {
+			return null;
+		}
+		if (isArray(value)) {
+			try {
+				return (Object[]) value;
+			} catch (Exception e) {
+				final String className = value.getClass().getComponentType().getName();
+				switch (className) {
+					case "long":
+						return wrap((long[]) value);
+					case "int":
+						return wrap((int[]) value);
+					case "short":
+						return wrap((short[]) value);
+					case "char":
+						return wrap((char[]) value);
+					case "byte":
+						return wrap((byte[]) value);
+					case "boolean":
+						return wrap((boolean[]) value);
+					case "float":
+						return wrap((float[]) value);
+					case "double":
+						return wrap((double[]) value);
+					default:
+						throw new UtilException(e);
+				}
+			}
+		}
+		throw new UtilException(StrUtil.format("[{}] is not Array!", value.getClass()));
+	}
+
 }

@@ -793,6 +793,26 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return Constant.NEGATIVE_ONE;
 	}
 
-    
+    /**
+     * [返回数组中指定元素所在位置](Returns the position of the specified element in the array)
+     * @description zh - 返回数组中指定元素所在位置
+     * @description en - Returns the position of the specified element in the array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-21 10:54:39
+     * @param array 数组
+     * @param valuue 被检查的元素
+     * @return int
+     */
+    public static int indexOfIgnoreCase(CharSequence[] array, CharSequence value) {
+		if (Constant.NULL != array) {
+			for (int i = Constant.ZERO; i < array.length; i++) {
+				if (StrUtil.equalsIgnoreCase(array[i], value)) {
+					return i;
+				}
+			}
+		}
+		return Constant.NEGATIVE_ONE;
+	}
 
 }

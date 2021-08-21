@@ -851,5 +851,26 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return indexOf(array, value) > Constant.NEGATIVE_ONE;
 	}
 
+    /**
+     * [数组中是否包含指定元素中的任意一个](Whether the array contains any of the specified elements)
+     * @description zh - 数组中是否包含指定元素中的任意一个
+     * @description en - Whether the array contains any of the specified elements
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-21 19:34:03
+     * @param array 数组
+     * @param values 被检查的多个元素
+     * @return boolean
+     */
+    @SuppressWarnings("unchecked")
+	public static <T> boolean containsAny(T[] array, T... values) {
+		for (T value : values) {
+			if (contains(array, value)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
     
 }

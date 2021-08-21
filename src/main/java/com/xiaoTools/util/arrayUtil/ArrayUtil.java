@@ -779,7 +779,7 @@ public class ArrayUtil extends PrimitiveArrayUtil {
      * @author XiaoXunYao
      * @since 2021-08-21 10:40:51
      * @param array 数组
-     * @param value 下标位置
+     * @param value 被检查的元素
      * @return int
      */
     public static <T> int indexOf(T[] array, Object value) {
@@ -808,6 +808,25 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		if (Constant.NULL != array) {
 			for (int i = Constant.ZERO; i < array.length; i++) {
 				if (StrUtil.equalsIgnoreCase(array[i], value)) {
+					return i;
+				}
+			}
+		}
+		return Constant.NEGATIVE_ONE;
+	}
+
+    /**
+     * [返回数组中指定元素所在最后的位置](Returns the last position of the specified element in the array)
+     * @description zh - 返回数组中指定元素所在最后的位置
+     * @description en - Returns the last position of the specified element in the array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-21 10:56:38
+     */
+    public static <T> int lastIndexOf(T[] array, Object value) {
+		if (Constant.NULL != array) {
+			for (int i = array.length - Constant.ONE; i >= Constant.ZERO; i--) {
+				if (ObjectUtil.equal(value, array[i])) {
 					return i;
 				}
 			}

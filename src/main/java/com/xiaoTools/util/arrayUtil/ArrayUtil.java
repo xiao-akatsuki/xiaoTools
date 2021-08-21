@@ -1168,5 +1168,19 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return value.toString();
 	}
 
+    /* 获取数组长度 -------------------------------------------------------------- length */
 
+    /**
+     * [获取数组长度](Get array length)
+     * @description zh - 获取数组长度
+     * @description en - Get array length
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-21 20:05:56
+     * @param array 数组
+     * @return int
+     */
+    public static int length(Object array) throws IllegalArgumentException {
+        return Constant.NULL == array ? Constant.ZERO : Array.getLength(array);
+	}
 }

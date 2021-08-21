@@ -871,4 +871,25 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		}
 		return false;
 	}
+
+    /**
+     * [数组中是否包含指定元素中的全部](Whether the array contains all of the specified elements)
+     * @description zh - 数组中是否包含指定元素中的全部
+     * @description en - Whether the array contains all of the specified elements
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-21 19:35:22
+     * @param array 数组
+     * @param value 被检查的多个元素
+     * @return boolean
+     */
+    @SuppressWarnings("unchecked")
+	public static <T> boolean containsAll(T[] array, T... values) {
+		for (T value : values) {
+			if (false == contains(array, value)) {
+				return false;
+			}
+		}
+		return true;
+	}
 }

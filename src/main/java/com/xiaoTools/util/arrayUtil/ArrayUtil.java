@@ -955,4 +955,72 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		throw new UtilException(StrUtil.format("[{}] is not Array!", value.getClass()));
 	}
 
+    /* 对象是否为数组对象 -------------------------------------------------------------- is Array */
+
+    /**
+     * [对象是否为数组对象](Is the object an array object)
+     * @description zh - 对象是否为数组对象
+     * @description en - Is the object an array object
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-21 19:48:18
+     * @param value 对象
+     * @return boolean
+     */
+    public static boolean isArray(Object value) {
+		return Constant.NULL != value && value.getClass().isArray();
+	}
+
+    /* 获取下标的值 -------------------------------------------------------------- get */
+
+    /**
+     * [获取数组对象中指定index的值](Gets the value of the specified index in the array object)
+     * @description zh - 获取数组对象中指定index的值
+     * @description en - Gets the value of the specified index in the array object
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-21 19:51:09
+     * @param array 数组
+     * @param index 下标
+     * @return T
+     */
+    @SuppressWarnings("unchecked")
+	public static <T> T get(Object array, int index) {
+		if (Constant.NULL == array) {
+			return null;
+		}
+
+		if (index < Constant.ZERO) {
+			index += Array.getLength(array);
+		}
+		try {
+			return (T) Array.get(array, index);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return null;
+		}
+	}
+
+    /**
+     * [获取数组中指定多个下标元素值，组成新数组](Get the values of multiple subscript elements specified in the array to form a new array)
+     * @description zh - 获取数组中指定多个下标元素值，组成新数组
+     * @description en - Get the values of multiple subscript elements specified in the array to form a new array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-21 19:52:14
+     * @param array 数组
+     * @param indexes 下标列表
+     * @return T[]
+     */
+    public static <T> T[] getAny(Object array, int... indexes) {
+		if (Constant.NULL == array) {
+			return null;
+		}
+
+		final T[] result = newArray(array.getClass().getComponentType(), indexes.length);
+		for (int i : indexes) {
+			result[i] = get(array, i);
+		}
+		return result;
+	}
+
 }

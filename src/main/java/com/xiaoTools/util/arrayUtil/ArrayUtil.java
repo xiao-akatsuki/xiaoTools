@@ -12,6 +12,7 @@ import com.xiaoTools.core.matcher.Matcher;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.collUtil.CollUtil;
 import com.xiaoTools.util.numUtil.NumUtil;
+import com.xiaoTools.util.objectUtil.ObjectUtil;
 import com.xiaoTools.util.primitiveArrayUtil.PrimitiveArrayUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
 
@@ -767,5 +768,31 @@ public class ArrayUtil extends PrimitiveArrayUtil {
     public static <K, V> Map<K, V> zip(K[] keys, V[] values) {
 		return zip(keys, values, Constant.FALSE);
 	}
+
+    /* 返回数组中指定元素所在位置 -------------------------------------------------------------- index of */
+
+    /**
+     * [返回数组中指定元素所在位置](Returns the position of the specified element in the array)
+     * @description zh - 返回数组中指定元素所在位置
+     * @description en - Returns the position of the specified element in the array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-21 10:40:51
+     * @param array 数组
+     * @param value 下标位置
+     * @return int
+     */
+    public static <T> int indexOf(T[] array, Object value) {
+		if (Constant.NULL != array) {
+			for (int i = Constant.ZERO; i < array.length; i++) {
+				if (ObjectUtil.equal(value, array[i])) {
+					return i;
+				}
+			}
+		}
+		return Constant.NEGATIVE_ONE;
+	}
+
+    
 
 }

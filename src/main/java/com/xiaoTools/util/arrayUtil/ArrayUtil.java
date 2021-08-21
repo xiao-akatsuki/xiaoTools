@@ -834,4 +834,22 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return Constant.NEGATIVE_ONE;
 	}
 
+    /* 数组中是否包含元素 -------------------------------------------------------------- contains */
+
+    /**
+     * [数组中是否包含元素](Does the array contain elements)
+     * @description zh - 数组中是否包含元素
+     * @description en - Does the array contain elements
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-21 19:32:42
+     * @param array 数组
+     * @param value 被检查的元素
+     * @return boolean
+     */
+    public static <T> boolean contains(T[] array, T value) {
+		return indexOf(array, value) > Constant.NEGATIVE_ONE;
+	}
+
+    
 }

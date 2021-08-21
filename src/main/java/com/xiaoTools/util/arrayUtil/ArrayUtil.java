@@ -1023,4 +1023,44 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return result;
 	}
 
+    /* 获取子数组 -------------------------------------------------------------- subarray */
+
+    /**
+     * [获取子数组](Get subarray)
+     * @description zh - 获取子数组
+     * @description en - Get subarray
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-21 19:54:41
+     * @param array 数组
+     * @param start 开始的位置
+     * @param end 结束的位置
+     * @return T[]
+     */
+    public static <T> T[] subarray(T[] array, int start, int end) {
+		int length = length(array);
+		if (start < Constant.ZERO) {
+			start += length;
+		}
+		if (end < Constant.ZERO) {
+			end += length;
+		}
+		if (start == length) {
+			return newArray(array.getClass().getComponentType(), Constant.ZERO);
+		}
+		if (start > end) {
+			int tmp = start;
+			start = end;
+			end = tmp;
+		}
+		if (end > length) {
+			if (start >= length) {
+				return newArray(array.getClass().getComponentType(), Constant.ZERO);
+			}
+			end = length;
+		}
+		return Arrays.copyOfRange(array, start, end);
+	}
+
+
 }

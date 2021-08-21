@@ -1126,4 +1126,50 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return list.toArray();
 	}
 
+    /* 数组或集合转String -------------------------------------------------------------- toString */
+
+    /**
+     * [数组或集合转String](Array or collection to string)
+     * @description zh - 数组或集合转String
+     * @description en - Array or collection to string
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-21 20:01:30
+     * @param value 集合或数组对象
+     * @return java.lang.String
+     */
+    public static String toString(Object value) {
+		if (Constant.NULL == value) {
+			return Constant.STRING_NULL;
+		}
+
+		if (value instanceof long[]) {
+			return Arrays.toString((long[]) value);
+		} else if (value instanceof int[]) {
+			return Arrays.toString((int[]) value);
+		} else if (value instanceof short[]) {
+			return Arrays.toString((short[]) value);
+		} else if (value instanceof char[]) {
+			return Arrays.toString((char[]) value);
+		} else if (value instanceof byte[]) {
+			return Arrays.toString((byte[]) value);
+		} else if (value instanceof boolean[]) {
+			return Arrays.toString((boolean[]) value);
+		} else if (value instanceof float[]) {
+			return Arrays.toString((float[]) value);
+		} else if (value instanceof double[]) {
+			return Arrays.toString((double[]) value);
+		} else if (ArrayUtil.isArray(value)) {
+			// 对象数组
+			try {
+				return Arrays.deepToString((Object[]) value);
+			} catch (Exception ignore) {
+				//ignore
+			}
+		}
+
+		return value.toString();
+	}
+
+
 }

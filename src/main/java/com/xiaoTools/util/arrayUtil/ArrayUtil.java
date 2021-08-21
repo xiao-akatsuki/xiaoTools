@@ -1062,5 +1062,68 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return Arrays.copyOfRange(array, start, end);
 	}
 
+    /**
+     * [获取子数组](Get subarray)
+     * @description zh - 获取子数组
+     * @description en - Get subarray
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-21 19:56:53
+     * @param array 数组
+     * @param start 开始的位置
+     * @param end 结束的位置
+     * @return java.lang.Object[]
+     */
+    public static Object[] subarray(Object array, int start, int end) {
+		return subarray(array, start, end, Constant.ONE);
+	}
+
+    /**
+     * [获取子数组](Get subarray)
+     * @description zh - 获取子数组
+     * @description en - Get subarray
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-21 19:58:33
+     * @param array 数组
+     * @param start 开始的位置
+     * @param end 结束的位置
+     * @param step 步长
+     * @return java.lang.Object[]
+     */
+    public static Object[] subarray(Object array, int start, int end, int step) {
+		int length = length(array);
+		if (start < Constant.ZERO) {
+			start += length;
+		}
+		if (end < Constant.ZERO) {
+			end += length;
+		}
+		if (start == length) {
+			return new Object[Constant.ZERO];
+		}
+		if (start > end) {
+			int tmp = start;
+			start = end;
+			end = tmp;
+		}
+		if (end > length) {
+			if (start >= length) {
+				return new Object[Constant.ZERO];
+			}
+			end = length;
+		}
+
+		if (step <= Constant.ONE) {
+			step = Constant.ONE;
+		}
+
+		final ArrayList<Object> list = new ArrayList<>();
+		for (int i = start; i < end; i += step) {
+			list.add(get(array, i));
+		}
+
+		return list.toArray();
+	}
 
 }

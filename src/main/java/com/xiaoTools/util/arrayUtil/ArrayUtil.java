@@ -1276,4 +1276,34 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return sb.toString();
 	}
 
+    /**
+     * [以 conjunction 为分隔符将数组转换为字符串](Converts an array to a string with a conjunction as a delimiter)
+     * @description zh - 以 conjunction 为分隔符将数组转换为字符串
+     * @description en - Converts an array to a string with a conjunction as a delimiter
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-22 17:06:53
+     * @param array 数组
+     * @param conjunction 分隔符
+     * @return java.lang.String
+     */
+    public static String join(long[] array, CharSequence conjunction) {
+		if (Constant.NULL == array) {
+			return Constant.STRING_NULL;
+		}
+
+		final StringBuilder sb = new StringBuilder();
+		boolean isFirst = Constant.TRUE;
+		for (long item : array) {
+			if (isFirst) {
+				isFirst = Constant.FALSE;
+			} else {
+				sb.append(conjunction);
+			}
+			sb.append(item);
+		}
+		return sb.toString();
+	}
+
+
 }

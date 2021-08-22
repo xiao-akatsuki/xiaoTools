@@ -1305,5 +1305,52 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return sb.toString();
 	}
 
+    /**
+     * [以 conjunction 为分隔符将数组转换为字符串](Converts an array to a string with a conjunction as a delimiter)
+     * @description zh - 以 conjunction 为分隔符将数组转换为字符串
+     * @description en - Converts an array to a string with a conjunction as a delimiter
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-22 17:11:35
+     * @param array 数组
+     * @param conjunction 分隔符
+     * @return java.lang.String
+     */
+    public static String join(Object array, CharSequence conjunction) {
+		if(Constant.NULL == array){
+			throw new NullPointerException("Array must be not null!");
+		}
+		if (Constant.FALSE == isArray(array)) {
+			throw new IllegalArgumentException(StrUtil.format("[{}] is not a Array!", array.getClass()));
+		}
+
+		final Class<?> componentType = array.getClass().getComponentType();
+		if (componentType.isPrimitive()) {
+			final String componentTypeName = componentType.getName();
+			switch (componentTypeName) {
+				case "long":
+					return join((long[]) array, conjunction);
+				case "int":
+					return join((int[]) array, conjunction);
+				case "short":
+					return join((short[]) array, conjunction);
+				case "char":
+					return join((char[]) array, conjunction);
+				case "byte":
+					return join((byte[]) array, conjunction);
+				case "boolean":
+					return join((boolean[]) array, conjunction);
+				case "float":
+					return join((float[]) array, conjunction);
+				case "double":
+					return join((double[]) array, conjunction);
+				default:
+					throw new UtilException("Unknown primitive type: [{}]", componentTypeName);
+			}
+		} else {
+			return join((Object[]) array, conjunction);
+		}
+	}
+
 
 }

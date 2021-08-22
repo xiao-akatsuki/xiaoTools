@@ -3,6 +3,7 @@ package com.xiaoTools.util.arrayUtil;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 
@@ -1201,6 +1202,19 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return join(array, conjunction, Constant.NULL, Constant.NULL);
 	}
 
+    /**
+     * [以 conjunction 为分隔符将数组转换为字符串](Converts an array to a string with a conjunction as a delimiter)
+     * @description zh - 以 conjunction 为分隔符将数组转换为字符串
+     * @description en - Converts an array to a string with a conjunction as a delimiter
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-22 17:00:24
+	 * @param array 数组
+	 * @param conjunction 分隔符
+	 * @param prefix 每个元素添加的前缀，null表示不添加
+	 * @param suffix 每个元素添加的后缀，null表示不添加
+     * @return java.lang.String
+     */
     public static <T> String join(T[] array, CharSequence conjunction, String prefix, String suffix) {
 		if (Constant.NULL == array) {
 			return Constant.STRING_NULL;
@@ -1227,4 +1241,5 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return sb.toString();
 	}
 
+    
 }

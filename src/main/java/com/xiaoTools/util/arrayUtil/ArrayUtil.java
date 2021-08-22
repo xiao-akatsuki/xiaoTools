@@ -1183,4 +1183,48 @@ public class ArrayUtil extends PrimitiveArrayUtil {
     public static int length(Object array) throws IllegalArgumentException {
         return Constant.NULL == array ? Constant.ZERO : Array.getLength(array);
 	}
+
+    /* 分隔符将数组转换为字符串 -------------------------------------------------------------- join */
+
+    /**
+     * [以 conjunction 为分隔符将数组转换为字符串](Converts an array to a string with a conjunction as a delimiter)
+     * @description zh - 以 conjunction 为分隔符将数组转换为字符串
+     * @description en - Converts an array to a string with a conjunction as a delimiter
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-22 16:55:02
+     * @param array 数组
+     * @param conjunction 分隔符
+     * @return java.lang.String
+     */
+    public static <T> String join(T[] array, CharSequence conjunction) {
+		return join(array, conjunction, Constant.NULL, Constant.NULL);
+	}
+
+    public static <T> String join(T[] array, CharSequence conjunction, String prefix, String suffix) {
+		if (Constant.NULL == array) {
+			return Constant.STRING_NULL;
+		}
+
+		final StringBuilder sb = new StringBuilder();
+		boolean isFirst = Constant.TRUE;
+		for (T item : array) {
+			if (isFirst) {
+				isFirst = Constant.FALSE;
+			} else {
+				sb.append(conjunction);
+			}
+			if (ArrayUtil.isArray(item)) {
+				sb.append(join(ArrayUtil.wrap(item), conjunction, prefix, suffix));
+			} else if (item instanceof Iterable<?>) {
+				sb.append(CollUtil.join((Iterable<?>) item, conjunction, prefix, suffix));
+			} else if (item instanceof Iterator<?>) {
+				sb.append(IterUtil.join((Iterator<?>) item, conjunction, prefix, suffix));
+			} else {
+				sb.append(StrUtil.wrap(StrUtil.toString(item), prefix, suffix));
+			}
+		}
+		return sb.toString();
+	}
+
 }

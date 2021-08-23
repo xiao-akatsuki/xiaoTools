@@ -1441,4 +1441,19 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 	public static <T> T[] remove(T[] array, int index) throws IllegalArgumentException {
 		return (T[]) remove((Object) array, index);
 	}
+
+    /**
+     * [移除数组中指定的元素](Removes the specified element from the array)
+     * @description zh - 移除数组中指定的元素
+     * @description en - Removes the specified element from the array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-23 15:17:57
+     * @param array 数组
+     * @param element 需要删除的元素
+     * @return T[]
+     */
+    public static <T> T[] remove(T[] array, T element) throws IllegalArgumentException {
+		return remove(array, indexOf(array, element));
+	}
 }

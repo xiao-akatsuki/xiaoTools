@@ -1648,4 +1648,26 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		array[index2] = tmp;
 		return array;
 	}
+
+    /**
+     * [交换数组中两个位置的值](Swap the values of two positions in the array)
+     * @description zh - 交换数组中两个位置的值
+     * @description en - Swap the values of two positions in the array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-23 18:58:42
+     * @param array 数组
+     * @param index1 位置1
+     * @param index2 位置2
+     * @return java.lang.Object
+     */
+    public static Object swap(Object array, int index1, int index2) {
+		if (isEmpty(array)) {
+			throw new IllegalArgumentException("Array must not empty !");
+		}
+		Object tmp = get(array, index1);
+		Array.set(array, index1, Array.get(array, index2));
+		Array.set(array, index2, tmp);
+		return array;
+	}
 }

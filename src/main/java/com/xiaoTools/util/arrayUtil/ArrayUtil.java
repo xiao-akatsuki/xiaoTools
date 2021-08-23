@@ -5,6 +5,7 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
@@ -15,6 +16,7 @@ import com.xiaoTools.core.filter.Filter;
 import com.xiaoTools.core.matcher.Matcher;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.collUtil.CollUtil;
+import com.xiaoTools.util.compareUtil.CompareUtil;
 import com.xiaoTools.util.numUtil.NumUtil;
 import com.xiaoTools.util.objectUtil.ObjectUtil;
 import com.xiaoTools.util.primitiveArrayUtil.PrimitiveArrayUtil;
@@ -1518,4 +1520,27 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return min(array, null);
 	}
 
+    /**
+     * [取最小值](Take the minimum value)
+     * @description zh - 取最小值
+     * @description en - Take the minimum value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-23 18:06:30
+     * @param array 数组
+     * @param comparator 比较器，null按照默认比较
+     * @return T
+     */
+    public static <T extends Comparable<? super T>> T min(T[] array, Comparator<T> comparator) {
+		if (isEmpty(array)) {
+			throw new IllegalArgumentException("Number array must not empty !");
+		}
+		T min = array[Constant.ZERO];
+		for (T t : array) {
+			if (CompareUtil.compare(min, t, comparator) > Constant.ZERO) {
+				min = t;
+			}
+		}
+		return min;
+	}
 }

@@ -1423,4 +1423,22 @@ public class ArrayUtil extends PrimitiveArrayUtil {
     public static <T> T[] toArray(Collection<T> collection, Class<T> componentType) {
 		return collection.toArray(newArray(componentType, 0));
 	}
+
+    /* 移除 -------------------------------------------------------------- remove */
+
+    /**
+     * [移除数组中对应位置的元素](Remove the element at the corresponding position in the array)
+     * @description zh - 移除数组中对应位置的元素
+     * @description en - Remove the element at the corresponding position in the array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-23 15:14:36
+     * @param array 数组
+     * @param index 位置
+     * @return T[]
+     */
+    @SuppressWarnings("unchecked")
+	public static <T> T[] remove(T[] array, int index) throws IllegalArgumentException {
+		return (T[]) remove((Object) array, index);
+	}
 }

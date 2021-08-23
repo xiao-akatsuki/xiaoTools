@@ -20,6 +20,7 @@ import com.xiaoTools.util.compareUtil.CompareUtil;
 import com.xiaoTools.util.numUtil.NumUtil;
 import com.xiaoTools.util.objectUtil.ObjectUtil;
 import com.xiaoTools.util.primitiveArrayUtil.PrimitiveArrayUtil;
+import com.xiaoTools.util.randomUtil.RandomUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
 
 /**
@@ -1583,4 +1584,22 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		}
 		return max;
 	}
+
+    /* 打乱数组顺序 -------------------------------------------------------------- disorder */
+
+    /**
+     * [打乱数组顺序](Disorder array order)
+     * @description zh - 打乱数组顺序
+     * @description en - Disorder array order
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-23 18:22:04
+     * @param array 数组
+     * @return T[]
+     */
+    public static <T> T[] disorder(T[] array) {
+		return disorder(array, RandomUtil.getRandom());
+	}
+
+
 }

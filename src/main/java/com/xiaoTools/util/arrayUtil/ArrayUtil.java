@@ -9,6 +9,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 
 import com.xiaoTools.core.editor.Editor;
 import com.xiaoTools.core.exception.utilException.UtilException;
@@ -1601,5 +1602,26 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return disorder(array, RandomUtil.getRandom());
 	}
 
+    /**
+     * [打乱数组顺序](Disorder array order)
+     * @description zh - 打乱数组顺序
+     * @description en - Disorder array order
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-23 18:24:35
+     * @param array  数组
+     * @param random 随机数生成器
+     * @return T[]
+     */
+    public static <T> T[] disorder(T[] array, Random random) {
+		if (array == Constant.NULL || random == Constant.NULL || array.length <= Constant.ONE) {
+			return array;
+		}
 
+		for (int i = array.length; i > Constant.ONE; i--) {
+			swap(array, i - 1, random.nextInt(i));
+		}
+
+		return array;
+	}
 }

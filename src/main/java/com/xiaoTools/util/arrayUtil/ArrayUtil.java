@@ -1456,4 +1456,36 @@ public class ArrayUtil extends PrimitiveArrayUtil {
     public static <T> T[] remove(T[] array, T element) throws IllegalArgumentException {
 		return remove(array, indexOf(array, element));
 	}
+
+    /* 反转数组 -------------------------------------------------------------- reverse */
+
+    /**
+     * [反转数组](Invert array)
+     * @description zh - 反转数组
+     * @description en - Invert array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-23 17:27:42
+     * @param array 数组
+     * @param state 开始位置
+     * @param end 结束位置
+     * @return T[]
+     */
+    public static <T> T[] reverse(T[] array, final int state, final int end) {
+		if (isEmpty(array)) {
+			return array;
+		}
+		int i = NumUtil.max(state, Constant.ZERO);
+		int j = NumUtil.min(array.length, end) - Constant.ONE;
+		T tmp;
+		while (j > i) {
+			tmp = array[j];
+			array[j] = array[i];
+			array[i] = tmp;
+			j--;
+			i++;
+		}
+		return array;
+	}
+
 }

@@ -1502,4 +1502,20 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return reverse(array, Constant.ZERO, array.length);
 	}
 
+    /* 取最小值 -------------------------------------------------------------- min */
+
+    /**
+     * [取最小值](Take the minimum value)
+     * @description zh - 取最小值
+     * @description en - Take the minimum value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-23 18:04:47
+     * @param array 数组
+     * @return T
+     */ 
+    public static <T extends Comparable<? super T>> T min(T[] array) {
+		return min(array, null);
+	}
+
 }

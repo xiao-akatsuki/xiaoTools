@@ -1,6 +1,7 @@
 package com.xiaoTools.util.arrayUtil;
 
 import java.lang.reflect.Array;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -1352,5 +1353,29 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		}
 	}
 
+    /* 转数组 -------------------------------------------------------------- to array */
+
+    /**
+     * [ByteBuffer 转byte数组](Byte buffer to byte array)
+     * @description zh - ByteBuffer 转byte数组
+     * @description en - Byte buffer to byte array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-23 14:58:19
+     * @param bytebuffer ByteBuffer
+     * @return byte[]
+     */
+    public static byte[] toArray(ByteBuffer bytebuffer) {
+		if (bytebuffer.hasArray()) {
+			return Arrays.copyOfRange(bytebuffer.array(), bytebuffer.position(), bytebuffer.limit());
+		} else {
+			int oldPosition = bytebuffer.position();
+			bytebuffer.position(Constant.ZERO);
+			byte[] buffers = new byte[bytebuffer.limit()];
+			bytebuffer.get(buffers);
+			bytebuffer.position(oldPosition);
+			return buffers;
+		}
+	}
 
 }

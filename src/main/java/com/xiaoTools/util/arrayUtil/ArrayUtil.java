@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
@@ -1406,5 +1407,20 @@ public class ArrayUtil extends PrimitiveArrayUtil {
      */
     public static <T> T[] toArray(Iterable<T> iterable, Class<T> componentType) {
 		return toArray(CollectionUtil.toCollection(iterable), componentType);
+	}
+
+    /**
+     * [将集合转为数组](Convert collection to array)
+     * @description zh - 将集合转为数组
+     * @description en - Convert collection to array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-23 15:08:44
+     * @param collection 集合
+     * @param componentType 集合元素类型
+     * @return T[] 
+     */
+    public static <T> T[] toArray(Collection<T> collection, Class<T> componentType) {
+		return collection.toArray(newArray(componentType, 0));
 	}
 }

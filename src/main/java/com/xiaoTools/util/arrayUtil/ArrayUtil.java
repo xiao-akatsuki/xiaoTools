@@ -1544,6 +1544,8 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return min;
 	}
 
+    /* 取最大值 -------------------------------------------------------------- max */
+
     /**
      * [取最大值](Take the maximum value)
      * @description zh - 取最大值
@@ -1556,5 +1558,29 @@ public class ArrayUtil extends PrimitiveArrayUtil {
      */
     public static <T extends Comparable<? super T>> T max(T[] array) {
 		return max(array, null);
+	}
+
+    /**
+     * [取最大值](Take the maximum value)
+     * @description zh - 取最大值
+     * @description en - Take the maximum value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-23 18:11:47
+     * @param array 数组
+     * @param comparator 比较器，null按照默认比较
+     * @return T
+     */
+    public static <T extends Comparable<? super T>> T max(T[] array, Comparator<T> comparator) {
+		if (isEmpty(array)) {
+			throw new IllegalArgumentException("Number array must not empty !");
+		}
+		T max = array[Constant.ZERO];
+		for (int i = Constant.ONE; i < array.length; i++) {
+			if (CompareUtil.compare(max, array[i], comparator) < Constant.ZERO) {
+				max = array[i];
+			}
+		}
+		return max;
 	}
 }

@@ -1740,7 +1740,7 @@ public class ArrayUtil extends PrimitiveArrayUtil {
      * @param array 数组
      * @return boolean
      */
-    public static boolean isAllNotEmpty(Object... args) {
-		return Constant.FALSE == hasEmpty(args);
+    public static boolean isAllNotEmpty(Object... array) {
+		return Constant.FALSE == hasEmpty(array);
 	}
 }

@@ -1543,4 +1543,18 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		}
 		return min;
 	}
+
+    /**
+     * [取最大值](Take the maximum value)
+     * @description zh - 取最大值
+     * @description en - Take the maximum value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-23 18:09:10
+     * @param array 数组
+     * @return T
+     */
+    public static <T extends Comparable<? super T>> T max(T[] array) {
+		return max(array, null);
+	}
 }

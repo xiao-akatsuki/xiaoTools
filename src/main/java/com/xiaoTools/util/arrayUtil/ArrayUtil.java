@@ -1578,9 +1578,9 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 			throw new IllegalArgumentException("Number array must not empty !");
 		}
 		T max = array[Constant.ZERO];
-		for (int i = Constant.ONE; i < array.length; i++) {
-			if (CompareUtil.compare(max, array[i], comparator) < Constant.ZERO) {
-				max = array[i];
+		for (T t : array) {
+			if (CompareUtil.compare(max, t, comparator) < Constant.ZERO) {
+				max = t;
 			}
 		}
 		return max;

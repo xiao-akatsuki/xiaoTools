@@ -1378,4 +1378,20 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		}
 	}
 
+    /**
+     * [将集合转为数组](Convert collection to array)
+     * @description zh - 将集合转为数组
+     * @description en - Convert collection to array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-23 15:00:24
+     * @param iterator Iterator
+     * @param componentType 集合元素类型
+     * @return T[]
+     */
+    public static <T> T[] toArray(Iterator<T> iterator, Class<T> componentType) {
+		return toArray(CollUtil.newArrayList(iterator), componentType);
+	}
+
+    
 }

@@ -1715,4 +1715,32 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		}
 		return Constant.FALSE;
 	}
+
+    /**
+     * [是否存在都为 null或 空对象](Whether there are null or empty objects)
+     * @description zh - 是否存在都为 null或 空对象
+     * @description en - Whether there are null or empty objects
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-23 19:06:07
+     * @param array 数组
+     * @return boolean
+     */
+    public static boolean isAllEmpty(Object... array) {
+		return emptyCount(array) == array.length;
+	}
+
+    /**
+     * [是否存在都不为 null 或 空对象](Whether there are objects that are not null or empty)
+     * @description zh - 是否存在都不为 null 或 空对象
+     * @description en - Whether there are objects that are not null or empty
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-23 19:09:53
+     * @param array 数组
+     * @return boolean
+     */
+    public static boolean isAllNotEmpty(Object... args) {
+		return Constant.FALSE == hasEmpty(args);
+	}
 }

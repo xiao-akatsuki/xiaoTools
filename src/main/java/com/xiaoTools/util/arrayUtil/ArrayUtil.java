@@ -1743,4 +1743,19 @@ public class ArrayUtil extends PrimitiveArrayUtil {
     public static boolean isAllNotEmpty(Object... array) {
 		return Constant.FALSE == hasEmpty(array);
 	}
+
+    /**
+     * [多个字段是否全部不为 null](Are multiple fields all non null)
+     * @description zh - 多个字段是否全部不为 null
+     * @description en - Are multiple fields all non null
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-23 19:11:33
+     * @param array 数组
+     * @return boolean
+     */
+    @SuppressWarnings("unchecked")
+	public static <T> boolean isAllNotNull(T... array) {
+		return Constant.FALSE == hasNull(array);
+	}
 }

@@ -1488,4 +1488,18 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return array;
 	}
 
+    /**
+     * [反转数组](Invert array)
+     * @description zh - 反转数组
+     * @description en - Invert array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-23 17:28:59
+     * @param array 数组
+     * @return T[]
+     */
+    public static <T> T[] reverse(T[] array) {
+		return reverse(array, Constant.ZERO, array.length);
+	}
+
 }

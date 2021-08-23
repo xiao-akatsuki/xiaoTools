@@ -1624,4 +1624,28 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 
 		return array;
 	}
+
+    /* 交换数组中两个位置的值 -------------------------------------------------------------- swap */
+
+    /**
+     * [交换数组中两个位置的值](Swap the values of two positions in the array)
+     * @description zh - 交换数组中两个位置的值
+     * @description en - Swap the values of two positions in the array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-23 18:56:26
+     * @param array 数组
+     * @param index1 位置1
+     * @param index2 位置2
+     * @return T[]
+     */
+    public static <T> T[] swap(T[] array, int index1, int index2) {
+		if (isEmpty(array)) {
+			throw new IllegalArgumentException("Array must not empty !");
+		}
+		T tmp = array[index1];
+		array[index1] = array[index2];
+		array[index2] = tmp;
+		return array;
+	}
 }

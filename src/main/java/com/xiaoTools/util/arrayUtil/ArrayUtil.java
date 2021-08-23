@@ -1670,4 +1670,49 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		Array.set(array, index2, tmp);
 		return array;
 	}
+
+    /* 是否为空 -------------------------------------------------------------- empty */
+
+    /**
+     * [计算 null 或 空元素对象 的个数](Count the number of null or empty element objects)
+     * @description zh - 计算 null 或 空元素对象 的个数
+     * @description en - Count the number of null or empty element objects
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-23 19:02:23
+     * @param array 数组
+     * @return int
+     */
+    public static int emptyCount(Object... array) {
+		int count = Constant.ZERO;
+		if (isNotEmpty(array)) {
+			for (Object element : array) {
+				if (ObjectUtil.isEmpty(element)) {
+					count++;
+				}
+			}
+		}
+		return count;
+	}
+
+    /**
+     * [是否存在 null 或 空对象](Is there a null or empty object)
+     * @description zh - 是否存在 null 或 空对象
+     * @description en - Is there a null or empty object
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-23 19:04:26
+     * @param array 数组
+     * @return boolean
+     */
+    public static boolean hasEmpty(Object... array) {
+		if (isNotEmpty(array)) {
+			for (Object element : array) {
+				if (ObjectUtil.isEmpty(element)) {
+					return Constant.TRUE;
+				}
+			}
+		}
+		return Constant.FALSE;
+	}
 }

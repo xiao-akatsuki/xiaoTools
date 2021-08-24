@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Function;
 
 import com.xiaoTools.core.editor.Editor;
 import com.xiaoTools.core.exception.utilException.UtilException;
@@ -1785,5 +1786,25 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		return toArray(set, (Class<T>) getComponentType(array));
 	}
 
-    
+    /* 转换 -------------------------------------------------------------- map */        
+
+    /**
+     * [一种类型的数组转换为另一种类型](Convert an array of one type to another)
+     * @description zh - 一种类型的数组转换为另一种类型
+     * @description en - Convert an array of one type to another
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-24 19:34:05
+     * @param array 被转换的数组
+     * @param type 目标的元素类型
+     * @param func 转换规则函数
+     * @return R[]
+     */
+    public static <T, R> R[] map(T[] array, Class<R> type, Function<? super T, ? extends R> func) {
+		final R[] result = newArray(type, array.length);
+		for (int i = Constant.ZERO; i < array.length; i++) {
+			result[i] = func.apply(array[i]);
+		}
+		return result;
+	}
 }

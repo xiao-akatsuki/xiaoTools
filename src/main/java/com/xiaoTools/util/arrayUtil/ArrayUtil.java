@@ -1893,7 +1893,6 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		}
 	}
 
-
     /* 自数组 -------------------------------------------------------------- find */        
 
     /**
@@ -1963,11 +1962,37 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		}
 
 		for (int i = Constant.ZERO; i < subArray.length; i++) {
-			if (false == ObjectUtil.equal(array[i + firstIndex], subArray[i])) {
+			if ( Constant.FALSE == ObjectUtil.equal(array[i + firstIndex], subArray[i])) {
 				return Constant.NEGATIVE_ONE;
 			}
 		}
 
 		return firstIndex;
+	}
+
+    /* 排序 -------------------------------------------------------------- sort */        
+
+    /**
+     * [检查数组是否有序](Check whether the array is ordered)
+     * @description zh - 检查数组是否有序
+     * @description en - Check whether the array is ordered
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-24 20:17:43
+     * @param array 数组
+     * @param comparator 比较器
+     * @return boolean
+     */
+    public static <T> boolean isSorted(T[] array, Comparator<? super T> comparator) {
+		if (array == Constant.NULL || comparator == Constant.NULL) {
+			return Constant.FALSE;
+		}
+
+		for (int i = Constant.ZERO; i < array.length - Constant.ONE; i++) {
+			if (comparator.compare(array[i], array[i + Constant.ONE]) > Constant.ONE) {
+				return Constant.FALSE;
+			}
+		}
+		return Constant.TRUE;
 	}
 }

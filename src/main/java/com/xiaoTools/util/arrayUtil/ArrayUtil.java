@@ -17,6 +17,7 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import com.xiaoTools.assertion.Assertion;
 import com.xiaoTools.core.editor.Editor;
 import com.xiaoTools.core.exception.utilException.UtilException;
 import com.xiaoTools.core.filter.Filter;
@@ -1845,4 +1846,51 @@ public class ArrayUtil extends PrimitiveArrayUtil {
     public static <T, R> List<R> map(T[] array, Function<? super T, ? extends R> func) {
 		return Arrays.stream(array).map(func).collect(Collectors.toList());
 	}
+
+    /* 相等 -------------------------------------------------------------- equals */        
+
+    /**
+     * [判断两个数组是否相等，判断依据包括数组长度和每个元素都相等。](Judge whether the two arrays are equal. The judgment basis includes the length of the array and the equality of each element.)
+     * @description zh - 判断两个数组是否相等，判断依据包括数组长度和每个元素都相等。
+     * @description en - Judge whether the two arrays are equal. The judgment basis includes the length of the array and the equality of each element.
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-24 19:47:16
+     * @param array1 数组1
+     * @param array2 数组2
+     * @return boolean
+     */
+    public static boolean equals(Object array1, Object array2) {
+		if (array1 == array2) {
+			return Constant.TRUE;
+		}
+		if (hasNull(array1, array2)) {
+			return Constant.FALSE;
+		}
+
+		Assertion.isTrue(isArray(array1), "First is not a Array !");
+		Assertion.isTrue(isArray(array2), "Second is not a Array !");
+
+		if (array1 instanceof long[]) {
+			return Arrays.equals((long[]) array1, (long[]) array2);
+		} else if (array1 instanceof int[]) {
+			return Arrays.equals((int[]) array1, (int[]) array2);
+		} else if (array1 instanceof short[]) {
+			return Arrays.equals((short[]) array1, (short[]) array2);
+		} else if (array1 instanceof char[]) {
+			return Arrays.equals((char[]) array1, (char[]) array2);
+		} else if (array1 instanceof byte[]) {
+			return Arrays.equals((byte[]) array1, (byte[]) array2);
+		} else if (array1 instanceof double[]) {
+			return Arrays.equals((double[]) array1, (double[]) array2);
+		} else if (array1 instanceof float[]) {
+			return Arrays.equals((float[]) array1, (float[]) array2);
+		} else if (array1 instanceof boolean[]) {
+			return Arrays.equals((boolean[]) array1, (boolean[]) array2);
+		} else {
+			// Not an array of primitives
+			return Arrays.deepEquals((Object[]) array1, (Object[]) array2);
+		}
+	}
+
 }

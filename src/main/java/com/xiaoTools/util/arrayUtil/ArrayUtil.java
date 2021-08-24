@@ -9,11 +9,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import com.xiaoTools.core.editor.Editor;
 import com.xiaoTools.core.exception.utilException.UtilException;
@@ -1827,5 +1829,20 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 			result[i] = func.apply(get(array, i));
 		}
 		return result;
+	}
+
+    /**
+     * [一种类型的数组转换为另一种类型](Convert an array of one type to another)
+     * @description zh - 一种类型的数组转换为另一种类型
+     * @description en - Convert an array of one type to another
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-24 19:36:43
+     * @param array 被转换的数组
+     * @param func 转换规则函数
+     * @return java.util.List<R>
+     */
+    public static <T, R> List<R> map(T[] array, Function<? super T, ? extends R> func) {
+		return Arrays.stream(array).map(func).collect(Collectors.toList());
 	}
 }

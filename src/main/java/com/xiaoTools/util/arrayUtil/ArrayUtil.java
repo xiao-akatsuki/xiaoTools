@@ -1952,12 +1952,12 @@ public class ArrayUtil extends PrimitiveArrayUtil {
      * @param subArray 子数组
      * @return int
      */
-    public static <T> int lastIndexOfSub(T[] array, T[] subArray) {
+    public static <T> int lastIndexOfSubArray(T[] array, T[] subArray) {
 		if (isEmpty(array) || isEmpty(subArray) || subArray.length > array.length) {
 			return Constant.NEGATIVE_ONE;
 		}
 
-		int firstIndex = lastIndexOf(array, subArray[0]);
+		int firstIndex = lastIndexOf(array, subArray[Constant.ZERO]);
 		if (firstIndex < Constant.ZERO || firstIndex + subArray.length > array.length) {
 			return Constant.NEGATIVE_ONE;
 		}

@@ -1,5 +1,5 @@
 # xiaoTools
-**🌍[中文](https://github.com/xiaoxunyao/java-utils-library/blob/master/README.md)**
+**🌍[中文](https://github.com/xiao-organization/xiaoTools/blob/master/README.md)**
 ## 🔖 Introduction
 
 XiaoTools is a java tool class library, through the encapsulation of static methods, reduce the cost of everyone learning API.
@@ -38,6 +38,6 @@ implementation 'io.github.xiaoxunyao:xiaoTools:0.1.1-releases'
 
 ## 📖Documentation
 
-### Address --> [Welcome to visit the document URL](https://xiaoxunyao.github.io/xiaoTools-doc/)
+### Address --> [Welcome to visit the document URL](https://xiao-organization.github.io/xiaoTools-doc/)
 ### Document author --> [「missyou-zxt」](https://github.com/missyou-zxt)
 

@@ -2033,4 +2033,28 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 
 		return Constant.TRUE;
 	}
+
+    /**
+     * [检查数组是否降序](Check whether the array is in descending order)
+     * @description zh - 检查数组是否降序
+     * @description en - Check whether the array is in descending order
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-24 20:21:52
+     * @param array 数组
+     * @return boolean
+     */
+    public static <T extends Comparable<? super T>> boolean isSortedDESC(T[] array) {
+		if (array == Constant.NULL) {
+			return Constant.FALSE;
+		}
+
+		for (int i = Constant.ZERO; i < array.length - Constant.ONE; i++) {
+			if (array[i].compareTo(array[i + Constant.ONE]) < Constant.ZERO) {
+				return Constant.FALSE;
+			}
+		}
+
+		return Constant.TRUE;
+	}
 }

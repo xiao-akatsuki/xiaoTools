@@ -5,11 +5,14 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
+import java.util.Set;
 
 import com.xiaoTools.core.editor.Editor;
 import com.xiaoTools.core.exception.utilException.UtilException;
@@ -1758,4 +1761,29 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 	public static <T> boolean isAllNotNull(T... array) {
 		return Constant.FALSE == hasNull(array);
 	}
+
+    /* 去重 -------------------------------------------------------------- distinct */
+
+    /**
+     * [去重数组中的元素](De duplication of elements in an array)
+     * @description zh - 去重数组中的元素
+     * @description en - De duplication of elements in an array
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-24 19:31:24
+     * @param array 数组
+     * @return T[]
+     */
+    @SuppressWarnings("unchecked")
+	public static <T> T[] distinct(T[] array) {
+		if (isEmpty(array)) {
+			return array;
+		}
+
+		final Set<T> set = new LinkedHashSet<>(array.length, Constant.ONE);
+		Collections.addAll(set, array);
+		return toArray(set, (Class<T>) getComponentType(array));
+	}
+
+    
 }

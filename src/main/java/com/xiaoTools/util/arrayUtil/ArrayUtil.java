@@ -1995,4 +1995,42 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		}
 		return Constant.TRUE;
 	}
+
+    /**
+     * [检查数组是否升序](Check whether the array is in ascending order)
+     * @description zh - 检查数组是否升序
+     * @description en - Check whether the array is in ascending order
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-24 20:18:54
+     * @param array 数组
+     * @return boolean
+     */
+    public static <T extends Comparable<? super T>> boolean isSorted(T[] array) {
+		return isSortedASC(array);
+	}
+
+    /**
+     * [检查数组是否升序](Check whether the array is in ascending order)
+     * @description zh - 检查数组是否升序
+     * @description en - Check whether the array is in ascending order
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-24 20:20:33
+     * @param array 数组
+     * @return boolean
+     */
+    public static <T extends Comparable<? super T>> boolean isSortedASC(T[] array) {
+		if (array == Constant.NULL) {
+			return Constant.FALSE;
+		}
+
+		for (int i = Constant.ZERO; i < array.length - Constant.ONE; i++) {
+			if (array[i].compareTo(array[i + Constant.ONE]) > Constant.ZERO) {
+				return Constant.FALSE;
+			}
+		}
+
+		return Constant.TRUE;
+	}
 }

@@ -1940,4 +1940,34 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 
 		return firstIndex;
 	}
+
+    /**
+     * [查找最后一个子数组的开始位置](Find the start position of the last subarray)
+     * @description zh - 查找最后一个子数组的开始位置
+     * @description en - Find the start position of the last subarray
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-24 20:08:54
+     * @param array 数组
+     * @param subArray 子数组
+     * @return int
+     */
+    public static <T> int lastIndexOfSub(T[] array, T[] subArray) {
+		if (isEmpty(array) || isEmpty(subArray) || subArray.length > array.length) {
+			return Constant.NEGATIVE_ONE;
+		}
+
+		int firstIndex = lastIndexOf(array, subArray[0]);
+		if (firstIndex < Constant.ZERO || firstIndex + subArray.length > array.length) {
+			return Constant.NEGATIVE_ONE;
+		}
+
+		for (int i = Constant.ZERO; i < subArray.length; i++) {
+			if (false == ObjectUtil.equal(array[i + firstIndex], subArray[i])) {
+				return Constant.NEGATIVE_ONE;
+			}
+		}
+
+		return firstIndex;
+	}
 }

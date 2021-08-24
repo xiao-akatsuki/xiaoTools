@@ -1908,8 +1908,36 @@ public class ArrayUtil extends PrimitiveArrayUtil {
      * @return boolean
      */
     public static <T> boolean isSubArray(T[] array, T[] subArray) {
-		return indexOfSub(array, subArray) > Constant.NEGATIVE_ONE;
+		return indexOfSubArray(array, subArray) > Constant.NEGATIVE_ONE;
 	}
 
+    /**
+     * [查找子数组的位置](Find the location of the subarray)
+     * @description zh - 查找子数组的位置
+     * @description en - Find the location of the subarray
+     * @description en - 
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-24 20:04:26
+     * @param array 数组
+     * @param subArray 子数组
+     * @return int
+     */
+    public static <T> int indexOfSubArray(T[] array, T[] subArray) {
+		if (isEmpty(array) || isEmpty(subArray) || subArray.length > array.length) {
+			return Constant.NEGATIVE_ONE;
+		}
+		int firstIndex = indexOf(array, subArray[Constant.ZERO]);
+		if (firstIndex < Constant.ZERO || firstIndex + subArray.length > array.length) {
+			return Constant.NEGATIVE_ONE;
+		}
 
+		for (int i = Constant.ZERO; i < subArray.length; i++) {
+			if (Constant.FALSE == ObjectUtil.equal(array[i + firstIndex], subArray[i])) {
+				return Constant.NEGATIVE_ONE;
+			}
+		}
+
+		return firstIndex;
+	}
 }

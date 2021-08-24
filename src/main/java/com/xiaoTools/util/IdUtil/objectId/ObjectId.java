@@ -2,6 +2,7 @@ package com.xiaoTools.util.IdUtil.objectId;
 
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.randomUtil.RandomUtil;
+import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.net.NetworkInterface;
 import java.nio.ByteBuffer;

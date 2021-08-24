@@ -1893,4 +1893,23 @@ public class ArrayUtil extends PrimitiveArrayUtil {
 		}
 	}
 
+
+    /* 自数组 -------------------------------------------------------------- find */        
+
+    /**
+     * [查找子数组的位置](Find the location of the subarray)
+     * @description zh - 查找子数组的位置
+     * @description en - Find the location of the subarray
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-24 19:56:52
+     * @param array 数组
+     * @param subArray 子数组
+     * @return boolean
+     */
+    public static <T> boolean isSubArray(T[] array, T[] subArray) {
+		return indexOfSub(array, subArray) > Constant.NEGATIVE_ONE;
+	}
+
+
 }

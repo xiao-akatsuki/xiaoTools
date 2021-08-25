@@ -272,4 +272,18 @@ public class ObjectUtil {
             ArrayUtil.isArray(value) ? ArrayUtil.isEmpty(value) : 
             Constant.FALSE;
 	}
+
+    /**
+     * [判断指定对象是否为非空](Judge whether the specified object is non empty)
+     * @description zh - 判断指定对象是否为非空
+     * @description en - Judge whether the specified object is non empty
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-25 18:37:01
+     * @param value 被判断的对象
+     * @return boolean
+     */
+    public static boolean isNotEmpty(Object value) {
+		return Constant.FALSE == isEmpty(value);
+	}
 }

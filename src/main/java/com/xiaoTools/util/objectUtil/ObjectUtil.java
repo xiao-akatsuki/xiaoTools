@@ -304,4 +304,20 @@ public class ObjectUtil {
 		return Constant.FALSE == isEmpty(value);
 	}
 
+    /**
+     * [如果给定对象为 null 或者 "" 返回默认值](If the given object is null or '' returns the default value)
+     * @description zh - 如果给定对象为 null 或者 "" 返回默认值
+     * @description en - If the given object is null or '' returns the default value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-25 20:14:54
+     * @param value 文本
+     * @param handle 自定义的处理方法
+     * @param defaultValue 默认值
+     * @return T
+     */
+    public static <T> T defaultIfEmpty(String value, Supplier<? extends T> handle, final T defaultValue) {
+        return StrUtil.isNotBlank(value) ? handle.get() : defaultValue;
+	}
+
 }

@@ -9,6 +9,7 @@ import com.xiaoTools.util.strUtil.StrUtil;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.function.Supplier;
 
 /**
  * [对象工具类，包括判空、克隆、序列化等操作](Object tool class, including null, clone, serialization and other operations)
@@ -155,6 +156,22 @@ public class ObjectUtil {
         return (Constant.NULL != object) ? object : defaultValue;
     }
 
+    /**
+     * [如果给定对象为null返回默认值](Returns the default value if the given object is null)
+     * @description: zh - 如果给定对象为null返回默认值
+     * @description: en - Returns the default value if the given object is null
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-25 18:42:29
+     * @param source 对象
+     * @param handle 自定义的处理方法
+     * @param defaultValue 默认值
+     * @return T
+     */
+    public static <T> T defaultIfNull(Object source, Supplier<? extends T> handle, final T defaultValue) {
+        return Objects.nonNull(source) ? handle.get() : defaultValue;
+	}
+
     /* 比较 -------------------------------------------------------------- compare */
 
     /**
@@ -286,4 +303,5 @@ public class ObjectUtil {
     public static boolean isNotEmpty(Object value) {
 		return Constant.FALSE == isEmpty(value);
 	}
+
 }

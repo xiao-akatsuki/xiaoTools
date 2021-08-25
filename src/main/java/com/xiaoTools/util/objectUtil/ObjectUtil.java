@@ -1,8 +1,10 @@
 package com.xiaoTools.util.objectUtil;
 
 import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.compareUtil.CompareUtil;
 import com.xiaoTools.util.numUtil.NumUtil;
+import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
@@ -248,4 +250,26 @@ public class ObjectUtil {
 		return Constant.FALSE;
 	}
 
+    /* 是否为空 -------------------------------------------------------------- is Empty */
+
+    /**
+     * [判断指定对象是否为空](Judge whether the specified object is empty)
+     * @description zh - 判断指定对象是否为空
+     * @description en - Judge whether the specified object is empty
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-25 18:02:53
+     * @param value 对象
+     * @return boolean
+     */
+    @SuppressWarnings("rawtypes")
+	public static boolean isEmpty(Object value) {
+        return Constant.NULL == value ? Constant.TRUE : 
+            value instanceof CharSequence ? StrUtil.isEmpty((CharSequence) value) : 
+            value instanceof Map ? MapUtil.isEmpty((Map) value) : 
+            value instanceof Iterable ? IterUtil.isEmpty((Iterable) value) :
+            value instanceof Iterator ? IterUtil.isEmpty((Iterator) value) : 
+            ArrayUtil.isArray(value) ? ArrayUtil.isEmpty(value) : 
+            Constant.FALSE;
+	}
 }

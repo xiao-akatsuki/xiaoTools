@@ -335,4 +335,19 @@ public class ObjectUtil {
 		return StrUtil.isEmpty(value) ? defaultValue : value;
 	}
 
+    /**
+     * [如果给定对象为 null 或者 "" 或者 空白符 返回默认值](Returns the default value if the given object is null or empty)
+     * @description zh - 如果给定对象为 null 或者 "" 或者 空白符 返回默认值
+     * @description en - Returns the default value if the given object is null or empty
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-25 20:17:21
+     * @param value 被检查对象
+     * @param defaultValue 默认值
+     * @return T
+     */
+    public static <T extends CharSequence> T defaultIfBlank(final T value, final T defaultValue) {
+		return StrUtil.isBlank(value) ? defaultValue : value;
+	}
+
 }

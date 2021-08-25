@@ -1691,16 +1691,16 @@ public class ArrayUtil extends PrimitiveArrayUtil {
      * @return int
      */
     public static int emptyCount(Object... array) {
-		int count = Constant.ZERO;
-		if (isNotEmpty(array)) {
-			for (Object element : array) {
-				if (ObjectUtil.isEmpty(element)) {
-					count++;
-				}
-			}
-		}
+		  int count = Constant.ZERO;
+		  if (isNotEmpty(array)) {
+			  for (Object element : array) {
+				  if (ObjectUtil.isEmpty(element)) {
+					  count++;
+				  }
+			  }
+		  }
 		return count;
-	}
+	  }
 
     /**
      * [是否存在 null 或 空对象](Is there a null or empty object)

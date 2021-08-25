@@ -18,6 +18,8 @@ import java.util.*;
 */
 public class ObjectUtil {
 
+    /* 是否一致 -------------------------------------------------------------- equals */
+
     /**
      * [比较两个对象是否一致](Compare two objects for consistency)
      * @description: zh - 比较两个对象是否一致
@@ -66,6 +68,8 @@ public class ObjectUtil {
         return !equal(value1, value2);
     }
 
+    /* 长度 -------------------------------------------------------------- length */
+    
     /**
      * [获取对象的长度，如果是字符串调用其length函数，集合类调用其size函数，数组调用其length属性，其他可遍历对象遍历计算长度](Get the length of the object. If it is a string, call its length function, collection class call its size function, array call its length attribute, and other traversable objects traverse the length)
      * @description: zh - 获取对象的长度，如果是字符串调用其length函数，集合类调用其size函数，数组调用其length属性，其他可遍历对象遍历计算长度
@@ -103,6 +107,8 @@ public class ObjectUtil {
         }
         return Constant.NEGATIVE_ONE;
     }
+
+    /* 判断对象是否为null -------------------------------------------------------------- is NULL */
 
     /**
      * [判断对象是否为「null」](Judge whether the object is 「null」)
@@ -147,6 +153,8 @@ public class ObjectUtil {
         return (Constant.NULL != object) ? object : defaultValue;
     }
 
+    /* 比较 -------------------------------------------------------------- compare */
+
     /**
      * [null安全的对象比较，null对象排在末尾](Null safe object comparison, null objects at the end)
      * @description: zh - null安全的对象比较，null对象排在末尾
@@ -178,5 +186,66 @@ public class ObjectUtil {
         return CompareUtil.compare(c1, c2, nullGreater);
     }
 
+    /* 包含 -------------------------------------------------------------- contains */
+
+    /** 
+     * [对象中是否包含元素](Does the object contain elements)
+     * @description zh - 对象中是否包含元素
+     * @description en - Does the object contain elements
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-25 17:51:21
+     * @param value 对象
+     * @param element 元素
+     * @return boolean
+     */
+    public static boolean contains(Object value, Object element) {
+		if (value == Constant.NULL) {
+			return Constant.FALSE;
+		}
+		if (value instanceof String) {
+			if (element == Constant.NULL) {
+				return Constant.FALSE;
+			}
+			return ((String) value).contains(element.toString());
+		}
+		if (value instanceof Collection) {
+			return ((Collection<?>) value).contains(element);
+		}
+		if (value instanceof Map) {
+			return ((Map<?, ?>) value).containsValue(element);
+		}
+
+		if (value instanceof Iterator) {
+			Iterator<?> iter = (Iterator<?>) value;
+			while (iter.hasNext()) {
+				Object o = iter.next();
+				if (equal(o, element)) {
+					return Constant.TRUE;
+				}
+			}
+			return Constant.FALSE;
+		}
+		if (value instanceof Enumeration) {
+			Enumeration<?> enumeration = (Enumeration<?>) value;
+			while (enumeration.hasMoreElements()) {
+				Object o = enumeration.nextElement();
+				if (equal(o, element)) {
+					return Constant.TRUE;
+				}
+			}
+			return Constant.FALSE;
+		}
+		if (value.getClass().isArray() == true) {
+			int len = Array.getLength(value);
+			for (int i = Constant.ZERO; i < len; i++) {
+				Object o = Array.get(value, i);
+				if (equal(o, element)) {
+					return Constant.TRUE;
+				}
+			}
+        }
+		return Constant.FALSE;
+	}
 
 }

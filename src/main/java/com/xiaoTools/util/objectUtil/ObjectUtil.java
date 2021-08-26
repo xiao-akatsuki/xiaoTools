@@ -375,4 +375,24 @@ public class ObjectUtil {
 		return result;
 	}
 
+    /**
+     * [克隆对象](Clone object)
+     * @description zh - 克隆对象
+     * @description en - Clone object
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-26 19:05:20
+     * @param value 对象
+     * @return T
+     */
+    public static <T> T cloneIfPossible(final T value) {
+		T clone = null;
+		try {
+			clone = clone(value);
+		} catch (Exception e) {
+			// pass
+		}
+		return clone == Constant.NULL ? value : clone;
+	}
+
 }

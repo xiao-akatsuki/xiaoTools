@@ -469,4 +469,18 @@ public class ObjectUtil {
     public static boolean isValidIfNumber(Object value) {
         return value instanceof Number ? NumUtil.isValidNumber((Number) value) : Constant.TRUE;
 	}
+
+    /**
+     * [获得给定类的第一个泛型参数](Gets the first generic parameter of a given class)
+     * @description zh - 获得给定类的第一个泛型参数
+     * @description en - Gets the first generic parameter of a given class
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-26 19:48:14
+     * @param value 对象
+     * @return java.lang.Class<?>
+     */
+    public static Class<?> getTypeArgument(Object value) {
+		return getTypeArgument(value, Constant.ZERO);
+	}
 }

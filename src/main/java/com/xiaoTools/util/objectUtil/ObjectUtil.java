@@ -4,7 +4,10 @@ import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.compareUtil.CompareUtil;
 import com.xiaoTools.util.numUtil.NumUtil;
+import com.xiaoTools.util.reflectUtil.ReflectUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
+
+import org.graalvm.compiler.phases.graph.InferStamps;
 
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
@@ -348,6 +351,28 @@ public class ObjectUtil {
      */
     public static <T extends CharSequence> T defaultIfBlank(final T value, final T defaultValue) {
 		return StrUtil.isBlank(value) ? defaultValue : value;
+	}
+
+    /* 克隆 -------------------------------------------------------------- clone */
+
+    /**
+     * [克隆对象](Clone object)
+     * @description zh - 克隆对象
+     * @description en - Clone object
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-26 18:46:37
+     * @param value 对象
+     * @return T
+     */
+    public static <T> T clone(T value) {
+		T result = ArrayUtil.clone(value);
+		if (Constant.NULL == result) {
+            result = value instanceof Cloneable ? 
+                ReflectUtil.invoke(value, "clone") : 
+                cloneByStream(value);
+		}
+		return result;
 	}
 
 }

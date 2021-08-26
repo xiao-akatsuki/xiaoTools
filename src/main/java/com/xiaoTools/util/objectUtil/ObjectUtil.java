@@ -453,4 +453,20 @@ public class ObjectUtil {
     public static boolean isBasicType(Object value) {
 		return ClassUtil.isBasicType(value.getClass());
 	}
+
+    /* 是否为有效的数字 -------------------------------------------------------------- is Valid Number */
+
+    /**
+     * [检查是否为有效的数字](Check whether it is a valid number)
+     * @description zh - 检查是否为有效的数字
+     * @description en - Check whether it is a valid number
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-26 19:43:02
+     * @param value 数字
+     * @return boolean
+     */
+    public static boolean isValidIfNumber(Object value) {
+        return value instanceof Number ? NumUtil.isValidNumber((Number) value) : Constant.TRUE;
+	}
 }

@@ -1,5 +1,6 @@
 package com.xiaoTools.util.objectUtil;
 
+import com.xiaoTools.core.convert.Convert;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.classUtil.ClassUtil;
@@ -470,6 +471,8 @@ public class ObjectUtil {
         return value instanceof Number ? NumUtil.isValidNumber((Number) value) : Constant.TRUE;
 	}
 
+    /* 获取类型 -------------------------------------------------------------- get Type */
+
     /**
      * [获得给定类的第一个泛型参数](Gets the first generic parameter of a given class)
      * @description zh - 获得给定类的第一个泛型参数
@@ -497,5 +500,23 @@ public class ObjectUtil {
      */
     public static Class<?> getTypeArgument(Object value, int index) {
 		return ClassUtil.getTypeArgument(value.getClass(), index);
+	}
+
+    /* 将Object转为String -------------------------------------------------------------- to string */
+
+    /**
+     * [将Object转为String](Convert object to string)
+     * @description zh - 将Object转为String
+     * @description en - Convert object to string
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-26 20:08:38
+     * @param value 对象
+     * @return java.lang.String
+     */
+    public static String toString(Object value) {
+        return Constant.NULL == value ? Constant.STRING_NULL_OUT : 
+                value instanceof Map ? value.toString() :  
+                Convert.toStr(value);
 	}
 }

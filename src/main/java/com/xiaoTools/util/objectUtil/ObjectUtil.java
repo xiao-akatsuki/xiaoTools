@@ -2,6 +2,7 @@ package com.xiaoTools.util.objectUtil;
 
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
+import com.xiaoTools.util.classUtil.ClassUtil;
 import com.xiaoTools.util.compareUtil.CompareUtil;
 import com.xiaoTools.util.numUtil.NumUtil;
 import com.xiaoTools.util.reflectUtil.ReflectUtil;
@@ -435,5 +436,21 @@ public class ObjectUtil {
      */
     public static <T> T deserialize(byte[] bytes) {
 		return SerializeUtil.deserialize(bytes);
+	}
+
+    /* 基本类型 -------------------------------------------------------------- is basic type */
+
+    /**
+     * [是否为基本类型](Is it a basic type)
+     * @description zh - 是否为基本类型
+     * @description en - Is it a basic type
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-26 19:33:55
+     * @param value 被检查对象
+     * @return boolean
+     */
+    public static boolean isBasicType(Object value) {
+		return ClassUtil.isBasicType(value.getClass());
 	}
 }

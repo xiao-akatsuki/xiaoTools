@@ -483,4 +483,19 @@ public class ObjectUtil {
     public static Class<?> getTypeArgument(Object value) {
 		return getTypeArgument(value, Constant.ZERO);
 	}
+
+    /**
+     * [获得给定类的第一个泛型参数](Gets the first generic parameter of a given class)
+     * @description zh - 获得给定类的第一个泛型参数
+     * @description en - Gets the first generic parameter of a given class
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-26 19:49:25
+     * @param value 对象
+     * @param index 第几个泛型
+     * @return java.lang.Class<?>
+     */
+    public static Class<?> getTypeArgument(Object value, int index) {
+		return ClassUtil.getTypeArgument(value.getClass(), index);
+	}
 }

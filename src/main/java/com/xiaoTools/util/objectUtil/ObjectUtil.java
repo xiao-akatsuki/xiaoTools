@@ -409,5 +409,19 @@ public class ObjectUtil {
 		return SerializeUtil.clone(value);
 	}
 
+    /* 序列化 -------------------------------------------------------------- serialize */
 
+    /**
+     * [序列化](serialize)
+     * @description zh - 序列化
+     * @description en - serialize
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-26 19:17:23
+     * @param value 对象
+     * @return byte[]
+     */
+    public static <T> byte[] serialize(T value) {
+		return SerializeUtil.serialize(value);
+	}
 }

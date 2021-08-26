@@ -396,14 +396,17 @@ public class ObjectUtil {
 	}
 
     /**
-     *
-     * @description 
+     * [序列化后拷贝流的方式克隆](Clone by copying stream after serialization)
+     * @description zh - 序列化后拷贝流的方式克隆
+     * @description en - Clone by copying stream after serialization
      * @version V1.0
      * @author XiaoXunYao
      * @since 2021-08-26 19:08:09
+     * @param value 对象
+     * @return T
      */
-    public static <T> T cloneByStream(T obj) {
-		return SerializeUtil.clone(obj);
+    public static <T> T cloneByStream(T value) {
+		return SerializeUtil.clone(value);
 	}
 
 

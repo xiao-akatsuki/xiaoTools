@@ -395,4 +395,16 @@ public class ObjectUtil {
 		return clone == Constant.NULL ? value : clone;
 	}
 
+    /**
+     *
+     * @description 
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-26 19:08:09
+     */
+    public static <T> T cloneByStream(T obj) {
+		return SerializeUtil.clone(obj);
+	}
+
+
 }

@@ -424,4 +424,16 @@ public class ObjectUtil {
     public static <T> byte[] serialize(T value) {
 		return SerializeUtil.serialize(value);
 	}
+
+    /**
+     * [反序列化](Deserialization)
+     * @description zh - 反序列化
+     * @description en - Deserialization
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-26 19:28:12
+     */
+    public static <T> T deserialize(byte[] bytes) {
+		return SerializeUtil.deserialize(bytes);
+	}
 }

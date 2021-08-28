@@ -519,4 +519,72 @@ public class ObjectUtil {
                 value instanceof Map ? value.toString() :  
                 Convert.toStr(value);
 	}
+
+    /**
+     * [存在多少个 null 或 空对象](How many null or empty objects exist)
+     * @description zh -  存在多少个 null 或 空对象
+     * @description en -  How many null or empty objects exist
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-28 19:54:20
+     * @param values 数组
+     * @return int
+     */
+	public static int emptyCount(Object... values) {
+		return ArrayUtil.emptyCount(values);
+	}
+
+    /**
+     * [存在多少个 null 或 空对象](How many null or empty objects exist)
+     * @description zh -  存在多少个 null 或 空对象
+     * @description en -  How many null or empty objects exist
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-28 19:56:27
+     * @param values 数组
+     * @return boolean
+     */
+	public static boolean hasNull(Object... values) {
+		return ArrayUtil.hasNull(values);
+	}
+
+    /**
+     * [存在多少个 null 或 空对象](How many null or empty objects exist)
+     * @description zh -  存在多少个 null 或 空对象
+     * @description en -  How many null or empty objects exist
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-28 19:56:52
+     * @param value 数组
+     * @return boolean
+     */
+	public static boolean hasEmpty(Object... values) {
+		return ArrayUtil.hasEmpty(values);
+	}
+
+    /**
+     * [是否全都为 null 或 空对象](Are all null or empty objects)
+     * @description zh - 是否全都为 null 或 空对象
+     * @description en - Are all null or empty objects
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-28 19:57:20
+     */
+	public static boolean isAllEmpty(Object... values) {
+		return ArrayUtil.isAllEmpty(values);
+	}
+
+    /**
+     * [是否全都不为 null 或 空对象](Are none null or empty objects)
+     * @description zh - 是否全都不为 null 或 空对象
+     * @description en - Are none null or empty objects
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-28 19:58:08
+     * @param values 数组
+     * @return boolean
+     */
+	public static boolean isAllNotEmpty(Object... values) {
+		return ArrayUtil.isAllNotEmpty(values);
+	}
 }

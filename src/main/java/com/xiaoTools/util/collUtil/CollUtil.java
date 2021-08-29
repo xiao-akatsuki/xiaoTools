@@ -1,5 +1,6 @@
 package com.xiaoTools.util.collUtil;
 
+import com.xiaoTools.core.convert.Convert;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.listUtil.ListUtil;
 
@@ -45,6 +46,40 @@ public class CollUtil {
 		return (Constant.NULL == set) ? Collections.emptyList() : set;
 	}
 
+    /* 并集 -------------------------------------------------------------- union */
+
+    /**
+     * [两个集合的并集](Union of two sets)
+     * @description zh - 两个集合的并集
+     * @description en - Union of two sets
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-29 19:29:09
+     * @param coll1 集合1
+     * @param coll2 集合2
+     * @return java.util.Collection<T>
+     */
+    public static <T> Collection<T> union(Collection<T> coll1, Collection<T> coll2) {
+		if (isEmpty(coll1)) {
+			return new ArrayList<>(coll2);
+		} else if (isEmpty(coll2)) {
+			return new ArrayList<>(coll1);
+		}
+
+		final ArrayList<T> list = new ArrayList<>(Math.max(coll1.size(), coll2.size()));
+		final Map<T, Integer> map1 = countMap(coll1);
+		final Map<T, Integer> map2 = countMap(coll2);
+		final Set<T> elts = newHashSet(coll2);
+		elts.addAll(coll1);
+		int m;
+		for (T t : elts) {
+			m = Math.max(Convert.toInt(map1.get(t), Constant.ZERO), Convert.toInt(map2.get(t), Constant.ZERO));
+			for (int i = Constant.ZERO; i < m; i++) {
+				list.add(t);
+			}
+		}
+		return list;
+	}
 
 
     /* 新建 -------------------------------------------------------------- set HashSet */

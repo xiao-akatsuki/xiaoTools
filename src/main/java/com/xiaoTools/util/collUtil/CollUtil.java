@@ -134,6 +134,36 @@ public class CollUtil {
 		return result;
 	}
 
+    /**
+     * [多个集合的完全并集](Complete union of multiple sets)
+     * @description zh - 多个集合的完全并集
+     * @description en - Complete union of multiple sets
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-29 19:49:04
+     * @param coll1 集合1
+     * @param coll2 集合2
+     * @param otherColls 其它集合
+     * @return java.util.List<T>
+     */
+    @SafeVarargs
+	public static <T> List<T> unionAll(Collection<T> coll1, Collection<T> coll2, Collection<T>... otherColls) {
+		final List<T> result;
+        result = isEmpty(coll1) ? new ArrayList<>() :
+                 new ArrayList<>(coll1);
+
+		if (isNotEmpty(coll2)) {
+			result.addAll(coll2);
+		}
+
+		if (ArrayUtil.isNotEmpty(otherColls)) {
+			for (Collection<T> otherColl : otherColls) {
+				result.addAll(otherColl);
+			}
+		}
+
+		return result;
+	}
 
     /* 新建 -------------------------------------------------------------- set HashSet */
 

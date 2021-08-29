@@ -24,10 +24,27 @@ public class CollUtil {
      * @version V1.0
      * @author XiaoXunYao
      * @since 2021-08-29 19:24:18
+     * @param set 提供的集合
+     * @return java.util.Set<T>
      */
     public static <T> Set<T> emptyIfNull(Set<T> set) {
 		return (Constant.NULL == set) ? Collections.emptySet() : set;
 	}
+
+    /**
+     * [空集合使用](Empty collection use)
+     * @description zh - 空集合使用
+     * @description en - Empty collection use
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-29 19:26:14
+     * @param set 提供的集合
+     * @return java.util.List<T>
+     */
+    public static <T> List<T> emptyIfNull(List<T> set) {
+		return (Constant.NULL == set) ? Collections.emptyList() : set;
+	}
+
 
 
     /* 新建 -------------------------------------------------------------- set HashSet */

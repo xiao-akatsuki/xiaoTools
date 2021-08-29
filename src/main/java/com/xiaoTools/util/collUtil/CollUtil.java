@@ -15,7 +15,22 @@ import java.util.*;
 */
 public class CollUtil {
 
+    /* 空集合 -------------------------------------------------------------- empty aggregate */
 
+    /**
+     * [空集合使用](Empty collection use)
+     * @description zh - 空集合使用
+     * @description en - Empty collection use
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-29 19:24:18
+     */
+    public static <T> Set<T> emptyIfNull(Set<T> set) {
+		return (Constant.NULL == set) ? Collections.emptySet() : set;
+	}
+
+
+    /* 新建 -------------------------------------------------------------- set HashSet */
 
     /**
      * [新建一个HashSet](Create a new HashSet)

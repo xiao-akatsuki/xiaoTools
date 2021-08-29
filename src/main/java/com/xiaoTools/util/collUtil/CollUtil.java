@@ -81,6 +81,26 @@ public class CollUtil {
 		return list;
 	}
 
+    /**
+     * [多个集合的并集](Union of multiple sets)
+     * @description zh - 多个集合的并集
+     * @description en - Union of multiple sets
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-29 19:33:01
+     * @param coll1 集合1
+     * @param coll2 集合2
+     * @param otherColls 其它集合
+     * @return java.util.Collection<T>
+     */
+    @SafeVarargs
+	public static <T> Collection<T> union(Collection<T> coll1, Collection<T> coll2, Collection<T>... otherColls) {
+		Collection<T> union = union(coll1, coll2);
+		for (Collection<T> coll : otherColls) {
+			union = union(union, coll);
+		}
+		return union;
+	}
 
     /* 新建 -------------------------------------------------------------- set HashSet */
 

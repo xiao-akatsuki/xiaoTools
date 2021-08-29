@@ -197,6 +197,33 @@ public class CollUtil {
 		return new ArrayList<>();
 	}
 
+    /**
+     * [多个集合的交集](Intersection of multiple sets)
+     * @description zh - 多个集合的交集
+     * @description en - Intersection of multiple sets
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-29 19:55:03
+     * @param coll1 集合
+     * @param coll2 集合
+     * @param otherColls 其他集合
+     * @return java.util.Collection<T>
+     */
+    @SafeVarargs
+	public static <T> Collection<T> intersection(Collection<T> coll1, Collection<T> coll2, Collection<T>... otherColls) {
+		Collection<T> intersection = intersection(coll1, coll2);
+		if (isEmpty(intersection)) {
+			return intersection;
+		}
+		for (Collection<T> coll : otherColls) {
+			intersection = intersection(intersection, coll);
+			if (isEmpty(intersection)) {
+				return intersection;
+			}
+		}
+		return intersection;
+	}
+
     /* 新建 -------------------------------------------------------------- set HashSet */
 
     /**

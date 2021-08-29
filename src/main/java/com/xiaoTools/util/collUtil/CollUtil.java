@@ -2,6 +2,7 @@ package com.xiaoTools.util.collUtil;
 
 import com.xiaoTools.core.convert.Convert;
 import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.listUtil.ListUtil;
 
 import java.util.*;
@@ -101,6 +102,38 @@ public class CollUtil {
 		}
 		return union;
 	}
+
+    /**
+     * [多个集合的非重复并集](Non repeating union of multiple sets)
+     * @description zh - 多个集合的非重复并集
+     * @description en - Non repeating union of multiple sets
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-29 19:36:02
+     * @param coll1 集合1
+     * @param coll2 集合2
+     * @param otherColls 其它集合
+     * @return java.util.Set<T>
+     */
+	@SafeVarargs
+	public static <T> Set<T> unionDistinct(Collection<T> coll1, Collection<T> coll2, Collection<T>... otherColls) {
+		final Set<T> result;
+        result = isEmpty(coll1) ? new LinkedHashSet<>() : 
+                 new LinkedHashSet<>(coll1);
+
+		if (isNotEmpty(coll2)) {
+			result.addAll(coll2);
+		}
+
+		if (ArrayUtil.isNotEmpty(otherColls)) {
+			for (Collection<T> otherColl : otherColls) {
+				result.addAll(otherColl);
+			}
+		}
+
+		return result;
+	}
+
 
     /* 新建 -------------------------------------------------------------- set HashSet */
 

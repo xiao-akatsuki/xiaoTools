@@ -165,6 +165,38 @@ public class CollUtil {
 		return result;
 	}
 
+    /* 交集 -------------------------------------------------------------- intersection */
+
+    /**
+     * [两个集合的交集](Intersection of two sets)
+     * @description zh - 两个集合的交集
+     * @description en - Intersection of two sets
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-29 19:51:12
+     * @param coll1
+     * @param coll2
+     * @return java.util.Collection<T>
+     */
+    public static <T> Collection<T> intersection(Collection<T> coll1, Collection<T> coll2) {
+		if (isNotEmpty(coll1) && isNotEmpty(coll2)) {
+			final ArrayList<T> list = new ArrayList<>(Math.min(coll1.size(), coll2.size()));
+			final Map<T, Integer> map1 = countMap(coll1);
+			final Map<T, Integer> map2 = countMap(coll2);
+			final Set<T> elts = newHashSet(coll2);
+			int m;
+			for (T t : elts) {
+				m = Math.min(Convert.toInt(map1.get(t), Constant.ZERO), Convert.toInt(map2.get(t), Constant.ZERO));
+				for (int i = Constant.ZERO; i < m; i++) {
+					list.add(t);
+				}
+			}
+			return list;
+		}
+
+		return new ArrayList<>();
+	}
+
     /* 新建 -------------------------------------------------------------- set HashSet */
 
     /**

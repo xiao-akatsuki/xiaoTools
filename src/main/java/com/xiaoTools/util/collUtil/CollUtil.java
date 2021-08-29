@@ -224,6 +224,44 @@ public class CollUtil {
 		return intersection;
 	}
 
+    /**
+     * [多个集合的交集](Intersection of multiple sets)
+     * @description zh - 多个集合的交集
+     * @description en - Intersection of multiple sets
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-29 19:57:20
+     * @param coll1 集合
+     * @param coll2 集合
+     * @param otherColls 其他集合
+     * @return java.util.Set<T>
+     */
+    @SafeVarargs
+	public static <T> Set<T> intersectionDistinct(Collection<T> coll1, Collection<T> coll2, Collection<T>... otherColls) {
+		final Set<T> result;
+		if (isEmpty(coll1) || isEmpty(coll2)) {
+			// 有一个空集合就直接返回空
+			return new LinkedHashSet<>();
+		} else {
+			result = new LinkedHashSet<>(coll1);
+		}
+
+		if (ArrayUtil.isNotEmpty(otherColls)) {
+			for (Collection<T> otherColl : otherColls) {
+				if (isNotEmpty(otherColl)) {
+					result.retainAll(otherColl);
+				} else {
+					// 有一个空集合就直接返回空
+					return new LinkedHashSet<>();
+				}
+			}
+		}
+
+		result.retainAll(coll2);
+
+		return result;
+	}
+
     /* 新建 -------------------------------------------------------------- set HashSet */
 
     /**

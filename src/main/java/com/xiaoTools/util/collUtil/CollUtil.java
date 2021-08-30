@@ -458,6 +458,38 @@ public class CollUtil {
 		return Constant.FALSE;
 	}
 
+    /** 
+     * [集合2是否为集合1的子集](Is set 2 a subset of set 1)
+     * @description zh - 集合2是否为集合1的子集
+     * @description en - Is set 2 a subset of set 1
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-30 18:59:32
+     * @param coll1 集合
+     * @param coll2 集合
+     * @return boolean
+     */
+    public static boolean containsAll(Collection<?> coll1, Collection<?> coll2) {
+		if (isEmpty(coll1)) {
+			return isEmpty(coll2);
+		}
+
+		if (isEmpty(coll2)) {
+			return Constant.TRUE;
+		}
+
+		if (coll1.size() < coll2.size()) {
+			return Constant.FALSE;
+		}
+
+		for (Object object : coll2) {
+			if (Constant.FALSE == coll1.contains(object)) {
+				return Constant.FALSE;
+			}
+		}
+		return Constant.TRUE;
+	}
+
     /*新建一个ArrayList-----------------------------------------------------------new Array List*/
 
     /**

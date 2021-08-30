@@ -617,6 +617,35 @@ public class CollUtil {
 		return MapUtil.newHashMap();
 	}
 
+    /**
+     * [新建一个HashMap](Create a new HashMap)
+     * @description zh - 新建一个HashMap
+     * @description en - Create a new HashMap
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-30 19:55:58
+     * @param size 初始大小
+     * @param isOrder Map的Key是否有序
+     * @return java.util.HashMap<K, V>
+     */
+	public static <K, V> HashMap<K, V> newHashMap(int size, boolean isOrder) {
+		return MapUtil.newHashMap(size, isOrder);
+	}
+
+    /**
+     * [新建一个HashMap](Create a new HashMap)
+     * @description zh - 新建一个HashMap
+     * @description en - Create a new HashMap
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-30 19:56:40
+     * @param size 初始大小
+     * @return java.util.HashMap<K, V>
+     */
+	public static <K, V> HashMap<K, V> newHashMap(int size) {
+		return MapUtil.newHashMap(size);
+	}
+
     /*新建一个ArrayList-----------------------------------------------------------new Array List*/
 
     /**

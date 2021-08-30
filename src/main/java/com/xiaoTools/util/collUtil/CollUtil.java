@@ -262,6 +262,42 @@ public class CollUtil {
 		return result;
 	}
 
+    /* 差集 -------------------------------------------------------------- disjunction */
+
+    /**
+     * [两个集合的差集](Difference set of two sets)
+     * @description zh - 两个集合的差集
+     * @description en - Difference set of two sets
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-30 18:32:46
+     * @param coll1 集合
+     * @param coll2 集合
+     * @return java.util.Collection<T>
+     */
+    public static <T> Collection<T> disjunction(Collection<T> coll1, Collection<T> coll2) {
+		if (isEmpty(coll1)) {
+			return coll2;
+		}
+		if (isEmpty(coll2)) {
+			return coll1;
+		}
+
+		final List<T> result = new ArrayList<>();
+		final Map<T, Integer> map1 = countMap(coll1);
+		final Map<T, Integer> map2 = countMap(coll2);
+		final Set<T> elts = newHashSet(coll2);
+		elts.addAll(coll1);
+		int m;
+		for (T t : elts) {
+			m = Math.abs(Convert.toInt(map1.get(t), Constant.ZERO) - Convert.toInt(map2.get(t), Constant.ZERO));
+			for (int i = Constant.ZERO; i < m; i++) {
+				result.add(t);
+			}
+		}
+		return result;
+	}
+
     /* 新建 -------------------------------------------------------------- set HashSet */
 
     /**

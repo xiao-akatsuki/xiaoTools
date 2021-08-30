@@ -521,6 +521,23 @@ public class CollUtil {
         return Constant.NULL == iterable ? Constant.STRING_NULL : IterUtil.join(iterable.iterator(), conjunction);
 	}
 
+    /**
+     * [以 conjunction 为分隔符将集合转换为字符串](Converts a collection to a string with a conjunction as a delimiter)
+     * @description zh - 以 conjunction 为分隔符将集合转换为字符串
+     * @description en - Converts a collection to a string with a conjunction as a delimiter
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-30 19:46:41
+	 * @param iterable Iterable
+	 * @param conjunction 分隔符
+	 * @param prefix 每个元素添加的前缀，null表示不添加
+	 * @param suffix 每个元素添加的后缀，null表示不添加
+     * @return java.lang.String
+     */
+    public static <T> String join(Iterable<T> iterable, CharSequence conjunction, String prefix, String suffix) {
+        return Constant.NULL = iterable ? Constant.STRING_NULL : IterUtil.join(iterable.iterator(), conjunction, prefix, suffix);
+	}
+
     /*新建一个ArrayList-----------------------------------------------------------new Array List*/
 
     /**

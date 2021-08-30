@@ -316,6 +316,37 @@ public class CollUtil {
 		return result;
 	}
 
+    /**
+     * [计算集合的单差集](Single difference set of calculation set)
+     * @description zh - 计算集合的单差集
+     * @description en - Single difference set of calculation set
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-30 18:38:05
+     * @param coll1 集合
+     * @param coll2 集合
+     * @return java.util.List<T>
+     */
+    public static <T> List<T> subtractToList(Collection<T> coll1, Collection<T> coll2) {
+
+		if (isEmpty(coll1)) {
+			return ListUtil.empty();
+		}
+		if (isEmpty(coll2)) {
+			return ListUtil.list(true, coll1);
+		}
+
+		//将被交数用链表储存，防止因为频繁扩容影响性能
+		final List<T> result = new LinkedList<>();
+		Set<T> set = new HashSet<>(coll2);
+		for (T t : coll1) {
+			if (false == set.contains(t)) {
+				result.add(t);
+			}
+		}
+		return result;
+	}
+
     /* 新建 -------------------------------------------------------------- set HashSet */
 
     /**

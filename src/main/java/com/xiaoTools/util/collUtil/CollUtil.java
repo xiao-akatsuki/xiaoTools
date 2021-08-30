@@ -7,6 +7,7 @@ import com.xiaoTools.util.listUtil.ListUtil;
 import com.xiaoTools.util.objectUtil.ObjectUtil;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * [集合相关工具类](Collection related tool classes)
@@ -401,6 +402,29 @@ public class CollUtil {
      */
     public static boolean contains(Collection<?> collection, Object value) {
 		return isNotEmpty(collection) && collection.contains(value);
+	}
+
+    /**
+     * [自定义函数判断集合是否包含某类值](A user-defined function determines whether a collection contains a certain type of value)
+     * @description zh - 自定义函数判断集合是否包含某类值
+     * @description en - A user-defined function determines whether a collection contains a certain type of value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-30 18:52:23
+     * @param collection 集合
+     * @param contain 自定义判断函数
+     * @return boolean
+     */
+    public static <T> boolean contains(Collection<T> collection, Predicate<? super T> contain) {
+		if (isEmpty(collection)) {
+			return Constant.FALSE;
+		}
+		for (T t : collection) {
+			if (contain.test(t)) {
+				return Constant.TRUE;
+			}
+		}
+		return Constant.FALSE;
 	}
 
 

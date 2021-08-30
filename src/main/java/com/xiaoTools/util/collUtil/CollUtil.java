@@ -504,6 +504,23 @@ public class CollUtil {
 		return IterUtil.countMap(Constant.NULL == collection ? Constant.NULL : collection.iterator());
 	}
 
+    /*转换-----------------------------------------------------------join*/
+
+    /**
+     * [以 conjunction 为分隔符将集合转换为字符串](Converts a collection to a string with a conjunction as a delimiter)
+     * @description zh - 以 conjunction 为分隔符将集合转换为字符串
+     * @description en - Converts a collection to a string with a conjunction as a delimiter
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-30 19:43:33
+     * @param iterable 集合元素类型
+     * @param conjunction 分隔符
+     * @return java.lang.String
+     */
+    public static <T> String join(Iterable<T> iterable, CharSequence conjunction) {
+        return Constant.NULL == iterable ? Constant.STRING_NULL : IterUtil.join(iterable.iterator(), conjunction);
+	}
+
     /*新建一个ArrayList-----------------------------------------------------------new Array List*/
 
     /**

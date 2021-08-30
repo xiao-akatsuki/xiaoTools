@@ -427,6 +427,36 @@ public class CollUtil {
 		return Constant.FALSE;
 	}
 
+    /**
+     * [两个集合是否至少有一个共同的元素](Do two collections have at least one element in common)
+     * @description zh - 两个集合是否至少有一个共同的元素
+     * @description en - Do two collections have at least one element in common
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-30 18:56:56
+     * @param coll1 集合
+     * @param coll2 集合
+     * @return boolean
+     */
+    public static boolean containsAny(Collection<?> coll1, Collection<?> coll2) {
+		if (isEmpty(coll1) || isEmpty(coll2)) {
+			return Constant.FALSE;
+		}
+		if (coll1.size() < coll2.size()) {
+			for (Object object : coll1) {
+				if (coll2.contains(object)) {
+					return Constant.TRUE;
+				}
+			}
+		} else {
+			for (Object object : coll2) {
+				if (coll1.contains(object)) {
+					return Constant.TRUE;
+				}
+			}
+		}
+		return Constant.FALSE;
+	}
 
     /*新建一个ArrayList-----------------------------------------------------------new Array List*/
 

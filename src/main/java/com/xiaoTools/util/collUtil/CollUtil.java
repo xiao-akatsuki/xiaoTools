@@ -386,6 +386,24 @@ public class CollUtil {
         return set(false, ts);
     }
 
+    /* 包含指定值 ----------------------------------------------------------- contains */
+
+    /**
+     * [判断指定集合是否包含指定值](Determines whether the specified set contains the specified value)
+     * @description zh - 判断指定集合是否包含指定值
+     * @description en - Determines whether the specified set contains the specified value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-30 18:47:50
+     * @param collection 集合
+     * @param value 需要查找的值
+     * @return boolean
+     */
+    public static boolean contains(Collection<?> collection, Object value) {
+		return isNotEmpty(collection) && collection.contains(value);
+	}
+
+
     /*新建一个ArrayList-----------------------------------------------------------new Array List*/
 
     /**

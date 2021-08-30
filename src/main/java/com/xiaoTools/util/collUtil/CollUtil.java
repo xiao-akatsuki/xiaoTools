@@ -602,6 +602,21 @@ public class CollUtil {
 		return currentAlaDatas;
 	}
 
+    /*新建一个HashMap-----------------------------------------------------------new HashMap*/
+
+    /**
+     * [新建一个HashMap](Create a new HashMap)
+     * @description zh - 新建一个HashMap
+     * @description en - Create a new HashMap
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-30 19:54:27
+     * @return java.util.HashMap<K, V>
+     */
+    public static <K, V> HashMap<K, V> newHashMap() {
+		return MapUtil.newHashMap();
+	}
+
     /*新建一个ArrayList-----------------------------------------------------------new Array List*/
 
     /**

@@ -490,6 +490,20 @@ public class CollUtil {
 		return Constant.TRUE;
 	}
 
+    /**
+     * [根据集合返回一个元素计数的Map](Returns a map of element counts based on the collection)
+     * @description zh - 根据集合返回一个元素计数的Map
+     * @description en - Returns a map of element counts based on the collection
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-30 19:00:59
+     * @param collection 集合
+     * @return java.util.Map<T, Integer>
+     */
+    public static <T> Map<T, Integer> countMap(Iterable<T> collection) {
+		return IterUtil.countMap(Constant.NULL == collection ? Constant.NULL : collection.iterator());
+	}
+
     /*新建一个ArrayList-----------------------------------------------------------new Array List*/
 
     /**

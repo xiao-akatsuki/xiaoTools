@@ -538,6 +538,39 @@ public class CollUtil {
         return Constant.NULL = iterable ? Constant.STRING_NULL : IterUtil.join(iterable.iterator(), conjunction, prefix, suffix);
 	}
 
+    /*切取部分数据----------------------------------------------------------- Cut */
+
+    /**
+     * [切取部分数据](Cut some data)
+     * @description zh - 切取部分数据
+     * @description en - Cut some data
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-30 19:49:52
+     * @param surplusAlaDatas 原数据
+     * @param partSize 每部分数据的长度
+     * @return java.util.List<T>
+     */
+    public static <T> List<T> popPart(Stack<T> surplusAlaDatas, int partSize) {
+		if (isEmpty(surplusAlaDatas)) {
+			return ListUtil.empty();
+		}
+
+		final List<T> currentAlaDatas = new ArrayList<>();
+		int size = surplusAlaDatas.size();
+		// 切割
+		if (size > partSize) {
+			for (int i = Constant.ZERO; i < partSize; i++) {
+				currentAlaDatas.add(surplusAlaDatas.pop());
+			}
+		} else {
+			for (int i = Constant.ZERO; i < size; i++) {
+				currentAlaDatas.add(surplusAlaDatas.pop());
+			}
+		}
+		return currentAlaDatas;
+	}
+
     /*新建一个ArrayList-----------------------------------------------------------new Array List*/
 
     /**

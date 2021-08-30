@@ -4,6 +4,7 @@ import com.xiaoTools.core.convert.Convert;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.listUtil.ListUtil;
+import com.xiaoTools.util.objectUtil.ObjectUtil;
 
 import java.util.*;
 
@@ -295,6 +296,23 @@ public class CollUtil {
 				result.add(t);
 			}
 		}
+		return result;
+	}
+
+    /**
+     * [计算集合的单差集](Single difference set of calculation set)
+     * @description zh - 计算集合的单差集
+     * @description en - Single difference set of calculation set
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-30 18:34:56
+     * @param coll1 集合
+     * @param coll2 集合
+     * @return java.util.Collection<T>
+     */
+    public static <T> Collection<T> subtract(Collection<T> coll1, Collection<T> coll2) {
+		final Collection<T> result = ObjectUtil.clone(coll1);
+		result.removeAll(coll2);
 		return result;
 	}
 

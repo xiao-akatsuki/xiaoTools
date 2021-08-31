@@ -7,8 +7,11 @@ import com.xiaoTools.util.listUtil.ListUtil;
 import com.xiaoTools.util.objectUtil.ObjectUtil;
 
 import java.util.*;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Predicate;
+
+import javax.management.Query;
 
 /**
  * [集合相关工具类](Collection related tool classes)
@@ -947,5 +950,22 @@ public class CollUtil {
      */
     public static <T> CopyOnWriteArrayList<T> newCopyOnWriteArrayList(Collection<T> collection) {
 		return ListUtil.toCopyOnWriteArrayList(collection);
+	}
+
+    /**
+     * [新建 BlockingQueue](New BlockingQueue)
+     * @description zh - 新建 BlockingQueue
+     * @description en - New BlockingQueue
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-31 19:09:00
+     * @param capacity 容量
+     * @param isLinked 是否为链表形式
+     * @return java.util.concurrent.BlockingQueue<T>
+     */
+    public static <T> BlockingQueue<T> newBlockingQueue(int capacity, boolean isLinked) {
+		BlockingQueue<T> queue;
+        queue = isLinked ? new LinkedBlockingDeque<>(capacity) : new ArrayBlockingQueue<>(capacity);
+		return queue;
 	}
 }

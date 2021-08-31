@@ -885,5 +885,18 @@ public class CollUtil {
 		return ListUtil.list(isLinked, iter);
 	}
 
-
+    /**
+     * [新建一个List](Create an list)
+     * @description zh - 新建一个List
+     * @description en - Create an list
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-31 15:26:15
+     * @param isLinked 是否新建LinkedList
+     * @param enumeration Enumeration
+     * @return java.util.List<T>
+     */
+    public static <T> List<T> list(boolean isLinked, Enumeration<T> enumeration) {
+		return ListUtil.list(isLinked, enumeration);
+	}
 }

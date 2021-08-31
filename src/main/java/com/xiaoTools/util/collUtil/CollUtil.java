@@ -1059,4 +1059,22 @@ public class CollUtil {
                 new ArrayList<>(new LinkedHashSet<>(collection));
 	}
 
+    /*截取-----------------------------------------------------------sub*/
+
+    /**
+     * [截取集合的部分](Intercepts part of the set)
+     * @description zh - 截取集合的部分
+     * @description en - Intercepts part of the set
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-31 19:53:00
+     * @param list 被截取的数组
+     * @param start 开始位置（包含）
+     * @param end 结束位置（不包含）
+     * @return java.util.List<T>
+     */
+    public static <T> List<T> sub(List<T> list, int start, int end) {
+		return ListUtil.sub(list, start, end);
+	}
+
 }

@@ -1027,4 +1027,18 @@ public class CollUtil {
 		return list;
 	}
 
+    /**
+     * [创建Map](Create map)
+     * @description zh - 创建Map
+     * @description en - Create map
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-31 19:38:03
+     * @param mapType map类型
+     * @return java.util.Map<K, V>
+     */
+    public static <K, V> Map<K, V> createMap(Class<?> mapType) {
+		return MapUtil.createMap(mapType);
+	}
+
 }

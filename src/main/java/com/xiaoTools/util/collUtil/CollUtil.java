@@ -916,4 +916,21 @@ public class CollUtil {
 	public static <T> ArrayList<T> toList(T... values) {
 		return ListUtil.toList(values);
 	}
+
+    /* 新建LinkedList ----------------------------------------------------------- new LinkedList */    
+
+    /**
+     * [新建LinkedList](New LinkedList)
+     * @description zh - 新建LinkedList
+     * @description en - New LinkedList
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-31 18:55:59
+     * @param values 数组
+     * @return java.util.LinkedList<T>
+     */
+    @SafeVarargs
+	public static <T> LinkedList<T> newLinkedList(T... values) {
+		return ListUtil.toLinkedList(values);
+	}
 }

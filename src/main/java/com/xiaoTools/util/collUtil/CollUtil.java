@@ -899,4 +899,21 @@ public class CollUtil {
     public static <T> List<T> list(boolean isLinked, Enumeration<T> enumeration) {
 		return ListUtil.list(isLinked, enumeration);
 	}
+
+    /*数组转为ArrayList-----------------------------------------------------------toList*/
+
+    /**
+     * [数组转为ArrayList](Convert array to ArrayList)
+     * @description zh - 数组转为ArrayList
+     * @description en - Convert array to ArrayList
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-31 18:50:45
+     * @param values 数组
+     * @return java.util.ArrayList<T>
+     */
+    @SafeVarargs
+	public static <T> ArrayList<T> toList(T... values) {
+		return ListUtil.toList(values);
+	}
 }

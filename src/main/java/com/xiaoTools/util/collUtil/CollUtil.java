@@ -358,17 +358,17 @@ public class CollUtil {
      * @author XiaoXunYao
      * @since 2021/6/17 4:31 下午
      * @param isSorted: 是否有序，有序返回 LinkedHashSet，否则返回 HashSet
-     * @param ts: 元素数组
+     * @param values: 元素数组
      * @return java.util.HashSet<T>
     */
     @SafeVarargs
-    public static <T> HashSet<T> set(boolean isSorted, T... ts) {
-        if (Constant.NULL == ts) {
+    public static <T> HashSet<T> set(boolean isSorted, T... values) {
+        if (Constant.NULL == values) {
             return isSorted ? new LinkedHashSet<>() : new HashSet<>();
         }
-        int initialCapacity = Math.max((int) (ts.length / .75f) + Constant.ONE, Constant.SIXTEEN);
+        int initialCapacity = Math.max((int) (values.length / .75f) + Constant.ONE, Constant.SIXTEEN);
         final HashSet<T> set = isSorted ? new LinkedHashSet<>(initialCapacity) : new HashSet<>(initialCapacity);
-        Collections.addAll(set, ts);
+        Collections.addAll(set, values);
         return set;
     }
 
@@ -661,7 +661,19 @@ public class CollUtil {
 		return MapUtil.newHashMap(size);
 	}
 
-
+    /**
+     * [新建一个HashSet](Create a new HashSet)
+     * @description zh - 新建一个HashSet
+     * @description en - Create a new HashSet
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-31 14:50:11
+     * @param collection 集合
+     * @return java.util.HashSet<T>
+     */
+	public static <T> HashSet<T> newHashSet(Collection<T> collection) {
+		return newHashSet(Constant.FALSE, collection);
+	}
 
     /*新建一个ArrayList-----------------------------------------------------------new Array List*/
 

@@ -1041,4 +1041,22 @@ public class CollUtil {
 		return MapUtil.createMap(mapType);
 	}
 
+    /*去重-----------------------------------------------------------distinct*/
+
+    /**
+     * [去重集合](De duplication set)
+     * @description zh - 去重集合
+     * @description en - De duplication set
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-31 19:43:16
+     * @param collection 集合
+     * @return java.util.ArrayList<T>
+     */
+    public static <T> ArrayList<T> distinct(Collection<T> collection) {
+        return isEmpty(collection) ? new ArrayList<>() : 
+                collection instanceof Set ? new ArrayList<>(collection) : 
+                new ArrayList<>(new LinkedHashSet<>(collection));
+	}
+
 }

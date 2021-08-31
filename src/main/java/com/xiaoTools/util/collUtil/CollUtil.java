@@ -675,6 +675,21 @@ public class CollUtil {
 		return newHashSet(Constant.FALSE, collection);
 	}
 
+    /**
+     * [新建一个HashSet](Create a new HashSet)
+     * @description zh - 新建一个HashSet
+     * @description en - Create a new HashSet
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-31 14:51:56
+     * @param isSorted 是否有序
+     * @param collection 集合
+     * @return java.util.HashSet<T>
+     */
+    public static <T> HashSet<T> newHashSet(boolean isSorted, Collection<T> collection) {
+		return isSorted ? new LinkedHashSet<>(collection) : new HashSet<>(collection);
+	}
+
     /*新建一个ArrayList-----------------------------------------------------------new Array List*/
 
     /**

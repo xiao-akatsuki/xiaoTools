@@ -712,6 +712,28 @@ public class CollUtil {
 		return set;
 	}
 
+    /**
+     * [新建一个HashSet](Create a new HashSet)
+     * @description zh - 新建一个HashSet
+     * @description en - Create a new HashSet
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-31 15:03:03
+     * @param isSorted
+     * @param enumeration
+     * @return java.util.HashSet<T>
+     */
+    public static <T> HashSet<T> newHashSet(boolean isSorted, Enumeration<T> enumeration) {
+		if (Constant.NULL == enumeration) {
+			return set(isSorted, (T[]) null);
+		}
+		final HashSet<T> set = isSorted ? new LinkedHashSet<>() : new HashSet<>();
+		while (enumeration.hasMoreElements()) {
+			set.add(enumeration.nextElement());
+		}
+		return set;
+	}
+
     /*新建一个ArrayList-----------------------------------------------------------new Array List*/
 
     /**

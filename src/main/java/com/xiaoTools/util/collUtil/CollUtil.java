@@ -824,4 +824,20 @@ public class CollUtil {
 		return ListUtil.list(isLinked);
 	}
 
+    /**
+     * [新建一个空List](Create an empty list)
+     * @description zh - 新建一个空List
+     * @description en - Create an empty list
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-31 15:15:07
+     * @param isLinked 是否新建LinkedList
+     * @param values 数组
+     * @return java.util.List<T>
+     */
+    @SafeVarargs
+	public static <T> List<T> list(boolean isLinked, T... values) {
+		return ListUtil.list(isLinked, values);
+	}
+
 }

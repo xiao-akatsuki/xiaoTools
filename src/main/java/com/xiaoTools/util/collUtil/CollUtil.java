@@ -840,4 +840,19 @@ public class CollUtil {
 		return ListUtil.list(isLinked, values);
 	}
 
+    /**
+     * [新建一个List](Create an list)
+     * @description zh - 新建一个List
+     * @description en - Create an list
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-31 15:19:26
+     * @param isLinked 是否新建LinkedList
+     * @param collection 集合
+     * @return java.util.List<T>
+     */
+    public static <T> List<T> list(boolean isLinked, Collection<T> collection) {
+		return ListUtil.list(isLinked, collection);
+	}
+
 }

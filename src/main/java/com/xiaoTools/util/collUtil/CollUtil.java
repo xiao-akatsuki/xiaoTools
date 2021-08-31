@@ -379,13 +379,28 @@ public class CollUtil {
      * @version: V1.0
      * @author XiaoXunYao
      * @since 2021/6/17 4:33 下午
-     * @param ts: 元素数组
+     * @param values: 元素数组
      * @return java.util.HashSet<T>
     */
     @SafeVarargs
-    public static <T> HashSet<T> newHashSet(T... ts) {
-        return set(false, ts);
+    public static <T> HashSet<T> newHashSet(T... values) {
+        return set(false, values);
     }
+
+    /**
+     * [新建一个LinkedHashSet](Create a linkedhashset)
+     * @description zh - 新建一个LinkedHashSet
+     * @description en - Create a linkedhashset
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-31 14:40:59
+     * @param values 元素数组
+     * @return java.util.LinkedHashSet<T>
+     */
+    @SafeVarargs
+	public static <T> LinkedHashSet<T> newLinkedHashSet(T... values) {
+		return (LinkedHashSet<T>) set(Constant.TRUE, values);
+	}
 
     /* 包含指定值 ----------------------------------------------------------- contains */
 
@@ -645,6 +660,8 @@ public class CollUtil {
 	public static <K, V> HashMap<K, V> newHashMap(int size) {
 		return MapUtil.newHashMap(size);
 	}
+
+
 
     /*新建一个ArrayList-----------------------------------------------------------new Array List*/
 

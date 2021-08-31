@@ -1,10 +1,13 @@
 package com.xiaoTools.util.collUtil;
 
 import com.xiaoTools.core.convert.Convert;
+import com.xiaoTools.core.exception.utilException.UtilException;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
+import com.xiaoTools.util.compareUtil.CompareUtil;
 import com.xiaoTools.util.listUtil.ListUtil;
 import com.xiaoTools.util.objectUtil.ObjectUtil;
+import com.xiaoTools.util.reflectUtil.ReflectUtil;
 
 import java.util.*;
 import java.util.concurrent.BlockingQueue;
@@ -968,4 +971,60 @@ public class CollUtil {
         queue = isLinked ? new LinkedBlockingDeque<>(capacity) : new ArrayBlockingQueue<>(capacity);
 		return queue;
 	}
+
+    /*创建-----------------------------------------------------------create*/
+
+    /**
+     * [创建新的集合对象](Create a new collection object)
+     * @description zh - 创建新的集合对象
+     * @description en - Create a new collection object
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-31 19:36:42
+     * @param collectionType 集合类型
+     * @return java.util.Collection<T>
+     */
+    @SuppressWarnings({"unchecked", "rawtypes"})
+	public static <T> Collection<T> create(Class<?> collectionType) {
+		Collection<T> list;
+		if (collectionType.isAssignableFrom(AbstractCollection.class)) {
+			// 抽象集合默认使用ArrayList
+			list = new ArrayList<>();
+		}
+
+		// Set
+		else if (collectionType.isAssignableFrom(HashSet.class)) {
+			list = new HashSet<>();
+		} else if (collectionType.isAssignableFrom(LinkedHashSet.class)) {
+			list = new LinkedHashSet<>();
+		} else if (collectionType.isAssignableFrom(TreeSet.class)) {
+			list = new TreeSet<>((o1, o2) -> {
+				// 优先按照对象本身比较，如果没有实现比较接口，默认按照toString内容比较
+				if (o1 instanceof Comparable) {
+					return ((Comparable<T>) o1).compareTo(o2);
+				}
+				return CompareUtil.compare(o1.toString(), o2.toString());
+			});
+		} else if (collectionType.isAssignableFrom(EnumSet.class)) {
+			list = (Collection<T>) EnumSet.noneOf((Class<Enum>) ClassUtil.getTypeArgument(collectionType));
+		}
+
+		// List
+		else if (collectionType.isAssignableFrom(ArrayList.class)) {
+			list = new ArrayList<>();
+		} else if (collectionType.isAssignableFrom(LinkedList.class)) {
+			list = new LinkedList<>();
+		}
+
+		// Others，直接实例化
+		else {
+			try {
+				list = (Collection<T>) ReflectUtil.newInstance(collectionType);
+			} catch (Exception e) {
+				throw new UtilException(e);
+			}
+		}
+		return list;
+	}
+
 }

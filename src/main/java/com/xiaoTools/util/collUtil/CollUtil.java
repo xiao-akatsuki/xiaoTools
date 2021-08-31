@@ -7,6 +7,7 @@ import com.xiaoTools.util.listUtil.ListUtil;
 import com.xiaoTools.util.objectUtil.ObjectUtil;
 
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Predicate;
 
 /**
@@ -932,5 +933,19 @@ public class CollUtil {
     @SafeVarargs
 	public static <T> LinkedList<T> newLinkedList(T... values) {
 		return ListUtil.toLinkedList(values);
+	}
+
+    /**
+     * [新建一个CopyOnWriteArrayList](Create a new copyonwritearraylist)
+     * @description zh - 新建一个CopyOnWriteArrayList
+     * @description en - Create a new copyonwritearraylist
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-31 19:02:36
+     * @param collection 集合
+     * @return java.util.concurrent.CopyOnWriteArrayList<T>
+     */
+    public static <T> CopyOnWriteArrayList<T> newCopyOnWriteArrayList(Collection<T> collection) {
+		return ListUtil.toCopyOnWriteArrayList(collection);
 	}
 }

@@ -808,4 +808,20 @@ public class CollUtil {
     }
 
 
+    /*新建一个List-----------------------------------------------------------List*/
+
+    /**
+     * [新建一个空List](Create an empty list)
+     * @description zh - 新建一个空List
+     * @description en - Create an empty list
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-08-31 15:11:22
+     * @param isLinked 是否新建LinkedList
+     * @return java.util.List<T>
+     */
+    public static <T> List<T> list(boolean isLinked) {
+		return ListUtil.list(isLinked);
+	}
+
 }

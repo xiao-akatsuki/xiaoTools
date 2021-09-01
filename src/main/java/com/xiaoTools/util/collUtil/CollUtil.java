@@ -2394,5 +2394,33 @@ public class CollUtil {
 		return values;
 	}
 
+    /* 排序 ----------------------------------------------------------- sort */
+
+    /**
+     * [将多个集合排序并显示不同的段落（分页）](Sort multiple sets and display different paragraphs (pagination))
+     * @description zh - 将多个集合排序并显示不同的段落（分页）
+     * @description en - Sort multiple sets and display different paragraphs (pagination)
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 18:05:37
+     * @param current 页码
+     * @param pageSize 每页的条目数
+     * @param comparator 比较器
+     * @param colls 集合数组
+     * @return java.util.List<T>
+     */
+    @SafeVarargs
+	public static <T> List<T> sortPageAll(int current, int pageSize, Comparator<T> comparator, Collection<T>... colls) {
+		final List<T> list = new ArrayList<>(current * pageSize);
+		for (Collection<T> coll : colls) {
+			list.addAll(coll);
+		}
+		if (Constant.NULL != comparator) {
+			list.sort(comparator);
+		}
+
+		return page(current, pageSize, list);
+	}
+
 }
 

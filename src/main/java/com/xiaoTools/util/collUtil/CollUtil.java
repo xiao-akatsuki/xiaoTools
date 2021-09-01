@@ -2651,5 +2651,26 @@ public class CollUtil {
 		}
 	}
 
+    /**
+     * [循环遍历](Loop traversal)
+     * @description zh - 循环遍历
+     * @description en - Loop traversal
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 19:17:50
+     * @param enumeration Enumeration
+     * @param consumer Consumer
+     */
+    public static <T> void forEach(Enumeration<T> enumeration, Consumer<T> consumer) {
+		if(enumeration == Constant.NULL){
+			return;
+		}
+		int index = Constant.ZERO;
+		while (enumeration.hasMoreElements()) {
+			consumer.accept(enumeration.nextElement(), index);
+			index++;
+		}
+	}
+
 }
 

@@ -1635,5 +1635,19 @@ public class CollUtil {
 		return count;
 	}
 
+    /* 集合是否为空 -----------------------------------------------------------isEmpty*/
 
+    /**
+     * [集合是否为空](Is the collection empty)
+     * @description zh - 集合是否为空
+     * @description en - Is the collection empty
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 15:15:16
+     * @param collection 集合
+     * @return boolean
+     */
+    public static boolean isEmpty(Collection<?> collection) {
+		return collection == Constant.NULL || collection.isEmpty();
+	}
 }

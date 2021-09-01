@@ -1273,6 +1273,21 @@ public class CollUtil {
 		return ListUtil.filter(list, t -> filter.accept(t) ? t : null);
 	}
 
+    /**
+     * [去除指定元素](Removes the specified element)
+     * @description zh - 去除指定元素
+     * @description en - Removes the specified element
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 12:02:03
+     * @param collection 集合
+     * @param filter 过滤器
+     * @return T
+     */
+    public static <T extends Collection<E>, E> T filter(T collection, final Filter<E> filter) {
+		return IterUtil.filter(collection, filter);
+	}
+
     /* 去掉 -----------------------------------------------------------remove*/    
 
     /**
@@ -1291,4 +1306,6 @@ public class CollUtil {
 		collection.removeAll(newHashSet(elesRemoved));
 		return collection;
 	}
+
+
 }

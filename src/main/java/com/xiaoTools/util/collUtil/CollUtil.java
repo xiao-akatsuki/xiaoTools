@@ -13,6 +13,7 @@ import com.xiaoTools.util.reflectUtil.ReflectUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Function;
@@ -1288,6 +1289,21 @@ public class CollUtil {
      */
     public static <T extends Collection<E>, E> T filter(T collection, final Filter<E> filter) {
 		return IterUtil.filter(collection, filter);
+	}
+
+    /**
+     * [过滤](filter)
+     * @description zh - 过滤
+     * @description en - filter
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 15:02:20
+     * @param map Map 
+     * @param editor 编辑器接口
+     * @return java.util.Map<K, V>
+     */
+    public static <K, V> Map<K, V> filter(Map<K, V> map, Editor<Entry<K, V>> editor) {
+		return MapUtil.filter(map, editor);
 	}
 
     /* 去掉 -----------------------------------------------------------remove*/    

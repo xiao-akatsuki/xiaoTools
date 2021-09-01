@@ -1843,4 +1843,33 @@ public class CollUtil {
 		return zip(keys, values, delimiter, Constant.FALSE);
 	}
 
+    /**
+     * [映射键值](Mapping key value)
+     * @description zh - 映射键值
+     * @description en - Mapping key value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 16:41:49
+     * @param keys 键列表
+     * @param values 值列表
+     * @return java.util.Map<K, V>
+     */
+    public static <K, V> Map<K, V> zip(Collection<K> keys, Collection<V> values) {
+		if (isEmpty(keys) || isEmpty(values)) {
+			return MapUtil.empty();
+		}
+
+		int entryCount = Math.min(keys.size(), values.size());
+		final Map<K, V> map = newHashMap(entryCount);
+
+		final Iterator<K> keyIterator = keys.iterator();
+		final Iterator<V> valueIterator = values.iterator();
+		while (entryCount > Constant.ZERO) {
+			map.put(keyIterator.next(), valueIterator.next());
+			entryCount--;
+		}
+
+		return map;
+	}
+
 }

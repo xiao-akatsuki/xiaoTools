@@ -2128,5 +2128,20 @@ public class CollUtil {
 		return collection;
 	}
 
+    /**
+     * [加入全部](Add all)
+     * @description zh - 加入全部
+     * @description en - Add all
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 17:16:09
+     * @param collection 被加入的集合Collection
+     * @param iterator 要加入的 Iterator
+     * @return java.util.Collection<T>
+     */
+    public static <T> Collection<T> addAll(Collection<T> collection, Iterable<T> iterable) {
+        return iterable == Constant.NULL ? collection : addAll(collection, iterable.iterator());
+	}
+
 }
 

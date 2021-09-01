@@ -1949,4 +1949,17 @@ public class CollUtil {
 		return IterUtil.asIterator(enumeration);
 	}
 
+    /**
+     * [Iterator 转为 Iterable](Iterator to iteratable)
+     * @description zh - Iterator 转为 Iterable
+     * @description en - Iterator to iteratable
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 16:52:46
+     * @return iterator Iterator
+     * @return java.lang.Iterable<E>
+     */
+    public static <E> Iterable<E> asIterable(final Iterator<E> iterator) {
+		return IterUtil.asIterable(iterator);
+	}
 }

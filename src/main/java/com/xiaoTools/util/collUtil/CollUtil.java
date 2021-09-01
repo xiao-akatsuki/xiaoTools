@@ -1364,6 +1364,22 @@ public class CollUtil {
      * @return java.util.List<Object>
      */
     public static List<Object> extract(Iterable<?> collection, Editor<Object> editor) {
-		return extract(collection, editor, false);
+		return extract(collection, editor, Constant.FALSE);
+	}
+
+    /**
+     * [通过Editor抽取集合元素中的某些值返回为新列表](Extract some values from the collection elements through the editor and return them to a new list)
+     * @description zh - 通过Editor抽取集合元素中的某些值返回为新列表
+     * @description en - Extract some values from the collection elements through the editor and return them to a new list
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 14:17:55
+     * @param collection 原集合
+     * @param editor 编辑器
+     * @param ignoreNull 是否忽略空值
+     * @return java.util.List<Object>
+     */
+    public static List<Object> extract(Iterable<?> collection, Editor<Object> editor, boolean ignoreNull) {
+		return map(collection, editor::edit, ignoreNull);
 	}
 }

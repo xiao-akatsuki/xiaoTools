@@ -2250,5 +2250,40 @@ public class CollUtil {
 		return null;
 	}
 
+    /**
+     * [获取集合中指定多个下标的元素值](Gets the element value of the specified multiple subscripts in the collection)
+     * @description zh - 获取集合中指定多个下标的元素值
+     * @description en - Gets the element value of the specified multiple subscripts in the collection
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 17:55:17
+     * @param collection 集合
+     * @param indexes 下标
+     * @return java.util.List<T>
+     */
+    @SuppressWarnings("unchecked")
+	public static <T> List<T> getAny(Collection<T> collection, int... indexes) {
+		final int size = collection.size();
+		final ArrayList<T> result = new ArrayList<>();
+		if (collection instanceof List) {
+			final List<T> list = ((List<T>) collection);
+			for (int index : indexes) {
+				if (index < Constant.ZERO) {
+					index += size;
+				}
+				result.add(list.get(index));
+			}
+		} else {
+			final Object[] array = collection.toArray();
+			for (int index : indexes) {
+				if (index < Constant.ZERO) {
+					index += size;
+				}
+				result.add((T) array[index]);
+			}
+		}
+		return result;
+	}
+
 }
 

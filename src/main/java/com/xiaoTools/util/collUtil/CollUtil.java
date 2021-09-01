@@ -1872,4 +1872,20 @@ public class CollUtil {
 		return map;
 	}
 
+    /* 转换为HashMap ----------------------------------------------------------- to Map */
+
+    /**
+     * [将Entry集合转换为HashMap](Convert entry collection to HashMap)
+     * @description zh - 将Entry集合转换为HashMap
+     * @description en - Convert entry collection to HashMap
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 16:43:42
+     * @param entryIter entry集合
+     * @return java.util.HashMap<K, V>
+     */
+    public static <K, V> HashMap<K, V> toMap(Iterable<Entry<K, V>> entryIter) {
+		return IterUtil.toMap(entryIter);
+	}
+
 }

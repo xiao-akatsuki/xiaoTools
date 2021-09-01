@@ -2163,6 +2163,24 @@ public class CollUtil {
 		return collection;
 	}
 
+    /**
+     * [加入全部](Add all)
+     * @description zh - 加入全部
+     * @description en - Add all
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 17:46:40
+     * @param collection 被加入的集合
+     * @param values 要加入的内容数组
+     * @return java.util.Collection<T>
+     */
+    public static <T> Collection<T> addAll(Collection<T> collection, T[] values) {
+		if (Constant.NULL != collection && Constant.NULL != values) {
+			Collections.addAll(collection, values);
+		}
+		return collection;
+	}
+
 
 }
 

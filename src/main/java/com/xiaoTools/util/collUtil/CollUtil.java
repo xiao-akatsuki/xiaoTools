@@ -1962,4 +1962,18 @@ public class CollUtil {
     public static <E> Iterable<E> asIterable(final Iterator<E> iterator) {
 		return IterUtil.asIterable(iterator);
 	}
+
+    /**
+     * [Iterable 转为 Collection](Iterable to collection)
+     * @description zh - Iterable 转为 Collection
+     * @description en - Iterable to collection
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 16:54:24
+     * @param iterable Iterable
+     * @return java.util.Collection<E>
+     */
+    public static <E> Collection<E> toCollection(Iterable<E> iterable) {
+		return (iterable instanceof Collection) ? (Collection<E>) iterable : newArrayList(iterable.iterator());
+	}
 }

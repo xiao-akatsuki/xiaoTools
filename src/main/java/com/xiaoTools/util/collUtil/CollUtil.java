@@ -2438,5 +2438,22 @@ public class CollUtil {
 		return ListUtil.page(current, size, list);
 	}
 
+    /**
+     * [排序集合](Sort set)
+     * @description zh - 排序集合
+     * @description en - Sort set
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 18:09:30
+     * @param collection 集合
+     * @param comparator 比较器
+     * @return java.util.List<T>
+     */
+    public static <T> List<T> sort(Collection<T> collection, Comparator<? super T> comparator) {
+		List<T> list = new ArrayList<>(collection);
+		list.sort(comparator);
+		return list;
+	}
+
 }
 

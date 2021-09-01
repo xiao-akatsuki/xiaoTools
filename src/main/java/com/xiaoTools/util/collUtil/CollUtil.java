@@ -1918,4 +1918,20 @@ public class CollUtil {
 		return treeSet;
 	}
 
+    /* 转换为 XXX ----------------------------------------------------------- as XXX */
+
+    /**
+     * [Iterator转换为Enumeration](Convert iterator to enumeration)
+     * @description zh - Iterator转换为Enumeration
+     * @description en - Convert iterator to enumeration
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 16:46:49
+     * @param iter Iterator
+     * @return java.util.Enumeration<E>
+     */
+    public static <E> Enumeration<E> asEnumeration(Iterator<E> iter) {
+		return new IteratorEnumeration<>(iter);
+	}
+
 }

@@ -1766,4 +1766,18 @@ public class CollUtil {
 		return IterUtil.isNotEmpty(iterable);
 	}
 
+    /**
+     * [Iterator对象](Iterator object)
+     * @description zh - Iterator对象
+     * @description en - Iterator object
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 15:37:11
+     * @param Iterator Iterator对象
+     * @return boolean
+     */
+    public static boolean isNotEmpty(Iterator<?> Iterator) {
+		return IterUtil.isNotEmpty(Iterator);
+	}
+
 }

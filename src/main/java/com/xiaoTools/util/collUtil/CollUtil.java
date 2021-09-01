@@ -1888,4 +1888,34 @@ public class CollUtil {
 		return IterUtil.toMap(entryIter);
 	}
 
+    /**
+     * [将数组转换为Map（HashMap）](Convert array to map (HashMap))
+     * @description zh - 将数组转换为Map（HashMap）
+     * @description en - Convert array to map (HashMap)
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 16:44:30
+     * @return java.util.HashMap<Object, Object>
+     */
+    public static HashMap<Object, Object> toMap(Object[] array) {
+		return MapUtil.of(array);
+	}
+
+    /**
+     * [将集合转换为排序后的TreeSet](Convert collection to sorted TreeSet)
+     * @description zh - 将集合转换为排序后的TreeSet
+     * @description en - Convert collection to sorted TreeSet
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 16:45:23
+     * @param collection 集合
+     * @param comparator 比较器
+     * @return java.util.TreeSet<T>
+     */
+    public static <T> TreeSet<T> toTreeSet(Collection<T> collection, Comparator<T> comparator) {
+		final TreeSet<T> treeSet = new TreeSet<>(comparator);
+		treeSet.addAll(collection);
+		return treeSet;
+	}
+
 }

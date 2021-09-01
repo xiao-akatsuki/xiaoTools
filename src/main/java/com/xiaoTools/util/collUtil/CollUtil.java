@@ -1126,4 +1126,21 @@ public class CollUtil {
     public static <T> List<T> sub(Collection<T> list, int start, int end, int step) {
         return list == null || list.isEmpty() ? ListUtil.empty() : sub(new ArrayList<>(list), start, end, step);
 	}
+
+    /*切分-----------------------------------------------------------split*/
+
+    /**
+     * [对集合按照指定长度分段](Segments the set by the specified length)
+     * @description zh - 对集合按照指定长度分段
+     * @description en - Segments the set by the specified length
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 11:34:47
+     * @param list 集合
+     * @param size 切分的长度
+     * @return java.util.List<T>
+     */
+    public static <T> List<List<T>> splitList(List<T> list, int size) {
+		return ListUtil.split(list, size);
+	}
 }

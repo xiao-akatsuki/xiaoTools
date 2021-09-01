@@ -1526,4 +1526,30 @@ public class CollUtil {
 		}
 		return null;
 	}
+
+    /**
+     * [查找第一个匹配元素对象](Find the first matching element object)
+     * @description zh - 查找第一个匹配元素对象
+     * @description en - Find the first matching element object
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 14:36:52
+     * @param collection 集合
+     * @param fieldName 集合元素对象的字段名或map的键
+     * @param fieldValue 集合元素对象的字段值或map的值
+     * @return T
+     */
+    public static <T> T findOneByField(Iterable<T> collection, final String fieldName, final Object fieldValue) {
+		return findOne(collection, t -> {
+			if (t instanceof Map) {
+				final Map<?, ?> map = (Map<?, ?>) t;
+				final Object value = map.get(fieldName);
+				return ObjectUtil.equal(value, fieldValue);
+			}
+
+			// 普通Bean
+			final Object value = ReflectUtil.getFieldValue(t, fieldName);
+			return ObjectUtil.equal(value, fieldValue);
+		});
+	}
 }

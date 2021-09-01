@@ -1,7 +1,9 @@
 package com.xiaoTools.util.collUtil;
 
+import com.xiaoTools.core.collection.arrayIter.ArrayIter;
 import com.xiaoTools.core.collection.iteratorEnumeration.IteratorEnumeration;
 import com.xiaoTools.core.convert.Convert;
+import com.xiaoTools.core.convert.converterRegistry.ConverterRegistry;
 import com.xiaoTools.core.editor.Editor;
 import com.xiaoTools.core.exception.utilException.UtilException;
 import com.xiaoTools.core.filter.Filter;
@@ -14,7 +16,9 @@ import com.xiaoTools.util.objectUtil.ObjectUtil;
 import com.xiaoTools.util.reflectUtil.ReflectUtil;
 import com.xiaoTools.util.regularUtil.method.Func1;
 import com.xiaoTools.util.strUtil.StrUtil;
+import com.xiaoTools.util.typeUtil.TypeUtil;
 
+import java.lang.reflect.Type;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.BlockingQueue;
@@ -2055,4 +2059,52 @@ public class CollUtil {
     public static <T> Collection<T> addAll(Collection<T> collection, Object value) {
 		return addAll(collection, value, TypeUtil.getTypeArgument(collection.getClass()));
 	}
+
+    /**
+     * [将指定对象全部加入到集合中](Adds all specified objects to the collection)
+     * @description zh - 将指定对象全部加入到集合中
+     * @description en - Adds all specified objects to the collection
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 17:09:47
+     * @param collection 被加入的集合
+     * @param value 对象
+     * @param elementType 元素类型
+     * @return java.util.Collection<T>
+     */
+    @SuppressWarnings({"unchecked", "rawtypes"})
+	public static <T> Collection<T> addAll(Collection<T> collection, Object value, Type elementType) {
+		if (Constant.NULL == collection || Constant.NULL == value) {
+			return collection;
+		}
+		if (TypeUtil.isUnknown(elementType)) {
+			// 元素类型为空时，使用Object类型来接纳所有类型
+			elementType = Object.class;
+		}
+		Iterator iter;
+		if (value instanceof Iterator) {
+			iter = (Iterator) value;
+		} else if (value instanceof Iterable) {
+			iter = ((Iterable) value).iterator();
+		} else if (value instanceof Enumeration) {
+			iter = new EnumerationIter<>((Enumeration) value);
+		} else if (ArrayUtil.isArray(value)) {
+			iter = new ArrayIter<>(value);
+		} else if (value instanceof CharSequence) {
+			// String按照逗号分隔的列表对待
+			final String ArrayStr = StrUtil.unWrap((CharSequence) value, '[', ']');
+			iter = StrUtil.splitTrim(ArrayStr, Constant.CHAR_COMMA).iterator();
+		} else {
+			// 其它类型按照单一元素处理
+			iter = CollUtil.newArrayList(value).iterator();
+		}
+
+		final ConverterRegistry convert = ConverterRegistry.getInstance();
+		while (iter.hasNext()) {
+			collection.add(convert.convert(elementType, iter.next()));
+		}
+
+		return collection;
+	}
+
 }

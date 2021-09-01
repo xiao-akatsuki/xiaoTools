@@ -214,6 +214,8 @@ public class Constant {
 
     public static final char CHAR_SPACE = ' ';
 
+    public static final char CHAR_COMMA = ',';
+
     public static final char CHAR_SLASH_SPOT = '\'';
 
     public static final char CHAR_CR = '\r';

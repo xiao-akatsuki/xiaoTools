@@ -2038,4 +2038,21 @@ public class CollUtil {
     public static <K, V, E> Map<K, V> toMap(Iterable<E> values, Map<K, V> map, Func1<E, K> keyFunc, Func1<E, V> valueFunc) {
 		return IterUtil.toMap(Constant.NULL == values ? null : values.iterator(), map, keyFunc, valueFunc);
 	}
+
+    /* 加入到集合 ----------------------------------------------------------- add All */
+
+    /**
+     * [将指定对象全部加入到集合中](Adds all specified objects to the collection)
+     * @description zh - 将指定对象全部加入到集合中
+     * @description en - Adds all specified objects to the collection
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 17:05:17
+     * @param collection 被加入的集合
+     * @param value 对象
+     * @return java.util.Collection<T>
+     */
+    public static <T> Collection<T> addAll(Collection<T> collection, Object value) {
+		return addAll(collection, value, TypeUtil.getTypeArgument(collection.getClass()));
+	}
 }

@@ -2019,6 +2019,6 @@ public class CollUtil {
      * @return java.util.Map<K, V>
      */
     public static <K, V> Map<K, V> toMap(Iterable<V> values, Map<K, V> map, Func1<V, K> keyFunc) {
-		return IterUtil.toMap(null == values ? null : values.iterator(), map, keyFunc);
+		return IterUtil.toMap(Constant.NULL == values ? null : values.iterator(), map, keyFunc);
 	}
 }

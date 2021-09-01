@@ -3,6 +3,7 @@ package com.xiaoTools.util.collUtil;
 import com.xiaoTools.core.collection.arrayIter.ArrayIter;
 import com.xiaoTools.core.collection.enumerationIter.EnumerationIter;
 import com.xiaoTools.core.collection.iteratorEnumeration.IteratorEnumeration;
+import com.xiaoTools.core.comparator.propertyComparator.PropertyComparator;
 import com.xiaoTools.core.convert.Convert;
 import com.xiaoTools.core.convert.converterRegistry.ConverterRegistry;
 import com.xiaoTools.core.editor.Editor;

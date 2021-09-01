@@ -2021,4 +2021,21 @@ public class CollUtil {
     public static <K, V> Map<K, V> toMap(Iterable<V> values, Map<K, V> map, Func1<V, K> keyFunc) {
 		return IterUtil.toMap(Constant.NULL == values ? null : values.iterator(), map, keyFunc);
 	}
+
+    /**
+     * [集合转换为Map](Convert collection to map)
+     * @description zh - 集合转换为Map
+     * @description en - Convert collection to map
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 17:02:06
+     * @param value 数据列表
+     * @param map Map对象
+     * @param keyFunc 生成key的函数
+     * @param valueFunc 生成值的策略函数
+     * @return java.util.Map<K, V>
+     */
+    public static <K, V, E> Map<K, V> toMap(Iterable<E> values, Map<K, V> map, Func1<E, K> keyFunc, Func1<E, V> valueFunc) {
+		return IterUtil.toMap(Constant.NULL == values ? null : values.iterator(), map, keyFunc, valueFunc);
+	}
 }

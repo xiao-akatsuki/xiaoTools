@@ -1990,4 +1990,18 @@ public class CollUtil {
     public static <K, V> Map<K, List<V>> toListMap(Iterable<? extends Map<K, V>> mapList) {
 		return MapUtil.toListMap(mapList);
 	}
+
+    /**
+     * [列转行。将Map中值列表分别按照其位置与key组成新的map。](Column to row. Form a new map from the list of values in the map according to their positions and keys.)
+     * @description zh - 列转行。将Map中值列表分别按照其位置与key组成新的map。
+     * @description en - Column to row. Form a new map from the list of values in the map according to their positions and keys.
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 16:58:02
+     * @param listMap 列表Map
+     * @return java.util.List<Map<K, V>>
+     */
+    public static <K, V> List<Map<K, V>> toMapList(Map<K, ? extends Iterable<V>> listMap) {
+		return MapUtil.toMapList(listMap);
+	}
 }

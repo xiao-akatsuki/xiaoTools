@@ -1,5 +1,6 @@
 package com.xiaoTools.util.collUtil;
 
+import com.xiaoTools.core.collection.iteratorEnumeration.IteratorEnumeration;
 import com.xiaoTools.core.convert.Convert;
 import com.xiaoTools.core.editor.Editor;
 import com.xiaoTools.core.exception.utilException.UtilException;

@@ -2455,5 +2455,20 @@ public class CollUtil {
 		return list;
 	}
 
+    /**
+     * [针对List排序](Sort for list)
+     * @description zh - 针对List排序
+     * @description en - Sort for list
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 18:10:58
+     * @param list 被排序的List
+     * @param comparator Comparator
+     * @return java.util.List<T>
+     */
+    public static <T> List<T> sort(List<T> list, Comparator<? super T> comparator) {
+		return ListUtil.sort(list, comparator);
+	}
+
 }
 

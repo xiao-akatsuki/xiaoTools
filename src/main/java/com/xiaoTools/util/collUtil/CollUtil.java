@@ -2327,5 +2327,19 @@ public class CollUtil {
 		return get(collection, Constant.NEGATIVE_ONE);
 	}
 
+    /**
+     * [获得 Iterable 对象的元素类型](Gets the element type of the iteratable object)
+     * @description zh - 获得 Iterable 对象的元素类型
+     * @description en - Gets the element type of the iteratable object
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 18:00:21
+     * @param iterable Iterable
+     * @return java.lang.Class<?>
+     */
+    public static Class<?> getElementType(Iterable<?> iterable) {
+		return IterUtil.getElementType(iterable);
+	}
+
 }
 

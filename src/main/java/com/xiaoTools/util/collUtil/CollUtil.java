@@ -1471,4 +1471,19 @@ public class CollUtil {
 		List<Object> fieldValues = getFieldValues(collection, fieldName);
 		return Convert.toList(elementType, fieldValues);
 	}
+
+    /**
+     * [字段值与列表值对应的Map](Map corresponding to field value and list value)
+     * @description zh - 字段值与列表值对应的Map
+     * @description en - Map corresponding to field value and list value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 14:30:28
+     * @param iterable 对象列表
+     * @param fieldName 字段名
+     * @return java.util.Map<K, V>
+     */
+    public static <K, V> Map<K, V> fieldValueMap(Iterable<V> iterable, String fieldName) {
+		return IterUtil.fieldValueMap(null == iterable ? null : iterable.iterator(), fieldName);
+	}
 }

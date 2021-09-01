@@ -2404,14 +2404,14 @@ public class CollUtil {
      * @author XiaoXunYao
      * @since 2021-09-01 18:05:37
      * @param current 页码
-     * @param pageSize 每页的条目数
+     * @param size 每页的条目数
      * @param comparator 比较器
      * @param colls 集合数组
      * @return java.util.List<T>
      */
     @SafeVarargs
-	public static <T> List<T> sortPageAll(int current, int pageSize, Comparator<T> comparator, Collection<T>... colls) {
-		final List<T> list = new ArrayList<>(current * pageSize);
+	public static <T> List<T> sortPageAll(int current, int size, Comparator<T> comparator, Collection<T>... colls) {
+		final List<T> list = new ArrayList<>(current * size);
 		for (Collection<T> coll : colls) {
 			list.addAll(coll);
 		}
@@ -2419,7 +2419,23 @@ public class CollUtil {
 			list.sort(comparator);
 		}
 
-		return page(current, pageSize, list);
+		return page(current, size, list);
+	}
+
+    /**
+     * [对指定List分页取值](Page values for the specified list)
+     * @description zh - 对指定List分页取值
+     * @description en - Page values for the specified list
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 18:08:06
+     * @param current 页码
+     * @param size 每页的条目数
+     * @param list 列表
+     * @return java.util.List<T>
+     */
+    public static <T> List<T> page(int current, int size, List<T> list) {
+		return ListUtil.page(current, size, list);
 	}
 
 }

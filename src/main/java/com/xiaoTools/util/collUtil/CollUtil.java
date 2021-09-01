@@ -2569,5 +2569,20 @@ public class CollUtil {
 		return result;
 	}
 
+    /**
+     * [通过Entry排序，可以按照键排序，也可以按照值排序，亦或者两者综合排序](Through entry sorting, you can sort by key, value, or both)
+     * @description zh - 通过Entry排序，可以按照键排序，也可以按照值排序，亦或者两者综合排序
+     * @description en - Through entry sorting, you can sort by key, value, or both
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 19:12:26
+     * @param map 被排序的Map
+     * @param comparator Comparator
+     * @return java.util.LinkedHashMap<K, V>
+     */
+    public static <K, V> LinkedHashMap<K, V> sortByEntry(Map<K, V> map, Comparator<Map.Entry<K, V>> comparator) {
+		return sortToMap(map.entrySet(), comparator);
+	}
+
 }
 

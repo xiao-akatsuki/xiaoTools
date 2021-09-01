@@ -1432,4 +1432,26 @@ public class CollUtil {
     public static List<Object> getFieldValues(Iterable<?> collection, final String fieldName) {
 		return getFieldValues(collection, fieldName, Constant.FALSE);
 	}
+
+    /**
+     * [获取给定Bean列表中指定字段名对应字段值的列表](Gets the list of field values corresponding to the specified field name in the given bean list)
+     * @description zh - 获取给定Bean列表中指定字段名对应字段值的列表
+     * @description en - Gets the list of field values corresponding to the specified field name in the given bean list
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 14:24:54
+     * @param collection Bean集合或Map集合
+     * @param fieldName 字段名或map的键
+     * @param ignoreNull 是否忽略值为 null 的字段
+     * @return java.util.List<Object>
+     */
+    public static List<Object> getFieldValues(Iterable<?> collection, final String fieldName, boolean ignoreNull) {
+		return map(collection, bean -> {
+			if (bean instanceof Map) {
+				return ((Map<?, ?>) bean).get(fieldName);
+			} else {
+				return ReflectUtil.getFieldValue(bean, fieldName);
+			}
+		}, ignoreNull);
+	}
 }

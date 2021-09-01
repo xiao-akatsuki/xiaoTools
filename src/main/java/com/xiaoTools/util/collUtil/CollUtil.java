@@ -2630,5 +2630,26 @@ public class CollUtil {
 		forEach(iterable.iterator(), consumer);
 	}
 
+    /**
+     * [循环遍历](Loop traversal)
+     * @description zh - 循环遍历
+     * @description en - Loop traversal
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 19:16:59
+     * @param iterable Iterable
+     * @param consumer Consumer
+     */
+    public static <T> void forEach(Iterator<T> iterator, Consumer<T> consumer) {
+		if(iterator == Constant.NULL){
+			return;
+		}
+		int index = Constant.ZERO;
+		while (iterator.hasNext()) {
+			consumer.accept(iterator.next(), index);
+			index++;
+		}
+	}
+
 }
 

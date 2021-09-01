@@ -2194,7 +2194,7 @@ public class CollUtil {
      */
     public static <T> List<T> addAllIfNotContains(List<T> list, List<T> otherList) {
 		for (T t : otherList) {
-			if (false == list.contains(t)) {
+			if (Constant.FALSE == list.contains(t)) {
 				list.add(t);
 			}
 		}

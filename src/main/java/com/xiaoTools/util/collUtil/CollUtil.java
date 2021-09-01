@@ -1272,4 +1272,23 @@ public class CollUtil {
     public static <T> List<T> filterNew(List<T> list, Filter<T> filter) {
 		return ListUtil.filter(list, t -> filter.accept(t) ? t : null);
 	}
+
+    /* 去掉 -----------------------------------------------------------remove*/    
+
+    /**
+     * [去掉集合中的多个元素](Remove multiple elements from the collection)
+     * @description zh - 去掉集合中的多个元素
+     * @description en - Remove multiple elements from the collection
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 11:59:53
+     * @param collection 集合
+     * @param elesRemoved 被去掉的元素数组
+     * @return T
+     */
+    @SuppressWarnings("unchecked")
+	public static <T extends Collection<E>, E> T removeAny(T collection, E... elesRemoved) {
+		collection.removeAll(newHashSet(elesRemoved));
+		return collection;
+	}
 }

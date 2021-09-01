@@ -1976,4 +1976,18 @@ public class CollUtil {
     public static <E> Collection<E> toCollection(Iterable<E> iterable) {
 		return (iterable instanceof Collection) ? (Collection<E>) iterable : newArrayList(iterable.iterator());
 	}
+
+    /**
+     * [行转列，合并相同的键，值合并为列表](Row to column, merge the same keys, and merge the values into a list)
+     * @description zh - 行转列，合并相同的键，值合并为列表
+     * @description en - Row to column, merge the same keys, and merge the values into a list
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 16:56:25
+     * @param mapList Map列表
+     * @return java.util.Map<K, List<V>>
+     */
+    public static <K, V> Map<K, List<V>> toListMap(Iterable<? extends Map<K, V>> mapList) {
+		return MapUtil.toListMap(mapList);
+	}
 }

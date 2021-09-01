@@ -2584,5 +2584,31 @@ public class CollUtil {
 		return sortToMap(map.entrySet(), comparator);
 	}
 
+    /**
+     * [将Set排序](Sort set)
+     * @description zh - 将Set排序
+     * @description en - Sort set
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 19:13:24
+     * @param collection Collection
+     * @return java.util.List<java.util.Map.Entry<K, V>>
+     */
+    @SuppressWarnings({"unchecked", "rawtypes"})
+	public static <K, V> List<Entry<K, V>> sortEntryToList(Collection<Entry<K, V>> collection) {
+		List<Entry<K, V>> list = new LinkedList<>(collection);
+		list.sort((value1, value2) -> {
+			V v1 = value1.getValue();
+			V v2 = value2.getValue();
+
+			if (v1 instanceof Comparable) {
+				return ((Comparable) v1).compareTo(v2);
+			} else {
+				return v1.toString().compareTo(v2.toString());
+			}
+		});
+		return list;
+	}
+
 }
 

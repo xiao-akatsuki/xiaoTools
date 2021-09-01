@@ -26,6 +26,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -2608,6 +2609,25 @@ public class CollUtil {
 			}
 		});
 		return list;
+	}
+
+    /* 循环遍历 ----------------------------------------------------------- forEach */
+
+    /**
+     * [循环遍历](Loop traversal)
+     * @description zh - 循环遍历
+     * @description en - Loop traversal
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 19:15:54
+     * @param iterable Iterable
+     * @param consumer Consumer
+     */
+    public static <T> void forEach(Iterable<T> iterable, Consumer<T> consumer) {
+		if(iterable == Constant.NULL){
+			return;
+		}
+		forEach(iterable.iterator(), consumer);
 	}
 
 }

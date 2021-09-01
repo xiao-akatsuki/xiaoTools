@@ -15,6 +15,7 @@ import com.xiaoTools.util.strUtil.StrUtil;
 import java.util.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import javax.management.Query;
@@ -1381,5 +1382,37 @@ public class CollUtil {
      */
     public static List<Object> extract(Iterable<?> collection, Editor<Object> editor, boolean ignoreNull) {
 		return map(collection, editor::edit, ignoreNull);
+	}
+
+    /**
+     * [生成新的列表返回](Generate a new list return)
+     * @description zh - 生成新的列表返回
+     * @description en - Generate a new list return
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 14:21:14
+     * @param collection 原集合
+     * @param func 编辑函数
+     * @param ignoreNull 是否忽略空值
+     * @return java.util.List<R>
+     */
+    public static <T, R> List<R> map(Iterable<T> collection, Function<? super T, ? extends R> func, boolean ignoreNull) {
+		final List<R> fieldValueList = new ArrayList<>();
+		if (Constant.NULL == collection) {
+			return fieldValueList;
+		}
+
+		R value;
+		for (T t : collection) {
+			if (Constant.NULL == t && ignoreNull) {
+				continue;
+			}
+			value = func.apply(t);
+			if (Constant.NULL == value && ignoreNull) {
+				continue;
+			}
+			fieldValueList.add(value);
+		}
+		return fieldValueList;
 	}
 }

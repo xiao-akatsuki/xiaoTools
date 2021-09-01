@@ -1143,4 +1143,33 @@ public class CollUtil {
     public static <T> List<List<T>> splitList(List<T> list, int size) {
 		return ListUtil.split(list, size);
 	}
+
+    /**
+     * [对集合按照指定长度分段](Segments the set by the specified length)
+     * @description zh - 对集合按照指定长度分段
+     * @description en - Segments the set by the specified length
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 11:37:42
+     * @param collection 集合
+     * @param size 切分的长度
+     * @return java.util.List<T>
+     */
+    public static <T> List<List<T>> split(Collection<T> collection, int size) {
+		final List<List<T>> result = new ArrayList<>();
+		if (CollUtil.isEmpty(collection)) {
+			return result;
+		}
+
+		ArrayList<T> subList = new ArrayList<>(size);
+		for (T t : collection) {
+			if (subList.size() >= size) {
+				result.add(subList);
+				subList = new ArrayList<>(size);
+			}
+			subList.add(t);
+		}
+		result.add(subList);
+		return result;
+	}
 }

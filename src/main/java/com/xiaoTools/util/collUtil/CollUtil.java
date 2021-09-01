@@ -1794,4 +1794,18 @@ public class CollUtil {
 		return null != enumeration && enumeration.hasMoreElements();
 	}
 
+    /**
+     * [是否包含 null 元素](Contains null elements)
+     * @description zh - 是否包含 null 元素
+     * @description en - Contains null elements
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 15:39:26
+     * @param iterable Iterable
+     * @return boolean
+     */
+    public static boolean hasNull(Iterable<?> iterable) {
+		return IterUtil.hasNull(iterable);
+	}
+
 }

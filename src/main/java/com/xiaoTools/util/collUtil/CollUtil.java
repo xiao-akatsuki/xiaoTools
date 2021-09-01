@@ -2313,5 +2313,19 @@ public class CollUtil {
 		return IterUtil.getFirst(iterator);
 	}
 
+    /**
+     * [获取集合的最后一个元素](Gets the last element of the collection)
+     * @description zh - 获取集合的最后一个元素
+     * @description en - Gets the last element of the collection
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 17:58:59
+     * @param collection Collection
+     * @return T
+     */
+    public static <T> T getLast(Collection<T> collection) {
+		return get(collection, -1);
+	}
+
 }
 

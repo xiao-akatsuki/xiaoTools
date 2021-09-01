@@ -4,6 +4,7 @@ import com.xiaoTools.core.convert.Convert;
 import com.xiaoTools.core.editor.Editor;
 import com.xiaoTools.core.exception.utilException.UtilException;
 import com.xiaoTools.core.filter.Filter;
+import com.xiaoTools.core.matcher.Matcher;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.compareUtil.CompareUtil;
@@ -1583,4 +1584,56 @@ public class CollUtil {
 			return ObjectUtil.equal(value, fieldValue);
 		});
 	}
+
+    /**
+     * [获取匹配规则定义中匹配到元素的所有位置](Gets all positions that match elements in the matching rule definition)
+     * @description zh - 获取匹配规则定义中匹配到元素的所有位置
+     * @description en - Gets all positions that match elements in the matching rule definition
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 15:10:10
+     * @param collection
+     * @param matcher
+     * @return int[]
+     */
+    public static <T> int[] indexOfAll(Collection<T> collection, Matcher<T> matcher) {
+		final List<Integer> indexList = new ArrayList<>();
+		if (Constant.NULL != collection) {
+			int index = Constant.ZERO;
+			for (T t : collection) {
+				if (Constant.NULL == matcher || matcher.match(t)) {
+					indexList.add(index);
+				}
+				index++;
+			}
+		}
+		return Convert.convert(int[].class, indexList);
+	}
+
+    /* 总和 -----------------------------------------------------------count*/
+
+    /**
+     * [集合中匹配规则的数量](Number of matching rules in the collection)
+     * @description zh - 集合中匹配规则的数量
+     * @description en - Number of matching rules in the collection
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 15:07:32
+     * @param iterable Iterable
+     * @param matcher 匹配器
+     * @return int
+     */
+    public static <T> int count(Iterable<T> iterable, Matcher<T> matcher) {
+		int count = Constant.ZERO;
+		if (Constant.NULL != iterable) {
+			for (T t : iterable) {
+				if (Constant.NULL == matcher || matcher.match(t)) {
+					count++;
+				}
+			}
+		}
+		return count;
+	}
+
+
 }

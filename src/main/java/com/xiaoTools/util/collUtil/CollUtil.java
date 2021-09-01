@@ -1679,4 +1679,18 @@ public class CollUtil {
     public static boolean isEmpty(Map<?, ?> map) {
 		return MapUtil.isEmpty(map);
 	}
+
+    /**
+     * [Iterable是否为空](Is Iterable empty)
+     * @description zh - Iterable是否为空
+     * @description en - Is Iterable empty
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 15:20:04
+     * @param iterable 集合
+     * @return boolean
+     */
+    public static boolean isEmpty(Iterable<?> iterable) {
+		return IterUtil.isEmpty(iterable);
+	}
 }

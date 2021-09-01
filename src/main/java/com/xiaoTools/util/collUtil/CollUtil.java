@@ -2341,5 +2341,19 @@ public class CollUtil {
 		return IterUtil.getElementType(iterable);
 	}
 
+    /**
+     * [获得 Iterator 对象的元素类型](Gets the element type of the iterator object)
+     * @description zh - 获得 Iterator 对象的元素类型
+     * @description en - Gets the element type of the iterator object
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 18:01:31
+     * @param iterator Iterator
+     * @return java.lang.Class<?>
+     */
+    public static Class<?> getElementType(Iterator<?> iterator) {
+		return IterUtil.getElementType(iterator);
+	}
+
 }
 

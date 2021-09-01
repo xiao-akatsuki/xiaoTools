@@ -1257,4 +1257,19 @@ public class CollUtil {
 		}
 		return collection2;
 	}
+
+    /**
+     * [过滤](filter)
+     * @description zh - 过滤
+     * @description en - filter
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 11:50:28
+     * @param list 集合
+     * @param filter 过滤器
+     * @return java.util.List<T>
+     */
+    public static <T> List<T> filterNew(List<T> list, Filter<T> filter) {
+		return ListUtil.filter(list, t -> filter.accept(t) ? t : null);
+	}
 }

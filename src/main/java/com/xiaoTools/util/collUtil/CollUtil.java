@@ -12,6 +12,7 @@ import com.xiaoTools.util.compareUtil.CompareUtil;
 import com.xiaoTools.util.listUtil.ListUtil;
 import com.xiaoTools.util.objectUtil.ObjectUtil;
 import com.xiaoTools.util.reflectUtil.ReflectUtil;
+import com.xiaoTools.util.regularUtil.method.Func1;
 import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.util.*;
@@ -2003,5 +2004,21 @@ public class CollUtil {
      */
     public static <K, V> List<Map<K, V>> toMapList(Map<K, ? extends Iterable<V>> listMap) {
 		return MapUtil.toMapList(listMap);
+	}
+
+    /**
+     * [集合转换为Map](Convert collection to map)
+     * @description zh - 集合转换为Map
+     * @description en - Convert collection to map
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 16:59:50
+     * @param values 数据列表
+     * @param map Map对象
+     * @param keyFunc 生成key的函数
+     * @return java.util.Map<K, V>
+     */
+    public static <K, V> Map<K, V> toMap(Iterable<V> values, Map<K, V> map, Func1<V, K> keyFunc) {
+		return IterUtil.toMap(null == values ? null : values.iterator(), map, keyFunc);
 	}
 }

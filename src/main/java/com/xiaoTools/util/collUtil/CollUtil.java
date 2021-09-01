@@ -2299,5 +2299,19 @@ public class CollUtil {
 		return IterUtil.getFirst(iterable);
 	}
 
+    /**
+     * [获取集合的第一个元素](Gets the first element of the collection)
+     * @description zh - 获取集合的第一个元素
+     * @description en - Gets the first element of the collection
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 17:57:43
+     * @param iterator Iterator
+     * @return T
+     */
+    public static <T> T getFirst(Iterator<T> iterator) {
+		return IterUtil.getFirst(iterator);
+	}
+
 }
 

@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="GROUP_BY_SEVERITY" value="true" />
+    <option name="ANALYZE_TEST_SOURCES" value="false" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="99a1a05a-f70d-4024-8c66-1ac9e54b3d49" name="Default Changelist" comment="🌯 init - Invert array">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiaoTools/util/calendarUtil/CalendarUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiaoTools/util/calendarUtil/CalendarUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiaoTools/util/primitiveArrayUtil/PrimitiveArrayUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiaoTools/util/primitiveArrayUtil/PrimitiveArrayUtil.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="$PROJECT_DIR$/../../Mavnen/repository" />
+        <option name="userSettingsFile" value="$PROJECT_DIR$/../../Mavnen/apache-maven-3.6.3/conf/settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1roxK0BQV6uySdpdpYQ4DhTb6MG" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/xiaoTools/util/strUtil" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="tasks.servers" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.xiaoTools.util.strUtil" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/com/xiaoTools/util/strUtil" />
+      <recent name="$PROJECT_DIR$/doc/en" />
+      <recent name="$PROJECT_DIR$/doc" />
+      <recent name="$PROJECT_DIR$/src/main/java/com/hcy/code/util" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/doc/zh" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SshConsoleOptionsProvider">
+    <option name="myEncoding" value="UTF-8" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="99a1a05a-f70d-4024-8c66-1ac9e54b3d49" name="Default Changelist" comment="" />
+      <created>1619656178055</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1619656178055</updated>
+      <workItem from="1619656179422" duration="3667000" />
+      <workItem from="1620862278390" duration="2663000" />
+      <workItem from="1620969080799" duration="13398000" />
+      <workItem from="1621051816547" duration="3449000" />
+      <workItem from="1621144586196" duration="18475000" />
+      <workItem from="1621303080241" duration="19806000" />
+      <workItem from="1621393542102" duration="24248000" />
+      <workItem from="1621497424404" duration="11484000" />
+      <workItem from="1621600978932" duration="7912000" />
+      <workItem from="1621770695680" duration="4970000" />
+      <workItem from="1621822336436" duration="5818000" />
+      <workItem from="1621900668800" duration="10333000" />
+      <workItem from="1621934246580" duration="3843000" />
+      <workItem from="1622078123564" duration="4667000" />
+      <workItem from="1622436461221" duration="2310000" />
+      <workItem from="1622698064829" duration="2203000" />
+      <workItem from="1622767239456" duration="12636000" />
+      <workItem from="1622791519372" duration="1175000" />
+      <workItem from="1622798392703" duration="9162000" />
+      <workItem from="1622895671268" duration="24040000" />
+      <workItem from="1623040556612" duration="75416000" />
+      <workItem from="1623578585349" duration="337000" />
+      <workItem from="1623578933709" duration="110000" />
+      <workItem from="1623579089020" duration="121000" />
+      <workItem from="1623579236302" duration="59511000" />
+      <workItem from="1623842634581" duration="13898000" />
+      <workItem from="1623917504732" duration="44055000" />
+      <workItem from="1624070908413" duration="76409000" />
+      <workItem from="1624328283845" duration="49475000" />
+      <workItem from="1624533620914" duration="22000" />
+      <workItem from="1624533677654" duration="6626000" />
+      <workItem from="1624703863116" duration="6548000" />
+      <workItem from="1624801257935" duration="62338000" />
+      <workItem from="1625894971322" duration="32172000" />
+      <workItem from="1626439292675" duration="336000" />
+      <workItem from="1626499223331" duration="23823000" />
+      <workItem from="1627089683800" duration="34371000" />
+      <workItem from="1628053667769" duration="19235000" />
+      <workItem from="1628596750938" duration="5972000" />
+      <workItem from="1628849075773" duration="45000" />
+      <workItem from="1628915698090" duration="17304000" />
+    </task>
+    <task id="LOCAL-00178" summary="🍕 init - BigDecimal number to String">
+      <created>1628054050116</created>
+      <option name="number" value="00178" />
+      <option name="presentableId" value="LOCAL-00178" />
+      <option name="project" value="LOCAL" />
+      <updated>1628054050116</updated>
+    </task>
+    <task id="LOCAL-00179" summary="🍕 init - BigDecimal number to String">
+      <created>1628054164062</created>
+      <option name="number" value="00179" />
+      <option name="presentableId" value="LOCAL-00179" />
+      <option name="project" value="LOCAL" />
+      <updated>1628054164062</updated>
+    </task>
+    <task id="LOCAL-00180" summary="🍕 init - number to BigDecimal">
+      <created>1628055257166</created>
+      <option name="number" value="00180" />
+      <option name="presentableId" value="LOCAL-00180" />
+      <option name="project" value="LOCAL" />
+      <updated>1628055257166</updated>
+    </task>
+    <task id="LOCAL-00181" summary="🍕 init - Calculate the number of equal parts">
+      <created>1628055700965</created>
+      <option name="number" value="00181" />
+      <option name="presentableId" value="LOCAL-00181" />
+      <option name="project" value="LOCAL" />
+      <updated>1628055700965</updated>
+    </task>
+    <task id="LOCAL-00182" summary="🍕 init - zero to xxx OR xxx to zero">
+      <created>1628056170328</created>
+      <option name="number" value="00182" />
+      <option name="presentableId" value="LOCAL-00182" />
+      <option name="project" value="LOCAL" />
+      <updated>1628056170328</updated>
+    </task>
+    <task id="LOCAL-00183" summary="🍕 init - create Big Integer in sixteen hex OR ten hex OR eight hex of empty return NULL">
+      <created>1628136478859</created>
+      <option name="number" value="00183" />
+      <option name="presentableId" value="LOCAL-00183" />
+      <option name="project" value="LOCAL" />
+      <updated>1628136478859</updated>
+    </task>
+    <task id="LOCAL-00184" summary="🍕 init - abs">
+      <created>1628137138607</created>
+      <option name="number" value="00184" />
+      <option name="presentableId" value="LOCAL-00184" />
+      <option name="project" value="LOCAL" />
+      <updated>1628137138607</updated>
+    </task>
+    <task id="LOCAL-00185" summary="🍕 init - Is Beside">
+      <created>1628137322123</created>
+      <option name="number" value="00185" />
+      <option name="presentableId" value="LOCAL-00185" />
+      <option name="project" value="LOCAL" />
+      <updated>1628137322123</updated>
+    </task>
+    <task id="LOCAL-00186" summary="🍕 init - Divide the given total number into N parts, and return the number of each part">
+      <created>1628227220461</created>
+      <option name="number" value="00186" />
+      <option name="presentableId" value="LOCAL-00186" />
+      <option name="project" value="LOCAL" />
+      <updated>1628227220461</updated>
+    </task>
+    <task id="LOCAL-00187" summary="🍕 init - Provide accurate power operation">
+      <created>1628227965059</created>
+      <option name="number" value="00187" />
+      <option name="presentableId" value="LOCAL-00187" />
+      <option name="project" value="LOCAL" />
+      <updated>1628227965059</updated>
+    </task>
+    <task id="LOCAL-00188" summary="🍕 init - Determines whether an integer is a power of 2">
+      <created>1628228369141</created>
+      <option name="number" value="00188" />
+      <option name="presentableId" value="LOCAL-00188" />
+      <option name="project" value="LOCAL" />
+      <updated>1628228369141</updated>
+    </task>
+    <task id="LOCAL-00189" summary="🍕 init - byte array to int">
+      <created>1628334467456</created>
+      <option name="number" value="00189" />
+      <option name="presentableId" value="LOCAL-00189" />
+      <option name="project" value="LOCAL" />
+      <updated>1628334467456</updated>
+    </task>
+    <task id="LOCAL-00190" summary="🍕 init - byte array to int">
+      <created>1628334606460</created>
+      <option name="number" value="00190" />
+      <option name="presentableId" value="LOCAL-00190" />
+      <option name="project" value="LOCAL" />
+      <updated>1628334606460</updated>
+    </task>
+    <task id="LOCAL-00191" summary="🍕 init - Convert to unsigned array">
+      <created>1628336128100</created>
+      <option name="number" value="00191" />
+      <option name="presentableId" value="LOCAL-00191" />
+      <option name="project" value="LOCAL" />
+      <updated>1628336128100</updated>
+    </task>
+    <task id="LOCAL-00192" summary="🍕 init - Is it true">
+      <created>1628390670244</created>
+      <option name="number" value="00192" />
+      <option name="presentableId" value="LOCAL-00192" />
+      <option name="project" value="LOCAL" />
+      <updated>1628390670244</updated>
+    </task>
+    <task id="LOCAL-00193" summary="🍕 init - Is it false">
+      <created>1628391552480</created>
+      <option name="number" value="00193" />
+      <option name="presentableId" value="LOCAL-00193" />
+      <option name="project" value="LOCAL" />
+      <updated>1628391552480</updated>
+    </task>
+    <task id="LOCAL-00194" summary="🍕 init - Is it null">
+      <created>1628392582528</created>
+      <option name="number" value="00194" />
+      <option name="presentableId" value="LOCAL-00194" />
+      <option name="project" value="LOCAL" />
+      <updated>1628392582528</updated>
+    </task>
+    <task id="LOCAL-00195" summary="🍕 init - Is it a substring">
+      <created>1628495113096</created>
+      <option name="number" value="00195" />
+      <option name="presentableId" value="LOCAL-00195" />
+      <option name="project" value="LOCAL" />
+      <updated>1628495113097</updated>
+    </task>
+    <task id="LOCAL-00196" summary="🍕 init - Judge that the given set is not empty">
+      <created>1628496792655</created>
+      <option name="number" value="00196" />
+      <option name="presentableId" value="LOCAL-00196" />
+      <option name="project" value="LOCAL" />
+      <updated>1628496792655</updated>
+    </task>
+    <task id="LOCAL-00197" summary="🍕 init - Determines whether a given object is an instance of a given class">
+      <created>1628584019352</created>
+      <option name="number" value="00197" />
+      <option name="presentableId" value="LOCAL-00197" />
+      <option name="project" value="LOCAL" />
+      <updated>1628584019352</updated>
+    </task>
+    <task id="LOCAL-00198" summary="🍕 init - Check Boolean expression">
+      <created>1628584336199</created>
+      <option name="number" value="00198" />
+      <option name="presentableId" value="LOCAL-00198" />
+      <option name="project" value="LOCAL" />
+      <updated>1628584336199</updated>
+    </task>
+    <task id="LOCAL-00199" summary="🍕 init - Check subscript AND Check whether the value is within the specified range">
+      <created>1628585052697</created>
+      <option name="number" value="00199" />
+      <option name="presentableId" value="LOCAL-00199" />
+      <option name="project" value="LOCAL" />
+      <updated>1628585052697</updated>
+    </task>
+    <task id="LOCAL-00200" summary="🥦 init - Primitive type array utility class">
+      <created>1628585712256</created>
+      <option name="number" value="00200" />
+      <option name="presentableId" value="LOCAL-00200" />
+      <option name="project" value="LOCAL" />
+      <updated>1628585712256</updated>
+    </task>
+    <task id="LOCAL-00201" summary="🥦 init - Array is empty">
+      <created>1628586713682</created>
+      <option name="number" value="00201" />
+      <option name="presentableId" value="LOCAL-00201" />
+      <option name="project" value="LOCAL" />
+      <updated>1628586713682</updated>
+    </task>
+    <task id="LOCAL-00202" summary="🥦 init - array is not empty">
+      <created>1628770002665</created>
+      <option name="number" value="00202" />
+      <option name="presentableId" value="LOCAL-00202" />
+      <option name="project" value="LOCAL" />
+      <updated>1628770002665</updated>
+    </task>
+    <task id="LOCAL-00203" summary="🥦 init - Generates a new resized array">
+      <created>1628770670556</created>
+      <option name="number" value="00203" />
+      <option name="presentableId" value="LOCAL-00203" />
+      <option name="project" value="LOCAL" />
+      <updated>1628770670556</updated>
+    </task>
+    <task id="LOCAL-00204" summary="🥦 init - Merge multiple arrays together">
+      <created>1628773687872</created>
+      <option name="number" value="00204" />
+      <option name="presentableId" value="LOCAL-00204" />
+      <option name="project" value="LOCAL" />
+      <updated>1628773687872</updated>
+    </task>
+    <task id="LOCAL-00205" summary="🥦 init - Merge multiple arrays together">
+      <created>1628774450111</created>
+      <option name="number" value="00205" />
+      <option name="presentableId" value="LOCAL-00205" />
+      <option name="project" value="LOCAL" />
+      <updated>1628774450111</updated>
+    </task>
+    <task id="LOCAL-00206" summary="❤️‍🔥 init - ISSUE_TEMPLATE">
+      <created>1628775276538</created>
+      <option name="number" value="00206" />
+      <option name="presentableId" value="LOCAL-00206" />
+      <option name="project" value="LOCAL" />
+      <updated>1628775276538</updated>
+    </task>
+    <task id="LOCAL-00207" summary="🌯 init - Generate a list of numbers">
+      <created>1628832634000</created>
+      <option name="number" value="00207" />
+      <option name="presentableId" value="LOCAL-00207" />
+      <option name="project" value="LOCAL" />
+      <updated>1628832634000</updated>
+    </task>
+    <task id="LOCAL-00208" summary="🌯 init - Split byte array into several equal parts">
+      <created>1628832958913</created>
+      <option name="number" value="00208" />
+      <option name="presentableId" value="LOCAL-00208" />
+      <option name="project" value="LOCAL" />
+      <updated>1628832958914</updated>
+    </task>
+    <task id="LOCAL-00209" summary="🌯 init - Split byte array into several equal parts">
+      <created>1628832993027</created>
+      <option name="number" value="00209" />
+      <option name="presentableId" value="LOCAL-00209" />
+      <option name="project" value="LOCAL" />
+      <updated>1628832993027</updated>
+    </task>
+    <task id="LOCAL-00210" summary="🌯 init - loading String spliter">
+      <created>1628916185968</created>
+      <option name="number" value="00210" />
+      <option name="presentableId" value="LOCAL-00210" />
+      <option name="project" value="LOCAL" />
+      <updated>1628916185969</updated>
+    </task>
+    <task id="LOCAL-00211" summary="🌯 init - Returns the position of the specified element in the array">
+      <created>1628916308708</created>
+      <option name="number" value="00211" />
+      <option name="presentableId" value="LOCAL-00211" />
+      <option name="project" value="LOCAL" />
+      <updated>1628916308708</updated>
+    </task>
+    <task id="LOCAL-00212" summary="🌯 init - Returns the last position of the specified element in the array">
+      <created>1628916555367</created>
+      <option name="number" value="00212" />
+      <option name="presentableId" value="LOCAL-00212" />
+      <option name="project" value="LOCAL" />
+      <updated>1628916555367</updated>
+    </task>
+    <task id="LOCAL-00213" summary="🌯 init - Returns the position of the specified element in the array">
+      <created>1628917565549</created>
+      <option name="number" value="00213" />
+      <option name="presentableId" value="LOCAL-00213" />
+      <option name="project" value="LOCAL" />
+      <updated>1628917565549</updated>
+    </task>
+    <task id="LOCAL-00214" summary="🌯 init - Returns the last position of the specified element in the array">
+      <created>1628918459120</created>
+      <option name="number" value="00214" />
+      <option name="presentableId" value="LOCAL-00214" />
+      <option name="project" value="LOCAL" />
+      <updated>1628918459120</updated>
+    </task>
+    <task id="LOCAL-00215" summary="🌯 init - Returns the last position of the specified element in the array">
+      <created>1628921059850</created>
+      <option name="number" value="00215" />
+      <option name="presentableId" value="LOCAL-00215" />
+      <option name="project" value="LOCAL" />
+      <updated>1628921059851</updated>
+    </task>
+    <task id="LOCAL-00216" summary="🌯 init - Does the array contain elements">
+      <created>1628930270827</created>
+      <option name="number" value="00216" />
+      <option name="presentableId" value="LOCAL-00216" />
+      <option name="project" value="LOCAL" />
+      <updated>1628930270827</updated>
+    </task>
+    <task id="LOCAL-00217" summary="🌯 init - Convert wrapper class array to original type array">
+      <created>1628931330097</created>
+      <option name="number" value="00217" />
+      <option name="presentableId" value="LOCAL-00217" />
+      <option name="project" value="LOCAL" />
+      <updated>1628931330098</updated>
+    </task>
+    <task id="LOCAL-00218" summary="🌯 init - Wrap the original type array as a wrapper type">
+      <created>1628934812488</created>
+      <option name="number" value="00218" />
+      <option name="presentableId" value="LOCAL-00218" />
+      <option name="project" value="LOCAL" />
+      <updated>1628934812488</updated>
+    </task>
+    <task id="LOCAL-00219" summary="🌯 init - Wrap the original type array as a wrapper type">
+      <created>1628987575631</created>
+      <option name="number" value="00219" />
+      <option name="presentableId" value="LOCAL-00219" />
+      <option name="project" value="LOCAL" />
+      <updated>1628987575632</updated>
+    </task>
+    <task id="LOCAL-00220" summary="🌯 init - Get subarray">
+      <created>1629006607931</created>
+      <option name="number" value="00220" />
+      <option name="presentableId" value="LOCAL-00220" />
+      <option name="project" value="LOCAL" />
+      <updated>1629006607931</updated>
+    </task>
+    <task id="LOCAL-00221" summary="🌯 init - The delimiter converts the array to a string">
+      <created>1629013858080</created>
+      <option name="number" value="00221" />
+      <option name="presentableId" value="LOCAL-00221" />
+      <option name="project" value="LOCAL" />
+      <updated>1629013858080</updated>
+    </task>
+    <task id="LOCAL-00222" summary="🌯 init - Remove the element at the corresponding position in the array">
+      <created>1629015304718</created>
+      <option name="number" value="00222" />
+      <option name="presentableId" value="LOCAL-00222" />
+      <option name="project" value="LOCAL" />
+      <updated>1629015304718</updated>
+    </task>
+    <task id="LOCAL-00223" summary="🌯 init - Remove the element at the corresponding position in the array">
+      <created>1629015696961</created>
+      <option name="number" value="00223" />
+      <option name="presentableId" value="LOCAL-00223" />
+      <option name="project" value="LOCAL" />
+      <updated>1629015696961</updated>
+    </task>
+    <task id="LOCAL-00224" summary="🌯 init - Remove the element at the corresponding position in the array">
+      <created>1629016413466</created>
+      <option name="number" value="00224" />
+      <option name="presentableId" value="LOCAL-00224" />
+      <option name="project" value="LOCAL" />
+      <updated>1629016413466</updated>
+    </task>
+    <task id="LOCAL-00225" summary="🌯 init - Removes the specified element from the array">
+      <created>1629089923476</created>
+      <option name="number" value="00225" />
+      <option name="presentableId" value="LOCAL-00225" />
+      <option name="project" value="LOCAL" />
+      <updated>1629089923476</updated>
+    </task>
+    <task id="LOCAL-00226" summary="🌯 init - Invert array">
+      <created>1629090560481</created>
+      <option name="number" value="00226" />
+      <option name="presentableId" value="LOCAL-00226" />
+      <option name="project" value="LOCAL" />
+      <updated>1629090560481</updated>
+    </task>
+    <option name="localTasksCounter" value="227" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value=" init - Is it null" />
+    <MESSAGE value=" init - Is it a substring" />
+    <MESSAGE value=" init - Judge that the given set is not empty" />
+    <MESSAGE value=" init - Determines whether a given object is an instance of a given class" />
+    <MESSAGE value=" init - Check Boolean expression" />
+    <MESSAGE value=" init - Check subscript AND Check whether the value is within the specified range" />
+    <MESSAGE value=" init - Primitive type array utility class" />
+    <MESSAGE value=" init - Array is empty" />
+    <MESSAGE value=" init - array is not empty" />
+    <MESSAGE value=" init - Generates a new resized array" />
+    <MESSAGE value=" init - Merge multiple arrays together" />
+    <MESSAGE value="❤️‍ init - ISSUE_TEMPLATE" />
+    <MESSAGE value=" init - Generate a list of numbers" />
+    <MESSAGE value=" init - Split byte array into several equal parts" />
+    <MESSAGE value=" init - loading String spliter" />
+    <MESSAGE value=" init - Returns the position of the specified element in the array" />
+    <MESSAGE value=" init - Returns the last position of the specified element in the array" />
+    <MESSAGE value=" init - Does the array contain elements" />
+    <MESSAGE value=" init - Convert wrapper class array to original type array" />
+    <MESSAGE value=" init - Wrap the original type array as a wrapper type" />
+    <MESSAGE value=" init - Get subarray" />
+    <MESSAGE value=" init - The delimiter converts the array to a string" />
+    <MESSAGE value=" init - Remove the element at the corresponding position in the array" />
+    <MESSAGE value=" init - Removes the specified element from the array" />
+    <MESSAGE value=" init - Invert array" />
+    <option name="LAST_COMMIT_MESSAGE" value=" init - Invert array" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

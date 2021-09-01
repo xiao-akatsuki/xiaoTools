@@ -1808,4 +1808,23 @@ public class CollUtil {
 		return IterUtil.hasNull(iterable);
 	}
 
+    /* 映射 -----------------------------------------------------------zip*/
+
+    /**
+     * [映射键值](Mapping key value)
+     * @description zh - 映射键值
+     * @description en - Mapping key value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 16:39:07
+     * @param keys 键列表
+     * @param values 值列表
+     * @param delimiter 分隔符
+     * @param isOrder 是否有序
+     * @return java.util.Map<String, String>
+     */
+    public static Map<String, String> zip(String keys, String values, String delimiter, boolean isOrder) {
+		return ArrayUtil.zip(StrUtil.split(keys, delimiter), StrUtil.split(values, delimiter), isOrder);
+	}
+
 }

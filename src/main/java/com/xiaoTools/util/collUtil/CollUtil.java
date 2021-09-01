@@ -1502,4 +1502,28 @@ public class CollUtil {
     public static <K, V> Map<K, V> fieldValueAsMap(Iterable<?> iterable, String fieldNameForKey, String fieldNameForValue) {
 		return IterUtil.fieldValueAsMap(null == iterable ? null : iterable.iterator(), fieldNameForKey, fieldNameForValue);
 	}
+
+    /* 查找 -----------------------------------------------------------find*/   
+
+    /**
+     * [查找第一个匹配元素对象](Find the first matching element object)
+     * @description zh - 查找第一个匹配元素对象
+     * @description en - Find the first matching element object
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 14:35:43
+     * @param collection 集合
+     * @param filter 过滤器
+     * @return T
+     */
+    public static <T> T findOne(Iterable<T> collection, Filter<T> filter) {
+		if (Constant.NULL != collection) {
+			for (T t : collection) {
+				if (filter.accept(t)) {
+					return t;
+				}
+			}
+		}
+		return null;
+	}
 }

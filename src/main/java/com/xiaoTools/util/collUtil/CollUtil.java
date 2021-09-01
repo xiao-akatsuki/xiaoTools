@@ -1739,9 +1739,9 @@ public class CollUtil {
 	}
 
     /**
-     * [集合是否为非空](Is the collection non empty)
-     * @description zh - 集合是否为非空
-     * @description en - Is the collection non empty
+     * [Map是否为非空](Is the mao non empty)
+     * @description zh - Map是否为非空
+     * @description en - Is the map non empty
      * @version V1.0
      * @author XiaoXunYao
      * @since 2021-09-01 15:34:36
@@ -1751,4 +1751,19 @@ public class CollUtil {
     public static boolean isNotEmpty(Map<?, ?> map) {
 		return MapUtil.isNotEmpty(map);
 	}
+
+    /**
+     * [Iterable是否为空](Is Iterable empty)
+     * @description zh - Iterable是否为空
+     * @description en - Is Iterable empty
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 15:35:11
+     * @param iterable Iterable对象
+     * @return boolean
+     */
+    public static boolean isNotEmpty(Iterable<?> iterable) {
+		return IterUtil.isNotEmpty(iterable);
+	}
+
 }

@@ -1935,4 +1935,18 @@ public class CollUtil {
 		return new IteratorEnumeration<>(iter);
 	}
 
+    /**
+     * [Enumeration转换为Iterator](Convert enumeration to iterator)
+     * @description zh - Enumeration转换为Iterator
+     * @description en - Convert enumeration to iterator
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 16:51:46
+     * @param enumeration Enumeration
+     * @return java.util.Iterator<E>
+     */
+    public static <E> Iterator<E> asIterator(Enumeration<E> enumeration) {
+		return IterUtil.asIterator(enumeration);
+	}
+
 }

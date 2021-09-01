@@ -2530,5 +2530,22 @@ public class CollUtil {
 		return ListUtil.sortByPinyin(list);
 	}
 
+    /**
+     * [排序Map](sort Map)
+     * @description zh - 排序Map
+     * @description en - sort Map
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 19:10:01
+     * @param map Map
+     * @param comparator Entry比较器
+     * @return java.util.TreeMap<K, V>
+     */
+    public static <K, V> TreeMap<K, V> sort(Map<K, V> map, Comparator<? super K> comparator) {
+		final TreeMap<K, V> result = new TreeMap<>(comparator);
+		result.putAll(map);
+		return result;
+	}
+
 }
 

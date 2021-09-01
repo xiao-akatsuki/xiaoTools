@@ -1737,4 +1737,18 @@ public class CollUtil {
     public static boolean isNotEmpty(Collection<?> collection) {
 		return !isEmpty(collection);
 	}
+
+    /**
+     * [集合是否为非空](Is the collection non empty)
+     * @description zh - 集合是否为非空
+     * @description en - Is the collection non empty
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 15:34:36
+     * @param map 集合
+     * @return boolean
+     */
+    public static boolean isNotEmpty(Map<?, ?> map) {
+		return MapUtil.isNotEmpty(map);
+	}
 }

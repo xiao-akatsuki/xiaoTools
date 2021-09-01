@@ -2516,5 +2516,19 @@ public class CollUtil {
 		return sort(collection, new PinyinComparator());
 	}
 
+    /**
+     * [根据汉字的拼音顺序排序](Sort according to the Pinyin order of Chinese characters)
+     * @description zh - 根据汉字的拼音顺序排序
+     * @description en - Sort according to the Pinyin order of Chinese characters
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 19:08:24
+     * @param list 集合
+     * @return java.util.List<java.lang.String>
+     */
+    public static List<String> sortByPinyin(List<String> list) {
+		return ListUtil.sortByPinyin(list);
+	}
+
 }
 

@@ -1780,4 +1780,18 @@ public class CollUtil {
 		return IterUtil.isNotEmpty(Iterator);
 	}
 
+    /**
+     * [Enumeration是否为空](Is enumeration empty)
+     * @description zh - Enumeration是否为空
+     * @description en - Is enumeration empty
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 15:38:33
+     * @param enumeration Enumeration
+     * @return boolean
+     */
+    public static boolean isNotEmpty(Enumeration<?> enumeration) {
+		return null != enumeration && enumeration.hasMoreElements();
+	}
+
 }

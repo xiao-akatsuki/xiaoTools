@@ -2143,5 +2143,26 @@ public class CollUtil {
         return iterable == Constant.NULL ? collection : addAll(collection, iterable.iterator());
 	}
 
+    /**
+     * [加入全部](Add all)
+     * @description zh - 加入全部
+     * @description en - Add all
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 17:45:30
+     * @param collection 被加入的集合
+     * @param enumeration 要加入的内容
+     * @return java.util.Collection<T>
+     */
+    public static <T> Collection<T> addAll(Collection<T> collection, Enumeration<T> enumeration) {
+		if (Constant.NULL != collection && Constant.NULL != enumeration) {
+			while (enumeration.hasMoreElements()) {
+				collection.add(enumeration.nextElement());
+			}
+		}
+		return collection;
+	}
+
+
 }
 

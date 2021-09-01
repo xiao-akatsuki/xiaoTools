@@ -1307,5 +1307,17 @@ public class CollUtil {
 		return collection;
 	}
 
-
+    /**
+     * [去除 null 元素](Remove null elements)
+     * @description zh - 去除 null 元素
+     * @description en - Remove null elements
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 12:04:08
+     * @param collection 集合
+     * @return T 
+     */
+    public static <T extends Collection<E>, E> T removeNull(T collection) {
+		return filter(collection, Objects::nonNull);
+	}
 }

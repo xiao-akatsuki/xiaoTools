@@ -2375,5 +2375,24 @@ public class CollUtil {
 		return values;
 	}
 
+    /**
+     * [从Map中获取指定键列表对应的值列表](Get the value list corresponding to the specified key list from the map)
+     * @description zh - 从Map中获取指定键列表对应的值列表
+     * @description en - Get the value list corresponding to the specified key list from the map
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 18:04:13
+     * @param map Map
+     * @param keys 键列表
+     * @return java.util.ArrayList<V>
+     */
+    public static <K, V> ArrayList<V> valuesOfKeys(Map<K, V> map, Iterator<K> keys) {
+		final ArrayList<V> values = new ArrayList<>();
+		while (keys.hasNext()) {
+			values.add(map.get(keys.next()));
+		}
+		return values;
+	}
+
 }
 

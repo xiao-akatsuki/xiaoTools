@@ -1335,4 +1335,18 @@ public class CollUtil {
     public static <T extends Collection<E>, E extends CharSequence> T removeEmpty(T collection) {
 		return filter(collection, StrUtil::isNotEmpty);
 	}
+
+    /**
+     * [去除 null 或者 "" 或者 空白字符串 元素](Remove null or '' or blank string elements)
+     * @description zh - 去除 null 或者 "" 或者 空白字符串 元素
+     * @description en - Remove null or '' or blank string elements
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 12:07:27
+     * @param collection 集合
+     * @return T
+     */
+    public static <T extends Collection<E>, E extends CharSequence> T removeBlank(T collection) {
+		return filter(collection, StrUtil::isNotBlank);
+	}
 }

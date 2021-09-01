@@ -1,6 +1,7 @@
 package com.xiaoTools.util.collUtil;
 
 import com.xiaoTools.core.convert.Convert;
+import com.xiaoTools.core.editor.Editor;
 import com.xiaoTools.core.exception.utilException.UtilException;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
@@ -1171,5 +1172,41 @@ public class CollUtil {
 		}
 		result.add(subList);
 		return result;
+	}
+
+    /*过滤-----------------------------------------------------------filter*/
+
+    /**
+     * [过滤，此方法产生一个新集合](Filter, this method generates a new collection)
+     * @description zh - 过滤，此方法产生一个新集合
+     * @description en - Filter, this method generates a new collection
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 11:43:53
+     * @param collection 集合
+     * @param editor 过滤接口
+     * @return java.util.Collection<T>
+     */
+    public static <T> Collection<T> filter(Collection<T> collection, Editor<T> editor) {
+		if (Constant.NULL == collection || Constant.NULL == editor) {
+			return collection;
+		}
+
+		Collection<T> collection2 = ObjectUtil.clone(collection);
+		try {
+			collection2.clear();
+		} catch (UnsupportedOperationException e) {
+			// 克隆后的对象不支持清空，说明为不可变集合对象，使用默认的ArrayList保存结果
+			collection2 = new ArrayList<>();
+		}
+
+		T modified;
+		for (T t : collection) {
+			modified = editor.edit(t);
+			if (Constant.NULL != modified) {
+				collection2.add(modified);
+			}
+		}
+		return collection2;
 	}
 }

@@ -2212,6 +2212,7 @@ public class CollUtil {
      * @since 2021-09-01 17:53:36
      * @param collection 集合
      * @param index 下标
+     * @return T
      */
     public static <T> T get(Collection<T> collection, int index) {
 		if (Constant.NULL == collection) {

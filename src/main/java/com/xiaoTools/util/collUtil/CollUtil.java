@@ -1306,6 +1306,21 @@ public class CollUtil {
 		return MapUtil.filter(map, editor);
 	}
 
+    /**
+     * [过滤](filter)
+     * @description zh - 过滤
+     * @description en - filter
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 15:03:34
+     * @param map Map
+     * @param filter 编辑器接口
+     * @return java.util.Map<K, V>
+     */
+    public static <K, V> Map<K, V> filter(Map<K, V> map, Filter<Entry<K, V>> filter) {
+		return MapUtil.filter(map, filter);
+	}
+
     /* 去掉 -----------------------------------------------------------remove*/    
 
     /**

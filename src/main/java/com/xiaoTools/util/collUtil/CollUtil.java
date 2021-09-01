@@ -10,6 +10,7 @@ import com.xiaoTools.core.editor.Editor;
 import com.xiaoTools.core.exception.utilException.UtilException;
 import com.xiaoTools.core.filter.Filter;
 import com.xiaoTools.core.matcher.Matcher;
+import com.xiaoTools.entity.pinyinComparator.PinyinComparator;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.compareUtil.CompareUtil;
@@ -2499,6 +2500,20 @@ public class CollUtil {
      */
     public static <T> List<T> sortByProperty(List<T> list, String property) {
 		return ListUtil.sortByProperty(list, property);
+	}
+
+    /**
+     * [根据汉字的拼音顺序排序](Sort according to the Pinyin order of Chinese characters)
+     * @description zh - 根据汉字的拼音顺序排序
+     * @description en - Sort according to the Pinyin order of Chinese characters
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 19:07:18
+     * @param collection
+     * @return java.util.List<java.lang.String>
+     */
+    public static List<String> sortByPinyin(Collection<String> collection) {
+		return sort(collection, new PinyinComparator());
 	}
 
 }

@@ -2181,6 +2181,26 @@ public class CollUtil {
 		return collection;
 	}
 
+    /**
+     * [将另一个列表中的元素加入到列表中](Adds an element from another list to the list)
+     * @description zh - 将另一个列表中的元素加入到列表中
+     * @description en - Adds an element from another list to the list
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 17:47:45
+     * @param list 列表
+     * @param otherList 其它列表
+     * @return java.util.List<T>
+     */
+    public static <T> List<T> addAllIfNotContains(List<T> list, List<T> otherList) {
+		for (T t : otherList) {
+			if (false == list.contains(t)) {
+				list.add(t);
+			}
+		}
+		return list;
+	}
+
 
 }
 

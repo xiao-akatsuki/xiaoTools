@@ -2324,7 +2324,7 @@ public class CollUtil {
      * @return T
      */
     public static <T> T getLast(Collection<T> collection) {
-		return get(collection, -1);
+		return get(collection, Constant.NEGATIVE_ONE);
 	}
 
 }

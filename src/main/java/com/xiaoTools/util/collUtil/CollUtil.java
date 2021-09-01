@@ -1349,4 +1349,21 @@ public class CollUtil {
     public static <T extends Collection<E>, E extends CharSequence> T removeBlank(T collection) {
 		return filter(collection, StrUtil::isNotBlank);
 	}
+
+    /* 提取 -----------------------------------------------------------extract*/    
+
+    /**
+     * [通过Editor抽取集合元素中的某些值返回为新列表](Extract some values from the collection elements through the editor and return them to a new list)
+     * @description zh - 通过Editor抽取集合元素中的某些值返回为新列表
+     * @description en - Extract some values from the collection elements through the editor and return them to a new list
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 14:16:02
+     * @param collection 集合
+     * @param editor 编辑器
+     * @return java.util.List<Object>
+     */
+    public static List<Object> extract(Iterable<?> collection, Editor<Object> editor) {
+		return extract(collection, editor, false);
+	}
 }

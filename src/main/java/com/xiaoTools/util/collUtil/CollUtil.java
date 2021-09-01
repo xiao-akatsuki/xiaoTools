@@ -1665,4 +1665,18 @@ public class CollUtil {
     public static <T extends Collection<E>, E> T defaultIfEmpty(T collection, T defaultCollection) {
 		return isEmpty(collection) ? defaultCollection : collection;
 	}
+
+    /**
+     * [Map是否为空](Is the map empty)
+     * @description zh - Map是否为空
+     * @description en - Is the map empty
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 15:18:18
+     * @parama map 集合
+     * @return boolean
+     */
+    public static boolean isEmpty(Map<?, ?> map) {
+		return MapUtil.isEmpty(map);
+	}
 }

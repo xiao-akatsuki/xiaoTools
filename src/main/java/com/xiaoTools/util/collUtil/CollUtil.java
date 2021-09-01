@@ -1486,4 +1486,20 @@ public class CollUtil {
     public static <K, V> Map<K, V> fieldValueMap(Iterable<V> iterable, String fieldName) {
 		return IterUtil.fieldValueMap(null == iterable ? null : iterable.iterator(), fieldName);
 	}
+
+    /**
+     * [两个字段值组成新的Map](Two field values form a new map)
+     * @description zh - 两个字段值组成新的Map
+     * @description en - Two field values form a new map
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 14:33:31
+     * @param iterable 对象列表
+     * @param fieldNameForKey 做为键的字段名
+     * @param fieldNameForValue 做为值的字段名
+     * @return java.util.Map<K, V>
+     */
+    public static <K, V> Map<K, V> fieldValueAsMap(Iterable<?> iterable, String fieldNameForKey, String fieldNameForValue) {
+		return IterUtil.fieldValueAsMap(null == iterable ? null : iterable.iterator(), fieldNameForKey, fieldNameForValue);
+	}
 }

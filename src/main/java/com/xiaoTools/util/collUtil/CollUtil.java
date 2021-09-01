@@ -2672,5 +2672,26 @@ public class CollUtil {
 		}
 	}
 
+    /**
+     * [循环遍历Map](Loop through map)
+     * @description zh - 循环遍历Map
+     * @description en - Loop through map
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 19:19:32
+     * @param map Map
+     * @param kvConsumer 遍历的每条数据处理器
+     */
+    public static <K, V> void forEach(Map<K, V> map, KVConsumer<K, V> kvConsumer) {
+		if(map == Constant.NULL){
+			return;
+		}
+		int index = Constant.ZERO;
+		for (Entry<K, V> entry : map.entrySet()) {
+			kvConsumer.accept(entry.getKey(), entry.getValue(), index);
+			index++;
+		}
+	}
+
 }
 

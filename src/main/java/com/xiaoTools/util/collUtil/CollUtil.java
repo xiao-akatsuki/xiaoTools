@@ -1721,4 +1721,20 @@ public class CollUtil {
     public static boolean isEmpty(Enumeration<?> enumeration) {
 		return Constant.NULL == enumeration || Constant.FALSE == enumeration.hasMoreElements();
 	}
+
+    /* 集合是否为非空 -----------------------------------------------------------isNotEmpty*/
+
+    /**
+     * [集合是否为非空](Is the collection non empty)
+     * @description zh - 集合是否为非空
+     * @description en - Is the collection non empty
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 15:33:41
+     * @param collection 集合
+     * @return boolean
+     */
+    public static boolean isNotEmpty(Collection<?> collection) {
+		return !isEmpty(collection);
+	}
 }

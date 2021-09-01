@@ -1454,4 +1454,21 @@ public class CollUtil {
 			}
 		}, ignoreNull);
 	}
+
+    /**
+     * [获取给定Bean列表中指定字段名对应字段值的列表](Gets the list of field values corresponding to the specified field name in the given bean list)
+     * @description zh - 获取给定Bean列表中指定字段名对应字段值的列表
+     * @description en - Gets the list of field values corresponding to the specified field name in the given bean list
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 14:28:52
+     * @param collection Bean集合或Map集合
+     * @param fieldName 字段名或map的键
+     * @param elementType 元素类型类
+     * @return java.util.List<T>
+     */
+    public static <T> List<T> getFieldValues(Iterable<?> collection, final String fieldName, final Class<T> elementType) {
+		List<Object> fieldValues = getFieldValues(collection, fieldName);
+		return Convert.toList(elementType, fieldValues);
+	}
 }

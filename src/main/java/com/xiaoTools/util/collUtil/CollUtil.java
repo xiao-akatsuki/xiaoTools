@@ -1109,4 +1109,21 @@ public class CollUtil {
     public static <T> List<T> sub(Collection<T> collection, int start, int end) {
 		return sub(collection, start, end, Constant.ONE);
 	}
+
+    /**
+     * [截取集合的部分](Intercepts part of the set)
+     * @description zh - 截取集合的部分
+     * @description en - Intercepts part of the set
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 11:28:20
+     * @param list 被截取的数组
+     * @param start 开始的位置
+     * @param end 结束的位置
+     * @param step 步进
+     * @return java.util.List<T>
+     */
+    public static <T> List<T> sub(Collection<T> list, int start, int end, int step) {
+        return list == null || list.isEmpty() ? ListUtil.empty() : sub(new ArrayList<>(list), start, end, step);
+	}
 }

@@ -10,6 +10,7 @@ import com.xiaoTools.util.compareUtil.CompareUtil;
 import com.xiaoTools.util.listUtil.ListUtil;
 import com.xiaoTools.util.objectUtil.ObjectUtil;
 import com.xiaoTools.util.reflectUtil.ReflectUtil;
+import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.util.*;
 import java.util.concurrent.BlockingQueue;
@@ -1319,5 +1320,19 @@ public class CollUtil {
      */
     public static <T extends Collection<E>, E> T removeNull(T collection) {
 		return filter(collection, Objects::nonNull);
+	}
+
+    /**
+     * [去除 null 或者 "" 元素](Remove null or '' elements)
+     * @description zh - 去除 null 或者 "" 元素
+     * @description en - Remove null or '' elements
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 12:06:12
+     * @param collection 集合
+     * @return T
+     */
+    public static <T extends Collection<E>, E extends CharSequence> T removeEmpty(T collection) {
+		return filter(collection, StrUtil::isNotEmpty);
 	}
 }

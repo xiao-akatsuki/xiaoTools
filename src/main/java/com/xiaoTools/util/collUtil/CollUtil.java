@@ -2486,5 +2486,20 @@ public class CollUtil {
 		return sort(collection, new PropertyComparator<>(property));
 	}
 
+    /**
+     * [根据Bean的属性排序](Sort by bean properties)
+     * @description zh - 根据Bean的属性排序
+     * @description en - Sort by bean properties
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 19:06:15
+     * @param list List
+     * @param property 属性名
+     * @return java.util.List<T>
+     */
+    public static <T> List<T> sortByProperty(List<T> list, String property) {
+		return ListUtil.sortByProperty(list, property);
+	}
+
 }
 

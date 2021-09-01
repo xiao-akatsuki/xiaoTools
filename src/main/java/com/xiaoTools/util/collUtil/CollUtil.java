@@ -1650,4 +1650,19 @@ public class CollUtil {
     public static boolean isEmpty(Collection<?> collection) {
 		return collection == Constant.NULL || collection.isEmpty();
 	}
+
+    /** 
+     * [如果给定集合为空，返回默认集合](If the given collection is empty, the default collection is returned)
+     * @description zh - 如果给定集合为空，返回默认集合
+     * @description en - If the given collection is empty, the default collection is returned
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 15:16:57
+     * @param collection 集合
+     * @param defaultCollection 默认数组
+     * @return T
+     */
+    public static <T extends Collection<E>, E> T defaultIfEmpty(T collection, T defaultCollection) {
+		return isEmpty(collection) ? defaultCollection : collection;
+	}
 }

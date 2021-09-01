@@ -1209,4 +1209,19 @@ public class CollUtil {
 		}
 		return collection2;
 	}
+
+    /**
+     * [过滤](filter)
+     * @description zh - 过滤
+     * @description en - filter
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-01 11:45:10
+     * @param list
+     * @param editor
+     * @return java.util.List<T>
+     */
+    public static <T> List<T> filter(List<T> list, Editor<T> editor) {
+		return ListUtil.filter(list, editor);
+	}
 }

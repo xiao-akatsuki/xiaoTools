@@ -2694,5 +2694,46 @@ public class CollUtil {
 		}
 	}
 
+  /**
+   *
+   * @description zh - 分组
+   * @description en - grouping
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-03 21:24:42
+   * @param collection 集合
+   * @param hash Hash值算法
+   * @return java.util.List<java.util.List<T>>
+   */
+  public static <T> List<List<T>> group(Collection<T> collection, Hash32<T> hash) {
+		final List<List<T>> result = new ArrayList<>();
+		if (isEmpty(collection)) {
+			return result;
+		}
+		if (Constant.NULL == hash) {
+			// 默认hash算法，按照元素的hashCode分组
+			hash = t -> (Constant.NULL == t) ? Constant.ZERO : t.hashCode();
+		}
+
+		int index;
+		List<T> subList;
+		for (T t : collection) {
+			index = hash.hash32(t);
+			if (result.size() - 1 < index) {
+				while (result.size() - 1 < index) {
+					result.add(null);
+				}
+				result.set(index, newArrayList(t));
+			} else {
+				subList = result.get(index);
+				if (Constant.NULL == subList) {
+					result.set(index, newArrayList(t));
+				} else {
+					subList.add(t);
+				}
+			}
+		}
+		return result;
+	}
 }
 

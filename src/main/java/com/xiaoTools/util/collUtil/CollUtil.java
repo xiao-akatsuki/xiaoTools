@@ -2695,6 +2695,8 @@ public class CollUtil {
 		}
 	}
 
+  /* 分组 ----------------------------------------------------------- grouping */
+
   /**
    * [分组](grouping)
    * @description zh - 分组
@@ -2735,6 +2737,39 @@ public class CollUtil {
 			}
 		}
 		return result;
+	}
+
+  /**
+   * [根据元素的指定字段名分组](Group according to the specified field name of the element)
+   * @description zh - 根据元素的指定字段名分组
+   * @description en - Group according to the specified field name of the element
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-03 21:30:55
+   * @param collection 集合
+   * @param fieldName 元素Bean中的字段名，非Bean都放在第一个分组中
+   * @return java.util.List<java.util.List<T>>
+   */
+  public static <T> List<List<T>> groupByField(Collection<T> collection, final String fieldName) {
+		return group(collection, new Hash32<T>() {
+			private final List<Object> fieldNameList = new ArrayList<>();
+
+			@Override
+			public int hash32(T t) {
+				if (Constant.NULL == t || Constant.FALSE == BeanUtil.isBean(t.getClass())) {
+					// 非Bean放在同一子分组中
+					return Constant.ZERO;
+				}
+				final Object value = ReflectUtil.getFieldValue(t, fieldName);
+				int hash = fieldNameList.indexOf(value);
+				if (hash < Constant.ZERO) {
+					fieldNameList.add(value);
+					return fieldNameList.size() - Constant.ONE;
+				} else {
+					return hash;
+				}
+			}
+		});
 	}
 }
 

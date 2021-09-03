@@ -2696,7 +2696,7 @@ public class CollUtil {
 	}
 
   /**
-   *
+   * [分组](grouping)
    * @description zh - 分组
    * @description en - grouping
    * @version V1.0

@@ -13,6 +13,7 @@ import com.xiaoTools.core.filter.Filter;
 import com.xiaoTools.core.matcher.Matcher;
 import com.xiaoTools.entity.pinyinComparator.PinyinComparator;
 import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.lang.hash.hash32.Hash32;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.compareUtil.CompareUtil;
 import com.xiaoTools.util.listUtil.ListUtil;

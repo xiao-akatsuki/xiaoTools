@@ -2876,5 +2876,21 @@ public class CollUtil {
   public static <T extends Comparable<? super T>> T max(Collection<T> coll) {
 		return Collections.max(coll);
 	}
+
+  /* 最小值 ----------------------------------------------------------- min */    
+
+  /**
+   * [取最小值](Take the minimum value)
+   * @description zh - 取最小值
+   * @description en - Take the minimum value
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-04 14:48:29
+   * @param coll 集合
+   * @return T
+   */
+  public static <T extends Comparable<? super T>> T min(Collection<T> coll) {
+		return Collections.min(coll);
+	}
 }
 

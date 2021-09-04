@@ -2771,5 +2771,21 @@ public class CollUtil {
 			}
 		});
 	}
+
+  /* 反序 ----------------------------------------------------------- reverse */    
+
+  /**
+   * [反序给定List](Reverse order given list)
+   * @description zh - 反序给定List
+   * @description en - Reverse order given list
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-04 14:08:06
+   * @param list 集合
+   * @return java.util.List<T>
+   */
+  public static <T> List<T> reverse(List<T> list) {
+		return ListUtil.reverse(list);
+	}
 }
 

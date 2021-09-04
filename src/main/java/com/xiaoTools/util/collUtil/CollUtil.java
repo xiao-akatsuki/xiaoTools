@@ -2860,5 +2860,21 @@ public class CollUtil {
 
 		return values;
 	}
+
+  /* 最大值 ----------------------------------------------------------- max */    
+
+  /**
+   * [取最大值](Take the maximum value)
+   * @description zh - 取最大值
+   * @description en - Take the maximum value
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-04 14:45:30
+   * @param coll 集合
+   * @return T
+   */
+  public static <T extends Comparable<? super T>> T max(Collection<T> coll) {
+		return Collections.max(coll);
+	}
 }
 

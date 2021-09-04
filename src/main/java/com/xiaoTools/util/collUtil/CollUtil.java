@@ -2841,5 +2841,24 @@ public class CollUtil {
 
 		return set;
 	}
+
+  /**
+   * [获取指定Map列表中所有的Value](Gets all values in the specified map list)
+   * @description zh - 获取指定Map列表中所有的Value
+   * @description en - Gets all values in the specified map list
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-04 14:37:36
+   * @param mapCollection Map列表
+   * @return java.util.List<V>
+   */
+  public static <V> List<V> values(Collection<Map<?, V>> mapCollection) {
+		final List<V> values = new ArrayList<>();
+		for (Map<?, V> map : mapCollection) {
+			values.addAll(map.values());
+		}
+
+		return values;
+	}
 }
 

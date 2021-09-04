@@ -2819,5 +2819,27 @@ public class CollUtil {
   public static <T> List<T> setOrAppend(List<T> list, int index, T element) {
 		return ListUtil.setOrAppend(list, index, element);
 	}
+
+  /**
+   * [获取指定Map列表中所有的Key](Gets all keys in the specified map list)
+   * @description zh - 获取指定Map列表中所有的Key
+   * @description en - Gets all keys in the specified map list
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-04 14:35:39
+   * @param mapCollection Map列表
+   * @return java.util.Set<K>
+   */
+  public static <K> Set<K> keySet(Collection<Map<K, ?>> mapCollection) {
+		if (isEmpty(mapCollection)) {
+			return new HashSet<>();
+		}
+		final HashSet<K> set = new HashSet<>(mapCollection.size() * Constant.SIXTEEN);
+		for (Map<K, ?> map : mapCollection) {
+			set.addAll(map.keySet());
+		}
+
+		return set;
+	}
 }
 

@@ -2801,5 +2801,23 @@ public class CollUtil {
   public static <T> List<T> reverseNew(List<T> list) {
 		return ListUtil.reverseNew(list);
 	}
+
+  /* 反序 ----------------------------------------------------------- reverse */    
+  
+  /**
+   * [设置或增加元素](Set or add elements)
+   * @description zh - 设置或增加元素
+   * @description en - Set or add elements
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-04 14:33:16
+   * @param list List列表
+   * @param index 位置
+   * @param element 新元素
+   * @return java.util.List<T>
+   */
+  public static <T> List<T> setOrAppend(List<T> list, int index, T element) {
+		return ListUtil.setOrAppend(list, index, element);
+	}
 }
 

@@ -2892,5 +2892,21 @@ public class CollUtil {
   public static <T extends Comparable<? super T>> T min(Collection<T> coll) {
 		return Collections.min(coll);
 	}
+
+  /* 只读 ----------------------------------------------------------- unmodifiable */    
+
+  /**
+   * [转为只读集合](Convert to read-only collection)
+   * @description zh - 转为只读集合
+   * @description en - Convert to read-only collection
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-04 14:57:31
+   * @param c 集合
+   * @return java.util.Collection<T>
+   */
+  public static <T> Collection<T> unmodifiable(Collection<? extends T> c) {
+		return Collections.unmodifiableCollection(c);
+	}
 }
 

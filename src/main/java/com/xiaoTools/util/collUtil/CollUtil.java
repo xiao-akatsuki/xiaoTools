@@ -2908,5 +2908,35 @@ public class CollUtil {
   public static <T> Collection<T> unmodifiable(Collection<? extends T> c) {
 		return Collections.unmodifiableCollection(c);
 	}
+
+  /* 为空 ----------------------------------------------------------- empty */    
+
+  /**
+   * [根据给定的集合类型，返回对应的空集合](Returns the corresponding empty collection according to the given collection type)
+   * @description zh - 根据给定的集合类型，返回对应的空集合
+   * @description en - Returns the corresponding empty collection according to the given collection type
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-06 22:13:58
+   * @param collectionClass 集合类型
+   * @return T
+   */
+  @SuppressWarnings("unchecked")
+	public static <E, T extends Collection<E>> T empty(Class<?> collectionClass) {
+		if (Constant.NULL == collectionClass) {
+			return (T) Collections.emptyList();
+		}
+
+		if (Set.class.isAssignableFrom(collectionClass)) {
+      return NavigableSet.class == collectionClass ? (T) Collections.emptyNavigableSet() : 
+            SortedSet.class == collectionClass ? (T) Collections.emptySortedSet() : 
+            (T) Collections.emptySet();
+		} else if (List.class.isAssignableFrom(collectionClass)) {
+			return (T) Collections.emptyList();
+		}
+
+		// 不支持空集合的集合类型
+		throw new IllegalArgumentException(StrUtil.format("[{}] is not support to get empty!", collectionClass));
+	}
 }
 

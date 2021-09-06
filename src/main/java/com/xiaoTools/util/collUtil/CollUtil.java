@@ -2999,5 +2999,22 @@ public class CollUtil {
 			list.add(padObj);
 		}
 	}
+
+  /* 转换 ----------------------------------------------------------- trans */    
+
+  /**
+   * [使用给定的转换函数，转换源集合为新类型的集合](Use the given conversion function to convert the source collection to a collection of the new type)
+   * @description zh - 使用给定的转换函数，转换源集合为新类型的集合
+   * @description en - Use the given conversion function to convert the source collection to a collection of the new type
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-06 22:21:15
+   * @param collection 集合
+   * @param function 转换函数
+   * @return java.util.Collection<T>
+   */
+  public static <F, T> Collection<T> trans(Collection<F> collection, Function<? super F, ? extends T> function) {
+		return new TransCollection<>(collection, function);
+	}
 }
 

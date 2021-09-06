@@ -2938,5 +2938,24 @@ public class CollUtil {
 		// 不支持空集合的集合类型
 		throw new IllegalArgumentException(StrUtil.format("[{}] is not support to get empty!", collectionClass));
 	}
+
+  /* 清空 ----------------------------------------------------------- clear */    
+
+  /**
+   * [清除一个或多个集合内的元素](Clears elements within one or more collections)
+   * @description zh - 清除一个或多个集合内的元素
+   * @description en - Clears elements within one or more collections
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-06 22:15:43
+   * @param collections 一个或多个集合
+   */
+  public static void clear(Collection<?>... collections) {
+		for (Collection<?> collection : collections) {
+			if (isNotEmpty(collection)) {
+				collection.clear();
+			}
+		}
+	}
 }
 

@@ -2981,5 +2981,23 @@ public class CollUtil {
 			list.add(Constant.ZERO, padObj);
 		}
 	}
+
+  /**
+   * [填充List](Fill list)
+   * @description zh - 填充List
+   * @description en - Fill list
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-06 22:19:51
+   * @param list 列表
+   * @param minLen 最小长度
+   * @param padObj 填充的对象
+   */
+  public static <T> void padRight(Collection<T> list, int minLen, T padObj) {
+		Objects.requireNonNull(list);
+		for (int i = list.size(); i < minLen; i++) {
+			list.add(padObj);
+		}
+	}
 }
 

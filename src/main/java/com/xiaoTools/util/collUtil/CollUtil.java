@@ -3016,5 +3016,45 @@ public class CollUtil {
   public static <F, T> Collection<T> trans(Collection<F> collection, Function<? super F, ? extends T> function) {
 		return new TransCollection<>(collection, function);
 	}
+
+  /* 大小 ----------------------------------------------------------- size */    
+
+  /**
+   * [获取Collection或者iterator的大小](Gets the size of the collection or iterator)
+   * @description zh - 获取Collection或者iterator的大小
+   * @description en - Gets the size of the collection or iterator
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-07 22:17:00
+   * @param object 可以为空的对象
+   * @return int 
+   */
+  public static int size(final Object object) {
+		if (object == Constant.NULL) {
+			return Constant.ZERO;
+		}
+
+		int total = Constant.ZERO;
+		if (object instanceof Map<?, ?>) {
+			total = ((Map<?, ?>) object).size();
+		} else if (object instanceof Collection<?>) {
+			total = ((Collection<?>) object).size();
+		} else if (object instanceof Iterable<?>) {
+			total = IterUtil.size((Iterable<?>) object);
+		} else if (object instanceof Iterator<?>) {
+			total = IterUtil.size((Iterator<?>) object);
+		} else if (object instanceof Enumeration<?>) {
+			final Enumeration<?> it = (Enumeration<?>) object;
+			while (it.hasMoreElements()) {
+				total++;
+				it.nextElement();
+			}
+		} else if (ArrayUtil.isArray(object)) {
+			total = ArrayUtil.length(object);
+		} else {
+			throw new IllegalArgumentException("Unsupported object type: " + object.getClass().getName());
+		}
+		return total;
+	}
 }
 

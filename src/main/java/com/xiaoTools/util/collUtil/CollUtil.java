@@ -3056,5 +3056,21 @@ public class CollUtil {
 		}
 		return total;
 	}
+
+  /**
+   * [判断两个 Collection 是否元素和顺序相同](Determine whether two collections have the same element and order)
+   * @description zh - 判断两个 Collection 是否元素和顺序相同
+   * @description en - Determine whether two collections have the same element and order
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-07 22:18:42
+   * @param list1 列表1
+   * @param list2 列表2
+   * @return boolean
+   */
+  public static boolean isEqualList(final Collection<?> list1, final Collection<?> list2) {
+    return list1 == Constant.NULL || list2 == Constant.NULL || list1.size() != list2.size() ? 
+            Constant.FALSE : IterUtil.isEqualList(list1, list2);
+	}
 }
 

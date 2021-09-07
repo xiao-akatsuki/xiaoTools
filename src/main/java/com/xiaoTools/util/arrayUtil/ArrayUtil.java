@@ -1212,7 +1212,7 @@ public class ArrayUtil extends PrimitiveArrayUtil {
      * @return java.lang.String
      */
     public static <T> String join(T[] array, CharSequence conjunction) {
-		return join(array, conjunction, Constant.NULL, Constant.NULL);
+		return join(array, conjunction, null, null);
 	}
 
     /**

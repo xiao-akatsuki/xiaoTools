@@ -56,5 +56,19 @@ public class IterUtil {
     public static boolean isNotEmpty(Iterable<?> iterable) {
 		return Constant.NULL != iterable && isNotEmpty(iterable.iterator());
 	}
+
+    /**
+     * [Iterator是否为非空](Is iterator non empty)
+     * @description zh - Iterator是否为非空
+     * @description en - Is iterator non empty
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-08 20:47:03
+     * @param iterator Iterator对象
+     * @return boolean 
+     */
+    public static boolean isNotEmpty(Iterator<?> iterator) {
+		return Constant.NULL != iterator && iterator.hasNext();
+	}
     
 }

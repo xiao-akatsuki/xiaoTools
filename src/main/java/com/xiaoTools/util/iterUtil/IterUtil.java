@@ -71,4 +71,22 @@ public class IterUtil {
 		return Constant.NULL != iterator && iterator.hasNext();
 	}
     
+    /* 含有null -------------------------------------------------------------- has null */ 
+
+    /**
+     * [是否包含 null 元素](Contains null elements)
+     * @description zh - 是否包含 null 元素
+     * @description en - Contains null elements
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-09 19:58:51
+     * @param iter 被检查的对象
+     * @return boolean
+     */
+    public static boolean hasNull(Iterable<?> iter) {
+		return hasNull(null == iter ? null : iter.iterator());
+	}
+
+    
+
 }

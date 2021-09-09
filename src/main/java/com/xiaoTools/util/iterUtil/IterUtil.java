@@ -110,4 +110,18 @@ public class IterUtil {
 		return Constant.FALSE;
 	}
 
+    /**
+     * [是否全部元素为null](Are all elements null)
+     * @description zh - 是否全部元素为null
+     * @description en - Are all elements null
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-09 20:02:45
+     * @param iter 被检查的对象
+     * @return boolean
+     */
+    public static boolean isAllNull(Iterable<?> iter) {
+		return isAllNull(Constant.NULL == iter ? null : iter.iterator());
+	}
+
 }

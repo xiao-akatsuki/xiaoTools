@@ -124,4 +124,27 @@ public class IterUtil {
 		return isAllNull(Constant.NULL == iter ? null : iter.iterator());
 	}
 
+
+    /**
+     * [是否全部元素为null](Are all elements null)
+     * @description zh - 是否全部元素为null
+     * @description en - Are all elements null
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-09 20:04:59
+     * @param iter 被检查的对象
+     * @return boolean
+     */
+    public static boolean isAllNull(Iterator<?> iter) {
+		if (Constant.NULL == iter) {
+			return Constant.TRUE;
+		}
+
+		while (iter.hasNext()) {
+			if (Constant.NULL != iter.next()) {
+				return Constant.FALSE;
+			}
+		}
+		return Constant.TRUE;
+	}
 }

@@ -1,6 +1,8 @@
 package com.xiaoTools.util.iterUtil;
 
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import com.xiaoTools.lang.constant.Constant;
 
@@ -146,5 +148,35 @@ public class IterUtil {
 			}
 		}
 		return Constant.TRUE;
+	}
+
+    /* 总数 -------------------------------------------------------------- count */ 
+
+    /**
+     * [根据集合返回一个元素计数的 Map](Returns a map of element counts based on the collection)
+     * @description zh - 根据集合返回一个元素计数的 Map
+     * @description en - Returns a map of element counts based on the collection
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-10 20:32:29
+     * @param iterator Iterator对象
+     * @return java.util.Map<T, Integer>
+     */
+    public static <T> Map<T, Integer> countMap(Iterator<T> iterator) {
+		final HashMap<T, Integer> countMap = new HashMap<>();
+		if (Constant.NULL != iterator) {
+			Integer count;
+			T t;
+			while (iterator.hasNext()) {
+				t = iterator.next();
+				count = countMap.get(t);
+				if (Constant.NULL == count) {
+					countMap.put(t, Constant.ONE);
+				} else {
+					countMap.put(t, count + Constant.ONE);
+				}
+			}
+		}
+		return countMap;
 	}
 }

@@ -1,5 +1,6 @@
 package com.xiaoTools.util.iterUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -229,6 +230,29 @@ public class IterUtil {
      * @return java.util.List<Object>
      */
     public static <V> List<Object> fieldValueList(Iterable<V> iterable, String fieldName) {
-		return fieldValueList(null == iterable ? null : iterable.iterator(), fieldName);
+		return fieldValueList(Constant.NULL == iterable ? null : iterable.iterator(), fieldName);
+	}
+
+    /**
+     * [获取指定Bean列表中某个字段，生成新的列表](Gets a field in the specified bean list and generates a new list)
+     * @description zh - 获取指定Bean列表中某个字段，生成新的列表
+     * @description en - Gets a field in the specified bean list and generates a new list
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-10 20:47:17
+     * @param iterable 对象列表
+     * @param fieldName 字段名
+     * @return java.util.List<Object>
+     */
+    public static <V> List<Object> fieldValueList(Iterator<V> iter, String fieldName) {
+		final List<Object> result = new ArrayList<>();
+		if (Constant.NULL != iter) {
+			V value;
+			while (iter.hasNext()) {
+				value = iter.next();
+				result.add(ReflectUtil.getFieldValue(value, fieldName));
+			}
+		}
+		return result;
 	}
 }

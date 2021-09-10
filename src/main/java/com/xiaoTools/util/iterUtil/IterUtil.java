@@ -195,4 +195,24 @@ public class IterUtil {
 	public static <K, V> Map<K, V> fieldValueMap(Iterator<V> iterator, String fieldName) {
 		return toMap(iterator, new HashMap<>(), (value) -> (K) ReflectUtil.getFieldValue(value, fieldName));
 	}
+
+    /**
+     * [字段值与列表值对应的Map](Map corresponding to field value and list value)
+     * @description zh - 字段值与列表值对应的Map
+     * @description en - Map corresponding to field value and list value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-10 20:44:55 
+     * @param iterator 对象列表
+     * @param fieldNameForKey 做为键的字段名
+     * @param fieldNameForValue 做为值的字段名
+     * @return java.util.Map<K, V>
+     */
+    @SuppressWarnings("unchecked")
+	public static <K, V> Map<K, V> fieldValueAsMap(Iterator<?> iterator, String fieldNameForKey, String fieldNameForValue) {
+		return toMap(iterator, new HashMap<>(),
+				(value) -> (K) ReflectUtil.getFieldValue(value, fieldNameForKey),
+				(value) -> (V) ReflectUtil.getFieldValue(value, fieldNameForValue)
+		);
+	}
 }

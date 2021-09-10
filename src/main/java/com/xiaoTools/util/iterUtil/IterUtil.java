@@ -179,4 +179,20 @@ public class IterUtil {
 		}
 		return countMap;
 	}
+
+    /** 
+     * [字段值与列表值对应的Map](Map corresponding to field value and list value)
+     * @description zh - 字段值与列表值对应的Map
+     * @description en - Map corresponding to field value and list value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-10 20:35:31
+     * @param iterator Iterator对象
+     * @param fieldName 字段名
+     * @return java.util.Map<K, V>
+     */
+    @SuppressWarnings("unchecked")
+	public static <K, V> Map<K, V> fieldValueMap(Iterator<V> iterator, String fieldName) {
+		return toMap(iterator, new HashMap<>(), (value) -> (K) ReflectUtil.getFieldValue(value, fieldName));
+	}
 }

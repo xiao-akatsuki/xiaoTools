@@ -275,6 +275,24 @@ public class IterUtil {
 		return join(iterator, conjunction, Constant.STRING_NULL, Constant.STRING_NULL);
 	}
 
+
+    /**
+     * [以 conjunction 为分隔符将集合转换为字符串](Converts a collection to a string with a conjunction as a delimiter)
+     * @description zh - 以 conjunction 为分隔符将集合转换为字符串
+     * @description en - Converts a collection to a string with a conjunction as a delimiter
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-14 22:00:45
+     * @param iterator 集合
+     * @param conjunction 分隔符
+     * @param prefix 每个元素添加的前缀，null表示不添加
+     * @param suffix 每个元素添加的后缀，null表示不添加
+     */
+    public static <T> String join(Iterable<T> iterable, CharSequence conjunction, String prefix, String suffix) {
+        return Constant.NULL == iterable ? Constant.STRING_NULL : join(iterable.iterator(), conjunction, prefix, suffix);
+	}
+
+
     /**
      * [以 conjunction 为分隔符将集合转换为字符串](Converts a collection to a string with a conjunction as a delimiter)
      * @description zh - 以 conjunction 为分隔符将集合转换为字符串

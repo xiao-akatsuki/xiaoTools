@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
@@ -275,7 +276,6 @@ public class IterUtil {
 		return join(iterator, conjunction, Constant.STRING_NULL, Constant.STRING_NULL);
 	}
 
-
     /**
      * [以 conjunction 为分隔符将集合转换为字符串](Converts a collection to a string with a conjunction as a delimiter)
      * @description zh - 以 conjunction 为分隔符将集合转换为字符串
@@ -334,4 +334,27 @@ public class IterUtil {
 		}
 		return sb.toString();
 	}
+
+    /* 将Entry集合转换为HashMap -------------------------------------------------------------- to Map */ 
+
+    /**
+     * [将Entry集合转换为HashMap](Convert entry collection to HashMap)
+     * @description zh - 将Entry集合转换为HashMap
+     * @description en - Convert entry collection to HashMap
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-14 22:02:46
+     * @param entryIter entry集合
+     * @return java.util.HashMap<K, V>
+     */
+    public static <K, V> HashMap<K, V> toMap(Iterable<Entry<K, V>> entryIter) {
+		final HashMap<K, V> map = new HashMap<>();
+		if (isNotEmpty(entryIter)) {
+			for (Entry<K, V> entry : entryIter) {
+				map.put(entry.getKey(), entry.getValue());
+			}
+		}
+		return map;
+	}
+
 }

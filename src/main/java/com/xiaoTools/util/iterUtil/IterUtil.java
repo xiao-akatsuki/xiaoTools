@@ -357,4 +357,19 @@ public class IterUtil {
 		return map;
 	}
 
+    /**
+     * [将键列表和值列表转换为Map](Convert key list and value list to map)
+     * @description zh - 将键列表和值列表转换为Map
+     * @description en - Convert key list and value list to map
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-14 22:03:40
+     * @param keys 键列表
+     * @param values 值列表
+     * @return java.util.Map<K, V>
+     */
+    public static <K, V> Map<K, V> toMap(Iterable<K> keys, Iterable<V> values) {
+		return toMap(keys, values, false);
+	}
+
 }

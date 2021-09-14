@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.util.arrayUtil.ArrayUtil;
+import com.xiaoTools.util.strUtil.StrUtil;
 
 /**
  * [Iterable 和  Iterator 相关工具类](Iteratable and iterator related tool classes)
@@ -254,5 +256,51 @@ public class IterUtil {
 			}
 		}
 		return result;
+	}
+
+    /* 分页 -------------------------------------------------------------- join */ 
+
+    /**
+     * [以 conjunction 为分隔符将集合转换为字符串](Converts a collection to a string with a conjunction as a delimiter)
+     * @description zh - 以 conjunction 为分隔符将集合转换为字符串
+     * @description en - Converts a collection to a string with a conjunction as a delimiter
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-14 21:55:33
+     * @param iterator 集合
+     * @param conjunction 分隔符
+     * @return java.lang.String
+     */
+    public static <T> String join(Iterator<T> iterator, CharSequence conjunction) {
+		return join(iterator, conjunction, Constant.STRING_NULL, Constant.STRING_NULL);
+	}
+
+    public static <T> String join(Iterator<T> iterator, CharSequence conjunction, String prefix, String suffix) {
+		if (Constant.NULL == iterator) {
+			return Constant.STRING_NULL;
+		}
+
+		final StringBuilder sb = new StringBuilder();
+		boolean isFirst = Constant.TRUE;
+		T item;
+		while (iterator.hasNext()) {
+			if (isFirst) {
+				isFirst = Constant.FALSE;
+			} else {
+				sb.append(conjunction);
+			}
+
+			item = iterator.next();
+			if (ArrayUtil.isArray(item)) {
+				sb.append(ArrayUtil.join(ArrayUtil.wrap(item), conjunction, prefix, suffix));
+			} else if (item instanceof Iterable<?>) {
+				sb.append(join((Iterable<?>) item, conjunction, prefix, suffix));
+			} else if (item instanceof Iterator<?>) {
+				sb.append(join((Iterator<?>) item, conjunction, prefix, suffix));
+			} else {
+				sb.append(StrUtil.wrap(String.valueOf(item), prefix, suffix));
+			}
+		}
+		return sb.toString();
 	}
 }

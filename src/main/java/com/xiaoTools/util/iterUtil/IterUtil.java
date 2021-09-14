@@ -402,4 +402,26 @@ public class IterUtil {
 		return toMap(keys, values, false);
 	}
 
+    /**
+     * [将键列表和值列表转换为Map](Convert key list and value list to map)
+     * @description zh - 将键列表和值列表转换为Map
+     * @description en - Convert key list and value list to map
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-14 22:17:07
+     * @param keys 键列表
+     * @param values 值列表
+     * @param isOrder 是否有序
+     * @return java.util.Map<K, V>
+     */
+    public static <K, V> Map<K, V> toMap(Iterator<K> keys, Iterator<V> values, boolean isOrder) {
+		final Map<K, V> resultMap = MapUtil.newHashMap(isOrder);
+		if (isNotEmpty(keys)) {
+			while (keys.hasNext()) {
+				resultMap.put(keys.next(), (Constant.NULL != values && values.hasNext()) ? values.next() : null);
+			}
+		}
+		return resultMap;
+	}
+
 }

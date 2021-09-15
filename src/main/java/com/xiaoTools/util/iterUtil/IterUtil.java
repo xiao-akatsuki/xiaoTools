@@ -10,6 +10,7 @@ import java.util.function.Function;
 
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
+import com.xiaoTools.util.objectUtil.ObjectUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
 
 /**
@@ -454,5 +455,33 @@ public class IterUtil {
      */
     public static <T, K, V> Map<K, List<V>> toListMap(Iterable<T> iterable, Function<T, K> keyMapper, Function<T, V> valueMapper) {
 		return toListMap(MapUtil.newHashMap(), iterable, keyMapper, valueMapper);
+	}
+
+    /**
+     * [将列表转成值为List的HashMap](Convert the list to a HashMap with a value of list)
+     * @description zh - 将列表转成值为List的HashMap
+     * @description en - Convert the list to a HashMap with a value of list
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-15 22:09:52
+     * @param resultMap 结果Map，可自定义结果Map类型
+     * @param iterable 值列表
+     * @param keyMapper Map的键映射
+     * @param valueMapper Map中List的值映射
+     * @return java.util.Map<K, java.util.List<V>>
+     */
+    public static <T, K, V> Map<K, List<V>> toListMap(Map<K, List<V>> resultMap, Iterable<T> iterable, Function<T, K> keyMapper, Function<T, V> valueMapper) {
+		if (Constant.NULL == resultMap) {
+			resultMap = MapUtil.newHashMap();
+		}
+		if (ObjectUtil.isNull(iterable)) {
+			return resultMap;
+		}
+
+		for (T value : iterable) {
+			resultMap.computeIfAbsent(keyMapper.apply(value), k -> new ArrayList<>()).add(valueMapper.apply(value));
+		}
+
+		return resultMap;
 	}
 }

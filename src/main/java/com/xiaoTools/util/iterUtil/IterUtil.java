@@ -441,11 +441,16 @@ public class IterUtil {
 	}
 
     /**
-     *
-     * @description zh - 
+     * [将列表转成值为List的HashMap](Convert the list to a HashMap with a value of list)
+     * @description zh - 将列表转成值为List的HashMap
+     * @description en - Convert the list to a HashMap with a value of list
      * @version V1.0
      * @author XiaoXunYao
      * @since 2021-09-15 22:08:09
+     * @param iterable 值列表
+     * @param keyMapper Map的键映射
+     * @param valueMapper Map中List的值映射
+     * @param java.util.Map<K, java.util.List<V>>
      */
     public static <T, K, V> Map<K, List<V>> toListMap(Iterable<T> iterable, Function<T, K> keyMapper, Function<T, V> valueMapper) {
 		return toListMap(MapUtil.newHashMap(), iterable, keyMapper, valueMapper);

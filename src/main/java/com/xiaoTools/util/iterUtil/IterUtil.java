@@ -484,4 +484,19 @@ public class IterUtil {
 
 		return resultMap;
 	}
+
+    /**
+     * [将列表转成HashMap](Convert list to HashMap)
+     * @description zh - 将列表转成HashMap
+     * @description en - Convert list to HashMap
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-17 07:50:54
+     * @param iterable 值列表
+     * @param keyMapper Map的键映射
+     * @return java.util.Map<K, V>
+     */
+    public static <K, V> Map<K, V> toMap(Iterable<V> iterable, Function<V, K> keyMapper) {
+		return toMap(iterable, keyMapper, v -> v);
+	}
 }

@@ -515,4 +515,32 @@ public class IterUtil {
     public static <T, K, V> Map<K, V> toMap(Iterable<T> iterable, Function<T, K> keyMapper, Function<T, V> valueMapper) {
 		return toMap(MapUtil.newHashMap(), iterable, keyMapper, valueMapper);
 	}
+
+    /**
+     * [将列表转成Map](Convert list to map)
+     * @description zh - 将列表转成Map
+     * @description en - Convert list to map
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-17 07:55:17
+     * @param resultMap 结果Map，通过传入map对象决定结果的Map类型
+     * @param iterable 值列表
+     * @param keyMapper Map的键映射
+     * @param valueMapper Map的值映射
+     * @return java.util.Map<K, V>
+     */
+    public static <T, K, V> Map<K, V> toMap(Map<K, V> resultMap, Iterable<T> iterable, Function<T, K> keyMapper, Function<T, V> valueMapper) {
+		if (Constant.NULL == resultMap) {
+			resultMap = MapUtil.newHashMap();
+		}
+		if (ObjectUtil.isNull(iterable)) {
+			return resultMap;
+		}
+
+		for (T value : iterable) {
+			resultMap.put(keyMapper.apply(value), valueMapper.apply(value));
+		}
+
+		return resultMap;
+	}
 }

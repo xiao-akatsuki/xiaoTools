@@ -558,5 +558,22 @@ public class IterUtil {
     return Constant.NULL == iter ? null : toList(iter.iterator());
 	}
 
+  /**
+   * [Iterator转List](Iterator to list)
+   * @description zh - Iterator转List
+   * @description en - Iterator to list
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-18 22:14:58
+   * @param iter Iterator
+   * @return java.util.List<E>
+   */
+  public static <E> List<E> toList(Iterator<E> iter) {
+		final List<E> list = new ArrayList<>();
+		while (iter.hasNext()) {
+			list.add(iter.next());
+		}
+		return list;
+	}
     
 }

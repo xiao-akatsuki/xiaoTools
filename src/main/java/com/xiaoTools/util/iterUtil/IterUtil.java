@@ -543,4 +543,20 @@ public class IterUtil {
 
 		return resultMap;
 	}
+
+  /**
+   * [Iterator转List](Iterator to list)
+   * @description zh - Iterator转List
+   * @description en - Iterator to list
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-18 22:14:00
+   * @param iter Iterator
+   * @return java.util.List<E>
+   */
+  public static <E> List<E> toList(Iterable<E> iter) {
+    return Constant.NULL == iter ? null : toList(iter.iterator());
+	}
+
+    
 }

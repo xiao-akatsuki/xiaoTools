@@ -15,6 +15,8 @@ import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.objectUtil.ObjectUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
 
+import jdk.javadoc.internal.doclets.formats.html.resources.standard;
+
 /**
  * [Iterable 和  Iterator 相关工具类](Iteratable and iterator related tool classes)
  * @description zh - Iterable 和  Iterator 相关工具类
@@ -636,5 +638,21 @@ public class IterUtil {
    */
   public static <T> T getFirst(Iterator<T> iterator) {
     return Constant.NULL != iterator && iterator.hasNext() ? iterator.next() : null;
+	}
+
+  /* 元素类型 -------------------------------------------------------------- get type */ 
+
+  /**
+   * [获得 Iterable 对象的元素类型](Gets the element type of the iteratable object)
+   * @description zh - 获得 Iterable 对象的元素类型
+   * @description en - Gets the element type of the iteratable object
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-19 21:39:18
+   * @param iterable Iterable
+   * @return java.lang.Class<?>
+   */
+	public static Class<?> getElementType(Iterable<?> iterable) {
+    return Constant.NULL != iterable ? getElementType(iterable.iterator()) : null; 
 	}
 }

@@ -591,4 +591,18 @@ public class IterUtil {
   public static <E> Iterator<E> asIterator(Enumeration<E> enumeration) {
 		return new EnumerationIter<>(enumeration);
 	}
+
+  /**
+   * [Iterator 转为 Iterable](Iterator to iteratable)
+   * @description zh - Iterator 转为 Iterable
+   * @description en - Iterator to iteratable
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-19 21:23:18
+   * @param iterator Iterator
+   * @return java.lang.Iterable<E>
+   */
+  public static <E> Iterable<E> asIterable(final Iterator<E> iterator) {
+		return () -> iterator;
+	}
 }

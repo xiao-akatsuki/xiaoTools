@@ -623,4 +623,18 @@ public class IterUtil {
   public static <T> T getFirst(Iterable<T> iterable) {
     return Constant.NULL == iterable ? null : getFirst(iterable.iterator());
 	}
+
+  /**
+   * [获取集合的第一个元素](Gets the first element of the collection)
+   * @description zh - 获取集合的第一个元素
+   * @description en - Gets the first element of the collection
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-19 21:28:34
+   * @param iterator Iterator
+   * @return T
+   */
+  public static <T> T getFirst(Iterator<T> iterator) {
+    return Constant.NULL != iterator && iterator.hasNext() ? iterator.next() : null;
+	}
 }

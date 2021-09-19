@@ -794,4 +794,19 @@ public class IterUtil {
   public static <T> Iterator<T> empty() {
 		return Collections.emptyIterator();
 	}
+
+  /**
+   * [转换 Iterator 为另一种类型的 Iterator](Convert iterator to another type of iterator)
+   * @description zh - 转换 Iterator 为另一种类型的 Iterator
+   * @description en - Convert iterator to another type of iterator
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-19 21:54:37
+   * @param iterator Iterator
+   * @param function 转换函数
+   * @return java.util.Iterator<T>
+   */
+  public static <F, T> Iterator<T> trans(Iterator<F> iterator, Function<? super F, ? extends T> function) {
+		return new TransIter<>(iterator, function);
+	}
 }

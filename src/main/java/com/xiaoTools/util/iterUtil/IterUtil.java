@@ -14,6 +14,7 @@ import com.xiaoTools.core.escape.filter.Filter;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.objectUtil.ObjectUtil;
+import com.xiaoTools.util.regularUtil.method.Func1;
 import com.xiaoTools.util.strUtil.StrUtil;
 
 import jdk.javadoc.internal.doclets.formats.html.resources.standard;
@@ -723,5 +724,23 @@ public class IterUtil {
 			}
 		}
 		return iter;
+	}
+
+  /* 转为map -------------------------------------------------------------- to map */   
+
+  /**
+   * [Iterator转换为Map](Convert iterator to map)
+   * @description zh - Iterator转换为Map
+   * @description en - Convert iterator to map
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-19 21:49:03
+   * @param iterator 数据列表
+   * @param map map
+   * @param keyFunc 生成key的函数
+   * @return java.util.Map<K, V>
+   */
+  public static <K, V> Map<K, V> toMap(Iterator<V> iterator, Map<K, V> map, Func1<V, K> keyFunc) {
+		return toMap(iterator, map, keyFunc, (value) -> value);
 	}
 }

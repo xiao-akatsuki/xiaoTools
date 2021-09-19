@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Map.Entry;
 import java.util.function.Function;
 
@@ -846,5 +847,38 @@ public class IterUtil {
 			}
 		}
 		return size;
+	}
+
+  /**
+   * [判断两个 Iterable 是否元素和顺序相同](Determine whether two Iterable elements are in the same order)
+   * @description zh - 判断两个 Iterable 是否元素和顺序相同
+   * @description en - Determine whether two Iterable elements are in the same order
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-19 21:58:54
+   * @param list1 列表1
+   * @param list2 列表2
+   * @return boolean
+   */
+  public static boolean isEqualList(final Iterable<?> list1, final Iterable<?> list2) {
+		if (list1 == list2) {
+			return Constant.TRUE;
+		}
+
+		final Iterator<?> it1 = list1.iterator();
+		final Iterator<?> it2 = list2.iterator();
+		Object obj1;
+		Object obj2;
+		while (it1.hasNext() && it2.hasNext()) {
+			obj1 = it1.next();
+			obj2 = it2.next();
+
+			if (Constant.FALSE == Objects.equals(obj1, obj2)) {
+				return Constant.FALSE;
+			}
+		}
+
+		// 当两个Iterable长度不一致时返回false
+		return Constant.FALSE == (it1.hasNext() || it2.hasNext());
 	}
 }

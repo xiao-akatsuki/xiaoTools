@@ -700,4 +700,28 @@ public class IterUtil {
 
 		return iter;
 	}
+
+  /**
+   * [过滤集合](Filter collection)
+   * @description zh - 过滤集合
+   * @description en - Filter collection
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-19 21:44:06
+   * @param iter 集合对象
+   * @param filter 过滤接口
+   * @return java.util.Iterator<E>
+   */
+  public static <E> Iterator<E> filter(Iterator<E> iter, Filter<E> filter) {
+		if (Constant.NULL == iter || Constant.NULL == filter) {
+			return iter;
+		}
+
+		while (iter.hasNext()) {
+			if (Constant.FALSE == filter.accept(iter.next())) {
+				iter.remove();
+			}
+		}
+		return iter;
+	}
 }

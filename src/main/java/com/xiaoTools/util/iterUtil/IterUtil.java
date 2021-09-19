@@ -655,4 +655,25 @@ public class IterUtil {
 	public static Class<?> getElementType(Iterable<?> iterable) {
     return Constant.NULL != iterable ? getElementType(iterable.iterator()) : null; 
 	}
+
+  /**
+   * [获得 Iterable 对象的元素类型](Gets the element type of the iteratable object)
+   * @description zh - 获得 Iterable 对象的元素类型
+   * @description en - Gets the element type of the iteratable object
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-19 21:41:22
+   * @param iterator Iterator
+   * @retuen java.lang.Class<?>
+   */
+  public static Class<?> getElementType(Iterator<?> iterator) {
+		final Iterator<?> iter2 = new CopiedIter<>(iterator);
+		if (iter2.hasNext()) {
+			final Object t = iter2.next();
+			if (Constant.NULL != t) {
+				return t.getClass();
+			}
+		}
+		return null;
+	}
 }

@@ -826,4 +826,25 @@ public class IterUtil {
            iterable instanceof Collection<?> ? ((Collection<?>) iterable).size() : 
            size(iterable.iterator());
 	}
+
+  /**
+   * [返回 Iterator 对象的元素数量](Returns the number of elements of the iterator object)
+   * @description zh - 返回 Iterator 对象的元素数量
+   * @description en - Returns the number of elements of the iterator object
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-19 21:57:43
+   * @param iterator Iterator
+   * @return int
+   */
+  public static int size(final Iterator<?> iterator) {
+		int size = Constant.ZERO;
+		if (iterator != Constant.NULL) {
+			while (iterator.hasNext()) {
+				iterator.next();
+				size++;
+			}
+		}
+		return size;
+	}
 }

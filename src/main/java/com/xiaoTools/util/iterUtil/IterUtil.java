@@ -1,6 +1,7 @@
 package com.xiaoTools.util.iterUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -777,5 +778,20 @@ public class IterUtil {
 			}
 		}
 		return map;
+	}
+
+  /* 其他 -------------------------------------------------------------- other */     
+
+  /**
+   * [返回一个空Iterator](Returns an empty iterator)
+   * @description zh - 返回一个空Iterator
+   * @description en - Returns an empty iterator
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-19 21:52:45
+   * @return java.util.Iterator<T>
+   */
+  public static <T> Iterator<T> empty() {
+		return Collections.emptyIterator();
 	}
 }

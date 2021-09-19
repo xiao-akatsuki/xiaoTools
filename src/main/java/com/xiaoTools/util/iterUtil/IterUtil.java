@@ -1,6 +1,7 @@
 package com.xiaoTools.util.iterUtil;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -808,5 +809,21 @@ public class IterUtil {
    */
   public static <F, T> Iterator<T> trans(Iterator<F> iterator, Function<? super F, ? extends T> function) {
 		return new TransIter<>(iterator, function);
+	}
+
+  /**
+   * [返回 Iterable 对象的元素数量](Returns the number of elements of an iteratable object)
+   * @description zh - 返回 Iterable 对象的元素数量
+   * @description en - Returns the number of elements of an iteratable object
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-19 21:56:44
+   * @param iterable Iterable
+   * @return int
+   */
+  public static int size(final Iterable<?> iterable) {
+    return Constant.NULL == iterable ? Constant.ZERO :
+           iterable instanceof Collection<?> ? ((Collection<?>) iterable).size() : 
+           size(iterable.iterator());
 	}
 }

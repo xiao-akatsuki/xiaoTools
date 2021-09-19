@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import java.util.function.Function;
 
 import com.xiaoTools.core.collection.enumerationIter.EnumerationIter;
+import com.xiaoTools.core.escape.filter.Filter;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.objectUtil.ObjectUtil;
@@ -675,5 +676,28 @@ public class IterUtil {
 			}
 		}
 		return null;
+	}
+
+  /* 过滤 -------------------------------------------------------------- filter */ 
+
+  /**
+   * [过滤集合](Filter collection)
+   * @description zh - 过滤集合
+   * @description en - Filter collection
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-19 21:42:40
+   * @param iter 集合对象
+   * @param filter 过滤接口
+   * @return T
+   */
+  public static <T extends Iterable<E>, E> T filter(T iter, Filter<E> filter) {
+		if (Constant.NULL == iter) {
+			return null;
+		}
+
+		filter(iter.iterator(), filter);
+
+		return iter;
 	}
 }

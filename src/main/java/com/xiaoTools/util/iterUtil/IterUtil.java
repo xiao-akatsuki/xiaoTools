@@ -577,6 +577,8 @@ public class IterUtil {
 		}
 		return list;
 	}
+
+  /* Iterator 转为 Iterable -------------------------------------------------------------- Iterator to iteratable */ 
     
   /**
    * [Enumeration转换为Iterator](Convert enumeration to iterator)
@@ -604,5 +606,21 @@ public class IterUtil {
    */
   public static <E> Iterable<E> asIterable(final Iterator<E> iterator) {
 		return () -> iterator;
+	}
+
+  /* 获取第一个元素 -------------------------------------------------------------- get first */ 
+
+  /**
+   * [获取集合的第一个元素](Gets the first element of the collection)
+   * @description zh - 获取集合的第一个元素
+   * @description en - Gets the first element of the collection
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-19 21:26:40
+   * @param iterable Iterable
+   * @return T
+   */
+  public static <T> T getFirst(Iterable<T> iterable) {
+    return Constant.NULL == iterable ? null : getFirst(iterable.iterator());
 	}
 }

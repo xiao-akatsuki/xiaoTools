@@ -13,6 +13,7 @@ import java.util.Map.Entry;
 import java.util.function.Function;
 
 import com.xiaoTools.core.collection.enumerationIter.EnumerationIter;
+import com.xiaoTools.core.collection.transIter.TransIter;
 import com.xiaoTools.core.escape.filter.Filter;
 import com.xiaoTools.core.exception.utilException.UtilException;
 import com.xiaoTools.lang.constant.Constant;

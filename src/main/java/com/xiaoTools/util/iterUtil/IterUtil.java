@@ -11,6 +11,7 @@ import java.util.function.Function;
 
 import com.xiaoTools.core.collection.enumerationIter.EnumerationIter;
 import com.xiaoTools.core.escape.filter.Filter;
+import com.xiaoTools.core.exception.utilException.UtilException;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.objectUtil.ObjectUtil;
@@ -742,5 +743,39 @@ public class IterUtil {
    */
   public static <K, V> Map<K, V> toMap(Iterator<V> iterator, Map<K, V> map, Func1<V, K> keyFunc) {
 		return toMap(iterator, map, keyFunc, (value) -> value);
+	}
+
+  /**
+   * [Iterator转换为Map](Convert iterator to map)
+   * @description zh - Iterator转换为Map
+   * @description en - Convert iterator to map
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-19 21:51:17
+   * @param iterator 数据列表
+   * @param map map
+   * @param keyFunc 生成key的函数
+   * @param valueFunc 生成值的策略函数
+   * @return java.util.Map<K, V>
+   */
+  public static <K, V, E> Map<K, V> toMap(Iterator<E> iterator, Map<K, V> map, Func1<E, K> keyFunc, Func1<E, V> valueFunc) {
+		if (Constant.NULL == iterator) {
+			return map;
+		}
+
+		if (Constant.NULL == map) {
+			map = MapUtil.newHashMap(true);
+		}
+
+		E element;
+		while (iterator.hasNext()) {
+			element = iterator.next();
+			try {
+				map.put(keyFunc.call(element), valueFunc.call(element));
+			} catch (Exception e) {
+				throw new UtilException(e);
+			}
+		}
+		return map;
 	}
 }

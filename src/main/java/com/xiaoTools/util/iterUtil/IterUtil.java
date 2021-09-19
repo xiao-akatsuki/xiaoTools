@@ -1,6 +1,7 @@
 package com.xiaoTools.util.iterUtil;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Function;
 
+import com.xiaoTools.core.collection.enumerationIter.EnumerationIter;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.objectUtil.ObjectUtil;
@@ -576,4 +578,17 @@ public class IterUtil {
 		return list;
 	}
     
+  /**
+   * [Enumeration转换为Iterator](Convert enumeration to iterator)
+   * @description zh - Enumeration转换为Iterator
+   * @description en - Convert enumeration to iterator
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-19 21:20:09
+   * @param enumeration Enumeration
+   * @return java.util.Iterator<E>
+   */
+  public static <E> Iterator<E> asIterator(Enumeration<E> enumeration) {
+		return new EnumerationIter<>(enumeration);
+	}
 }

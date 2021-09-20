@@ -57,5 +57,18 @@ public class DesensitizedUtil {
 		return newStr;
 	}
 
+    /**
+     * [不对外提供userId](Do not provide userid externally)
+     * @description zh - 不对外提供userId
+     * @description en - Do not provide userid externally
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-20 17:58:37
+     * @return java.lang.Long
+     */
+    public static Long userId() {
+		return 0L;
+	}
+
 
 }

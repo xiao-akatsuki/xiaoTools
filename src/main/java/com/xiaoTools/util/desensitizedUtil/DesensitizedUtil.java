@@ -70,5 +70,22 @@ public class DesensitizedUtil {
 		return 0L;
 	}
 
+    /**
+     * [电子邮箱](E-mail)
+     * @description zh - 电子邮箱
+     * @description en - E-mail
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-20 18:01:22
+     * @param email 邮箱
+     * @return java.lang.String
+     */
+    public static String email(String email) {
+		if (StrUtil.isBlank(email)) {
+			return Constant.EMPTY;
+		}
+		int index = StrUtil.indexOf(email, '@');
+        return index <= Constant.ONE ? email : StrUtil.hide(email, Constant.ONE, index);
+	}
 
 }

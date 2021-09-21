@@ -79,4 +79,19 @@ public class MapUtil {
 		return (Constant.NULL == set) ? Collections.emptyMap() : set;
 	}
 
+    /**
+     * [如果给定Map为空，返回默认Map](If the given map is empty, the default map is returned)
+     * @description zh - 如果给定Map为空，返回默认Map
+     * @description en - If the given map is empty, the default map is returned
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-21 14:45:28
+     * @param map 集合
+     * @param defaultMap 默认集合
+     * @return T
+     */
+    public static <T extends Map<K, V>, K, V> T defaultIfEmpty(T map, T defaultMap) {
+		return isEmpty(map) ? defaultMap : map;
+	}
+
 }

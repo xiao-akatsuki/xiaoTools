@@ -49,4 +49,18 @@ public class MapUtil {
     public static boolean isEmpty(Map<?, ?> map) {
 		return Constant.NULL == map || map.isEmpty();
 	}
+
+    /**
+     * [Map是否为非空](Is the map non empty)
+     * @description zh - Map是否为非空
+     * @description en - Is the map non empty
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-21 14:39:40
+     * @param map 集合
+     * @return boolean
+     */
+    public static boolean isNotEmpty(Map<?, ?> map) {
+		return Constant.NULL != map && Constant.FALSE == map.isEmpty();
+	}
 }

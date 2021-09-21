@@ -3504,6 +3504,7 @@ public class CharSequenceUtil {
      * @param values: 多个元素
      * @return T
     */
+    @SuppressWarnings("unchecked")
     public <T extends CharSequence> T firstNonNull(T... values) {
         return ArrayUtil.firstNonNull(values);
     }
@@ -3518,6 +3519,7 @@ public class CharSequenceUtil {
      * @param values: 多个元素
      * @return T
     */
+    @SuppressWarnings("unchecked")
     public <T extends CharSequence> T firstNonEmpty(T... values) {
         return ArrayUtil.firstMatch(StrUtil::isNotEmpty, values);
     }
@@ -3532,6 +3534,7 @@ public class CharSequenceUtil {
      * @param values: 多个元素
      * @return T
     */
+    @SuppressWarnings("unchecked")
     public <T extends CharSequence> T firstNonBlank(T... values) {
         return ArrayUtil.firstMatch(StrUtil::isNotBlank, values);
     }

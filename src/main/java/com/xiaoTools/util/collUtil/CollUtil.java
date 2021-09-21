@@ -15,6 +15,7 @@ import com.xiaoTools.entity.pinyinComparator.PinyinComparator;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.lang.hash.hash32.Hash32;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
+import com.xiaoTools.util.classUtil.ClassUtil;
 import com.xiaoTools.util.compareUtil.CompareUtil;
 import com.xiaoTools.util.iterUtil.IterUtil;
 import com.xiaoTools.util.listUtil.ListUtil;
@@ -27,8 +28,10 @@ import com.xiaoTools.util.typeUtil.TypeUtil;
 import java.lang.reflect.Type;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -389,7 +392,7 @@ public class CollUtil {
     */
     @SafeVarargs
     public static <T> HashSet<T> set(boolean isSorted, T... values) {
-        if (NULL == values) {
+        if (Constant.NULL == values) {
             return isSorted ? new LinkedHashSet<>() : new HashSet<>();
         }
         int initialCapacity = Math.max((int) (values.length / .75f) + Constant.ONE, Constant.SIXTEEN);
@@ -542,7 +545,7 @@ public class CollUtil {
      * @return java.util.Map<T, Integer>
      */
     public static <T> Map<T, Integer> countMap(Iterable<T> collection) {
-		return IterUtil.countMap(NULL == collection ? NULL : collection.iterator());
+		return IterUtil.countMap(Constant.NULL == collection ? null : collection.iterator());
 	}
 
     /*转换-----------------------------------------------------------join*/
@@ -559,7 +562,7 @@ public class CollUtil {
      * @return java.lang.String
      */
     public static <T> String join(Iterable<T> iterable, CharSequence conjunction) {
-        return NULL == iterable ? Constant.STRING_NULL : IterUtil.join(iterable.iterator(), conjunction);
+        return Constant.NULL == iterable ? Constant.STRING_NULL : IterUtil.join(iterable.iterator(), conjunction);
 	}
 
     /**
@@ -576,7 +579,7 @@ public class CollUtil {
      * @return java.lang.String
      */
     public static <T> String join(Iterable<T> iterable, CharSequence conjunction, String prefix, String suffix) {
-        return NULL = iterable ? Constant.STRING_NULL : IterUtil.join(iterable.iterator(), conjunction, prefix, suffix);
+        return Constant.NULL == iterable ? Constant.STRING_NULL : IterUtil.join(iterable.iterator(), conjunction, prefix, suffix);
 	}
 
     /*切取部分数据----------------------------------------------------------- Cut */
@@ -728,7 +731,7 @@ public class CollUtil {
      * @return java.util.HashSet<T>
      */
     public static <T> HashSet<T> newHashSet(boolean isSorted, Iterator<T> iter) {
-		if (NULL == iter) {
+		if (Constant.NULL == iter) {
 			return set(isSorted, (T[]) null);
 		}
 		final HashSet<T> set = isSorted ? new LinkedHashSet<>() : new HashSet<>();
@@ -750,7 +753,7 @@ public class CollUtil {
      * @return java.util.HashSet<T>
      */
     public static <T> HashSet<T> newHashSet(boolean isSorted, Enumeration<T> enumeration) {
-		if (NULL == enumeration) {
+		if (Constant.NULL == enumeration) {
 			return set(isSorted, (T[]) null);
 		}
 		final HashSet<T> set = isSorted ? new LinkedHashSet<>() : new HashSet<>();
@@ -1206,7 +1209,7 @@ public class CollUtil {
      * @return java.util.Collection<T>
      */
     public static <T> Collection<T> filter(Collection<T> collection, Editor<T> editor) {
-		if (NULL == collection || NULL == editor) {
+		if (Constant.NULL == collection || Constant.NULL == editor) {
 			return collection;
 		}
 
@@ -1221,7 +1224,7 @@ public class CollUtil {
 		T modified;
 		for (T t : collection) {
 			modified = editor.edit(t);
-			if (NULL != modified) {
+			if (Constant.NULL != modified) {
 				collection2.add(modified);
 			}
 		}
@@ -1255,7 +1258,7 @@ public class CollUtil {
      * @return java.util.Collection<T>
      */
     public static <T> Collection<T> filterNew(Collection<T> collection, Filter<T> filter) {
-		if (NULL == collection || NULL == filter) {
+		if (Constant.NULL == collection || Constant.NULL == filter) {
 			return collection;
 		}
 
@@ -1443,17 +1446,17 @@ public class CollUtil {
      */
     public static <T, R> List<R> map(Iterable<T> collection, Function<? super T, ? extends R> func, boolean ignoreNull) {
 		final List<R> fieldValueList = new ArrayList<>();
-		if (NULL == collection) {
+		if (Constant.NULL == collection) {
 			return fieldValueList;
 		}
 
 		R value;
 		for (T t : collection) {
-			if (NULL == t && ignoreNull) {
+			if (Constant.NULL == t && ignoreNull) {
 				continue;
 			}
 			value = func.apply(t);
-			if (NULL == value && ignoreNull) {
+			if (Constant.NULL == value && ignoreNull) {
 				continue;
 			}
 			fieldValueList.add(value);
@@ -1562,7 +1565,7 @@ public class CollUtil {
      * @return T
      */
     public static <T> T findOne(Iterable<T> collection, Filter<T> filter) {
-		if (NULL != collection) {
+		if (Constant.NULL != collection) {
 			for (T t : collection) {
 				if (filter.accept(t)) {
 					return t;
@@ -1611,10 +1614,10 @@ public class CollUtil {
      */
     public static <T> int[] indexOfAll(Collection<T> collection, Matcher<T> matcher) {
 		final List<Integer> indexList = new ArrayList<>();
-		if (NULL != collection) {
+		if (Constant.NULL != collection) {
 			int index = Constant.ZERO;
 			for (T t : collection) {
-				if (NULL == matcher || matcher.match(t)) {
+				if (Constant.NULL == matcher || matcher.match(t)) {
 					indexList.add(index);
 				}
 				index++;
@@ -1638,9 +1641,9 @@ public class CollUtil {
      */
     public static <T> int count(Iterable<T> iterable, Matcher<T> matcher) {
 		int count = Constant.ZERO;
-		if (NULL != iterable) {
+		if (Constant.NULL != iterable) {
 			for (T t : iterable) {
-				if (NULL == matcher || matcher.match(t)) {
+				if (Constant.NULL == matcher || matcher.match(t)) {
 					count++;
 				}
 			}
@@ -1661,7 +1664,7 @@ public class CollUtil {
      * @return boolean
      */
     public static boolean isEmpty(Collection<?> collection) {
-		return collection == NULL || collection.isEmpty();
+		return collection == Constant.NULL || collection.isEmpty();
 	}
 
     /** 
@@ -1732,7 +1735,7 @@ public class CollUtil {
      * @return boolean
      */
     public static boolean isEmpty(Enumeration<?> enumeration) {
-		return NULL == enumeration || Constant.FALSE == enumeration.hasMoreElements();
+		return Constant.NULL == enumeration || Constant.FALSE == enumeration.hasMoreElements();
 	}
 
     /* 集合是否为非空 -----------------------------------------------------------isNotEmpty*/
@@ -2030,7 +2033,7 @@ public class CollUtil {
      * @return java.util.Map<K, V>
      */
     public static <K, V> Map<K, V> toMap(Iterable<V> values, Map<K, V> map, Func1<V, K> keyFunc) {
-		return IterUtil.toMap(NULL == values ? null : values.iterator(), map, keyFunc);
+		return IterUtil.toMap(Constant.NULL == values ? null : values.iterator(), map, keyFunc);
 	}
 
     /**
@@ -2047,7 +2050,7 @@ public class CollUtil {
      * @return java.util.Map<K, V>
      */
     public static <K, V, E> Map<K, V> toMap(Iterable<E> values, Map<K, V> map, Func1<E, K> keyFunc, Func1<E, V> valueFunc) {
-		return IterUtil.toMap(NULL == values ? null : values.iterator(), map, keyFunc, valueFunc);
+		return IterUtil.toMap(Constant.NULL == values ? null : values.iterator(), map, keyFunc, valueFunc);
 	}
 
     /* 加入到集合 ----------------------------------------------------------- add All */
@@ -2081,7 +2084,7 @@ public class CollUtil {
      */
     @SuppressWarnings({"unchecked", "rawtypes"})
 	public static <T> Collection<T> addAll(Collection<T> collection, Object value, Type elementType) {
-		if (NULL == collection || NULL == value) {
+		if (Constant.NULL == collection || Constant.NULL == value) {
 			return collection;
 		}
 		if (TypeUtil.isUnknown(elementType)) {
@@ -2126,7 +2129,7 @@ public class CollUtil {
      * @return java.util.Collection<T>
      */
     public static <T> Collection<T> addAll(Collection<T> collection, Iterator<T> iterator) {
-		if (NULL != collection && NULL != iterator) {
+		if (Constant.NULL != collection && Constant.NULL != iterator) {
 			while (iterator.hasNext()) {
 				collection.add(iterator.next());
 			}
@@ -2146,7 +2149,7 @@ public class CollUtil {
      * @return java.util.Collection<T>
      */
     public static <T> Collection<T> addAll(Collection<T> collection, Iterable<T> iterable) {
-        return iterable == NULL ? collection : addAll(collection, iterable.iterator());
+        return iterable == Constant.NULL ? collection : addAll(collection, iterable.iterator());
 	}
 
     /**
@@ -2161,7 +2164,7 @@ public class CollUtil {
      * @return java.util.Collection<T>
      */
     public static <T> Collection<T> addAll(Collection<T> collection, Enumeration<T> enumeration) {
-		if (NULL != collection && NULL != enumeration) {
+		if (Constant.NULL != collection && Constant.NULL != enumeration) {
 			while (enumeration.hasMoreElements()) {
 				collection.add(enumeration.nextElement());
 			}
@@ -2181,7 +2184,7 @@ public class CollUtil {
      * @return java.util.Collection<T>
      */
     public static <T> Collection<T> addAll(Collection<T> collection, T[] values) {
-		if (NULL != collection && NULL != values) {
+		if (Constant.NULL != collection && Constant.NULL != values) {
 			Collections.addAll(collection, values);
 		}
 		return collection;

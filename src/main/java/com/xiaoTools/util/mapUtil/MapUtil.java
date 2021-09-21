@@ -1,5 +1,6 @@
 package com.xiaoTools.util.mapUtil;
 
+import java.util.Collections;
 import java.util.Map;
 
 import com.xiaoTools.lang.constant.Constant;
@@ -63,4 +64,19 @@ public class MapUtil {
     public static boolean isNotEmpty(Map<?, ?> map) {
 		return Constant.NULL != map && Constant.FALSE == map.isEmpty();
 	}
+
+    /**
+     * [一个不可变的默认空集合](An immutable default empty collection)
+     * @description zh - 一个不可变的默认空集合
+     * @description en - An immutable default empty collection
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-21 14:42:09
+     * @param set 集合
+     * @return java.util.Map<K, V>
+     */
+    public static <K, V> Map<K, V> emptyIfNull(Map<K, V> set) {
+		return (Constant.NULL == set) ? Collections.emptyMap() : set;
+	}
+
 }

@@ -58,7 +58,7 @@ public class CollUtil {
      * @return java.util.Set<T>
      */
     public static <T> Set<T> emptyIfNull(Set<T> set) {
-		return (NULL == set) ? Collections.emptySet() : set;
+		return (Constant.NULL == set) ? Collections.emptySet() : set;
 	}
 
     /**
@@ -72,7 +72,7 @@ public class CollUtil {
      * @return java.util.List<T>
      */
     public static <T> List<T> emptyIfNull(List<T> set) {
-		return (NULL == set) ? Collections.emptyList() : set;
+		return (Constant.NULL == set) ? Collections.emptyList() : set;
 	}
 
     /* 并集 -------------------------------------------------------------- union */

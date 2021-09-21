@@ -88,4 +88,19 @@ public class DesensitizedUtil {
         return index <= Constant.ONE ? email : StrUtil.hide(email, Constant.ONE, index);
 	}
 
+    /**
+     * [密码](password)
+     * @description zh - 密码
+     * @description en - password
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-21 08:05:06
+     * @param password 密码
+     * @return java.lang.String
+     */
+    public static String password(String password) {
+        return StrUtil.isBlank(password) ? Constant.EMPTY : StrUtil.repeat('*', password.length());
+	}
+
+
 }

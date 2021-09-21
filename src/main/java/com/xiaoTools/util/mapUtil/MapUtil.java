@@ -1,5 +1,7 @@
 package com.xiaoTools.util.mapUtil;
 
+import java.util.Map;
+
 import com.xiaoTools.lang.constant.Constant;
 
 /**
@@ -23,7 +25,7 @@ public class MapUtil {
     public static final int DEFAULT_INITIAL_CAPACITY = Constant.SIXTEEN;
 
     /**
-     * [默认增长因子 ](Default growth factor)
+     * [默认增长因子](Default growth factor)
      * @description zh - 默认增长因子 
      * @description en - Default growth factor
      * @version V1.0
@@ -31,4 +33,20 @@ public class MapUtil {
      * @since 2021-09-21 08:26:31
      */
     public static final float DEFAULT_LOAD_FACTOR = 0.75f;
+
+    /* Map是否为空 ----------------------------------------------------------- is Empty */
+
+    /**
+     * [Map是否为空](Is the map empty)
+     * @description zh - Map是否为空
+     * @description en - Is the map empty
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-21 14:35:51
+     * @param map 集合
+     * @return boolean
+     */
+    public static boolean isEmpty(Map<?, ?> map) {
+		return Constant.NULL == map || map.isEmpty();
+	}
 }

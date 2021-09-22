@@ -170,4 +170,23 @@ public class MapUtil {
 		return new TreeMap<>(comparator);
 	}
 
+    /**
+     * [新建TreeMap，Key有序的Map](Create a new treemap, and the key is an ordered map)
+     * @description zh - 新建TreeMap，Key有序的Map
+     * @description en - Create a new treemap, and the key is an ordered map
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-22 21:33:08
+     * @param map Map
+     * @param comparator Key比较器
+     * @return java.util.TreeMap<K, V>
+     */
+    public static <K, V> TreeMap<K, V> newTreeMap(Map<K, V> map, Comparator<? super K> comparator) {
+		final TreeMap<K, V> treeMap = new TreeMap<>(comparator);
+		if (Constant.FALSE == isEmpty(map)) {
+			treeMap.putAll(map);
+		}
+		return treeMap;
+	}
+
 }

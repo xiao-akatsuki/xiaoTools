@@ -1,9 +1,11 @@
 package com.xiaoTools.util.mapUtil;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import com.xiaoTools.lang.constant.Constant;
 
@@ -152,6 +154,20 @@ public class MapUtil {
      */
     public static <K, V> HashMap<K, V> newHashMap(boolean isOrder) {
 		return newHashMap(DEFAULT_INITIAL_CAPACITY, isOrder);
+	}
+
+    /**
+     * [新建TreeMap，Key有序的Map](Create a new treemap, and the key is an ordered map)
+     * @description zh - 新建TreeMap，Key有序的Map
+     * @description en - Create a new treemap, and the key is an ordered map
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-22 21:31:16
+     * @param comparator Key比较器
+     * @return java.util.TreeMap<K, V>
+     */
+    public static <K, V> TreeMap<K, V> newTreeMap(Comparator<? super K> comparator) {
+		return new TreeMap<>(comparator);
 	}
 
 }

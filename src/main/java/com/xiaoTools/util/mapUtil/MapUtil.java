@@ -218,4 +218,18 @@ public class MapUtil {
 		return new ConcurrentHashMap<>(DEFAULT_INITIAL_CAPACITY);
 	}
 
+    /**
+     * [新建一个ConcurrentHashMap](Create a new concurrenthashmap)
+     * @description zh - 新建一个ConcurrentHashMap
+     * @description en - Create a new concurrenthashmap
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-22 21:37:10
+     * @param size 大小
+     * @return java.util.concurrent.ConcurrentHashMap<K, V>
+     */
+    public static <K, V> ConcurrentHashMap<K, V> newConcurrentHashMap(int size) {
+		return new ConcurrentHashMap<>(size <= 0 ? DEFAULT_INITIAL_CAPACITY : size);
+	}
+
 }

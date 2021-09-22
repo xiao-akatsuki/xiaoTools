@@ -1,5 +1,6 @@
 package com.xiaoTools.util.mapUtil;
 
+import java.util.AbstractMap;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -10,6 +11,7 @@ import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.util.reflectUtil.ReflectUtil;
 
 /**
  * [Map相关工具类](Map related tool classes)
@@ -244,5 +246,20 @@ public class MapUtil {
      */
     public static <K, V> ConcurrentHashMap<K, V> newConcurrentHashMap(Map<K, V> map) {
         return isEmpty(map) ? new ConcurrentHashMap<>(DEFAULT_INITIAL_CAPACITY) : new ConcurrentHashMap<>(map);
+	}
+
+    /**
+     * [创建Map](Create map)
+     * @description zh - 创建Map
+     * @description en - Create map
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-22 21:39:59
+     * @param mapType map类型
+     * @return java.util.Map<K, V>
+     */
+    @SuppressWarnings("unchecked")
+	public static <K, V> Map<K, V> createMap(Class<?> mapType) {
+        return mapType.isAssignableFrom(AbstractMap.class) ? new HashMap<>() : (Map<K, V>) ReflectUtil.newInstance(mapType);
 	}
 }

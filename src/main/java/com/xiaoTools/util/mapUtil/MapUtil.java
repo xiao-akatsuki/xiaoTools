@@ -3,6 +3,7 @@ package com.xiaoTools.util.mapUtil;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -187,6 +188,20 @@ public class MapUtil {
 			treeMap.putAll(map);
 		}
 		return treeMap;
+	}
+
+    /**
+     * [创建键不重复Map](Create a map without duplicate keys)
+     * @description zh - 创建键不重复Map
+     * @description en - Create a map without duplicate keys
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-22 21:34:00
+     * @param size 大小
+     * @return java.util.Map<K, V>
+     */
+    public static <K, V> Map<K, V> newIdentityMap(int size) {
+		return new IdentityHashMap<>(size);
 	}
 
 }

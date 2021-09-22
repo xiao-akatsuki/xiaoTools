@@ -1,6 +1,7 @@
 package com.xiaoTools.util.mapUtil;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.xiaoTools.lang.constant.Constant;
@@ -94,6 +95,19 @@ public class MapUtil {
 		return isEmpty(map) ? defaultMap : map;
 	}
 
-    /* Map是否为空 ----------------------------------------------------------- is Empty */
+    /* 新建一个HashMap ----------------------------------------------------------- new HashMap */
+
+    /**
+     * [新建一个HashMap](Create a new HashMap)
+     * @description zh - 新建一个HashMap
+     * @description en - Create a new HashMap
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-22 08:27:13
+     */
+    public static <K, V> HashMap<K, V> newHashMap() {
+		return new HashMap<>();
+	}
+
 
 }

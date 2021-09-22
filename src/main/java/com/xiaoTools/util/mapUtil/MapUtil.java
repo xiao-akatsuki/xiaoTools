@@ -140,4 +140,18 @@ public class MapUtil {
 		return newHashMap(size, Constant.FALSE);
 	}
 
+    /**
+     * [新建一个HashMap](Create a new HashMap)
+     * @description zh - 新建一个HashMap
+     * @description en - Create a new HashMap
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-22 08:34:41
+     * @param isOrder Map的Key是否有序
+     * @return java.util.HashMap<K, V>
+     */
+    public static <K, V> HashMap<K, V> newHashMap(boolean isOrder) {
+		return newHashMap(DEFAULT_INITIAL_CAPACITY, isOrder);
+	}
+
 }

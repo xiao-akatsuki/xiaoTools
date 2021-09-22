@@ -232,4 +232,17 @@ public class MapUtil {
 		return new ConcurrentHashMap<>(size <= 0 ? DEFAULT_INITIAL_CAPACITY : size);
 	}
 
+    /**
+     * [传入一个Map将其转化为ConcurrentHashMap类型](Pass in a map and convert it to type concurrenthashmap)
+     * @description zh - 传入一个Map将其转化为ConcurrentHashMap类型
+     * @description en - Pass in a map and convert it to type concurrenthashmap
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-22 21:38:17
+     * @param map 集合
+     * @return java.util.concurrent.ConcurrentHashMap<K, V>
+     */
+    public static <K, V> ConcurrentHashMap<K, V> newConcurrentHashMap(Map<K, V> map) {
+        return isEmpty(map) ? new ConcurrentHashMap<>(DEFAULT_INITIAL_CAPACITY) : new ConcurrentHashMap<>(map);
+	}
 }

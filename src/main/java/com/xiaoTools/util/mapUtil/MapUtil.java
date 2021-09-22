@@ -126,5 +126,18 @@ public class MapUtil {
 		return isOrder ? new LinkedHashMap<>(initialCapacity) : new HashMap<>(initialCapacity);
 	}
 
+    /**
+     * [新建一个HashMap](Create a new HashMap)
+     * @description zh - 新建一个HashMap
+     * @description en - Create a new HashMap
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-22 08:33:46
+     * @param size 初始大小
+     * @return java.util.HashMap<K, V>
+     */
+    public static <K, V> HashMap<K, V> newHashMap(int size) {
+		return newHashMap(size, Constant.FALSE);
+	}
 
 }

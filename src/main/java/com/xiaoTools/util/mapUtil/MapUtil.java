@@ -7,6 +7,7 @@ import java.util.IdentityHashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.xiaoTools.lang.constant.Constant;
 
@@ -202,6 +203,19 @@ public class MapUtil {
      */
     public static <K, V> Map<K, V> newIdentityMap(int size) {
 		return new IdentityHashMap<>(size);
+	}
+
+    /**
+     * [新建一个初始容量为 DEFAULT_INITIAL_CAPACITY 的 ConcurrentHashMap](Create a new one with an initial capacity of default_INITIAL_Concurrent HashMap of capability)
+     * @description zh - 新建一个初始容量为 DEFAULT_INITIAL_CAPACITY 的 ConcurrentHashMap
+     * @description en - Create a new one with an initial capacity of default_INITIAL_Concurrent HashMap of capability
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-22 21:35:58
+     * @return java.util.concurrent.ConcurrentHashMap<K, V>
+     */
+    public static <K, V> ConcurrentHashMap<K, V> newConcurrentHashMap() {
+		return new ConcurrentHashMap<>(DEFAULT_INITIAL_CAPACITY);
 	}
 
 }

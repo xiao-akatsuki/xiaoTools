@@ -2,6 +2,7 @@ package com.xiaoTools.util.mapUtil;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.xiaoTools.lang.constant.Constant;
@@ -107,6 +108,22 @@ public class MapUtil {
      */
     public static <K, V> HashMap<K, V> newHashMap() {
 		return new HashMap<>();
+	}
+
+    /**
+     * [新建一个HashMap](Create a new HashMap)
+     * @description zh - 新建一个HashMap
+     * @description en - Create a new HashMap
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-22 08:32:04
+     * @param size 初始大小
+     * @param isOrder Map的Key是否有序
+     * @return java.util.HashMap<K, V>
+     */
+    public static <K, V> HashMap<K, V> newHashMap(int size, boolean isOrder) {
+		int initialCapacity = (int) (size / DEFAULT_LOAD_FACTOR) + Constant.ONE;
+		return isOrder ? new LinkedHashMap<>(initialCapacity) : new HashMap<>(initialCapacity);
 	}
 
 

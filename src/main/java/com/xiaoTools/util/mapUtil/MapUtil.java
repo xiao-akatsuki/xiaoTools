@@ -94,4 +94,6 @@ public class MapUtil {
 		return isEmpty(map) ? defaultMap : map;
 	}
 
+    /* Map是否为空 ----------------------------------------------------------- is Empty */
+
 }

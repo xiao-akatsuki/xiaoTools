@@ -262,4 +262,21 @@ public class MapUtil {
 	public static <K, V> Map<K, V> createMap(Class<?> mapType) {
         return mapType.isAssignableFrom(AbstractMap.class) ? new HashMap<>() : (Map<K, V>) ReflectUtil.newInstance(mapType);
 	}
+
+    /* 值对转换 ----------------------------------------------------------- value of */
+
+    /**
+     * [将单一键值对转换为Map](Convert single key value pairs to maps)
+     * @description zh - 将单一键值对转换为Map
+     * @description en - Convert single key value pairs to maps
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-24 15:49:45
+     * @param key 键
+     * @param value 值
+     * @return java.util.HashMap<K, V>
+     */
+    public static <K, V> HashMap<K, V> of(K key, V value) {
+		return of(key, value, Constant.FALSE);
+	}
 }

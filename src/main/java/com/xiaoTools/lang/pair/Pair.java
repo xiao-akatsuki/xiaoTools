@@ -63,4 +63,18 @@ public class Pair<K, V> extends CloneSupport<Pair<K, V>> implements Serializable
 		return this.value;
 	}
 
+    /**
+     * [获取键](get key)
+     * @description zh - 获取键
+     * @description en - get key 
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-25 20:08:57
+     */
+    public K getKey() {
+		return this.key;
+	}
+
+    
+
 }

@@ -297,4 +297,21 @@ public class MapUtil {
 		map.put(key, value);
 		return map;
 	}
+
+  /**
+   * [根据给定的Pair数组创建Map对象](Creates a map object based on the given pair array)
+   * @description zh - 根据给定的Pair数组创建Map对象
+   * @description en - Creates a map object based on the given pair array
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-25 19:52:11
+   */
+  @SafeVarargs
+	public static <K, V> Map<K, V> of(Pair<K, V>... pairs) {
+		final Map<K, V> map = new HashMap<>();
+		for (Pair<K, V> pair : pairs) {
+			map.put(pair.getKey(), pair.getValue());
+		}
+		return map;
+	}
 }

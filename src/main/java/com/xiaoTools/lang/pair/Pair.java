@@ -29,8 +29,25 @@ public class Pair<K, V> extends CloneSupport<Pair<K, V>> implements Serializable
      * @since 2021-09-25 19:56:19
      * @param key 键
      * @param value 值
+     * @return com.xiaoTools.lang.pair.Pair<K, V>
      */
     public static <K, V> Pair<K, V> of(K key, V value) {
 		return new Pair<>(key, value);
 	}
+
+    /**
+     * [构造](structure)
+     * @description zh - 构造
+     * @description en - structure
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-25 19:58:53
+     * @param key 键
+     * @param value 值
+     */
+    public Pair(K key, V value) {
+		this.key = key;
+		this.value = value;
+	}
+
 }

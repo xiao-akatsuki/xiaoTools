@@ -50,4 +50,17 @@ public class Pair<K, V> extends CloneSupport<Pair<K, V>> implements Serializable
 		this.value = value;
 	}
 
+    /**
+     * [获取值](get value)
+     * @description zh - 获取值
+     * @description en - get Value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-25 20:01:10
+     * @return V
+     */
+    public V getValue() {
+		return this.value;
+	}
+
 }

@@ -14,5 +14,23 @@ import java.util.Objects;
  * @since 2021-09-25 19:54:42
  */
 public class Pair<K, V> extends CloneSupport<Pair<K, V>> implements Serializable {
-    
+
+    private static final long serialVersionUID = 1L;
+
+	private final K key;
+	private final V value;
+
+    /**
+     * [构建 Pair 对象](Building pair objects)
+     * @description zh - 构建 Pair 对象
+     * @description en - Building pair objects
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-25 19:56:19
+     * @param key 键
+     * @param value 值
+     */
+    public static <K, V> Pair<K, V> of(K key, V value) {
+		return new Pair<>(key, value);
+	}
 }

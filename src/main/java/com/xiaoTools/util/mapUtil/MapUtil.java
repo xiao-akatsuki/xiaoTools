@@ -470,4 +470,31 @@ public class MapUtil {
   public static <K, V> Map<K, V> toCamelCaseMap(Map<K, V> map) {
 		return (map instanceof LinkedHashMap) ? new CamelCaseLinkedMap<>(map) : new CamelCaseMap<>(map);
 	}
+
+  /**
+   * [将键值对转换为二维数组](Convert key value pairs to two-dimensional arrays)
+   * @description zh - 将键值对转换为二维数组
+   * @description en - Convert key value pairs to two-dimensional arrays
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-26 12:27:54
+   * @rparam map 集合
+   * @return java.lang.Object[][]
+   */
+  public static Object[][] toObjectArray(Map<?, ?> map) {
+		if (map == Constant.NULL) {
+			return null;
+		}
+		final Object[][] result = new Object[map.size()][2];
+		if (map.isEmpty()) {
+			return result;
+		}
+		int index = Constant.ZERO;
+		for (Entry<?, ?> entry : map.entrySet()) {
+			result[index][Constant.ZERO] = entry.getKey();
+			result[index][Constant.ONE] = entry.getValue();
+			index++;
+		}
+		return result;
+	}
 }

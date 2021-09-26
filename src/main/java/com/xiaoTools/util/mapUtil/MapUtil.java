@@ -1,6 +1,7 @@
 package com.xiaoTools.util.mapUtil;
 
 import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -407,5 +408,50 @@ public class MapUtil {
 		}
 
 		return resultMap;
+	}
+
+  /**
+   * [列转行](Column to row)
+   * @description zh - 列转行
+   * @description en - Column to row
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-26 12:23:57
+   * @param listMap 列表Map
+   * @return java.util.List<java.util.Map<K, V>>
+   */
+  public static <K, V> List<Map<K, V>> toMapList(Map<K, ? extends Iterable<V>> listMap) {
+		final List<Map<K, V>> resultList = new ArrayList<>();
+		if (isEmpty(listMap)) {
+			return resultList;
+		}
+    // 是否结束。标准是元素列表已耗尽
+		boolean isEnd;
+    // 值索引
+		int index = Constant.ZERO;
+		Map<K, V> map;
+		do {
+			isEnd = true;
+			map = new HashMap<>();
+			List<V> vList;
+			int vListSize;
+			for (Entry<K, ? extends Iterable<V>> entry : listMap.entrySet()) {
+				vList = CollUtil.newArrayList(entry.getValue());
+				vListSize = vList.size();
+				if (index < vListSize) {
+					map.put(entry.getKey(), vList.get(index));
+					if (index != vListSize - Constant.ONE) {
+						// 当值列表中还有更多值（非最后一个），继续循环
+						isEnd = Constant.FALSE;
+					}
+				}
+			}
+			if (Constant.FALSE == map.isEmpty()) {
+				resultList.add(map);
+			}
+			index++;
+		} while (Constant.FALSE == isEnd);
+
+		return resultList;
 	}
 }

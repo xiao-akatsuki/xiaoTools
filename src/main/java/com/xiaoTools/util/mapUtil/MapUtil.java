@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.IdentityHashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -13,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.lang.pair.Pair;
 import com.xiaoTools.util.reflectUtil.ReflectUtil;
+import com.xiaoTools.util.strUtil.StrUtil;
 
 /**
  * [Map相关工具类](Map related tool classes)
@@ -312,6 +314,57 @@ public class MapUtil {
 		final Map<K, V> map = new HashMap<>();
 		for (Pair<K, V> pair : pairs) {
 			map.put(pair.getKey(), pair.getValue());
+		}
+		return map;
+	}
+
+  /**
+   * [将数组转换为Map](Convert array to map)
+   * @description zh - 将数组转换为Map
+   * @description en - Convert array to map
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-26 12:17:35
+   * @param array 数组
+   * @return java.util.HashMap<Object, Object>
+   */
+  @SuppressWarnings("rawtypes")
+	public static HashMap<Object, Object> of(Object[] array) {
+		if (array == Constant.NULL) {
+			return null;
+		}
+		final HashMap<Object, Object> map = new HashMap<>((int) (array.length * 1.5));
+		for (int i = 0; i < array.length; i++) {
+			final Object object = array[i];
+			if (object instanceof Map.Entry) {
+				Map.Entry entry = (Map.Entry) object;
+				map.put(entry.getKey(), entry.getValue());
+			} else if (object instanceof Object[]) {
+				final Object[] entry = (Object[]) object;
+				if (entry.length > 1) {
+					map.put(entry[0], entry[1]);
+				}
+			} else if (object instanceof Iterable) {
+				final Iterator iter = ((Iterable) object).iterator();
+				if (iter.hasNext()) {
+					final Object key = iter.next();
+					if (iter.hasNext()) {
+						final Object value = iter.next();
+						map.put(key, value);
+					}
+				}
+			} else if (object instanceof Iterator) {
+				final Iterator iter = ((Iterator) object);
+				if (iter.hasNext()) {
+					final Object key = iter.next();
+					if (iter.hasNext()) {
+						final Object value = iter.next();
+						map.put(key, value);
+					}
+				}
+			} else {
+				throw new IllegalArgumentException(StrUtil.format("Array element {}, '{}', is not type of Map.Entry or Array or Iterable or Iterator", i, object));
+			}
 		}
 		return map;
 	}

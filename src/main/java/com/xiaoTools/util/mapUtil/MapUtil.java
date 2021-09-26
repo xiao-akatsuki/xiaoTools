@@ -374,6 +374,8 @@ public class MapUtil {
 		return map;
 	}
 
+  /* 列转行 ----------------------------------------------------------- to map */
+
   /**
    * [行转列，合并相同的键，值合并为列表](Row to column, merge the same keys, and merge the values into a list)
    * @description zh - 行转列，合并相同的键，值合并为列表
@@ -431,7 +433,7 @@ public class MapUtil {
 		int index = Constant.ZERO;
 		Map<K, V> map;
 		do {
-			isEnd = true;
+			isEnd = Constant.TRUE;
 			map = new HashMap<>();
 			List<V> vList;
 			int vListSize;
@@ -453,5 +455,19 @@ public class MapUtil {
 		} while (Constant.FALSE == isEnd);
 
 		return resultList;
+	}
+
+  /**
+   * [将已知Map转换为key为驼峰风格的Map](Convert a known map into a hump style map)
+   * @description zh - 将已知Map转换为key为驼峰风格的Map
+   * @description en - Convert a known map into a hump style map
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-26 12:26:17
+   * @return map 集合
+   * @return java.util.Map<K, V>
+   */
+  public static <K, V> Map<K, V> toCamelCaseMap(Map<K, V> map) {
+		return (map instanceof LinkedHashMap) ? new CamelCaseLinkedMap<>(map) : new CamelCaseMap<>(map);
 	}
 }

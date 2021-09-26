@@ -7,12 +7,15 @@ import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.lang.pair.Pair;
+import com.xiaoTools.util.collUtil.CollUtil;
 import com.xiaoTools.util.reflectUtil.ReflectUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
 
@@ -334,15 +337,15 @@ public class MapUtil {
 			return null;
 		}
 		final HashMap<Object, Object> map = new HashMap<>((int) (array.length * 1.5));
-		for (int i = 0; i < array.length; i++) {
+		for (int i = Constant.ZERO; i < array.length; i++) {
 			final Object object = array[i];
 			if (object instanceof Map.Entry) {
 				Map.Entry entry = (Map.Entry) object;
 				map.put(entry.getKey(), entry.getValue());
 			} else if (object instanceof Object[]) {
 				final Object[] entry = (Object[]) object;
-				if (entry.length > 1) {
-					map.put(entry[0], entry[1]);
+				if (entry.length > Constant.ONE) {
+					map.put(entry[Constant.ZERO], entry[Constant.ONE]);
 				}
 			} else if (object instanceof Iterable) {
 				final Iterator iter = ((Iterable) object).iterator();
@@ -367,5 +370,41 @@ public class MapUtil {
 			}
 		}
 		return map;
+	}
+
+  /**
+   * [行转列，合并相同的键，值合并为列表](Row to column, merge the same keys, and merge the values into a list)
+   * @description zh - 行转列，合并相同的键，值合并为列表
+   * @description en - Row to column, merge the same keys, and merge the values into a list
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-26 12:20:00
+   * @return mapList Map列表
+   * @return java.util.Map<K, List<V>>
+   */
+  public static <K, V> Map<K, List<V>> toListMap(Iterable<? extends Map<K, V>> mapList) {
+		final HashMap<K, List<V>> resultMap = new HashMap<>();
+		if (CollUtil.isEmpty(mapList)) {
+			return resultMap;
+		}
+
+		Set<Entry<K, V>> entrySet;
+		for (Map<K, V> map : mapList) {
+			entrySet = map.entrySet();
+			K key;
+			List<V> valueList;
+			for (Entry<K, V> entry : entrySet) {
+				key = entry.getKey();
+				valueList = resultMap.get(key);
+				if (Constant.NULL == valueList) {
+					valueList = CollUtil.newArrayList(entry.getValue());
+					resultMap.put(key, valueList);
+				} else {
+					valueList.add(entry.getValue());
+				}
+			}
+		}
+
+		return resultMap;
 	}
 }

@@ -497,4 +497,23 @@ public class MapUtil {
 		}
 		return result;
 	}
+
+  /* 分页 ----------------------------------------------------------- join */  
+
+  /**
+   * [将map转成字符串](Convert map to string)
+   * @description zh - 将map转成字符串
+   * @description en - Convert map to string
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-27 17:43:15
+   * @param map Map
+   * @param separator entry之间的连接符
+   * @param keyValueSeparator kv之间的连接符
+   * @param otherParams 其它附加参数字符串
+   * @return java.lang.String
+   */
+  public static <K, V> String join(Map<K, V> map, String separator, String keyValueSeparator, String... otherParams) {
+		return join(map, separator, keyValueSeparator, false, otherParams);
+	}
 }

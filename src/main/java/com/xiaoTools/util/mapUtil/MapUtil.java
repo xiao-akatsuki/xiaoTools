@@ -516,4 +516,22 @@ public class MapUtil {
   public static <K, V> String join(Map<K, V> map, String separator, String keyValueSeparator, String... otherParams) {
 		return join(map, separator, keyValueSeparator, false, otherParams);
 	}
+
+  /**
+   * [根据参数排序后拼接为字符串](Concatenate into strings after sorting according to parameters)
+   * @description zh - 根据参数排序后拼接为字符串
+   * @description en - Concatenate into strings after sorting according to parameters
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-28 22:48:42
+   * @param params 参数
+   * @param separator entry之间的连接符
+   * @param keyValueSeparator kv之间的连接符
+   * @param isIgnoreNull 是否忽略null的键和值
+   * @param otherParams 其它附加参数字符串
+   * @return java.lang.String
+   */
+  public static String sortJoin(Map<?, ?> params, String separator, String keyValueSeparator, boolean isIgnoreNull, String... otherParams) {
+		return join(sort(params), separator, keyValueSeparator, isIgnoreNull, otherParams);
+	}
 }

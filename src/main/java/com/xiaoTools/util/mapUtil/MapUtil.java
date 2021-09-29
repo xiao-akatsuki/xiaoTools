@@ -15,8 +15,10 @@ import java.util.TreeMap;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.xiaoTools.core.convert.Convert;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.lang.pair.Pair;
+import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.collUtil.CollUtil;
 import com.xiaoTools.util.reflectUtil.ReflectUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
@@ -550,5 +552,42 @@ public class MapUtil {
    */
   public static <K, V> String joinIgnoreNull(Map<K, V> map, String separator, String keyValueSeparator, String... otherParams) {
 		return join(map, separator, keyValueSeparator, true, otherParams);
+	}
+
+  /**
+   * [将map转成字符串](Convert map to string)
+   * @description zh - 将map转成字符串
+   * @description en - Convert map to string
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-29 20:00:05
+   * @param separator entry之间的连接符
+   * @param keyValueSeparator kv之间的连接符
+   * @param isIgnoreNull 是否忽略null的键和值
+   * @param otherParams 其它附加参数字符串
+   * @return java.lang.String
+   */
+  public static <K, V> String join(Map<K, V> map, String separator, String keyValueSeparator, boolean isIgnoreNull, String... otherParams) {
+		final StringBuilder strBuilder = StrUtil.builder();
+		boolean isFirst = Constant.TRUE;
+		if (isNotEmpty(map)) {
+			for (Entry<K, V> entry : map.entrySet()) {
+				if (Constant.FALSE == isIgnoreNull || entry.getKey() != Constant.NULL && entry.getValue() != Constant.NULL) {
+					if (isFirst) {
+						isFirst = Constant.FALSE;
+					} else {
+						strBuilder.append(separator);
+					}
+					strBuilder.append(Convert.toStr(entry.getKey())).append(keyValueSeparator).append(Convert.toStr(entry.getValue()));
+				}
+			}
+		}
+		// 补充其它字符串到末尾，默认无分隔符
+		if (ArrayUtil.isNotEmpty(otherParams)) {
+			for (String otherParam : otherParams) {
+				strBuilder.append(otherParam);
+			}
+		}
+		return strBuilder.toString();
 	}
 }

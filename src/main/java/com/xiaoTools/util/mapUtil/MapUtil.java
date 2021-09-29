@@ -534,4 +534,21 @@ public class MapUtil {
   public static String sortJoin(Map<?, ?> params, String separator, String keyValueSeparator, boolean isIgnoreNull, String... otherParams) {
 		return join(sort(params), separator, keyValueSeparator, isIgnoreNull, otherParams);
 	}
+
+  /**
+   * [将map转成字符串，忽略null的键和值](Convert the map to a string, ignoring null keys and values)
+   * @description zh - 将map转成字符串，忽略null的键和值
+   * @description en - Convert the map to a string, ignoring null keys and values
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-09-29 19:47:24
+   * @param map Map
+   * @param separator entry之间的连接符
+   * @param keyValueSeparator kv之间的连接符
+   * @param otherParams 其它附加参数字符串
+   * @return java.lang.String
+   */
+  public static <K, V> String joinIgnoreNull(Map<K, V> map, String separator, String keyValueSeparator, String... otherParams) {
+		return join(map, separator, keyValueSeparator, true, otherParams);
+	}
 }

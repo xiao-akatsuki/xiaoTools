@@ -33,4 +33,16 @@ public class MapWrapper<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>>, S
 
 	private final Map<K, V> raw;
     
+    /**
+     * [构造](structure)
+     * @description zh - 构造
+     * @description en - structure
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-09-30 14:56:18
+     * @param raw Map
+     */
+    public MapWrapper(Map<K, V> raw) {
+		this.raw = raw;
+	}
 }

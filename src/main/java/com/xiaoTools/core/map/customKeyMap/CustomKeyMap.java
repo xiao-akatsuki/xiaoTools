@@ -4,6 +4,14 @@ import java.util.Map;
 
 import com.xiaoTools.core.map.mapWrapper.MapWrapper;
 
+/**
+ * [自定义键的Map](Custom key map)
+ * @description zh - 自定义键的Map
+ * @description en - Custom key map
+ * @version V1.0
+ * @author XiaoXunYao
+ * @since 2021-10-02 10:08:42
+ */
 public abstract class CustomKeyMap<K, V> extends MapWrapper<K, V> {
     private static final long serialVersionUID = 4043263744224569870L;
 

@@ -61,5 +61,15 @@ public abstract class CustomKeyMap<K, V> extends MapWrapper<K, V> {
 		return super.replace((K) customKey(key), value);
 	}
 
-    
+    /**
+     * [自定义键](Custom key)
+     * @description zh - 自定义键
+     * @description en - Custom key
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-02 10:07:54
+     * @param key 键
+     * @return java.lang.Object
+     */
+    protected abstract Object customKey(Object key);
 }

@@ -174,7 +174,6 @@ public class MapWrapper<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>>, S
 		return raw.computeIfAbsent(key, mappingFunction);
 	}
 
-	//---------------------------------------------------------------------------- Override default methods start
 	@Override
 	public V getOrDefault(Object key, V defaultValue) {
 		return raw.getOrDefault(key, defaultValue);
@@ -194,5 +193,4 @@ public class MapWrapper<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>>, S
 	public V merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction) {
 		return raw.merge(key, value, remappingFunction);
 	}
-	//---------------------------------------------------------------------------- Override default methods end
 }

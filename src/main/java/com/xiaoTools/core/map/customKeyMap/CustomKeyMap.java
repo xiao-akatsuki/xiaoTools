@@ -19,4 +19,47 @@ public abstract class CustomKeyMap<K, V> extends MapWrapper<K, V> {
     public CustomKeyMap(Map<K, V> map) {
 		super(map);
 	}
+
+    @Override
+	public V get(Object key) {
+		return super.get(customKey(key));
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public V put(K key, V value) {
+		return super.put((K) customKey(key), value);
+	}
+
+	@Override
+	public void putAll(Map<? extends K, ? extends V> m) {
+		m.forEach(this::put);
+	}
+
+	@Override
+	public boolean containsKey(Object key) {
+		return super.containsKey(customKey(key));
+	}
+
+	@Override
+	public V remove(Object key) {
+		return super.remove(customKey(key));
+	}
+
+	@Override
+	public boolean remove(Object key, Object value) {
+		return super.remove(customKey(key), value);
+	}
+
+	@Override
+	public boolean replace(K key, V oldValue, V newValue) {
+		return super.replace((K) customKey(key), oldValue, newValue);
+	}
+
+	@Override
+	public V replace(K key, V value) {
+		return super.replace((K) customKey(key), value);
+	}
+
+    
 }

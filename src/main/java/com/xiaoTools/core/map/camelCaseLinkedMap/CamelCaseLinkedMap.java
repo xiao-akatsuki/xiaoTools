@@ -11,6 +11,20 @@ import com.xiaoTools.core.map.customKeyMap.CustomKeyMap;
  * @since 2021-10-04 08:28:03
  */
 public class CamelCaseLinkedMap<K,V> extends CustomKeyMap<K, V> {
-    
+
     private static final long serialVersionUID = 4043263744224569870L;
+
+    /**
+     * [构造](structure)
+     * @description zh - 构造
+     * @description en - structure
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-04 08:30:43
+     */
+    public CamelCaseLinkedMap() {
+		this(DEFAULT_INITIAL_CAPACITY);
+	}
+
+    
 }

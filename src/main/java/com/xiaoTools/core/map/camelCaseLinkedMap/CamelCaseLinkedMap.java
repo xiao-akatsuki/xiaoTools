@@ -36,6 +36,19 @@ public class CamelCaseLinkedMap<K,V> extends CustomKeyMap<K, V> {
      * @description en - structure
      * @version V1.0
      * @author XiaoXunYao
+     * @since 2021-10-04 08:36:14
+     * @param map 集合
+     */
+    public CamelCaseLinkedMap(Map<? extends K, ? extends V> map) {
+		this(DEFAULT_LOAD_FACTOR, m);
+	}
+
+    /**
+     * [构造](structure)
+     * @description zh - 构造
+     * @description en - structure
+     * @version V1.0
+     * @author XiaoXunYao
      * @since 2021-10-04 08:31:24
      * @param initialCapacity 初始大小
      */

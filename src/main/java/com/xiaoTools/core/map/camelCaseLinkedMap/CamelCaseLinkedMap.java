@@ -40,7 +40,7 @@ public class CamelCaseLinkedMap<K,V> extends CustomKeyMap<K, V> {
      * @param map 集合
      */
     public CamelCaseLinkedMap(Map<? extends K, ? extends V> map) {
-		this(DEFAULT_LOAD_FACTOR, m);
+		this(DEFAULT_LOAD_FACTOR, map);
 	}
 
     /**

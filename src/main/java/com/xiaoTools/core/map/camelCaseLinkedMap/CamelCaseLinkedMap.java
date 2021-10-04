@@ -26,5 +26,15 @@ public class CamelCaseLinkedMap<K,V> extends CustomKeyMap<K, V> {
 		this(DEFAULT_INITIAL_CAPACITY);
 	}
 
-    
+    /**
+     * [构造](structure)
+     * @description zh - 构造
+     * @description en - structure
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-04 08:31:24
+     */
+    public CamelCaseLinkedMap(int initialCapacity) {
+		this(initialCapacity, DEFAULT_LOAD_FACTOR);
+	}
 }

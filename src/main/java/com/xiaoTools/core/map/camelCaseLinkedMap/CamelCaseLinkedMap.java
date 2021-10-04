@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.xiaoTools.core.map.customKeyMap.CustomKeyMap;
+import com.xiaoTools.util.strUtil.StrUtil;
 
 /**
  * [驼峰Key风格的LinkedHashMap](Hump key style LinkedHashMap)
@@ -69,5 +70,23 @@ public class CamelCaseLinkedMap<K,V> extends CustomKeyMap<K, V> {
      */
     public CamelCaseLinkedMap(int initialCapacity, float loadFactor) {
 		super(new LinkedHashMap<>(initialCapacity, loadFactor));
+	}
+
+    /**
+     * [将Key转为驼峰风格](Change key to hump style)
+     * @description zh - 将Key转为驼峰风格
+     * @description en - Change key to hump style
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-04 08:34:14
+     * @param key 键
+     * @return java.lang.Object
+     */
+    @Override
+	protected Object customKey(Object key) {
+		if (key instanceof CharSequence) {
+			key = StrUtil.toCamelCase(key.toString());
+		}
+		return key;
 	}
 }

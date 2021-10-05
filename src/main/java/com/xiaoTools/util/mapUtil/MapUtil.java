@@ -16,12 +16,14 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.xiaoTools.core.convert.Convert;
+import com.xiaoTools.core.editor.Editor;
 import com.xiaoTools.core.map.camelCaseLinkedMap.CamelCaseLinkedMap;
 import com.xiaoTools.core.map.camelCaseMap.CamelCaseMap;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.lang.pair.Pair;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.collUtil.CollUtil;
+import com.xiaoTools.util.objectUtil.ObjectUtil;
 import com.xiaoTools.util.reflectUtil.ReflectUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
 
@@ -591,5 +593,39 @@ public class MapUtil {
 			}
 		}
 		return strBuilder.toString();
+	}
+
+  /* 过滤 ----------------------------------------------------------- filter */  
+
+  /**
+   * [过滤](filter)
+   * @description zh - 过滤
+   * @description en - filter
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-10-05 22:35:08
+   * @param map 集合
+   * @param editor 编辑器接口
+   * @return java.util.Map<K, V>
+   */
+  public static <K, V> Map<K, V> filter(Map<K, V> map, Editor<Entry<K, V>> editor) {
+		if (Constant.NULL == map || Constant.NULL == editor) {
+			return map;
+		}
+
+		final Map<K, V> map2 = ObjectUtil.clone(map);
+		if (isEmpty(map2)) {
+			return map2;
+		}
+
+		map2.clear();
+		Entry<K, V> modified;
+		for (Entry<K, V> entry : map.entrySet()) {
+			modified = editor.edit(entry);
+			if (Constant.NULL != modified) {
+				map2.put(modified.getKey(), modified.getValue());
+			}
+		}
+		return map2;
 	}
 }

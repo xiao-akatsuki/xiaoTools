@@ -718,4 +718,20 @@ public class MapUtil {
 			}
 		});
 	}
+
+  /**
+   * [Map的键和值互换](The keys and values of map are interchanged)
+   * @description zh - Map的键和值互换
+   * @description en - The keys and values of map are interchanged
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-10-06 22:30:56
+   * @param map 集合
+   * @return java.util.Map<T, T>
+   */
+  public static <K, V> Map<V, K> inverse(Map<K, V> map) {
+		final Map<V, K> result = createMap(map.getClass());
+		map.forEach((key, value) -> result.put(value, key));
+		return result;
+	}
 }

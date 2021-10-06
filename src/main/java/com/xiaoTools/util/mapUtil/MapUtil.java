@@ -686,4 +686,36 @@ public class MapUtil {
 		}
 		return map2;
 	}
+
+  /* 互换 ----------------------------------------------------------- reverse */  
+
+  /**
+   * [Map的键和值互换](The keys and values of map are interchanged)
+   * @description zh - Map的键和值互换
+   * @description en - The keys and values of map are interchanged
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-10-06 09:06:32
+   * @param map 集合
+   * @return java.util.Map<T, T>
+   */
+  public static <T> Map<T, T> reverse(Map<T, T> map) {
+		return filter(map, (Editor<Entry<T, T>>) t -> new Entry<T, T>() {
+
+			@Override
+			public T getKey() {
+				return t.getValue();
+			}
+
+			@Override
+			public T getValue() {
+				return t.getKey();
+			}
+
+			@Override
+			public T setValue(T value) {
+				throw new UnsupportedOperationException("Unsupported setValue method !");
+			}
+		});
+	}
 }

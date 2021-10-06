@@ -659,4 +659,31 @@ public class MapUtil {
 		}
 		return map2;
 	}
+
+  /**
+   * [过滤Map保留指定键值对](Filter the map to retain the specified key value pair)
+   * @description zh - 过滤Map保留指定键值对
+   * @description en - Filter the map to retain the specified key value pair
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-10-06 08:55:48
+   * @param map 集合
+   * @param keys 键
+   * @return java.util.Map<K, V>
+   */
+  @SuppressWarnings("unchecked")
+  public static <K, V> Map<K, V> filter(Map<K, V> map, K... keys) {
+		final Map<K, V> map2 = ObjectUtil.clone(map);
+		if (isEmpty(map2)) {
+			return map2;
+		}
+
+		map2.clear();
+		for (K key : keys) {
+			if (map.containsKey(key)) {
+				map2.put(key, map.get(key));
+			}
+		}
+		return map2;
+	}
 }

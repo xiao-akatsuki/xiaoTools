@@ -780,4 +780,25 @@ public class MapUtil {
 
 		return result;
 	}
+
+  /**
+   * [按照值排序，可选是否倒序](Sort by value. Reverse order is optional)
+   * @description zh - 按照值排序，可选是否倒序
+   * @description en - Sort by value. Reverse order is optional
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-10-07 08:54:45
+   * @param map 集合
+   * @param isDesc 是否倒序
+   * @return java.util.Map<K, V>
+   */
+  public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map, boolean isDesc) {
+		Map<K, V> result = new LinkedHashMap<>();
+		Comparator<Entry<K, V>> entryComparator = Entry.comparingByValue();
+		if(isDesc){
+			entryComparator = entryComparator.reversed();
+		}
+		map.entrySet().stream().sorted(entryComparator).forEachOrdered(e -> result.put(e.getKey(), e.getValue()));
+		return result;
+	}
 }

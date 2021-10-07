@@ -10,6 +10,6 @@ import com.xiaoTools.core.getter.optNullBasicTypeGetter.OptNullBasicTypeGetter;
  * @author XiaoXunYao
  * @since 2021-10-08 07:40:38
  */
-public class OptNullBasicTypeFromObjectGetter<T> extends OptNullBasicTypeGetter {
+public interface OptNullBasicTypeFromObjectGetter<K> extends OptNullBasicTypeGetter<K> {
     
 }

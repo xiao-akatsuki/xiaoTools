@@ -748,8 +748,36 @@ public class MapUtil {
    * @return java.util.TreeMap<K, V>
    */
   public static <K, V> TreeMap<K, V> sort(Map<K, V> map) {
-		return sort(map, Constant.NULL);
+		return sort(map, null);
 	}
 
-  
+  /**
+   * [排序已有Map](Sort existing maps)
+   * @description zh - 排序已有Map
+   * @description en - Sort existing maps
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-10-07 08:53:47
+   * @param map 集合
+   * @param comparator Key比较器
+   * @return java.util.TreeMap<K, V>
+   */
+  public static <K, V> TreeMap<K, V> sort(Map<K, V> map, Comparator<? super K> comparator) {
+		if (Constant.NULL == map) {
+			return null;
+		}
+
+		TreeMap<K, V> result;
+		if (map instanceof TreeMap) {
+			// 已经是可排序Map，此时只有比较器一致才返回原map
+			result = (TreeMap<K, V>) map;
+			if (Constant.NULL == comparator || comparator.equals(result.comparator())) {
+				return result;
+			}
+		} else {
+			result = newTreeMap(map, comparator);
+		}
+
+		return result;
+	}
 }

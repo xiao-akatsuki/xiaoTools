@@ -734,4 +734,22 @@ public class MapUtil {
 		map.forEach((key, value) -> result.put(value, key));
 		return result;
 	}
+
+  /* 排序 ----------------------------------------------------------- sort */  
+
+  /**
+   * [排序已有Map](Sort existing maps)
+   * @description zh - 排序已有Map
+   * @description en - Sort existing maps
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-10-07 08:51:52
+   * @param map 集合
+   * @return java.util.TreeMap<K, V>
+   */
+  public static <K, V> TreeMap<K, V> sort(Map<K, V> map) {
+		return sort(map, Constant.NULL);
+	}
+
+  
 }

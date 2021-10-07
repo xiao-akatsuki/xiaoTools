@@ -801,4 +801,20 @@ public class MapUtil {
 		map.entrySet().stream().sorted(entryComparator).forEachOrdered(e -> result.put(e.getKey(), e.getValue()));
 		return result;
 	}
+
+  /* 创建 ----------------------------------------------------------- create */  
+
+  /**
+   * [创建代理Map](Create proxy map)
+   * @description zh - 创建代理Map
+   * @description en - Create proxy map
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-10-08 07:36:12
+   * @param map
+   * @return com.xiaoTools.core.map.mapProxy
+   */
+  public static MapProxy createProxy(Map<?, ?> map) {
+		return MapProxy.create(map);
+	}
 }

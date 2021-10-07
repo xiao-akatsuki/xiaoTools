@@ -734,4 +734,71 @@ public class MapUtil {
 		map.forEach((key, value) -> result.put(value, key));
 		return result;
 	}
+
+  /* 排序 ----------------------------------------------------------- sort */  
+
+  /**
+   * [排序已有Map](Sort existing maps)
+   * @description zh - 排序已有Map
+   * @description en - Sort existing maps
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-10-07 08:51:52
+   * @param map 集合
+   * @return java.util.TreeMap<K, V>
+   */
+  public static <K, V> TreeMap<K, V> sort(Map<K, V> map) {
+		return sort(map, null);
+	}
+
+  /**
+   * [排序已有Map](Sort existing maps)
+   * @description zh - 排序已有Map
+   * @description en - Sort existing maps
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-10-07 08:53:47
+   * @param map 集合
+   * @param comparator Key比较器
+   * @return java.util.TreeMap<K, V>
+   */
+  public static <K, V> TreeMap<K, V> sort(Map<K, V> map, Comparator<? super K> comparator) {
+		if (Constant.NULL == map) {
+			return null;
+		}
+
+		TreeMap<K, V> result;
+		if (map instanceof TreeMap) {
+			// 已经是可排序Map，此时只有比较器一致才返回原map
+			result = (TreeMap<K, V>) map;
+			if (Constant.NULL == comparator || comparator.equals(result.comparator())) {
+				return result;
+			}
+		} else {
+			result = newTreeMap(map, comparator);
+		}
+
+		return result;
+	}
+
+  /**
+   * [按照值排序，可选是否倒序](Sort by value. Reverse order is optional)
+   * @description zh - 按照值排序，可选是否倒序
+   * @description en - Sort by value. Reverse order is optional
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-10-07 08:54:45
+   * @param map 集合
+   * @param isDesc 是否倒序
+   * @return java.util.Map<K, V>
+   */
+  public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map, boolean isDesc) {
+		Map<K, V> result = new LinkedHashMap<>();
+		Comparator<Entry<K, V>> entryComparator = Entry.comparingByValue();
+		if(isDesc){
+			entryComparator = entryComparator.reversed();
+		}
+		map.entrySet().stream().sorted(entryComparator).forEachOrdered(e -> result.put(e.getKey(), e.getValue()));
+		return result;
+	}
 }

@@ -36,5 +36,16 @@ public interface OptBasicTypeGetter<K> {
      */
     String getStr(K key, String defaultValue);
 
-    
+    /**
+     * [获取int型属性值](Get int type attribute value)
+     * @description zh - 获取int型属性值
+     * @description en - Get int type attribute value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-09 08:55:40
+     * @param key 键
+     * @param defaultValue 默认值
+     * @return java.lang.Integer
+     */
+    Integer getInt(K key, Integer defaultValue);
 }

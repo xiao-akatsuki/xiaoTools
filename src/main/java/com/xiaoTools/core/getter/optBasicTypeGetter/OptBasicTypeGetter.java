@@ -48,4 +48,17 @@ public interface OptBasicTypeGetter<K> {
      * @return java.lang.Integer
      */
     Integer getInt(K key, Integer defaultValue);
+
+    /**
+     * [获取short型属性值](Gets the value of a short attribute)
+     * @description zh - 获取short型属性值
+     * @description en - Gets the value of a short attribute
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-09 08:56:25
+     * @param key 键
+     * @param defaultValue 默认值
+     * @return java.lang.Short
+     */
+    Short getShort(K key, Short defaultValue);
 }

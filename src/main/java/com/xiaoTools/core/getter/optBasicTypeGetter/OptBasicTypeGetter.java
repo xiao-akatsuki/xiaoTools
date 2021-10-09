@@ -22,4 +22,19 @@ public interface OptBasicTypeGetter<K> {
      * @return java.lang.Object
      */
 	Object getObj(K key, Object defaultValue);
+
+    /**
+     * [获取字符串型属性值](Get string property value)
+     * @description zh - 获取字符串型属性值
+     * @description en - Get string property value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-09 08:52:57
+     * @param key 键
+     * @param defaultValue 默认值
+     * @return java.lang.String
+     */
+    String getStr(K key, String defaultValue);
+
+    
 }

@@ -61,4 +61,17 @@ public interface OptBasicTypeGetter<K> {
      * @return java.lang.Short
      */
     Short getShort(K key, Short defaultValue);
+
+    /**
+     * [获取boolean型属性值](Get Boolean attribute value)
+     * @description zh - 获取boolean型属性值
+     * @description en - Get Boolean attribute value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-09 08:57:15
+     * @param key 键
+     * @param defaultValue 默认值
+     * @return java.lang.Boolean
+     */
+    Boolean getBool(K key, Boolean defaultValue);
 }

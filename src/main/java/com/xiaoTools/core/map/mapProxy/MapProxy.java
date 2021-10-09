@@ -8,6 +8,8 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
+import com.xiaoTools.core.getter.optNullBasicTypeFromObjectGetter.OptNullBasicTypeFromObjectGetter;
+
 /**
  * [Map代理](Map proxy)
  * @description zh - Map代理

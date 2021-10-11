@@ -1,5 +1,9 @@
 package com.xiaoTools.core.getter.optBasicTypeGetter;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Date;
+
 /**
  * [可选默认值的基本类型的getter接口](Getter interface of basic type of optional default value)
  * @description zh - 可选默认值的基本类型的getter接口
@@ -74,4 +78,122 @@ public interface OptBasicTypeGetter<K> {
      * @return java.lang.Boolean
      */
     Boolean getBool(K key, Boolean defaultValue);
+
+    /**
+     * [获取Long型属性值](Gets the value of the long attribute)
+     * @description zh - 获取Long型属性值
+     * @description en - Gets the value of the long attribute
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-11 08:41:35
+     * @param key 键
+     * @param defaultValue 默认值
+     * @return java.lang.Long
+     */
+    Long getLong(K key, Long defaultValue);
+
+    /**
+     * [获取char型属性值](Get char type attribute value)
+     * @description zh - 获取char型属性值
+     * @description en - Get char type attribute value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-11 08:42:27
+     * @param key 键
+     * @param defaultValue 默认值
+     * @return java.lang.Character
+     */
+    Character getChar(K key, Character defaultValue);
+
+    /**
+     * [获取float型属性值](Get float type attribute value)
+     * @description zh - 获取float型属性值
+     * @description en - Get float type attribute value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-11 08:44:20
+     * @param key 键
+     * @param defaultValue 默认值
+     * @return java.lang.Float
+     */
+    Float getFloat(K key, Float defaultValue);
+
+    /**
+     * [获取double型属性值](Get double type attribute value)
+     * @description zh - 获取double型属性值
+     * @description en - Get double type attribute value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-11 08:45:15
+     * @param key 键
+     * @param defaultValue 默认值
+     * @return java.lang.Double
+     */
+    Double getDouble(K key, Double defaultValue);
+
+    /**
+     * [获取byte型属性值](Get byte type attribute value)
+     * @description zh - 获取byte型属性值
+     * @description en - Get byte type attribute value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-11 08:46:06
+     * @param key 键
+     * @param defaultValue 默认值
+     * @return java.lang.Byte
+     */
+    Byte getByte(K key, Byte defaultValue);
+
+    /**
+     * [获取BigDecimal型属性值](Get BigDecimal type attribute value)
+     * @description zh - 获取BigDecimal型属性值
+     * @description en - Get BigDecimal type attribute value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-11 08:47:14
+     * @param key 键
+     * @param defaultValue 默认值
+     * @return java.math.BigDecimal
+     */
+    BigDecimal getBigDecimal(K key, BigDecimal defaultValue);
+
+    /**
+     * [获取BigInteger型属性值](Gets the BigInteger type property value)
+     * @description zh - 获取BigInteger型属性值
+     * @description en - Gets the BigInteger type property value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-11 08:48:02
+     * @param key 键
+     * @param defaultValue 默认值
+     * @return java.math.BigInteger
+     */
+    BigInteger getBigInteger(K key, BigInteger defaultValue);
+
+    /**
+     * [获得Enum类型的值](Get value of enum type)
+     * @description zh - 获得Enum类型的值
+     * @description en - Get value of enum type
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-11 08:48:55
+     * @param clazz Enum的Class
+     * @param key 键
+     * @param defaultValue 默认值
+     * @return E
+     */
+    <E extends Enum<E>> E getEnum(Class<E> clazz, K key, E defaultValue);
+
+    /**
+     * [获取Date类型值](Get date type value)
+     * @description zh - 获取Date类型值
+     * @description en - Get date type value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-11 08:50:08
+     * @param key 键
+     * @param defaultValue 默认值
+     * @return java.util.Date
+     */
+    Date getDate(K key, Date defaultValue);
 }

@@ -1,5 +1,7 @@
 package com.xiaoTools.core.getter.optBasicTypeGetter;
 
+import java.math.BigDecimal;
+
 /**
  * [可选默认值的基本类型的getter接口](Getter interface of basic type of optional default value)
  * @description zh - 可选默认值的基本类型的getter接口
@@ -139,4 +141,17 @@ public interface OptBasicTypeGetter<K> {
      * @return java.lang.Byte
      */
     Byte getByte(K key, Byte defaultValue);
+
+    /**
+     * [获取BigDecimal型属性值](Get BigDecimal type attribute value)
+     * @description zh - 获取BigDecimal型属性值
+     * @description en - Get BigDecimal type attribute value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-11 08:47:14
+     * @param key 键
+     * @param defaultValue 默认值
+     * @return java.math.BigDecimal
+     */
+    BigDecimal getBigDecimal(K key, BigDecimal defaultValue);
 }

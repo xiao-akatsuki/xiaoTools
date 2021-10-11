@@ -87,4 +87,17 @@ public interface OptBasicTypeGetter<K> {
      * @return java.lang.Long
      */
     Long getLong(K key, Long defaultValue);
+
+    /**
+     * [获取char型属性值](Get char type attribute value)
+     * @description zh - 获取char型属性值
+     * @description en - Get char type attribute value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-11 08:42:27
+     * @param key 键
+     * @param defaultValue 默认值
+     * @return java.lang.Character
+     */
+    Character getChar(K key, Character defaultValue);
 }

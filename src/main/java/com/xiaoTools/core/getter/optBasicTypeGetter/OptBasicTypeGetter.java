@@ -168,4 +168,18 @@ public interface OptBasicTypeGetter<K> {
      * @return java.math.BigInteger
      */
     BigInteger getBigInteger(K key, BigInteger defaultValue);
+
+    /**
+     * [获得Enum类型的值](Get value of enum type)
+     * @description zh - 获得Enum类型的值
+     * @description en - Get value of enum type
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-11 08:48:55
+     * @param clazz Enum的Class
+     * @param key 键
+     * @param defaultValue 默认值
+     * @return E
+     */
+    <E extends Enum<E>> E getEnum(Class<E> clazz, K key, E defaultValue);
 }

@@ -2,6 +2,7 @@ package com.xiaoTools.core.getter.optBasicTypeGetter;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Date;
 
 /**
  * [可选默认值的基本类型的getter接口](Getter interface of basic type of optional default value)
@@ -182,4 +183,17 @@ public interface OptBasicTypeGetter<K> {
      * @return E
      */
     <E extends Enum<E>> E getEnum(Class<E> clazz, K key, E defaultValue);
+
+    /**
+     * [获取Date类型值](Get date type value)
+     * @description zh - 获取Date类型值
+     * @description en - Get date type value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-11 08:50:08
+     * @param key 键
+     * @param defaultValue 默认值
+     * @return java.util.Date
+     */
+    Date getDate(K key, Date defaultValue);
 }

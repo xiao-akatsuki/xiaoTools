@@ -126,4 +126,17 @@ public interface OptBasicTypeGetter<K> {
      * @return java.lang.Double
      */
     Double getDouble(K key, Double defaultValue);
+
+    /**
+     * [获取byte型属性值](Get byte type attribute value)
+     * @description zh - 获取byte型属性值
+     * @description en - Get byte type attribute value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-11 08:46:06
+     * @param key 键
+     * @param defaultValue 默认值
+     * @return java.lang.Byte
+     */
+    Byte getByte(K key, Byte defaultValue);
 }

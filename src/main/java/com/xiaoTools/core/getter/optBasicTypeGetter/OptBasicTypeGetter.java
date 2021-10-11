@@ -74,4 +74,17 @@ public interface OptBasicTypeGetter<K> {
      * @return java.lang.Boolean
      */
     Boolean getBool(K key, Boolean defaultValue);
+
+    /**
+     * [获取Long型属性值](Gets the value of the long attribute)
+     * @description zh - 获取Long型属性值
+     * @description en - Gets the value of the long attribute
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-11 08:41:35
+     * @param key 键
+     * @param defaultValue 默认值
+     * @return java.lang.Long
+     */
+    Long getLong(K key, Long defaultValue);
 }

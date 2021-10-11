@@ -100,4 +100,19 @@ public interface OptBasicTypeGetter<K> {
      * @return java.lang.Character
      */
     Character getChar(K key, Character defaultValue);
+
+    /**
+     * [获取float型属性值](Get float type attribute value)
+     * @description zh - 获取float型属性值
+     * @description en - Get float type attribute value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-11 08:44:20
+     * @param key 键
+     * @param defaultValue 默认值
+     * @return java.lang.Float
+     */
+    Float getFloat(K key, Float defaultValue);
+
+    
 }

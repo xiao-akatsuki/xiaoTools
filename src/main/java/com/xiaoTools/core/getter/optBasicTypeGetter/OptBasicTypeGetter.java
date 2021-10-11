@@ -114,5 +114,16 @@ public interface OptBasicTypeGetter<K> {
      */
     Float getFloat(K key, Float defaultValue);
 
-    
+    /**
+     * [获取double型属性值](Get double type attribute value)
+     * @description zh - 获取double型属性值
+     * @description en - Get double type attribute value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-11 08:45:15
+     * @param key 键
+     * @param defaultValue 默认值
+     * @return java.lang.Double
+     */
+    Double getDouble(K key, Double defaultValue);
 }

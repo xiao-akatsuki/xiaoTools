@@ -8,6 +8,29 @@ package com.xiaoTools.core.getter.basicTypeGetter;
  * @author XiaoXunYao
  * @since 2021-10-08 07:43:31
  */
-public interface BasicTypeGetter<T> {
-    
+public interface BasicTypeGetter<K> {
+
+    /**
+     * [获取Object属性值](Get object property value)
+     * @description zh - 获取Object属性值
+     * @description en - Get object property value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-12 09:13:58
+     * @param key 键
+     * @return java.lang.Object
+     */
+    Object getObj(K key);
+
+    /** 
+     * [获取字符串型属性值](Get string property value)
+     * @description zh - 获取字符串型属性值
+     * @description en - Get string property value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-12 09:15:23
+     * @param key 键
+     * @return java.lang.String
+     */
+    String getStr(K key);
 }

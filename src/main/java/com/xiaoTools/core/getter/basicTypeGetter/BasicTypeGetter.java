@@ -8,6 +8,6 @@ package com.xiaoTools.core.getter.basicTypeGetter;
  * @author XiaoXunYao
  * @since 2021-10-08 07:43:31
  */
-public interface BasicTypeGetter<T> {
+public interface BasicTypeGetter<K> {
     
 }

@@ -1,6 +1,6 @@
 # Xiao-Tools
 
-[![Build Status](https://app.travis-ci.com/xiaoxunyao/xiaoTools.svg?branch=master)](https://app.travis-ci.com/xiaoxunyao/xiaoTools)[![maven-central](https://img.shields.io/maven-central/v/io.github.xiaoxunyao/xiaoTools.svg)](https://mvnrepository.com/artifact/io.github.xiaoxunyao/xiaoTools)[![java-doc](https://www.javadoc.io/badge/io.github.xiaoxunyao/xiaoTools.svg)](https://www.javadoc.io/doc/io.github.xiaoxunyao/xiaoTools)
+[![Build Status](https://app.travis-ci.com/xiaoxunyao/xiaoTools.svg?branch=master)](https://app.travis-ci.com/xiaoxunyao/xiaoTools) [![maven-central](https://img.shields.io/maven-central/v/io.github.xiaoxunyao/xiaoTools.svg)](https://mvnrepository.com/artifact/io.github.xiaoxunyao/xiaoTools) [![java-doc](https://www.javadoc.io/badge/io.github.xiaoxunyao/xiaoTools.svg)](https://www.javadoc.io/doc/io.github.xiaoxunyao/xiaoTools)
 
 This repository contains simple tools written in 100% Java. 
 

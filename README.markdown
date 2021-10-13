@@ -44,6 +44,7 @@ If you do not use any dependency management tool, you can find the latest standa
 xiaoTools is known to work with:
 
 Java 1.8 and higher
+
 Other JRE implementations may work as well, but haven't been tested.
 
 ## License

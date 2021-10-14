@@ -57,4 +57,16 @@ public interface BasicTypeGetter<K> {
      * @return java.lang.Short
      */
     Short getShort(K key);
+
+    /**
+     * [获取Boolean型属性值](Get Boolean type attribute value)
+     * @description zh - 获取Boolean型属性值
+     * @description en - Get Boolean type attribute value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-14 11:02:15
+     * @param key 键
+     * @return java.lang.Boolean
+     */
+    Boolean getBool(K key);
 }

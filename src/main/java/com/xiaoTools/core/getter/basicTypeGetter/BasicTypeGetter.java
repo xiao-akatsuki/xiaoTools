@@ -156,4 +156,17 @@ public interface BasicTypeGetter<K> {
      * @return java.math.BigInteger
      */
     BigInteger getBigInteger(K key);
+
+    /**
+     * [获取Enum型属性值](Get Enum type attribute value)
+     * @description zh - 获取Enum型属性值
+     * @description en - Get Enum type attribute value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-14 11:08:34
+     * @param clazz Enum的Class 
+     * @param key 键
+     * @return E
+     */
+    <E extends Enum<E>> E getEnum(Class<E> clazz, K key);
 }

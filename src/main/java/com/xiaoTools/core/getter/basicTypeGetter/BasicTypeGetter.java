@@ -2,6 +2,7 @@ package com.xiaoTools.core.getter.basicTypeGetter;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Date;
 
 /**
  * [基本类型的getter接口](Getter interface of basic type)
@@ -169,4 +170,16 @@ public interface BasicTypeGetter<K> {
      * @return E
      */
     <E extends Enum<E>> E getEnum(Class<E> clazz, K key);
+
+    /**
+     * [获取Date类型值](Get date type value)
+     * @description zh - 获取Date类型值
+     * @description en - Get date type value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-14 11:09:35
+     * @param key 键
+     * @return java.util.Date
+     */
+    Date getDate(K key);
 }

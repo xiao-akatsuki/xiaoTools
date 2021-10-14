@@ -51,4 +51,4 @@ Other JRE implementations may work as well, but haven't been tested.
 
 Everything found in this repo is licensed under an [Apache-2.0 License](https://github.com/xiao-organization/xiaoTools/blob/master/LICENSE). See the `LICENSE` file for specifics.
 
-
+Thanks

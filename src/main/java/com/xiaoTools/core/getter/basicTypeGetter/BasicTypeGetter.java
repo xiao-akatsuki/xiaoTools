@@ -93,4 +93,18 @@ public interface BasicTypeGetter<K> {
      * @return java.lang.Character
      */
     Character getChar(K key);
+
+    /**
+     * [获取Float型属性值](Get Float type attribute value)
+     * @description zh - 获取Float型属性值
+     * @description en - Get Float type attribute value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-14 11:04:54
+     * @param key 键
+     * @return java.lang.Float
+     */
+    Float getFloat(K key);
+
+    
 }

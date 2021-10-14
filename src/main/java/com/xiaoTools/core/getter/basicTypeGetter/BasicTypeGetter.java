@@ -106,5 +106,15 @@ public interface BasicTypeGetter<K> {
      */
     Float getFloat(K key);
 
-    
+    /**
+     * [获取Double型属性值](Get Double type attribute value)
+     * @description zh - 获取Double型属性值
+     * @description en - Get Double type attribute value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-14 11:05:41
+     * @param key 键
+     * @return java.lang.Double
+     */
+    Double getDouble(K key);
 }

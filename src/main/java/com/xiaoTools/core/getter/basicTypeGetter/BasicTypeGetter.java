@@ -69,4 +69,16 @@ public interface BasicTypeGetter<K> {
      * @return java.lang.Boolean
      */
     Boolean getBool(K key);
+
+    /**
+     * [获取Long型属性值](Get Long type attribute value)
+     * @description zh - 获取Long型属性值
+     * @description en - Get Long type attribute value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-14 11:03:24
+     * @param key 键
+     * @return java.lang.Long
+     */
+    Long getLong(K key);
 }

@@ -1,5 +1,7 @@
 package com.xiaoTools.core.getter.basicTypeGetter;
 
+import java.math.BigDecimal;
+
 /**
  * [基本类型的getter接口](Getter interface of basic type)
  * @description zh - 基本类型的getter接口
@@ -129,4 +131,16 @@ public interface BasicTypeGetter<K> {
      * @return java.lang.Byte
      */
     Byte getByte(K key);
+
+    /**
+     * [获取BigDecimal型属性值](Get BigDecimal type attribute value)
+     * @description zh - 获取BigDecimal型属性值
+     * @description en - Get BigDecimal type attribute value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-14 11:07:04
+     * @param key 键
+     * @return java.math.BigDecimal
+     */
+    BigDecimal getBigDecimal(K key);
 }

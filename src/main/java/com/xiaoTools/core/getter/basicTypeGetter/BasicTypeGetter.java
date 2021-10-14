@@ -117,4 +117,16 @@ public interface BasicTypeGetter<K> {
      * @return java.lang.Double
      */
     Double getDouble(K key);
+
+    /**
+     * [获取Byte型属性值](Get Byte type attribute value)
+     * @description zh - 获取Byte型属性值
+     * @description en - Get Byte type attribute value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-14 11:06:18
+     * @param key 键
+     * @return java.lang.Byte
+     */
+    Byte getByte(K key);
 }

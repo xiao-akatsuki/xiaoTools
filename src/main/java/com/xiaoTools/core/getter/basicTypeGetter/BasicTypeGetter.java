@@ -46,5 +46,15 @@ public interface BasicTypeGetter<K> {
      */
     Integer getInt(K key);
 
-    
+    /**
+     * [获取short型属性值](Get short type attribute value)
+     * @description zh - 获取short型属性值
+     * @description en - Get short type attribute value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-14 11:01:28
+     * @param key 键
+     * @return java.lang.Short
+     */
+    Short getShort(K key);
 }

@@ -33,4 +33,18 @@ public interface BasicTypeGetter<K> {
      * @return java.lang.String
      */
     String getStr(K key);
+
+    /**
+     * [获取int型属性值](Get int type attribute value)
+     * @description zh - 获取int型属性值
+     * @description en - Get int type attribute value
+     * @version V1.0
+     * @author XiaoXunYao
+     * @since 2021-10-14 10:59:36
+     * @param key 键
+     * @return java.lang.Integer
+     */
+    Integer getInt(K key);
+
+    
 }

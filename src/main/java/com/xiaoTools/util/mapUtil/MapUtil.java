@@ -20,7 +20,9 @@ import com.xiaoTools.core.editor.Editor;
 import com.xiaoTools.core.filter.Filter;
 import com.xiaoTools.core.map.camelCaseLinkedMap.CamelCaseLinkedMap;
 import com.xiaoTools.core.map.camelCaseMap.CamelCaseMap;
+import com.xiaoTools.core.map.mapBuilder.MapBuilder;
 import com.xiaoTools.core.map.mapProxy.MapProxy;
+import com.xiaoTools.core.map.mapWrapper.MapWrapper;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.lang.pair.Pair;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
@@ -817,5 +819,61 @@ public class MapUtil {
    */
   public static MapProxy createProxy(Map<?, ?> map) {
 		return MapProxy.create(map);
+	}
+
+  /**
+   * [创建Map包装类MapWrapper](Create Map wrapper class MapWrapper)
+   * @description zh - 创建Map包装类MapWrapper
+   * @description en - Create Map wrapper class MapWrapper
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-10-15 07:51:04
+   * @param map 集合
+   * @return com.xiaoTools.core.map.mapWrapper.MapWrapper<K, V>
+   */
+  public static <K, V> MapWrapper<K, V> wrap(Map<K, V> map) {
+		return new MapWrapper<>(map);
+	}
+
+  /**
+   * [将对应Map转换为不可修改的Map](Convert the corresponding map to a non modifiable map)
+   * @description zh - 将对应Map转换为不可修改的Map
+   * @description en - Convert the corresponding map to a non modifiable map
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-10-15 07:53:12
+   * @param map 集合
+   * @return java.util.Map<K, V>
+   */
+  public static <K, V> Map<K, V> unmodifiable(Map<K, V> map) {
+		return Collections.unmodifiableMap(map);
+	}
+
+  /* 构造 ----------------------------------------------------------- builder */  
+
+  /**
+   * [创建链接调用map](Create link call map)
+   * @description zh - 创建链接调用map
+   * @description en - Create link call map
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-10-15 07:54:28
+   */
+  public static <K, V> MapBuilder<K, V> builder() {
+		return builder(new HashMap<>());
+	}
+
+  /**
+   * [创建链接调用map](Create link call map)
+   * @description zh - 创建链接调用map
+   * @description en - Create link call map
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-10-15 08:10:47
+   * @param map 集合
+   * @return com.xiaoTools.core.map.mapBuilder.MapBuilder<K, V>
+   */
+  public static <K, V> MapBuilder<K, V> builder(Map<K, V> map) {
+		return new MapBuilder<>(map);
 	}
 }

@@ -862,4 +862,18 @@ public class MapUtil {
   public static <K, V> MapBuilder<K, V> builder() {
 		return builder(new HashMap<>());
 	}
+
+  /**
+   * [创建链接调用map](Create link call map)
+   * @description zh - 创建链接调用map
+   * @description en - Create link call map
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-10-15 08:10:47
+   * @param map 集合
+   * @return com.xiaoTools.core.map.mapBuilder.MapBuilder<K, V>
+   */
+  public static <K, V> MapBuilder<K, V> builder(Map<K, V> map) {
+		return new MapBuilder<>(map);
+	}
 }

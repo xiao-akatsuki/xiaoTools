@@ -20,6 +20,7 @@ import com.xiaoTools.core.editor.Editor;
 import com.xiaoTools.core.filter.Filter;
 import com.xiaoTools.core.map.camelCaseLinkedMap.CamelCaseLinkedMap;
 import com.xiaoTools.core.map.camelCaseMap.CamelCaseMap;
+import com.xiaoTools.core.map.mapBuilder.MapBuilder;
 import com.xiaoTools.core.map.mapProxy.MapProxy;
 import com.xiaoTools.core.map.mapWrapper.MapWrapper;
 import com.xiaoTools.lang.constant.Constant;
@@ -848,5 +849,17 @@ public class MapUtil {
 		return Collections.unmodifiableMap(map);
 	}
 
-  
+  /* 构造 ----------------------------------------------------------- builder */  
+
+  /**
+   * [创建链接调用map](Create link call map)
+   * @description zh - 创建链接调用map
+   * @description en - Create link call map
+   * @version V1.0
+   * @author XiaoXunYao
+   * @since 2021-10-15 07:54:28
+   */
+  public static <K, V> MapBuilder<K, V> builder() {
+		return builder(new HashMap<>());
+	}
 }

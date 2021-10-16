@@ -53,7 +53,7 @@ public class MapUtil {
 
     /**
      * [默认增长因子](Default growth factor)
-     * @description zh - 默认增长因子 
+     * @description zh - 默认增长因子
      * @description en - Default growth factor
      * @version V1.0
      * @author XiaoXunYao
@@ -306,7 +306,7 @@ public class MapUtil {
      * @author XiaoXunYao
      * @since 2021-09-24 16:12:19
      * @param key 键
-     * @param value 值 
+     * @param value 值
      * @param isOrder 是否有序
      * @return java.util.HashMap<K, V>
      */
@@ -508,7 +508,7 @@ public class MapUtil {
 		return result;
 	}
 
-  /* 分页 ----------------------------------------------------------- join */  
+  /* 分页 ----------------------------------------------------------- join */
 
   /**
    * [将map转成字符串](Convert map to string)
@@ -599,7 +599,7 @@ public class MapUtil {
 		return strBuilder.toString();
 	}
 
-  /* 过滤 ----------------------------------------------------------- filter */  
+  /* 过滤 ----------------------------------------------------------- filter */
 
   /**
    * [过滤](filter)
@@ -690,7 +690,7 @@ public class MapUtil {
 		return map2;
 	}
 
-  /* 互换 ----------------------------------------------------------- reverse */  
+  /* 互换 ----------------------------------------------------------- reverse */
 
   /**
    * [Map的键和值互换](The keys and values of map are interchanged)
@@ -738,7 +738,7 @@ public class MapUtil {
 		return result;
 	}
 
-  /* 排序 ----------------------------------------------------------- sort */  
+  /* 排序 ----------------------------------------------------------- sort */
 
   /**
    * [排序已有Map](Sort existing maps)
@@ -805,7 +805,7 @@ public class MapUtil {
 		return result;
 	}
 
-  /* 创建 ----------------------------------------------------------- create */  
+  /* 创建 ----------------------------------------------------------- create */
 
   /**
    * [创建代理Map](Create proxy map)
@@ -849,7 +849,7 @@ public class MapUtil {
 		return Collections.unmodifiableMap(map);
 	}
 
-  /* 构造 ----------------------------------------------------------- builder */  
+  /* 构造 ----------------------------------------------------------- builder */
 
   /**
    * [创建链接调用map](Create link call map)
@@ -876,4 +876,18 @@ public class MapUtil {
   public static <K, V> MapBuilder<K, V> builder(Map<K, V> map) {
 		return new MapBuilder<>(map);
 	}
+
+	/**
+   	 * [创建链接调用map](Create link call map)
+   	 * @description zh - 创建链接调用map
+     * @description en - Create link call map
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-16 13:15:54
+	 */
+	public static <K, V> MapBuilder<K, V> builder(K key, V value) {
+		return (builder(new HashMap<K, V>())).put(key, value);
+	}
+
+
 }

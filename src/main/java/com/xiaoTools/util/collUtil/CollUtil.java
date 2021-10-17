@@ -150,7 +150,7 @@ public class CollUtil {
 	@SafeVarargs
 	public static <T> Set<T> unionDistinct(Collection<T> coll1, Collection<T> coll2, Collection<T>... otherColls) {
 		final Set<T> result;
-        result = isEmpty(coll1) ? new LinkedHashSet<>() : 
+        result = isEmpty(coll1) ? new LinkedHashSet<>() :
                  new LinkedHashSet<>(coll1);
 
 		if (isNotEmpty(coll2)) {
@@ -503,7 +503,7 @@ public class CollUtil {
 		return Constant.FALSE;
 	}
 
-    /** 
+    /**
      * [集合2是否为集合1的子集](Is set 2 a subset of set 1)
      * @description zh - 集合2是否为集合1的子集
      * @description en - Is set 2 a subset of set 1
@@ -794,7 +794,7 @@ public class CollUtil {
     public static <T> ArrayList<T> newArrayList(Collection<T> collection) {
         return ListUtil.toList(collection);
     }
-    
+
     /**
      * [新建一个ArrayList](Create a new ArrayList)
      * @description: zh - 新建一个ArrayList
@@ -947,7 +947,7 @@ public class CollUtil {
 		return ListUtil.toList(values);
 	}
 
-    /* 新建LinkedList ----------------------------------------------------------- new LinkedList */    
+    /* 新建LinkedList ----------------------------------------------------------- new LinkedList */
 
     /**
      * [新建LinkedList](New LinkedList)
@@ -1077,8 +1077,8 @@ public class CollUtil {
      * @return java.util.ArrayList<T>
      */
     public static <T> ArrayList<T> distinct(Collection<T> collection) {
-        return isEmpty(collection) ? new ArrayList<>() : 
-                collection instanceof Set ? new ArrayList<>(collection) : 
+        return isEmpty(collection) ? new ArrayList<>() :
+                collection instanceof Set ? new ArrayList<>(collection) :
                 new ArrayList<>(new LinkedHashSet<>(collection));
 	}
 
@@ -1316,7 +1316,7 @@ public class CollUtil {
      * @version V1.0
      * @author XiaoXunYao
      * @since 2021-09-01 15:02:20
-     * @param map Map 
+     * @param map Map
      * @param editor 编辑器接口
      * @return java.util.Map<K, V>
      */
@@ -1339,7 +1339,7 @@ public class CollUtil {
 		return MapUtil.filter(map, filter);
 	}
 
-    /* 去掉 -----------------------------------------------------------remove*/    
+    /* 去掉 -----------------------------------------------------------remove*/
 
     /**
      * [去掉集合中的多个元素](Remove multiple elements from the collection)
@@ -1366,7 +1366,7 @@ public class CollUtil {
      * @author XiaoXunYao
      * @since 2021-09-01 12:04:08
      * @param collection 集合
-     * @return T 
+     * @return T
      */
     public static <T extends Collection<E>, E> T removeNull(T collection) {
 		return filter(collection, Objects::nonNull);
@@ -1400,7 +1400,7 @@ public class CollUtil {
 		return filter(collection, StrUtil::isNotBlank);
 	}
 
-    /* 提取 -----------------------------------------------------------extract*/    
+    /* 提取 -----------------------------------------------------------extract*/
 
     /**
      * [通过Editor抽取集合元素中的某些值返回为新列表](Extract some values from the collection elements through the editor and return them to a new list)
@@ -1465,7 +1465,7 @@ public class CollUtil {
 		return fieldValueList;
 	}
 
-    /* 列表元素支持Bean与Map -----------------------------------------------------------get Field Values*/    
+    /* 列表元素支持Bean与Map -----------------------------------------------------------get Field Values*/
 
     /**
      * [获取给定Bean列表中指定字段名对应字段值的列表](Gets the list of field values corresponding to the specified field name in the given bean list)
@@ -1552,7 +1552,7 @@ public class CollUtil {
 		return IterUtil.fieldValueAsMap(null == iterable ? null : iterable.iterator(), fieldNameForKey, fieldNameForValue);
 	}
 
-    /* 查找 -----------------------------------------------------------find*/   
+    /* 查找 -----------------------------------------------------------find*/
 
     /**
      * [查找第一个匹配元素对象](Find the first matching element object)
@@ -1668,7 +1668,7 @@ public class CollUtil {
 		return collection == Constant.NULL || collection.isEmpty();
 	}
 
-    /** 
+    /**
      * [如果给定集合为空，返回默认集合](If the given collection is empty, the default collection is returned)
      * @description zh - 如果给定集合为空，返回默认集合
      * @description en - If the given collection is empty, the default collection is returned
@@ -2211,7 +2211,7 @@ public class CollUtil {
 		return list;
 	}
 
-    /* 获取 ----------------------------------------------------------- get */    
+    /* 获取 ----------------------------------------------------------- get */
 
     /**
      * [获取集合中指定下标的元素值](Gets the element value of the specified subscript in the collection)
@@ -2777,7 +2777,7 @@ public class CollUtil {
 		});
 	}
 
-  /* 反序 ----------------------------------------------------------- reverse */    
+  /* 反序 ----------------------------------------------------------- reverse */
 
   /**
    * [反序给定List](Reverse order given list)
@@ -2807,8 +2807,8 @@ public class CollUtil {
 		return ListUtil.reverseNew(list);
 	}
 
-  /* 反序 ----------------------------------------------------------- reverse */    
-  
+  /* 反序 ----------------------------------------------------------- reverse */
+
   /**
    * [设置或增加元素](Set or add elements)
    * @description zh - 设置或增加元素
@@ -2866,7 +2866,7 @@ public class CollUtil {
 		return values;
 	}
 
-  /* 最大值 ----------------------------------------------------------- max */    
+  /* 最大值 ----------------------------------------------------------- max */
 
   /**
    * [取最大值](Take the maximum value)
@@ -2882,7 +2882,7 @@ public class CollUtil {
 		return Collections.max(coll);
 	}
 
-  /* 最小值 ----------------------------------------------------------- min */    
+  /* 最小值 ----------------------------------------------------------- min */
 
   /**
    * [取最小值](Take the minimum value)
@@ -2898,7 +2898,7 @@ public class CollUtil {
 		return Collections.min(coll);
 	}
 
-  /* 只读 ----------------------------------------------------------- unmodifiable */    
+  /* 只读 ----------------------------------------------------------- unmodifiable */
 
   /**
    * [转为只读集合](Convert to read-only collection)
@@ -2914,7 +2914,7 @@ public class CollUtil {
 		return Collections.unmodifiableCollection(c);
 	}
 
-  /* 为空 ----------------------------------------------------------- empty */    
+  /* 为空 ----------------------------------------------------------- empty */
 
   /**
    * [根据给定的集合类型，返回对应的空集合](Returns the corresponding empty collection according to the given collection type)
@@ -2933,8 +2933,8 @@ public class CollUtil {
 		}
 
 		if (Set.class.isAssignableFrom(collectionClass)) {
-      return NavigableSet.class == collectionClass ? (T) Collections.emptyNavigableSet() : 
-            SortedSet.class == collectionClass ? (T) Collections.emptySortedSet() : 
+      return NavigableSet.class == collectionClass ? (T) Collections.emptyNavigableSet() :
+            SortedSet.class == collectionClass ? (T) Collections.emptySortedSet() :
             (T) Collections.emptySet();
 		} else if (List.class.isAssignableFrom(collectionClass)) {
 			return (T) Collections.emptyList();
@@ -2944,7 +2944,7 @@ public class CollUtil {
 		throw new IllegalArgumentException(StrUtil.format("[{}] is not support to get empty!", collectionClass));
 	}
 
-  /* 清空 ----------------------------------------------------------- clear */    
+  /* 清空 ----------------------------------------------------------- clear */
 
   /**
    * [清除一个或多个集合内的元素](Clears elements within one or more collections)
@@ -2963,7 +2963,7 @@ public class CollUtil {
 		}
 	}
 
-  /* 填充 ----------------------------------------------------------- pad */    
+  /* 填充 ----------------------------------------------------------- pad */
 
   /**
    * [填充List](Fill list)
@@ -3005,7 +3005,7 @@ public class CollUtil {
 		}
 	}
 
-  /* 转换 ----------------------------------------------------------- trans */    
+  /* 转换 ----------------------------------------------------------- trans */
 
   /**
    * [使用给定的转换函数，转换源集合为新类型的集合](Use the given conversion function to convert the source collection to a collection of the new type)
@@ -3022,7 +3022,7 @@ public class CollUtil {
 		return new TransCollection<>(collection, function);
 	}
 
-  /* 大小 ----------------------------------------------------------- size */    
+  /* 大小 ----------------------------------------------------------- size */
 
   /**
    * [获取Collection或者iterator的大小](Gets the size of the collection or iterator)
@@ -3032,7 +3032,7 @@ public class CollUtil {
    * @author XiaoXunYao
    * @since 2021-09-07 22:17:00
    * @param object 可以为空的对象
-   * @return int 
+   * @return int
    */
   public static int size(final Object object) {
 		if (object == Constant.NULL) {
@@ -3074,7 +3074,7 @@ public class CollUtil {
    * @return boolean
    */
   public static boolean isEqualList(final Collection<?> list1, final Collection<?> list2) {
-    return list1 == Constant.NULL || list2 == Constant.NULL || list1.size() != list2.size() ? 
+    return list1 == Constant.NULL || list2 == Constant.NULL || list1.size() != list2.size() ?
             Constant.FALSE : IterUtil.isEqualList(list1, list2);
 	}
 }

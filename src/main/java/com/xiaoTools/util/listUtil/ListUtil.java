@@ -1,5 +1,6 @@
 package com.xiaoTools.util.listUtil;
 
+import com.xiaoTools.core.comparator.propertyComparator.PropertyComparator;
 import com.xiaoTools.core.convert.Convert;
 import com.xiaoTools.core.editor.Editor;
 import com.xiaoTools.core.matcher.Matcher;
@@ -49,6 +50,7 @@ public class ListUtil {
      * @param values: 数组
      * @return java.util.List<T>
     */
+	@SafeVarargs
     public static <T> List<T> list(boolean isLinked, T... values) {
         if (ArrayUtil.isEmpty(values)) {
             return list(isLinked);
@@ -142,6 +144,7 @@ public class ListUtil {
      * @param values: 数组
      * @return java.util.ArrayList<T>
     */
+	@SafeVarargs
     public static <T> ArrayList<T> toList(T... values) {
         return (ArrayList<T>) list(Constant.FALSE, values);
     }
@@ -213,6 +216,7 @@ public class ListUtil {
      * @param values: 数组
      * @return java.util.LinkedList<T>
     */
+	@SafeVarargs
     public static <T> LinkedList<T> toLinkedList(T... values) {
         return (LinkedList<T>) list(Constant.TRUE, values);
     }
@@ -227,6 +231,7 @@ public class ListUtil {
      * @param ts: 对象
      * @return java.util.List<T>
     */
+	@SafeVarargs
     public static <T> List<T> of(T... ts) {
         return ArrayUtil.isEmpty(ts) ? Collections.emptyList() : Collections.unmodifiableList(toList(ts));
     }
@@ -524,4 +529,50 @@ public class ListUtil {
         }
         return result;
     }
+
+	/*分页-----------------------------------------------------------page*/
+
+	/**
+	 * [对指定List分页取值](Page values for the specified list)
+	 * @description zh - 对指定List分页取值
+	 * @description en - Page values for the specified list
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-18 07:35:50
+	 * @param current 页码
+	 * @param size 条目数
+	 * @param list 集合
+	 * @return java.util.List<T>
+	 */
+	public static <T> List<T> page(int current, int size, List<T> list) {
+		if (CollUtil.isEmpty(list)) {
+			return new ArrayList<>(Constant.ZERO);
+		}
+
+		int resultSize = list.size();
+		// 每页条目数大于总数直接返回所有
+		if (resultSize <= size) {
+			if (current < (PageUtil.getFirstPageNo() + Constant.ONE)) {
+				return unmodifiable(list);
+			} else {
+				// 越界直接返回空
+				return new ArrayList<>(Constant.ZERO);
+			}
+		}
+		// 相乘可能会导致越界 临时用long
+		if (((long) (current - PageUtil.getFirstPageNo()) * size) > resultSize) {
+			// 越界直接返回空
+			return new ArrayList<>(Constant.ZERO);
+		}
+
+		final int[] startEnd = PageUtil.transToStartEnd(current, size);
+		if (startEnd[Constant.ONE] > resultSize) {
+			startEnd[Constant.ONE] = resultSize;
+			if (startEnd[Constant.ZERO] > startEnd[Constant.ONE]) {
+				return new ArrayList<>(Constant.ZERO);
+			}
+		}
+
+		return sub(list, startEnd[Constant.ZERO], startEnd[Constant.ONE]);
+	}
 }

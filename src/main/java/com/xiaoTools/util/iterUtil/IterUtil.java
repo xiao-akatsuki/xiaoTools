@@ -14,15 +14,13 @@ import java.util.function.Function;
 
 import com.xiaoTools.core.collection.enumerationIter.EnumerationIter;
 import com.xiaoTools.core.collection.transIter.TransIter;
-import com.xiaoTools.core.escape.filter.Filter;
+import com.xiaoTools.core.filter.Filter;
 import com.xiaoTools.core.exception.utilException.UtilException;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.objectUtil.ObjectUtil;
 import com.xiaoTools.util.regularUtil.method.Func1;
 import com.xiaoTools.util.strUtil.StrUtil;
-
-import jdk.javadoc.internal.doclets.formats.html.resources.standard;
 
 /**
  * [Iterable 和  Iterator 相关工具类](Iteratable and iterator related tool classes)
@@ -85,13 +83,13 @@ public class IterUtil {
      * @author XiaoXunYao
      * @since 2021-09-08 20:47:03
      * @param iterator Iterator对象
-     * @return boolean 
+     * @return boolean
      */
     public static boolean isNotEmpty(Iterator<?> iterator) {
 		return Constant.NULL != iterator && iterator.hasNext();
 	}
-    
-    /* 含有null -------------------------------------------------------------- has null */ 
+
+    /* 含有null -------------------------------------------------------------- has null */
 
     /**
      * [是否包含 null 元素](Contains null elements)
@@ -168,7 +166,7 @@ public class IterUtil {
 		return Constant.TRUE;
 	}
 
-    /* 总数 -------------------------------------------------------------- count */ 
+    /* 总数 -------------------------------------------------------------- count */
 
     /**
      * [根据集合返回一个元素计数的 Map](Returns a map of element counts based on the collection)
@@ -198,7 +196,7 @@ public class IterUtil {
 		return countMap;
 	}
 
-    /** 
+    /**
      * [字段值与列表值对应的Map](Map corresponding to field value and list value)
      * @description zh - 字段值与列表值对应的Map
      * @description en - Map corresponding to field value and list value
@@ -220,7 +218,7 @@ public class IterUtil {
      * @description en - Map corresponding to field value and list value
      * @version V1.0
      * @author XiaoXunYao
-     * @since 2021-09-10 20:44:55 
+     * @since 2021-09-10 20:44:55
      * @param iterator 对象列表
      * @param fieldNameForKey 做为键的字段名
      * @param fieldNameForValue 做为值的字段名
@@ -272,7 +270,7 @@ public class IterUtil {
 		return result;
 	}
 
-    /* 分页 -------------------------------------------------------------- join */ 
+    /* 分页 -------------------------------------------------------------- join */
 
     /**
      * [以 conjunction 为分隔符将集合转换为字符串](Converts a collection to a string with a conjunction as a delimiter)
@@ -348,7 +346,7 @@ public class IterUtil {
 		return sb.toString();
 	}
 
-    /* 将Entry集合转换为HashMap -------------------------------------------------------------- to Map */ 
+    /* 将Entry集合转换为HashMap -------------------------------------------------------------- to Map */
 
     /**
      * [将Entry集合转换为HashMap](Convert entry collection to HashMap)
@@ -587,8 +585,8 @@ public class IterUtil {
 		return list;
 	}
 
-  /* Iterator 转为 Iterable -------------------------------------------------------------- Iterator to iteratable */ 
-    
+  /* Iterator 转为 Iterable -------------------------------------------------------------- Iterator to iteratable */
+
   /**
    * [Enumeration转换为Iterator](Convert enumeration to iterator)
    * @description zh - Enumeration转换为Iterator
@@ -617,7 +615,7 @@ public class IterUtil {
 		return () -> iterator;
 	}
 
-  /* 获取第一个元素 -------------------------------------------------------------- get first */ 
+  /* 获取第一个元素 -------------------------------------------------------------- get first */
 
   /**
    * [获取集合的第一个元素](Gets the first element of the collection)
@@ -647,7 +645,7 @@ public class IterUtil {
     return Constant.NULL != iterator && iterator.hasNext() ? iterator.next() : null;
 	}
 
-  /* 元素类型 -------------------------------------------------------------- get type */ 
+  /* 元素类型 -------------------------------------------------------------- get type */
 
   /**
    * [获得 Iterable 对象的元素类型](Gets the element type of the iteratable object)
@@ -660,7 +658,7 @@ public class IterUtil {
    * @return java.lang.Class<?>
    */
 	public static Class<?> getElementType(Iterable<?> iterable) {
-    return Constant.NULL != iterable ? getElementType(iterable.iterator()) : null; 
+    return Constant.NULL != iterable ? getElementType(iterable.iterator()) : null;
 	}
 
   /**
@@ -684,7 +682,7 @@ public class IterUtil {
 		return null;
 	}
 
-  /* 过滤 -------------------------------------------------------------- filter */ 
+  /* 过滤 -------------------------------------------------------------- filter */
 
   /**
    * [过滤集合](Filter collection)
@@ -731,7 +729,7 @@ public class IterUtil {
 		return iter;
 	}
 
-  /* 转为map -------------------------------------------------------------- to map */   
+  /* 转为map -------------------------------------------------------------- to map */
 
   /**
    * [Iterator转换为Map](Convert iterator to map)
@@ -783,7 +781,7 @@ public class IterUtil {
 		return map;
 	}
 
-  /* 其他 -------------------------------------------------------------- other */     
+  /* 其他 -------------------------------------------------------------- other */
 
   /**
    * [返回一个空Iterator](Returns an empty iterator)
@@ -825,7 +823,7 @@ public class IterUtil {
    */
   public static int size(final Iterable<?> iterable) {
     return Constant.NULL == iterable ? Constant.ZERO :
-           iterable instanceof Collection<?> ? ((Collection<?>) iterable).size() : 
+           iterable instanceof Collection<?> ? ((Collection<?>) iterable).size() :
            size(iterable.iterator());
 	}
 

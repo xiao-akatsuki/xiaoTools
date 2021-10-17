@@ -4,18 +4,22 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NavigableMap;
 import java.util.Set;
+import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.xiaoTools.core.convert.Convert;
+import com.xiaoTools.core.convert.typeReference.TypeReference;
 import com.xiaoTools.core.editor.Editor;
 import com.xiaoTools.core.filter.Filter;
 import com.xiaoTools.core.map.camelCaseLinkedMap.CamelCaseLinkedMap;
@@ -887,6 +891,527 @@ public class MapUtil {
 	 */
 	public static <K, V> MapBuilder<K, V> builder(K key, V value) {
 		return (builder(new HashMap<K, V>())).put(key, value);
+	}
+
+	/**
+	 * [获取Map的部分key生成新的Map](Get some keys of the map to generate a new map)
+	 * @description zh - 获取Map的部分key生成新的Map
+	 * @description en - Get some keys of the map to generate a new map
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:35:28
+	 * @param map 集合
+	 * @param keys 键列表
+	 * @return java.util.Map<K, V>
+	 */
+	@SuppressWarnings("unchecked")
+	public static <K, V> Map<K, V> getAny(Map<K, V> map, final K... keys) {
+		return filter(map, (Filter<Entry<K, V>>) entry -> ArrayUtil.contains(keys, entry.getKey()));
+	}
+
+	/**
+	 * [去掉Map中指定key的键值对，修改原Map](Remove the key value pair of the specified key in the map and modify the original map)
+	 * @description zh - 去掉Map中指定key的键值对，修改原Map
+	 * @description en - Remove the key value pair of the specified key in the map and modify the original map
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:36:46
+	 * @param map 集合
+	 * @param keys 键列表
+	 * @return java.util.Map<K, V>
+	 */
+	@SuppressWarnings("unchecked")
+	public static <K, V> Map<K, V> removeAny(Map<K, V> map, final K... keys) {
+		for (K key : keys) {
+			map.remove(key);
+		}
+		return map;
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为字符串](Get the value of the key specified in the map and convert it to a string)
+	 * @description zh - 获取Map指定key的值，并转换为字符串
+	 * @description en - Get the value of the key specified in the map and convert it to a string
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:38:26
+	 * @param map 集合
+	 * @param key 键
+	 * @return java.lang.String
+	 */
+	public static String getStr(Map<?, ?> map, Object key) {
+		return get(map, key, String.class);
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为字符串](Get the value of the key specified in the map and convert it to a string)
+	 * @description zh - 获取Map指定key的值，并转换为字符串
+	 * @description en - Get the value of the key specified in the map and convert it to a string
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:39:11
+	 * @param map 集合
+	 * @param key 键
+	 * @param defaultValue 默认值
+	 * @return java.lang.String
+	 */
+	public static String getStr(Map<?, ?> map, Object key, String defaultValue) {
+		return get(map, key, String.class, defaultValue);
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为Integer](Get the value of the key specified in the map and convert it to integer)
+	 * @description zh - 获取Map指定key的值，并转换为Integer
+	 * @description en - Get the value of the key specified in the map and convert it to integer
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:40:18
+	 * @param map 集合
+	 * @param key 键
+	 * @return java.lang.Integer
+	 */
+	public static Integer getInt(Map<?, ?> map, Object key) {
+		return get(map, key, Integer.class);
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为Integer](Get the value of the key specified in the map and convert it to integer)
+	 * @description zh - 获取Map指定key的值，并转换为Integer
+	 * @description en - Get the value of the key specified in the map and convert it to integer
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:41:08
+	 * @param map 集合
+	 * @param key 键
+	 * @param defaultValue 默认值
+	 * @return java.lang.Integer
+	 */
+	public static Integer getInt(Map<?, ?> map, Object key, Integer defaultValue) {
+		return get(map, key, Integer.class, defaultValue);
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为Double](Get the value of the key specified in the map and convert it to double)
+	 * @description zh - 获取Map指定key的值，并转换为Double
+	 * @description en - Get the value of the key specified in the map and convert it to double
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:41:57
+	 * @param map 集合
+	 * @param key 键
+	 * @return java.lang.Double
+	 */
+	public static Double getDouble(Map<?, ?> map, Object key) {
+		return get(map, key, Double.class);
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为Double](Get the value of the key specified in the map and convert it to double)
+	 * @description zh - 获取Map指定key的值，并转换为Double
+	 * @description en - Get the value of the key specified in the map and convert it to double
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:42:34
+	 * @param map 集合
+	 * @param key 键
+	 * @param defaultValue 默认值
+	 * @return java.lang.Double
+	 */
+	public static Double getDouble(Map<?, ?> map, Object key, Double defaultValue) {
+		return get(map, key, Double.class, defaultValue);
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为Float](Get the value of the key specified in the map and convert it to float)
+	 * @description zh - 获取Map指定key的值，并转换为Float
+	 * @description en - Get the value of the key specified in the map and convert it to float
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:43:32
+	 * @param map 集合
+	 * @param key 键
+	 * @return java.lang.Float
+	 */
+	public static Float getFloat(Map<?, ?> map, Object key) {
+		return get(map, key, Float.class);
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为Float](Get the value of the key specified in the map and convert it to float)
+	 * @description zh - 获取Map指定key的值，并转换为Float
+	 * @description en - Get the value of the key specified in the map and convert it to float
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:44:17
+	 * @param map 集合
+	 * @param key 键
+	 * @param defaultValue 默认值
+	 * @return java.lang.Float
+	 */
+	public static Float getFloat(Map<?, ?> map, Object key, Float defaultValue) {
+		return get(map, key, Float.class, defaultValue);
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为Short](Get the value of the key specified in the map and convert it to short)
+	 * @description zh - 获取Map指定key的值，并转换为Short
+	 * @description en - Get the value of the key specified in the map and convert it to short
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:44:59
+	 * @param map 集合
+	 * @param key 键
+	 * @return java.lang.Short
+	 */
+	public static Short getShort(Map<?, ?> map, Object key) {
+		return get(map, key, Short.class);
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为Short](Get the value of the key specified in the map and convert it to short)
+	 * @description zh - 获取Map指定key的值，并转换为Short
+	 * @description en - Get the value of the key specified in the map and convert it to short
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:45:46
+	 * @param map 集合
+	 * @param key 键
+	 * @param defaultValue 默认值
+	 * @return java.lang.Short
+	 */
+	public static Short getShort(Map<?, ?> map, Object key, Short defaultValue) {
+		return get(map, key, Short.class, defaultValue);
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为Bool](Get the value of the key specified in the map and convert it to boolean)
+	 * @description zh - 获取Map指定key的值，并转换为Bool
+	 * @description en - Get the value of the key specified in the map and convert it to boolean
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:47:08
+	 * @param map 集合
+	 * @param key 键
+	 * @return java.lang.Boolean
+	 */
+	public static Boolean getBool(Map<?, ?> map, Object key) {
+		return get(map, key, Boolean.class);
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为Bool](Get the value of the key specified in the map and convert it to boolean)
+	 * @description zh - 获取Map指定key的值，并转换为Bool
+	 * @description en - Get the value of the key specified in the map and convert it to boolean
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:47:51
+	 * @param map 集合
+	 * @param key 键
+	 * @param defaultValue 默认值
+	 * @return java.lang.Boolean
+	 */
+	public static Boolean getBool(Map<?, ?> map, Object key, Boolean defaultValue) {
+		return get(map, key, Boolean.class, defaultValue);
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为Character](Get the value of the key specified in the map and convert it to character)
+	 * @description zh - 获取Map指定key的值，并转换为Character
+	 * @description en - Get the value of the key specified in the map and convert it to character
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:48:29
+	 * @param map 集合
+	 * @param key 键
+	 * @return java.lang.Character
+	 */
+	public static Character getChar(Map<?, ?> map, Object key) {
+		return get(map, key, Character.class);
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为Character](Get the value of the key specified in the map and convert it to character)
+	 * @description zh - 获取Map指定key的值，并转换为Character
+	 * @description en - Get the value of the key specified in the map and convert it to character
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:49:07
+	 * @param map 集合
+	 * @param key 键
+	 * @param defaultValue 默认值
+	 * @return java.lang.Character
+	 */
+	public static Character getChar(Map<?, ?> map, Object key, Character defaultValue) {
+		return get(map, key, Character.class, defaultValue);
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为Long](Get the value of the key specified in the map and convert it to long)
+	 * @description zh - 获取Map指定key的值，并转换为Long
+	 * @description en - Get the value of the key specified in the map and convert it to long
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:49:53
+	 * @param map 集合
+	 * @param key 键
+	 * @return java.lang.Long
+	 */
+	public static Long getLong(Map<?, ?> map, Object key) {
+		return get(map, key, Long.class);
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为Long](Get the value of the key specified in the map and convert it to long)
+	 * @description zh - 获取Map指定key的值，并转换为Long
+	 * @description en - Get the value of the key specified in the map and convert it to long
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:50:28
+	 * @param map 集合
+	 * @param key 键
+	 * @param defaultValue 默认值
+	 * @return java.lang.Long
+	 */
+	public static Long getLong(Map<?, ?> map, Object key, Long defaultValue) {
+		return get(map, key, Long.class, defaultValue);
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为 Date](Get the value of the key specified in the map and convert it to date)
+	 * @description zh - 获取Map指定key的值，并转换为 Date
+	 * @description en - Get the value of the key specified in the map and convert it to date
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:50:51
+	 * @param map 集合
+	 * @param key 键
+	 * @return java.util.Date
+	 */
+	public static Date getDate(Map<?, ?> map, Object key) {
+		return get(map, key, Date.class);
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为 Date](Get the value of the key specified in the map and convert it to date)
+	 * @description zh - 获取Map指定key的值，并转换为 Date
+	 * @description en - Get the value of the key specified in the map and convert it to date
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:51:38
+	 * @param map 集合
+	 * @param key 键
+	 * @param defaultValue 默认值
+	 * @return java.util.Date
+	 */
+	public static Date getDate(Map<?, ?> map, Object key, Date defaultValue) {
+		return get(map, key, Date.class, defaultValue);
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为指定类型](Gets the value of the key specified in the map and converts it to the specified type)
+	 * @description zh - 获取Map指定key的值，并转换为指定类型
+	 * @description en - Gets the value of the key specified in the map and converts it to the specified type
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:52:45
+	 * @param map  Map
+	 * @param key  键
+	 * @param type 值类型
+	 * @return T
+	 */
+	public static <T> T get(Map<?, ?> map, Object key, Class<T> type) {
+		return get(map, key, type, null);
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为指定类型](Gets the value of the key specified in the map and converts it to the specified type)
+	 * @description zh - 获取Map指定key的值，并转换为指定类型
+	 * @description en - Gets the value of the key specified in the map and converts it to the specified type
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:53:26
+	 * @param map Map
+	 * @param key 键
+	 * @param type 值类型
+	 * @param defaultValue 默认值
+	 * @return T
+	 */
+	public static <T> T get(Map<?, ?> map, Object key, Class<T> type, T defaultValue) {
+		return null == map ? null : Convert.convert(type, map.get(key), defaultValue);
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为指定类型](Gets the value of the key specified in the map and converts it to the specified type)
+	 * @description zh - 获取Map指定key的值，并转换为指定类型
+	 * @description en - Gets the value of the key specified in the map and converts it to the specified type
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:54:11
+	 * @param map Map
+	 * @param key 键
+	 * @param type 值类型
+	 * @param defaultValue 默认值
+	 * @return T
+	 */
+	public static <T> T getQuietly(Map<?, ?> map, Object key, Class<T> type, T defaultValue) {
+		return null == map ? null : Convert.convertQuietly(type, map.get(key), defaultValue);
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为指定类型](Gets the value of the key specified in the map and converts it to the specified type)
+	 * @description zh - 获取Map指定key的值，并转换为指定类型
+	 * @description en - Gets the value of the key specified in the map and converts it to the specified type
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:54:41
+	 * @param map  Map
+	 * @param key  键
+	 * @param type 值类型
+	 * @return T
+	 */
+	public static <T> T get(Map<?, ?> map, Object key, TypeReference<T> type) {
+		return get(map, key, type, null);
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为指定类型](Gets the value of the key specified in the map and converts it to the specified type)
+	 * @description zh - 获取Map指定key的值，并转换为指定类型
+	 * @description en - Gets the value of the key specified in the map and converts it to the specified type
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:56:50
+	 * @param map Map
+	 * @param key 键
+	 * @param type 值类型
+	 * @param defaultValue 默认值
+	 * @return T
+	 */
+	public static <T> T get(Map<?, ?> map, Object key, TypeReference<T> type, T defaultValue) {
+		return null == map ? null : Convert.convert(type, map.get(key), defaultValue);
+	}
+
+	/**
+	 * [获取Map指定key的值，并转换为指定类型](Gets the value of the key specified in the map and converts it to the specified type)
+	 * @description zh - 获取Map指定key的值，并转换为指定类型
+	 * @description en - Gets the value of the key specified in the map and converts it to the specified type
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:57:32
+	 * @param map Map
+	 * @param key 键
+	 * @param type 值类型
+	 * @param defaultValue 默认值
+	 * @return T
+	 */
+	public static <T> T getQuietly(Map<?, ?> map, Object key, TypeReference<T> type, T defaultValue) {
+		return null == map ? null : Convert.convertQuietly(type, map.get(key), defaultValue);
+	}
+
+	/**
+	 * [重命名](rename)
+	 * @description zh - 重命名
+	 * @description en - rename
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 09:58:20
+	 * @param map 集合
+	 * @param oldKey 原键
+	 * @param newKey 新键
+	 * @return java.util.Map<K, V>
+	 * @throws java.lang.IllegalArgumentException.IllegalArgumentException
+	 */
+	public static <K, V> Map<K, V> renameKey(Map<K, V> map, K oldKey, K newKey) {
+		if (isNotEmpty(map) && map.containsKey(oldKey)) {
+			if (map.containsKey(newKey)) {
+				throw new IllegalArgumentException(StrUtil.format("The key '{}' exist !", newKey));
+			}
+			map.put(newKey, map.remove(oldKey));
+		}
+		return map;
+	}
+
+	/**
+	 * [去除Map中值为 null 的键值对](Remove null key value pairs in the map)
+	 * @description zh - 去除Map中值为 null 的键值对
+	 * @description en - Remove null key value pairs in the map
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 10:00:12
+	 * @param map 集合
+	 * @return java.util.Map<K, V>
+	 */
+	public static <K, V> Map<K, V> removeNullValue(Map<K, V> map) {
+		if (isEmpty(map)) {
+			return map;
+		}
+
+		final Iterator<Entry<K, V>> iter = map.entrySet().iterator();
+		Entry<K, V> entry;
+		while (iter.hasNext()) {
+			entry = iter.next();
+			if (null == entry.getValue()) {
+				iter.remove();
+			}
+		}
+
+		return map;
+	}
+
+	/**
+	 * [返回一个空Map](Returns an empty map)
+	 * @description zh - 返回一个空Map
+	 * @description en - Returns an empty map
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 10:01:10
+	 * @return java.util.Map<K, V>
+	 */
+	public static <K, V> Map<K, V> empty() {
+		return Collections.emptyMap();
+	}
+
+	/**
+	 * [根据传入的Map类型不同，返回对应类型的空Map](Empty map of corresponding type is returned according to different types of incoming map)
+	 * @description zh - 根据传入的Map类型不同，返回对应类型的空Map
+	 * @description en - Empty map of corresponding type is returned according to different types of incoming map
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 10:02:03
+	 * @param mapClass Map类型
+	 * @return T
+	 */
+	@SuppressWarnings("unchecked")
+	public static <K, V, T extends Map<K, V>> T empty(Class<?> mapClass) {
+		if (null == mapClass) {
+			return (T) Collections.emptyMap();
+		}
+		if (NavigableMap.class == mapClass) {
+			return (T) Collections.emptyNavigableMap();
+		} else if (SortedMap.class == mapClass) {
+			return (T) Collections.emptySortedMap();
+		} else if (Map.class == mapClass) {
+			return (T) Collections.emptyMap();
+		}
+
+		// 不支持空集合的集合类型
+		throw new IllegalArgumentException(StrUtil.format("[{}] is not support to get empty!", mapClass));
+	}
+
+	/**
+	 *
+	 * @description zh - 清除一个或多个Map集合内的元素
+	 * @description en - Clears elements within one or more map collections
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-17 10:03:03
+	 * @param maps 一个或多个Map
+	 */
+	public static void clear(Map<?, ?>... maps) {
+		for (Map<?, ?> map : maps) {
+			if (isNotEmpty(map)) {
+				map.clear();
+			}
+		}
 	}
 
 

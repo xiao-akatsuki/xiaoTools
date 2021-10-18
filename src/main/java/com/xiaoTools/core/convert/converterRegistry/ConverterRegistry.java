@@ -1,18 +1,52 @@
 package com.xiaoTools.core.convert.converterRegistry;
 
+import com.xiaoTools.core.convert.characterConverter.CharacterConverter;
 import com.xiaoTools.core.convert.converter.Converter;
+import com.xiaoTools.core.convert.numberConverter.NumberConverter;
+import com.xiaoTools.core.convert.primitiveConverter.PrimitiveConverter;
+import com.xiaoTools.date.dateTime.DateTime;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.classUtil.ClassUtil;
 import com.xiaoTools.util.reflectUtil.ReflectUtil;
 import com.xiaoTools.util.serviceLoaderUtil.ServiceLoaderUtil;
 import com.xiaoTools.util.typeUtil.TypeUtil;
 
-import java.io.Serial;
-import java.io.Serializable;
-import java.lang.reflect.Type;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
+import java.io.Serializable;
+import java.lang.ref.SoftReference;
+import java.lang.ref.WeakReference;
+import java.lang.reflect.Type;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.net.URI;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.file.Path;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.OffsetDateTime;
+import java.time.OffsetTime;
+import java.time.Period;
+import java.time.ZonedDateTime;
+import java.time.temporal.TemporalAccessor;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Currency;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
+import java.util.TimeZone;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicIntegerArray;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicLongArray;
+import java.util.concurrent.atomic.AtomicReference;
 /**
  * [类型转换器登记中心](Type converter registry)
  * @description: zh - 类型转换器登记中心
@@ -23,7 +57,6 @@ import java.util.concurrent.ConcurrentHashMap;
 */
 public class ConverterRegistry implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -142,6 +175,80 @@ public class ConverterRegistry implements Serializable {
 
     private ConverterRegistry defaultConverter() {
         defaultConverterMap = new ConcurrentHashMap<>();
+
+		// 原始类型转换器
+		defaultConverterMap.put(int.class, new PrimitiveConverter(int.class));
+		defaultConverterMap.put(long.class, new PrimitiveConverter(long.class));
+		defaultConverterMap.put(byte.class, new PrimitiveConverter(byte.class));
+		defaultConverterMap.put(short.class, new PrimitiveConverter(short.class));
+		defaultConverterMap.put(float.class, new PrimitiveConverter(float.class));
+		defaultConverterMap.put(double.class, new PrimitiveConverter(double.class));
+		defaultConverterMap.put(char.class, new PrimitiveConverter(char.class));
+		defaultConverterMap.put(boolean.class, new PrimitiveConverter(boolean.class));
+
+		// 包装类转换器
+		defaultConverterMap.put(Number.class, new NumberConverter());
+		defaultConverterMap.put(Integer.class, new NumberConverter(Integer.class));
+		defaultConverterMap.put(AtomicInteger.class, new NumberConverter(AtomicInteger.class));
+		defaultConverterMap.put(Long.class, new NumberConverter(Long.class));
+		defaultConverterMap.put(AtomicLong.class, new NumberConverter(AtomicLong.class));
+		defaultConverterMap.put(Byte.class, new NumberConverter(Byte.class));
+		defaultConverterMap.put(Short.class, new NumberConverter(Short.class));
+		defaultConverterMap.put(Float.class, new NumberConverter(Float.class));
+		defaultConverterMap.put(Double.class, new NumberConverter(Double.class));
+		defaultConverterMap.put(Character.class, new CharacterConverter());
+		defaultConverterMap.put(Boolean.class, new BooleanConverter());
+		defaultConverterMap.put(AtomicBoolean.class, new AtomicBooleanConverter());
+		defaultConverterMap.put(BigDecimal.class, new NumberConverter(BigDecimal.class));
+		defaultConverterMap.put(BigInteger.class, new NumberConverter(BigInteger.class));
+		defaultConverterMap.put(CharSequence.class, new StringConverter());
+		defaultConverterMap.put(String.class, new StringConverter());
+
+		// URI and URL
+		defaultConverterMap.put(URI.class, new URIConverter());
+		defaultConverterMap.put(URL.class, new URLConverter());
+
+		// 日期时间
+		defaultConverterMap.put(Calendar.class, new CalendarConverter());
+		defaultConverterMap.put(java.util.Date.class, new DateConverter(java.util.Date.class));
+		defaultConverterMap.put(DateTime.class, new DateConverter(DateTime.class));
+		defaultConverterMap.put(java.sql.Date.class, new DateConverter(java.sql.Date.class));
+		defaultConverterMap.put(java.sql.Time.class, new DateConverter(java.sql.Time.class));
+		defaultConverterMap.put(java.sql.Timestamp.class, new DateConverter(java.sql.Timestamp.class));
+
+		// 日期时间 JDK8+
+		defaultConverterMap.put(TemporalAccessor.class, new TemporalAccessorConverter(Instant.class));
+		defaultConverterMap.put(Instant.class, new TemporalAccessorConverter(Instant.class));
+		defaultConverterMap.put(LocalDateTime.class, new TemporalAccessorConverter(LocalDateTime.class));
+		defaultConverterMap.put(LocalDate.class, new TemporalAccessorConverter(LocalDate.class));
+		defaultConverterMap.put(LocalTime.class, new TemporalAccessorConverter(LocalTime.class));
+		defaultConverterMap.put(ZonedDateTime.class, new TemporalAccessorConverter(ZonedDateTime.class));
+		defaultConverterMap.put(OffsetDateTime.class, new TemporalAccessorConverter(OffsetDateTime.class));
+		defaultConverterMap.put(OffsetTime.class, new TemporalAccessorConverter(OffsetTime.class));
+		defaultConverterMap.put(Period.class, new PeriodConverter());
+		defaultConverterMap.put(Duration.class, new DurationConverter());
+
+		// Reference
+		defaultConverterMap.put(WeakReference.class, new ReferenceConverter(WeakReference.class));
+		defaultConverterMap.put(SoftReference.class, new ReferenceConverter(SoftReference.class));
+		defaultConverterMap.put(AtomicReference.class, new AtomicReferenceConverter());
+
+		//AtomicXXXArray
+		defaultConverterMap.put(AtomicIntegerArray.class, new AtomicIntegerArrayConverter());
+		defaultConverterMap.put(AtomicLongArray.class, new AtomicLongArrayConverter());
+
+		// 其它类型
+		defaultConverterMap.put(Class.class, new ClassConverter());
+		defaultConverterMap.put(TimeZone.class, new TimeZoneConverter());
+		defaultConverterMap.put(Locale.class, new LocaleConverter());
+		defaultConverterMap.put(Charset.class, new CharsetConverter());
+		defaultConverterMap.put(Path.class, new PathConverter());
+		defaultConverterMap.put(Currency.class, new CurrencyConverter());
+		defaultConverterMap.put(UUID.class, new UUIDConverter());
+		defaultConverterMap.put(StackTraceElement.class, new StackTraceElementConverter());
+		defaultConverterMap.put(Optional.class, new OptionalConverter());
+
+		return this;
 
     }
 }

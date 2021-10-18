@@ -1,5 +1,6 @@
 package com.xiaoTools.core.convert.converterRegistry;
 
+import com.xiaoTools.core.convert.booleanConverter.BooleanConverter;
 import com.xiaoTools.core.convert.characterConverter.CharacterConverter;
 import com.xiaoTools.core.convert.converter.Converter;
 import com.xiaoTools.core.convert.numberConverter.NumberConverter;

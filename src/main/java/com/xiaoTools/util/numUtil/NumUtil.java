@@ -88,6 +88,10 @@ public class NumUtil {
         return subtraction(Double.toString(subtraction),Double.toString(minuend)).doubleValue();
     }
 
+	public static BigDecimal subtraction(Number subtraction, Number minuend) {
+		return subtraction(new Number[]{subtraction, minuend});
+	}
+
     /**
      * [乘法](multiplication)
      * @description: zh - 将输入的两个数字进行相乘，可以带符号。
@@ -1842,6 +1846,32 @@ public class NumUtil {
             return result;
         }
     }
+
+	/**
+     * [减法](subtraction)
+     * @description: zh - 具体完成减法的方法
+     * @description: en - How to complete the subtraction
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-18 12:43:36
+	 * @param values [减法的数组](Subtracted array)
+	 * @return java.math.BigDecimal
+	 */
+	public static BigDecimal subtraction(Number... values) {
+		if (ArrayUtil.isEmpty(values)) {
+			return BigDecimal.ZERO;
+		}
+
+		Number value = values[0];
+		BigDecimal result = null == value ? BigDecimal.ZERO : new BigDecimal(value.toString());
+		for (int i = 1; i < values.length; i++) {
+			value = values[i];
+			if (null != value) {
+				result = result.subtract(new BigDecimal(value.toString()));
+			}
+		}
+		return result;
+	}
 
     /**
      * [减法](subtraction)

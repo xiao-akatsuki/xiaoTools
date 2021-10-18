@@ -1,6 +1,7 @@
 package com.xiaoTools.util.pageUtil;
 
 import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.lang.segment.Segment;
 
 /**
  *[分页工具类](Paging tool class)

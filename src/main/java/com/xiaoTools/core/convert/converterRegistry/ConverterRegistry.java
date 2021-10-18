@@ -6,6 +6,9 @@ import com.xiaoTools.core.convert.characterConverter.CharacterConverter;
 import com.xiaoTools.core.convert.converter.Converter;
 import com.xiaoTools.core.convert.numberConverter.NumberConverter;
 import com.xiaoTools.core.convert.primitiveConverter.PrimitiveConverter;
+import com.xiaoTools.core.convert.stringConverter.StringConverter;
+import com.xiaoTools.core.convert.uRIConverter.URIConverter;
+import com.xiaoTools.core.convert.uRLConverter.URLConverter;
 import com.xiaoTools.date.dateTime.DateTime;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.classUtil.ClassUtil;
@@ -203,6 +206,7 @@ public class ConverterRegistry implements Serializable {
 		defaultConverterMap.put(AtomicBoolean.class, new AtomicBooleanConverter());
 		defaultConverterMap.put(BigDecimal.class, new NumberConverter(BigDecimal.class));
 		defaultConverterMap.put(BigInteger.class, new NumberConverter(BigInteger.class));
+
 		defaultConverterMap.put(CharSequence.class, new StringConverter());
 		defaultConverterMap.put(String.class, new StringConverter());
 

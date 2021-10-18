@@ -77,7 +77,7 @@ public class NumberConverter extends AbstractConverter<Number> {
      * @param toStrFunc: 转换为字符串的函数
      * @return java.lang.Number
     */
-    protected static Number convert(Object value, Class<?> targetType, Function<Object, String> toStrFunc) {
+    public static Number convert(Object value, Class<?> targetType, Function<Object, String> toStrFunc) {
         // 枚举转换为数字默认为其顺序
         if (value instanceof Enum) {
             return convert(((Enum<?>) value).ordinal(), targetType, toStrFunc);
@@ -207,4 +207,71 @@ public class NumberConverter extends AbstractConverter<Number> {
 
         throw new UnsupportedOperationException(StrUtil.format("Unsupport Number type: {}", targetType.getName()));
     }
+
+	/**
+	 * [转换为BigDecimal](Convert to BigDecimal)
+	 * @description zh - 转换为BigDecimal
+	 * @description en - Convert to BigDecimal
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-18 19:59:55
+	 * @param value 被转换的值
+	 * @param toStrFunc 转换为字符串的函数规则
+	 * @return java.math.BigDecimal
+	 */
+	private static BigDecimal toBigDecimal(Object value, Function<Object, String> toStrFunc) {
+		if (value instanceof Number) {
+			return NumUtil.toBigDecimal((Number) value);
+		} else if (value instanceof Boolean) {
+			return new BigDecimal((boolean) value ? Constant.ONE : Constant.ZERO);
+		} else if (value instanceof byte[]){
+			return NumUtil.toBigDecimal(ByteUtil.bytesToDouble((byte[]) value));
+		}
+
+		//对于Double类型，先要转换为String，避免精度问题
+		return NumUtil.toBigDecimal(toStrFunc.apply(value));
+	}
+
+	/**
+	 * [转换为BigInteger](Convert to BigInteger)
+	 * @description zh - 转换为BigInteger
+	 * @description en - Convert to BigInteger
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-18 20:01:27
+	 * @param value 被转换的值
+	 * @param toStrFunc 转换为字符串的函数规则
+	 * @return java.math.BigInteger
+	 */
+	private static BigInteger toBigInteger(Object value, Function<Object, String> toStrFunc) {
+		if (value instanceof Long) {
+			return BigInteger.valueOf((Long) value);
+		} else if (value instanceof Boolean) {
+			return BigInteger.valueOf((boolean) value ? Constant.ONE : Constant.ZERO);
+		} else if (value instanceof byte[]){
+			return BigInteger.valueOf(ByteUtil.bytesToLong((byte[]) value));
+		}
+
+		return NumUtil.toBigInteger(toStrFunc.apply(value));
+	}
+
+	@Override
+	protected String convertToStr(Object value) {
+		String result = StrUtil.trim(super.convertToStr(value));
+		if (StrUtil.isNotEmpty(result)) {
+			final char c = Character.toUpperCase(result.charAt(result.length() - 1));
+			if (c == 'D' || c == 'L' || c == 'F') {
+				// 类型标识形式（例如123.6D）
+				return StrUtil.subStringPre(result, -1);
+			}
+		}
+
+		return result;
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public Class<Number> getTargetType() {
+		return (Class<Number>) this.targetType;
+	}
 }

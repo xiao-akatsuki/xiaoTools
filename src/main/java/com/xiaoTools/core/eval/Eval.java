@@ -35,6 +35,7 @@ public class Eval {
 
 
 	public static int eval(String formula) {
+		formula = formula.replace(" ", "");
         List<Integer> resInBrackets = new LinkedList<>();
         List<Operator> optr = new LinkedList<Operator>();
         for(int i=0; i<formula.length(); i++) {

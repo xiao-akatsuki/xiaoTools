@@ -1,5 +1,7 @@
 package com.xiaoTools.util.strUtil;
 
+import com.xiaoTools.core.convert.Convert;
+import com.xiaoTools.core.eval.Eval;
 import com.xiaoTools.core.text.stringBuilder.StrBuilder;
 import com.xiaoTools.core.text.textSimilarity.TextSimilarity;
 import com.xiaoTools.lang.constant.Constant;
@@ -498,4 +500,32 @@ public class StrUtil extends CharSequenceUtil {
         }
         return template2;
     }
+
+	/**
+	 * [运算公式](Operation formula)
+	 * @description zh - 运算公式
+	 * @description en - Operation formula
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-19 20:36:26
+	 * @param formula 公式
+	 * @return java.lang.String
+	 */
+	public static String eval(String formula){
+		return Convert.toStr(Eval.eval(formula), "-1");
+	}
+
+	/**
+	 * [运算公式](Operation formula)
+	 * @description zh - 运算公式
+	 * @description en - Operation formula
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-19 20:37:00
+	 * @param formula 公式
+	 * @return int
+	 */
+	public static int evalToInt(String formula){
+		return Eval.eval(formula);
+	}
 }

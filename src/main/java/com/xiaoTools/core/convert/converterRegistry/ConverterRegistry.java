@@ -24,12 +24,15 @@ import com.xiaoTools.core.convert.stackTraceElementConverter.StackTraceElementCo
 import com.xiaoTools.core.convert.stringConverter.StringConverter;
 import com.xiaoTools.core.convert.temporalAccessorConverter.TemporalAccessorConverter;
 import com.xiaoTools.core.convert.timeZoneConverter.TimeZoneConverter;
+import com.xiaoTools.core.convert.typeReference.TypeReference;
 import com.xiaoTools.core.convert.uRIConverter.URIConverter;
 import com.xiaoTools.core.convert.uRLConverter.URLConverter;
 import com.xiaoTools.core.convert.uUIDConverter.UUIDConverter;
+import com.xiaoTools.core.exception.convertException.ConvertException;
 import com.xiaoTools.date.dateTime.DateTime;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.classUtil.ClassUtil;
+import com.xiaoTools.util.objectUtil.ObjectUtil;
 import com.xiaoTools.util.reflectUtil.ReflectUtil;
 import com.xiaoTools.util.serviceLoaderUtil.ServiceLoaderUtil;
 import com.xiaoTools.util.typeUtil.TypeUtil;
@@ -192,6 +195,158 @@ public class ConverterRegistry implements Serializable {
         customConverterMap.put(type, converter);
         return this;
     }
+
+	/**
+	 * [获得转换器](Get converter)
+	 * @description zh - 获得转换器
+	 * @description en - Get converter
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-20 17:11:11
+	 * @param type 类型
+	 * @param isCustomFirst 是否自定义转换器优先
+	 * @return com.xiaoTools.core.convert.converter.Converter<T>
+	 */
+	public <T> Converter<T> getConverter(Type type, boolean isCustomFirst) {
+		Converter<T> converter;
+		if (isCustomFirst) {
+			converter = this.getCustomConverter(type);
+			if (null == converter) {
+				converter = this.getDefaultConverter(type);
+			}
+		} else {
+			converter = this.getDefaultConverter(type);
+			if (null == converter) {
+				converter = this.getCustomConverter(type);
+			}
+		}
+		return converter;
+	}
+
+	/**
+	 * [获得默认转换器](Get default converter)
+	 * @description zh - 获得默认转换器
+	 * @description en - Get default converter
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-20 17:12:28
+	 * @param type 类型
+	 * @return com.xiaoTools.core.convert.converter.Converter<T>
+	 */
+	@SuppressWarnings("unchecked")
+	public <T> Converter<T> getDefaultConverter(Type type) {
+		return (null == defaultConverterMap) ? null : (Converter<T>) defaultConverterMap.get(type);
+	}
+
+	/**
+	 * [获得自定义转换器](Get custom converter)
+	 * @description zh - 获得自定义转换器
+	 * @description en - Get custom converter
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-20 17:13:26
+	 * @param type 类型
+	 * @return com.xiaoTools.core.convert.converter.Converter<T>
+	 */
+	@SuppressWarnings("unchecked")
+	public <T> Converter<T> getCustomConverter(Type type) {
+		return (null == customConverterMap) ? null : (Converter<T>) customConverterMap.get(type);
+	}
+
+	/**
+	 * [转换值为指定类型](Converts the value to the specified type)
+	 * @description zh - 转换值为指定类型
+	 * @description en - Converts the value to the specified type
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-20 17:15:07
+	 * @param type 类型目标
+	 * @param value 被转换值
+	 * @param defaultValue 默认值
+	 * @param isCustomFirst 是否自定义转换器优先
+	 * @return T
+	 */
+	@SuppressWarnings("unchecked")
+	public <T> T convert(Type type, Object value, T defaultValue, boolean isCustomFirst) throws ConvertException {
+		if (TypeUtil.isUnknown(type) && null == defaultValue) {
+			// 对于用户不指定目标类型的情况，返回原值
+			return (T) value;
+		}
+		if (ObjectUtil.isNull(value)) {
+			return defaultValue;
+		}
+		if (TypeUtil.isUnknown(type)) {
+			type = defaultValue.getClass();
+		}
+
+		if (type instanceof TypeReference) {
+			type = ((TypeReference<?>) type).getType();
+		}
+
+		// 标准转换器
+		final Converter<T> converter = getConverter(type, isCustomFirst);
+		if (null != converter) {
+			return converter.convert(value, defaultValue);
+		}
+
+		Class<T> rowType = (Class<T>) TypeUtil.getClass(type);
+		if (null == rowType) {
+			if (null != defaultValue) {
+				rowType = (Class<T>) defaultValue.getClass();
+			} else {
+				// 无法识别的泛型类型，按照Object处理
+				return (T) value;
+			}
+		}
+
+
+		// 特殊类型转换，包括Collection、Map、强转、Array等
+		final T result = convertSpecial(type, rowType, value, defaultValue);
+		if (null != result) {
+			return result;
+		}
+
+		// 尝试转Bean
+		if (BeanUtil.isBean(rowType)) {
+			return new BeanConverter<T>(type).convert(value, defaultValue);
+		}
+
+		// 无法转换
+		throw new ConvertException("Can not Converter from [{}] to [{}]", value.getClass().getName(), type.getTypeName());
+	}
+
+	/**
+	 * [转换值为指定类型](Converts the value to the specified type)
+	 * @description zh - 转换值为指定类型
+	 * @description en - Converts the value to the specified type
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-20 17:16:51
+	 * @param type 类型
+	 * @param value 值
+	 * @param defaultValue 默认值
+	 * @throws com.xiaoTools.core.exception.convertException.ConvertException
+	 * @return T
+	 */
+	public <T> T convert(Type type, Object value, T defaultValue) throws ConvertException {
+		return convert(type, value, defaultValue, true);
+	}
+
+	/**
+	 * [转换值为指定类型](Converts the value to the specified type)
+	 * @description zh - 转换值为指定类型
+	 * @description en - Converts the value to the specified type
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-20 17:18:41
+	 * @param type 类型
+	 * @param value 值
+	 * @throws com.xiaoTools.core.exception.convertException.ConvertException
+	 * @return T
+	 */
+	public <T> T convert(Type type, Object value) throws ConvertException {
+		return convert(type, value, null);
+	}
 
     /*默认转换器--------------------------------------------------------------------defaultConverter*/
 

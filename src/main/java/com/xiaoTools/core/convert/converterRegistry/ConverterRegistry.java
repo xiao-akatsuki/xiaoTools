@@ -220,6 +220,21 @@ public class ConverterRegistry implements Serializable {
 		return converter;
 	}
 
+	/**
+	 * [获得默认转换器](Get default converter)
+	 * @description zh - 获得默认转换器
+	 * @description en - Get default converter
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-20 17:12:28
+	 * @param type 类型
+	 * @return com.xiaoTools.core.convert.converter.Converter<T>
+	 */
+	@SuppressWarnings("unchecked")
+	public <T> Converter<T> getDefaultConverter(Type type) {
+		return (null == defaultConverterMap) ? null : (Converter<T>) defaultConverterMap.get(type);
+	}
+
     /*默认转换器--------------------------------------------------------------------defaultConverter*/
 
     private ConverterRegistry defaultConverter() {

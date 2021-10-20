@@ -3,6 +3,7 @@ package com.xiaoTools.util.typeUtil;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
@@ -48,6 +49,20 @@ public class TypeUtil {
         }
         return null;
     }
+
+	/**
+	 * [获取字段对应的Type类型](Gets the type corresponding to the field)
+	 * @description zh - 获取字段对应的Type类型
+	 * @description en - Gets the type corresponding to the field
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 07:35:48
+	 * @param field 字段
+	 * @return java.lang.reflect.Type
+	 */
+	public static Type getType(Field field) {
+		return null == field ? null : field.getGenericType();
+	}
 
     /**
      * [获得给定类的第一个泛型参数](Gets the first generic parameter of a given class)

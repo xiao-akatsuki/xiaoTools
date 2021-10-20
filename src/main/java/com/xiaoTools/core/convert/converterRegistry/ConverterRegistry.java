@@ -59,6 +59,7 @@ import java.time.Period;
 import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Currency;
 import java.util.Locale;
 import java.util.Map;
@@ -346,6 +347,56 @@ public class ConverterRegistry implements Serializable {
 	 */
 	public <T> T convert(Type type, Object value) throws ConvertException {
 		return convert(type, value, null);
+	}
+
+	/**
+	 * [特殊类型转换](Special type conversion)
+	 * @description zh - 特殊类型转换
+	 * @description en - Special type conversion
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-20 17:21:18
+	 * @param type 类型
+	 * @param value 值
+	 * @param defaultValue 默认值
+	 * @return T
+	 */
+	@SuppressWarnings("unchecked")
+	private <T> T convertSpecial(Type type, Class<T> rowType, Object value, T defaultValue) {
+		if (null == rowType) {
+			return null;
+		}
+
+		// 集合转换（不可以默认强转）
+		if (Collection.class.isAssignableFrom(rowType)) {
+			final CollectionConverter collectionConverter = new CollectionConverter(type);
+			return (T) collectionConverter.convert(value, (Collection<?>) defaultValue);
+		}
+
+		// Map类型（不可以默认强转）
+		if (Map.class.isAssignableFrom(rowType)) {
+			final MapConverter mapConverter = new MapConverter(type);
+			return (T) mapConverter.convert(value, (Map<?, ?>) defaultValue);
+		}
+
+		// 默认强转
+		if (rowType.isInstance(value)) {
+			return (T) value;
+		}
+
+		// 枚举转换
+		if (rowType.isEnum()) {
+			return (T) new EnumConverter(rowType).convert(value, defaultValue);
+		}
+
+		// 数组转换
+		if (rowType.isArray()) {
+			final ArrayConverter arrayConverter = new ArrayConverter(rowType);
+			return (T) arrayConverter.convert(value, defaultValue);
+		}
+
+		// 表示非需要特殊转换的对象
+		return null;
 	}
 
     /*默认转换器--------------------------------------------------------------------defaultConverter*/

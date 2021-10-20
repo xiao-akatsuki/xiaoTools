@@ -235,6 +235,21 @@ public class ConverterRegistry implements Serializable {
 		return (null == defaultConverterMap) ? null : (Converter<T>) defaultConverterMap.get(type);
 	}
 
+	/**
+	 * [获得自定义转换器](Get custom converter)
+	 * @description zh - 获得自定义转换器
+	 * @description en - Get custom converter
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-20 17:13:26
+	 * @param type 类型
+	 * @return com.xiaoTools.core.convert.converter.Converter<T>
+	 */
+	@SuppressWarnings("unchecked")
+	public <T> Converter<T> getCustomConverter(Type type) {
+		return (null == customConverterMap) ? null : (Converter<T>) customConverterMap.get(type);
+	}
+
     /*默认转换器--------------------------------------------------------------------defaultConverter*/
 
     private ConverterRegistry defaultConverter() {

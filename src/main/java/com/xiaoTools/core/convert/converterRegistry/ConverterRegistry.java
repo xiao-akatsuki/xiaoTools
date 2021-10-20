@@ -193,6 +193,33 @@ public class ConverterRegistry implements Serializable {
         return this;
     }
 
+	/**
+	 * [获得转换器](Get converter)
+	 * @description zh - 获得转换器
+	 * @description en - Get converter
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-20 17:11:11
+	 * @param type 类型
+	 * @param isCustomFirst 是否自定义转换器优先
+	 * @return com.xiaoTools.core.convert.converter.Converter<T>
+	 */
+	public <T> Converter<T> getConverter(Type type, boolean isCustomFirst) {
+		Converter<T> converter;
+		if (isCustomFirst) {
+			converter = this.getCustomConverter(type);
+			if (null == converter) {
+				converter = this.getDefaultConverter(type);
+			}
+		} else {
+			converter = this.getDefaultConverter(type);
+			if (null == converter) {
+				converter = this.getCustomConverter(type);
+			}
+		}
+		return converter;
+	}
+
     /*默认转换器--------------------------------------------------------------------defaultConverter*/
 
     private ConverterRegistry defaultConverter() {

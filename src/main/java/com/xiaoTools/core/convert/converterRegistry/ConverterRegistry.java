@@ -28,6 +28,7 @@ import com.xiaoTools.core.convert.typeReference.TypeReference;
 import com.xiaoTools.core.convert.uRIConverter.URIConverter;
 import com.xiaoTools.core.convert.uRLConverter.URLConverter;
 import com.xiaoTools.core.convert.uUIDConverter.UUIDConverter;
+import com.xiaoTools.core.exception.convertException.ConvertException;
 import com.xiaoTools.date.dateTime.DateTime;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.classUtil.ClassUtil;
@@ -312,6 +313,39 @@ public class ConverterRegistry implements Serializable {
 
 		// 无法转换
 		throw new ConvertException("Can not Converter from [{}] to [{}]", value.getClass().getName(), type.getTypeName());
+	}
+
+	/**
+	 * [转换值为指定类型](Converts the value to the specified type)
+	 * @description zh - 转换值为指定类型
+	 * @description en - Converts the value to the specified type
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-20 17:16:51
+	 * @param type 类型
+	 * @param value 值
+	 * @param defaultValue 默认值
+	 * @throws com.xiaoTools.core.exception.convertException.ConvertException
+	 * @return T
+	 */
+	public <T> T convert(Type type, Object value, T defaultValue) throws ConvertException {
+		return convert(type, value, defaultValue, true);
+	}
+
+	/**
+	 * [转换值为指定类型](Converts the value to the specified type)
+	 * @description zh - 转换值为指定类型
+	 * @description en - Converts the value to the specified type
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-20 17:18:41
+	 * @param type 类型
+	 * @param value 值
+	 * @throws com.xiaoTools.core.exception.convertException.ConvertException
+	 * @return T
+	 */
+	public <T> T convert(Type type, Object value) throws ConvertException {
+		return convert(type, value, null);
 	}
 
     /*默认转换器--------------------------------------------------------------------defaultConverter*/

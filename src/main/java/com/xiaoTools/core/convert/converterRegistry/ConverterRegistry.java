@@ -2,11 +2,14 @@ package com.xiaoTools.core.convert.converterRegistry;
 
 import com.xiaoTools.core.convert.atomicBooleanConverter.AtomicBooleanConverter;
 import com.xiaoTools.core.convert.booleanConverter.BooleanConverter;
+import com.xiaoTools.core.convert.calendarConverter.CalendarConverter;
 import com.xiaoTools.core.convert.characterConverter.CharacterConverter;
 import com.xiaoTools.core.convert.converter.Converter;
+import com.xiaoTools.core.convert.dateConverter.DateConverter;
 import com.xiaoTools.core.convert.numberConverter.NumberConverter;
 import com.xiaoTools.core.convert.primitiveConverter.PrimitiveConverter;
 import com.xiaoTools.core.convert.stringConverter.StringConverter;
+import com.xiaoTools.core.convert.temporalAccessorConverter.TemporalAccessorConverter;
 import com.xiaoTools.core.convert.uRIConverter.URIConverter;
 import com.xiaoTools.core.convert.uRLConverter.URLConverter;
 import com.xiaoTools.date.dateTime.DateTime;

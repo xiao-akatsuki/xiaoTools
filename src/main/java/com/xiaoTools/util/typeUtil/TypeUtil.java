@@ -2,7 +2,10 @@ package com.xiaoTools.util.typeUtil;
 
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
+import com.xiaoTools.util.reflectUtil.ReflectUtil;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
@@ -48,6 +51,140 @@ public class TypeUtil {
         }
         return null;
     }
+
+	/**
+	 * [获取字段对应的Type类型](Gets the type corresponding to the field)
+	 * @description zh - 获取字段对应的Type类型
+	 * @description en - Gets the type corresponding to the field
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 07:35:48
+	 * @param field 字段
+	 * @return java.lang.reflect.Type
+	 */
+	public static Type getType(Field field) {
+		return null == field ? null : field.getGenericType();
+	}
+
+	/**
+	 * [获得字段的泛型类型](Gets the generic type of the field)
+	 * @description zh - 获得字段的泛型类型
+	 * @description en - Gets the generic type of the field
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 07:38:24
+	 * @param clazz Bean
+	 * @param fieldName 字段名
+	 * @return java.lang.reflect.Type
+	 */
+	public static Type getFieldType(Class<?> clazz, String fieldName) {
+		return getType(ReflectUtil.getField(clazz, fieldName));
+	}
+
+	/**
+	 * [获得Field对应的原始类](Get the original class corresponding to field)
+	 * @description zh - 获得Field对应的原始类
+	 * @description en - Get the original class corresponding to field
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 07:39:47
+	 * @param field 字段
+	 * @return java.lang.Class<?>
+	 */
+	public static Class<?> getClass(Field field) {
+		return null == field ? null : field.getType();
+	}
+
+	/*参数类型--------------------------------------------------------------------Param Type*/
+
+	/**
+	 * [获取方法的第一个参数类型](Gets the first parameter type of the method)
+	 * @description zh - 获取方法的第一个参数类型
+	 * @description en - Gets the first parameter type of the method
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 07:42:46
+	 * @param method 方法
+	 * @return java.lang.reflect.Type
+	 */
+	public static Type getFirstParamType(Method method) {
+		return getParamType(method, Constant.ZERO);
+	}
+
+	/**
+	 * [获取方法的第一个参数类](Gets the first parameter class of the method)
+	 * @description zh - 获取方法的第一个参数类
+	 * @description en - Gets the first parameter class of the method
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 07:43:38
+	 * @param method 方法
+	 * @return java.lang.Class<?>
+	 */
+	public static Class<?> getFirstParamClass(Method method) {
+		return getParamClass(method, 0);
+	}
+
+	/**
+	 * [获取方法的参数类型](Gets the parameter type of the method)
+	 * @description zh - 获取方法的参数类型
+	 * @description en - Gets the parameter type of the method
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 07:45:18
+	 * @param method 方法
+	 * @param index 第几个参数的索引，从0开始计数
+	 * @return java.lang.reflect.Type
+	 */
+	public static Type getParamType(Method method, int index) {
+		Type[] types = getParamTypes(method);
+		return null != types && types.length > index ? types[index] : null;
+	}
+
+	/**
+	 * [获取方法的参数类型列表](Gets a list of parameter types for the method)
+	 * @description zh - 获取方法的参数类型列表
+	 * @description en - Gets a list of parameter types for the method
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 07:49:14
+	 * @param method 方法
+	 * @return java.lang.reflect.Type[]
+	 */
+	public static Type[] getParamTypes(Method method) {
+		return null == method ? null : method.getGenericParameterTypes();
+	}
+
+	/**
+	 * [获取方法的参数类](Gets the parameter class of the method)
+	 * @description zh - 获取方法的参数类
+	 * @description en - Gets the parameter class of the method
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 07:50:50
+	 * @param method 方法
+	 * @param index 第几个参数的索引，从0开始计数
+	 * @return java.lang.Class<?>
+	 */
+	public static Class<?> getParamClass(Method method, int index) {
+		Class<?>[] classes = getParamClasses(method);
+		return null != classes && classes.length > index ? classes[index] : null;
+
+	}
+
+	/**
+	 * [解析方法的参数类型列表](A list of parameter types for the resolution method)
+	 * @description zh - 解析方法的参数类型列表
+	 * @description en - A list of parameter types for the resolution method
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 07:51:56
+	 * @param method 方法
+	 * @return java.lang.Class<?>[]
+	 */
+	public static Class<?>[] getParamClasses(Method method) {
+		return null == method ? null : method.getParameterTypes();
+	}
 
     /**
      * [获得给定类的第一个泛型参数](Gets the first generic parameter of a given class)

@@ -1,17 +1,32 @@
 package com.xiaoTools.core.convert.converterRegistry;
 
 import com.xiaoTools.core.convert.atomicBooleanConverter.AtomicBooleanConverter;
+import com.xiaoTools.core.convert.atomicIntegerArrayConverter.AtomicIntegerArrayConverter;
+import com.xiaoTools.core.convert.atomicLongArrayConverter.AtomicLongArrayConverter;
+import com.xiaoTools.core.convert.atomicReferenceConverter.AtomicReferenceConverter;
 import com.xiaoTools.core.convert.booleanConverter.BooleanConverter;
 import com.xiaoTools.core.convert.calendarConverter.CalendarConverter;
 import com.xiaoTools.core.convert.characterConverter.CharacterConverter;
+import com.xiaoTools.core.convert.charsetConverter.CharsetConverter;
+import com.xiaoTools.core.convert.classConverter.ClassConverter;
 import com.xiaoTools.core.convert.converter.Converter;
+import com.xiaoTools.core.convert.currencyConverter.CurrencyConverter;
 import com.xiaoTools.core.convert.dateConverter.DateConverter;
+import com.xiaoTools.core.convert.durationConverter.DurationConverter;
+import com.xiaoTools.core.convert.localeConverte.LocaleConverter;
 import com.xiaoTools.core.convert.numberConverter.NumberConverter;
+import com.xiaoTools.core.convert.optionalConverter.OptionalConverter;
+import com.xiaoTools.core.convert.pathConverter.PathConverter;
+import com.xiaoTools.core.convert.periodConverter.PeriodConverter;
 import com.xiaoTools.core.convert.primitiveConverter.PrimitiveConverter;
+import com.xiaoTools.core.convert.referenceConverter.ReferenceConverter;
+import com.xiaoTools.core.convert.stackTraceElementConverter.StackTraceElementConverter;
 import com.xiaoTools.core.convert.stringConverter.StringConverter;
 import com.xiaoTools.core.convert.temporalAccessorConverter.TemporalAccessorConverter;
+import com.xiaoTools.core.convert.timeZoneConverter.TimeZoneConverter;
 import com.xiaoTools.core.convert.uRIConverter.URIConverter;
 import com.xiaoTools.core.convert.uRLConverter.URLConverter;
+import com.xiaoTools.core.convert.uUIDConverter.UUIDConverter;
 import com.xiaoTools.date.dateTime.DateTime;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.classUtil.ClassUtil;
@@ -41,7 +56,6 @@ import java.time.Period;
 import java.time.ZonedDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Currency;
 import java.util.Locale;
 import java.util.Map;
@@ -248,6 +262,7 @@ public class ConverterRegistry implements Serializable {
 
 		// 其它类型
 		defaultConverterMap.put(Class.class, new ClassConverter());
+
 		defaultConverterMap.put(TimeZone.class, new TimeZoneConverter());
 		defaultConverterMap.put(Locale.class, new LocaleConverter());
 		defaultConverterMap.put(Charset.class, new CharsetConverter());

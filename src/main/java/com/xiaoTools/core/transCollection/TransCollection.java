@@ -10,6 +10,7 @@ import java.util.function.Predicate;
 
 import com.xiaoTools.assertion.Assertion;
 import com.xiaoTools.util.iterUtil.IterUtil;
+import com.xiaoTools.util.spliteratorUtil.SpliteratorUtil;
 
 public class TransCollection<F, T> extends AbstractCollection<T> {
 

@@ -2,6 +2,7 @@ package com.xiaoTools.util.typeUtil;
 
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
+import com.xiaoTools.util.objectUtil.ObjectUtil;
 import com.xiaoTools.util.reflectUtil.ReflectUtil;
 
 import java.lang.reflect.Field;
@@ -10,6 +11,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
+import java.util.Map;
 
 /**
  * [针对 Type 的工具类封装](Tool class encapsulation for Type)
@@ -186,6 +188,38 @@ public class TypeUtil {
 		return null == method ? null : method.getParameterTypes();
 	}
 
+	/*获取返回值类型--------------------------------------------------------------------get return type*/
+
+	/**
+	 * [获取方法的返回值类型](Gets the return value type of the method)
+	 * @description zh - 获取方法的返回值类型
+	 * @description en - Gets the return value type of the method
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 12:04:14
+	 * @param method 方法
+	 * @return java.lang.reflect.Type
+	 */
+	public static Type getReturnType(Method method) {
+		return null == method ? null : method.getGenericReturnType();
+	}
+
+	/**
+	 * [解析方法的返回类型类列表](List of return type classes of the resolution method)
+	 * @description zh - 解析方法的返回类型类列表
+	 * @description en - List of return type classes of the resolution method
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 12:05:36
+	 * @param method 方法
+	 * @return java.lang.Class<?>
+	 */
+	public static Class<?> getReturnClass(Method method) {
+		return null == method ? null : method.getReturnType();
+	}
+
+	/** 泛型类型 ----------------------------------------------------------------------------------- Type Argument */
+
     /**
      * [获得给定类的第一个泛型参数](Gets the first generic parameter of a given class)
      * @description: zh - 获得给定类的第一个泛型参数
@@ -263,4 +297,122 @@ public class TypeUtil {
         }
         return result;
     }
+
+	/**
+	 * [是否未知类型](Unknown type)
+	 * @description zh - 是否未知类型
+	 * @description en - Unknown type
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 12:07:53
+	 * @param type 类型
+	 * @return boolean
+	 */
+	public static boolean isUnknown(Type type) {
+		return null == type || type instanceof TypeVariable;
+	}
+
+	/**
+	 * [指定泛型数组中是否含有泛型变量](Specifies whether the generic array contains generic variables)
+	 * @description zh - 指定泛型数组中是否含有泛型变量
+	 * @description en - Specifies whether the generic array contains generic variables
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 12:10:13
+	 * @param types 泛型数组
+	 * @return boolean
+	 */
+	public static boolean hasTypeVariable(Type... types) {
+		for (Type type : types) {
+			if (type instanceof TypeVariable) {
+				return Constant.TRUE;
+			}
+		}
+		return Constant.FALSE;
+	}
+
+	/**
+	 * [获取泛型变量和泛型实际类型的对应关系Map](Get the mapping between generic variables and generic actual types)
+	 * @description zh - 获取泛型变量和泛型实际类型的对应关系Map
+	 * @description en - Get the mapping between generic variables and generic actual types
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 12:11:26
+	 * @param clazz 被解析的包含泛型参数的类
+	 * @return java.util.Map<Type, Type>
+	 */
+	public static Map<Type, Type> getTypeMap(Class<?> clazz) {
+		return ActualTypeMapperPool.get(clazz);
+	}
+
+	/**
+	 * [获得泛型字段对应的泛型实际类型](Get the generic actual type corresponding to the generic field)
+	 * @description zh - 获得泛型字段对应的泛型实际类型
+	 * @description en - Get the generic actual type corresponding to the generic field
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 12:18:38
+	 * @param type 实际类型明确的类
+	 * @param field 字段
+	 * @return java.lang.reflect.Type
+	 */
+	public static Type getActualType(Type type, Field field) {
+		return null == field ? null : getActualType(ObjectUtil.defaultIfNull(type, field.getDeclaringClass()), field.getGenericType());
+	}
+
+	/**
+	 * [获得泛型字段对应的泛型实际类型](Get the generic actual type corresponding to the generic field)
+	 * @description zh - 获得泛型字段对应的泛型实际类型
+	 * @description en - Get the generic actual type corresponding to the generic field
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 12:20:39
+	 * @param type 类
+	 * @param typeVariable 泛型变量
+	 * @return java.lang.reflect.Type
+	 */
+	public static Type getActualType(Type type, Type typeVariable) {
+		return typeVariable instanceof ParameterizedType ? getActualType(type, (ParameterizedType) typeVariable) :
+			typeVariable instanceof TypeVariable ? ActualTypeMapperPool.getActualType(type, (TypeVariable<?>) typeVariable) :
+			typeVariable;
+	}
+
+	/**
+	 * [获得泛型字段对应的泛型实际类型](Get the generic actual type corresponding to the generic field)
+	 * @description zh - 获得泛型字段对应的泛型实际类型
+	 * @description en - Get the generic actual type corresponding to the generic field
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 12:22:07
+	 * @param type 类型
+	 * @param parameterizedType 泛型变量
+	 * @return java.lang.reflect.Type
+	 */
+	public static Type getActualType(Type type, ParameterizedType parameterizedType) {
+		Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
+
+		if (TypeUtil.hasTypeVariable(actualTypeArguments)) {
+			actualTypeArguments = getActualTypes(type, parameterizedType.getActualTypeArguments());
+			if (ArrayUtil.isNotEmpty(actualTypeArguments)) {
+				parameterizedType = new ParameterizedTypeImpl(actualTypeArguments, parameterizedType.getOwnerType(), parameterizedType.getRawType());
+			}
+		}
+
+		return parameterizedType;
+	}
+
+	/**
+	 * [获得泛型变量对应的泛型实际类型](Get the generic actual type corresponding to the generic variable)
+	 * @description zh - 获得泛型变量对应的泛型实际类型
+	 * @description en - Get the generic actual type corresponding to the generic variable
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 12:22:59
+	 * @param type 类
+	 * @param typeVariables 泛型变量数组
+	 * @return java.lang.reflect.Type[]
+	 */
+	public static Type[] getActualTypes(Type type, Type... typeVariables) {
+		return ActualTypeMapperPool.getActualTypes(type, typeVariables);
+	}
 }

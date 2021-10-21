@@ -2,6 +2,7 @@ package com.xiaoTools.core.stringFormatter;
 
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
+import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.nio.charset.StandardCharsets;
 
@@ -66,6 +67,6 @@ public class StrFormatter {
     }
 
     public static String utf8Str(Object o) {
-        return StrUtil.str(o, StandardCharsets.UTF_8);
+        return StrUtil.string(o, StandardCharsets.UTF_8);
     }
 }

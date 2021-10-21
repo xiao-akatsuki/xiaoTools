@@ -189,7 +189,7 @@ public class LocalDateTimeUtil {
      * @version: V1.0
      * @author XiaoXunYao
      * @since 2021/6/21 12:11 下午
-     * @param instant: Instant 
+     * @param instant: Instant
      * @return java.time.LocalDateTime
     */
     public static LocalDateTime ofUTC(Instant instant) { return of(instant, ZoneId.of(Constant.UTC)); }
@@ -281,7 +281,7 @@ public class LocalDateTimeUtil {
             if(StrUtil.startWithIgnoreEquals(format, Constant.PURE_DATETIME_PATTERN)){
                 final String fraction = StrUtil.removePrefix(format, Constant.PURE_DATETIME_PATTERN);
                 if(RegularUtil.isMatch(Constant.STRING_S_ONE_TWO, fraction)){
-                    text += StrUtil.repeat(Constant.CHAR_ZERO, Constant.THREE-fraction.length());
+                    text = text + StrUtil.repeat(Constant.CHAR_ZERO, Constant.THREE-fraction.length());
                 }
                 formatter = new DateTimeFormatterBuilder()
                         .appendPattern(Constant.PURE_DATETIME_PATTERN)

@@ -1284,6 +1284,25 @@ public class NumUtil {
         return string;
     }
 
+	/**
+	 * [检查是否为有效的数字](Check whether it is a valid number)
+	 * @description zh - 检查是否为有效的数字
+	 * @description en - Check whether it is a valid number
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 18:14:17
+	 * @param number 数字
+	 * @return boolean
+	 */
+	public static boolean isValidNumber(Number number) {
+		if (number instanceof Double) {
+			return (false == ((Double) number).isInfinite()) && (false == ((Double) number).isNaN());
+		} else if (number instanceof Float) {
+			return (false == ((Float) number).isInfinite()) && (false == ((Float) number).isNaN());
+		}
+		return true;
+	}
+
     /*BigDecimal数字转字符串 ----------------------------------------------------------- BigDecimal to string*/
 
     /**

@@ -410,7 +410,7 @@ public class RegularUtil {
      * @return java.lang.String
     */
     public static String delFirst(String regex, CharSequence content) {
-        if (StrUtil.isBlank(regex, content)) {
+        if (StrUtil.hasBlank(regex, content)) {
             return StrUtil.str(content);
         }
         final Pattern pattern = PatternPool.get(regex, Pattern.DOTALL);
@@ -444,7 +444,7 @@ public class RegularUtil {
      * @return java.lang.String
     */
     public static String delAll(String regex, CharSequence content) {
-        if (StrUtil.isBlank(regex, content)) { return StrUtil.str(content); }
+        if (StrUtil.hasBlank(regex, content)) { return StrUtil.str(content); }
         final Pattern pattern = PatternPool.get(regex, Pattern.DOTALL);
         return delAll(pattern, content);
     }

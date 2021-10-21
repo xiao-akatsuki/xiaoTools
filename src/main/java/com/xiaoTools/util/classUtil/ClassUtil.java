@@ -1,11 +1,14 @@
 package com.xiaoTools.util.classUtil;
 
+import com.xiaoTools.assertion.Assertion;
 import com.xiaoTools.core.basicType.BasicType;
 import com.xiaoTools.entity.nullWrapperEntity.NullWrapperEntity;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.typeUtil.TypeUtil;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 
 /**
@@ -27,6 +30,7 @@ public class ClassUtil {
      * @param value: 对象，如果为null 返回null
      * @return java.lang.Class<T>
     */
+	@SuppressWarnings("unchecked")
     public static <T> Class<T> getClass(T value) {
         return ((Constant.NULL == value) ? (Class<T>) Constant.NULL : (Class<T>) value.getClass());
     }
@@ -249,4 +253,19 @@ public class ClassUtil {
         final Type argumentType = TypeUtil.getTypeArgument(clazz, index);
         return TypeUtil.getClass(argumentType);
     }
+
+	/**
+	 * [是否为静态方法](Is it a static method)
+	 * @description zh - 是否为静态方法
+	 * @description en - Is it a static method
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 19:14:18
+	 * @param method 方法
+	 * @return boolean
+	 */
+	public static boolean isStatic(Method method) {
+		Assertion.notNull(method, "Method to provided is null.");
+		return Modifier.isStatic(method.getModifiers());
+	}
 }

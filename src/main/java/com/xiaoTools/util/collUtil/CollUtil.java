@@ -1,6 +1,7 @@
 package com.xiaoTools.util.collUtil;
 
 import com.xiaoTools.core.collection.arrayIter.ArrayIter;
+import com.xiaoTools.core.collection.consumer.Consumer;
 import com.xiaoTools.core.collection.enumerationIter.EnumerationIter;
 import com.xiaoTools.core.collection.iteratorEnumeration.IteratorEnumeration;
 import com.xiaoTools.core.collection.kVConsumer.KVConsumer;
@@ -11,6 +12,7 @@ import com.xiaoTools.core.editor.Editor;
 import com.xiaoTools.core.exception.utilException.UtilException;
 import com.xiaoTools.core.filter.Filter;
 import com.xiaoTools.core.matcher.Matcher;
+import com.xiaoTools.core.transCollection.TransCollection;
 import com.xiaoTools.entity.pinyinComparator.PinyinComparator;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.lang.hash.hash32.Hash32;
@@ -26,6 +28,7 @@ import com.xiaoTools.util.regularUtil.method.Func1;
 import com.xiaoTools.util.strUtil.StrUtil;
 import com.xiaoTools.util.typeUtil.TypeUtil;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.*;
 import java.util.Map.Entry;
@@ -33,7 +36,6 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.LinkedBlockingDeque;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 

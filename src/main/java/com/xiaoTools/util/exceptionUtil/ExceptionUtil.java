@@ -3,6 +3,7 @@ package com.xiaoTools.util.exceptionUtil;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.reflectUtil.ReflectUtil;
+import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.UndeclaredThrowableException;
@@ -200,7 +201,7 @@ public class ExceptionUtil {
      * @version: V1.0
      * @author XiaoXunYao
      * @since 2021/6/16 12:54 下午
-     * @param throwable: 异常 
+     * @param throwable: 异常
      * @param causeClasses: 定义的引起异常的类
      * @return boolean
     */
@@ -215,7 +216,7 @@ public class ExceptionUtil {
      * @version: V1.0
      * @author XiaoXunYao
      * @since 2021/6/16 12:55 下午
-     * @param throwable: 异常对象 
+     * @param throwable: 异常对象
      * @param causeClasses: 定义的引起异常的类
      * @return java.lang.Throwable
     */
@@ -223,8 +224,8 @@ public class ExceptionUtil {
         Throwable cause = throwable;
         while (cause != Constant.NULL) {
             for (Class<? extends Exception> causeClass : causeClasses) {
-                if (causeClass.isInstance(cause)) { 
-                    return cause; 
+                if (causeClass.isInstance(cause)) {
+                    return cause;
                 }
             }
             cause = cause.getCause();
@@ -239,7 +240,7 @@ public class ExceptionUtil {
      * @version: V1.0
      * @author XiaoXunYao
      * @since 2021/6/16 1:03 下午
-     * @param throwable: 异常 
+     * @param throwable: 异常
      * @param exceptionClass: 定义的引起异常的类
      * @return boolean
     */

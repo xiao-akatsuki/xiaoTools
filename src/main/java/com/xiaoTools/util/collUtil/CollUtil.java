@@ -11,6 +11,7 @@ import com.xiaoTools.core.editor.Editor;
 import com.xiaoTools.core.exception.utilException.UtilException;
 import com.xiaoTools.core.filter.Filter;
 import com.xiaoTools.core.matcher.Matcher;
+import com.xiaoTools.core.transCollection.TransCollection;
 import com.xiaoTools.entity.pinyinComparator.PinyinComparator;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.lang.hash.hash32.Hash32;

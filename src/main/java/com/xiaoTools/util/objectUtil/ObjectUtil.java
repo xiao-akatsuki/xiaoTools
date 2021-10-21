@@ -5,6 +5,8 @@ import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.classUtil.ClassUtil;
 import com.xiaoTools.util.compareUtil.CompareUtil;
+import com.xiaoTools.util.iterUtil.IterUtil;
+import com.xiaoTools.util.mapUtil.MapUtil;
 import com.xiaoTools.util.numUtil.NumUtil;
 import com.xiaoTools.util.reflectUtil.ReflectUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
@@ -75,7 +77,7 @@ public class ObjectUtil {
     }
 
     /* 长度 -------------------------------------------------------------- length */
-    
+
     /**
      * [获取对象的长度，如果是字符串调用其length函数，集合类调用其size函数，数组调用其length属性，其他可遍历对象遍历计算长度](Get the length of the object. If it is a string, call its length function, collection class call its size function, array call its length attribute, and other traversable objects traverse the length)
      * @description: zh - 获取对象的长度，如果是字符串调用其length函数，集合类调用其size函数，数组调用其length属性，其他可遍历对象遍历计算长度
@@ -210,7 +212,7 @@ public class ObjectUtil {
 
     /* 包含 -------------------------------------------------------------- contains */
 
-    /** 
+    /**
      * [对象中是否包含元素](Does the object contain elements)
      * @description zh - 对象中是否包含元素
      * @description en - Does the object contain elements
@@ -284,12 +286,12 @@ public class ObjectUtil {
      */
     @SuppressWarnings("rawtypes")
 	public static boolean isEmpty(Object value) {
-        return Constant.NULL == value ? Constant.TRUE : 
-            value instanceof CharSequence ? StrUtil.isEmpty((CharSequence) value) : 
-            value instanceof Map ? MapUtil.isEmpty((Map) value) : 
+        return Constant.NULL == value ? Constant.TRUE :
+            value instanceof CharSequence ? StrUtil.isEmpty((CharSequence) value) :
+            value instanceof Map ? MapUtil.isEmpty((Map) value) :
             value instanceof Iterable ? IterUtil.isEmpty((Iterable) value) :
-            value instanceof Iterator ? IterUtil.isEmpty((Iterator) value) : 
-            ArrayUtil.isArray(value) ? ArrayUtil.isEmpty(value) : 
+            value instanceof Iterator ? IterUtil.isEmpty((Iterator) value) :
+            ArrayUtil.isArray(value) ? ArrayUtil.isEmpty(value) :
             Constant.FALSE;
 	}
 
@@ -368,8 +370,8 @@ public class ObjectUtil {
     public static <T> T clone(T value) {
 		T result = ArrayUtil.clone(value);
 		if (Constant.NULL == result) {
-            result = value instanceof Cloneable ? 
-                ReflectUtil.invoke(value, "clone") : 
+            result = value instanceof Cloneable ?
+                ReflectUtil.invoke(value, "clone") :
                 cloneByStream(value);
 		}
 		return result;
@@ -513,8 +515,8 @@ public class ObjectUtil {
      * @return java.lang.String
      */
     public static String toString(Object value) {
-        return Constant.NULL == value ? Constant.STRING_NULL_OUT : 
-                value instanceof Map ? value.toString() :  
+        return Constant.NULL == value ? Constant.STRING_NULL_OUT :
+                value instanceof Map ? value.toString() :
                 Convert.toStr(value);
 	}
 

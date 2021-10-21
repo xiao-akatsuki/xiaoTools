@@ -5,6 +5,7 @@ import com.xiaoTools.assertion.Assertion;
 import com.xiaoTools.cache.simple.SimpleCache;
 import com.xiaoTools.core.convert.Convert;
 import com.xiaoTools.core.exception.utilException.UtilException;
+import com.xiaoTools.entity.nullWrapperEntity.NullWrapperEntity;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.classUtil.ClassUtil;
@@ -53,6 +54,7 @@ public class ReflectUtil {
      * @param parameterTypes: 参数类型
      * @return java.lang.reflect.Constructor<T>
     */
+	@SuppressWarnings("unchecked")
     public static <T> Constructor<T> getConstructor(Class<T> clazz, Class<?>... parameterTypes) {
         if (Constant.NULL == clazz) { return (Constructor<T>) Constant.NULL; }
         final Constructor<?>[] constructors = getConstructors(clazz);
@@ -78,6 +80,7 @@ public class ReflectUtil {
      * @param beanClass: 类
      * @return java.lang.reflect.Constructor<T>[]
     */
+	@SuppressWarnings("unchecked")
     public static <T> Constructor<T>[] getConstructors(Class<T> beanClass) throws SecurityException {
         Assertion.notNull(beanClass);
         Constructor<?>[] constructors = CONSTRUCTORS_CACHE.get(beanClass);
@@ -115,7 +118,7 @@ public class ReflectUtil {
      * @return T
     */
     public static <T extends AccessibleObject> T setAccessible(T accessibleObject) {
-        if (null != accessibleObject && !accessibleObject.isAccessible()) {
+        if (null != accessibleObject && !accessibleObject.canAccess(accessibleObject)) {
             accessibleObject.setAccessible(true);
         }
         return accessibleObject;
@@ -295,6 +298,119 @@ public class ReflectUtil {
         return Constant.OBJECTS_ARRAY_NULL;
     }
 
+	/**
+	 * [查找指定对象中的所有方法](Finds all methods in the specified object)
+	 * @description zh - 查找指定对象中的所有方法
+	 * @description en - Finds all methods in the specified object
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 19:04:17
+	 * @param obj 对象
+	 * @param methodName 方法名称
+	 * @param args 参数列表
+	 * @return java.lang.reflect.Method
+	 */
+	public static Method getMethodOfObj(Object obj, String methodName, Object... args) throws SecurityException {
+		return null == obj || StrUtil.isBlank(methodName) ? null : getMethod(obj.getClass(), methodName, ClassUtil.getClasses(args));
+	}
+
+	/**
+	 * [查找指定方法](Find the specified method)
+	 * @description zh - 查找指定方法
+	 * @description en - Find the specified method
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 19:05:54
+	 * @param clazz 类
+	 * @param methodName 方法名
+	 * @param paramTypes 参数类型
+	 * @return java.lang.reflect.Method
+	 */
+	public static Method getMethod(Class<?> clazz, String methodName, Class<?>... paramTypes) throws SecurityException {
+		return getMethod(clazz, false, methodName, paramTypes);
+	}
+
+	/**
+	 * [查找指定方法](Find the specified method)
+	 * @description zh - 查找指定方法
+	 * @description en - Find the specified method
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 19:07:12
+	 * @param clazz 类
+	 * @param ignoreCase 是否忽略大小写
+	 * @param methodName 方法名
+	 * @param paramTypes 参数类型
+	 * @return java.lang.reflect.Method
+	 */
+	public static Method getMethod(Class<?> clazz, boolean ignoreCase, String methodName, Class<?>... paramTypes) throws SecurityException {
+		if (null == clazz || StrUtil.isBlank(methodName)) {
+			return null;
+		}
+
+		final Method[] methods = getMethods(clazz);
+		if (ArrayUtil.isNotEmpty(methods)) {
+			for (Method method : methods) {
+				if (StrUtil.equals(methodName, method.getName(), ignoreCase)) {
+					if (ClassUtil.isAllAssignableFrom(method.getParameterTypes(), paramTypes)) {
+						return method;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * [获得一个类中所有方法列表](Get a list of all methods in a class)
+	 * @description zh - 获得一个类中所有方法列表
+	 * @description en - Get a list of all methods in a class
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 19:09:41
+	 * @param beanClass 类
+	 * @return java.lang.reflect.Method
+	 */
+	public static Method[] getMethods(Class<?> beanClass) throws SecurityException {
+		Method[] allMethods = METHODS_CACHE.get(beanClass);
+		if (null != allMethods) {
+			return allMethods;
+		}
+
+		allMethods = getMethodsDirectly(beanClass, true);
+		return METHODS_CACHE.put(beanClass, allMethods);
+	}
+
+	/**
+	 * [获得一个类中所有方法列表](Get a list of all methods in a class)
+	 * @description zh - 获得一个类中所有方法列表
+	 * @description en - Get a list of all methods in a class
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 19:11:20
+	 * @param beanClass 类
+	 * @param withSuperClassMethods 是否包括父类的方法列表
+	 * @return java.lang.reflect.Method[]
+	 */
+	public static Method[] getMethodsDirectly(Class<?> beanClass, boolean withSuperClassMethods) throws SecurityException {
+		Assertion.notNull(beanClass);
+
+		Method[] allMethods = null;
+		Class<?> searchType = beanClass;
+		Method[] declaredMethods;
+		while (searchType != null) {
+			declaredMethods = searchType.getDeclaredMethods();
+			if (null == allMethods) {
+				allMethods = declaredMethods;
+			} else {
+				allMethods = ArrayUtil.append(allMethods, declaredMethods);
+			}
+			searchType = withSuperClassMethods ? searchType.getSuperclass() : null;
+		}
+
+		return allMethods;
+	}
+
     /**
      * [设置字段值](Set field value)
      * @description: zh - 设置字段值
@@ -361,6 +477,7 @@ public class ReflectUtil {
      * @param clazz: 类名
      * @return T
     */
+	@SuppressWarnings("unchecked")
     public static <T> T newInstance(String clazz) throws UtilException {
         try {
             return (T) Class.forName(clazz).getDeclaredConstructor().newInstance();
@@ -401,4 +518,113 @@ public class ReflectUtil {
             throw new UtilException(e, "Instance class [{}] error!", clazz);
         }
     }
+
+	// 调用 ------------------------------------------------------------------------------- invoke
+
+	/**
+	 * [执行静态方法](Execute static methods)
+	 * @description zh - 执行静态方法
+	 * @description en - Execute static methods
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 18:42:07
+	 * @param method 方法
+	 * @param args 参数列表
+	 * @return T
+	 */
+	public static <T> T invokeStatic(Method method, Object... args) throws UtilException {
+		return invoke(null, method, args);
+	}
+
+	/**
+	 * [执行方法](Execution method)
+	 * @description zh - 执行方法
+	 * @description en - Execution method
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 18:44:54
+	 * @param obj 对象
+	 * @param method 方法
+	 * @param args 参数列表
+	 * @return T
+	 */
+	public static <T> T invokeWithCheck(Object obj, Method method, Object... args) throws UtilException {
+		final Class<?>[] types = method.getParameterTypes();
+		if (null != args) {
+			Assertion.isTrue(args.length == types.length, "Params length [{}] is not fit for param length [{}] of method !", args.length, types.length);
+			Class<?> type;
+			for (int i = 0; i < args.length; i++) {
+				type = types[i];
+				if (type.isPrimitive() && null == args[i]) {
+					// 参数是原始类型，而传入参数为null时赋予默认值
+					args[i] = ClassUtil.getDefaultValue(type);
+				}
+			}
+		}
+
+		return invoke(obj, method, args);
+	}
+
+	/**
+	 * [执行方法](Execution method)
+	 * @description zh - 执行方法
+	 * @description en - Execution method
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 18:46:28
+	 * @param obj 对象
+	 * @param method 方法
+	 * @param args 参数列表
+	 * @return T
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T invoke(Object obj, Method method, Object... args) throws UtilException {
+		setAccessible(method);
+
+		final Class<?>[] parameterTypes = method.getParameterTypes();
+		final Object[] actualArgs = new Object[parameterTypes.length];
+		if (null != args) {
+			for (int i = 0; i < actualArgs.length; i++) {
+				if (i >= args.length || null == args[i]) {
+					actualArgs[i] = ClassUtil.getDefaultValue(parameterTypes[i]);
+				} else if (args[i] instanceof NullWrapperEntity) {
+					actualArgs[i] = null;
+				} else if (false == parameterTypes[i].isAssignableFrom(args[i].getClass())) {
+					final Object targetValue = Convert.convert(parameterTypes[i], args[i]);
+					if (null != targetValue) {
+						actualArgs[i] = targetValue;
+					}
+				} else {
+					actualArgs[i] = args[i];
+				}
+			}
+		}
+
+		try {
+			return (T) method.invoke(ClassUtil.isStatic(method) ? null : obj, actualArgs);
+		} catch (Exception e) {
+			throw new UtilException(e);
+		}
+	}
+
+	/**
+	 * [执行对象中指定方法](Executes the method specified in the object)
+	 * @description zh - 执行对象中指定方法
+	 * @description en - Executes the method specified in the object
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 18:17:14
+	 * @param methodName 方法名称
+	 * @param args 参数列表
+	 * @throws com.xiaoTools.core.exception.utilException.UtilException.UtilException
+	 * @return T
+	 */
+	public static <T> T invoke(Object obj, String methodName, Object... args) throws UtilException {
+		final Method method = getMethodOfObj(obj, methodName, args);
+		if (null == method) {
+			throw new UtilException(StrUtil.format("No such method: [{}]", methodName));
+		}
+		return invoke(obj, method, args);
+	}
+
 }

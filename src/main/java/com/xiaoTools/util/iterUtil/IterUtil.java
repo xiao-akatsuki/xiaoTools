@@ -12,6 +12,7 @@ import java.util.Objects;
 import java.util.Map.Entry;
 import java.util.function.Function;
 
+import com.xiaoTools.core.collection.copiedIter.CopiedIter;
 import com.xiaoTools.core.collection.enumerationIter.EnumerationIter;
 import com.xiaoTools.core.collection.transIter.TransIter;
 import com.xiaoTools.core.filter.Filter;

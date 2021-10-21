@@ -175,6 +175,18 @@ public class FileUtil {
         return Constant.TRUE;
     }
 
+	/**
+	 * [是否为Windows环境](Is it a Windows environment)
+	 * @description zh - 是否为Windows环境
+	 * @description en - Is it a Windows environment
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-21 18:32:41
+	 */
+	public static boolean isWindows() {
+		return '\\' == File.separatorChar;
+	}
+
     /**
      * [获取文件的绝对路径](Get the absolute path of the file)
      * @description: zh - 通过文件的相对路径获取到该文件的绝对路径

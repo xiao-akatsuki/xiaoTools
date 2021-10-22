@@ -2,6 +2,7 @@ package com.xiaoTools.util.ioUtil;
 
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.fileUtil.fileUtil.FileUtil;
+import com.xiaoTools.util.nioUtil.NioUtil;
 
 import java.io.*;
 
@@ -13,7 +14,7 @@ import java.io.*;
  * @author XiaoXunYao
  * @since 2021/5/24 1:23 下午
 */
-public class IoUtil {
+public class IoUtil extends NioUtil {
 
     /**
      * [初始化工具类](Initialize tool class)
@@ -84,7 +85,7 @@ public class IoUtil {
     public static void writeUTF8(String value,String path){
         write(value,path, Constant.UTF_8);
     }
-    
+
     /**
      * [将写入的文本使用GBK写入到文件中](Write the written text to a file using GBK)
      * @description: zh - 将写入的文本使用GBK写入到文件中

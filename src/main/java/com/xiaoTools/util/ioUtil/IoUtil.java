@@ -1,10 +1,17 @@
 package com.xiaoTools.util.ioUtil;
 
+import com.xiaoTools.assertion.Assertion;
+import com.xiaoTools.core.exception.iORuntimeException.IORuntimeException;
+import com.xiaoTools.core.io.bomInputStream.BOMInputStream;
+import com.xiaoTools.core.io.streamProgress.StreamProgress;
 import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.util.charsetUtil.CharsetUtil;
 import com.xiaoTools.util.fileUtil.fileUtil.FileUtil;
 import com.xiaoTools.util.nioUtil.NioUtil;
 
 import java.io.*;
+import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
 
 /**
  * [Io流封装的工具类NIO](Tool class NiO encapsulated by IO stream)
@@ -16,16 +23,246 @@ import java.io.*;
 */
 public class IoUtil extends NioUtil {
 
-    /**
-     * [初始化工具类](Initialize tool class)
-     * @description: zh - 初始化工具类
-     * @description: en - Initialize tool class
-     * @version: V1.0
-     * @author XiaoXunYao
-     * @since 2021/5/24 1:24 下午
-    */
-    public IoUtil() { }
+	// 复制 ----------------------------------------- Copy
 
+	/**
+	 * [将Reader中的内容复制到Writer中使用默认缓存大小](Copy the contents of the reader to the writer using the default cache size)
+	 * @description zh - 将Reader中的内容复制到Writer中使用默认缓存大小
+	 * @description en - Copy the contents of the reader to the writer using the default cache size
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-22 21:48:02
+	 * @param reader Reader
+	 * @param weiter Writer
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return long
+	 */
+	public static long copy(Reader reader, Writer writer) throws IORuntimeException {
+		return copy(reader, writer, DEFAULT_BUFFER_SIZE);
+	}
+
+	/**
+	 * [将Reader中的内容复制到Writer中](Copy the contents of the reader to the writer)
+	 * @description zh - 将Reader中的内容复制到Writer中
+	 * @description en - Copy the contents of the reader to the writer
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-22 22:16:33
+	 * @param reader Reader
+	 * @param writer Writer
+	 * @param bufferSize 缓存大小
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return long
+	 */
+	public static long copy(Reader reader, Writer writer, int bufferSize) throws IORuntimeException {
+		return copy(reader, writer, bufferSize, null);
+	}
+
+	/**
+	 * [将Reader中的内容复制到Writer中](Copy the contents of the reader to the writer)
+	 * @description zh - 将Reader中的内容复制到Writer中
+	 * @description en - Copy the contents of the reader to the writer
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-22 22:18:31
+	 * @param reader Reader
+	 * @param writer Writer
+	 * @param bufferSize 缓存大小
+	 * @param streamProgress 进度处理器
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return long
+	 */
+	public static long copy(Reader reader, Writer writer, int bufferSize, StreamProgress streamProgress) throws IORuntimeException {
+		char[] buffer = new char[bufferSize];
+		long size = 0;
+		int readSize;
+		if (null != streamProgress) {
+			streamProgress.start();
+		}
+		try {
+			while ((readSize = reader.read(buffer, 0, bufferSize)) != EOF) {
+				writer.write(buffer, 0, readSize);
+				size += readSize;
+				writer.flush();
+				if (null != streamProgress) {
+					streamProgress.progress(size);
+				}
+			}
+		} catch (Exception e) {
+			throw new IORuntimeException(e);
+		}
+		if (null != streamProgress) {
+			streamProgress.finish();
+		}
+		return size;
+	}
+
+	/**
+	 * [拷贝流](Copy stream)
+	 * @description zh - 拷贝流
+	 * @description en - Copy stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-22 22:20:38
+	 * @param in 输入流
+	 * @param out 输出流
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return long
+	 */
+	public static long copy(InputStream in, OutputStream out) throws IORuntimeException {
+		return copy(in, out, DEFAULT_BUFFER_SIZE);
+	}
+
+	/**
+	 * [拷贝流](Copy stream)
+	 * @description zh - 拷贝流
+	 * @description en - Copy stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-22 22:21:27
+	 * @param in 输入流
+	 * @param out 输出流
+	 * @param bufferSize 缓存大小
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return long
+	 */
+	public static long copy(InputStream in, OutputStream out, int bufferSize) throws IORuntimeException {
+		return copy(in, out, bufferSize, null);
+	}
+
+	/**
+	 * [拷贝流](Copy stream)
+	 * @description zh - 拷贝流
+	 * @description en - Copy stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-22 22:22:23
+	 * @param in 输入流
+	 * @param out 输出流
+	 * @param bufferSize 缓存大小
+	 * @param streamProgress 进度条工具
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return long
+	 */
+	public static long copy(InputStream in, OutputStream out, int bufferSize, StreamProgress streamProgress) throws IORuntimeException {
+		Assertion.notNull(in, "InputStream is null !");
+		Assertion.notNull(out, "OutputStream is null !");
+		if (bufferSize <= 0) {
+			bufferSize = DEFAULT_BUFFER_SIZE;
+		}
+
+		byte[] buffer = new byte[bufferSize];
+		if (null != streamProgress) {
+			streamProgress.start();
+		}
+		long size = 0;
+		try {
+			for (int readSize; (readSize = in.read(buffer)) != EOF; ) {
+				out.write(buffer, 0, readSize);
+				size += readSize;
+				if (null != streamProgress) {
+					streamProgress.progress(size);
+				}
+			}
+			out.flush();
+		} catch (IOException e) {
+			throw new IORuntimeException(e);
+		}
+		if (null != streamProgress) {
+			streamProgress.finish();
+		}
+		return size;
+	}
+
+	/**
+	 * [拷贝文件流](Copy file stream)
+	 * @description zh - 拷贝文件流
+	 * @description en - Copy file stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-22 22:23:17
+	 * @param in 输入
+	 * @param out 输出
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return long
+	 */
+	public static long copy(FileInputStream in, FileOutputStream out) throws IORuntimeException {
+		Assertion.notNull(in, "FileInputStream is null!");
+		Assertion.notNull(out, "FileOutputStream is null!");
+
+		FileChannel inChannel = null;
+		FileChannel outChannel = null;
+		try {
+			inChannel = in.getChannel();
+			outChannel = out.getChannel();
+			return copy(inChannel, outChannel);
+		} finally {
+			close(outChannel);
+			close(inChannel);
+		}
+	}
+
+	// 写入和输出 ------------------------------------- getReader and getWriter
+
+	/**
+	 * [获得一个文件读取器](Get a file reader)
+	 * @description zh - 获得一个文件读取器
+	 * @description en - Get a file reader
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-22 22:25:15
+	 * @param in 输入流
+	 * @return java.io.BufferedReader
+	 */
+	public static BufferedReader getUtf8Reader(InputStream in) {
+		return getReader(in, CharsetUtil.CHARSET_UTF_8);
+	}
+
+	/**
+	 * [获得一个文件读取器](Get a file reader)
+	 * @description zh - 获得一个文件读取器
+	 * @description en - Get a file reader
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-22 22:28:39
+	 * @param in 输入流
+	 * @param charsetName 字符集名称
+	 * @return java.io.BufferedReader
+	 */
+	public static BufferedReader getReader(InputStream in, String charsetName) {
+		return getReader(in, Charset.forName(charsetName));
+	}
+
+	/**
+	 * [从 BOMInputStream 中获取Reader](Get reader from bominputstream)
+	 * @description zh - 从 BOMInputStream 中获取Reader
+	 * @description en - Get reader from bominputstream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-22 22:32:16
+	 * @param in BOMInputStream
+	 * @return java.io.BufferedReader
+	 */
+	public static BufferedReader getReader(BOMInputStream in) {
+		return getReader(in, in.getCharset());
+	}
+
+	/**
+	 * [获得一个Reader](Get a reader)
+	 * @description zh - 获得一个Reader
+	 * @description en - Get a reader
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-22 22:35:25
+	 * @param in 输入流
+	 * @param charset 字符集
+	 * @return java.io.BufferedReader
+	 */
+	public static BufferedReader getReader(InputStream in, Charset charset) {
+		return null == in ? null :
+			new BufferedReader(null == charset ? new InputStreamReader(in) :
+				new InputStreamReader(in, charset));
+	}
 
     /**
      * [将InputStream转为BufferedReader用于读取字符流](Converting InputStream to BufferedReader for reading character stream)
@@ -41,6 +278,7 @@ public class IoUtil extends NioUtil {
         return in == Constant.NULL ? Constant.BUFFERED_READER_NULL : new BufferedReader(new InputStreamReader(in));
     }
 
+
     /**
      * [将Reader转为BufferedReader用于读取字符流](Convert reader to BufferedReader to read character stream)
      * @description: zh - 将Reader转为BufferedReader用于读取字符流
@@ -54,6 +292,68 @@ public class IoUtil extends NioUtil {
     public static BufferedReader getReader(Reader reader){
         return Constant.NULL == reader ? Constant.BUFFERED_READER_NULL : reader instanceof BufferedReader ? (BufferedReader)reader : new BufferedReader(reader);
     }
+
+	/**
+	 * [获得 PushbackReader](Get pushbackreader)
+	 * @description zh - 获得 PushbackReader
+	 * @description en - Get pushbackreader
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-22 22:38:54
+	 * @param reader Reader
+	 * @param pushBackSize 推后的byte数
+	 * @return java.io.PushbackReader
+	 */
+	public static PushbackReader getPushBackReader(Reader reader, int pushBackSize) {
+		return (reader instanceof PushbackReader) ? (PushbackReader) reader : new PushbackReader(reader, pushBackSize);
+	}
+
+	/**
+	 * [获得一个Writer](Get a writer)
+	 * @description zh - 获得一个Writer
+	 * @description en - Get a writer
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-22 22:40:14
+	 * @param out 输出流
+	 * @return java.io.OutputStreamWriter
+	 */
+	public static OutputStreamWriter getUtf8Writer(OutputStream out) {
+		return getWriter(out, CharsetUtil.CHARSET_UTF_8);
+	}
+
+	/**
+	 * [获得一个Writer](Get a writer)
+	 * @description zh - 获得一个Writer
+	 * @description en - Get a writer
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-22 22:42:28
+	 * @param out 输出流
+	 * @param charsetName 字符集名称
+	 * @return java.io.OutputStreamWriter
+	 */
+	public static OutputStreamWriter getWriter(OutputStream out, String charsetName) {
+		return getWriter(out, Charset.forName(charsetName));
+	}
+
+	/**
+	 * [获得一个Writer](Get a writer)
+	 * @description zh - 获得一个Writer
+	 * @description en - Get a writer
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-22 22:46:05
+	 * @param out 输入流
+	 * @param charset 字符集
+	 * @return java.io.OutputStreamWriter
+	 */
+	public static OutputStreamWriter getWriter(OutputStream out, Charset charset) {
+		return null == out ? null :
+			null == charset ? new OutputStreamWriter(out) :
+				new OutputStreamWriter(out, charset);
+
+	}
 
     /**
      * [将需要写入的文本通过字符编码写入所需要的文件](Write the text to be written to the required file by character encoding)
@@ -203,4 +503,6 @@ public class IoUtil extends NioUtil {
             }
         }
     }
+
+
 }

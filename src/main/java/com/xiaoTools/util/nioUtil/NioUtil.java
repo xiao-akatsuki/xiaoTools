@@ -13,7 +13,10 @@ import java.nio.charset.Charset;
 
 import com.xiaoTools.assertion.Assertion;
 import com.xiaoTools.core.exception.iORuntimeException.IORuntimeException;
+import com.xiaoTools.core.io.fastByteArrayOutputStream.FastByteArrayOutputStream;
 import com.xiaoTools.core.io.streamProgress.StreamProgress;
+import com.xiaoTools.util.charsetUtil.CharsetUtil;
+import com.xiaoTools.util.strUtil.StrUtil;
 
 /**
  * [NIO相关工具封装](NiO related tool packaging)
@@ -156,5 +159,111 @@ public class NioUtil{
 		}
 
 		return size;
+	}
+
+	/**
+	 * [从流中读取内容](Read content from stream)
+	 * @description zh - 从流中读取内容
+	 * @description en - Read content from stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-22 13:06:22
+	 * @param channel 可读通道，读取完毕后并不关闭通道
+	 * @param charset 字符集
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return java.lang.String
+	 */
+	public static String read(ReadableByteChannel channel, Charset charset) throws IORuntimeException {
+		FastByteArrayOutputStream out = read(channel);
+		return null == charset ? out.toString() : out.toString(charset);
+	}
+
+	/**
+	 * [从流中读取内容](Read content from stream)
+	 * @description zh - 从流中读取内容
+	 * @description en - Read content from stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-22 13:10:43
+	 * @param channel 可读通道
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return com.xiaoTools.core.io.fastByteArrayOutputStream.FastByteArrayOutputStream
+	 */
+	public static FastByteArrayOutputStream read(ReadableByteChannel channel) throws IORuntimeException {
+		final FastByteArrayOutputStream out = new FastByteArrayOutputStream();
+		copy(channel, Channels.newChannel(out));
+		return out;
+	}
+
+	/**
+	 * [从FileChannel中读取UTF-8编码内容](Read UTF-8 encoded content from filechannel)
+	 * @description zh - 从FileChannel中读取UTF-8编码内容
+	 * @description en - Read UTF-8 encoded content from filechannel
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-22 13:16:56
+	 * @param fileChannel 文件管道
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return java.lang.String
+	 */
+	public static String readUtf8(FileChannel fileChannel) throws IORuntimeException {
+		return read(fileChannel, CharsetUtil.CHARSET_UTF_8);
+	}
+
+	/**
+	 * [从FileChannel中读取内容](Read content from filechannel)
+	 * @description zh - 从FileChannel中读取内容
+	 * @description en - Read content from filechannel
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-22 13:15:02
+	 * @param fileChannel 文件管道
+	 * @param charsetName 字符集
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return java.lang.String
+	 */
+	public static String read(FileChannel fileChannel, String charsetName) throws IORuntimeException {
+		return read(fileChannel, CharsetUtil.charset(charsetName));
+	}
+
+	/**
+	 * [从FileChannel中读取内容](Read content from filechannel)
+	 * @description zh - 从FileChannel中读取内容
+	 * @description en - Read content from filechannel
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-22 13:14:09
+	 * @param fileChannel 文件管道
+	 * @param charset 字符集
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return java.lang.String
+	 */
+	public static String read(FileChannel fileChannel, Charset charset) throws IORuntimeException {
+		MappedByteBuffer buffer;
+		try {
+			buffer = fileChannel.map(FileChannel.MapMode.READ_ONLY, 0, fileChannel.size()).load();
+		} catch (IOException e) {
+			throw new IORuntimeException(e);
+		}
+		return StrUtil.str(buffer, charset);
+	}
+
+	/**
+	 * [关闭](close)
+	 * @description zh - 关闭
+	 * @description en - close
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-22 13:12:52
+	 * @param closeable 被关闭的对象
+	 */
+	public static void close(AutoCloseable closeable) {
+		if (null != closeable) {
+			try {
+				closeable.close();
+			} catch (Exception e) {
+				// 静默关闭
+			}
+		}
 	}
 }

@@ -3,13 +3,17 @@ package com.xiaoTools.util.ioUtil;
 import com.xiaoTools.assertion.Assertion;
 import com.xiaoTools.core.exception.iORuntimeException.IORuntimeException;
 import com.xiaoTools.core.io.bomInputStream.BOMInputStream;
+import com.xiaoTools.core.io.fastByteArrayOutputStream.FastByteArrayOutputStream;
 import com.xiaoTools.core.io.streamProgress.StreamProgress;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.charsetUtil.CharsetUtil;
 import com.xiaoTools.util.fileUtil.fileUtil.FileUtil;
+import com.xiaoTools.util.hexUtil.HexUtil;
 import com.xiaoTools.util.nioUtil.NioUtil;
+import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.io.*;
+import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 
@@ -353,6 +357,281 @@ public class IoUtil extends NioUtil {
 			null == charset ? new OutputStreamWriter(out) :
 				new OutputStreamWriter(out, charset);
 
+	}
+
+	// 写入 ------------------------------------- reader
+
+	/**
+	 * [从流中读取UTF8编码的内容](Read utf8 encoded content from stream)
+	 * @description zh - 从流中读取UTF8编码的内容
+	 * @description en - Read utf8 encoded content from stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-23 10:21:47
+	 * @param in 输入流
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return java.lang.String
+	 */
+	public static String readUtf8(InputStream in) throws IORuntimeException {
+		return read(in, CharsetUtil.CHARSET_UTF_8);
+	}
+
+	/**
+	 * [从流中读取内容](Read content from stream)
+	 * @description zh - 从流中读取内容
+	 * @description en - Read content from stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-23 10:28:45
+	 * @param in 输入流
+	 * @param charset 字符集
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return java.lang.String
+	 */
+	public static String read(InputStream in, Charset charset) throws IORuntimeException {
+		return StrUtil.str(readBytes(in), charset);
+	}
+
+	/**
+	 * [从流中读取内容](Read content from stream)
+	 * @description zh - 从流中读取内容
+	 * @description en - Read content from stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-23 10:24:56
+	 * @param in 输入流
+	 * @param charsetName 字符集
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return java.lang.String
+	 */
+	public static String read(InputStream in, String charsetName) throws IORuntimeException {
+		final FastByteArrayOutputStream out = read(in);
+		return StrUtil.isBlank(charsetName) ? out.toString() : out.toString(charsetName);
+	}
+
+	/**
+	 * [从流中读取内容](Read content from stream)
+	 * @description zh - 从流中读取内容
+	 * @description en - Read content from stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-23 10:29:46
+	 * @param in 输入流
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return com.xiaoTools.core.io.fastByteArrayOutputStream.FastByteArrayOutputStream
+	 */
+	public static FastByteArrayOutputStream read(InputStream in) throws IORuntimeException {
+		return read(in, Constant.TRUE);
+	}
+
+	/**
+	 * [从流中读取内容](Read content from stream)
+	 * @description zh - 从流中读取内容
+	 * @description en - Read content from stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-23 10:31:48
+	 * @param in 输入流
+	 * @param isClose 是否关闭
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return com.xiaoTools.core.io.fastByteArrayOutputStream.FastByteArrayOutputStream
+	 */
+	public static FastByteArrayOutputStream read(InputStream in, boolean isClose) throws IORuntimeException {
+		final FastByteArrayOutputStream out;
+		if(in instanceof FileInputStream){
+			// 文件流的长度是可预见的，此时直接读取效率更高
+			try {
+				out = new FastByteArrayOutputStream(in.available());
+			} catch (IOException e) {
+				throw new IORuntimeException(e);
+			}
+		} else{
+			out = new FastByteArrayOutputStream();
+		}
+		try {
+			copy(in, out);
+		} finally {
+			if (isClose) {
+				close(in);
+			}
+		}
+		return out;
+	}
+
+	/**
+	 * [从Reader中读取String](Read string from reader)
+	 * @description zh - 从Reader中读取String
+	 * @description en - Read string from reader
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-23 10:33:49
+	 * @param reader Reader
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return java.lang.String
+	 */
+	public static String read(Reader reader) throws IORuntimeException {
+		return read(reader, true);
+	}
+
+	/**
+	 * [从 Reader 中读取String](Read string from reader)
+	 * @description zh - 从 Reader 中读取String
+	 * @description en - Read string from reader
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-23 10:36:33
+	 * @param reader Reader
+	 * @param isClose 是否关闭Reader
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return java.lang.String
+	 */
+	public static String read(Reader reader, boolean isClose) throws IORuntimeException {
+		final StringBuilder builder = StrUtil.builder();
+		final CharBuffer buffer = CharBuffer.allocate(DEFAULT_BUFFER_SIZE);
+		try {
+			while (Constant.NEGATIVE_ONE != reader.read(buffer)) {
+				builder.append(buffer.flip().toString());
+			}
+		} catch (IOException e) {
+			throw new IORuntimeException(e);
+		} finally {
+			if (isClose) {
+				IoUtil.close(reader);
+			}
+		}
+		return builder.toString();
+	}
+
+	/**
+	 * [从流中读取bytes](Read bytes from stream)
+	 * @description zh - 从流中读取bytes
+	 * @description en - Read bytes from stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-23 10:38:55
+	 * @param in InputStream
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return byte[]
+	 */
+	public static byte[] readBytes(InputStream in) throws IORuntimeException {
+		return readBytes(in, true);
+	}
+
+	/**
+	 * [从流中读取bytes](Read bytes from stream)
+	 * @description zh - 从流中读取bytes
+	 * @description en - Read bytes from stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-23 10:40:38
+	 * @param in InputStream
+	 * @param isClose 是否关闭输入流
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return byte[]
+	 */
+	public static byte[] readBytes(InputStream in, boolean isClose) throws IORuntimeException {
+		if (in instanceof FileInputStream) {
+			final byte[] result;
+			try {
+				final int available = in.available();
+				result = new byte[available];
+				final int readLength = in.read(result);
+				if (readLength != available) {
+					throw new IOException(StrUtil.format("File length is [{}] but read [{}]!", available, readLength));
+				}
+			} catch (IOException e) {
+				throw new IORuntimeException(e);
+			} finally {
+				if (isClose) {
+					close(in);
+				}
+			}
+			return result;
+		}
+		return read(in, isClose).toByteArray();
+	}
+
+	/**
+	 * [从流中读取bytes](Read bytes from stream)
+	 * @description zh - 从流中读取bytes
+	 * @description en - Read bytes from stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-23 10:42:10
+	 * @param in InputStream
+	 * @param length 长度
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return byte[]
+	 */
+	public static byte[] readBytes(InputStream in, int length) throws IORuntimeException {
+		if (null == in) {
+			return null;
+		}
+		if (length <= Constant.ZERO) {
+			return new byte[Constant.ZERO];
+		}
+
+		byte[] b = new byte[length];
+		int readLength;
+		try {
+			readLength = in.read(b);
+		} catch (IOException e) {
+			throw new IORuntimeException(e);
+		}
+		if (readLength > Constant.ZERO && readLength < length) {
+			byte[] b2 = new byte[readLength];
+			System.arraycopy(b, Constant.ZERO, b2, Constant.ZERO, readLength);
+			return b2;
+		} else {
+			return b;
+		}
+	}
+
+	/**
+	 * [读取16进制字符串](Read hexadecimal string)
+	 * @description zh - 读取16进制字符串
+	 * @description en - Read hexadecimal string
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-23 10:43:47
+	 * @param in InputStream
+	 * @param length 长度
+	 * @param toLowerCase true 传换成小写格式 ， false 传换成大写格式
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return java.lang.String
+	 */
+	public static String readHex(InputStream in, int length, boolean toLowerCase) throws IORuntimeException {
+		return HexUtil.encodeHexStr(readBytes(in, length), toLowerCase);
+	}
+
+	/**
+	 * [从流中读取前28个byte并转换为16进制，字母部分使用大写](The first 28 bytes are read from the stream and converted to hexadecimal, and the letter part is capitalized)
+	 * @description zh - 从流中读取前28个byte并转换为16进制，字母部分使用大写
+	 * @description en - The first 28 bytes are read from the stream and converted to hexadecimal, and the letter part is capitalized
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-23 10:46:50
+	 * @param in InputStream
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return java.lang.String
+	 */
+	public static String readHex28Upper(InputStream in) throws IORuntimeException {
+		return readHex(in, Constant.TWENTY_EIGHT, Constant.FALSE);
+	}
+
+	/**
+	 * [从流中读取前28个byte并转换为16进制，字母部分使用小写](Read the first 28 bytes from the stream and convert them to hexadecimal, and the letter part uses lowercase)
+	 * @description zh - 从流中读取前28个byte并转换为16进制，字母部分使用小写
+	 * @description en - Read the first 28 bytes from the stream and convert them to hexadecimal, and the letter part uses lowercase
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-23 10:49:45
+	 * @param in InputStream
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return java.lang.String
+	 */
+	public static String readHex28Lower(InputStream in) throws IORuntimeException {
+		return readHex(in, Constant.TWENTY_EIGHT, Constant.TRUE);
 	}
 
     /**

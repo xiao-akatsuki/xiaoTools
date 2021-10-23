@@ -2,9 +2,12 @@ package com.xiaoTools.util.ioUtil;
 
 import com.xiaoTools.assertion.Assertion;
 import com.xiaoTools.core.exception.iORuntimeException.IORuntimeException;
+import com.xiaoTools.core.exception.utilException.UtilException;
 import com.xiaoTools.core.io.bomInputStream.BOMInputStream;
 import com.xiaoTools.core.io.fastByteArrayOutputStream.FastByteArrayOutputStream;
+import com.xiaoTools.core.io.lineHandler.LineHandler;
 import com.xiaoTools.core.io.streamProgress.StreamProgress;
+import com.xiaoTools.core.io.validateObjectInputStream.ValidateObjectInputStream;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.charsetUtil.CharsetUtil;
 import com.xiaoTools.util.fileUtil.fileUtil.FileUtil;
@@ -16,6 +19,7 @@ import java.io.*;
 import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
+import java.util.Collection;
 
 /**
  * [Io流封装的工具类NIO](Tool class NiO encapsulated by IO stream)
@@ -632,6 +636,196 @@ public class IoUtil extends NioUtil {
 	 */
 	public static String readHex28Lower(InputStream in) throws IORuntimeException {
 		return readHex(in, Constant.TWENTY_EIGHT, Constant.TRUE);
+	}
+
+	/**
+	 * [从流中读取对象](Read object from stream)
+	 * @description zh - 从流中读取对象
+	 * @description en - Read object from stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-23 17:23:49
+	 * @param in 输入流
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @throws com.xiaoTools.core.exception.utilException.UtilException
+	 * @return T
+	 */
+	public static <T> T readObj(InputStream in) throws IORuntimeException, UtilException {
+		return readObj(in, null);
+	}
+
+	/**
+	 * [从流中读取对象](Read object from stream)
+	 * @description zh - 从流中读取对象
+	 * @description en - Read object from stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-23 17:27:22
+	 * @param in 输入流
+	 * @param clazz 类型
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @throws com.xiaoTools.core.exception.utilException.UtilException
+	 * @return T
+	 */
+	public static <T> T readObj(InputStream in, Class<T> clazz) throws IORuntimeException, UtilException {
+		try {
+			return readObj((in instanceof ValidateObjectInputStream) ?
+							(ValidateObjectInputStream) in : new ValidateObjectInputStream(in),
+					clazz);
+		} catch (IOException e) {
+			throw new IORuntimeException(e);
+		}
+	}
+
+	/**
+	 * [从流中读取对象](Read object from stream)
+	 * @description zh - 从流中读取对象
+	 * @description en - Read object from stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-23 17:28:25
+	 * @param in ValidateObjectInputStream
+	 * @param clazz 类型
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @throws com.xiaoTools.core.exception.utilException.UtilException
+	 * @return T
+	 */
+	public static <T> T readObj(ValidateObjectInputStream in, Class<T> clazz) throws IORuntimeException, UtilException {
+		if (in == null) {
+			throw new IllegalArgumentException("The InputStream must not be null");
+		}
+		try {
+			return (T) in.readObject();
+		} catch (IOException e) {
+			throw new IORuntimeException(e);
+		} catch (ClassNotFoundException e) {
+			throw new UtilException(e);
+		}
+	}
+
+	/**
+	 * [从流中读取内容](Read content from stream)
+	 * @description zh - 从流中读取内容
+	 * @description en - Read content from stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-23 17:39:56
+	 * @param in 输入流
+	 * @param collection 返回集合
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return T
+	 */
+	public static <T extends Collection<String>> T readUtf8Lines(InputStream in, T collection) throws IORuntimeException {
+		return readLines(in, CharsetUtil.CHARSET_UTF_8, collection);
+	}
+
+	/**
+	 * [从流中读取内容](Read content from stream)
+	 * @description zh - 从流中读取内容
+	 * @description en - Read content from stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-23 17:45:51
+	 * @param in 输入流
+	 * @param charsetName 字符集名称
+	 * @param cllection 返回集合
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return T
+	 */
+	public static <T extends Collection<String>> T readLines(InputStream in, String charsetName, T collection) throws IORuntimeException {
+		return readLines(in, CharsetUtil.charset(charsetName), collection);
+	}
+
+	/**
+	 * [从流中读取内容](Read content from stream)
+	 * @description zh - 从流中读取内容
+	 * @description en - Read content from stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-23 17:47:01
+	 * @param in 输入流
+	 * @param charsetName 字符集名称
+	 * @param cllection 返回集合
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return T
+	 */
+	public static <T extends Collection<String>> T readLines(InputStream in, Charset charset, T collection) throws IORuntimeException {
+		return readLines(getReader(in, charset), collection);
+	}
+
+	/**
+	 * [从流中读取内容](Read content from stream)
+	 * @description zh - 从流中读取内容
+	 * @description en - Read content from stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-23 17:48:25
+	 * @param reader Reader
+	 * @param collection 返回集合
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return T
+	 */
+	public static <T extends Collection<String>> T readLines(Reader reader, final T collection) throws IORuntimeException {
+		readLines(reader, (LineHandler) collection::add);
+		return collection;
+	}
+
+	/**
+	 * [按行读取UTF-8编码数据](Read UTF-8 encoded data by line)
+	 * @description zh - 按行读取UTF-8编码数据
+	 * @description en - Read UTF-8 encoded data by line
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-23 17:50:57
+	 * @param in InputStream
+	 * @param lineHandler LineHandler
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 */
+	public static void readUtf8Lines(InputStream in, LineHandler lineHandler) throws IORuntimeException {
+		readLines(in, CharsetUtil.CHARSET_UTF_8, lineHandler);
+	}
+
+	/**
+	 * [按行读取数据，针对每行的数据做处理](Read data by row and process the data of each row)
+	 * @description zh - 按行读取数据，针对每行的数据做处理
+	 * @description en - Read data by row and process the data of each row
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-23 17:51:52
+	 * @param in InputStream
+	 * @param charset Charset
+	 * @param lineHandler LineHandler
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 */
+	public static void readLines(InputStream in, Charset charset, LineHandler lineHandler) throws IORuntimeException {
+		readLines(getReader(in, charset), lineHandler);
+	}
+
+	/**
+	 * [按行读取数据，针对每行的数据做处理](Read data by row and process the data of each row)
+	 * @description zh - 按行读取数据，针对每行的数据做处理
+	 * @description en - Read data by row and process the data of each row
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-23 17:52:53
+	 * @param reader InputStream
+	 * @param lineHandler LineHandler
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 */
+	public static void readLines(Reader reader, LineHandler lineHandler) throws IORuntimeException {
+		Assertion.notNull(reader);
+		Assertion.notNull(lineHandler);
+
+		// 从返回的内容中读取所需内容
+		final BufferedReader bReader = getReader(reader);
+		String line;
+		try {
+			while ((line = bReader.readLine()) != null) {
+				lineHandler.handle(line);
+			}
+		} catch (IOException e) {
+			throw new IORuntimeException(e);
+		}
 	}
 
     /**

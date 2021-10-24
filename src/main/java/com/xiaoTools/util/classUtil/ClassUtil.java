@@ -5,6 +5,8 @@ import com.xiaoTools.core.basicType.BasicType;
 import com.xiaoTools.entity.nullWrapperEntity.NullWrapperEntity;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
+import com.xiaoTools.util.classLoaderUtil.ClassLoaderUtil;
+import com.xiaoTools.util.reflectUtil.ReflectUtil;
 import com.xiaoTools.util.typeUtil.TypeUtil;
 
 import java.lang.reflect.Method;
@@ -167,10 +169,7 @@ public class ClassUtil {
      * @return boolean
     */
     public static boolean isBasicType(Class<?> clazz) {
-        if (Constant.NULL == clazz) {
-            return Constant.FALSE;
-        }
-        return (clazz.isPrimitive() || isPrimitiveWrapper(clazz));
+		return Constant.NULL == clazz ? Constant.FALSE : (clazz.isPrimitive() || isPrimitiveWrapper(clazz));
     }
 
     /**
@@ -267,5 +266,30 @@ public class ClassUtil {
 	public static boolean isStatic(Method method) {
 		Assertion.notNull(method, "Method to provided is null.");
 		return Modifier.isStatic(method.getModifiers());
+	}
+
+	/**
+	 * [获取 ClassLoader](Get classloader)
+	 * @description zh - 获取 ClassLoader
+	 * @description en - Get classloader
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 18:47:56
+	 * @return java.lang.ClassLoader
+	 */
+	public static ClassLoader getClassLoader() {
+		return ClassLoaderUtil.getClassLoader();
+	}
+
+	/**
+	 * [查找指定类中的所有方法](Finds all methods in the specified class)
+	 * @description zh - 查找指定类中的所有方法
+	 * @description en - Finds all methods in the specified class
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 19:01:51
+	 */
+	public static Method getDeclaredMethod(Class<?> clazz, String methodName, Class<?>... parameterTypes) throws SecurityException {
+		return ReflectUtil.getMethod(clazz, methodName, parameterTypes);
 	}
 }

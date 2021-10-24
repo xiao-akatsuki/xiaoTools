@@ -1962,4 +1962,21 @@ public class NumUtil {
         }
         throw new IllegalArgumentException(StrUtil.format("Overflow in multiplication: {} * {}", multiplier, multiplicand));
     }
+
+	/**
+	 * [格式化百分比](Format percentage)
+	 * @description zh - 格式化百分比
+	 * @description en - Format percentage
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 17:45:48
+	 * @param number 数字
+	 * @param scale 小数点位数
+	 * @return java.lang.String
+	 */
+	public static String formatPercent(double number, int scale) {
+		final NumberFormat format = NumberFormat.getPercentInstance();
+		format.setMaximumFractionDigits(scale);
+		return format.format(number);
+	}
 }

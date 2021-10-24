@@ -1,5 +1,6 @@
 package com.xiaoTools.date.dateTime;
 
+import com.xiaoTools.assertion.Assertion;
 import com.xiaoTools.core.exception.dateException.DateException;
 import com.xiaoTools.date.dateBetween.DateBetween;
 import com.xiaoTools.date.dateField.DateField;
@@ -15,10 +16,12 @@ import com.xiaoTools.date.week.Week;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.dateUtil.DateUtil;
 import com.xiaoTools.util.objectUtil.ObjectUtil;
+import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.io.Serial;
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -246,6 +249,32 @@ public class DateTime extends Date {
         this(parse(dateStr, dateFormat), dateFormat.getTimeZone());
     }
 
+	/**
+	 * [转换字符串为Date](Convert string to date)
+	 * @description zh - 转换字符串为Date
+	 * @description en - Convert string to date
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 11:07:08
+	 * @param dateStr 日期字符串
+	 * @param dateFormat SimpleDateFormat
+	 * @return java.util.Date
+	 */
+	private static Date parse(CharSequence dateStr, DateFormat dateFormat) {
+		Assertion.notBlank(dateStr, "Date String must be not blank !");
+		try {
+			return dateFormat.parse(dateStr.toString());
+		} catch (Exception e) {
+			String pattern;
+			if (dateFormat instanceof SimpleDateFormat) {
+				pattern = ((SimpleDateFormat) dateFormat).toPattern();
+			} else {
+				pattern = dateFormat.toString();
+			}
+			throw new DateException(StrUtil.format("Parse [{}] with format [{}] error!", dateStr, pattern), e);
+		}
+	}
+
     /**
      * [构建DateTime对象](Building a DateTime object)
      * @description: zh - 构建DateTime对象
@@ -273,6 +302,27 @@ public class DateTime extends Date {
     public DateTime(CharSequence dateStr, DateParser dateParser) {
         this(parse(dateStr, dateParser), dateParser.getTimeZone());
     }
+
+	/**
+ 	 * [转换字符串为Date](Convert string to date)
+	 * @description zh - 转换字符串为Date
+	 * @description en - Convert string to date
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 11:08:15
+	 * @param dateStr 日期字符串
+	 * @param parser DateParser
+	 * @return java.util.Date
+	 */
+	private static Date parse(CharSequence dateStr, DateParser parser) {
+		Assertion.notNull(parser, "Parser or DateFromat must be not null !");
+		Assertion.notBlank(dateStr, "Date String must be not blank !");
+		try {
+			return parser.parse(dateStr.toString());
+		} catch (Exception e) {
+			throw new DateException("Parse [{}] with format [{}] error!", dateStr, parser.getPattern(), e);
+		}
+	}
 
     /*转换--------------------------------------------------------------------transformation*/
 
@@ -393,6 +443,21 @@ public class DateTime extends Date {
         DateTime dt = ObjectUtil.clone(this);
         return dt.setTimeInternal(cal.getTimeInMillis());
     }
+
+	/**
+	 * [设置日期时间](Set date time)
+	 * @description zh - 设置日期时间
+	 * @description en - Set date time
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 11:03:23
+	 * @param time 时间
+	 * @return com.xiaoTools.date.dateTime.DateTime
+	 */
+	private DateTime setTimeInternal(long time) {
+		super.setTime(time);
+		return this;
+	}
 
     /*设置 OR 获取日期 --------------------------------------------------------------------set OR get*/
 
@@ -1100,7 +1165,7 @@ public class DateTime extends Date {
     */
     public String toString(TimeZone timeZone) {
         if (Constant.NULL != timeZone) {
-            return toString(DateUtil.newSimpleFormat(DatePattern.NORM_DATETIME_PATTERN, Constant.NULL, timeZone));
+            return toString(DateUtil.newSimpleFormat(DatePattern.NORM_DATETIME_PATTERN, null, timeZone));
         }
         return toString(DatePattern.NORM_DATETIME_FORMAT);
     }
@@ -1116,7 +1181,7 @@ public class DateTime extends Date {
     */
     public String toDateStr() {
         if (Constant.NULL != this.timeZone) {
-            return toString(DateUtil.newSimpleFormat(DatePattern.NORM_DATE_PATTERN, Constant.NULL, timeZone));
+            return toString(DateUtil.newSimpleFormat(DatePattern.NORM_DATE_PATTERN, null, timeZone));
         }
         return toString(DatePattern.NORM_DATE_FORMAT);
     }
@@ -1132,7 +1197,7 @@ public class DateTime extends Date {
     */
     public String toTimeStr() {
         if (Constant.NULL != this.timeZone) {
-            return toString(DateUtil.newSimpleFormat(DatePattern.NORM_TIME_PATTERN, Constant.NULL, timeZone));
+            return toString(DateUtil.newSimpleFormat(DatePattern.NORM_TIME_PATTERN, null, timeZone));
         }
         return toString(DatePattern.NORM_TIME_FORMAT);
     }
@@ -1149,7 +1214,7 @@ public class DateTime extends Date {
     */
     public String toString(String format) {
         if (Constant.NULL != this.timeZone) {
-            return toString(DateUtil.newSimpleFormat(format, Constant.NULL, timeZone));
+            return toString(DateUtil.newSimpleFormat(format, null, timeZone));
         }
         return toString(FastDateFormat.getInstance(format));
     }

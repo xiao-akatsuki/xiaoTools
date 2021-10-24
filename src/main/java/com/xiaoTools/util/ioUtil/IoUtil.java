@@ -828,6 +828,282 @@ public class IoUtil extends NioUtil {
 		}
 	}
 
+	// 转流 ------------------------------------- toStream
+
+	/**
+	 * [String 转为流](String to stream)
+	 * @description zh - String 转为流
+	 * @description en - String to stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 08:06:32
+	 * @param content 内容
+	 * @param charsetName 编码
+	 * @return java.io.ByteArrayInputStream
+	 */
+	public static ByteArrayInputStream toStream(String content, String charsetName) {
+		return toStream(content, CharsetUtil.charset(charsetName));
+	}
+
+	/**
+	 * [String 转为流](String to stream)
+	 * @description zh - String 转为流
+	 * @description en - String to stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 08:08:13
+	 * @param content 内容
+	 * @param charset 编码
+	 * @return java.io.ByteArrayInputStream
+	 */
+	public static ByteArrayInputStream toStream(String content, Charset charset) {
+		return content == null ? null : toStream(StrUtil.bytes(content, charset));
+	}
+
+	/**
+	 * [将String转为UTF-8格式的流](Convert string to UTF-8 format stream)
+	 * @description zh - 将String转为UTF-8格式的流
+	 * @description en - Convert string to UTF-8 format stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 08:09:07
+	 * @param content 内容
+	 * @return java.io.ByteArrayInputStream
+	 */
+	public static ByteArrayInputStream toUtf8Stream(String content) {
+		return toStream(content, CharsetUtil.CHARSET_UTF_8);
+	}
+
+	/**
+	 * [文件转为 FileInputStream](Convert file to FileInputStream)
+	 * @description zh - 文件转为 FileInputStream
+	 * @description en - Convert file to FileInputStream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 08:10:19
+	 */
+	public static FileInputStream toStream(File file) {
+		try {
+			return new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			throw new IORuntimeException(e);
+		}
+	}
+
+	/**
+	 * [byte[] 转为 ByteArrayInputStream](byte[] to bytearrayinputstream)
+	 * @description zh - byte[] 转为 ByteArrayInputStream
+	 * @description en - byte[] to bytearrayinputstream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 08:13:16
+	 * @param content 内容
+	 * @return java.io.ByteArrayInputStream
+	 */
+	public static ByteArrayInputStream toStream(byte[] content) {
+		return content == null ? null : new ByteArrayInputStream(content);
+	}
+
+	/**
+	 * [ByteArrayOutputStream 转为 ByteArrayInputStream](ByteArrayOutputStream to ByteArrayInputStream)
+	 * @description zh - ByteArrayOutputStream 转为 ByteArrayInputStream
+	 * @description en - ByteArrayOutputStream to ByteArrayInputStream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 08:15:39
+	 * @param out ByteArrayOutputStream
+	 * @return java.io.ByteArrayInputStream
+	 */
+	public static ByteArrayInputStream toStream(ByteArrayOutputStream out) {
+		return out == null ? null : new ByteArrayInputStream(out.toByteArray());
+
+	}
+
+	/**
+	 * [转换为 BufferedInputStream](to BufferedInputStream)
+	 * @description zh - 转换为 BufferedInputStream
+	 * @description en - to BufferedInputStream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 08:16:59
+	 * @param in InputStream
+	 * @return java.io.BufferedInputStream
+	 */
+	public static BufferedInputStream toBuffered(InputStream in) {
+		Assertion.notNull(in, "InputStream must be not null!");
+		return (in instanceof BufferedInputStream) ? (BufferedInputStream) in : new BufferedInputStream(in);
+	}
+
+	/**
+	 * [转换为 BufferedInputStream](to BufferedInputStream)
+	 * @description zh - 转换为 BufferedInputStream
+	 * @description en - to BufferedInputStream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 08:18:05
+	 * @param in InputStream
+	 * @param bufferSize 缓存大小
+	 * @return java.io.BufferedInputStream
+	 */
+	public static BufferedInputStream toBuffered(InputStream in, int bufferSize) {
+		Assertion.notNull(in, "InputStream must be not null!");
+		return (in instanceof BufferedInputStream) ? (BufferedInputStream) in : new BufferedInputStream(in, bufferSize);
+	}
+
+	/**
+	 * [转换为 BufferedOutputStream](to BufferedOutputStream)
+	 * @description zh - 转换为 BufferedOutputStream
+	 * @description en - to BufferedOutputStream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 08:18:49
+	 * @param out OutputStream
+	 * @return java.io.BufferedOutputStream
+	 */
+	public static BufferedOutputStream toBuffered(OutputStream out) {
+		Assertion.notNull(out, "OutputStream must be not null!");
+		return (out instanceof BufferedOutputStream) ? (BufferedOutputStream) out : new BufferedOutputStream(out);
+	}
+
+	/**
+	 * [转换为 BufferedOutputStream](to BufferedOutputStream)
+	 * @description zh - 转换为 BufferedOutputStream
+	 * @description en - to BufferedOutputStream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 08:19:50
+	 * @param out OutputStream
+	 * @param bufferSize 缓存大小
+	 * @return java.io.BufferedOutputStream
+	 */
+	public static BufferedOutputStream toBuffered(OutputStream out, int bufferSize) {
+		Assertion.notNull(out, "OutputStream must be not null!");
+		return (out instanceof BufferedOutputStream) ? (BufferedOutputStream) out : new BufferedOutputStream(out, bufferSize);
+	}
+
+	/**
+	 * [转换为 BufferedReader](to BufferedReader)
+	 * @description zh - 转换为 BufferedReader
+	 * @description en - to BufferedReader
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 08:20:59
+	 * @param reader Reader
+	 * @return java.io.BufferedReader
+	 */
+	public static BufferedReader toBuffered(Reader reader) {
+		Assertion.notNull(reader, "Reader must be not null!");
+		return (reader instanceof BufferedReader) ? (BufferedReader) reader : new BufferedReader(reader);
+	}
+
+	/**
+	 * [转换为 BufferedReader](to BufferedReader)
+	 * @description zh - 转换为 BufferedReader
+	 * @description en - to BufferedReader
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 08:21:40
+	 * @param reader Reader
+	 * @param bufferSize 缓存大小
+	 * @return java.io.BufferedReader
+	 */
+	public static BufferedReader toBuffered(Reader reader, int bufferSize) {
+		Assertion.notNull(reader, "Reader must be not null!");
+		return (reader instanceof BufferedReader) ? (BufferedReader) reader : new BufferedReader(reader, bufferSize);
+	}
+
+	/**
+	 * [转换为 BufferedWriter](to BufferedWriter)
+	 * @description zh - 转换为 BufferedWriter
+	 * @description en - to BufferedWriter
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 08:22:47
+	 * @param writer Writer
+	 * @return java.io.BufferedWriter
+	 */
+	public static BufferedWriter toBuffered(Writer writer) {
+		Assertion.notNull(writer, "Writer must be not null!");
+		return (writer instanceof BufferedWriter) ? (BufferedWriter) writer : new BufferedWriter(writer);
+	}
+
+	/**
+	 * [转换为 BufferedWriter](to BufferedWriter)
+	 * @description zh - 转换为 BufferedWriter
+	 * @description en - to BufferedWriter
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 08:24:17
+	 * @param writer Writer
+	 * @param bufferSize 缓存大小
+	 * @return java.io.BufferedWriter
+	 */
+	public static BufferedWriter toBuffered(Writer writer, int bufferSize) {
+		Assertion.notNull(writer, "Writer must be not null!");
+		return (writer instanceof BufferedWriter) ? (BufferedWriter) writer : new BufferedWriter(writer, bufferSize);
+	}
+
+	/**
+	 * [将 InputStream 转换为支持mark标记的流](Convert InputStream to a stream that supports mark tags)
+	 * @description zh - 将 InputStream 转换为支持mark标记的流
+	 * @description en - Convert InputStream to a stream that supports mark tags
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 08:25:43
+	 * @parama in InputStream
+	 * @return java.io.InputStream
+	 */
+	public static InputStream toMarkSupportStream(InputStream in) {
+		return null == in ? null :
+			Constant.FALSE == in.markSupported() ? new BufferedInputStream(in) :
+				in;
+	}
+
+	/**
+	 * [转换为 PushbackInputStream](Convert to pushbackinputstream)
+	 * @description zh - 转换为 PushbackInputStream
+	 * @description en - Convert to pushbackinputstream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 08:26:39
+	 * @param in InputStream
+	 * @param pushBackSize 推后的byte数
+	 * @return java.io.PushbackInputStream
+	 */
+	public static PushbackInputStream toPushbackStream(InputStream in, int pushBackSize) {
+		return (in instanceof PushbackInputStream) ? (PushbackInputStream) in :
+			new PushbackInputStream(in, pushBackSize);
+	}
+
+	/**
+	 * [将指定 InputStream 转换为 InputStream 方法可用的流。](Converts the specified InputStream to a stream available to the InputStream method.)
+	 * @description zh - 将指定 InputStream 转换为 InputStream 方法可用的流。
+	 * @description en - Converts the specified InputStream to a stream available to the InputStream method.
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 08:28:14
+	 * @param in InputStream
+	 * @return java.io.InputStream
+	 */
+	public static InputStream toAvailableStream(InputStream in) {
+		if (in instanceof FileInputStream) {
+			return in;
+		}
+
+		final PushbackInputStream pushbackInputStream = toPushbackStream(in, Constant.ONE);
+		try {
+			final int available = pushbackInputStream.available();
+			if (available <= Constant.ZERO) {
+				int b = pushbackInputStream.read();
+				pushbackInputStream.unread(b);
+			}
+		} catch (IOException e) {
+			throw new IORuntimeException(e);
+		}
+
+		return pushbackInputStream;
+	}
+
     /**
      * [将需要写入的文本通过字符编码写入所需要的文件](Write the text to be written to the required file by character encoding)
      * @description: zh - 将需要写入的文本通过字符编码写入所需要的文件

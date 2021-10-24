@@ -1,11 +1,14 @@
 package com.xiaoTools.util.ioUtil;
 
 import com.xiaoTools.assertion.Assertion;
+import com.xiaoTools.core.convert.Convert;
 import com.xiaoTools.core.exception.iORuntimeException.IORuntimeException;
 import com.xiaoTools.core.exception.utilException.UtilException;
 import com.xiaoTools.core.io.bomInputStream.BOMInputStream;
 import com.xiaoTools.core.io.fastByteArrayOutputStream.FastByteArrayOutputStream;
 import com.xiaoTools.core.io.lineHandler.LineHandler;
+import com.xiaoTools.core.io.lineIter.LineIter;
+import com.xiaoTools.core.io.nullOutputStream.NullOutputStream;
 import com.xiaoTools.core.io.streamProgress.StreamProgress;
 import com.xiaoTools.core.io.validateObjectInputStream.ValidateObjectInputStream;
 import com.xiaoTools.lang.constant.Constant;
@@ -20,6 +23,10 @@ import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.util.Collection;
+import java.util.Objects;
+import java.util.zip.CRC32;
+import java.util.zip.CheckedInputStream;
+import java.util.zip.Checksum;
 
 /**
  * [Io流封装的工具类NIO](Tool class NiO encapsulated by IO stream)
@@ -1104,6 +1111,144 @@ public class IoUtil extends NioUtil {
 		return pushbackInputStream;
 	}
 
+	// 写入 ------------------------------------- writer
+
+	/**
+	 * [将byte[]写到流中](Write byte[] to stream)
+	 * @description zh - 将byte[]写到流中
+	 * @description en - Write byte[] to stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 10:19:03
+	 * @param out OutputStream
+	 * @param isCloseOut 是否关闭输出流
+	 * @param content 写入的内容
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 */
+	public static void write(OutputStream out, boolean isCloseOut, byte[] content) throws IORuntimeException {
+		try {
+			out.write(content);
+		} catch (IOException e) {
+			throw new IORuntimeException(e);
+		} finally {
+			if (isCloseOut) {
+				close(out);
+			}
+		}
+	}
+
+	/**
+	 * [将多部分内容写到流中](Write multipart content to the stream)
+	 * @description zh - 将多部分内容写到流中
+	 * @description en - Write multipart content to the stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 10:20:24
+	 * @param out OutputStream
+	 * @param isCloseOut 是否关闭输出流
+	 * @param content 写入的内容
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 */
+	public static void writeUtf8(OutputStream out, boolean isCloseOut, Object... contents) throws IORuntimeException {
+		write(out, CharsetUtil.CHARSET_UTF_8, isCloseOut, contents);
+	}
+
+	/**
+	 * [将多部分内容写到流中](Write multipart content to the stream)
+	 * @description zh - 将多部分内容写到流中
+	 * @description en - Write multipart content to the stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 10:21:18
+	 * @param out OutputStream
+	 * @param charsetName 字符集
+	 * @param isCloseOut 是否关闭输出流
+	 * @param content 写入的内容
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 */
+	public static void write(OutputStream out, String charsetName, boolean isCloseOut, Object... contents) throws IORuntimeException {
+		write(out, CharsetUtil.charset(charsetName), isCloseOut, contents);
+	}
+
+	/**
+	 * [将多部分内容写到流中](Write multipart content to the stream)
+	 * @description zh - 将多部分内容写到流中
+	 * @description en - Write multipart content to the stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 10:25:56
+	 * @param out OutputStream
+	 * @param charset 字符集
+	 * @param isCloseOut 是否关闭输出流
+	 * @param contents 写入的内容
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 */
+	public static void write(OutputStream out, Charset charset, boolean isCloseOut, Object... contents) throws IORuntimeException {
+		OutputStreamWriter osw = null;
+		try {
+			osw = getWriter(out, charset);
+			for (Object content : contents) {
+				if (content != null) {
+					osw.write(Convert.toStr(content, Constant.EMPTY));
+				}
+			}
+			osw.flush();
+		} catch (IOException e) {
+			throw new IORuntimeException(e);
+		} finally {
+			if (isCloseOut) {
+				close(osw);
+			}
+		}
+	}
+
+	/**
+	 * [将多部分内容写到流中](Write multipart content to the stream)
+	 * @description zh - 将多部分内容写到流中
+	 * @description en - Write multipart content to the stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 10:28:16
+	 * @param out OutputStream
+	 * @param isCloseOut 是否关闭输出流
+	 * @param obj 写入的对象内容
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 */
+	public static void writeObj(OutputStream out, boolean isCloseOut, Serializable obj) throws IORuntimeException {
+		writeObjects(out, isCloseOut, obj);
+	}
+
+	/**
+	 * [将多部分内容写到流中](Write multipart content to the stream)
+	 * @description zh - 将多部分内容写到流中
+	 * @description en - Write multipart content to the stream
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 10:30:12
+	 * @param out OutputStream
+	 * @param isCloseOut 是否关闭输出流
+	 * @param obj 写入的对象内容
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 */
+	public static void writeObjects(OutputStream out, boolean isCloseOut, Serializable... contents) throws IORuntimeException {
+		ObjectOutputStream osw = null;
+		try {
+			osw = out instanceof ObjectOutputStream ? (ObjectOutputStream) out : new ObjectOutputStream(out);
+			for (Object content : contents) {
+				if (content != null) {
+					osw.writeObject(content);
+				}
+			}
+			osw.flush();
+		} catch (IOException e) {
+			throw new IORuntimeException(e);
+		} finally {
+			if (isCloseOut) {
+				close(osw);
+			}
+		}
+	}
+
     /**
      * [将需要写入的文本通过字符编码写入所需要的文件](Write the text to be written to the required file by character encoding)
      * @description: zh - 将需要写入的文本通过字符编码写入所需要的文件
@@ -1150,7 +1295,7 @@ public class IoUtil extends NioUtil {
     }
 
     /**
-     *
+     * [通过读取输入流和输入自定义的字符编码级进行读取文件](Read the file by reading the input stream and entering the custom character encoding level)
      * @description: zh - 通过读取输入流和输入自定义的字符编码级进行读取文件
      * @description: en - Read the file by reading the input stream and entering the custom character encoding level
      * @version: V1.0
@@ -1253,5 +1398,236 @@ public class IoUtil extends NioUtil {
         }
     }
 
+	// 其他 ------------------------------------- other
 
+	/**
+	 * [从缓存中刷出数据](Flush data from cache)
+	 * @description zh - 从缓存中刷出数据
+	 * @description en - Flush data from cache
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 10:33:22
+	 * @param flushable Flushable
+	 */
+	public static void flush(Flushable flushable) {
+		if (null != flushable) {
+			try {
+				flushable.flush();
+			} catch (Exception e) {}
+		}
+	}
+
+	/**
+	 * [关闭](close)
+	 * @description zh - 关闭
+	 * @description en - close
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 10:35:28
+	 * @param closeable 被关闭的对象
+	 */
+	public static void close(Closeable closeable) {
+		if (null != closeable) {
+			try {
+				closeable.close();
+			} catch (Exception e) {}
+		}
+	}
+
+	/**
+	 * [尝试关闭指定对象](Attempt to close the specified object)
+	 * @description zh - 尝试关闭指定对象
+	 * @description en - Attempt to close the specified object
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 10:36:15
+	 * @param obj 需要关闭的对象
+	 */
+	public static void closeIfPosible(Object obj) {
+		if (obj instanceof AutoCloseable) {
+			close((AutoCloseable) obj);
+		}
+	}
+
+	/**
+	 * [对比两个流内容是否相同](Compare whether the contents of the two streams are the same)
+	 * @description zh - 对比两个流内容是否相同
+	 * @description en - Compare whether the contents of the two streams are the same
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 10:38:01
+	 * @param input1 InputStream
+	 * @param input2 InputStream
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 */
+	public static boolean contentEquals(InputStream input1, InputStream input2) throws IORuntimeException {
+		if (Constant.FALSE == (input1 instanceof BufferedInputStream)) {
+			input1 = new BufferedInputStream(input1);
+		}
+		if (Constant.FALSE == (input2 instanceof BufferedInputStream)) {
+			input2 = new BufferedInputStream(input2);
+		}
+
+		try {
+			int ch = input1.read();
+			while (EOF != ch) {
+				int ch2 = input2.read();
+				if (ch != ch2) {
+					return false;
+				}
+				ch = input1.read();
+			}
+
+			int ch2 = input2.read();
+			return ch2 == EOF;
+		} catch (IOException e) {
+			throw new IORuntimeException(e);
+		}
+	}
+
+	/**
+	 * [对比两个流内容是否相同](Compare whether the contents of the two streams are the same)
+	 * @description zh - 对比两个流内容是否相同
+	 * @description en - Compare whether the contents of the two streams are the same
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 10:39:39
+	 * @param input1 Reader
+	 * @param input2 Reader
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return boolean
+	 */
+	public static boolean contentEquals(Reader input1, Reader input2) throws IORuntimeException {
+		input1 = getReader(input1);
+		input2 = getReader(input2);
+
+		try {
+			int ch = input1.read();
+			while (EOF != ch) {
+				int ch2 = input2.read();
+				if (ch != ch2) {
+					return false;
+				}
+				ch = input1.read();
+			}
+
+			int ch2 = input2.read();
+			return ch2 == EOF;
+		} catch (IOException e) {
+			throw new IORuntimeException(e);
+		}
+	}
+
+	/**
+	 * [对比两个流内容是否相同](Compare whether the contents of the two streams are the same)
+	 * @description zh - 对比两个流内容是否相同
+	 * @description en - Compare whether the contents of the two streams are the same
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 10:41:06
+	 * @param input1 Reader
+	 * @param input2 Reader
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return boolean
+	 */
+	public static boolean contentEqualsIgnoreEOL(Reader input1, Reader input2) throws IORuntimeException {
+		final BufferedReader br1 = getReader(input1);
+		final BufferedReader br2 = getReader(input2);
+
+		try {
+			String line1 = br1.readLine();
+			String line2 = br2.readLine();
+			while (line1 != null && line1.equals(line2)) {
+				line1 = br1.readLine();
+				line2 = br2.readLine();
+			}
+			return Objects.equals(line1, line2);
+		} catch (IOException e) {
+			throw new IORuntimeException(e);
+		}
+	}
+
+	/**
+	 * [计算流CRC32校验码](Compute stream CRC32 check code)
+	 * @description zh - 计算流CRC32校验码
+	 * @description en - Compute stream CRC32 check code
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 10:42:20
+	 * @param in InputStream
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return long
+	 */
+	public static long checksumCRC32(InputStream in) throws IORuntimeException {
+		return checksum(in, new CRC32()).getValue();
+	}
+
+	/**
+	 * [计算流校验码](Computational stream check code)
+	 * @description zh - 计算流校验码
+	 * @description en - Computational stream check code
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 10:43:40
+	 * @param in InputStream
+	 * @param checksum Checksum
+	 * @throws com.xiaoTools.core.exception.iORuntimeException.IORuntimeException
+	 * @return java.util.zip.Checksum
+	 */
+	public static Checksum checksum(InputStream in, Checksum checksum) throws IORuntimeException {
+		Assertion.notNull(in, "InputStream is null !");
+		if (null == checksum) {
+			checksum = new CRC32();
+		}
+		try {
+			in = new CheckedInputStream(in, checksum);
+			IoUtil.copy(in, new NullOutputStream());
+		} finally {
+			IoUtil.close(in);
+		}
+		return checksum;
+	}
+
+	/**
+	 * [计算流校验码](Computational stream check code)
+	 * @description zh - 计算流校验码
+	 * @description en - Computational stream check code
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 10:44:50
+	 * @param in InputStream
+	 * @param checksum Checksum
+	 * @return java.util.zip.Checksum
+	 */
+	public static long checksumValue(InputStream in, Checksum checksum) {
+		return checksum(in, checksum).getValue();
+	}
+
+	/**
+	 * [返回行遍历器](Return line iterator)
+	 * @description zh - 返回行遍历器
+	 * @description en - Return line iterator
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 10:45:42
+	 * @param reader Reader
+	 * @return
+	 */
+	public static LineIter lineIter(Reader reader){
+		return new LineIter(reader);
+	}
+
+	/**
+	 * [返回行遍历器](Return line iterator)
+	 * @description zh - 返回行遍历器
+	 * @description en - Return line iterator
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 10:46:42
+	 * @param in InputStream
+	 * @param charset Charset
+	 */
+	public static LineIter lineIter(InputStream in, Charset charset){
+		return new LineIter(in, charset);
+	}
 }

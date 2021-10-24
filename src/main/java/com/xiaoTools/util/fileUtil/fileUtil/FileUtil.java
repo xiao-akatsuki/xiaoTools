@@ -7,6 +7,8 @@ import com.xiaoTools.util.charUtil.CharUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
 
 import java.io.*;
+import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * [文件工具类](File tools)
@@ -689,4 +691,85 @@ public class FileUtil {
         return Constant.TRUE;
     }
 
+	/**
+	 * [递归遍历目录以及子目录中的所有文件](Recursively traverse all files in directories and subdirectories)
+	 * @description zh - 递归遍历目录以及子目录中的所有文件
+	 * @description en - Recursively traverse all files in directories and subdirectories
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 18:49:39
+	 * @param file 当前遍历文件或目录
+	 * @param fileFilter 文件过滤规则对象
+	 * @return java.util.List<java.io.File>
+	 */
+	public static List<File> loopFiles(File file, FileFilter fileFilter) {
+		return loopFiles(file, -1, fileFilter);
+	}
+
+	/**
+	 * [递归遍历目录以及子目录中的所有文件](Recursively traverse all files in directories and subdirectories)
+	 * @description zh - 递归遍历目录以及子目录中的所有文件
+	 * @description en - Recursively traverse all files in directories and subdirectories
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 18:54:26
+	 * @param file 当前遍历文件或目录
+	 * @param maxDepth 遍历最大深度
+	 * @param fileFilter 文件过滤规则对象
+	 * @return java.util.List<java.io.File>
+	 */
+	public static List<File> loopFiles(File file, int maxDepth, FileFilter fileFilter) {
+		return loopFiles(file.toPath(), maxDepth, fileFilter);
+	}
+
+	/**
+	 * [递归遍历目录以及子目录中的所有文件](Recursively traverse all files in directories and subdirectories)
+	 * @description zh - 递归遍历目录以及子目录中的所有文件
+	 * @description en - Recursively traverse all files in directories and subdirectories
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 18:55:08
+	 * @param path 当前遍历文件或目录的路径
+	 * @return java.util.List<java.io.File>
+	 */
+	public static List<File> loopFiles(String path) {
+		return loopFiles(file(path));
+	}
+
+	/**
+	 * [递归遍历目录以及子目录中的所有文件](Recursively traverse all files in directories and subdirectories)
+	 * @description zh - 递归遍历目录以及子目录中的所有文件
+	 * @description en - Recursively traverse all files in directories and subdirectories
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 18:58:27
+	 * @param file 当前遍历文件或目录
+	 * @return java.util.List<java.io.File>
+	 */
+	public static List<File> loopFiles(File file) {
+		return loopFiles(file, null);
+	}
+
+	/**
+	 * [递归遍历目录以及子目录中的所有文件](Recursively traverse all files in directories and subdirectories)
+	 * @description zh - 递归遍历目录以及子目录中的所有文件
+	 * @description en - Recursively traverse all files in directories and subdirectories
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-24 18:53:34
+	 * @param file 文件
+	 * @param consumer 文件处理器
+	 */
+	public static void walkFiles(File file, Consumer<File> consumer) {
+		if (file.isDirectory()) {
+			final File[] subFiles = file.listFiles();
+			if (ArrayUtil.isNotEmpty(subFiles)) {
+				for (File tmp : subFiles) {
+					walkFiles(tmp, consumer);
+				}
+			}
+		} else {
+			consumer.accept(file);
+		}
+	}
 }

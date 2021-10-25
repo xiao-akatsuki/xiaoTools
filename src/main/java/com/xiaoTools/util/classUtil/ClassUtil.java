@@ -22,6 +22,41 @@ import java.lang.reflect.Type;
  * @since 2021/6/14 11:03 上午
 */
 public class ClassUtil {
+
+	/**
+	 * [加载类并初始化](Load class and initialize)
+	 * @description zh - 加载类并初始化
+	 * @description en - Load class and initialize
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-25 08:35:48
+	 * @param className 类名字
+	 * @return java.lang.Class<T>
+	 */
+	public static <T> Class<T> loadClass(String className) {
+		return loadClass(className, true);
+	}
+
+	/**
+	 * [加载类](Load class)
+	 * @description zh - 加载类
+	 * @description en - Load class
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-25 08:36:30
+	 * @param className 类的名字
+	 * @param isInitialized 是否初始化
+	 * @return java.lang.Class<T>
+
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> Class<T> loadClass(String className, boolean isInitialized) {
+		return (Class<T>) ClassLoaderUtil.loadClass(className, isInitialized);
+	}
+
+
+
+
     /**
      * [null安全的获取对象类型](Null safe get object type)
      * @description: zh - null安全的获取对象类型
@@ -291,5 +326,24 @@ public class ClassUtil {
 	 */
 	public static Method getDeclaredMethod(Class<?> clazz, String methodName, Class<?>... parameterTypes) throws SecurityException {
 		return ReflectUtil.getMethod(clazz, methodName, parameterTypes);
+	}
+
+	/**
+	 * [检查目标类是否可以从原类转化](Check whether the target class can be converted from the original class)
+	 * @description zh - 检查目标类是否可以从原类转化
+	 * @description en - Check whether the target class can be converted from the original class
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-25 08:25:49
+	 * @param targetType 目标类型
+	 * @param sourceType 原类型
+	 * @return boolean
+	 */
+	public static boolean isAssignable(Class<?> targetType, Class<?> sourceType) {
+		return null == targetType || null == sourceType ? Constant.FALSE :
+			targetType.isAssignableFrom(sourceType) ? Constant.TRUE :
+				targetType.isPrimitive() ? targetType.equals(BasicType.WRAPPER_PRIMITIVE_MAP.get(sourceType)) :
+					BasicType.PRIMITIVE_WRAPPER_MAP.get(sourceType) != null && targetType.isAssignableFrom(BasicType.PRIMITIVE_WRAPPER_MAP.get(sourceType));
+
 	}
 }

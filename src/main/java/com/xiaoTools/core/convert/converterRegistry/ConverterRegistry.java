@@ -1,5 +1,6 @@
 package com.xiaoTools.core.convert.converterRegistry;
 
+import com.xiaoTools.core.convert.arrayConverter.ArrayConverter;
 import com.xiaoTools.core.convert.atomicBooleanConverter.AtomicBooleanConverter;
 import com.xiaoTools.core.convert.atomicIntegerArrayConverter.AtomicIntegerArrayConverter;
 import com.xiaoTools.core.convert.atomicLongArrayConverter.AtomicLongArrayConverter;
@@ -9,11 +10,14 @@ import com.xiaoTools.core.convert.calendarConverter.CalendarConverter;
 import com.xiaoTools.core.convert.characterConverter.CharacterConverter;
 import com.xiaoTools.core.convert.charsetConverter.CharsetConverter;
 import com.xiaoTools.core.convert.classConverter.ClassConverter;
+import com.xiaoTools.core.convert.collectionConverter.CollectionConverter;
 import com.xiaoTools.core.convert.converter.Converter;
 import com.xiaoTools.core.convert.currencyConverter.CurrencyConverter;
 import com.xiaoTools.core.convert.dateConverter.DateConverter;
 import com.xiaoTools.core.convert.durationConverter.DurationConverter;
+import com.xiaoTools.core.convert.enumConverter.EnumConverter;
 import com.xiaoTools.core.convert.localeConverte.LocaleConverter;
+import com.xiaoTools.core.convert.mapConverter.MapConverter;
 import com.xiaoTools.core.convert.numberConverter.NumberConverter;
 import com.xiaoTools.core.convert.optionalConverter.OptionalConverter;
 import com.xiaoTools.core.convert.pathConverter.PathConverter;

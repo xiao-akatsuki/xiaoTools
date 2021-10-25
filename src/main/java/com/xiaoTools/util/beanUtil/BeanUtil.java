@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import com.xiaoTools.entity.dynaBean.DynaBean;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.classUtil.ClassUtil;
 
@@ -108,7 +109,30 @@ public class BeanUtil {
 		return Constant.FALSE;
 	}
 
+	/**
+	 * [创建动态Bean](Create dynamic bean)
+	 * @description zh - 创建动态Bean
+	 * @description en - Create dynamic bean
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-25 18:13:10
+	 * @param bean 实体类
+	 */
+	public static DynaBean createDynaBean(Object bean) {
+		return new DynaBean(bean);
+	}
 
-
-
+	/**
+	 * [查找类型转换器](Find type converter)
+	 * @description zh - 查找类型转换器
+	 * @description en - Find type converter
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-25 19:29:30
+	 * @param type 类型
+	 * @return java.beans.PropertyEditor
+	 */
+	public static PropertyEditor findEditor(Class<?> type) {
+		return PropertyEditorManager.findEditor(type);
+	}
 }

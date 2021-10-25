@@ -11,6 +11,7 @@ import com.xiaoTools.util.strUtil.StrUtil;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Collection;
@@ -1978,5 +1979,20 @@ public class NumUtil {
 		final NumberFormat format = NumberFormat.getPercentInstance();
 		format.setMaximumFractionDigits(scale);
 		return format.format(number);
+	}
+
+	/**
+	 * [格式化double](Format double)
+	 * @description zh - 格式化double
+	 * @description en - Format double
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-25 08:10:50
+	 * @param pattern 格式
+	 * @param value 值
+	 * @return java.lang.String
+	 */
+	public static String decimalFormat(String pattern, double value) {
+		return new DecimalFormat(pattern).format(value);
 	}
 }

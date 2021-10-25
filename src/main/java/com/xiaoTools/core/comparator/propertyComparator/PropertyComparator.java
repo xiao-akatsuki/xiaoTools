@@ -3,6 +3,7 @@ package com.xiaoTools.core.comparator.propertyComparator;
 import java.io.Serializable;
 import java.util.Comparator;
 
+import com.xiaoTools.core.exception.comparatorException.ComparatorException;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.compareUtil.CompareUtil;
 import com.xiaoTools.util.objectUtil.ObjectUtil;
@@ -28,24 +29,20 @@ public class PropertyComparator<T> implements Comparator<T>, Serializable {
      */
 	private final boolean isNullGreater;
 
-    /**
-     *
-     * @description zh - 构造
-     * @description en - structure
-     * @version V1.0
-     * @author XiaoXunYao
-     * @since 2021-09-01 19:01:57
-     * @param property 属性名
-     */
 	public PropertyComparator(String property) {
 		this(property, true);
+	}
+
+	public PropertyComparator(String property, boolean isNullGreater) {
+		this.property = property;
+		this.isNullGreater = isNullGreater;
 	}
 
     @Override
 	public int compare(T o1, T o2) {
 		if (o1 == o2) {
 			return Constant.ZERO;
-		} else if (Constant.NULL == o1) {// null 排在后面
+		} else if (Constant.NULL == o1) {
 			return isNullGreater ? Constant.ONE : Constant.NEGATIVE_ONE;
 		} else if (Constant.NULL == o2) {
 			return isNullGreater ? Constant.NEGATIVE_ONE : Constant.ONE;
@@ -67,7 +64,6 @@ public class PropertyComparator<T> implements Comparator<T>, Serializable {
 	private int compare(T o1, T o2, Comparable fieldValue1, Comparable fieldValue2) {
 		int result = ObjectUtil.compare(fieldValue1, fieldValue2, isNullGreater);
 		if(Constant.ZERO == result) {
-			//避免TreeSet / TreeMap 过滤掉排序字段相同但是对象不相同的情况
 			result = CompareUtil.compare(o1, o2, this.isNullGreater);
 		}
 		return result;

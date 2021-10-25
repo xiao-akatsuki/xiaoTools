@@ -2,9 +2,12 @@ package com.xiaoTools.core.convert;
 
 import com.xiaoTools.assertion.Assertion;
 import com.xiaoTools.core.basicType.BasicType;
+import com.xiaoTools.core.convert.collectionConverter.CollectionConverter;
 import com.xiaoTools.core.convert.converterRegistry.ConverterRegistry;
+import com.xiaoTools.core.convert.enumConverter.EnumConverter;
 import com.xiaoTools.core.convert.formatter.numberChineseFormatter.NumberChineseFormatter;
 import com.xiaoTools.core.convert.formatter.numberChineseFormatter.NumberWordFormatter;
+import com.xiaoTools.core.convert.mapConverter.MapConverter;
 import com.xiaoTools.core.convert.typeReference.TypeReference;
 import com.xiaoTools.core.exception.convertException.ConvertException;
 import com.xiaoTools.lang.constant.Constant;
@@ -648,6 +651,7 @@ public class Convert {
      * @param defaultValue: 默认值
      * @return E
     */
+	@SuppressWarnings("unchecked")
     public static <E extends Enum<E>> E toEnum(Class<E> clazz, Object value, E defaultValue) {
         return (E) (new EnumConverter(clazz)).convertQuietly(value, defaultValue);
     }
@@ -710,6 +714,7 @@ public class Convert {
      * @param value: 被转换的值
      * @return java.util.List<T>
     */
+	@SuppressWarnings("unchecked")
     public static <T> List<T> toList(Class<T> elementType, Object value) {
         return (List<T>) toCollection(ArrayList.class, elementType, value);
     }
@@ -726,6 +731,7 @@ public class Convert {
      * @param value: 被转换的值
      * @return java.util.Map<K,V>
     */
+	@SuppressWarnings("unchecked")
     public static <K, V> Map<K, V> toMap(Class<K> keyType, Class<V> valueType, Object value) {
         return (Map<K, V>) new MapConverter(HashMap.class, keyType, valueType).convert(value, null);
     }

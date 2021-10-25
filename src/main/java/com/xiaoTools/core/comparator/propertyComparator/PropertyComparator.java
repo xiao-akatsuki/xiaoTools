@@ -5,6 +5,7 @@ import java.util.Comparator;
 
 import com.xiaoTools.core.exception.comparatorException.ComparatorException;
 import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.util.beanUtil.BeanUtil;
 import com.xiaoTools.util.compareUtil.CompareUtil;
 import com.xiaoTools.util.objectUtil.ObjectUtil;
 

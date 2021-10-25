@@ -35,6 +35,7 @@ import com.xiaoTools.core.convert.uUIDConverter.UUIDConverter;
 import com.xiaoTools.core.exception.convertException.ConvertException;
 import com.xiaoTools.date.dateTime.DateTime;
 import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.util.beanUtil.BeanUtil;
 import com.xiaoTools.util.classUtil.ClassUtil;
 import com.xiaoTools.util.objectUtil.ObjectUtil;
 import com.xiaoTools.util.reflectUtil.ReflectUtil;

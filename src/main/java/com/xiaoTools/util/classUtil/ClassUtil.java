@@ -346,4 +346,39 @@ public class ClassUtil {
 					BasicType.PRIMITIVE_WRAPPER_MAP.get(sourceType) != null && targetType.isAssignableFrom(BasicType.PRIMITIVE_WRAPPER_MAP.get(sourceType));
 
 	}
+
+	/**
+	 * [是否为标准的类](Is it a standard class)
+	 * @description zh - 是否为标准的类
+	 * @description en - Is it a standard class
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-25 09:10:50
+	 * @param clazz 类型
+	 * @return boolean
+	 */
+	public static boolean isNormalClass(Class<?> clazz) {
+		return null != clazz
+				&& Constant.FALSE == clazz.isInterface()
+				&& Constant.FALSE == isAbstract(clazz)
+				&& Constant.FALSE == clazz.isEnum()
+				&& Constant.FALSE == clazz.isArray()
+				&& Constant.FALSE == clazz.isAnnotation()
+				&& Constant.FALSE == clazz.isSynthetic()
+				&& Constant.FALSE == clazz.isPrimitive();
+	}
+
+	/**
+	 * [是否为抽象类](Is it an abstract class)
+	 * @description zh - 是否为抽象类
+	 * @description en - Is it an abstract class
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-25 09:11:29
+	 * @param clazz 类型
+	 * @return boolean
+	 */
+	public static boolean isAbstract(Class<?> clazz) {
+		return Modifier.isAbstract(clazz.getModifiers());
+	}
 }

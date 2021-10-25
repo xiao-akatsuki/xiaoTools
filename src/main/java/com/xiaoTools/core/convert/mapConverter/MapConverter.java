@@ -8,6 +8,7 @@ import java.util.Objects;
 import com.xiaoTools.core.convert.abstractConverter.AbstractConverter;
 import com.xiaoTools.core.convert.converterRegistry.ConverterRegistry;
 import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.util.beanUtil.BeanUtil;
 import com.xiaoTools.util.mapUtil.MapUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
 import com.xiaoTools.util.typeUtil.TypeUtil;

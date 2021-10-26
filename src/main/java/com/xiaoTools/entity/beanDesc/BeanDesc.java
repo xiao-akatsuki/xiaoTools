@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.xiaoTools.assertion.Assertion;
+import com.xiaoTools.core.map.caseInsensitiveMap.CaseInsensitiveMap;
 import com.xiaoTools.entity.propDesc.PropDesc;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.booleanUtil.BooleanUtil;
@@ -79,7 +80,7 @@ public class BeanDesc implements Serializable {
 	 * @return java.util.Map<java.lang.String, com.xiaoTools.entity.propDesc.PropDesc>
 	 */
 	public Map<String, PropDesc> getPropMap(boolean ignoreCase) {
-		return ignoreCase ? new CaseInsensitiveMap<>(1, this.propMap) : this.propMap;
+		return ignoreCase ? new CaseInsensitiveMap<>(Constant.ONE, this.propMap) : this.propMap;
 	}
 
 	/**
@@ -167,7 +168,7 @@ public class BeanDesc implements Serializable {
 		final Method[] methods = ReflectUtil.getMethods(this.beanClass);
 		PropDesc prop;
 		for (Field field : ReflectUtil.getFields(this.beanClass)) {
-			if (false == ModifierUtil.isStatic(field)) {
+			if (Constant.FALSE == ModifierUtil.isStatic(field)) {
 				prop = createProp(field, methods);
 				this.propMap.putIfAbsent(prop.getFieldName(), prop);
 			}

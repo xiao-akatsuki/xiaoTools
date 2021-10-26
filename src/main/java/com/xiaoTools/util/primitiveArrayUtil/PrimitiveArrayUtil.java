@@ -850,12 +850,12 @@ public class PrimitiveArrayUtil {
     /**
      * [返回数组中指定元素所在最后的位置](Returns the last position of the specified element in the array)
      * @description: zh - 返回数组中指定元素所在最后的位置
-     * @description: en - Returns the last position of the specified element in the array 
+     * @description: en - Returns the last position of the specified element in the array
      * @version: V1.0
      * @author XiaoXunYao
      * @since 2021/8/14 1:13 下午
      * @param array: 数组
-     * @param value: 被检查的元素 
+     * @param value: 被检查的元素
      * @return int
     */
     public static int lastIndexOf(int[] array, int value) {
@@ -2275,7 +2275,7 @@ public class PrimitiveArrayUtil {
     public static long[] reverse(long[] array) {
         return reverse(array, Constant.ZERO, array.length);
     }
-    
+
     /**
      * [反转数组](Invert array)
      * @description zh - 反转数组
@@ -2284,7 +2284,7 @@ public class PrimitiveArrayUtil {
      * @author XiaoXunYao
      * @since 2021-08-16 18:22:54
      * @param array 数组
-     * @param start 起始位置 
+     * @param start 起始位置
      * @param end 结束位置
      * @return int[]
      */
@@ -2325,7 +2325,7 @@ public class PrimitiveArrayUtil {
      * @author XiaoXunYao
      * @since 2021-08-16 19:05:20
      * @param array 数组
-     * @param start 起始位置 
+     * @param start 起始位置
      * @param end 结束位置
      * @return short[]
      */
@@ -2366,7 +2366,7 @@ public class PrimitiveArrayUtil {
      * @author XiaoXunYao
      * @since 2021-08-16 19:09:14
      * @param array 数组
-     * @param start 起始位置 
+     * @param start 起始位置
      * @param end 结束位置
      * @return char[]
      */
@@ -2407,7 +2407,7 @@ public class PrimitiveArrayUtil {
      * @author XiaoXunYao
      * @since 2021-08-16 19:13:41
      * @param array 数组
-     * @param start 起始位置 
+     * @param start 起始位置
      * @param end 结束位置
      * @return byte[]
      */
@@ -2448,7 +2448,7 @@ public class PrimitiveArrayUtil {
      * @author XiaoXunYao
      * @since 2021-08-16 19:17:04
      * @param array 数组
-     * @param start 起始位置 
+     * @param start 起始位置
      * @param end 结束位置
      * @return double[]
      */
@@ -2489,7 +2489,7 @@ public class PrimitiveArrayUtil {
      * @author XiaoXunYao
      * @since 2021-08-16 19:19:00
      * @param array 数组
-     * @param start 起始位置 
+     * @param start 起始位置
      * @param end 结束位置
      * @return float[]
      */
@@ -2530,7 +2530,7 @@ public class PrimitiveArrayUtil {
      * @author XiaoXunYao
      * @since 2021-08-16 19:22:39
      * @param array 数组
-     * @param start 起始位置 
+     * @param start 起始位置
      * @param end 结束位置
      * @return boolean[]
      */
@@ -3594,7 +3594,7 @@ public class PrimitiveArrayUtil {
      * @since 2021-08-17 20:03:51
      * @param array 数组
      * @return boolean
-     */ 
+     */
     public static boolean isSortedDESC(int[] array) {
 		if (array == Constant.NULL) {
 			return Constant.FALSE;

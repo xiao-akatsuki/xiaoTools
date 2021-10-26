@@ -15,8 +15,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import com.xiaoTools.entity.propDesc.PropDesc;
+import com.xiaoTools.cache.beanDescCache.BeanDescCache;
+import com.xiaoTools.cache.beanInfoCache.BeanInfoCache;
+import com.xiaoTools.core.exception.beanException.BeanException;
+import com.xiaoTools.core.filter.Filter;
+import com.xiaoTools.entity.beanDesc.BeanDesc;
 import com.xiaoTools.entity.dynaBean.DynaBean;
 import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.classUtil.ClassUtil;
 
 /**
@@ -135,4 +142,93 @@ public class BeanUtil {
 	public static PropertyEditor findEditor(Class<?> type) {
 		return PropertyEditorManager.findEditor(type);
 	}
+
+	/**
+	 * [获取 Bean 描述信息](Get bean description information)
+	 * @description zh - 获取 Bean 描述信息
+	 * @description en - Get bean description information
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-26 09:12:35
+	 * @param class Bean类
+	 */
+	public static BeanDesc getBeanDesc(Class<?> clazz) {
+		return BeanDescCache.INSTANCE.getBeanDesc(clazz, () -> new BeanDesc(clazz));
+	}
+
+	/**
+	 * [遍历Bean的属性](Traversing the properties of a bean)
+	 * @description zh - 遍历Bean的属性
+	 * @description en - Traversing the properties of a bean
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-26 09:13:59
+	 * @param clazz Bean类
+	 * @param action 每个元素的处理类
+	 */
+	public static void descForEach(Class<?> clazz, Consumer<? super PropDesc> action) {
+		getBeanDesc(clazz).getProps().forEach(action);
+	}
+
+	/**
+	 * [获得Bean字段描述数组](Get bean field description array)
+	 * @description zh - 获得Bean字段描述数组
+	 * @description en - Get bean field description array
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-26 09:41:22
+	 * @param clazz Bean类
+	 * @throws com.xiaoTools.core.exception.beanException.BeanException
+	 * @return java.beans.PropertyDescriptor[]
+	 */
+	public static PropertyDescriptor[] getPropertyDescriptors(Class<?> clazz) throws BeanException {
+		BeanInfo beanInfo;
+		try {
+			beanInfo = Introspector.getBeanInfo(clazz);
+		} catch (IntrospectionException e) {
+			throw new BeanException(e);
+		}
+		return ArrayUtil.filter(beanInfo.getPropertyDescriptors(), (Filter<PropertyDescriptor>) t -> {
+			return Constant.FALSE == "class".equals(t.getName());
+		});
+	}
+
+	/**
+	 * [获得字段名和字段描述Map](Get field name and field description map)
+	 * @description zh - 获得字段名和字段描述Map
+	 * @description en - Get field name and field description map
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-26 09:58:46
+	 * @param clazz
+	 * @param ignoreCase
+	 * @return java.util.Map<java.lang.String, java.beans.PropertyDescriptor>
+	 */
+	public static Map<String, PropertyDescriptor> getPropertyDescriptorMap(Class<?> clazz, boolean ignoreCase) throws BeanException {
+		return BeanInfoCache.INSTANCE.getPropertyDescriptorMap(clazz, ignoreCase, () -> internalGetPropertyDescriptorMap(clazz, ignoreCase));
+	}
+
+	/**
+	 * [获得字段名和字段描述Map](Get field name and field description map)
+	 * @description zh - 获得字段名和字段描述Map
+	 * @description en - Get field name and field description map
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-26 10:09:42
+	 * @param clazz bean类型
+	 * @param ignoreCase 是否忽略大小写
+	 * @throws com.xiaoTools.core.exception.beanException.BeanException
+	 * @return java.util.Map<java.lang.String, java.beans.PropertyDescriptor>
+	 */
+	private static Map<String, PropertyDescriptor> internalGetPropertyDescriptorMap(Class<?> clazz, boolean ignoreCase) throws BeanException {
+		final PropertyDescriptor[] propertyDescriptors = getPropertyDescriptors(clazz);
+		final Map<String, PropertyDescriptor> map = ignoreCase ? new CaseInsensitiveMap<>(propertyDescriptors.length, 1)
+				: new HashMap<>((int) (propertyDescriptors.length), 1);
+
+		for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
+			map.put(propertyDescriptor.getName(), propertyDescriptor);
+		}
+		return map;
+	}
+
 }

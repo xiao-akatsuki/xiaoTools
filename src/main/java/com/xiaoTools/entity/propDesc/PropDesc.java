@@ -30,12 +30,12 @@ public class PropDesc {
 	/**
 	 * Getter方法
 	 */
-	protected Method getter;
+	public Method getter;
 
 	/**
 	 * Setter方法
 	 */
-	protected Method setter;
+	public Method setter;
 
 	public PropDesc(Field field, Method getter, Method setter) {
 		this.field = field;

@@ -18,13 +18,18 @@ import java.util.function.Consumer;
 import com.xiaoTools.entity.propDesc.PropDesc;
 import com.xiaoTools.cache.beanDescCache.BeanDescCache;
 import com.xiaoTools.cache.beanInfoCache.BeanInfoCache;
+import com.xiaoTools.core.convert.Convert;
 import com.xiaoTools.core.exception.beanException.BeanException;
 import com.xiaoTools.core.filter.Filter;
+import com.xiaoTools.core.map.caseInsensitiveMap.CaseInsensitiveMap;
 import com.xiaoTools.entity.beanDesc.BeanDesc;
+import com.xiaoTools.entity.beanPath.BeanPath;
 import com.xiaoTools.entity.dynaBean.DynaBean;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.classUtil.ClassUtil;
+import com.xiaoTools.util.collUtil.CollUtil;
+import com.xiaoTools.util.reflectUtil.ReflectUtil;
 
 /**
  * [Bean工具类](Bean util)
@@ -230,5 +235,112 @@ public class BeanUtil {
 		}
 		return map;
 	}
+
+	/**
+	 * [获得Bean类属性描述，大小写敏感](Get the bean class attribute description, case sensitive)
+	 * @description zh - 获得Bean类属性描述，大小写敏感
+	 * @description en - Get the bean class attribute description, case sensitive
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-26 20:15:27
+	 * @param clazz 实体类
+	 * @param fieldName 字段名称
+	 * @return java.beans.PropertyDescriptor
+	 */
+	public static PropertyDescriptor getPropertyDescriptor(Class<?> clazz, final String fieldName) throws BeanException {
+		return getPropertyDescriptor(clazz, fieldName, Constant.FALSE);
+	}
+
+	/**
+	 * [获得Bean类属性描述](Get the bean class attribute description)
+	 * @description zh - 获得Bean类属性描述
+	 * @description en - Get the bean class attribute description
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-26 20:16:19
+	 * @param clazz bean实体类
+	 * @return fieldName 字段名称
+	 * @return ignoreCase 是否忽略大小写
+	 * @return java.beans.PropertyDescriptor
+	 */
+	public static PropertyDescriptor getPropertyDescriptor(Class<?> clazz, final String fieldName, boolean ignoreCase) throws BeanException {
+		final Map<String, PropertyDescriptor> map = getPropertyDescriptorMap(clazz, ignoreCase);
+		return (null == map) ? null : map.get(fieldName);
+	}
+
+	/**
+	 * [获得字段值](Get field value)
+	 * @description zh - 获得字段值
+	 * @description en - Get field value
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-26 20:18:41
+	 * @param bean
+	 * @param fieldNameOrIndex
+	 * @return java.lang.Object
+	 */
+	public static Object getFieldValue(Object bean, String fieldNameOrIndex) {
+		if (null == bean || null == fieldNameOrIndex) {
+			return null;
+		}
+
+		if (bean instanceof Map) {
+			return ((Map<?, ?>) bean).get(fieldNameOrIndex);
+		} else if (bean instanceof Collection) {
+			try{
+				return CollUtil.get((Collection<?>) bean, Integer.parseInt(fieldNameOrIndex));
+			} catch (NumberFormatException e){
+				return CollUtil.map((Collection<?>) bean, (beanEle)-> getFieldValue(beanEle, fieldNameOrIndex), false);
+			}
+		} else if (ArrayUtil.isArray(bean)) {
+			try{
+				return ArrayUtil.get(bean, Integer.parseInt(fieldNameOrIndex));
+			} catch (NumberFormatException e){
+				return ArrayUtil.map(bean, Object.class, (beanEle)-> getFieldValue(beanEle, fieldNameOrIndex));
+			}
+		} else {
+			return ReflectUtil.getFieldValue(bean, fieldNameOrIndex);
+		}
+	}
+
+	/**
+	 * [获得字段值](Get field value)
+	 * @description zh - 获得字段值
+	 * @description en - Get field value
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-26 20:20:38
+	 * @param bean Bean
+	 * @param fieldNameOrIndex 字段名或序号
+	 * @param value 值
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public static void setFieldValue(Object bean, String fieldNameOrIndex, Object value) {
+		if (bean instanceof Map) {
+			((Map) bean).put(fieldNameOrIndex, value);
+		} else if (bean instanceof List) {
+			CollUtil.setOrAppend((List) bean, Convert.toInt(fieldNameOrIndex), value);
+		} else if (ArrayUtil.isArray(bean)) {
+			ArrayUtil.setOrAppend(bean, Convert.toInt(fieldNameOrIndex), value);
+		} else {
+			ReflectUtil.setFieldValue(bean, fieldNameOrIndex, value);
+		}
+	}
+
+	/**
+	 * [解析Bean中的属性值](Resolve attribute values in a bean)
+	 * @description zh - 解析Bean中的属性值
+	 * @description en - Resolve attribute values in a bean
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-26 20:23:44
+	 * @param bean 实体类
+	 * @param expression 表达式
+	 * @param value 属性值
+	 */
+	public static void setProperty(Object bean, String expression, Object value) {
+		BeanPath.create(expression).set(bean, value);
+	}
+
 
 }

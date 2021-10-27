@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
+import com.xiaoTools.annotation.propIgnore.PropIgnore;
 import com.xiaoTools.core.convert.Convert;
 import com.xiaoTools.core.exception.beanException.BeanException;
 import com.xiaoTools.lang.constant.Constant;

@@ -24,11 +24,13 @@ import com.xiaoTools.core.filter.Filter;
 import com.xiaoTools.core.map.caseInsensitiveMap.CaseInsensitiveMap;
 import com.xiaoTools.entity.beanDesc.BeanDesc;
 import com.xiaoTools.entity.beanPath.BeanPath;
+import com.xiaoTools.entity.copyOptions.CopyOptions;
 import com.xiaoTools.entity.dynaBean.DynaBean;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.classUtil.ClassUtil;
 import com.xiaoTools.util.collUtil.CollUtil;
+import com.xiaoTools.util.mapUtil.MapUtil;
 import com.xiaoTools.util.reflectUtil.ReflectUtil;
 
 /**
@@ -342,5 +344,109 @@ public class BeanUtil {
 		BeanPath.create(expression).set(bean, value);
 	}
 
+	/**
+	 * [Map转换为Bean对象](Convert map to bean object)
+	 * @description zh - Map转换为Bean对象
+	 * @description en - Convert map to bean object
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-27 08:51:25
+	 * @param map Map
+	 * @param beanClass 实体类
+	 * @param isToCamelCase 是否将Map中的下划线风格key转换为驼峰风格
+	 * @param copyOptions 转Bean选项
+	 * @return T
+	 */
+	public static <T> T mapToBean(Map<?, ?> map, Class<T> beanClass, boolean isToCamelCase, CopyOptions copyOptions) {
+		return fillBeanWithMap(map, ReflectUtil.newInstanceIfPossible(beanClass), isToCamelCase, copyOptions);
+	}
+
+	/**
+	 * [使用Map填充Bean对象](Filling bean objects with map)
+	 * @description zh - 使用Map填充Bean对象
+	 * @description en - Filling bean objects with map
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-27 09:42:44
+	 * @param map Map
+	 * @param bean Bean
+	 * @param isIgnoreError 是否忽略注入错误
+	 * @return T
+	 */
+	public static <T> T fillBeanWithMap(Map<?, ?> map, T bean, boolean isIgnoreError) {
+		return fillBeanWithMap(map, bean, Constant.FALSE, isIgnoreError);
+	}
+
+	/**
+	 * [使用Map填充Bean对象](Filling bean objects with map)
+	 * @description zh - 使用Map填充Bean对象
+	 * @description en - Filling bean objects with map
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-27 09:44:44
+	 * @param map Map
+	 * @param bean Bean
+	 * @param isToCamelCase 是否将下划线模式转换为驼峰模式
+	 * @param isIgnoreError 是否忽略注入错误
+	 * @return T
+	 */
+	public static <T> T fillBeanWithMap(Map<?, ?> map, T bean, boolean isToCamelCase, boolean isIgnoreError) {
+		return fillBeanWithMap(map, bean, isToCamelCase, CopyOptions.create().setIgnoreError(isIgnoreError));
+	}
+
+	/**
+	 * [使用Map填充Bean对象](Filling bean objects with map)
+	 * @description zh - 使用Map填充Bean对象
+	 * @description en - Filling bean objects with map
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-27 09:47:10
+	 * @param map Map
+	 * @param bean Bean
+	 * @param isIgnoreError 是否忽略注入错误
+	 * @return T
+	 */
+	public static <T> T fillBeanWithMapIgnoreCase(Map<?, ?> map, T bean, boolean isIgnoreError) {
+		return fillBeanWithMap(map, bean, CopyOptions.create().setIgnoreCase(Constant.TRUE).setIgnoreError(isIgnoreError));
+	}
+
+	/**
+	 * [使用Map填充Bean对象](Filling bean objects with map)
+	 * @description zh - 使用Map填充Bean对象
+	 * @description en - Filling bean objects with map
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-27 09:47:32
+	 * @param map Map
+	 * @param bean Bean
+	 * @param copyOptions 转Bean选项
+	 * @return T
+	 */
+	public static <T> T fillBeanWithMap(Map<?, ?> map, T bean, CopyOptions copyOptions) {
+		return fillBeanWithMap(map, bean, Constant.FALSE, copyOptions);
+	}
+
+	/**
+	 * [使用Map填充Bean对象](Filling bean objects with map)
+	 * @description zh - 使用Map填充Bean对象
+	 * @description en - Filling bean objects with map
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-27 09:48:42
+	 * @param map Map
+	 * @param bean Bean
+	 * @param isToCamelCase 是否将下划线模式转换为驼峰模式
+	 * @param copyOptions 转Bean选项
+	 */
+	public static <T> T fillBeanWithMap(Map<?, ?> map, T bean, boolean isToCamelCase, CopyOptions copyOptions) {
+		if (MapUtil.isEmpty(map)) {
+			return bean;
+		}
+		if (isToCamelCase) {
+			map = MapUtil.toCamelCaseMap(map);
+		}
+		copyProperties(map, bean, copyOptions);
+		return bean;
+	}
 
 }

@@ -25,47 +25,47 @@ public class CopyOptions implements Serializable {
 	/**
 	 * 限制的类或接口，必须为目标对象的实现接口或父类，用于限制拷贝的属性，例如一个类我只想复制其父类的一些属性，就可以将editable设置为父类
 	 */
-	protected Class<?> editable;
+	public Class<?> editable;
 
 	/**
 	 * 是否忽略空值，当源对象的值为null时，true: 忽略而不注入此值，false: 注入null
 	 */
-	protected boolean ignoreNullValue;
+	public boolean ignoreNullValue;
 
 	/**
 	 * 属性过滤器，断言通过的属性才会被复制
 	 */
-	protected BiPredicate<Field, Object> propertiesFilter;
+	public BiPredicate<Field, Object> propertiesFilter;
 
 	/**
 	 * 忽略的目标对象中属性列表，设置一个属性列表，不拷贝这些属性值
 	 */
-	protected String[] ignoreProperties;
+	public String[] ignoreProperties;
 
 	/**
 	 * 是否忽略字段注入错误
 	 */
-	protected boolean ignoreError;
+	public boolean ignoreError;
 
 	/**
 	 * 是否忽略字段大小写
 	 */
-	protected boolean ignoreCase;
+	public boolean ignoreCase;
 
 	/**
 	 * 拷贝属性的字段映射，用于不同的属性之前拷贝做对应表用
 	 */
-	protected Map<String, String> fieldMapping;
+	public Map<String, String> fieldMapping;
 
 	/**
 	 * 反向映射表，自动生成用于反向查找
 	 */
-	private Map<String, String> reversedFieldMapping;
+	public Map<String, String> reversedFieldMapping;
 
 	/**
 	 * 字段属性编辑器，用于自定义属性转换规则，例如驼峰转下划线等
 	 */
-	protected Editor<String> fieldNameEditor;
+	public Editor<String> fieldNameEditor;
 
 	/**
 	 * 是否支持transient关键字修饰和@Transient注解，如果支持，被修饰的字段或方法对应的字段将被忽略。
@@ -319,7 +319,7 @@ public class CopyOptions implements Serializable {
 	 * @param reversed 是否反向映射
 	 * @return java.lang.String
 	 */
-	protected String getMappedFieldName(String fieldName, boolean reversed){
+	public String getMappedFieldName(String fieldName, boolean reversed){
 		Map<String, String> mapping = reversed ? getReversedMapping() : this.fieldMapping;
 		if(MapUtil.isEmpty(mapping)){
 			return fieldName;
@@ -337,7 +337,7 @@ public class CopyOptions implements Serializable {
 	 * @param fieldName 字段名
 	 * @return java.lang.String
 	 */
-	protected String editFieldName(String fieldName){
+	public String editFieldName(String fieldName){
 		return (null != this.fieldNameEditor) ? this.fieldNameEditor.edit(fieldName) : fieldName;
 	}
 

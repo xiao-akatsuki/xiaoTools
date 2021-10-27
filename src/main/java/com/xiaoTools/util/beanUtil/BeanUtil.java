@@ -16,12 +16,14 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import com.xiaoTools.entity.propDesc.PropDesc;
+import com.xiaoTools.entity.valueProvider.ValueProvider;
 import com.xiaoTools.cache.beanDescCache.BeanDescCache;
 import com.xiaoTools.cache.beanInfoCache.BeanInfoCache;
 import com.xiaoTools.core.convert.Convert;
 import com.xiaoTools.core.exception.beanException.BeanException;
 import com.xiaoTools.core.filter.Filter;
 import com.xiaoTools.core.map.caseInsensitiveMap.CaseInsensitiveMap;
+import com.xiaoTools.entity.beanCopier.BeanCopier;
 import com.xiaoTools.entity.beanDesc.BeanDesc;
 import com.xiaoTools.entity.beanPath.BeanPath;
 import com.xiaoTools.entity.copyOptions.CopyOptions;
@@ -448,5 +450,109 @@ public class BeanUtil {
 		copyProperties(map, bean, copyOptions);
 		return bean;
 	}
+
+	/**
+	 * [对象或Map转Bean](Object or map to bean)
+	 * @description zh - 对象或Map转Bean
+	 * @description en - Object or map to bean
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-27 17:58:46
+	 * @param source Bean对象或Map
+	 * @param clazz 目标的Bean类型
+	 * @return T
+	 */
+	public static <T> T toBean(Object source, Class<T> clazz) {
+		return toBean(source, clazz, null);
+	}
+
+	/**
+	 * [对象或Map转Bean](Object or map to bean)
+	 * @description zh - 对象或Map转Bean
+	 * @description en - Object or map to bean
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-27 17:59:49
+	 * @param source Bean对象或Map
+	 * @param clazz 目标的Bean类型
+	 * @return T
+	 */
+	public static <T> T toBeanIgnoreError(Object source, Class<T> clazz) {
+		return toBean(source, clazz, CopyOptions.create().setIgnoreError(Constant.TRUE));
+	}
+
+	/**
+	 * [对象或Map转Bean](Object or map to bean)
+	 * @description zh - 对象或Map转Bean
+	 * @description en - Object or map to bean
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-27 18:01:55
+	 * @param source Bean对象或Map
+	 * @param clazz 目标的Bean类型
+	 * @param ignoreError 是否忽略注入错误
+	 * @return T
+	 */
+	public static <T> T toBeanIgnoreCase(Object source, Class<T> clazz, boolean ignoreError) {
+		return toBean(source, clazz,
+				CopyOptions.create()
+						.setIgnoreCase(Constant.TRUE)
+						.setIgnoreError(ignoreError));
+	}
+
+	/**
+	 * [对象或Map转Bean](Object or map to bean)
+	 * @description zh - 对象或Map转Bean
+	 * @description en - Object or map to bean
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-27 18:02:49
+	 * @param source Bean对象或Map
+	 * @param clazz 目标的Bean类型
+	 * @param options 属性拷贝选项
+	 * @return T
+	 */
+	public static <T> T toBean(Object source, Class<T> clazz, CopyOptions options) {
+		if(null == source){
+			return null;
+		}
+		final T target = ReflectUtil.newInstanceIfPossible(clazz);
+		copyProperties(source, target, options);
+		return target;
+	}
+
+	/**
+	 * [ServletRequest 参数转 Bean](ServletRequest parameter to bean)
+	 * @description zh - ServletRequest 参数转 Bean
+	 * @description en - ServletRequest parameter to bean
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-27 18:03:55
+	 * @param beanClass Bean Class
+	 * @param valueProvider 值提供者
+	 * @param copyOptions 拷贝选项
+	 * @return T
+	 */
+	public static <T> T toBean(Class<T> beanClass, ValueProvider<String> valueProvider, CopyOptions copyOptions) {
+		return null == beanClass || null == valueProvider ? null : fillBean(ReflectUtil.newInstanceIfPossible(beanClass), valueProvider, copyOptions)
+	}
+
+	/**
+	 * [填充Bean的核心方法](Core method of filling bean)
+	 * @description zh - 填充Bean的核心方法
+	 * @description en - Core method of filling bean
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-27 18:05:25
+	 * @param bean Bean Class
+	 * @param valueProvider 值提供者
+	 * @param copyOptions 拷贝选项
+	 * @return T
+	 */
+	public static <T> T fillBean(T bean, ValueProvider<String> valueProvider, CopyOptions copyOptions) {
+		return null == valueProvider ? bean : BeanCopier.create(valueProvider, bean, copyOptions).copy();
+	}
+
+
 
 }

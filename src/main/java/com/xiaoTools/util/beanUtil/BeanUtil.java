@@ -553,6 +553,4 @@ public class BeanUtil {
 		return null == valueProvider ? bean : BeanCopier.create(valueProvider, bean, copyOptions).copy();
 	}
 
-
-
 }

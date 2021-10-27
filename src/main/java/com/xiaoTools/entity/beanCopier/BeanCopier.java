@@ -1,14 +1,15 @@
 package com.xiaoTools.entity.beanCopier;
 
 import java.io.Serializable;
-import java.lang.constant.Constable;
 import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Map;
 
 import com.xiaoTools.core.exception.beanException.BeanException;
+import com.xiaoTools.entity.beanValueProvider.BeanValueProvider;
 import com.xiaoTools.entity.copyOptions.CopyOptions;
 import com.xiaoTools.entity.dynaBean.DynaBean;
+import com.xiaoTools.entity.dynaBeanValueProvider.DynaBeanValueProvider;
 import com.xiaoTools.entity.mapValueProvider.MapValueProvider;
 import com.xiaoTools.entity.valueProvider.ValueProvider;
 import com.xiaoTools.lang.constant.Constant;
@@ -99,10 +100,8 @@ public class BeanCopier<T> implements Copier<T>, Serializable {
 	public T copy() {
 		if (null != this.source) {
 			if (this.source instanceof ValueProvider) {
-				// 目标只支持Bean
 				valueProviderToBean((ValueProvider<String>) this.source, this.dest);
 			} else if (this.source instanceof DynaBean) {
-				// 目标只支持Bean
 				valueProviderToBean(new DynaBeanValueProvider((DynaBean) this.source, copyOptions.ignoreError), this.dest);
 			} else if (this.source instanceof Map) {
 				if (this.dest instanceof Map) {
@@ -238,7 +237,6 @@ public class BeanCopier<T> implements Copier<T>, Serializable {
 		final CopyOptions copyOptions = this.copyOptions;
 		Class<?> actualEditable = bean.getClass();
 		if (null != copyOptions.editable) {
-			// 检查限制类是否为target的父类或接口
 			if (Constant.FALSE == copyOptions.editable.isInstance(bean)) {
 				throw new IllegalArgumentException(StrUtil.format("Target class [{}] not assignable to Editable class [{}]", bean.getClass().getName(), copyOptions.editable.getName()));
 			}

@@ -5,6 +5,7 @@ import com.xiaoTools.assertion.Assertion;
 import com.xiaoTools.cache.simple.SimpleCache;
 import com.xiaoTools.core.convert.Convert;
 import com.xiaoTools.core.exception.utilException.UtilException;
+import com.xiaoTools.core.filter.Filter;
 import com.xiaoTools.entity.nullWrapperEntity.NullWrapperEntity;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.arrayUtil.ArrayUtil;
@@ -386,6 +387,22 @@ public class ReflectUtil {
 		allMethods = getMethodsDirectly(beanClass, true);
 		return METHODS_CACHE.put(beanClass, allMethods);
 	}
+
+	/**
+	 * [获得指定类过滤后的Public方法列表](Gets the filtered public method list of the specified class)
+	 * @description zh - 获得指定类过滤后的Public方法列表
+	 * @description en - Gets the filtered public method list of the specified class
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-28 21:47:40
+	 * @param clazz 查找方法的类
+	 * @param filter 过滤器
+	 * @return java.lang.reflect.Method[]
+	 */
+	public static Method[] getMethods(Class<?> clazz, Filter<Method> filter) throws SecurityException {
+		return null == clazz ? null : ArrayUtil.filter(getMethods(clazz), filter);
+	}
+
 
 	/**
 	 * [获得一个类中所有方法列表](Get a list of all methods in a class)

@@ -399,4 +399,21 @@ public class ClassUtil {
 		}
 		return values;
 	}
+
+	/**
+	 * [设置方法为可访问](Set method to accessible)
+	 * @description zh - 设置方法为可访问
+	 * @description en - Set method to accessible
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-28 20:57:00
+	 * @param method 方法
+	 * @return java.lang.reflect.Method
+	 */
+	public static Method setAccessible(Method method) {
+		if (null != method && false == method.canAccess(method)) {
+			method.setAccessible(true);
+		}
+		return method;
+	}
 }

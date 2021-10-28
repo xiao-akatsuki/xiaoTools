@@ -381,4 +381,22 @@ public class ClassUtil {
 	public static boolean isAbstract(Class<?> clazz) {
 		return Modifier.isAbstract(clazz.getModifiers());
 	}
+
+	/**
+	 * [获得默认值列表](Get a list of default values)
+	 * @description zh - 获得默认值列表
+	 * @description en - Get a list of default values
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-28 20:02:49
+	 * @param classes 值类型
+	 * @return java.lang.Object[]
+	 */
+	public static Object[] getDefaultValues(Class<?>... classes) {
+		final Object[] values = new Object[classes.length];
+		for (int i = Constant.ZERO; i < classes.length; i++) {
+			values[i] = getDefaultValue(classes[i]);
+		}
+		return values;
+	}
 }

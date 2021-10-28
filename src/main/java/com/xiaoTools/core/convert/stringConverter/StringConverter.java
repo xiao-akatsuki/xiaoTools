@@ -11,6 +11,7 @@ import com.xiaoTools.core.convert.abstractConverter.AbstractConverter;
 import com.xiaoTools.core.exception.convertException.ConvertException;
 import com.xiaoTools.util.charsetUtil.CharsetUtil;
 import com.xiaoTools.util.ioUtil.IoUtil;
+import com.xiaoTools.util.xmlUtil.XmlUtil;
 
 /**
  * [字符串转换器](String converter)

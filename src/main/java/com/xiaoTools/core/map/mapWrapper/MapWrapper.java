@@ -29,10 +29,10 @@ public class MapWrapper<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>>, S
 	/**
 	 * Default initial size
 	 */
-	protected static final int DEFAULT_INITIAL_CAPACITY = 1 << 4; 
+	protected static final int DEFAULT_INITIAL_CAPACITY = 1 << 4;
 
 	private final Map<K, V> raw;
-    
+
     /**
      * [构造](structure)
      * @description zh - 构造
@@ -44,6 +44,19 @@ public class MapWrapper<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>>, S
      */
     public MapWrapper(Map<K, V> raw) {
 		this.raw = raw;
+	}
+
+	/**
+	 * [获取原始的map](Get the original map)
+	 * @description zh - 获取原始的map
+	 * @description en - Get the original map
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-28 19:15:06
+	 * @param java.util.Map< K , V >
+	 */
+	public Map<K, V> getRaw() {
+		return this.raw;
 	}
 
 	@Override

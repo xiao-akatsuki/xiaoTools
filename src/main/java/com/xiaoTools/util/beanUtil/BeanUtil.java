@@ -20,6 +20,7 @@ import com.xiaoTools.entity.valueProvider.ValueProvider;
 import com.xiaoTools.cache.beanDescCache.BeanDescCache;
 import com.xiaoTools.cache.beanInfoCache.BeanInfoCache;
 import com.xiaoTools.core.convert.Convert;
+import com.xiaoTools.core.editor.Editor;
 import com.xiaoTools.core.exception.beanException.BeanException;
 import com.xiaoTools.core.filter.Filter;
 import com.xiaoTools.core.map.caseInsensitiveMap.CaseInsensitiveMap;
@@ -33,7 +34,9 @@ import com.xiaoTools.util.arrayUtil.ArrayUtil;
 import com.xiaoTools.util.classUtil.ClassUtil;
 import com.xiaoTools.util.collUtil.CollUtil;
 import com.xiaoTools.util.mapUtil.MapUtil;
+import com.xiaoTools.util.modifierUtil.ModifierUtil;
 import com.xiaoTools.util.reflectUtil.ReflectUtil;
+import com.xiaoTools.util.strUtil.StrUtil;
 
 /**
  * [Bean工具类](Bean util)
@@ -102,6 +105,36 @@ public class BeanUtil {
 			}
 		}
 		return Constant.FALSE;
+	}
+
+	/**
+	 * [判断是否为Bean对象](Determine whether it is a bean object)
+	 * @description zh - 判断是否为Bean对象
+	 * @description en - Determine whether it is a bean object
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-28 09:58:20
+	 * @param clazz 实体类
+	 * @return boolean
+	 */
+	public static boolean isBean(Class<?> clazz) {
+		return hasSetter(clazz) || hasPublicField(clazz);
+	}
+
+	/**
+	 * [解析Bean中的属性值](Resolve attribute values in a bean)
+	 * @description zh - 解析Bean中的属性值
+	 * @description en - Resolve attribute values in a bean
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-28 10:00:21
+	 * @param bean Bean对象
+	 * @param expression 表达式
+	 * @return T
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T getProperty(Object bean, String expression) {
+		return (T) BeanPath.create(expression).get(bean);
 	}
 
 	/**
@@ -534,7 +567,7 @@ public class BeanUtil {
 	 * @return T
 	 */
 	public static <T> T toBean(Class<T> beanClass, ValueProvider<String> valueProvider, CopyOptions copyOptions) {
-		return null == beanClass || null == valueProvider ? null : fillBean(ReflectUtil.newInstanceIfPossible(beanClass), valueProvider, copyOptions)
+		return null == beanClass || null == valueProvider ? null : fillBean(ReflectUtil.newInstanceIfPossible(beanClass), valueProvider, copyOptions);
 	}
 
 	/**
@@ -552,5 +585,263 @@ public class BeanUtil {
 	public static <T> T fillBean(T bean, ValueProvider<String> valueProvider, CopyOptions copyOptions) {
 		return null == valueProvider ? bean : BeanCopier.create(valueProvider, bean, copyOptions).copy();
 	}
+
+	/**
+	 * [对象转Map](Object to map)
+	 * @description zh - 对象转Map
+	 * @description en - Object to map
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-28 09:09:17
+	 * @param bean 实体类
+	 * @return java.util.Map<java.lang.String, java.lang.Object>
+	 */
+	public static Map<String, Object> beanToMap(Object bean) {
+		return beanToMap(bean, Constant.FALSE, Constant.FALSE);
+	}
+
+	/**
+	 * [对象转Map](Object to map)
+	 * @description zh - 对象转Map
+	 * @description en - Object to map
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-28 09:10:47
+	 * @param bean 实体类
+	 * @param isToUnderlineCase 是否转换为下划线模式
+	 * @param ignoreNullValue 是否忽略值为空的字段
+	 * @return java.util.Map<java.lang.String, java.lang.Object>
+	 */
+	public static Map<String, Object> beanToMap(Object bean, boolean isToUnderlineCase, boolean ignoreNullValue) {
+		return null == bean ? null : beanToMap(bean, new LinkedHashMap<>(), isToUnderlineCase, ignoreNullValue);
+	}
+
+	/**
+	 * [对象转Map](Object to map)
+	 * @description zh - 对象转Map
+	 * @description en - Object to map
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-28 09:12:17
+	 * @param bean 实体类
+	 * @param targetMap 目标的Map
+	 * @param isToUnderlineCase 是否转换为下划线模式
+	 * @param ignoreNullValue 是否忽略值为空的字段
+	 * @return java.util.Map<java.lang.String, java.lang.Object>
+	 */
+	public static Map<String, Object> beanToMap(Object bean, Map<String, Object> targetMap, final boolean isToUnderlineCase, boolean ignoreNullValue) {
+		return null == bean ? null : beanToMap(bean, targetMap, ignoreNullValue, key -> isToUnderlineCase ? StrUtil.toUnderlineCase(key) : key);
+	}
+
+	/**
+	 * [对象转Map](Object to map)
+	 * @description zh - 对象转Map
+	 * @description en - Object to map
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-28 09:14:20
+	 * @param bean 实体类
+	 * @param targetMap 目标的Map
+	 * @param ignoreNullValue 是否忽略值为空的字段
+	 * @param keyEditor 属性字段（Map的key）编辑器
+	 * @return java.util.Map<java.lang.String, java.lang.Object>
+	 */
+	public static Map<String, Object> beanToMap(Object bean, Map<String, Object> targetMap, boolean ignoreNullValue, Editor<String> keyEditor) {
+		return null == bean ? null :
+			BeanCopier.create(bean, targetMap,
+				CopyOptions.create()
+						.setIgnoreNullValue(ignoreNullValue)
+						.setFieldNameEditor(keyEditor)
+			).copy();
+	}
+
+	/**
+	 * [按照Bean对象属性创建对应的Class对象](Create the corresponding class object according to the bean object attribute)
+	 * @description zh - 按照Bean对象属性创建对应的Class对象
+	 * @description en - Create the corresponding class object according to the bean object attribute
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-28 09:16:47
+	 * @param source 源Bean对象
+	 * @param tClass 目标Class
+	 * @param ignoreProperties 不拷贝的的属性列表
+	 * @return T
+	 */
+	public static <T> T copyProperties(Object source, Class<T> tClass, String... ignoreProperties) {
+		T target = ReflectUtil.newInstanceIfPossible(tClass);
+		copyProperties(source, target, CopyOptions.create().setIgnoreProperties(ignoreProperties));
+		return target;
+	}
+
+	/**
+	 * [复制Bean对象属性](Copy bean object properties)
+	 * @description zh - 复制Bean对象属性
+	 * @description en - Copy bean object properties
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-28 09:17:51
+	 * @param source 源Bean对象
+	 * @param target 目标Bean对象
+	 * @param ignoreProperties 不拷贝的的属性列表
+	 */
+	public static void copyProperties(Object source, Object target, String... ignoreProperties) {
+		copyProperties(source, target, CopyOptions.create().setIgnoreProperties(ignoreProperties));
+	}
+
+	/**
+	 * [复制Bean对象属性](Copy bean object properties)
+	 * @description zh - 复制Bean对象属性
+	 * @description en - Copy bean object properties
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-28 09:19:18
+	 * @param source 源Bean对象
+	 * @param target 目标Bean对象
+	 * @param ignoreCase 是否忽略大小写
+	 */
+	public static void copyProperties(Object source, Object target, boolean ignoreCase) {
+		BeanCopier.create(source, target, CopyOptions.create().setIgnoreCase(ignoreCase)).copy();
+	}
+
+	/**
+	 * [复制Bean对象属性](Copy bean object properties)
+	 * @description zh - 复制Bean对象属性
+	 * @description en - Copy bean object properties
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-28 09:20:01
+	 * @param source 源Bean对象
+	 * @param target 目标Bean对象
+	 * @param copyOptions 拷贝选项
+	 */
+	public static void copyProperties(Object source, Object target, CopyOptions copyOptions) {
+		if (null == copyOptions) {
+			copyOptions = new CopyOptions();
+		}
+		BeanCopier.create(source, target, copyOptions).copy();
+	}
+
+	/**
+	 * [给定的Bean的类名是否匹配指定类名字符串](Does the class name of the given bean match the specified class name string)
+	 * @description zh - 给定的Bean的类名是否匹配指定类名字符串
+	 * @description en - Does the class name of the given bean match the specified class name string
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-28 09:20:48
+	 * @param bean Bean
+	 * @param beanClassName Bean的类名
+	 * @param isSimple 是否只匹配类名而忽略包名，true表示忽略包名
+	 * @return boolean
+	 */
+	public static boolean isMatchName(Object bean, String beanClassName, boolean isSimple) {
+		return ClassUtil.getClassName(bean, isSimple).equals(isSimple ? StrUtil.upperFirst(beanClassName) : beanClassName);
+	}
+
+	/**
+	 * [把Bean里面的String属性做trim操作](Trim the string attribute in the bean)
+	 * @description zh - 把Bean里面的String属性做trim操作
+	 * @description en - Trim the string attribute in the bean
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-28 09:22:23
+	 * @param bean 实体类
+	 * @param ignoreFields 不需要trim的Field名称列表（不区分大小写）
+	 * @return T
+	 */
+	public static <T> T trimStrFields(T bean, String... ignoreFields) {
+		if (bean == null) {
+			return null;
+		}
+
+		final Field[] fields = ReflectUtil.getFields(bean.getClass());
+		for (Field field : fields) {
+			if (ModifierUtil.isStatic(field)) {
+				continue;
+			}
+			if (ignoreFields != null && ArrayUtil.containsIgnoreCase(ignoreFields, field.getName())) {
+				continue;
+			}
+			if (String.class.equals(field.getType())) {
+				final String val = (String) ReflectUtil.getFieldValue(bean, field);
+				if (null != val) {
+					final String trimVal = StrUtil.trim(val);
+					if (Constant.FALSE == val.equals(trimVal)) {
+						ReflectUtil.setFieldValue(bean, field, trimVal);
+					}
+				}
+			}
+		}
+
+		return bean;
+	}
+
+	/**
+	 * [判断Bean是否为非空对象](Determine whether the bean is a non empty object)
+	 * @description zh - 判断Bean是否为非空对象
+	 * @description en - Determine whether the bean is a non empty object
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-28 09:23:25
+	 * @param bean 实体类
+	 * @param ignoreFiledNames 忽略检查的字段名
+	 * @return boolean
+	 */
+	public static boolean isNotEmpty(Object bean, String... ignoreFiledNames) {
+		return Constant.FALSE == isEmpty(bean, ignoreFiledNames);
+	}
+
+	/**
+	 * [判断Bean是否为空对象](Determine whether the bean is an empty object)
+	 * @description zh - 判断Bean是否为空对象
+	 * @description en - Determine whether the bean is an empty object
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-28 09:24:38
+	 * @param bean 实体类
+	 * @param ignoreFiledNames 忽略检查的字段名
+	 * @return boolean
+	 */
+	public static boolean isEmpty(Object bean, String... ignoreFiledNames) {
+		if (null != bean) {
+			for (Field field : ReflectUtil.getFields(bean.getClass())) {
+				if (ModifierUtil.isStatic(field)) {
+					continue;
+				}
+				if ((Constant.FALSE == ArrayUtil.contains(ignoreFiledNames, field.getName()))
+						&& null != ReflectUtil.getFieldValue(bean, field)) {
+					return Constant.FALSE;
+				}
+			}
+		}
+		return Constant.TRUE;
+	}
+
+	/**
+	 * [判断Bean是否包含值为 null 的属性](Determine whether the bean contains a property with null value)
+	 * @description zh - 判断Bean是否包含值为 null 的属性
+	 * @description en - Determine whether the bean contains a property with null value
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-28 09:25:39
+	 * @param bean 实体类
+	 * @param ignoreFiledNames 忽略检查的字段名
+	 * @return boolean
+	 */
+	public static boolean hasNullField(Object bean, String... ignoreFiledNames) {
+		if (null == bean) {
+			return Constant.TRUE;
+		}
+		for (Field field : ReflectUtil.getFields(bean.getClass())) {
+			if (ModifierUtil.isStatic(field)) {
+				continue;
+			}
+			if ((Constant.FALSE == ArrayUtil.contains(ignoreFiledNames, field.getName()))
+					&& null == ReflectUtil.getFieldValue(bean, field)) {
+				return Constant.TRUE;
+			}
+		}
+		return Constant.FALSE;
+	}
+
 
 }

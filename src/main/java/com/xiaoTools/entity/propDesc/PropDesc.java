@@ -10,6 +10,8 @@ import com.xiaoTools.core.convert.Convert;
 import com.xiaoTools.core.exception.beanException.BeanException;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.classUtil.ClassUtil;
+import com.xiaoTools.util.modifierUtil.ModifierUtil;
+import com.xiaoTools.util.modifierUtil.modifierType.ModifierType;
 import com.xiaoTools.util.reflectUtil.ReflectUtil;
 import com.xiaoTools.util.typeUtil.TypeUtil;
 
@@ -303,10 +305,10 @@ public class PropDesc {
 	}
 
 	private boolean isTransientForGet() {
-		boolean isTransient = ModifierUtil.hasModifier(this.field, ModifierUtil.ModifierType.TRANSIENT);
+		boolean isTransient = ModifierUtil.hasModifier(this.field, ModifierType.TRANSIENT);
 
 		if (Constant.FALSE == isTransient && null != this.getter) {
-			isTransient = ModifierUtil.hasModifier(this.getter, ModifierUtil.ModifierType.TRANSIENT);
+			isTransient = ModifierUtil.hasModifier(this.getter, ModifierType.TRANSIENT);
 
 			if (Constant.FALSE == isTransient) {
 				isTransient = AnnotationUtil.hasAnnotation(this.getter, Transient.class);
@@ -317,10 +319,10 @@ public class PropDesc {
 	}
 
 	private boolean isTransientForSet() {
-		boolean isTransient = ModifierUtil.hasModifier(this.field, ModifierUtil.ModifierType.TRANSIENT);
+		boolean isTransient = ModifierUtil.hasModifier(this.field, ModifierType.TRANSIENT);
 
 		if (Constant.FALSE == isTransient && null != this.setter) {
-			isTransient = ModifierUtil.hasModifier(this.setter, ModifierUtil.ModifierType.TRANSIENT);
+			isTransient = ModifierUtil.hasModifier(this.setter, ModifierType.TRANSIENT);
 
 			if (Constant.FALSE == isTransient) {
 				isTransient = AnnotationUtil.hasAnnotation(this.setter, Transient.class);

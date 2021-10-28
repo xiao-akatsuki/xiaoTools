@@ -15,6 +15,12 @@ import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * [反射工具类](Reflection tools)
@@ -625,6 +631,47 @@ public class ReflectUtil {
 			throw new UtilException(StrUtil.format("No such method: [{}]", methodName));
 		}
 		return invoke(obj, method, args);
+	}
+
+	/**
+	 * [尝试遍历并调用此类的所有构造方法](Try to traverse and call all the constructor methods of this class)
+	 * @description zh - 尝试遍历并调用此类的所有构造方法
+	 * @description en - Try to traverse and call all the constructor methods of this class
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-28 09:53:54
+	 * @param beanClass 被构造的类
+	 * @return T
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T newInstanceIfPossible(Class<T> beanClass) {
+		Assertion.notNull(beanClass);
+
+		if (beanClass.isAssignableFrom(AbstractMap.class)) {
+			beanClass = (Class<T>) HashMap.class;
+		} else if (beanClass.isAssignableFrom(List.class)) {
+			beanClass = (Class<T>) ArrayList.class;
+		} else if (beanClass.isAssignableFrom(Set.class)) {
+			beanClass = (Class<T>) HashSet.class;
+		}
+
+		try {
+			return newInstance(beanClass);
+		} catch (Exception e) { }
+
+		final Constructor<T>[] constructors = getConstructors(beanClass);
+		Class<?>[] parameterTypes;
+		for (Constructor<T> constructor : constructors) {
+			parameterTypes = constructor.getParameterTypes();
+			if (Constant.ZERO == parameterTypes.length) {
+				continue;
+			}
+			setAccessible(constructor);
+			try {
+				return constructor.newInstance(ClassUtil.getDefaultValues(parameterTypes));
+			} catch (Exception ignore) { }
+		}
+		return null;
 	}
 
 }

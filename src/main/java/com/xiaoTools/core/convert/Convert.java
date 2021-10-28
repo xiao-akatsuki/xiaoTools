@@ -16,6 +16,7 @@ import com.xiaoTools.util.charsetUtil.CharsetUtil;
 import com.xiaoTools.util.classUtil.ClassUtil;
 import com.xiaoTools.util.hexUtil.HexUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
+import com.xiaoTools.util.unicodeUtil.UnicodeUtil;
 
 import java.lang.reflect.Type;
 import java.math.BigDecimal;

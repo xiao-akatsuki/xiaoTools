@@ -12,6 +12,7 @@ import com.xiaoTools.core.map.caseInsensitiveMap.CaseInsensitiveMap;
 import com.xiaoTools.entity.propDesc.PropDesc;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.booleanUtil.BooleanUtil;
+import com.xiaoTools.util.modifierUtil.ModifierUtil;
 import com.xiaoTools.util.reflectUtil.ReflectUtil;
 import com.xiaoTools.util.strUtil.StrUtil;
 

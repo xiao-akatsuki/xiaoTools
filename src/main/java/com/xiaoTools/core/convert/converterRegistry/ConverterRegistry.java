@@ -5,6 +5,7 @@ import com.xiaoTools.core.convert.atomicBooleanConverter.AtomicBooleanConverter;
 import com.xiaoTools.core.convert.atomicIntegerArrayConverter.AtomicIntegerArrayConverter;
 import com.xiaoTools.core.convert.atomicLongArrayConverter.AtomicLongArrayConverter;
 import com.xiaoTools.core.convert.atomicReferenceConverter.AtomicReferenceConverter;
+import com.xiaoTools.core.convert.beanConverter.BeanConverter;
 import com.xiaoTools.core.convert.booleanConverter.BooleanConverter;
 import com.xiaoTools.core.convert.calendarConverter.CalendarConverter;
 import com.xiaoTools.core.convert.characterConverter.CharacterConverter;

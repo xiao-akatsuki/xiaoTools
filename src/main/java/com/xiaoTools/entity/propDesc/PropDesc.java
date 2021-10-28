@@ -9,6 +9,7 @@ import com.xiaoTools.annotation.propIgnore.PropIgnore;
 import com.xiaoTools.core.convert.Convert;
 import com.xiaoTools.core.exception.beanException.BeanException;
 import com.xiaoTools.lang.constant.Constant;
+import com.xiaoTools.util.annotationUtil.AnnotationUtil;
 import com.xiaoTools.util.classUtil.ClassUtil;
 import com.xiaoTools.util.modifierUtil.ModifierUtil;
 import com.xiaoTools.util.modifierUtil.modifierType.ModifierType;

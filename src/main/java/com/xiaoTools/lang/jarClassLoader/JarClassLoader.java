@@ -12,6 +12,7 @@ import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.classUtil.ClassUtil;
 import com.xiaoTools.util.fileUtil.fileUtil.FileUtil;
 import com.xiaoTools.util.reflectUtil.ReflectUtil;
+import com.xiaoTools.util.urlUtil.URLUtil;
 
 /**
  * [外部Jar的类加载器](Class loader for external jar)

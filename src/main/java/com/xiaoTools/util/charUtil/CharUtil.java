@@ -80,4 +80,18 @@ public class CharUtil {
         }
         return c1 == c2;
     }
+
+	/**
+	 * [是否为可见ASCII字符](Is it a visible ASCII character)
+	 * @description zh - 是否为可见ASCII字符
+	 * @description en - Is it a visible ASCII character
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-28 20:47:26
+	 * @param ch 被检查的字符
+	 * @return boolean
+	 */
+	public static boolean isAsciiPrintable(char ch) {
+		return ch >= 32 && ch < 127;
+	}
 }

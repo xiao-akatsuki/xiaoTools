@@ -10,6 +10,7 @@ import com.xiaoTools.core.convert.abstractConverter.AbstractConverter;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.lang.enumItem.EnumItem;
 import com.xiaoTools.util.classUtil.ClassUtil;
+import com.xiaoTools.util.enumUtil.EnumUtil;
 import com.xiaoTools.util.mapUtil.MapUtil;
 import com.xiaoTools.util.modifierUtil.ModifierUtil;
 import com.xiaoTools.util.reflectUtil.ReflectUtil;
@@ -66,7 +67,7 @@ public class EnumConverter extends AbstractConverter<Object> {
 
 		Enum enumResult = null;
 		if (EnumItem.class.isAssignableFrom(enumClass)) {
-			final EnumItem first = (EnumItem) EnumUtil.getEnumAt(enumClass, 0);
+			final EnumItem first = (EnumItem) EnumUtil.getEnumAt(enumClass, Constant.ZERO);
 			if(null != first){
 				if (value instanceof Integer) {
 					return (Enum) first.fromInt((Integer) value);

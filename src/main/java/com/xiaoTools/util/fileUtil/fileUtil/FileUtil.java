@@ -511,7 +511,7 @@ public class FileUtil {
      * @param path: [文件的位置路径](The location path of the file)
      * @return java.io.File
     */
-    private static File file(String path) {
+    public static File file(String path) {
         return Constant.NULL == path ? Constant.FILE_NULL : new File(getAbsolutePath(path));
     }
 

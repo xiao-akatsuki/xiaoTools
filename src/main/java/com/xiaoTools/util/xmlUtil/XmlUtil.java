@@ -676,7 +676,7 @@ public class XmlUtil {
 	 * @param indent 格式化输出中缩进量，小于1表示不格式化输出
 	 */
 	public static void transform(Source source, Result result, String charset, int indent) {
-		transform(source, result, charset, indent, Constant.FALS);
+		transform(source, result, charset, indent, Constant.FALSE);
 	}
 
 	/**

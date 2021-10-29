@@ -13,8 +13,10 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.xiaoTools.assertion.Assertion;
 import com.xiaoTools.core.exception.iORuntimeException.IORuntimeException;
 import com.xiaoTools.core.io.fileWrapper.FileWrapper;
+import com.xiaoTools.core.io.lineSeparator.LineSeparator;
 import com.xiaoTools.lang.constant.Constant;
 import com.xiaoTools.util.charsetUtil.CharsetUtil;
 import com.xiaoTools.util.fileUtil.fileUtil.FileUtil;
@@ -147,5 +149,104 @@ public class FileWriter extends FileWrapper {
 		return writeLines(list, Constant.FALSE);
 	}
 
+	/**
+	 * [将列表写入文件](Write list to file)
+	 * @description zh - 将列表写入文件
+	 * @description en - Write list to file
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-29 21:54:36
+	 * @param list 列表
+	 * @return java.io.File
+	 */
+	public <T> File appendLines(Collection<T> list) throws IORuntimeException {
+		return writeLines(list, Constant.TRUE);
+	}
 
+	/**
+	 * [将列表写入文件](Write list to file)
+	 * @description zh - 将列表写入文件
+	 * @description en - Write list to file
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-29 21:57:29
+	 * @param list 列表
+	 * @param isAppend 是否追加
+	 * @return java.io.File
+	 */
+	public <T> File writeLines(Collection<T> list, boolean isAppend) throws IORuntimeException {
+		return writeLines(list, null, isAppend);
+	}
+
+	/**
+	 * [将列表写入文件](Write list to file)
+	 * @description zh - 将列表写入文件
+	 * @description en - Write list to file
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-29 21:59:37
+	 * @param list 列表
+	 * @param lineSeparator 换行符枚举（Windows、Mac或Linux换行符）
+	 * @param isAppend 是否追加
+	 * @return java.io.File
+	 */
+	public <T> File writeLines(Collection<T> list, LineSeparator lineSeparator, boolean isAppend) throws IORuntimeException {
+		try (PrintWriter writer = getPrintWriter(isAppend)){
+			for (T t : list) {
+				if (null != t) {
+					writer.print(t.toString());
+					printNewLine(writer, lineSeparator);
+					writer.flush();
+				}
+			}
+		}
+		return this.file;
+	}
+
+	/**
+	 * [获得一个打印写入对象](Get a print write object)
+	 * @description zh - 获得一个打印写入对象
+	 * @description en - Get a print write object
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-29 22:02:01
+	 * @param isAppend 是否追加
+	 * @return java.io.PrintWriter
+	 */
+	public PrintWriter getPrintWriter(boolean isAppend) throws IORuntimeException {
+		return new PrintWriter(getWriter(isAppend));
+	}
+
+	/**
+	 * [获得一个带缓存的写入对象](Gets a cached write object)
+	 * @description zh - 获得一个带缓存的写入对象
+	 * @description en - Gets a cached write object
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-29 22:03:28
+	 * @param isAppend 是否追加
+	 * @return java.io.BufferedWriter
+	 */
+	public BufferedWriter getWriter(boolean isAppend) throws IORuntimeException {
+		try {
+			return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(FileUtil.touch(file), isAppend), charset));
+		} catch (Exception e) {
+			throw new IORuntimeException(e);
+		}
+	}
+
+	private void checkFile() throws IORuntimeException {
+		Assertion.notNull(file, "File to write content is null !");
+		if(this.file.exists() && Constant.FALSE == file.isFile()){
+			throw new IORuntimeException("File [{}] is not a file !", this.file.getAbsoluteFile());
+		}
+	}
+
+	private void printNewLine(PrintWriter writer, LineSeparator lineSeparator) {
+		if(null == lineSeparator) {
+			writer.println();
+		}else {
+			writer.print(lineSeparator.getValue());
+		}
+	}
 }

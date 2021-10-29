@@ -94,4 +94,18 @@ public class CharUtil {
 	public static boolean isAsciiPrintable(char ch) {
 		return ch >= 32 && ch < 127;
 	}
+
+	/**
+	 * [获取给定字符的16进制数值](Gets the hexadecimal value of the given character)
+	 * @description zh - 获取给定字符的16进制数值
+	 * @description en - Gets the hexadecimal value of the given character
+	 * @version V1.0
+	 * @author XiaoXunYao
+	 * @since 2021-10-29 20:15:04
+	 * @param b 字符
+	 * @return int
+	 */
+	public static int digit16(int b) {
+		return Character.digit(b, 16);
+	}
 }

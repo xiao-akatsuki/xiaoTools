@@ -398,6 +398,8 @@ public class Constant {
 
     public static final String SPOT = ".";
 
+	public static final String DOUBLE_DOT = "..";
+
     public static final String BRACKETS = "{}";
 
     public static final String STRING_PLUS = "+";
@@ -527,6 +529,8 @@ public class Constant {
     public static final String STRING_UNDEFINED = "undefined";
 
     public static final String STRING_BIG_SPACE = "  ";
+
+	public static final String JAR_FILE_EXT = ".jar";
 
     /*-----------------------------------------------------------byte*/
 

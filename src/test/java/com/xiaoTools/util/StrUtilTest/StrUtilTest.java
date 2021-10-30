@@ -58,4 +58,41 @@ public class StrUtilTest {
 		System.out.println( "`a` after striing length --> " + StrUtil.string(a).length());
 	}
 
+	@Test
+	public void test_hasBlank(){
+		String a = "";
+		String b = "b";
+		String c = " c ";
+
+		// is `a` blank --> true
+		System.out.println( "is `a` blank --> " + StrUtil.hasBlank(a));
+		// is `b` blank --> false
+		System.out.println( "is `b` blank --> " + StrUtil.hasBlank(b));
+		// is `c` blank --> false
+		System.out.println( "is `c` blank --> " + StrUtil.hasBlank(c));
+	}
+
+	@Test
+	public void test_hasEmpty(){
+		String a = "";
+		String b = "b";
+		String c = " c ";
+
+		// is `a` blank --> true
+		System.out.println( "is `a` blank --> " + StrUtil.isEmpty(a));
+		// is `b` blank --> false
+		System.out.println( "is `b` blank --> " + StrUtil.isEmpty(b));
+		// is `c` blank --> false
+		System.out.println( "is `c` blank --> " + StrUtil.isEmpty(c));
+	}
+
+	@Test
+	public void test_removeSuffix(){
+		String a = "abc.jpg";
+
+		// `a` is --> abc.jpg
+		System.out.println( " `a` is --> " + a);
+		// `a` is remove suffix --> abc
+		System.out.println( " `a` is remove suffix --> " + StrUtil.removeSuffix(a, ".jpg"));
+	}
 }

@@ -2,7 +2,7 @@
 
 [![Build Status](https://app.travis-ci.com/xiaoxunyao/xiaoTools.svg?branch=master)](https://app.travis-ci.com/xiaoxunyao/xiaoTools) [![maven-central](https://img.shields.io/maven-central/v/io.github.xiaoxunyao/xiaoTools.svg)](https://mvnrepository.com/artifact/io.github.xiaoxunyao/xiaoTools) [![java-doc](https://www.javadoc.io/badge/io.github.xiaoxunyao/xiaoTools.svg)](https://www.javadoc.io/doc/io.github.xiaoxunyao/xiaoTools)
 
-This repository contains simple tools written in 100% Java. 
+This repository contains simple tools written in 100% Java.
 
 ## Getting Started
 
@@ -16,9 +16,9 @@ To use maven add this dependency to your pom.xml:
 
 ```xml
 <dependency>
-    <groupId>io.github.xiaoxunyao</groupId>
-    <artifactId>xiaoTools</artifactId>
-    <version>0.1.1-releases</version>
+  <groupId>io.github.xiao-organization</groupId>
+  <artifactId>xiaoTools</artifactId>
+  <version>1.0.0</version>
 </dependency>
 ```
 
@@ -33,7 +33,7 @@ mavenCentral()
 Then you can just add the latest version to your build.
 
 ```xml
-implementation 'io.github.xiaoxunyao:xiaoTools:0.1.1-releases'
+implementation 'io.github.xiao-organization:xiaoTools:1.0.0'
 ```
 
 Standalone jar

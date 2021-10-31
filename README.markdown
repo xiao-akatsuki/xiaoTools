@@ -18,7 +18,7 @@ To use maven add this dependency to your pom.xml:
 <dependency>
   <groupId>io.github.xiao-organization</groupId>
   <artifactId>xiaoTools</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
 ```
 
@@ -33,7 +33,7 @@ mavenCentral()
 Then you can just add the latest version to your build.
 
 ```xml
-implementation 'io.github.xiao-organization:xiaoTools:1.0.0'
+implementation 'io.github.xiao-organization:xiaoTools:1.0.1'
 ```
 
 Standalone jar

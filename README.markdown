@@ -1,4 +1,4 @@
-# Xiao-Tools
+# xiaoTools
 
 [![maven-central](https://img.shields.io/maven-central/v/io.github.xiao-organization/xiaoTools.svg)](https://mvnrepository.com/artifact/io.github.xiao-organization/xiaoTools) [![java-doc](https://www.javadoc.io/badge/io.github.xiao-organization/xiaoTools.svg)](https://www.javadoc.io/doc/io.github.xiao-organization/xiaoTools)
 
